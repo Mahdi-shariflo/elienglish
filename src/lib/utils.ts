@@ -1,0 +1,48 @@
+import z from 'zod';
+const sessionCookieSchema = z.object({
+  refreshToken: z.string(),
+  accessToken: z.string(),
+  accessTokenExpires: z.number(),
+});
+
+export function parseSessionCookie(cookie: string) {
+  try {
+    const session = sessionCookieSchema.parse(JSON.parse(cookie));
+    return session;
+  } catch {
+    throw new Error('Failed to parse session cookie');
+  }
+}
+
+// check if the access token is expired
+export function isSessionExpired(accessTokenExpires: number) {
+  return Date.now() > accessTokenExpires;
+}
+
+type Item = {
+  [key: string]: any;
+};
+
+export const sortedArray = (data: Item[], field: string) => {
+  const secItems = data.filter(
+    (item) => typeof item[field] === 'string' && item[field].startsWith('sec')
+  );
+
+  const otherItems = data.filter(
+    (item) => !(typeof item[field] === 'string' && item[field].startsWith('sec'))
+  );
+
+  const sortedSecItems = secItems.sort((a, b) => {
+    const valA = parseInt(a[field].replace(/\D/g, '') || '0', 10);
+    const valB = parseInt(b[field].replace(/\D/g, '') || '0', 10);
+    return valA - valB;
+  });
+
+  return [...sortedSecItems, ...otherItems];
+};
+
+export const discountCalculation = (special_price: string | number, price: string | number) => {
+  const math = Number(special_price) / Number(price);
+  const off = (1 - math) * 100;
+  return off.toFixed();
+};

@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+dist
+*.md
+*.yml
+*.yaml
+tsconfig.json
+tailwind.config.ts
+*.html
