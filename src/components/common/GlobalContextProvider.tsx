@@ -3,9 +3,9 @@ import { HeroUIProvider } from '@heroui/react';
 import { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Logout from './Logout';
-import VerifyDelete from '../admin/common/VerifyDelete';
 import CommingSoon from './CommingSoon';
 import { ToastProvider } from '@heroui/toast';
+import VerifyDelete from './VerifyDelete';
 
 type Props = {
   children: ReactNode;

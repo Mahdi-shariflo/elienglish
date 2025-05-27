@@ -46,7 +46,7 @@ export async function getSession(): Promise<User | null> {
 
   const { accessToken, accessTokenExpires, refreshToken } = session;
   if (accessToken) {
-    const res = await fetch(`${BASEURL}/user/getoneuser`, {
+    const res = await fetch(`${BASEURL}/user`, {
       headers: {
         ...headers,
         Authorization: `Bearer ${accessToken}`,

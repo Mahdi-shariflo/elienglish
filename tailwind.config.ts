@@ -12,7 +12,7 @@ export default {
     extend: {
       colors: {
         black: '#0c0c0c',
-        main: '#DD338B',
+        main: '#0096f5',
         gray: {
           100: '#E4E7E9',
           400: '#7d8793',
