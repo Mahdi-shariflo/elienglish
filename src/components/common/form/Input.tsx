@@ -146,7 +146,7 @@ const Input = ({
         }
         classNames={{
           input: `px-2 !border-none !ring-0  ${classNameInput}`,
-          inputWrapper: `bg-[#E4E7E9] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border pl-0 h-[48px] lg:h-[64px] w-full ${classNameInput}`,
+          inputWrapper: `bg-[#F4F6FA] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 h-[48px] lg:h-[56px] w-full ${classNameInput}`,
         }}
         className={`font-light text-[14px] ${disabled ? '!opacity-70' : ''}`}
       />
@@ -155,7 +155,7 @@ const Input = ({
           placeholder=" "
           classNames={{
             input: 'px-2 !border-none !ring-0',
-            inputWrapper: `bg-[#f4f4f4] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border pl-0 h-[48px] w-full ${classNameInput}`,
+            inputWrapper: `bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 h-[48px] w-full ${classNameInput}`,
           }}
           className="mt-3 font-light text-[14px]"
           value={formik?.values?.url}

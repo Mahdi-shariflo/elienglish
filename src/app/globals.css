@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply text-[14px];
+}
 body {
   direction: rtl;
   overflow-x: hidden;
@@ -33,6 +36,10 @@ input[type='number'] {
   src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-Bold.ttf');
 }
 @font-face {
+  font-family: 'extrabold';
+  src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-ExtraBold.ttf');
+}
+@font-face {
   font-family: 'semibold';
   src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-DemiBold.ttf');
 }
@@ -55,4 +62,30 @@ input[type='number'] {
 @font-face {
   font-family: 'medium';
   src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-Medium.ttf');
+}
+
+.custom_pagination .swiper-pagination-bullets .swiper-pagination-bullet {
+  @apply !mt-4 !h-[10px] !w-[10px] rounded-full bg-main bg-opacity-40;
+}
+
+.custom_pagination .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  @apply !h-[10px] !w-[45px] !rounded-full bg-main;
+}
+
+.custom-style {
+  grid-area: 1 / 1 / 2 / 3;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: hsl(0, 0%, 20%);
+  margin-right: 2px;
+  box-sizing: border-box;
+}
+
+.custom_border {
+  display: inline-block;
+  border: 1px solid;
+  border-image-source: linear-gradient(90deg, #ffffff 9.34%, rgba(142, 152, 168, 0) 73.63%);
+  border-image-slice: 1;
 }

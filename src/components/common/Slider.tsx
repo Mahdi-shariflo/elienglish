@@ -6,19 +6,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Slider as SliderType } from '@/types/home';
-import Link from 'next/link';
-import { BASEURL } from '@/lib/variable';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 type Props = {
-  sliders: SliderType[];
+  sliders: { image: StaticImageData; title: string; description: string }[];
   className?: string;
 };
 
 export default function Slider({ sliders, className }: Props) {
   return (
-    <div className={`container_page custom_pagination w-full ${className}`}>
+    <div
+      className={`custom_pagination flex h-full w-[90%] items-center justify-center ${className}`}
+    >
       <Swiper
         speed={1000}
         autoplay={{
@@ -33,37 +32,23 @@ export default function Slider({ sliders, className }: Props) {
         }}
         modules={[Pagination, Autoplay]}
         loop
+        slidesPerView={1}
+        className="!pb-16"
       >
         {sliders.map((item, idx) => {
-          if (!item?.published) return;
           return (
-            <SwiperSlide className="!h-[256px] lg:!h-[365px]" key={idx}>
-              <Link href={`${item.href}/`} className="relative block h-full w-full">
-                <picture className="h-full w-full overflow-hidden rounded-lg">
-                  {/* تصویر موبایل با وضوح مختلف */}
-                  <source
-                    media="(max-width: 768px)"
-                    srcSet={`${BASEURL}/${item.mobilePic.url} 1x, 
-               ${BASEURL}/${item.mobilePic.url} 2x`}
-                  />
-                  {/* تصویر دسکتاپ با وضوح مختلف */}
-                  <source
-                    media="(min-width: 769px)"
-                    srcSet={`${BASEURL}/${item.desktopPic.url} 1x, 
-               ${BASEURL}/${item.desktopPic.url} 2x, 
-               ${BASEURL}/${item.desktopPic.url} 3x`}
-                  />
-                  <Image
-                    src={`${BASEURL}/${item.desktopPic.url}`}
-                    alt={item.title}
-                    layout="fill"
-                    objectFit="cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    priority={idx === 0}
-                    className="rounded-lg object-cover"
-                  />
-                </picture>
-              </Link>
+            <SwiperSlide className="!h-fit w-full" key={idx}>
+              <span className="block !h-[512px]">
+                <Image
+                  src={`${item.image.src}`}
+                  alt={item.title}
+                  layout="fill"
+                  priority={idx === 0}
+                  className="!h-[512px] rounded-lg object-contain"
+                />
+              </span>
+              <p className="text-center font-extrabold text-lg text-primary">{item.title}</p>
+              <p className="pt-3 text-center font-light text-[#8E98A8]">{item.description}</p>
             </SwiperSlide>
           );
         })}

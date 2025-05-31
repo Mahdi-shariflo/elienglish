@@ -1,127 +1,130 @@
 'use client';
-import { Select as ReactSelect, SelectItem, SharedSelection } from '@heroui/react';
-import { ReactNode } from 'react';
+import RaectSelect, { MultiValue, SingleValue } from 'react-select';
+import { FormikProps } from 'formik';
+import { SingleValueProps } from 'react-select';
 
-type Props = {
+type OptionType = { label: string; value: string };
+
+type Props<T = Record<string, any>> = {
   emptyMessage?: string;
   label?: string;
-  options?: any;
-  nameLabel?: string;
-  description?: ReactNode;
+  options?: T[];
+  nameLabel?: keyof T;
+  nameValue?: keyof T;
   labelClass?: string;
-  nameValue?: string;
-  className?: string;
-  formik?: unknown;
   name?: string;
-  value?: string;
-  onChange?: (keys: SharedSelection) => void;
+  className?: string;
+  value?: string | string[];
+  onChange?: (value: MultiValue<OptionType> | SingleValue<OptionType>) => void;
   disabled?: boolean;
   isRequired?: boolean;
   isLoading?: boolean;
   selectionMode?: 'multiple' | 'single';
+  formik?: FormikProps<any>;
+  description?: string | null;
+  CustomOption?: React.ComponentType<any>;
+  CustomSingleValue?: React.ComponentType<any>;
+  DropdownIndicator?: React.ComponentType<any>;
 };
 
 const Select = ({
+  onChange,
   disabled,
-  isRequired,
-  formik,
-  name,
   label,
-  className,
   options = [],
   nameLabel = 'label',
   nameValue = 'value',
-  selectionMode = 'single',
   value,
-  description,
-  onChange,
-  isLoading,
-  emptyMessage,
+  selectionMode = 'single',
+  name,
   labelClass,
+  className,
+  isRequired,
+  isLoading,
+  formik,
+  emptyMessage = 'موردی یافت نشد',
+  CustomOption,
+  CustomSingleValue,
+  DropdownIndicator,
 }: Props) => {
-  const isError = formik
-    ? // @ts-expect-error error
-      formik?.touched[name!] && formik.errors[name!]
-      ? true
-      : false
-    : false;
-  // Map through options and create items dynamically based on the provided nameLabel and nameValue
-  const items = Array.isArray(options)
-    ? options.map((item) => ({
-        label: item[nameLabel], // Get label from the object
-        value: item[nameValue], // Get value from the object
-      }))
-    : [];
+  const isError = formik?.touched?.[name!] && formik?.errors?.[name!] ? true : false;
 
-  const onSelectionChange = (selectedKeys: SharedSelection) => {
-    if (selectionMode === 'single') {
-      // @ts-expect-error error
-      formik?.setFieldValue(name!, selectedKeys.currentKey);
-    } else {
-      // @ts-expect-error error
-      formik?.setFieldValue(name!, Array.from(selectedKeys));
-    }
-  };
+  const mappedOptions: OptionType[] = options.map((item) => ({
+    ...item,
+    label: item[nameLabel],
+    value: item[nameValue].toString(),
+  }));
+
+  const findValue = mappedOptions.find(
+    (item) => item.value === (value ? value : formik?.values[name!])
+  );
+
   return (
     <div className={className}>
       {label && (
-        <p
-          className={`mb-[6px] pr-1 font-medium text-[14px] text-[#616A76] lg:text-[14px] ${labelClass}`}
-        >
+        <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black ${labelClass}`}>
           {label} {isRequired && <span className="text-red-500">*</span>}
         </p>
       )}
-      <div className={`flex items-center gap-3`}>
-        <ReactSelect
-          isDisabled={disabled}
-          isLoading={isLoading}
-          dir="rtl"
-          aria-labelledby={name || 'select field'}
-          aria-label={name || 'select field'}
-          selectionMode={selectionMode}
-          // @ts-expect-error error
-          selectedKeys={
-            value
-              ? [value]
-              : selectionMode === 'multiple'
-                ? formik?.values[name!]
-                : [formik?.values[name!]]
-          }
-          classNames={{
-            label: '!text-gray-700 text-[12px]',
-            trigger: 'border !h-[48px]',
-            listbox: 'font-light',
-            value: 'font-medium',
-            errorMessage: 'font-regular',
-          }}
-          description={description}
-          onSelectionChange={onChange ? onChange : onSelectionChange}
-          renderValue={(selectedKeys) => {
-            const selectedItems = selectedKeys.map((key) => {
-              const column = items.find((col: { value: string }) => col.value === key.key);
-              return column?.label;
-            });
-            return <p className="text-[12px]">{selectedItems.join(', ')}</p>;
-          }}
-          isInvalid={isError}
-          // @ts-expect-error error
-          errorMessage={formik?.errors[name!] as string}
-        >
-          {items.length > 0 ? (
-            items.map((animal: { label?: string; value: string }) => (
-              <SelectItem key={animal.value}>{animal.label}</SelectItem>
-            ))
-          ) : (
-            <SelectItem
-              classNames={{ title: '!text-[12px] font-medium py-2 text-center' }}
-              isReadOnly
-              key={''}
-            >
-              {emptyMessage ? emptyMessage : 'لیست خالی است'}
-            </SelectItem>
-          )}
-        </ReactSelect>
-      </div>
+      <RaectSelect
+        isDisabled={disabled}
+        isMulti={selectionMode === 'multiple'}
+        options={[
+          ...(formik?.values[name!] ? [{ label: 'حذف انتخاب', value: '' }] : []),
+          ...mappedOptions,
+        ]}
+        isLoading={isLoading}
+        placeholder="انتخاب کنید..."
+        value={findValue}
+        components={{
+          ...(CustomOption ? { Option: CustomOption } : null),
+          ...(CustomSingleValue ? { SingleValue: CustomSingleValue } : null),
+          ...(DropdownIndicator ? { DropdownIndicator: DropdownIndicator } : null),
+        }}
+        onChange={
+          onChange
+            ? onChange
+            : selectionMode === 'multiple'
+              ? (value) =>
+                  formik?.setFieldValue(
+                    name!,
+                    // @ts-expect-error error
+                    value?.map((item) => item?.value)
+                  )
+              : // @ts-expect-error error
+                (value) => formik.setFieldValue(name!, value?.value)
+        }
+        name={name}
+        isSearchable
+        classNamePrefix="react-select"
+        noOptionsMessage={() => emptyMessage}
+        className={`!h-[56px] !min-w-[120px] font-medium !text-[14px]`}
+        styles={{
+          control: (base) => ({
+            ...base,
+            minHeight: 48,
+            borderRadius: 6,
+            borderColor: isError ? '#f87171' : base.borderColor,
+          }),
+          menu: (base) => ({
+            ...base,
+            zIndex: 9999,
+          }),
+        }}
+        classNames={{
+          control: () =>
+            ` !outline-none !border !border-[#E5EAEF] h-full !rounded-lg ${isError ? '!bg-[#FEE7EF]' : '!bg-[#F4F6FA]'}`,
+          indicatorSeparator: () => 'hidden',
+          placeholder: () => 'font-regular !whitespace-nowrap !text-[14px]',
+          container: () => '!outline-none h-full',
+          menu: () => `!z-[9999] rounded-2xl font-light overflow-hidden relative `,
+        }}
+      />
+      {isError && (
+        <p className="mt-1 font-light !text-[12px] text-red-500">
+          {formik?.errors?.[name!] as string}
+        </p>
+      )}
     </div>
   );
 };

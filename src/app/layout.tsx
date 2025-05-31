@@ -4,7 +4,6 @@ import Fetcher from '@/components/common/Fetcher';
 import GlobalContextProvider from '@/components/common/GlobalContextProvider';
 import { SessionProvider } from '@/lib/auth/SessionProvider';
 import { Viewport } from 'next';
-
 export const viewport: Viewport = {
   themeColor: '#DD338B',
   colorScheme: 'only light',
