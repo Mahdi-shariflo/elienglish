@@ -107,44 +107,44 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // Expired path
-  if (gonePaths.some((excludedPath) => pathname.startsWith(excludedPath))) {
-    // If path name equal product-tag then check if product tag exist or not
-    if (pathname.startsWith('/product-tag/')) {
-      const slug = pathname.split('/')[2];
-      const result = await fetch(`${BASEURL}/user/product/alltag?productTag=${slug}`, {
-        headers: headers,
-      });
+  // // Expired path
+  // if (gonePaths.some((excludedPath) => pathname.startsWith(excludedPath))) {
+  //   // If path name equal product-tag then check if product tag exist or not
+  //   if (pathname.startsWith('/product-tag/')) {
+  //     const slug = pathname.split('/')[2];
+  //     const result = await fetch(`${BASEURL}/user/product/alltag?productTag=${slug}`, {
+  //       headers: headers,
+  //     });
 
-      if (result) {
-        const response = await result.json();
-        const errors = response?.errors;
-        if (errors && errors.statusCode === 410) {
-          return new NextResponse('این صفحه توسط شرکت حذف شده است', {
-            status: 410,
-            headers: {
-              'Content-Type': 'text/plain',
-              'Cache-Control': 'no-store, max-age=0',
-            },
-          });
-        }
-      }
-    } else if (pathname === '/brands/') {
-      return response;
-    } else {
-      const title = 'این صفحه توسط شرکت حذف شده است';
-      return new NextResponse(title, { status: 410 });
-      // redirect
-      // const url = new URL("/", request.url);
-      // url.searchParams.set("from", pathname);
-      // const response = NextResponse.redirect(url, { status: 410 });
-      // response.headers.set(
-      //   "Link",
-      //   `<${request.url}>; rel="gone"; status="410"`
-      // );
-      // return response;
-    }
-  }
+  //     if (result) {
+  //       const response = await result.json();
+  //       const errors = response?.errors;
+  //       if (errors && errors.statusCode === 410) {
+  //         return new NextResponse('این صفحه توسط شرکت حذف شده است', {
+  //           status: 410,
+  //           headers: {
+  //             'Content-Type': 'text/plain',
+  //             'Cache-Control': 'no-store, max-age=0',
+  //           },
+  //         });
+  //       }
+  //     }
+  //   } else if (pathname === '/brands/') {
+  //     return response;
+  //   } else {
+  //     const title = 'این صفحه توسط شرکت حذف شده است';
+  //     return new NextResponse(title, { status: 410 });
+  //     // redirect
+  //     // const url = new URL("/", request.url);
+  //     // url.searchParams.set("from", pathname);
+  //     // const response = NextResponse.redirect(url, { status: 410 });
+  //     // response.headers.set(
+  //     //   "Link",
+  //     //   `<${request.url}>; rel="gone"; status="410"`
+  //     // );
+  //     // return response;
+  //   }
+  // }
 
   // noindex special path and all query params
   if (noIndexPaths.some((path) => pathname.startsWith(path)) || searchParams) {
@@ -168,22 +168,22 @@ export async function middleware(request: NextRequest) {
   }
 
   // بررسی مسیرهای موجود در آرایه pages
-  const isAllowedPage = pages.some((page) => pathname === page || pathname.startsWith(page + '/'));
+  // const isAllowedPage = pages.some((page) => pathname === page || pathname.startsWith(page + '/'));
 
-  if (!isAllowedPage) {
-    // چک می‌کنیم که آیا مسیر فعلی از نوع /mag/{id} هست یا نه تا از ایجاد لوپ جلوگیری کنیم
-    if (!pathname.startsWith('/mag/')) {
-      const pathParts = pathname.split('/').filter(Boolean);
-      const newUrl = new URL(request.url);
-      const result = await fetch(`${BASEURL}/user/mag/${pathParts[0]}`, {
-        headers: headers,
-      });
-      if (result.status !== 404) {
-        newUrl.pathname = `/mag/${pathParts[0]}`; // ریدایرکت به /mag/{id}
-        return NextResponse.redirect(newUrl);
-      }
-    }
-  }
+  // if (!isAllowedPage) {
+  //   // چک می‌کنیم که آیا مسیر فعلی از نوع /mag/{id} هست یا نه تا از ایجاد لوپ جلوگیری کنیم
+  //   if (!pathname.startsWith('/mag/')) {
+  //     const pathParts = pathname.split('/').filter(Boolean);
+  //     const newUrl = new URL(request.url);
+  //     const result = await fetch(`${BASEURL}/user/mag/${pathParts[0]}`, {
+  //       headers: headers,
+  //     });
+  //     if (result.status !== 404) {
+  //       newUrl.pathname = `/mag/${pathParts[0]}`; // ریدایرکت به /mag/{id}
+  //       return NextResponse.redirect(newUrl);
+  //     }
+  //   }
+  // }
 
   return response;
 }

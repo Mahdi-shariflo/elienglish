@@ -19,7 +19,8 @@ export default {
        }
       },
       boxShadow: {
-      button:"0px 12px 16px 0px #6E3DFF33"
+      button:"0px 12px 16px 0px #6E3DFF33",
+      header:"0px 10px 40px 0px #8A9EA840"
       },
       fontFamily: {
         bold: 'bold',

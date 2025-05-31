@@ -40,7 +40,7 @@ const Breadcrumbs = ({ breadcrumbs, className, page = '/product-category' }: Pro
             strokeLinejoin="round"
           />
         </svg>
-        رز سفید
+        الی اینگلیش
         <span className="mr-1 block h-4 w-px rotate-[30deg] bg-[#A8AFB8]"></span>
       </Link>
 

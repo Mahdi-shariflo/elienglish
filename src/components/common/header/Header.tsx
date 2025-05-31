@@ -230,7 +230,7 @@ const Header = ({ categories }: Props) => {
   return (
     <>
       <header
-        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-sm ${
+        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >

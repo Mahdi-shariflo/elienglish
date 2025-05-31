@@ -881,3 +881,27 @@ export const pages = [
   '/products',
   '/print',
 ];
+
+export const sorts = [
+  {
+    name: 'بیشترین تخفیف',
+    sort: 'discount_desc',
+  },
+  {
+    name: 'جدیدترین',
+    sort: 'createdAt_desc',
+  },
+
+  {
+    name: 'قدیمی‌ترین',
+    sort: 'createdAt_asc',
+  },
+  {
+    name: 'گران‌ترین',
+    sort: 'price_desc',
+  },
+  {
+    name: 'ارزان‌ترین',
+    sort: 'price_asc',
+  },
+];
