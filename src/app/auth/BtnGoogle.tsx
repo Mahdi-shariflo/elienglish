@@ -5,7 +5,9 @@ import React from 'react';
 const BtnGoogle = () => {
   return (
     <Button
-      onClick={async () => await signIn('google')}
+      onClick={() => {
+        signIn('google');
+      }}
       // isLoading={isPending}
       className="disabled !h-[48px] w-full border border-[#E5EAEF] font-bold text-black lg:mt-14 lg:!h-[48px]"
     >
