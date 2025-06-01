@@ -6,8 +6,6 @@ import { toEnglishDigits } from '@/lib/fun';
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
-import Select from '@/components/common/Select';
-import { countriesList } from '@/lib/countries_list';
 import BtnGoogle from './BtnGoogle';
 const Page = () => {
   const { mutate, isPending } = useGetCode();
@@ -24,11 +22,11 @@ const Page = () => {
     },
   });
   return (
-    <div className="mx-auto flex h-[95vh] flex-col justify-between lg:mt-14 lg:h-fit lg:w-[524px]">
+    <div className="mx-auto flex h-[95vh] flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]">
       <div>
-        <h1 className="font-extrabold text-2xl text-primary">ورود / ثبت نام</h1>
+        <h1 className="font-extrabold text-2xl text-primary dark:text-[#E5EAEF]">ورود / ثبت نام</h1>
         <div className="mt-10">
-          <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black`}>
+          <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black dark:text-[#8E98A8]`}>
             شماره موبایل {<span className="text-red-500">*</span>}
           </p>
           <div className="mt-1 flex flex-row-reverse items-center gap-4">
@@ -55,11 +53,15 @@ const Page = () => {
         </div>
       </div>
       <div className="pb-10 lg:pb-0">
-        <Button className="disabled !h-[48px] w-full bg-main font-medium text-white shadow-button lg:mt-8 lg:!h-[48px]">
+        <Button
+          onClick={formik.handleSubmit}
+          isPending={isPending}
+          className="disabled !h-[48px] w-full bg-main font-medium text-white shadow-button lg:mt-8 lg:!h-[48px]"
+        >
           دریافت کد
         </Button>
 
-        <span className="inline-block pt-5 font-medium text-[14px]">
+        <span className="inline-block pt-5 font-medium text-[14px] dark:text-[#8E98A8]">
           با ورود و ثبت‌نام،
           <Link href={'/common-questions/'} className="text-main">
             شرایط استفاده را
@@ -77,28 +79,28 @@ const Page = () => {
   );
 };
 
-const CustomOption = (props: any) => {
-  const { data, isSelected, innerRef, innerProps } = props;
-  return (
-    <div
-      ref={innerRef}
-      {...innerProps}
-      className={`flex cursor-pointer items-center gap-1 px-4 py-2 hover:bg-gray-100 ${
-        isSelected ? '!bg-blue-100 font-bold' : ''
-      }`}
-    >
-      <img className="h-5 w-6 object-contain" src={data?.flag_svg} />
-      <span>{data.label}</span>
-    </div>
-  );
-};
+// const CustomOption = (props: any) => {
+//   const { data, isSelected, innerRef, innerProps } = props;
+//   return (
+//     <div
+//       ref={innerRef}
+//       {...innerProps}
+//       className={`flex cursor-pointer items-center gap-1 px-4 py-2 hover:bg-gray-100 ${
+//         isSelected ? '!bg-blue-100 font-bold' : ''
+//       }`}
+//     >
+//       <img className="h-5 w-6 object-contain" src={data?.flag_svg} />
+//       <span>{data.label}</span>
+//     </div>
+//   );
+// };
 
-const CustomSingleValue = (props: any) => {
-  return (
-    <span {...props} className="custom-style !mx-auto flex items-center gap-2 !pl-0">
-      <span>{props.data.dial_code.split('').reverse().join('')}</span>
-      {props.data.flag_svg && <img className="h-5 w-6 object-contain" src={props.data.flag_svg} />}
-    </span>
-  );
-};
+// const CustomSingleValue = (props: any) => {
+//   return (
+//     <span {...props} className="custom-style !mx-auto flex items-center gap-2 !pl-0">
+//       <span>{props.data.dial_code.split('').reverse().join('')}</span>
+//       {props.data.flag_svg && <img className="h-5 w-6 object-contain" src={props.data.flag_svg} />}
+//     </span>
+//   );
+// };
 export default Page;

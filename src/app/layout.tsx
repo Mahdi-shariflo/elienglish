@@ -25,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang="fa">
-      <body>
+      <body className="">
         <SessionWrapper session={session}>
           <SessionProvider session={null}>
             <Fetcher>

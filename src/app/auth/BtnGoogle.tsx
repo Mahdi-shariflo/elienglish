@@ -37,7 +37,7 @@ const BtnGoogle = () => {
           />
         </svg>
       </span>
-      <span>ورود با حساب گوگل</span>
+      <span className="dark:text-white">ورود با حساب گوگل</span>
     </Button>
   );
 };

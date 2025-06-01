@@ -47,8 +47,12 @@ export default function Slider({ sliders, className }: Props) {
                   className="!h-[512px] rounded-lg object-contain"
                 />
               </span>
-              <p className="text-center font-extrabold text-lg text-primary">{item.title}</p>
-              <p className="pt-3 text-center font-light text-[#8E98A8]">{item.description}</p>
+              <p className="mt-4 text-center font-extrabold text-lg text-primary dark:text-[#E5EAEF]">
+                {item.title}
+              </p>
+              <p className="pt-3 text-center font-light text-[#8E98A8] dark:text-[#8E98A8]">
+                {item.description}
+              </p>
             </SwiperSlide>
           );
         })}

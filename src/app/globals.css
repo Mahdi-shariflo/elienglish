@@ -6,9 +6,8 @@
   @apply text-[14px];
 }
 body {
-  background-color: #ffffff;
   direction: rtl;
-  overflow-x: hidden;
+  @apply overflow-x-hidden;
 }
 
 @layer utilities {
@@ -25,6 +24,39 @@ input[type='number']::-webkit-inner-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+.loader {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 100rem;
+  border: 3px solid white;
+  background: conic-gradient(from 180deg at 50% 50%, #6e3dff 0deg, rgba(173, 173, 173, 0) 360deg);
+  animation: animate 1s linear infinite;
+}
+
+.loader::before {
+  position: absolute;
+  content: '';
+  background: #fff;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: 100rem;
+  border: 3px solid white;
+}
+
+@keyframes animate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
 @font-face {

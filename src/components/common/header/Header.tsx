@@ -232,7 +232,7 @@ const Header = ({ categories }: Props) => {
     <>
       <Image className="h-[60px] w-full" src={TopHeader.src} alt="" />
       <header
-        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header ${
+        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >
@@ -300,11 +300,16 @@ const Header = ({ categories }: Props) => {
               {quickLicks.map((link, idx) => (
                 <Link className="flex items-center gap-2" href={`${link.src}/`} key={idx}>
                   {link.icon && <span>{link.icon}</span>}
-                  <span className="font-medium text-[14px] text-[#7D8793]">{link.name}</span>
+                  <span className="font-medium text-[14px] text-[#7D8793] dark:!text-white">
+                    {link.name}
+                  </span>
                 </Link>
               ))}
               <div className="h-[32px] w-px bg-[#E4E7E9]" />
-              <Link href={'/common-questions/'} className="font-medium text-[14px] text-[#7D8793]">
+              <Link
+                href={'/common-questions/'}
+                className="font-medium text-[14px] text-[#7D8793] dark:!text-white"
+              >
                 تعین سطح
               </Link>
             </div>

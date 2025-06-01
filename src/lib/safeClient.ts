@@ -43,6 +43,13 @@ import React from 'react';
 import { removeSession } from './auth/storage';
 import { parseSessionCookie } from './utils';
 import { BASEURL, COOCIES_NAME } from './variable';
+import CryptoJS from 'crypto-js';
+
+const secret =
+  '6c0a9fc9f157c7ca2c70becb24a7e7a9b9e143eee5b29d6aee075639fba1c754ff0857c03ee1d6d7a241699e9ee02fce4620bdaeedb074d585318730580d6ae0';
+
+// تولید signature با HMAC-SHA256 از یک پیام خاص (در اینجا رشته خالی)
+const signature = CryptoJS.HmacSHA256('', secret).toString(CryptoJS.enc.Hex);
 
 const getXFFHeader = async () => {
   const { headers } = await import('next/headers');
@@ -52,7 +59,7 @@ const getXFFHeader = async () => {
 
 export const headers = {
   'Content-Type': 'application/json',
-  loginKey: btoa(`asdl;l;,/.p,SDL:SADCw34352GR^(*@&#)*()@(F)`),
+  'x-signature': signature,
 };
 
 export const client = axios.create({

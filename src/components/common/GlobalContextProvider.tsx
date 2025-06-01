@@ -1,6 +1,6 @@
 'use client';
 import { HeroUIProvider } from '@heroui/react';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Logout from './Logout';
 import CommingSoon from './CommingSoon';
@@ -27,11 +27,32 @@ const queryClient = new QueryClient({
 });
 
 function GlobalContextProvider({ children }: Props) {
+  function getDefaultTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+    } else if (savedTheme === 'light') {
+      document.body.classList.remove('dark');
+    } else {
+      // هیچ تمی ذخیره نشده، پس تم سیستم رو چک کن
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        document.body.classList.add('dark');
+      } else {
+        document.body.classList.remove('dark');
+      }
+    }
+  }
+
+  useEffect(() => {
+    getDefaultTheme();
+  }, []);
+
   return (
     <HeroUIProvider>
       <QueryClientProvider client={queryClient}>
         {/* <SwipeBack/> */}
-        {children}
+        <div className="min-h-screen dark:bg-[#0B1524]">{children}</div>
         <Logout />
         <VerifyDelete />
         <CommingSoon />
