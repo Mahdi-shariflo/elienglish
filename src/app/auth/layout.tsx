@@ -32,6 +32,7 @@ const Layout = ({ children }: Props) => {
       mutate({ idToken: data?.token });
     }
   }, [data]);
+  console.log(data, 'hhgfdhghfdghdsgfdshgfhsdfghdsfg');
 
   return (
     <div className="container_page flex h-screen items-center justify-center">
