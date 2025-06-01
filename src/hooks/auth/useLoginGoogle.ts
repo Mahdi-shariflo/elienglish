@@ -13,6 +13,7 @@ export const useLoginGoogle = () => {
         data,
       }),
     onSuccess: async (data) => {
+      console.log(data, 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
       await saveSession(data.data);
       location.href = '/';
       addToast({
