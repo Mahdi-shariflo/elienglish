@@ -6,7 +6,8 @@ import { SessionProvider } from '@/lib/auth/SessionProvider';
 import { SessionProvider as SessionProviderNextAuth } from 'next-auth/react';
 
 import { Viewport } from 'next';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth';
+import { authOptions } from './api/auth/[...nextauth]/route';
 export const viewport: Viewport = {
   themeColor: '#DD338B',
   colorScheme: 'only light',
@@ -20,7 +21,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getSession();
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang="fa">
