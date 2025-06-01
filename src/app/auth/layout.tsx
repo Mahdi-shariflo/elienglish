@@ -30,7 +30,7 @@ const Layout = ({ children }: Props) => {
   // @ts-expect-error error
   const data: { token: string } = useSession();
   const { mutate, isPending } = useLoginGoogle();
-
+  console.log(data, 'ffffffffffffffffffffffffffffffffffff');
   useEffect(() => {
     if (data?.token) {
       mutate({ idToken: data?.token });
