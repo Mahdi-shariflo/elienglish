@@ -25,7 +25,7 @@ const Page = () => {
       mutate({ mobile: toEnglishDigits(data.mobile) });
     },
   });
-
+  console.log(data);
   return (
     <div className="mx-auto flex h-[95vh] flex-col justify-between lg:mt-14 lg:h-fit lg:w-[524px]">
       <div>
