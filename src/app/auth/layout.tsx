@@ -28,12 +28,11 @@ const sliders = [
 ];
 const Layout = ({ children }: Props) => {
   // @ts-expect-error error
-  const data: { token: string } = useSession();
+  const data: { data: { accessToken: string } } = useSession();
   const { mutate, isPending } = useLoginGoogle();
-  console.log(data, 'ffffffffffffffffffffffffffffffffffff');
   useEffect(() => {
-    if (data?.token) {
-      mutate({ idToken: data?.token });
+    if (data?.data?.accessToken) {
+      mutate({ idToken: data?.data?.accessToken });
     }
   }, [data]);
 
