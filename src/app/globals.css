@@ -89,3 +89,7 @@ input[type='number'] {
   border-image-source: linear-gradient(90deg, #ffffff 9.34%, rgba(142, 152, 168, 0) 73.63%);
   border-image-slice: 1;
 }
+
+hr {
+  @apply !hidden;
+}

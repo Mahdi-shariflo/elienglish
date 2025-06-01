@@ -84,15 +84,10 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
     setSelectFilter({ name: '', component: undefined, type: '' });
   };
   const sortName = sorts.find((item) => item?.sort === searchParams.sort);
-  const filterMobile = [
-    {
-      name: 'محدوده قیمت',
-      type: 'range',
-    },
-  ];
   const searchParamsLength = Object.values(searchParams).filter((v) => v !== undefined).length;
   return (
     <>
+      {/* mobile sort and filter */}
       <div className="flex w-full items-center gap-3 lg:hidden">
         <Button onClick={() => setModalFilter(true)} className="relative z-10 w-full border">
           <Filter_icon />
@@ -106,18 +101,25 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
           <Arrow_back_mobile className="h-5 w-5 rotate-90" />
         </Button>
       </div>
-      <div className="custom_sidebar container_filter hidden !h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden lg:block lg:pl-3">
-        <div className="flex !h-[56px] items-center justify-between">
-          <p className="font-medium text-[20px] text-[#0C0C0C]">فیلتر‌ها</p>
-          {searchParamsLength >= 3 && (
-            <Button onClick={() => router.push(pathname)} className="w-fit text-main">
-              <Delete_icon />
-              <span>حذف فیلترها</span>
-            </Button>
-          )}
+
+      {/* title */}
+      <div>
+        <h1 className="relative mb-5 pr-2 font-bold text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
+          دسته بندی وبلاگ‌ها
+        </h1>
+        <div className="hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 lg:block lg:pl-3">
+          <div className="flex !h-[56px] items-center justify-between">
+            <p className="font-medium text-[20px] text-[#0C0C0C]">فیلتر‌ها</p>
+            {searchParamsLength >= 3 && (
+              <Button onClick={() => router.push(pathname)} className="w-fit text-main">
+                <Delete_icon />
+                <span>حذف فیلترها</span>
+              </Button>
+            )}
+          </div>
+          {/* <ToggleFilter onToggle={onToggle} searchParams={searchParams} /> */}
+          <CheckboxFilter searchParams={searchParams} resultFilter={resultFilter} />
         </div>
-        <ToggleFilter onToggle={onToggle} searchParams={searchParams} />
-        <CheckboxFilter searchParams={searchParams} resultFilter={resultFilter} />
       </div>
       {/* sort */}
       <SortModal
@@ -143,36 +145,8 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
         <div>
           <div>
             <ToggleFilter onToggle={onToggle} searchParams={searchParams} />
-            <div>
-              {filterMobile.map((filter, idx) => (
-                <Button
-                  onClick={() => setSelectFilter(filter)}
-                  className="!h-[56px] justify-between border-b border-[#E4E7E9] !px-0 font-regular"
-                  key={idx}
-                >
-                  <span className="!text-[14px]">{filter.name}</span>
-                  <span>
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995"
-                        stroke="#393B40"
-                        strokeWidth="1.5"
-                        strokeMiterlimit="10"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </Button>
-              ))}
-              <CheckboxFilter searchParams={searchParams} resultFilter={resultFilter} />
-            </div>
+
+            <CheckboxFilter searchParams={searchParams} resultFilter={resultFilter} />
           </div>
         </div>
       </BaseDialog>

@@ -72,45 +72,16 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
 
   return (
     // @ts-expect-error error
-    <Accordion
-      defaultSelectedKeys={defaultOpenAccordions}
-      className="container_accordion_filter px-0"
-    >
-      <AccordionItem
-        indicator={
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995"
-              stroke="#393B40"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        }
-        key={'range'}
-        aria-label={`Accordion range`}
-        classNames={{
-          base: 'border-b border-[#E4E7E9] hidden lg:block',
-          title: 'text-[#0C0C0C] text-[18px] font-regular',
-        }}
-        title="محدوده قیمت"
-      ></AccordionItem>
-
+    <Accordion defaultSelectedKeys={['0', ...defaultOpenAccordions]} className="px-0">
+      <></>
       {resultFilter?.properties?.map((property, idx) => {
         const searchTerm = searchTerms[idx] || '';
-        const filteredAttributes = property.attributes.filter((attr) =>
+        const filteredAttributes = property?.attributes?.filter((attr) =>
           attr.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
 
-        const selectedAttributesForProperty = property.attributes.filter((attr) =>
-          selectedAttributes.includes(attr._id)
+        const selectedAttributesForProperty = property?.attributes?.filter((attr) =>
+          selectedAttributes.includes(attr?._id)
         );
 
         return (
@@ -134,8 +105,8 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
             key={idx}
             aria-label={`Accordion ${idx}`}
             classNames={{
-              base: 'border-b !border-[#E4E7E9]',
-              title: 'text-[#0C0C0C] text-[14px] lg:text-[18px] font-regular',
+              base: 'border-b last:border-none !border-[#E4E7E9]',
+              title: 'text-[#172334] !text-[14px] lg:text-[16px] font-bold',
             }}
             title={property.title}
           >
@@ -154,7 +125,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                         isSelected={selectedAttributes.includes(attribute._id)}
                         key={attribute._id}
                         classNames={{
-                          label: 'pr-1 text-[14px] !font-regular text-[#0C0C0C]',
+                          label: 'pr-1 !text-[14px] !font-regular text-[#0C0C0C]',
                           wrapper: 'after:!bg-main',
                         }}
                         onValueChange={(value) => onAttributes(value, attribute._id)}
@@ -175,7 +146,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
               )}
 
               <Input
-                classNameInput="!h-[45px] bg-[#f5f6f6]"
+                classNameInput="!h-[45px] bg-white"
                 placeholder="جستجو"
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(idx, e.target.value)}
@@ -189,7 +160,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                       isSelected={selectedAttributes.includes(attribute._id)}
                       key={attribute._id}
                       classNames={{
-                        label: 'pr-1 text-[14px] !font-regular text-[#0C0C0C]',
+                        label: 'pr-1 !text-[14px] !font-medium text-[#33435A]',
                         wrapper: 'after:!bg-main',
                       }}
                       onValueChange={(value) => onAttributes(value, attribute._id)}
