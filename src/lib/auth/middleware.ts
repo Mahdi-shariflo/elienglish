@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server';
-import { headers } from '../safeClient';
-import { BASEURL, COOCIES_NAME } from '../variable';
+import { COOCIES_NAME } from '../variable';
 
 function generateUniqueToken(length = 82) {
   const characters =

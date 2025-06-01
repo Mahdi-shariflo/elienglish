@@ -3,11 +3,11 @@ import './globals.css';
 import Fetcher from '@/components/common/Fetcher';
 import GlobalContextProvider from '@/components/common/GlobalContextProvider';
 import { SessionProvider } from '@/lib/auth/SessionProvider';
-import { SessionProvider as SessionProviderNextAuth } from 'next-auth/react';
 
 import { Viewport } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
+import SessionWrapper from '@/lib/auth/SessionWrapperNextAuth';
 export const viewport: Viewport = {
   themeColor: '#DD338B',
   colorScheme: 'only light',
@@ -26,13 +26,13 @@ export default async function RootLayout({
   return (
     <html lang="fa">
       <body>
-        <SessionProviderNextAuth session={session}>
+        <SessionWrapper session={session}>
           <SessionProvider session={null}>
             <Fetcher>
               <GlobalContextProvider>{children}</GlobalContextProvider>
             </Fetcher>
           </SessionProvider>
-        </SessionProviderNextAuth>
+        </SessionWrapper>
       </body>
     </html>
   );
