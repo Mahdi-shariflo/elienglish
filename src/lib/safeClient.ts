@@ -44,9 +44,6 @@ import { removeSession } from './auth/storage';
 import { parseSessionCookie } from './utils';
 import { BASEURL, COOCIES_NAME } from './variable';
 
-// create a new axios client
-// create a request function that uses the client
-// export both the client and the request function
 const getXFFHeader = async () => {
   const { headers } = await import('next/headers');
   const forwardedFor = (await headers()).get('x-forwarded-for');
