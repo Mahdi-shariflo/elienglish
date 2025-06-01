@@ -167,7 +167,6 @@ export async function middleware(request: NextRequest) {
     return redirectToSignIn(request);
   }
 
-  // بررسی مسیرهای موجود در آرایه pages
   // const isAllowedPage = pages.some((page) => pathname === page || pathname.startsWith(page + '/'));
 
   // if (!isAllowedPage) {
