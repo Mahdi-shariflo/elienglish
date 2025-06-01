@@ -6,6 +6,7 @@
   @apply text-[14px];
 }
 body {
+  background-color: #ffffff;
   direction: rtl;
   overflow-x: hidden;
 }

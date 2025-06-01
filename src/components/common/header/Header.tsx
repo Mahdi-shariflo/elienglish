@@ -1,5 +1,4 @@
 'use client';
-import { useSession } from '@/lib/auth/useSession';
 import useGlobalStore from '@/store/global-store';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -10,6 +9,8 @@ import Cart from './Cart';
 import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
+import TopHeader from '@/../public/images/top-banner.png';
+import Image from '../Image';
 const quickLicks = [
   {
     name: 'صفحه اصلی',
@@ -229,6 +230,7 @@ const Header = ({ categories }: Props) => {
   //todo: Change this style to flex-shrink-0
   return (
     <>
+      <Image className="h-[60px] w-full" src={TopHeader.src} alt="" />
       <header
         className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'

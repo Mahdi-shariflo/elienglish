@@ -1,6 +1,8 @@
 import Breadcrumbs from '@/components/common/Breadcrumbs';
-import Filters from '@/components/mag/Filters';
+import Filters from '@/components/blog/Filters';
 import React from 'react';
+import CardBlog from '@/components/blog/CardBlog';
+import Pagination from '@/components/common/Pagination';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -77,6 +79,12 @@ const Page = async ({ searchParams }: Props) => {
             children: [],
           }}
         />
+        <div className="w-full">
+          {new Array(8).fill(8).map((_, idx) => (
+            <CardBlog key={idx} />
+          ))}
+          <Pagination className="mt-10" total={10} />
+        </div>
       </div>
     </div>
   );

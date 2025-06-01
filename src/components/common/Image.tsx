@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import NextImage from 'next/image';
 import Logo from '@/../public/icons/logo.svg';
-import { BASEURL } from '@/lib/variable';
+// import { BASEURL } from '@/lib/variable';
 
 type Props = {
   src: string;
@@ -17,13 +17,13 @@ const Image = ({ src, alt, className, classImg }: Props) => {
   return (
     <div className={`relative ${className}`}>
       <NextImage
-        src={isError ? Logo : `${BASEURL}/${src}`}
+        src={isError ? Logo : `${src}`}
         alt={alt}
         fill
         onError={() => setIsError(true)}
         quality={100}
         priority
-        className={`bg-transparent object-contain mix-blend-multiply ${
+        className={`bg-transparent object-cover mix-blend-multiply ${
           classImg ? classImg : ''
         } ${isError ? '!object-contain' : ''}`}
       />

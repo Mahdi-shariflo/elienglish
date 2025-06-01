@@ -36,7 +36,14 @@ export default function Pagination({ className, total = 10, top = 220 }: Props) 
     <ReactPagination
       onChange={onPage}
       dir="rtl"
-      classNames={{ item: 'active:bg-main', cursor: 'bg-main' }}
+      showControls
+      classNames={{
+        item: 'active:bg-main !w-[40px] !h-[40px] !mx-1 !rounded-lg',
+        cursor: 'bg-main !w-[40px] !h-[40px]',
+        next: '!w-[40px] !h-[40px]',
+        prev: '!w-[40px] !h-[40px]',
+        chevronNext: '!rotate-180',
+      }}
       className={`m-auto flex !w-fit items-center justify-center overflow-hidden font-regular ${className}`}
       initialPage={Number(searchParams.get('page')) || 1}
       total={total}

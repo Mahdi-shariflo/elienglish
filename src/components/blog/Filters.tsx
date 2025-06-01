@@ -86,7 +86,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
   const sortName = sorts.find((item) => item?.sort === searchParams.sort);
   const searchParamsLength = Object.values(searchParams).filter((v) => v !== undefined).length;
   return (
-    <>
+    <div className="sticky top-44">
       {/* mobile sort and filter */}
       <div className="flex w-full items-center gap-3 lg:hidden">
         <Button onClick={() => setModalFilter(true)} className="relative z-10 w-full border">
@@ -150,7 +150,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
           </div>
         </div>
       </BaseDialog>
-    </>
+    </div>
   );
 };
 
