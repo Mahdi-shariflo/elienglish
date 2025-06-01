@@ -9,9 +9,7 @@ import * as Yup from 'yup';
 import Select from '@/components/common/Select';
 import { countriesList } from '@/lib/countries_list';
 import BtnGoogle from './BtnGoogle';
-import { useSession } from 'next-auth/react';
 const Page = () => {
-  const data = useSession();
   const { mutate, isPending } = useGetCode();
   const formik = useFormik({
     initialValues: {
@@ -25,18 +23,16 @@ const Page = () => {
       mutate({ mobile: toEnglishDigits(data.mobile) });
     },
   });
-  console.log(data);
   return (
     <div className="mx-auto flex h-[95vh] flex-col justify-between lg:mt-14 lg:h-fit lg:w-[524px]">
       <div>
-        {JSON.stringify(data)}
         <h1 className="font-extrabold text-2xl text-primary">ورود / ثبت نام</h1>
         <div className="mt-10">
           <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black`}>
             شماره موبایل {<span className="text-red-500">*</span>}
           </p>
           <div className="mt-1 flex flex-row-reverse items-center gap-4">
-            <Select
+            {/* <Select
               DropdownIndicator={() => ' '}
               CustomSingleValue={CustomSingleValue}
               CustomOption={CustomOption}
@@ -45,7 +41,7 @@ const Page = () => {
               formik={formik}
               name=""
               options={countriesList}
-            />
+            /> */}
             <Input
               placeholder="09123456789"
               formik={formik}

@@ -1,14 +1,11 @@
+'use client';
 import Slider from '@/components/common/Slider';
-import { Metadata } from 'next';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import LoginSlider from '@/../public/images/login-slider.png';
+import { useSession } from 'next-auth/react';
+import { useLoginGoogle } from '@/hooks/auth/useLoginGoogle';
 type Props = {
   children: ReactNode;
-};
-
-export const metadata: Metadata = {
-  title: 'ورود / ثبت‌نام',
-  robots: 'noindex, nofollow',
 };
 
 const sliders = [
@@ -26,14 +23,21 @@ const sliders = [
   },
 ];
 const Layout = ({ children }: Props) => {
+  // @ts-expect-error error
+  const data: { token: string } = useSession();
+  const { mutate } = useLoginGoogle();
+
+  useEffect(() => {
+    if (data?.token) {
+      mutate({ idToken: data?.token });
+    }
+  }, [data]);
+
   return (
     <div className="container_page flex h-screen items-center justify-center">
       <div className="w-full">{children}</div>
-      <div className="relative z-20 hidden h-full lg:block">
-        {/* <Image className="absolute left-7 top-0" src={Logo} alt="" /> */}
-        <div className="flex h-full w-[672px] flex-col items-center justify-between overflow-hidden bg-[#F4F6FA]">
-          <Slider sliders={sliders} />
-        </div>
+      <div className="flex h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA]">
+        <Slider sliders={sliders} />
       </div>
     </div>
   );
