@@ -17,7 +17,7 @@ const Breadcrumbs = ({ breadcrumbs, className, page = '/product-category' }: Pro
   const pathname = usePathname();
   return (
     <div className={`flex flex-wrap items-center gap-4 lg:gap-3 ${className}`}>
-      <Link className="flex items-center gap-2 font-regular text-[14px] !text-[#A8AFB8]" href={'/'}>
+      <Link className="flex items-center gap-2 font-regular text-[14px] !text-[#505B74]" href={'/'}>
         <svg
           width="24"
           height="24"
@@ -49,14 +49,14 @@ const Breadcrumbs = ({ breadcrumbs, className, page = '/product-category' }: Pro
             <React.Fragment key={idx}>
               <Link
                 key={idx}
-                className={`font-regular text-[14px] ${idx !== breadcrumbs.length - 1 ? 'text-[#A8AFB8]' : 'text-[#616A76]'}`}
+                className={`font-regular text-[14px] ${idx !== breadcrumbs.length - 1 ? 'text-[#505B74]' : 'text-[#8E98A8]'}`}
                 href={`${breadcrumb.url ? `${page}/${breadcrumb.url}/` : pathname}`}
               >
                 <span className="flex items-center gap-1">
-                  {breadcrumb?.Icon && <breadcrumb.Icon className="-mt-1 stroke-[#A8AFB8]" />}
+                  {breadcrumb?.Icon && <breadcrumb.Icon className="-mt-1 stroke-[#505B74]" />}
                   <span className="pt-0"> {breadcrumb.title}</span>
                   {idx !== breadcrumbs.length - 1 && (
-                    <span className="mr-1 block h-4 w-px rotate-[30deg] bg-[#A8AFB8]"></span>
+                    <span className="mr-1 block h-4 w-px rotate-[30deg] bg-[#505B74]"></span>
                   )}
                 </span>
               </Link>

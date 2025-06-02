@@ -73,7 +73,9 @@ const Textarea = ({
   return (
     <div className={`w-full ${className}`}>
       {typeof label === 'string' ? (
-        <p className={`mb-[6px] pr-1 font-medium text-[12px] lg:text-[14px] ${classNameLabel}`}>
+        <p
+          className={`mb-[6px] pr-1 font-medium text-[12px] dark:!text-[#8E98A8] lg:text-[14px] ${classNameLabel}`}
+        >
           {label} {isRequired && <span className="text-red-500">*</span>}
         </p>
       ) : (
@@ -107,7 +109,7 @@ const Textarea = ({
         // onClear={() => formik?.setFieldValue(name, '')}
         classNames={{
           input: 'px-2 !border-none !ring-0',
-          inputWrapper: `bg-[#f5f6f6] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border pl-0 h-[48px] lg:h-[64px] w-full ${classNameInput}`,
+          inputWrapper: `bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 !h-[120px] w-full ${classNameInput}`,
         }}
         className="font-light text-[14px]"
       />

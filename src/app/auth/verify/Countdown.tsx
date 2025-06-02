@@ -48,18 +48,18 @@ const Countdown = () => {
     } else {
       // Render a countdown
       return (
-        <div className="mx-auto flex !w-fit items-center justify-center gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm !text-[#0C0C0C] transition-all duration-500 hover:!text-main">
-          <span className="font-bold">
-            {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        <div className="mx-auto flex !w-fit items-center justify-start gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm !text-[#0C0C0C] transition-all duration-500 hover:!text-main">
+          <span className="text-[#263248]">دریافت کد مجدد</span>
+          <span>
+            ( {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds})
           </span>
-          <span>مانده تا ارسال کد تائید جدید</span>
         </div>
       );
     }
   };
 
   return (
-    <div className="flex h-12 items-center justify-center lg:mt-10">
+    <div className="ml-auto flex w-fit items-start justify-start lg:mt-[24px]">
       <ReactCountdown
         date={time}
         renderer={renderer}

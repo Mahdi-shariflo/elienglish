@@ -1,3 +1,4 @@
+'use client';
 import { Input as ReactInput } from '@heroui/react';
 import { FormikProps } from 'formik';
 // @ts-ignore

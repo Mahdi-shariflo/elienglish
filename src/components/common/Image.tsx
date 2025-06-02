@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
-import NextImage from 'next/image';
+import NextImage, { StaticImageData } from 'next/image';
 import Logo from '@/../public/icons/logo.svg';
 // import { BASEURL } from '@/lib/variable';
 
 type Props = {
-  src: string;
+  src: string | StaticImageData;
   alt: string;
   classImg?: string;
   className: string;
