@@ -11,6 +11,7 @@ export const authOptions = {
   ],
   callbacks: {
     async jwt({ token, account }: any) {
+      console.log(token, account);
       if (account) {
         token.accessToken = account.access_token;
       }
