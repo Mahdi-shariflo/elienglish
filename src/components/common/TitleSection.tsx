@@ -31,7 +31,7 @@ const TitleSection = ({ title, Icon, url }: Props) => {
           >
             <path
               d="M14.9998 19.92L8.47984 13.4C7.70984 12.63 7.70984 11.37 8.47984 10.6L14.9998 4.08"
-              stroke="#DD338B"
+              stroke="#6E3DFF"
               strokeWidth="2"
               strokeMiterlimit="10"
               strokeLinecap="round"

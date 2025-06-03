@@ -103,14 +103,14 @@ const Counter = ({
                   >
                     <path
                       d="M4.5 8H12.5"
-                      stroke="#DD338B"
+                      stroke="#6E3DFF"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
                     <path
                       d="M8.5 12V4"
-                      stroke="#DD338B"
+                      stroke="#6E3DFF"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -145,35 +145,35 @@ const Counter = ({
                       >
                         <path
                           d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665"
-                          stroke="#DD338B"
+                          stroke="#6E3DFF"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M5.66675 3.31337L5.81341 2.44004C5.92008 1.80671 6.00008 1.33337 7.12675 1.33337H8.87341C10.0001 1.33337 10.0867 1.83337 10.1867 2.44671L10.3334 3.31337"
-                          stroke="#DD338B"
+                          stroke="#6E3DFF"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M12.5667 6.09338L12.1334 12.8067C12.06 13.8534 12 14.6667 10.14 14.6667H5.86002C4.00002 14.6667 3.94002 13.8534 3.86668 12.8067L3.43335 6.09338"
-                          stroke="#DD338B"
+                          stroke="#6E3DFF"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M6.88672 11H9.10672"
-                          stroke="#DD338B"
+                          stroke="#6E3DFF"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M6.33325 8.33337H9.66659"
-                          stroke="#DD338B"
+                          stroke="#6E3DFF"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -196,7 +196,7 @@ const Counter = ({
                   >
                     <path
                       d="M4.5 8H12.5"
-                      stroke="#DD338B"
+                      stroke="#6E3DFF"
                       strokeWidth="1.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -210,11 +210,11 @@ const Counter = ({
                                 Number(productIsBasket?.count) >= 1 && showDeleteIcon ? <Button disabled={isPendingRemoveBasket} isPending={isPendingRemoveBasket} onClick={descrement} className='px-0 min-w-fit w-fit pt-1'>
                                     <span>
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#DD338B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M5.66675 3.31337L5.81341 2.44004C5.92008 1.80671 6.00008 1.33337 7.12675 1.33337H8.87341C10.0001 1.33337 10.0867 1.83337 10.1867 2.44671L10.3334 3.31337" stroke="#DD338B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M12.5667 6.09338L12.1334 12.8067C12.06 13.8534 12 14.6667 10.14 14.6667H5.86002C4.00002 14.6667 3.94002 13.8534 3.86668 12.8067L3.43335 6.09338" stroke="#DD338B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M6.88672 11H9.10672" stroke="#DD338B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M6.33325 8.33337H9.66659" stroke="#DD338B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M14 3.98665C11.78 3.76665 9.54667 3.65332 7.32 3.65332C6 3.65332 4.68 3.71999 3.36 3.85332L2 3.98665" stroke="#6E3DFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M5.66675 3.31337L5.81341 2.44004C5.92008 1.80671 6.00008 1.33337 7.12675 1.33337H8.87341C10.0001 1.33337 10.0867 1.83337 10.1867 2.44671L10.3334 3.31337" stroke="#6E3DFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M12.5667 6.09338L12.1334 12.8067C12.06 13.8534 12 14.6667 10.14 14.6667H5.86002C4.00002 14.6667 3.94002 13.8534 3.86668 12.8067L3.43335 6.09338" stroke="#6E3DFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M6.88672 11H9.10672" stroke="#6E3DFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                            <path d="M6.33325 8.33337H9.66659" stroke="#6E3DFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
 
                                     </span>

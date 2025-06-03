@@ -1,0 +1,26 @@
+import { safeRequest } from '@/lib/safeClient';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addToast } from '@heroui/react';
+
+export const useUpdateCommentByIdAdmin = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
+      return await safeRequest({ url: `/admin/comment/update/${id}`, method: 'PATCH', data });
+    },
+    onSuccess: async () => {
+      addToast({
+        title: 'با موفقیت انجام شد',
+        color: 'success',
+      });
+      await queryClient.invalidateQueries({ queryKey: ['comments-admin'] });
+    },
+    onError: (error) => {
+      addToast({
+        // @ts-expect-error errror
+        title: error?.response?.data.errors.message,
+        color: 'danger',
+      });
+    },
+  });
+};

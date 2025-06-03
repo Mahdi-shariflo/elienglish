@@ -9,7 +9,7 @@ import { authOptions } from './api/auth/[...nextauth]/route';
 import SessionWrapper from '@/lib/auth/SessionWrapperNextAuth';
 import { getSession } from '@/lib/auth/session';
 export const viewport: Viewport = {
-  themeColor: '#DD338B',
+  themeColor: '#6E3DFF',
   colorScheme: 'only light',
   width: 'device-width',
   initialScale: 1,
