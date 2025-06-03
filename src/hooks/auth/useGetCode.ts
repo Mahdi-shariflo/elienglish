@@ -10,15 +10,16 @@ export const useGetCode = () => {
       await safeRequest({ url: '/auth/login', method: 'POST', data }),
     onSuccess: (data, variable) => {
       addToast({
-        title: data.data.data.message,
+        title: data.data.message,
         color: 'success',
       });
       router.push(`/auth/verify/?mobile=${variable.mobile}`);
     },
     onError: (error) => {
+      console.log(error);
       addToast({
         // @ts-expect-error errror
-        title: error?.response?.data.errors.message || error?.response?.data.message,
+        title: error?.response?.data.message[0] || error?.response?.data.message,
         color: 'danger',
       });
     },

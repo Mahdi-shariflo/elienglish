@@ -1,9 +1,10 @@
 import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
-import { useSession } from '@/lib/auth/useSession';
+import { useSession } from 'next-auth/react';
 
 export const useGetBasket = () => {
-  const user = useSession();
+  const session = useSession();
+  const user: any = session.data;
   // Debounce the search input
   return useQuery({
     queryKey: ['baskets'],

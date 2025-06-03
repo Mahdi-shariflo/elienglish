@@ -58,6 +58,7 @@ export type shippingMethod = {
 };
 
 export type User = {
+  theme?: string;
   viewport?: string;
   shabaNumber?: string;
   accessToken?: string;

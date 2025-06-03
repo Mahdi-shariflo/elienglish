@@ -1,17 +1,19 @@
 'use client';
-import { useSession } from '@/lib/auth/useSession';
 import useGlobalStore from '@/store/global-store';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import Link from 'next/link';
 import { User_Icon } from '../icon';
+import { useSession } from 'next-auth/react';
+import { SITE_NAME } from '@/lib/variable';
 
 export default function UserInformation() {
-  const user = useSession();
+  const session = useSession();
+  const user: any = session.data;
   const { setLogout } = useGlobalStore();
   const links = [
     {
       name: `${user?.firstName ? user.firstName : 'کاربر'} ${
-        user?.lastName ? user.lastName : 'رز سفید'
+        user?.lastName ? user.lastName : SITE_NAME
       }`,
       icon: (
         <svg

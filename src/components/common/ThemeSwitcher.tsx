@@ -1,23 +1,23 @@
 // app/components/ThemeSwitcher.tsx
 'use client';
 
+import { saveTheme } from '@/lib/auth/storage';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import { useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 
 export function ThemeSwitcher() {
   function changeTheme(themeName?: string) {
     if (themeName === 'dark') {
       document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      saveTheme('dark');
     } else if (themeName === 'light') {
       document.body.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      saveTheme('light');
     } else {
-      // کاربر خواسته که تم بر اساس سیستم باشه
-      localStorage.removeItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (prefersDark) {
         document.body.classList.add('dark');
+        saveTheme('dark');
       } else {
         document.body.classList.remove('dark');
       }

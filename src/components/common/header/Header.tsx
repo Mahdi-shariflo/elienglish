@@ -125,7 +125,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/mag',
+    src: '/blogs',
   },
   {
     name: 'تماس با ما',

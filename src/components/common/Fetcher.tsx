@@ -2,19 +2,20 @@
 
 import { useLayoutEffect } from 'react';
 import { AxiosHeaders } from 'axios';
-import { useSession } from '@/lib/auth/useSession';
 import { client } from '@/lib/safeClient';
+import { useSession } from 'next-auth/react';
 
 export default function Fetcher({ children }: { children: React.ReactNode }) {
   const session = useSession();
 
   useLayoutEffect(() => {
-    if (!session) return;
+    if (!session?.data) return;
 
     const interceptor = client.interceptors.request.use(async (config) => {
       let headers = new AxiosHeaders({
         ...config.headers,
-        Authorization: `Bearer ${session.accessToken}`,
+        // @ts-expect-error error
+        Authorization: `Bearer ${session?.data?.accessToken}`,
       });
 
       // if (

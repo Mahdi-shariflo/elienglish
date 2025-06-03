@@ -34,11 +34,13 @@ export async function getSession(): Promise<User | null> {
   const rawSession = (await cookies()).get(COOCIES_NAME)?.value;
   const finger = (await cookies()).get('finger')?.value as string;
   const viewport = (await cookies()).get('viewport')?.value as string;
+  const theme = (await cookies()).get('theme')?.value as string;
 
   if (!rawSession) {
     return {
       finger,
       viewport,
+      theme,
     };
   }
 
@@ -46,7 +48,7 @@ export async function getSession(): Promise<User | null> {
 
   const { accessToken, accessTokenExpires, refreshToken } = session;
   if (accessToken) {
-    const res = await fetch(`${BASEURL}/user`, {
+    const res = await fetch(`${BASEURL}/auth/me`, {
       headers: {
         ...headers,
         Authorization: `Bearer ${accessToken}`,
@@ -56,12 +58,14 @@ export async function getSession(): Promise<User | null> {
     if (!res.ok) {
       return {
         finger,
+        theme,
       };
     }
 
     const user = await res.json();
     return {
       finger,
+      theme,
       viewport,
       refreshToken,
       ...user.user,

@@ -2,12 +2,12 @@ import './globals.css';
 
 import Fetcher from '@/components/common/Fetcher';
 import GlobalContextProvider from '@/components/common/GlobalContextProvider';
-import { SessionProvider } from '@/lib/auth/SessionProvider';
 
 import { Viewport } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import SessionWrapper from '@/lib/auth/SessionWrapperNextAuth';
+import { getSession } from '@/lib/auth/session';
 export const viewport: Viewport = {
   themeColor: '#DD338B',
   colorScheme: 'only light',
@@ -22,16 +22,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  const sessionUser = await getSession();
 
   return (
     <html lang="fa">
-      <body className="">
-        <SessionWrapper session={session}>
-          <SessionProvider session={null}>
-            <Fetcher>
-              <GlobalContextProvider>{children}</GlobalContextProvider>
-            </Fetcher>
-          </SessionProvider>
+      <body className={`${sessionUser?.theme === 'dark' ? 'dark' : ''}`}>
+        <SessionWrapper session={{ ...session, ...sessionUser }}>
+          <Fetcher>
+            <GlobalContextProvider theme={sessionUser?.theme}>{children}</GlobalContextProvider>
+          </Fetcher>
         </SessionWrapper>
       </body>
     </html>

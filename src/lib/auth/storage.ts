@@ -19,6 +19,17 @@ export const saveSession = async (session: Session) => {
     path: '/',
   });
 };
+export const saveTheme = async (session: string) => {
+  const cookieStore = await cookies();
+  cookieStore.set({
+    name: 'theme',
+    value: session,
+    httpOnly: true,
+    maxAge: 7 * 24 * 60 * 60,
+    expires: 7 * 24 * 60 * 60,
+    path: '/',
+  });
+};
 
 export async function removeSession() {
   (await cookies()).delete(COOCIES_NAME);

@@ -6,9 +6,11 @@ import Logout from './Logout';
 import CommingSoon from './CommingSoon';
 import { ToastProvider } from '@heroui/toast';
 import VerifyDelete from './VerifyDelete';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   children: ReactNode;
+  theme?: string;
 };
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,12 +28,11 @@ const queryClient = new QueryClient({
   },
 });
 
-function GlobalContextProvider({ children }: Props) {
+function GlobalContextProvider({ children, theme }: Props) {
   function getDefaultTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
+    if (theme === 'dark') {
       document.body.classList.add('dark');
-    } else if (savedTheme === 'light') {
+    } else if (theme === 'light') {
       document.body.classList.remove('dark');
     } else {
       // هیچ تمی ذخیره نشده، پس تم سیستم رو چک کن

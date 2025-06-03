@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import useGlobalStore from '../../store/global-store';
 import { removeSession } from '@/lib/auth/storage';
 import { useTransition } from 'react';
+import { signOut } from 'next-auth/react';
 
 const Logout = () => {
   const [isPending, startTransaction] = useTransition();
@@ -14,6 +15,7 @@ const Logout = () => {
   const onLogout = async () => {
     startTransaction(async () => {
       await removeSession();
+      await signOut();
       setLogout();
       router.push('/auth/');
     });

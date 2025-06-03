@@ -1,13 +1,13 @@
 'use client';
 import { saveSession } from '@/lib/auth/storage';
-import { useSession } from '@/lib/auth/useSession';
 import { safeRequest } from '@/lib/safeClient';
 import { addToast } from '@heroui/react';
 import { useMutation } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 
 export const useVerifyAuth = () => {
-  const user = useSession();
-
+  const session = useSession();
+  const user: any = session?.data;
   return useMutation({
     mutationFn: async (data: { mobile?: string | null; code?: string | null }) =>
       await safeRequest({
@@ -50,7 +50,7 @@ export const useVerifyAuth = () => {
     onError: (error) => {
       addToast({
         // @ts-expect-error errror
-        title: error?.response?.data.errors.message,
+        title: error?.response?.data.message[0],
         color: 'danger',
       });
     },

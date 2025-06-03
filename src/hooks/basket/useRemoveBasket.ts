@@ -1,10 +1,11 @@
-import { useSession } from '@/lib/auth/useSession';
 import { safeRequest } from '@/lib/safeClient';
 import { addToast } from '@heroui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSession } from 'next-auth/react';
 
 export const useRemoveBasket = () => {
-  const user = useSession();
+  const session = useSession();
+  const user: any = session.data;
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ id }: { id: string }) => {

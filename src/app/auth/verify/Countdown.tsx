@@ -13,7 +13,7 @@ const Countdown = () => {
   const { mutate, isPending } = useGetCode();
   const searchParams = useSearchParams();
   const Completionist = () => (
-    <Button onClick={handleResend} isPending={isPending} className="text-[#1DA1F3]">
+    <Button onClick={handleResend} isPending={isPending} className="text-main">
       ارسال مجدد
     </Button>
   );
@@ -48,8 +48,8 @@ const Countdown = () => {
     } else {
       // Render a countdown
       return (
-        <div className="mx-auto flex !w-fit items-center justify-start gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm !text-[#0C0C0C] transition-all duration-500 hover:!text-main">
-          <span className="text-[#263248]">دریافت کد مجدد</span>
+        <div className="mx-auto flex !w-fit items-center justify-start gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm text-[#263248] transition-all duration-500 hover:!text-main dark:text-[#8E98A8]">
+          <span>دریافت کد مجدد</span>
           <span>
             ( {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds})
           </span>
