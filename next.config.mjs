@@ -13,6 +13,14 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
       },
+      {
+        protocol: 'https',
+        hostname: 'dkstatics-public.digikala',
+      },
+      {
+        protocol: 'https',
+        hostname: 'dkstatics-public.digikala.com',
+      },
     ],
   },
   eslint: {

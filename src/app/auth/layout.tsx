@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => {
   const { mutate, isPending } = useLoginGoogle();
   useEffect(() => {
     if (data?.data?.accessToken) {
-      mutate({ idToken: `Bearer ${data?.data?.accessToken}` });
+      mutate({ idToken: `${data?.data?.accessToken}` });
     }
   }, [data]);
 

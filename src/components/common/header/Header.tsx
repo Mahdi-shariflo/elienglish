@@ -1,8 +1,8 @@
 'use client';
 import useGlobalStore from '@/store/global-store';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { memo, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { memo, useEffect, useState } from 'react';
 import Logo from '../Logo';
 import Sidebar from '../Sidebar';
 import Cart from './Cart';
@@ -206,26 +206,25 @@ const Header = ({ categories }: Props) => {
     setCategories(categories);
   }, [categories]);
 
-  // const [position, setPosition] = useState(0);
-  // const [visible, setVisible] = useState(true);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     let moving = window.scrollY;
+  const [position, setPosition] = useState(0);
+  const [visible, setVisible] = useState(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      let moving = window.scrollY;
 
-  //     setVisible(position > moving);
-  //     setPosition(moving);
-  //   };
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // });
-  // const cls = visible ? "yes" : "no";
-  const cls: string = 'yes';
+      setVisible(position > moving);
+      setPosition(moving);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  });
+  const cls = visible ? 'yes' : 'no';
 
-  // useEffect(() => {
-  //   setPosition(window.scrollY);
-  // }, []);
+  useEffect(() => {
+    setPosition(window.scrollY);
+  }, []);
   if (pathname.startsWith('/mag')) return null;
   //todo: Change this style to flex-shrink-0
   return (

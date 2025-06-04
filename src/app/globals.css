@@ -7,7 +7,7 @@
 }
 body {
   direction: rtl;
-  @apply overflow-x-hidden;
+  @apply overflow-x-hidden bg-[#f7f7f7];
 }
 
 @layer utilities {
@@ -125,4 +125,8 @@ input[type='number'] {
 
 hr {
   @apply !hidden;
+}
+
+.bg_blur_blog {
+  backdrop-filter: blur(15px);
 }

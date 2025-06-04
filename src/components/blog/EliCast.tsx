@@ -1,0 +1,138 @@
+'use client';
+import Link from 'next/link';
+import React from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import { Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import CardBlog1 from './CardBlog1';
+import Title from '../common/Title';
+import Button from '../common/Button';
+type Props = {
+  delay: number;
+};
+const EliCast = ({ delay }: Props) => {
+  return (
+    <div className="rounded-lg bg-white p-3">
+      {
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_9_24293)">
+                  <path
+                    d="M8 23H16"
+                    stroke="#6E3DFF"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 19V23"
+                    stroke="#6E3DFF"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 1C11.2044 1 10.4413 1.31607 9.87868 1.87868C9.31607 2.44129 9 3.20435 9 4V12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12V4C15 3.20435 14.6839 2.44129 14.1213 1.87868C13.5587 1.31607 12.7956 1 12 1V1Z"
+                    stroke="#6E3DFF"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M19 10V12C19 13.8565 18.2625 15.637 16.9497 16.9497C15.637 18.2625 13.8565 19 12 19C10.1435 19 8.36301 18.2625 7.05025 16.9497C5.7375 15.637 5 13.8565 5 12V10"
+                    stroke="#6E3DFF"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_9_24293">
+                    <rect width="24" height="24" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <p className="font-bold text-2xl text-main">الی کست</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button>
+              <svg
+                className="rotate-180"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 20L11 14L17 8"
+                  stroke="#6E3DFF"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </Button>
+            <Button>
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 20L11 14L17 8"
+                  stroke="#6E3DFF"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </Button>
+          </div>
+        </div>
+      }
+      <Swiper
+        speed={1000}
+        autoplay={{
+          delay,
+          disableOnInteraction: false,
+        }}
+        // centeredSlides={true}
+        slidesPerView={'auto'}
+        spaceBetween={20}
+        modules={[Autoplay]}
+        loop
+        className="mt-6"
+      >
+        {[0, 1, 2, 3, 4, 6, 7, 8, 9, 9].map((_, idx) => {
+          return (
+            <SwiperSlide
+              className={
+                '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] lg:!h-[320px]'
+              }
+              key={idx}
+            >
+              <CardBlog1 />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
+  );
+};
+
+export default EliCast;
