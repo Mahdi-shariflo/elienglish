@@ -16,7 +16,7 @@ type Props = {
 export default function Slider({ sliders, className }: Props) {
   return (
     <div
-      className={`custom_pagination flex h-full w-[90%] items-center justify-center ${className}`}
+      className={`custom_pagination relative flex h-full w-[90%] items-center justify-center ${className}`}
     >
       <Swiper
         speed={1000}

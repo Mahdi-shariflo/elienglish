@@ -38,7 +38,7 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <header className="fixed flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:bg-[#0B1524]">
+      <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
           <Image src={LogoImage} alt="" />
           <Link
@@ -49,13 +49,15 @@ const Layout = ({ children }: Props) => {
           </Link>
         </div>
       </header>
-      <div className="container_page flex h-screen items-center justify-center">
-        <div className="w-full">{children}</div>
-        <div className="flex h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA] dark:bg-[#172334]">
-          <Slider sliders={sliders} />
-        </div>
+      <div className="min-h-screen bg-white">
+        <div className="container_page !relative !z-[1] flex h-screen items-center justify-center">
+          <div className="w-full">{children}</div>
+          <div className="flex h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA] dark:bg-[#172334]">
+            <Slider sliders={sliders} />
+          </div>
 
-        {isPending ? <Loading /> : null}
+          {isPending ? <Loading /> : null}
+        </div>
       </div>
     </>
   );

@@ -97,7 +97,7 @@ const Select = ({
         isSearchable
         classNamePrefix="react-select"
         noOptionsMessage={() => emptyMessage}
-        className={`!h-[56px] !min-w-[120px] font-medium !text-[14px]`}
+        className={`!h-[48px] !min-w-[120px] font-medium !text-[14px]`}
         styles={{
           control: (base) => ({
             ...base,

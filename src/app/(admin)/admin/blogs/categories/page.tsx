@@ -3,13 +3,7 @@ import ActionCategoryBlog from '@/components/admin/blog/ActionCategoryBlog';
 import VerifyDelete from '@/components/admin/common/VerifyDelete';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
-import {
-  Arrow_back_desktop,
-  Arrow_back_mobile,
-  Delete_icon,
-  Edit_icon,
-  Plus_icon,
-} from '@/components/common/icon';
+import { Arrow_back_mobile, Delete_icon, Edit_icon, Plus_icon } from '@/components/common/icon';
 import { useGetCategoriesBlog } from '@/hooks/admin/blogs/useGetCategoriesBlog';
 import useGlobalStore from '@/store/global-store';
 import { Category } from '@/types/home';
@@ -27,7 +21,7 @@ const Page = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   useEffect(() => {
     if (isSuccess || isFetching) {
-      const categories = data?.data?.data?.MagCategories;
+      const categories = data?.data?.data?.blogCategory;
       setCategories(categories);
     }
   }, [isSuccess, isFetching]);

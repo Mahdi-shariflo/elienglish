@@ -17,7 +17,7 @@ export function useRemoveFavorite() {
     },
     onError: (error: any) => {
       addToast({
-        title: error?.response?.data.errors.message,
+        title: error?.response?.data.message[0],
         color: 'danger',
       });
     },

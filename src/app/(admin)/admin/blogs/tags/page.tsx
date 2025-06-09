@@ -59,7 +59,7 @@ const Page = () => {
         isLoading={isLoading}
         page={1}
         total={tags?.totalPages}
-        mainData={tags?.magTag}
+        mainData={tags?.blogTag}
         showData={columns}
         columns={['_id', 'title', 'action', 'createdAt', 'isPublic']}
         nameAction="ایجاد تگ جدید"

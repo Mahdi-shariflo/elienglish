@@ -62,14 +62,14 @@ const pages = [
 ];
 
 const noIndexPaths = ['/admin', '/auth', '/search', '/shop'];
-const gonePaths = [
-  '/product-tag/',
-  '/shop/',
-  '/benchmark/',
-  '/brands/',
-  '/برند/',
-  '/%D8%A8%D8%B1%D9%86%D8%AF/',
-] as string[];
+// const gonePaths = [
+//   '/product-tag/',
+//   '/shop/',
+//   '/benchmark/',
+//   '/brands/',
+//   '/برند/',
+//   '/%D8%A8%D8%B1%D9%86%D8%AF/',
+// ] as string[];
 const protectedRoute = ['/checkout', '/address', '/admin', '/profile'];
 
 export async function middleware(request: NextRequest) {
@@ -162,9 +162,9 @@ export async function middleware(request: NextRequest) {
   const isProtectedRoute = protectedRoute.find((page) => pathname.startsWith(page));
 
   // اگر روت محافظت شده هست و سشن موجود نیست، ریدایرکت به صفحه ورود
-  if (!rawSession && isProtectedRoute) {
-    return redirectToSignIn(request);
-  }
+  // if (!rawSession && isProtectedRoute) {
+  //   return redirectToSignIn(request);
+  // }
 
   // const isAllowedPage = pages.some((page) => pathname === page || pathname.startsWith(page + '/'));
 

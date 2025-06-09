@@ -132,15 +132,18 @@ export type FilterCategory = {
 } | null;
 
 export type Media = {
-  title: string;
-  url: string;
-  href: string;
-  altpic: string;
-  filename: string;
-  updatedAt: string;
-  createdAt: string;
   _id: string;
-  author: User;
+  id: string;
+  title: string;
+  altText: string;
+  author: string;
+  createdAt: string; // یا اگر با Date کار می‌کنی: Date
+  updatedAt: string; // یا Date
+  url: string;
+  fileType: string;
+  width: number;
+  height: number;
+  __v: number;
 };
 
 export interface Article {

@@ -21,6 +21,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'dkstatics-public.digikala.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'eli-backend.liara.run',
+      },
     ],
   },
   eslint: {

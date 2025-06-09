@@ -20,14 +20,16 @@ import { Checkbox } from '@heroui/react';
 import SeoOptions from '@/components/admin/common/SeoOptions';
 interface InitialValues {
   tags: string[];
+  readTime: string;
   isChosen: boolean;
+  requiredLogin: boolean;
   url: string;
-  isPublic: string;
+  video: { url: string; _id: string } | undefined;
+  Published: string;
   description: string;
-  short_des: string;
   category: string[];
   title: string;
-  thumbnailimage: { url: string; _id: string } | undefined;
+  thumbnailImage: { url: string; _id: string } | undefined;
   metaTitle: string;
   metaDescription: string;
   keyWords: string;
@@ -35,6 +37,9 @@ interface InitialValues {
   redirecturl: string;
   redirecturltype: string;
   canonicalurl: string;
+  type: string;
+  shortDescription: string;
+  cverVideo: { url: string; _id: string } | undefined;
 }
 const Page = () => {
   const params = useParams();
@@ -44,18 +49,23 @@ const Page = () => {
 
   const { data, isLoading: isPendingTag } = useGetTagsBlogAdmin({});
   const editorRef = useRef<HTMLInputElement | null>(null);
-  const tagsOptions = data?.data?.data?.magTag;
+  const tagsOptions = data?.data?.data?.blogTag;
   const formik = useFormik<InitialValues>({
     initialValues: {
+      shortDescription: '',
+
+      requiredLogin: false,
+      cverVideo: undefined,
+      video: undefined,
       tags: [],
+      type: 'text',
       isChosen: false,
       url: '',
-      isPublic: 'false',
+      Published: 'false',
       description: '',
-      short_des: '',
       category: [],
       title: '',
-      thumbnailimage: undefined,
+      thumbnailImage: undefined,
       metaTitle: '',
       metaDescription: '',
       keyWords: '',
@@ -63,25 +73,31 @@ const Page = () => {
       redirecturl: '',
       redirecturltype: '',
       canonicalurl: '',
+      readTime: '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
-      short_des: Yup.string().required('فیلد اجباری است'),
+      shortDescription: Yup.string().required('فیلد اجباری است'),
       category: Yup.array().required('فیلد اجباری است'),
-      // thumbnailimage: Yup.object(),
+      // thumbnailImage: Yup.object(),
     }),
     onSubmit: (values) => {
       const formdata = {
         title: values.title,
-        isPublic: values.isPublic === 'true' ? true : false,
+        Published: values.Published === 'true' ? true : false,
         url: values?.url ? values?.url : createURL(values.title),
-        short_des: values?.short_des,
+        shortDescription: values?.shortDescription,
         isChosen: values.isChosen,
+        requiredLogin: values.requiredLogin,
+        cverVideo: values.cverVideo?._id,
+        video: values.video?._id,
+        readTime: values.readTime,
+        type: values.type,
         // @ts-ignore
         description: editorRef.current.getContent(),
-        tags: values?.tags?.map((option: string) => option).join(','),
+        tags: values?.tags,
         category: values.category.map((option: string) => option).join(','),
-        thumbnailimage: values.thumbnailimage?._id,
+        thumbnailImage: values.thumbnailImage?._id,
         robots: values.robots,
         canonicalurl: values.canonicalurl,
         redirecturltype: Number(values?.redirecturltype),
@@ -96,19 +112,18 @@ const Page = () => {
     enableReinitialize: true,
   });
 
-  const blog = Array.isArray(singleDataMag?.data?.data?.blog)
-    ? singleDataMag?.data?.data?.blog[0]
-    : null;
+  const blog = singleDataMag?.data?.data;
 
   useEffect(() => {
-    if (isSuccess && blog) {
+    if (isSuccess && singleDataMag?.data?.data) {
       formik.setValues({
         ...formik.values,
+        ...blog,
         category: [blog.category?._id],
-        isPublic: blog.isPublic ? 'true' : 'false',
+        Published: blog.Published ? 'true' : 'false',
         isChosen: blog.isChosen,
         tags: blog?.tags?.map((item: { _id: string }) => item._id),
-        thumbnailimage: blog.thumbnailimage,
+        thumbnailImage: blog.thumbnailImage,
         title: blog.title,
         url: blog?.url!,
         description: blog.description,
@@ -137,6 +152,7 @@ const Page = () => {
       <div className="mt-6 flex items-start gap-5">
         <div className="grid w-full grid-cols-2 gap-4">
           <Input
+            url
             isRequired
             label="عنوان بلاگ"
             classNameInput="!h-[48px]"
@@ -159,20 +175,40 @@ const Page = () => {
             selectionMode="multiple"
             isLoading={isPendingTag}
           />
-
+          <Select
+            label="نوع بلاگ"
+            options={[
+              { title: 'متن', _id: 'text' },
+              { title: 'ویدیو', _id: 'video' },
+              { title: 'پادکست', _id: 'poddcast' },
+            ]}
+            name="type"
+            nameLabel="title"
+            nameValue="_id"
+            formik={formik}
+            isLoading={isPendingTag}
+          />
+          <Input
+            label="زمان مطالعه (برحسب دقیقه)"
+            classNameInput="!h-[48px]"
+            name="readTime"
+            type="number"
+            className="lg:col-span-2"
+            formik={formik}
+          />
           <Select
             label="وضعیت انتشار "
             options={StatusOptionsAdmin}
             nameLabel="label"
             nameValue="value"
-            name="isPublic"
+            name="Published"
             formik={formik}
           />
           <Textarea
             isRequired
             label="توضیحات کوتاه درباره مقاله"
             className="lg:col-span-2"
-            name="short_des"
+            name="shortDescription"
             formik={formik}
           />
           <Editor
@@ -185,18 +221,56 @@ const Page = () => {
           <Media
             className="w-full"
             withModal
-            onSelect={(img) => formik.setFieldValue('thumbnailimage', img)}
+            onSelect={(img) => formik.setFieldValue('thumbnailImage', img)}
           >
             <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
-              {typeof formik.values.thumbnailimage === 'object' ? (
+              {typeof formik.values.thumbnailImage === 'object' ? (
                 <img
                   className="h-full w-full object-contain"
-                  src={`${BASEURL}/${formik.values?.thumbnailimage?.url}`}
+                  src={`${BASEURL}/${formik.values?.thumbnailImage?.url}`}
                   alt="thumbnail"
                 />
               ) : (
                 <p className="text-center font-regular text-lg">
                   انتخاب پوستر <span className="text-red-500">*</span>
+                </p>
+              )}
+            </div>
+          </Media>
+          <Media
+            className="w-full"
+            withModal
+            onSelect={(img) => formik.setFieldValue('video', img)}
+          >
+            <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+              {typeof formik.values.video === 'object' ? (
+                <img
+                  className="h-full w-full object-contain"
+                  src={`${BASEURL}/${formik.values?.video?.url}`}
+                  alt="thumbnail"
+                />
+              ) : (
+                <p className="text-center font-regular text-lg">
+                  انتخاب ویدیو <span className="text-red-500">*</span>
+                </p>
+              )}
+            </div>
+          </Media>
+          <Media
+            className="w-full"
+            withModal
+            onSelect={(img) => formik.setFieldValue('cverVideo', img)}
+          >
+            <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+              {typeof formik.values.cverVideo === 'object' ? (
+                <img
+                  className="h-full w-full object-contain"
+                  src={`${BASEURL}/${formik.values?.cverVideo?.url}`}
+                  alt="thumbnail"
+                />
+              ) : (
+                <p className="text-center font-regular text-lg">
+                  انتخاب کاور ویدیو <span className="text-red-500">*</span>
                 </p>
               )}
             </div>
@@ -216,6 +290,17 @@ const Page = () => {
               }}
             >
               آیا جز بلاگ های منتخب است؟
+            </Checkbox>
+            <Checkbox
+              isSelected={formik.values.requiredLogin}
+              onValueChange={(value) => formik.setFieldValue('requiredLogin', value)}
+              size="lg"
+              classNames={{
+                label: 'text-[14px] !font-regular text-[#0C0C0C]',
+                wrapper: 'after:!bg-main',
+              }}
+            >
+              آیا برای دانلود فایل ها، نیاز به لاگین دارد؟
             </Checkbox>
           </div>
           <div className="!mt-7 flex items-center gap-3">

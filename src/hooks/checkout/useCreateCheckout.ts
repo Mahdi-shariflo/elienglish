@@ -36,7 +36,7 @@ export const useCreateCheckout = () => {
     onError: (error) => {
       addToast({
         // @ts-expect-error errror
-        title: error?.response?.data.errors.message,
+        title: error?.response?.data.message[0],
         color: 'danger',
       });
     },

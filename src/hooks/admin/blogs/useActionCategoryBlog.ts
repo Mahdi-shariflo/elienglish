@@ -7,8 +7,8 @@ export const useActionCategoryBlog = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/blog/admin/tag/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/blog/admin/tag`, method: 'POST', data });
+        ? await safeRequest({ url: `/blog/admin/category/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/blog/admin/category`, method: 'POST', data });
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['categories-blog-admin'] });
@@ -16,7 +16,7 @@ export const useActionCategoryBlog = () => {
     onError: (error) => {
       addToast({
         // @ts-expect-error errror
-        title: error?.response?.data.errors.message,
+        title: error?.response?.data.message[0],
         color: 'danger',
       });
     },

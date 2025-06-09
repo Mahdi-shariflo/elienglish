@@ -1,12 +1,12 @@
 'use server';
 
-import memoize from 'memoizee';
-import { cookies } from 'next/headers';
+// import memoize from 'memoizee';
+// import { cookies } from 'next/headers';
 
-import { refreshTokenSet } from '@/lib/auth/session';
-import { saveSession } from '@/lib/auth/storage';
-import { parseSessionCookie } from '@/lib/utils';
-import { COOCIES_NAME } from '@/lib/variable';
+// import { refreshTokenSet } from '@/lib/auth/session';
+// import { saveSession } from '@/lib/auth/storage';
+// import { parseSessionCookie } from '@/lib/utils';
+// import { COOCIES_NAME } from '@/lib/variable';
 
 // handle race conditions by using a shared cache
 // you can use memoizee helper to cache the refresh token function
@@ -17,26 +17,26 @@ import { COOCIES_NAME } from '@/lib/variable';
   },
 */
 
-const refreshTokenSetMemoized = memoize(refreshTokenSet, {
-  maxAge: 30_000,
-  promise: true,
-  normalizer: (args) => JSON.stringify(args[0]),
-});
+// const refreshTokenSetMemoized = memoize(refreshTokenSet, {
+//   maxAge: 30_000,
+//   promise: true,
+//   normalizer: (args) => JSON.stringify(args[0]),
+// });
 
-export const refreshToken = async () => {
-  // read the session cookie
-  const rawSession = (await cookies()).get(COOCIES_NAME)?.value;
+// export const refreshToken = async () => {
+//   // read the session cookie
+//   const rawSession = (await cookies()).get(COOCIES_NAME)?.value;
 
-  if (!rawSession) {
-    throw new Error('Session cookie not found');
-  }
+//   if (!rawSession) {
+//     throw new Error('Session cookie not found');
+//   }
 
-  // extract the refresh token
-  const { refreshToken } = parseSessionCookie(rawSession);
+//   // extract the refresh token
+//   const { refreshToken } = parseSessionCookie(rawSession);
 
-  const newSession = await refreshTokenSetMemoized(refreshToken);
+//   const newSession = await refreshTokenSetMemoized(refreshToken);
 
-  saveSession(newSession);
+//   saveSession(newSession);
 
-  return newSession;
-};
+//   return newSession;
+// };

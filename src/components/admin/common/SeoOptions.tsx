@@ -23,21 +23,15 @@ const SeoOptions = ({ formik }: Props) => {
           }}
         >
           <div className="grid grid-cols-2 gap-3 pb-4">
-            <Input
-              label="عنوان سئو"
-              classNameInput="!h-[48px] bg-[#f5f6f6]"
-              name="metaTitle"
-              formik={formik}
-            />
+            <Input label="عنوان سئو" classNameInput="!h-[48px] " name="metaTitle" formik={formik} />
             <Input
               label="کلمات کلیدی"
-              classNameInput="!h-[48px] bg-[#f5f6f6]"
+              classNameInput="!h-[48px] "
               name="keyWords"
               formik={formik}
             />
             <Textarea
               label="توضیحات سئو"
-              classNameInput="bg-[#f5f6f6]"
               className="lg:col-span-2"
               name="metaDescription"
               formik={formik}
@@ -45,19 +39,14 @@ const SeoOptions = ({ formik }: Props) => {
 
             <Input
               label="canonical"
-              classNameInput="!h-[48px] bg-[#f5f6f6]"
+              classNameInput="!h-[48px] "
               name="canonicalurl"
               formik={formik}
             />
-            <Input
-              label="robots"
-              classNameInput="!h-[48px] bg-[#f5f6f6]"
-              name="robots"
-              formik={formik}
-            />
+            <Input label="robots" classNameInput="!h-[48px] " name="robots" formik={formik} />
             <Input
               label="redirecturl"
-              classNameInput="!h-[48px] bg-[#f5f6f6]"
+              classNameInput="!h-[48px] "
               name="redirecturl"
               formik={formik}
             />

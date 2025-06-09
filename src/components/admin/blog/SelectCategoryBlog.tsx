@@ -11,7 +11,7 @@ type Props = {
 
 const SelectCategoryBlog = ({ onSelect, selected, multiple }: Props) => {
   const { isPending, data } = useGetCategoriesBlog({});
-  const magCategory: Category[] = data?.data?.data?.MagCategories || [];
+  const magCategory: Category[] = data?.data?.data?.blogCategory || [];
   const [selectedCategories, setSelectedCategories] = useState<string[]>(selected);
 
   // تابع برای مدیریت تغییر وضعیت دسته‌بندی‌ها

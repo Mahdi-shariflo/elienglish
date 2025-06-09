@@ -10,7 +10,7 @@ export default function Fetcher({ children }: { children: React.ReactNode }) {
 
   useLayoutEffect(() => {
     if (!session?.data) return;
-
+    console.log(session, 'fhvsdfgshgfsjyg');
     const interceptor = client.interceptors.request.use(async (config) => {
       let headers = new AxiosHeaders({
         ...config.headers,

@@ -80,7 +80,7 @@ client.interceptors.response.use(
       return notFound();
     }
     if ((typeof window !== 'undefined' && status === 401) || status === 401) {
-      removeSession();
+      // removeSession();
       location.href === '/auth';
     }
     if (((typeof window !== 'undefined') !== undefined && status === 429) || status === 429) {
