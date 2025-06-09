@@ -39,7 +39,7 @@ const Page = () => {
       description: 'دسته‌بندی',
       info: category.title,
       updateCache: 'categories-blog-admin',
-      url: `/admin/mag-category/remove/${category._id}`,
+      url: `/blog/admin/category/${category._id}`,
     });
 
   return (

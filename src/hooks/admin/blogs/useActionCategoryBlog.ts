@@ -7,8 +7,8 @@ export const useActionCategoryBlog = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/admin/mag-category/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/mag-category/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/blog/admin/tag/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/blog/admin/tag`, method: 'POST', data });
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['categories-blog-admin'] });

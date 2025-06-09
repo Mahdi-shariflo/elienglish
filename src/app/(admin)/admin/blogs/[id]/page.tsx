@@ -139,7 +139,7 @@ const Page = () => {
           <Input
             isRequired
             label="عنوان بلاگ"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
+            classNameInput="!h-[48px]"
             name="title"
             className="lg:col-span-2"
             helperText={blog?.url ? blog.url : createURL(formik.values.title)}
@@ -171,7 +171,6 @@ const Page = () => {
           <Textarea
             isRequired
             label="توضیحات کوتاه درباره مقاله"
-            classNameInput="bg-[#f5f6f6]"
             className="lg:col-span-2"
             name="short_des"
             formik={formik}

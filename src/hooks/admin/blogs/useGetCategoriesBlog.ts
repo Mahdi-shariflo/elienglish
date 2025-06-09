@@ -9,6 +9,6 @@ export const useGetCategoriesBlog = ({ page = '1', sort = '', search = '' }: Pro
   // Debounce the search input
   return useQuery({
     queryKey: ['categories-blog-admin', page, search, sort],
-    queryFn: async () => await safeRequest({ url: `/admin/mag-category/all` }),
+    queryFn: async () => await safeRequest({ url: `//blog/admin/category/all` }),
   });
 };

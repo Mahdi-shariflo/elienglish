@@ -8,7 +8,7 @@ export const useGetBlogById = () => {
   return useQuery({
     queryKey: ['single-blog-admin', id],
     enabled: id === 'add' ? false : true,
-    queryFn: async () => await safeRequest({ url: `/admin/blogs/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/blog/admin/${id}` }),
     gcTime: 0,
   });
 };

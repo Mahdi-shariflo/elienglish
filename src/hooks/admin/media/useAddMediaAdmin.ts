@@ -8,7 +8,7 @@ export const useAddMediaAdmin = () => {
   return useMutation({
     mutationFn: async ({ data }: { data: unknown }) =>
       await safeRequest({
-        url: '/admin/media/add',
+        url: '/media/admin',
         method: 'POST',
         data,
         headers: { 'Content-Type': 'multipart/form-data' },

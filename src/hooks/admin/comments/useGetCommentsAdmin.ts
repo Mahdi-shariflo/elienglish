@@ -17,7 +17,7 @@ export const useGetCommentsAdmin = ({
     queryKey: ['comments-admin', page, search, sort, status],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/comment/all?page=${page}&limit=20&status=${status}&sort=${sort}&serach=${encodeURIComponent(search)}`,
+        url: `/comment/admin?page=${page}&limit=20&status=${status}&sort=${sort}&serach=${encodeURIComponent(search)}`,
       }),
   });
 };

@@ -158,7 +158,7 @@ const Input = ({
           placeholder=" "
           classNames={{
             input: 'px-2 !border-none !ring-0',
-            inputWrapper: `bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 h-[48px] w-full ${classNameInput}`,
+            inputWrapper: `!bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 h-[48px] w-full ${classNameInput}`,
           }}
           className="mt-3 font-light text-[14px]"
           value={formik?.values?.url}

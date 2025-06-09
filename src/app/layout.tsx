@@ -22,14 +22,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  // const sessionUser = await getSession();
+  const sessionUser = await getSession();
 
   return (
     <html lang="fa">
-      <body className={`${'' === 'dark' ? 'dark' : ''}`}>
-        <SessionWrapper session={{ ...session }}>
+      <body className={`${sessionUser?.theme === 'dark' ? 'dark' : ''}`}>
+        <SessionWrapper session={{ ...session, ...sessionUser }}>
           <Fetcher>
-            <GlobalContextProvider theme={''}>{children}</GlobalContextProvider>
+            <GlobalContextProvider theme={sessionUser?.theme}>{children}</GlobalContextProvider>
           </Fetcher>
         </SessionWrapper>
       </body>

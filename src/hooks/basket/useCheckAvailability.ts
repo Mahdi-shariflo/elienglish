@@ -1,9 +1,11 @@
 import { safeRequest } from '@/lib/safeClient';
+import { User } from '@/types';
 import { useQuery } from '@tanstack/react-query';
-import { useSession } from '@/lib/auth/useSession';
+import { useSession } from 'next-auth/react';
 
 export const useCheckAvailability = () => {
-  const user = useSession();
+  const session = useSession();
+  const user = session.data as User;
   // Debounce the search input
   return useQuery({
     queryKey: ['check-availability'],

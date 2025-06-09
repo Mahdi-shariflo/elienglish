@@ -34,7 +34,7 @@ const Page = () => {
             description: 'تگ بلاگ‌ها',
             info: row.title,
             updateCache: 'tags-mag-admin',
-            url: `/admin/mag-tag/remove/${row._id}`,
+            url: `/blog/admin/tag/${row._id}`,
           }),
         onEdit: (info: Tag) => setModal({ open: true, info }),
       }),

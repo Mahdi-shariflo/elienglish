@@ -15,7 +15,7 @@ export default {
         main: '#6E3DFF',
        primary:"#263248",
        gray:{
-        200:"#8E98A8"
+        DEFAULT:"#8E98A8"
        }
       },
       boxShadow: {

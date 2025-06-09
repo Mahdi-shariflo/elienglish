@@ -10,8 +10,8 @@ export const useActionMag = () => {
   return useMutation({
     mutationFn: async ({ data }: { data: unknown }) => {
       return id !== 'add'
-        ? await safeRequest({ url: `/admin/blogs/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/blogs/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/blog/admin/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/blog/admin`, method: 'POST', data });
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['blogs-admin-page'] });

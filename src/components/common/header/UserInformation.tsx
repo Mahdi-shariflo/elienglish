@@ -9,6 +9,7 @@ import { SITE_NAME } from '@/lib/variable';
 export default function UserInformation() {
   const session = useSession();
   const user: any = session.data;
+  console.log(user);
   const { setLogout } = useGlobalStore();
   const links = [
     {

@@ -1,7 +1,6 @@
 'use client';
 import RaectSelect, { MultiValue, SingleValue } from 'react-select';
 import { FormikProps } from 'formik';
-import { SingleValueProps } from 'react-select';
 
 type OptionType = { label: string; value: string };
 

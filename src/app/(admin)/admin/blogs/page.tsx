@@ -36,7 +36,7 @@ const Page = () => {
             description: 'بلاگ‌ها',
             info: row.title,
             updateCache: 'blogs-admin',
-            url: `/admin/blogs/remove/${row._id}`,
+            url: `/blog/admin/${row._id}`,
           }),
         onEdit: (row) => router.push(`/admin/blogs/${row._id}/`),
       }),

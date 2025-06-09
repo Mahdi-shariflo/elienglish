@@ -6,7 +6,7 @@ export const useUpdateCommentByIdAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
-      return await safeRequest({ url: `/admin/comment/update/${id}`, method: 'PATCH', data });
+      return await safeRequest({ url: `/comment/admin/${id}`, method: 'PATCH', data });
     },
     onSuccess: async () => {
       addToast({

@@ -13,8 +13,8 @@ export const useActionTagMag = () => {
       data: { title: string; url: string; description: string };
     }) => {
       return id
-        ? await safeRequest({ url: `/admin/mag-tag/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/mag-tag/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/blog/admin/tag/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/blog/admin/tag`, method: 'POST', data });
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['tags-mag-admin'] });
