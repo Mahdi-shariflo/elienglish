@@ -1,16 +1,18 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { ReactNode } from 'react';
 type Props = {
+  children?: ReactNode;
   categories: {
     title: string;
     url: string;
   }[];
 };
-const Categories = ({ categories }: Props) => {
+const Categories = ({ categories, children }: Props) => {
   return (
     <div>
       <p className="text-center font-bold text-xl text-[#33435A]">دسته‌های پر مخاطب</p>
       <div className="mt-[24px] flex gap-4">
+        {children}
         {categories.map((item, idx) => (
           <Link
             key={idx}

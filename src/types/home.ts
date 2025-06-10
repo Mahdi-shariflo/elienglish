@@ -1,6 +1,7 @@
-import { Address, User } from '.';
+import { Address, Blog, User } from '.';
 
 export type Home = {
+  cards: Blog[];
   bannerTopHeaderDesktop: {
     url: string;
   };

@@ -12,6 +12,7 @@ const CardBlogSection1 = ({ blog }: Props) => {
       className="group relative h-full cursor-pointer overflow-hidden"
     >
       <Image
+        classImg="!object-fill"
         className="h-full w-full transition-all duration-400 group-hover:scale-105"
         src={blog.thumbnailImage.url}
         alt=""

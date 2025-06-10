@@ -5,7 +5,7 @@ type Props = {
   sort?: string;
   search?: string;
 };
-export const useGetBlogsAdmin = ({ page = '1', sort = '', search = '' }: Props) => {
+export const useGetBlogsAdmin = ({ page = '1', sort = 'createdAt_desc', search = '' }: Props) => {
   // Debounce the search input
   return useQuery({
     queryKey: ['blogs-admin-page', page, search, sort],
