@@ -3,14 +3,14 @@ import Input from '@/components/common/form/Input';
 import Textarea from '@/components/common/form/Textarea';
 import Select from '@/components/common/Select';
 import { optionRedirectType, StatusOptionsAdmin } from '@/lib/data';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Editor from '../../../../../components/admin/common/Editor';
 import Media from '@/components/admin/common/Media';
 import { useParams, useRouter } from 'next/navigation';
 import SelectCategoryBlog from '@/components/admin/blog/SelectCategoryBlog';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { BASEURL } from '@/lib/variable';
+import { BASEURL, BASEURL_SITE } from '@/lib/variable';
 import Button from '@/components/common/Button';
 import { createURL, removeEmptyFields } from '@/lib/fun';
 import { useGetTagsBlogAdmin } from '@/hooks/admin/blogs/useGetTagsBlogAdmin';
@@ -20,6 +20,9 @@ import { Checkbox } from '@heroui/react';
 import SeoOptions from '@/components/admin/common/SeoOptions';
 import Video from 'react-player';
 import { AudioPlayer } from '@/components/common/AudioPlayer';
+import DownloadFile from '@/components/admin/blog/DownloadFile';
+import { ThumbnailImage } from '@/types';
+import { Delete_icon } from '@/components/common/icon';
 interface InitialValues {
   tags: string[];
   readTime: string;
@@ -43,8 +46,15 @@ interface InitialValues {
   type: string;
   shortDescription: string;
   cverVideo: { url: string; _id: string } | undefined;
+  downloads: {
+    title: string;
+    size: string;
+    url: string;
+    icon: string;
+  }[];
 }
 const Page = () => {
+  const [show, setShow] = useState(false);
   const params = useParams();
   const { data: singleDataMag, isSuccess } = useGetBlogById();
   const { mutate, isPending } = useActionMag();
@@ -55,6 +65,7 @@ const Page = () => {
   const tagsOptions = data?.data?.data?.blogTag;
   const formik = useFormik<InitialValues>({
     initialValues: {
+      downloads: [],
       shortDescription: '',
       requiredLogin: false,
       cverVideo: undefined,
@@ -97,6 +108,7 @@ const Page = () => {
         audio: values.poddcast?._id,
         readTime: values.readTime,
         type: values.type,
+        downloads: values.downloads,
         // @ts-ignore
         description: editorRef.current.getContent(),
         tags: values?.tags,
@@ -150,6 +162,12 @@ const Page = () => {
       });
     }
   }, [isSuccess]);
+  const onRemoveDownloadFile = (idx: number) => {
+    const updatedDownloads = [...formik.values.downloads]; // یک کپی از آرایه می‌گیریم
+    updatedDownloads.splice(idx, 1); // آیتم با ایندکس مشخص رو حذف می‌کنیم
+    formik.setFieldValue('downloads', updatedDownloads); // مقدار جدید رو ست می‌کنیم
+  };
+
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -224,7 +242,32 @@ const Page = () => {
           />
         </div>
         <div className="min-w-[350px] max-w-[350px] space-y-3 rounded-lg">
+          <div className="rounded-lg border p-2">
+            <p className="relative mb-5 pr-4 font-extrabold text-lg after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
+              فایل دانلود‌ها
+            </p>
+            <div className="grid grid-cols-3 gap-3">
+              <Button onClick={() => setShow(true)} className="h-[100px] min-w-fit border">
+                فایل جدید
+              </Button>
+              {formik.values.downloads.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="relative flex h-[100px] min-w-fit items-center justify-center rounded-xl border"
+                >
+                  <img src={`${item.icon}`} />
+                  <Button
+                    onClick={() => onRemoveDownloadFile(idx)}
+                    className="absolute left-0 top-0 flex h-10 w-10 min-w-fit items-center justify-center border bg-white"
+                  >
+                    <Delete_icon />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
           <Media
+            title="انتخاب پوستر"
             className="w-full"
             withModal
             onSelect={(img) => formik.setFieldValue('thumbnailImage', img)}
@@ -266,6 +309,7 @@ const Page = () => {
               <Media
                 className="w-full"
                 withModal
+                title="انتخاب پادکست"
                 onSelect={(img) => formik.setFieldValue('cverVideo', img)}
               >
                 <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
@@ -341,6 +385,13 @@ const Page = () => {
           </div>
         </div>
       </div>
+      <DownloadFile
+        onSubmit={(values) =>
+          formik.setFieldValue('downloads', [...formik.values.downloads, values])
+        }
+        show={show}
+        setShow={setShow}
+      />
     </div>
   );
 };
