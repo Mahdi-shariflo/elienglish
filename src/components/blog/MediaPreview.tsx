@@ -9,7 +9,7 @@ const MediaPreview = ({ blog }: { blog: Blog }) => {
     <>
       <div className="mt-[24px] h-[480px] overflow-hidden rounded-xl border border-[#E5EAEF]">
         {blog?.video?.url ? (
-          <VideoPlayer poster={`${BASEURL}/${blog.coverVideo.url}`} url={blog.video.url} />
+          <VideoPlayer poster={`${BASEURL}/${blog?.coverVideo?.url}`} url={blog?.video?.url} />
         ) : (
           <Image
             className="h-full w-full"
