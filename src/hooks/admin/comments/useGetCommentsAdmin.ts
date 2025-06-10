@@ -10,14 +10,14 @@ export const useGetCommentsAdmin = ({
   page = '1',
   search = '',
   sort = '',
-  status = 'Awaiting',
+  status = 'awaiting',
 }: Props) => {
   // Debounce the search input
   return useQuery({
     queryKey: ['comments-admin', page, search, sort, status],
     queryFn: async () =>
       await safeRequest({
-        url: `/comment/admin?page=${page}&limit=20&status=${status}&sort=${sort}&serach=${encodeURIComponent(search)}`,
+        url: `/comment/admin?page=${page}&limit=20&published=${status}&sort=${sort}&serach=${encodeURIComponent(search)}`,
       }),
   });
 };

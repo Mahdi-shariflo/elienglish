@@ -9,23 +9,10 @@ import {
   DrawerHeader,
 } from '@heroui/react';
 import { BlogPage_icon, BrandPage_icon, ContactPage_icon, Home_icon } from './icon';
-import useGlobalStore from '@/store/global-store';
-import { transformData } from '@/lib/transformDataCategory';
 import { useRouter } from 'next/navigation';
 import { CgClose } from 'react-icons/cg';
 
 const Sidebar = () => {
-  const { categories } = useGlobalStore();
-
-  const parseCaregories = (() => {
-    try {
-      return typeof categories === 'string' ? JSON.parse(categories) : categories || [];
-    } catch (error) {
-      console.error('Error parsing categories:', error);
-      return [];
-    }
-  })();
-
   const [open, setOpen] = useState(false);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<{
@@ -43,7 +30,6 @@ const Sidebar = () => {
       Icon: BrandPage_icon,
       src: '/brands',
     },
-    ...transformData(parseCaregories), // دسته‌بندی‌هایی که src ندارن
     {
       title: 'رز مگ',
       Icon: BlogPage_icon,
@@ -218,23 +204,17 @@ const Sidebar = () => {
                         <div
                           key={idx}
                           onClick={
-                            // @ts-expect-error error
                             menu?.src!
                               ? () => {
                                   onClose();
-                                  // @ts-expect-error error
                                   router.push(`${menu.src!}/`);
                                 }
                               : () => handleCategoryClick(menu)
                           }
                           className="flex h-[83px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border"
                         >
-                          {/* @ts-expect-error */}
                           <menu.Icon
-                            className={`!h-7 !w-7 ${
-                              // @ts-expect-error error
-                              menu.src === '/' ? 'stroke-main' : ''
-                            }`}
+                            className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main' : ''}`}
                           />
                           <span className="font-light text-[#4A4A4A]">{menu.title}</span>
                         </div>

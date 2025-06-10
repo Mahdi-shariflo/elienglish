@@ -1,9 +1,11 @@
 import React from 'react';
 import Image from '../common/Image';
 import { Blog } from '@/types';
+import Link from 'next/link';
 const CardBlog2 = ({ className, blog }: { blog: Blog; className?: string }) => {
   return (
-    <div
+    <Link
+      href={`/blogs/${blog.url}`}
       className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 ${className}`}
     >
       <Image
@@ -59,7 +61,7 @@ const CardBlog2 = ({ className, blog }: { blog: Blog; className?: string }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -168,7 +168,7 @@ const Footer = () => {
   if (isProfilePage) return null;
   return (
     <>
-      <div className="!mt-32 bg-[#F4F6FA] pb-10">
+      <div className="h-fit w-full bg-[#F4F6FA] pb-10">
         <section className="container_page mt-10 block bg-transparent pb-5 pt-3 lg:mb-0">
           <footer>
             {/* 1 */}

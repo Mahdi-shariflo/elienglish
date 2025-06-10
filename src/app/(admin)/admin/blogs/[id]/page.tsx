@@ -94,6 +94,7 @@ const Page = () => {
         requiredLogin: values.requiredLogin,
         cverVideo: values.cverVideo?._id,
         video: values.video?._id,
+        audio: values.poddcast?._id,
         readTime: values.readTime,
         type: values.type,
         // @ts-ignore
@@ -127,6 +128,8 @@ const Page = () => {
         isChosen: blog.isChosen,
         tags: blog?.tags?.map((item: { _id: string }) => item._id),
         thumbnailImage: blog.thumbnailImage,
+        video: blog.video,
+        poddcast: blog.audio,
         title: blog.title,
         url: blog?.url!,
         description: blog.description,

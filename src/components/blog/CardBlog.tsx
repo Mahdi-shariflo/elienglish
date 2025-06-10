@@ -1,13 +1,17 @@
 import React from 'react';
-import BlogImage from '@/../public/images/adel.png';
 import Image from '../common/Image';
-const CardBlog = () => {
+import { Blog } from '@/types';
+import Link from 'next/link';
+const CardBlog = ({ blog }: { blog: Blog }) => {
   return (
-    <div className="flex h-[160px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4">
+    <Link
+      href={`/blogs/${blog.url}`}
+      className="flex h-[160px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4"
+    >
       <div className="h-full">
         <Image
           className="h-full !w-[258px] overflow-hidden rounded-xl"
-          src={BlogImage.src}
+          src={blog.thumbnailImage.url}
           alt=""
         />
       </div>
@@ -15,9 +19,7 @@ const CardBlog = () => {
         <span className="flex h-[28px] w-fit items-center justify-center rounded-md bg-[#EDE8FC] px-2 font-medium text-[13px] text-main">
           آموزش گرامر
         </span>
-        <p className="font-medium text-[16px]">
-          متن و ترجمه آهنگ I love you از Easy On Me + تحلیل جامع متن و گرامر
-        </p>
+        <p className="font-medium text-[16px]">{blog.title}</p>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <span>
@@ -75,11 +77,17 @@ const CardBlog = () => {
                 />
               </svg>
             </span>
-            <span className="font-medium text-[14px] text-[#6A7890]">۴ روز پیش</span>
+            <span className="font-medium text-[14px] text-[#6A7890]">
+              {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

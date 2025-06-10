@@ -15,7 +15,7 @@ const Categories = ({ categories }: Props) => {
           <Link
             key={idx}
             className="flex h-[158px] w-[183px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white"
-            href={'/blogs/catgory/1'}
+            href={`/blogs/category/${item.url}`}
           >
             <span>
               <svg

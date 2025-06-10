@@ -1,11 +1,10 @@
+import { Blog } from '@/types';
 import React from 'react';
 
-const InfoBlog = () => {
+const InfoBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
-      <h1 className="pt-[24px] font-extrabold text-4xl text-[#172334]">
-        آموزش ماه های میلادی در زبان انگلیسی + تلفظ و نکات مهم
-      </h1>
+      <h1 className="pt-[24px] font-extrabold text-4xl text-[#172334]">{blog.title}</h1>
       <div className="mt-[24px] flex items-center gap-[24px]">
         <div className="flex items-center gap-2">
           <svg
@@ -35,7 +34,9 @@ const InfoBlog = () => {
               />
             </defs>
           </svg>
-          <span className="font-light text-[14px] text-[#6A7890]">الناز قاسمی</span>
+          <span className="font-light text-[14px] text-[#6A7890]">
+            {blog.author.firstName} {blog.author.lastName}
+          </span>
         </div>
         <div className="flex items-center gap-2">
           <svg
@@ -54,7 +55,7 @@ const InfoBlog = () => {
           </svg>
           <div className="flex gap-1">
             <span className="font-light text-[14px] text-[#8E98A8]">زمان مطالعه:</span>
-            <span className="font-light text-[14px] text-[#6A7890]">5 دقیقه</span>
+            <span className="font-light text-[14px] text-[#6A7890]">{blog.readTime} دقیقه</span>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -75,7 +76,13 @@ const InfoBlog = () => {
 
           <div className="flex gap-1">
             <span className="font-light text-[14px] text-[#8E98A8]">زمان انتشار:</span>
-            <span className="font-light text-[14px] text-[#6A7890]">شنبه, ۱۳ اردیبهشت ۱۴۰۴</span>
+            <span className="font-light text-[14px] text-[#6A7890]">
+              {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
           </div>
         </div>
       </div>

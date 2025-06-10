@@ -1,43 +1,97 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Input from '../common/form/Input';
 import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
 import CardComment from './CardComment';
+import { useSession } from '@/lib/auth/useSession';
+import { useGetCommentsProductById } from '@/hooks/comments/useGetCommentsProductById';
+import { useAddComment } from '@/hooks/comments/useAddComment';
+import { Blog } from '@/types';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import StarRating from '../common/StarRateing';
+import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
+const Comments = ({ blog }: { blog: Blog }) => {
+  const [open, setOpen] = useState(false);
+  const user = useSession();
+  const { data } = useGetCommentsProductById(blog._id!);
+  const { isSuccess, mutate, isPending } = useAddComment();
+  const [star, setStar] = useState(0);
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      content: '',
+    },
+    validationSchema: yup.object({
+      title: yup.string().required('فیلد اجباری است'),
+      content: yup.string().required('فیلد اجباری است'),
+      star: yup.mixed().test('is-not-zero', 'امتیاز نباید صفر باشد', () => star > 0),
+    }),
+    onSubmit: (values) => {
+      if (!user?.accessToken) return setOpen(!open);
+      const data = {
+        ...values,
+        rating: star,
+        targetType: 'blog',
+        targetId: blog._id,
+      };
+      mutate({ data });
+    },
+  });
 
-const Comments = () => {
+  useEffect(() => {
+    if (isSuccess) {
+      formik.resetForm();
+      setStar(0);
+    }
+  }, [isSuccess]);
   return (
     <>
       <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-[24px]">
         <p className="relative mb-5 pr-4 font-extrabold text-2xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
           ارسال دیدگاه
         </p>
-        <form className="grid grid-cols-2 gap-3">
+        <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
           <Input
+            isRequired
             placeholder="نام و نام خانوادگی خود را وارد کنید"
             label={'نام و نام خانوادگی'}
-            isRequired
+            classNameInput={'bg-[#f5f6f6]'}
+            name="title"
+            formik={formik}
           />
-          <Input placeholder="آدرس ایمیل خود را وارد کنید" label={'ایمیل'} isRequired />
+
+          <StarRating
+            onRate={(star) => setStar(star)}
+            isRequired
+            className="lg:col-span-2"
+            label="امتیاز شما"
+            setRating={setStar}
+            intialValue={star}
+          />
           <Textarea
-            className="col-span-2"
+            name="content"
+            formik={formik}
+            className="lg:col-span-2"
+            isRequired
             placeholder="متن دیدگاه خود را یادداشت کنید"
             label={'متن دیدگاه'}
-            isRequired
           />
-          <div className="col-span-2 mt-[24px] flex justify-end">
-            <Button className="!h-[56px] !w-[149px] bg-main text-[14px] text-white shadow-button">
-              ارسال دیدگاه
+          <div className="mt-5 flex justify-end lg:col-span-2">
+            <Button
+              isLoading={isPending}
+              type="submit"
+              className="w-full bg-main px-10 text-white lg:w-fit"
+            >
+              ثبت دیدگاه
             </Button>
           </div>
         </form>
-      </div>
-      <div className="mt-[24px]">
-        <p className="relative mb-5 pr-4 font-extrabold text-2xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
-          دیدگاه‌ها
-        </p>
-        <div className="mt-[24px]">
-          <CardComment />
+        <div className="mt-10">
+          {data?.data?.data?.comments?.map((comment: Comment, idx: number) => <CardComment />)}
         </div>
+        <ModalNeedLoginUser open={open} setOpen={setOpen} />
       </div>
     </>
   );

@@ -9,10 +9,9 @@ export const useAddComment = () => {
   return useMutation({
     mutationFn: async ({ data }: Props) => {
       return await safeRequest({
-        url: '/user/comment/add',
+        url: '/comment',
         method: 'POST',
         data,
-        headers: { 'Content-Type': 'multipart/form-data' },
       });
     },
     onSuccess: async () => {

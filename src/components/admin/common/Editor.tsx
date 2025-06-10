@@ -10,7 +10,7 @@ const Editor = ({ value, editorRef }: Props) => {
       <EditorTinymce
         // @ts-ignore
         onInit={(_evt, editor) => (editorRef.current! = editor)}
-        apiKey="cdtlfbzaf2xbr5p6ekmeqafs50fjcmpgw3zwxx2hwd8i88f9"
+        apiKey="mcxbw3ofc73fi306etrn075rmmta8nji278xe71ofdix95v1"
         init={{
           height: '550',
           directionality: 'rtl',

@@ -7,7 +7,7 @@
 }
 body {
   direction: rtl;
-  @apply overflow-x-hidden bg-[#f7f7f7];
+  @apply overflow-x-hidden;
 }
 
 @layer utilities {

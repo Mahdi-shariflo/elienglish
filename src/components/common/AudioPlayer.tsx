@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { AudioPlayerControlSprite, Audio } from 'react-audio-player-pro';
 import 'react-audio-player-pro/dist/style.css';
@@ -7,9 +8,9 @@ const mediaMetadata = {
   title: 'Pure Water',
 };
 
-export function AudioPlayer({ src }: { src: string }) {
+export function AudioPlayer({ src, className }: { src: string; className?: string }) {
   return (
-    <div dir="ltr">
+    <div className={className} dir="ltr">
       <AudioPlayerControlSprite />
       <Audio
         src={src}

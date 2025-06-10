@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <Header categories="" />
-      <div className="container_page mt-32">{children}</div>
+      <div>{children}</div>
       <Footer />
     </div>
   );

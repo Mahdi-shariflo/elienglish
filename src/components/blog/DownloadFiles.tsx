@@ -1,6 +1,8 @@
+import { Blog } from '@/types';
 import React from 'react';
 
-const DownloadFiles = () => {
+const DownloadFiles = ({ blog }: { blog: Blog }) => {
+  if (Number(blog.downloads.length) < 1) return null;
   return (
     <div className="mt-[24px]">
       <div className="flex h-[88px] items-center gap-3 rounded-[16px] border-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px]">

@@ -82,7 +82,7 @@ const Page = () => {
         isFetching={isFetching}
         isLoading={isPending || isFetching || isLoading}
         total={blogs?.totalPages}
-        mainData={blogs}
+        mainData={blogs?.blogs}
         showData={columns}
         columns={['_id', 'title', 'action', 'createdAt', 'isPublic']}
         nameAction="ایجاد بلاگ جدید"

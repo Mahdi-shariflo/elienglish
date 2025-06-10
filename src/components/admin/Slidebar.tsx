@@ -123,12 +123,12 @@ const menus = [
   //     },
   //   ],
   // },
-  // {
-  //   icon: Comments_icon,
-  //   name: 'دیدگاه‌ها',
-  //   href: '/admin/comments/',
-  //   activeIcon: Comments_fill_icon,
-  // },
+  {
+    icon: Comments_icon,
+    name: 'دیدگاه‌ها',
+    href: '/admin/comments/',
+    activeIcon: Comments_fill_icon,
+  },
   // {
   //   icon: Home_icon,
   //   name: 'صفحه اصلی',

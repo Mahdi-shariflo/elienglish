@@ -234,15 +234,18 @@ export type ThumbnailImage = {
 
 export type Blog = {
   _id: string;
-  author: string;
+  author: User;
   type: string; // مثلا "video"
   url: string;
   title: string;
+  readTime: string;
   keyWords: string[];
   shortDescription: string;
   Published: boolean;
   thumbnailImage: ThumbnailImage;
-  video: string; // به نظر میاد id ویدئو باشه
+  coverVideo: ThumbnailImage;
+  audio: ThumbnailImage;
+  video: ThumbnailImage; // به نظر میاد id ویدئو باشه
   tags: string[]; // آیدی‌های تگ‌ها
   category: string; // آیدی دسته‌بندی
   isChosen: boolean;

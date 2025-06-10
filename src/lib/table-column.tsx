@@ -1183,8 +1183,8 @@ export const initialDataComments = ({ onDelete, onEdit }: { onDelete?: any; onEd
   },
   {
     title: <HeaderCell align="center" title="امتیاز" />,
-    dataIndex: 'rate',
-    key: 'rate',
+    dataIndex: 'rating',
+    key: 'rating',
     render: (value: string) => (
       <p className="mx-auto w-[200px] overflow-hidden text-ellipsis text-center text-[12px] text-gray-600">
         {value}
@@ -1193,8 +1193,8 @@ export const initialDataComments = ({ onDelete, onEdit }: { onDelete?: any; onEd
   },
   {
     title: <HeaderCell align="center" title="عنوان" />,
-    dataIndex: 'commentTitle',
-    key: 'commentTitle',
+    dataIndex: 'title',
+    key: 'title',
     render: (value: string) => (
       <p className="mx-auto w-[200px] overflow-hidden text-ellipsis text-center text-[12px] text-gray-600">
         {value}
@@ -1203,8 +1203,8 @@ export const initialDataComments = ({ onDelete, onEdit }: { onDelete?: any; onEd
   },
   {
     title: <HeaderCell align="center" title="پیام" />,
-    dataIndex: 'comment',
-    key: 'comment',
+    dataIndex: 'content',
+    key: 'content',
     render: (value: string) => (
       <p className="mx-auto w-[200px] overflow-hidden text-ellipsis text-center text-[12px] text-gray-600">
         {value}

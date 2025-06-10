@@ -14,7 +14,7 @@ const CardBlog1 = ({
 }) => {
   return (
     <Link
-      href={'/'}
+      href={`/blogs/${blog.url}`}
       className={`group relative flex h-full w-full flex-col justify-between bg-white ${className}`}
     >
       <Image
