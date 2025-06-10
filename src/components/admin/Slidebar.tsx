@@ -67,140 +67,146 @@ const menus = [
         name: 'تگ بلاگ‌ها',
         href: '/admin/blogs/tags/',
       },
-    ],
-  },
-  {
-    icon: Products_icon,
-    name: 'محصولات',
-    href: ['/admin/products/', '/admin/products/create/', '/admin/products/categories/'],
-    activeIcon: Products_fill_icon,
-    children: [
       {
-        name: 'همه محصولات',
-        href: '/admin/products/',
-      },
-      {
-        name: 'ایجاد محصول',
-        href: '/admin/products/new/',
-      },
-      {
-        name: 'تگ محصولات',
-        href: '/admin/products/tags/',
-      },
-      {
-        name: 'ویژگی محصولات',
-        href: '/admin/products/properties/',
-      },
-      {
-        name: 'گروه ویژگی محصولات',
-        href: '/admin/products/group-properties/',
-      },
-      {
-        name: 'دسته‌بندی محصولات',
-        href: '/admin/products/categories/',
+        icon: Settings_icon,
+        name: 'تنظیمات',
+        href: '/admin/blogs/settings/',
+        activeIcon: Settings_fill_icon,
       },
     ],
   },
-  {
-    icon: Slider_icon,
-    name: 'اسلایدر‌ها',
-    activeIcon: Slider_fill_icon,
-    href: '/admin/sliders/',
-    children: [
-      {
-        name: 'اسلایدر‌ها',
-        href: '/admin/sliders/',
-      },
-      {
-        name: 'دسته‌بندی اسلایدر‌ها',
-        href: '/admin/sliders/categories/',
-      },
-    ],
-  },
-  {
-    icon: Comments_icon,
-    name: 'دیدگاه‌ها',
-    href: '/admin/comments/',
-    activeIcon: Comments_fill_icon,
-  },
-  {
-    icon: Home_icon,
-    name: 'صفحه اصلی',
-    href: '/admin/home/',
-    activeIcon: Home_fill_icon,
-  },
-  {
-    icon: Support_icon,
-    name: 'پشتیبانی',
-    href: '/admin/supports/',
-    activeIcon: Comments_fill_icon,
-  },
-  {
-    icon: User_icon,
-    name: 'کاربران',
-    href: '/admin/users/',
-    activeIcon: User_fill_icon,
-  },
+  // {
+  //   icon: Products_icon,
+  //   name: 'محصولات',
+  //   href: ['/admin/products/', '/admin/products/create/', '/admin/products/categories/'],
+  //   activeIcon: Products_fill_icon,
+  //   children: [
+  //     {
+  //       name: 'همه محصولات',
+  //       href: '/admin/products/',
+  //     },
+  //     {
+  //       name: 'ایجاد محصول',
+  //       href: '/admin/products/new/',
+  //     },
+  //     {
+  //       name: 'تگ محصولات',
+  //       href: '/admin/products/tags/',
+  //     },
+  //     {
+  //       name: 'ویژگی محصولات',
+  //       href: '/admin/products/properties/',
+  //     },
+  //     {
+  //       name: 'گروه ویژگی محصولات',
+  //       href: '/admin/products/group-properties/',
+  //     },
+  //     {
+  //       name: 'دسته‌بندی محصولات',
+  //       href: '/admin/products/categories/',
+  //     },
+  //   ],
+  // },
+  // {
+  //   icon: Slider_icon,
+  //   name: 'اسلایدر‌ها',
+  //   activeIcon: Slider_fill_icon,
+  //   href: '/admin/sliders/',
+  //   children: [
+  //     {
+  //       name: 'اسلایدر‌ها',
+  //       href: '/admin/sliders/',
+  //     },
+  //     {
+  //       name: 'دسته‌بندی اسلایدر‌ها',
+  //       href: '/admin/sliders/categories/',
+  //     },
+  //   ],
+  // },
+  // {
+  //   icon: Comments_icon,
+  //   name: 'دیدگاه‌ها',
+  //   href: '/admin/comments/',
+  //   activeIcon: Comments_fill_icon,
+  // },
+  // {
+  //   icon: Home_icon,
+  //   name: 'صفحه اصلی',
+  //   href: '/admin/home/',
+  //   activeIcon: Home_fill_icon,
+  // },
+  // {
+  //   icon: Support_icon,
+  //   name: 'پشتیبانی',
+  //   href: '/admin/supports/',
+  //   activeIcon: Comments_fill_icon,
+  // },
+  // {
+  //   icon: User_icon,
+  //   name: 'کاربران',
+  //   href: '/admin/users/',
+  //   activeIcon: User_fill_icon,
+  // },
   {
     icon: Media_icon,
     name: 'عکس‌وفیلم',
     href: '/admin/media/',
     activeIcon: Media_fill_icon,
   },
-  {
-    icon: Brand_icon,
-    name: 'برند‌ها',
-    href: '/admin/brands/',
-    activeIcon: Brand_fill_icon,
-  },
-  {
-    icon: Transport_icon,
-    name: 'حمل‌ونقل',
-    href: '/admin/transports/',
-    activeIcon: Transport_fill_icon,
-  },
-  {
-    icon: Transaction_icon,
-    name: 'تراکنش‌ها',
-    href: '/admin/transactions/',
-    activeIcon: Transaction_fill_icon,
-  },
-  {
-    icon: Menu_icon,
-    name: 'فهرست',
-    href: '/admin/menus/',
-    activeIcon: Menu_fill_icon,
-  },
-  {
-    icon: Sms_icon,
-    name: 'پیامک‌ها',
-    href: '/admin/sms/',
-    activeIcon: Sms_fill_icon,
-  },
-  {
-    icon: Orders_icon,
-    name: 'سفارش‌ها',
-    href: '/admin/orders/',
-    activeIcon: Orders_fill_icon,
-  },
-  {
-    icon: Discount_icon,
-    name: 'تخفیف‌ها',
-    href: '/admin/discounts/',
-    activeIcon: Discount_fill_icon,
-  },
+  // {
+  //   icon: Brand_icon,
+  //   name: 'برند‌ها',
+  //   href: '/admin/brands/',
+  //   activeIcon: Brand_fill_icon,
+  // },
+  // {
+  //   icon: Transport_icon,
+  //   name: 'حمل‌ونقل',
+  //   href: '/admin/transports/',
+  //   activeIcon: Transport_fill_icon,
+  // },
+  // {
+  //   icon: Transaction_icon,
+  //   name: 'تراکنش‌ها',
+  //   href: '/admin/transactions/',
+  //   activeIcon: Transaction_fill_icon,
+  // },
+  // {
+  //   icon: Menu_icon,
+  //   name: 'فهرست',
+  //   href: '/admin/menus/',
+  //   activeIcon: Menu_fill_icon,
+  // },
+  // {
+  //   icon: Sms_icon,
+  //   name: 'پیامک‌ها',
+  //   href: '/admin/sms/',
+  //   activeIcon: Sms_fill_icon,
+  // },
+  // {
+  //   icon: Orders_icon,
+  //   name: 'سفارش‌ها',
+  //   href: '/admin/orders/',
+  //   activeIcon: Orders_fill_icon,
+  // },
+  // {
+  //   icon: Discount_icon,
+  //   name: 'تخفیف‌ها',
+  //   href: '/admin/discounts/',
+  //   activeIcon: Discount_fill_icon,
+  // },
   // {
   //     icon: Contact_icon,
   //     name: "تماس با ما",
   //     href: "/admin/contact",
   //     activeIcon: Contact_fill_icon
   // },
-  {
-    icon: Settings_icon,
-    name: 'تنظیمات',
-    href: '/admin/settings/',
-    activeIcon: Settings_fill_icon,
-  },
+  // {
+  //   icon: Settings_icon,
+  //   name: 'تنظیمات',
+  //   href: '/admin/settings/',
+  //   activeIcon: Settings_fill_icon,
+  // },
 ];
 
 type Props = {

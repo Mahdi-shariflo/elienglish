@@ -3,13 +3,16 @@ import Title from '../common/Title';
 import Link from 'next/link';
 import CardBlog1 from './CardBlog1';
 import CardBlog2 from './CardBlog2';
+import { Blog } from '@/types';
 
-const EliMag = () => {
+const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
+  if (Number(blogs?.length) < 1) return null;
+
   return (
     <div>
       {
         <div className="flex items-center justify-between">
-          <Title title="الی مگ" />
+          <Title title={title} />
           <Link className="flex items-center gap-3" href={''}>
             <p className="font-medium text-main">مشاهده بیشتر</p>
             <span>
@@ -31,14 +34,20 @@ const EliMag = () => {
         </div>
       }
       <div className="mt-10 flex h-[450px] items-center gap-5">
-        <CardBlog1
-          classImage="!h-[300px]"
-          className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF]"
-        />
+        {blogs[0] && (
+          <CardBlog1
+            blog={blogs[0]}
+            classImage="!h-[300px]"
+            className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF]"
+          />
+        )}
+
         <div className="flex h-full w-1/2 flex-col justify-between gap-7">
-          <CardBlog2 className="border border-[#E5EAEF]" />
-          <CardBlog2 className="border border-[#E5EAEF]" />
-          <CardBlog2 className="border border-[#E5EAEF]" />
+          {blogs
+            ?.slice(1, 4)
+            .map((item, index) => (
+              <CardBlog2 key={item._id || index} blog={item} className="border border-[#E5EAEF]" />
+            ))}
         </div>
       </div>
     </div>

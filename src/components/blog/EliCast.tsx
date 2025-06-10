@@ -8,12 +8,15 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import CardBlog1 from './CardBlog1';
-import Title from '../common/Title';
 import Button from '../common/Button';
+import { Blog } from '@/types';
 type Props = {
   delay: number;
+  blogs?: Blog[];
 };
-const EliCast = ({ delay }: Props) => {
+const EliCast = ({ delay, blogs }: Props) => {
+  if (Number(blogs?.length) < 1) return null;
+
   return (
     <div className="rounded-lg bg-white p-3">
       {
@@ -118,7 +121,7 @@ const EliCast = ({ delay }: Props) => {
         loop
         className="mt-6"
       >
-        {[0, 1, 2, 3, 4, 6, 7, 8, 9, 9].map((_, idx) => {
+        {blogs?.map((item, idx) => {
           return (
             <SwiperSlide
               className={
@@ -126,7 +129,7 @@ const EliCast = ({ delay }: Props) => {
               }
               key={idx}
             >
-              <CardBlog1 />
+              <CardBlog1 blog={item} />
             </SwiperSlide>
           );
         })}

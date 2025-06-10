@@ -20,11 +20,10 @@ const CardProduct = ({
   showTotalProduct,
 }: Props) => {
   const product: any = pro?.children?.length > 0 ? filterLowProduct(pro.children) : pro;
-  console.log(product, 'ffffffffffffffff');
   return (
     <Link
       href={`/product/${pro.url}/`}
-      className={`group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border border-gray-100 px-2 pb-3 shadow-product transition-all duration-300 hover:scale-[1.01] hover:shadow-hover_product lg:px-[16px] ${className}`}
+      className={`shadow-product hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border border-gray-100 px-2 pb-3 transition-all duration-300 hover:scale-[1.01] lg:px-[16px] ${className}`}
     >
       {product.count === 0 || product?.price === 0 ? (
         <span className="absolute left-2 top-2 z-20 flex w-fit rounded bg-[#7D8793] bg-opacity-70 px-1 py-px font-regular text-[12px] text-white lg:text-[14px]">

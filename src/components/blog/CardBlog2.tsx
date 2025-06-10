@@ -1,23 +1,21 @@
 import React from 'react';
-import CardBlog from '@/../public/images/adel.png';
 import Image from '../common/Image';
-const CardBlog2 = ({ className }: { className?: string }) => {
+import { Blog } from '@/types';
+const CardBlog2 = ({ className, blog }: { blog: Blog; className?: string }) => {
   return (
     <div
-      className={`flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 ${className}`}
+      className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 ${className}`}
     >
       <Image
-        src={CardBlog.src}
-        className="h-full w-[100px] overflow-hidden !rounded-lg object-cover"
+        src={blog.thumbnailImage.url}
+        className="h-full w-[100px] overflow-hidden !rounded-lg object-cover transition-all duration-300 group-hover:scale-105"
         alt=""
       />
       <div className="flex h-full flex-col justify-between py-2">
         <p className="text-amin h-fit w-fit rounded bg-[#EDE8FC] px-2 font-light text-[14px] text-main">
           مکالمه انگلیسی
         </p>
-        <p className="line-clamp-1 font-bold text-[#0B1524]">
-          ۱۰۰ عبارت مکالمه روزمره انگلیسی + ترجمه جامع
-        </p>
+        <p className="line-clamp-1 font-bold text-[#0B1524]">{blog.title}</p>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <svg
@@ -51,7 +49,13 @@ const CardBlog2 = ({ className }: { className?: string }) => {
               />
             </svg>
 
-            <span className="font-light text-[12px] text-[#6A7890]">4 روز پیش</span>
+            <span className="font-light text-[12px] text-[#6A7890]">
+              {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
           </div>
         </div>
       </div>

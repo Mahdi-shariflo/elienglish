@@ -1,12 +1,17 @@
 import Link from 'next/link';
 import React from 'react';
-
-const Categories = () => {
+type Props = {
+  categories: {
+    title: string;
+    url: string;
+  }[];
+};
+const Categories = ({ categories }: Props) => {
   return (
     <div>
       <p className="text-center font-bold text-xl text-[#33435A]">دسته‌های پر مخاطب</p>
-      <div className="mt-[24px] flex justify-between">
-        {new Array(7).fill(7).map((_, idx) => (
+      <div className="mt-[24px] flex gap-4">
+        {categories.map((item, idx) => (
           <Link
             key={idx}
             className="flex h-[158px] w-[183px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white"
@@ -26,7 +31,7 @@ const Categories = () => {
                 />
               </svg>
             </span>
-            <p className="font-bold text-main">مکالمه انگلیسی</p>
+            <p className="font-bold text-main">{item.title}</p>
           </Link>
         ))}
       </div>

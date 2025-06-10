@@ -35,7 +35,7 @@ const Page = () => {
             title: 'حذف وبلاگ',
             description: 'بلاگ‌ها',
             info: row.title,
-            updateCache: 'blogs-admin',
+            updateCache: 'blogs-admin-page',
             url: `/blog/admin/${row._id}`,
           }),
         onEdit: (row) => router.push(`/admin/blogs/${row._id}/`),
@@ -82,7 +82,7 @@ const Page = () => {
         isFetching={isFetching}
         isLoading={isPending || isFetching || isLoading}
         total={blogs?.totalPages}
-        mainData={blogs?.blogs}
+        mainData={blogs}
         showData={columns}
         columns={['_id', 'title', 'action', 'createdAt', 'isPublic']}
         nameAction="ایجاد بلاگ جدید"

@@ -10,18 +10,22 @@ import 'swiper/css/pagination';
 import CardBlog1 from './CardBlog1';
 import CardBlog2 from './CardBlog2';
 import Title from '../common/Title';
+import { Blog } from '@/types';
 type Props = {
   typeCardBlog: 'short' | 'long';
   className?: string;
   title?: string;
   delay: number;
+  blogs?: Blog[];
 };
 const SliderBlog = ({
   delay,
   title,
+  blogs,
   typeCardBlog = 'long',
   className = '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] lg:!h-[320px]',
 }: Props) => {
+  if (Number(blogs?.length) < 1) return null;
   return (
     <div>
       {title && (
@@ -60,11 +64,11 @@ const SliderBlog = ({
         loop
         className="mt-10"
       >
-        {[0, 1, 2, 3, 4, 6, 7, 8, 9, 9].map((_, idx) => {
+        {blogs?.map((item, idx) => {
           return (
             <SwiperSlide className={className} key={idx}>
-              {typeCardBlog === 'long' && <CardBlog1 />}
-              {typeCardBlog === 'short' && <CardBlog2 />}
+              {typeCardBlog === 'long' && <CardBlog1 blog={item} />}
+              {typeCardBlog === 'short' && <CardBlog2 blog={item} />}
             </SwiperSlide>
           );
         })}

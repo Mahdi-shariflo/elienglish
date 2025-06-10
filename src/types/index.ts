@@ -217,3 +217,37 @@ export interface FormValuesCreteProduct {
   redirecturltype: any;
   redirecturl: string;
 }
+
+export type ThumbnailImage = {
+  _id: string;
+  url: string;
+  title: string;
+  altText: string;
+  author: string;
+  width: number;
+  height: number;
+  fileType: string;
+  createdAt: string; // یا Date
+  updatedAt: string; // یا Date
+  __v: number;
+};
+
+export type Blog = {
+  _id: string;
+  author: string;
+  type: string; // مثلا "video"
+  url: string;
+  title: string;
+  keyWords: string[];
+  shortDescription: string;
+  Published: boolean;
+  thumbnailImage: ThumbnailImage;
+  video: string; // به نظر میاد id ویدئو باشه
+  tags: string[]; // آیدی‌های تگ‌ها
+  category: string; // آیدی دسته‌بندی
+  isChosen: boolean;
+  requiredLogin: boolean;
+  downloads: any[]; // اگر ساختار دانلودها مشخص است، می‌تونیم دقیق‌تر تایپ کنیم
+  createdAt: string; // یا Date
+  updatedAt: string; // یا Date
+};

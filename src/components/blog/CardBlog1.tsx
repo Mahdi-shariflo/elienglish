@@ -1,20 +1,32 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import CardBlog from '@/../public/images/card-blog.png';
+import { Blog } from '@/types';
+import Image from '../common/Image';
 
-const CardBlog1 = ({ className, classImage }: { className?: string; classImage?: string }) => {
+const CardBlog1 = ({
+  blog,
+  className,
+  classImage,
+}: {
+  blog: Blog;
+  className?: string;
+  classImage?: string;
+}) => {
   return (
     <Link
       href={'/'}
-      className={`relative flex h-full w-full flex-col justify-between bg-white ${className}`}
+      className={`group relative flex h-full w-full flex-col justify-between bg-white ${className}`}
     >
-      <Image src={CardBlog} alt="" className={`h-[165px] w-full object-cover ${classImage}`} />
+      <Image
+        src={blog.thumbnailImage.url}
+        alt=""
+        className={`h-[165px] w-full object-cover transition-all duration-300 group-hover:scale-105 ${classImage}`}
+      />
       <div className="space-y-4 px-5 pb-5">
         <span className="text-amin h-[32px] rounded bg-[#EDE8FC] px-2 font-light text-[14px] text-main">
           مکالمه انگلیسی
         </span>
-        <p className="font-medium">معادل‌ بفرمایید در انگلیسی؛ از رسمی تا دوستانه!</p>
+        <p className="font-medium">{blog.title}</p>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <svg
@@ -48,7 +60,13 @@ const CardBlog1 = ({ className, classImage }: { className?: string; classImage?:
               />
             </svg>
 
-            <span className="font-light text-[12px] text-[#6A7890]">4 روز پیش</span>
+            <span className="font-light text-[12px] text-[#6A7890]">
+              {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
           </div>
         </div>
       </div>

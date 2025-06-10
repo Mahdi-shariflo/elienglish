@@ -36,7 +36,6 @@ const MediaComponent = ({ onSelect, withModal, onCloseMedia, multiple }: Props) 
   };
 
   const media: { media: MediaType[]; totalPages: number } = data?.data?.data;
-  console.log(media, 'mediamediamediamedia');
   const onChangeSort = (sort: string) => {
     setFilter({
       page: '1',

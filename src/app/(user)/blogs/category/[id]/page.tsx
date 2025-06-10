@@ -3,12 +3,17 @@ import Filters from '@/components/blog/Filters';
 import React from 'react';
 import CardBlog from '@/components/blog/CardBlog';
 import Pagination from '@/components/common/Pagination';
+import { request } from '@/lib/safeClient';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ [key: string]: string | undefined }>;
 };
 
-const Page = async ({ searchParams }: Props) => {
+const Page = async ({ searchParams, params }: Props) => {
+  const { id } = await params;
   const searchParamsFilter = await searchParams;
+
+  const blogs = await request({ url: `/blog/archive-category?slug=${id}` });
 
   return (
     <div>

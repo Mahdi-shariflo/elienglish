@@ -54,9 +54,10 @@ const Select = ({
     value: item[nameValue].toString(),
   }));
 
-  const findValue = mappedOptions.find(
-    (item) => item.value === (value ? value : formik?.values[name!])
-  );
+  const findValue =
+    selectionMode === 'multiple'
+      ? mappedOptions.filter((item) => formik?.values[name!].includes(item.value))
+      : mappedOptions.find((item) => item.value === (value ? value : formik?.values[name!]));
 
   return (
     <div className={className}>

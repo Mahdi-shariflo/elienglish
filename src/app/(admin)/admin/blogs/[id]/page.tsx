@@ -18,6 +18,8 @@ import { useActionMag } from '@/hooks/admin/blogs/useActionBlog';
 import { useGetBlogById } from '@/hooks/admin/blogs/useGetBlogById';
 import { Checkbox } from '@heroui/react';
 import SeoOptions from '@/components/admin/common/SeoOptions';
+import Video from 'react-player';
+import { AudioPlayer } from '@/components/common/AudioPlayer';
 interface InitialValues {
   tags: string[];
   readTime: string;
@@ -25,6 +27,7 @@ interface InitialValues {
   requiredLogin: boolean;
   url: string;
   video: { url: string; _id: string } | undefined;
+  poddcast: { url: string; _id: string } | undefined;
   Published: string;
   description: string;
   category: string[];
@@ -53,9 +56,9 @@ const Page = () => {
   const formik = useFormik<InitialValues>({
     initialValues: {
       shortDescription: '',
-
       requiredLogin: false,
       cverVideo: undefined,
+      poddcast: undefined,
       video: undefined,
       tags: [],
       type: 'text',
@@ -237,44 +240,62 @@ const Page = () => {
               )}
             </div>
           </Media>
-          <Media
-            className="w-full"
-            withModal
-            onSelect={(img) => formik.setFieldValue('video', img)}
-          >
-            <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
-              {typeof formik.values.video === 'object' ? (
-                <img
-                  className="h-full w-full object-contain"
-                  src={`${BASEURL}/${formik.values?.video?.url}`}
-                  alt="thumbnail"
-                />
-              ) : (
-                <p className="text-center font-regular text-lg">
-                  انتخاب ویدیو <span className="text-red-500">*</span>
-                </p>
-              )}
-            </div>
-          </Media>
-          <Media
-            className="w-full"
-            withModal
-            onSelect={(img) => formik.setFieldValue('cverVideo', img)}
-          >
-            <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
-              {typeof formik.values.cverVideo === 'object' ? (
-                <img
-                  className="h-full w-full object-contain"
-                  src={`${BASEURL}/${formik.values?.cverVideo?.url}`}
-                  alt="thumbnail"
-                />
-              ) : (
-                <p className="text-center font-regular text-lg">
-                  انتخاب کاور ویدیو <span className="text-red-500">*</span>
-                </p>
-              )}
-            </div>
-          </Media>
+          {formik.values.type === 'video' ? (
+            <>
+              <Media
+                className="w-full"
+                withModal
+                onSelect={(img) => formik.setFieldValue('video', img)}
+              >
+                <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+                  {typeof formik.values.video === 'object' ? (
+                    <Video
+                      width={'100%'}
+                      height={'100%'}
+                      controls
+                      url={`${BASEURL}/${formik.values?.video?.url}`}
+                    />
+                  ) : (
+                    <p className="text-center font-regular text-lg">انتخاب ویدیو</p>
+                  )}
+                </div>
+              </Media>
+              <Media
+                className="w-full"
+                withModal
+                onSelect={(img) => formik.setFieldValue('cverVideo', img)}
+              >
+                <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+                  {typeof formik.values.cverVideo === 'object' ? (
+                    <img
+                      className="h-full w-full object-contain"
+                      src={`${BASEURL}/${formik.values?.cverVideo?.url}`}
+                      alt="thumbnail"
+                    />
+                  ) : (
+                    <p className="text-center font-regular text-lg">انتخاب کاور ویدیو</p>
+                  )}
+                </div>
+              </Media>
+            </>
+          ) : null}
+          {formik.values.type === 'poddcast' ? (
+            <>
+              <Media
+                className="w-full"
+                withModal
+                onSelect={(img) => formik.setFieldValue('poddcast', img)}
+              >
+                <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+                  {typeof formik.values.poddcast === 'object' ? (
+                    <AudioPlayer src={`${BASEURL}/${formik.values?.poddcast?.url}`} />
+                  ) : (
+                    <p className="text-center font-regular text-lg">انتخاب پادکست</p>
+                  )}
+                </div>
+              </Media>
+            </>
+          ) : null}
           <SelectCategoryBlog
             onSelect={(values) => formik.setFieldValue('category', values)}
             selected={formik.values.category}
