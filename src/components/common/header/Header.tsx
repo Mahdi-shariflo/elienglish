@@ -266,7 +266,7 @@ const Header = ({ categories }: Props) => {
                 </span>
               </Link>
             </div>
-            <Logo className="h-10 w-24" />
+            <Logo className="h-10 w-full" />
             <div className="flex items-center gap-2">
               <UserInformation />
               <Cart />
@@ -279,7 +279,7 @@ const Header = ({ categories }: Props) => {
                 cls === 'yes' ? 'lg:py-3' : 'lg:py-3'
               }`}
             >
-              <Logo className="hidden w-44 lg:block" />
+              <Logo className="hidden w-44 lg:flex" />
               {/* <Search /> */}
             </div>
             <div className="hidden flex-1 justify-end gap-4 lg:flex">

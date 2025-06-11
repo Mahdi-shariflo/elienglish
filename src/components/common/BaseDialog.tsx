@@ -84,7 +84,7 @@ export default function BaseDialog({
                   {Boolean(onClickFooter) ? (
                     <ModalFooter className="bg-spring flex items-center justify-between rounded-lg">
                       <Button onClick={onClose} className="w-[140px] border !text-black">
-                        <span className="!text-black">{nameBtnBack}</span>
+                        <span className="!text-black dark:text-white">{nameBtnBack}</span>
                       </Button>
                       <Button
                         isPending={isLoadingFooterBtn}
