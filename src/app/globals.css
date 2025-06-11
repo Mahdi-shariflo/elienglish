@@ -130,3 +130,11 @@ hr {
 .bg_blur_blog {
   backdrop-filter: blur(15px);
 }
+
+.custom_pagination_blog .swiper-pagination-bullets .swiper-pagination-bullet {
+  @apply !h-[3px] !w-[40px] rounded-none bg-white bg-opacity-20;
+}
+
+.custom_pagination_blog .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  @apply !w-[40px] rounded-full bg-main;
+}

@@ -12,10 +12,11 @@ function getSectionByName(obj: { [key: string]: any[] }, sectionName: string) {
 const page = async () => {
   const blogs = await request({ url: '/blog/main' });
   return (
-    <div className="pt-32">
-      <div className="container_page flex flex-col gap-[100px]">
+    <div className="lg:pt-32">
+      <div className="lg:container_page flex flex-col gap-10 lg:gap-[100px]">
         <BlogSection1 blogs={getSectionByName(blogs.data.data, 'sec1')} />
         <Categories categories={getSectionByName(blogs.data.data, 'sec2')} />
+        
         <SliderBlog
           blogs={getSectionByName(blogs.data.data, 'sec3')}
           title={'جدیدترین مطالب آموزشی'}

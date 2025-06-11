@@ -9,7 +9,7 @@ const CardBlogSection1 = ({ blog }: Props) => {
   return (
     <Link
       href={`/blogs/${blog.url}`}
-      className="group relative h-full cursor-pointer overflow-hidden bg-white"
+      className="group relative block h-full w-full cursor-pointer overflow-hidden bg-white"
     >
       <Image
         classImg="!object-fill"
@@ -17,11 +17,11 @@ const CardBlogSection1 = ({ blog }: Props) => {
         src={blog.thumbnailImage.url}
         alt=""
       />
-      <div className="absolute bottom-0 z-30 flex h-[108px] w-full flex-col justify-between bg-white/30 p-3 backdrop-blur-lg">
-        <span className="flex h-[28px] w-fit items-center justify-center rounded bg-[#EDE8FC] px-2 font-medium text-main">
+      <div className="absolute bottom-0 z-30 flex h-[95px] w-full flex-col justify-between bg-white/30 p-3 backdrop-blur-lg lg:h-[108px]">
+        <span className="flex h-[28px] w-fit items-center justify-center rounded bg-[#EDE8FC] px-2 font-medium text-[14px] text-main dark:bg-[#172334]">
           آموزش زبان انگلیسی با کتاب داستان
         </span>
-        <p className="font-medium text-xl text-white">{blog.title}</p>
+        <p className="line-clamp-1 font-medium text-lg text-white lg:text-xl">{blog.title}</p>
       </div>
     </Link>
   );

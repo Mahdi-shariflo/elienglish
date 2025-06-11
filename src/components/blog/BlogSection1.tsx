@@ -1,6 +1,13 @@
+'use client';
 import React from 'react';
 import CardBlogSection1 from './CardBlogSection1';
 import { Blog } from '@/types';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 type Props = {
   blogs: Blog[];
 };
@@ -15,13 +22,38 @@ const positions = [
 
 const BlogSection1 = ({ blogs }: Props) => {
   return (
-    <div className="grid !h-[700px] grid-cols-6 grid-rows-6 gap-4">
-      {blogs.slice(0, positions.length).map((item, idx) => (
-        <div key={item._id || idx} className={`${positions[idx]} overflow-hidden rounded-lg`}>
-          <CardBlogSection1 blog={item} />
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="hidden !h-[700px] grid-cols-6 grid-rows-6 gap-4 lg:grid 2xl:!h-[800px]">
+        {blogs.slice(0, positions.length).map((item, idx) => (
+          <div key={item._id || idx} className={`${positions[idx]} overflow-hidden rounded-lg`}>
+            <CardBlogSection1 blog={item} />
+          </div>
+        ))}
+      </div>
+      <div className="custom_pagination_blog w-full overflow-hidden">
+        <Swiper
+          speed={1000}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          pagination={true}
+          slidesPerView={'auto'}
+          spaceBetween={20}
+          modules={[Autoplay, Pagination]}
+          loop
+          className="mt-10"
+        >
+          {blogs?.map((item, idx) => {
+            return (
+              <SwiperSlide className={`!h-[210px] !w-full`} key={idx}>
+                <CardBlogSection1 blog={item} />
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </>
   );
 };
 
