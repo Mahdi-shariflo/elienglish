@@ -40,7 +40,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { notFound, redirect } from 'next/navigation';
 import React from 'react';
-import { removeSession } from './auth/storage';
 import { parseSessionCookie } from './utils';
 import { BASEURL, COOCIES_NAME } from './variable';
 import CryptoJS from 'crypto-js';

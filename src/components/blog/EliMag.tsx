@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
+const EliMag = ({ blogs, title, delay }: { delay?: number; blogs: Blog[]; title: string }) => {
   if (Number(blogs?.length) < 1) return null;
 
   return (
@@ -68,7 +68,7 @@ const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
           dir="rtl"
           speed={1000}
           autoplay={{
-            delay: 3200,
+            delay,
             disableOnInteraction: false,
           }}
           // centeredSlides={true}

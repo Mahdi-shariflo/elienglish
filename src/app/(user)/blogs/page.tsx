@@ -16,7 +16,7 @@ const page = async () => {
       <div className="lg:container_page flex flex-col gap-10 lg:gap-[100px]">
         <BlogSection1 blogs={getSectionByName(blogs.data.data, 'sec1')} />
         <Categories categories={getSectionByName(blogs.data.data, 'sec2')} />
-        
+
         <SliderBlog
           blogs={getSectionByName(blogs.data.data, 'sec3')}
           title={'جدیدترین مطالب آموزشی'}
@@ -33,7 +33,7 @@ const page = async () => {
 
         <EliCast blogs={getSectionByName(blogs.data.data, 'sec5')} delay={5000} />
         <EliMag title="الی مگ" blogs={getSectionByName(blogs.data.data, 'sec6')} />
-        <EliMag title="الی ویدیو" blogs={getSectionByName(blogs.data.data, 'sec7')} />
+        <EliMag delay={4000} title="الی ویدیو" blogs={getSectionByName(blogs.data.data, 'sec7')} />
       </div>
     </div>
   );

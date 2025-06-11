@@ -16,7 +16,7 @@ const Page = async ({ searchParams, params }: Props) => {
   const result = await request({ url: `/blog/archive-category?slug=${id}` });
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
