@@ -1,14 +1,17 @@
 'use client';
 import SectionCategoryBlog from '@/components/admin/blog/SectionCategoryBlog';
 import Media from '@/components/admin/common/Media';
+import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import Select from '@/components/common/Select';
 import Title from '@/components/common/Title';
+import { useActionSetting } from '@/hooks/admin/settings/useActionSetting';
 import { BASEURL } from '@/lib/variable';
 import { useFormik } from 'formik';
 import React from 'react';
 
 const Page = () => {
+  const { mutate, isPending } = useActionSetting();
   const formik = useFormik({
     initialValues: {
       recommendSection: {
@@ -26,13 +29,20 @@ const Page = () => {
         cards: [],
       },
     },
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      mutate({ data: values, id: '' });
+    },
   });
 
   console.log(formik.values, 'jgfhkurfdhkdfgfd');
   return (
     <div>
-      <Title title="تنظیمات بلاگ" />
+      <div className="mb-5 flex items-center justify-between border-b pb-2">
+        <Title title="تنظیمات بلاگ" />
+        <Button onClick={() => formik.handleSubmit()} className="w-fit bg-main !px-3 text-white">
+          ثبت اطلاعات
+        </Button>
+      </div>
       <div className="flex items-start gap-10 border-b">
         <div className="flex-1 pb-5">
           <Media
@@ -77,7 +87,7 @@ const Page = () => {
               ]}
               formik={formik}
               name="section3.sort"
-              label="تعداد"
+              label="سورت"
             />
             <Input type="number" formik={formik} name="section3.count" label="تعداد نمایش بلاگ" />
           </div>

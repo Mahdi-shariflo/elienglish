@@ -57,7 +57,9 @@ const StarRating: React.FC<StarRatingProps> = ({
   return (
     <div className={className}>
       {typeof label === 'string' ? (
-        <p className={`mb-[6px] pr-1 font-medium text-[12px] lg:text-[14px] ${classNameLabel}`}>
+        <p
+          className={`mb-[6px] pr-1 font-medium text-[12px] dark:text-[#8E98A8] lg:text-[14px] ${classNameLabel}`}
+        >
           {label} {isRequired && <span className="text-red-500">*</span>}
         </p>
       ) : (

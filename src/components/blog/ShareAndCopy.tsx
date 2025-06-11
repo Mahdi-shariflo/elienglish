@@ -35,9 +35,9 @@ const ShareAndCopy = () => {
 
   return (
     <>
-      <div className="mt-[24px] flex h-[88px] items-center justify-between gap-3 rounded-[16px] border-t-[1px] border-[#E5EAEF] bg-[#F4F6FA] px-[24px]">
+      <div className="mt-[24px] flex h-[88px] items-center justify-between gap-3 rounded-[16px] border-t-[1px] border-[#E5EAEF] bg-[#F4F6FA] px-[24px] dark:border-[#263248] dark:bg-[#172334]">
         <Button onClick={handleShare} className="w-fit !min-w-fit">
-          <p className="font-bold text-[16px] text-[#0B1524]">اشتراک گذاری مطلب</p>
+          <p className="font-bold text-[16px] text-[#0B1524] dark:text-white">اشتراک گذاری مطلب</p>
           <span>
             <svg
               width="25"
@@ -55,7 +55,7 @@ const ShareAndCopy = () => {
           </span>
         </Button>
         <Button onClick={() => setShow(true)} className="w-fit min-w-fit">
-          <p className="font-bold text-[16px] text-[#0B1524]">کپی لینک مطلب</p>
+          <p className="font-bold text-[16px] text-[#0B1524] dark:text-white">کپی لینک مطلب</p>
           <span>
             <svg
               width="25"

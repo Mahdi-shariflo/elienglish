@@ -231,7 +231,7 @@ const Header = ({ categories }: Props) => {
     <>
       <Image className="h-[60px] w-full" src={TopHeader.src} alt="" />
       <header
-        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] ${
+        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] dark:shadow-darkHeader ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >

@@ -38,11 +38,11 @@ export default function Pagination({ className, total = 10, top = 220 }: Props) 
       dir="rtl"
       showControls
       classNames={{
-        item: 'active:bg-main !w-[40px] !h-[40px] !mx-1 !rounded-lg',
-        cursor: 'bg-main !w-[40px] !h-[40px]',
-        next: '!w-[40px] !h-[40px]',
-        prev: '!w-[40px] !h-[40px]',
-        chevronNext: '!rotate-180',
+        item: 'active:bg-main !w-[40px] dark:bg-transparent  !h-[40px] !mx-1 border border-transparent !rounded-lg',
+        cursor: 'bg-main !w-[40px] dark:shadow-showPagination dark:!border-transparent !h-[40px]',
+        next: '!w-[40px] !h-[40px] dark:bg-transparent rotate-180',
+        prev: '!w-[40px] !h-[40px] dark:bg-transparent rotate-180',
+        // chevronNext: 'rotate-180',
       }}
       className={`m-auto flex !w-fit items-center justify-center overflow-hidden font-regular ${className}`}
       initialPage={Number(searchParams.get('page')) || 1}

@@ -16,7 +16,7 @@ const Image = ({ src, alt, className, classImg }: Props) => {
   const [isError, setIsError] = useState(false);
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative bg-white ${className}`}>
       <NextImage
         src={isError ? Logo : `${BASEURL}/${src}`}
         alt={alt}
@@ -24,7 +24,7 @@ const Image = ({ src, alt, className, classImg }: Props) => {
         onError={() => setIsError(true)}
         quality={100}
         priority
-        className={`bg-transparent object-cover mix-blend-multiply ${
+        className={`w-full bg-transparent object-cover mix-blend-multiply ${
           classImg ? classImg : ''
         } ${isError ? '!object-contain' : ''}`}
       />

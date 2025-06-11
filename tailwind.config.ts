@@ -14,13 +14,16 @@ export default {
         black: '#0c0c0c',
         main: '#6E3DFF',
        primary:"#263248",
+       dark:"#0B1524",
        gray:{
         DEFAULT:"#8E98A8"
        }
       },
       boxShadow: {
       button:"0px 12px 16px 0px #6E3DFF33",
-      header:"0px 10px 40px 0px #8A9EA840"
+      header:"0px 10px 40px 0px #8A9EA840",
+      darkHeader:"0px 10px 40px 0px #8A9EA826",
+      showPagination:"0px 12px 16px 0px #6E3DFF33"
       },
       fontFamily: {
         bold: 'bold',

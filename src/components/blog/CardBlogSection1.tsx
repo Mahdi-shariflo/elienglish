@@ -9,15 +9,15 @@ const CardBlogSection1 = ({ blog }: Props) => {
   return (
     <Link
       href={`/blogs/${blog.url}`}
-      className="group relative h-full cursor-pointer overflow-hidden"
+      className="group relative h-full cursor-pointer overflow-hidden bg-white"
     >
       <Image
         classImg="!object-fill"
-        className="h-full w-full transition-all duration-400 group-hover:scale-105"
+        className="h-full w-full bg-white transition-all duration-400 group-hover:scale-105"
         src={blog.thumbnailImage.url}
         alt=""
       />
-      <div className="bg_blur_blog absolute bottom-0 z-30 flex h-[108px] w-full flex-col justify-between p-3">
+      <div className="absolute bottom-0 z-30 flex h-[108px] w-full flex-col justify-between bg-white/30 p-3 backdrop-blur-lg">
         <span className="flex h-[28px] w-fit items-center justify-center rounded bg-[#EDE8FC] px-2 font-medium text-main">
           آموزش زبان انگلیسی با کتاب داستان
         </span>

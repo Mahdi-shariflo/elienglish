@@ -88,14 +88,13 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
           <AccordionItem
             indicator={
               <svg
-                className="h-5 w-5"
+                className="h-5 w-5 rotate-90 stroke-[#8E98A8]"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   d="M19.9201 8.94995L13.4001 15.47C12.6301 16.24 11.3701 16.24 10.6001 15.47L4.08008 8.94995"
-                  stroke="#393B40"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -106,7 +105,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
             aria-label={`Accordion ${idx}`}
             classNames={{
               base: 'border-b last:border-none !border-[#E4E7E9]',
-              title: 'text-[#172334] !text-[14px] lg:text-[16px] font-bold',
+              title: 'text-[#172334] !text-[14px] lg:text-[16px] dark:text-[#E5EAEF] font-bold',
             }}
             title={property.title}
           >
@@ -125,7 +124,8 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                         isSelected={selectedAttributes.includes(attribute._id)}
                         key={attribute._id}
                         classNames={{
-                          label: 'pr-1 !text-[14px] !font-regular text-[#0C0C0C]',
+                          label:
+                            'pr-1 !text-[14px] !font-regular text-[#0C0C0C] dark:text-[#8E98A8]',
                           wrapper: 'after:!bg-main',
                         }}
                         onValueChange={(value) => onAttributes(value, attribute._id)}
@@ -146,7 +146,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
               )}
 
               <Input
-                classNameInput="!h-[45px] bg-white"
+                classNameInput="!h-[45px] !bg-white dark:!bg-[#33435A] border-none"
                 placeholder="جستجو"
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(idx, e.target.value)}
@@ -160,8 +160,8 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                       isSelected={selectedAttributes.includes(attribute._id)}
                       key={attribute._id}
                       classNames={{
-                        label: 'pr-1 !text-[14px] !font-medium text-[#33435A]',
-                        wrapper: 'after:!bg-main',
+                        label: 'pr-1 !text-[14px] !font-medium text-[#33435A] dark:text-[#8E98A8]',
+                        wrapper: 'after:!bg-main border border-[#8E98A8]',
                       }}
                       onValueChange={(value) => onAttributes(value, attribute._id)}
                     >

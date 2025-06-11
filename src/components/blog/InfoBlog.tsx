@@ -4,7 +4,9 @@ import React from 'react';
 const InfoBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
-      <h1 className="pt-[24px] font-extrabold text-4xl text-[#172334]">{blog.title}</h1>
+      <h1 className="pt-[24px] font-extrabold text-4xl text-[#172334] dark:text-white">
+        {blog.title}
+      </h1>
       <div className="mt-[24px] flex items-center gap-[24px]">
         <div className="flex items-center gap-2">
           <svg
@@ -34,7 +36,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
               />
             </defs>
           </svg>
-          <span className="font-light text-[14px] text-[#6A7890]">
+          <span className="font-light text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
             {blog.author.firstName} {blog.author.lastName}
           </span>
         </div>

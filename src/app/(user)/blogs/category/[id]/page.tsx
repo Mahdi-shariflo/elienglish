@@ -15,9 +15,8 @@ const Page = async ({ searchParams, params }: Props) => {
   const searchParamsFilter = await searchParams;
   const result = await request({ url: `/blog/archive-category?slug=${id}` });
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
-  console.log(blog);
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div className="min-h-screen w-full">
       <div className="container_page pt-32">
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex items-start gap-10 pt-10">
@@ -27,33 +26,6 @@ const Page = async ({ searchParams, params }: Props) => {
               breadcrumb: [],
               title: 'دسته بندی بلاگ‌ها',
               properties: [
-                {
-                  title: 'دسته بندی مقالات',
-                  attributes: [
-                    {
-                      _id: '1',
-                      title: 'الی کست',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                    {
-                      _id: '2',
-                      title: 'آموزش گرامر',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                    {
-                      _id: '3',
-                      title: 'دیکشنری الی انگلیس',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                  ],
-                  displayType: 'text',
-                },
                 {
                   title: 'نوع مقالات',
                   attributes: [
@@ -86,7 +58,7 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full">
+          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
             {blog.blogs.map((blog, idx) => (
               <CardBlog blog={blog} key={idx} />
             ))}

@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 type Props = {
   title: string;
@@ -8,13 +7,12 @@ type Props = {
   url?: string | null;
 };
 const TitleSection = ({ title, Icon, url }: Props) => {
-  const router = useRouter();
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <Icon />
         {/* <Image width={32} height={32} alt='' src={icon} /> */}
-        <span className="font-bold text-[14px] lg:text-[24px]">{title}</span>
+        <span className="font-bold text-[14px] dark:text-white lg:text-[24px]">{title}</span>
       </div>
       {url ? (
         <Link

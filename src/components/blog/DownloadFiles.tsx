@@ -15,7 +15,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
     <>
       <div className="mt-[24px]">
         {!user?.accessToken ? (
-          <div className="flex h-[88px] items-center gap-3 rounded-[16px] border-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px]">
+          <div className="flex h-[88px] items-center gap-3 rounded-[16px] border-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px] dark:border-none dark:bg-[#070118]">
             <span>
               <svg
                 width="32"
@@ -30,7 +30,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                 />
               </svg>
             </span>
-            <p className="flex items-center gap-1 font-medium">
+            <p className="flex items-center gap-1 font-medium dark:text-white">
               <span className="text-[16px]">برای دانلود فایل‌های پیوست این مقاله لطفا </span>
               <Link href={'/auth/'} className="text-[16px] text-main underline">
                 وارد حساب کاربری
@@ -47,15 +47,21 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
           {blog.downloads.map((item, idx) => (
             <div
               key={idx}
-              className="!mt-[24px] flex h-[88px] items-center justify-between gap-3 rounded-[16px] border-r-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px]"
+              className="!mt-[24px] flex h-[88px] items-center justify-between gap-3 rounded-[16px] border-r-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px] dark:border-[#263248] dark:bg-[#172334]"
             >
               <div className="flex items-center gap-4">
                 <Image width={20} height={20} className="h-10 w-10" alt="" src={item.icon} />
                 <div>
-                  <p className="font-medium text-[16px] text-[#0B1524]">{item.title}</p>
+                  <p className="font-medium text-[16px] text-[#0B1524] dark:text-white">
+                    {item.title}
+                  </p>
                   <p>
-                    <span className="font-light text-[14px] text-[#505B74]">حجم فایل: </span>
-                    <span className="font-light text-[14px] text-[#505B74]">{item?.size}</span>
+                    <span className="font-light text-[14px] text-[#505B74] dark:text-[#6A7890]">
+                      حجم فایل:{' '}
+                    </span>
+                    <span className="font-light text-[14px] text-[#505B74] dark:text-[#6A7890]">
+                      {item?.size}
+                    </span>
                   </p>
                 </div>
               </div>

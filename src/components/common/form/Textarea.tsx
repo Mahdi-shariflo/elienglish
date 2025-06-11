@@ -109,7 +109,7 @@ const Textarea = ({
         // onClear={() => formik?.setFieldValue(name, '')}
         classNames={{
           input: 'px-2 !border-none !ring-0',
-          inputWrapper: `!bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 !h-[120px] w-full ${classNameInput}`,
+          inputWrapper: `bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] dark:border-none pl-0 !h-[120px] w-full ${classNameInput}`,
         }}
         className="font-light text-[14px]"
       />

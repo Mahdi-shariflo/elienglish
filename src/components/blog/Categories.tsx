@@ -10,13 +10,15 @@ type Props = {
 const Categories = ({ categories, children }: Props) => {
   return (
     <div>
-      <p className="text-center font-bold text-xl text-[#33435A]">دسته‌های پر مخاطب</p>
+      <p className="text-center font-bold text-xl text-[#33435A] dark:text-white">
+        دسته‌های پر مخاطب
+      </p>
       <div className="mt-[24px] flex gap-4">
         {children}
         {categories.map((item, idx) => (
           <Link
             key={idx}
-            className="flex h-[158px] w-[183px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white"
+            className="flex h-[158px] w-[183px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334]"
             href={`/blogs/category/${item.url}`}
           >
             <span>

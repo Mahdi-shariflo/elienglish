@@ -10,6 +10,7 @@ import CheckboxFilter from './CheckboxFilter';
 import BaseDialog from '../common/BaseDialog';
 import SortModal from './SortModal';
 import { sorts } from '@/lib/data';
+import Title from '../common/Title';
 
 type Props = {
   resultFilter?: FilterCategory;
@@ -104,12 +105,10 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
 
       {/* title */}
       <div>
-        <h1 className="relative mb-5 pr-2 font-bold text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
-          دسته بندی وبلاگ‌ها
-        </h1>
-        <div className="hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 lg:block lg:pl-3">
+        <Title title="دسته بندی بلاگ‌ها" />
+        <div className="hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 dark:bg-[#263248] lg:block lg:pl-3">
           <div className="flex !h-[56px] items-center justify-between">
-            <p className="font-medium text-[20px] text-[#0C0C0C]">فیلتر‌ها</p>
+            <p className="font-medium text-[20px] text-[#0C0C0C] dark:text-white">فیلتر‌ها</p>
             {searchParamsLength >= 3 && (
               <Button onClick={() => router.push(pathname)} className="w-fit text-main">
                 <Delete_icon />

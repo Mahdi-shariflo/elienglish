@@ -18,7 +18,7 @@ const EliCast = ({ delay, blogs }: Props) => {
   if (Number(blogs?.length) < 1) return null;
 
   return (
-    <div className="rounded-lg bg-white p-3">
+    <div className="rounded-lg bg-white p-3 dark:bg-[#172334]">
       {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -125,7 +125,7 @@ const EliCast = ({ delay, blogs }: Props) => {
           return (
             <SwiperSlide
               className={
-                '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] lg:!h-[320px]'
+                '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
               }
               key={idx}
             >

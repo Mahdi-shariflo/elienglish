@@ -13,8 +13,11 @@ const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
       {
         <div className="flex items-center justify-between">
           <Title title={title} />
-          <Link className="flex items-center gap-3" href={''}>
-            <p className="font-medium text-main">مشاهده بیشتر</p>
+          <Link
+            className="flex h-[40px] items-center justify-center gap-3 rounded-lg border px-3 dark:border-white"
+            href={''}
+          >
+            <p className="whitespace-nowrap font-medium text-main">مشاهده بیشتر</p>
             <span>
               <svg
                 width="24"
@@ -38,7 +41,7 @@ const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
           <CardBlog1
             blog={blogs[0]}
             classImage="!h-[300px]"
-            className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF]"
+            className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] dark:border-[#505B74]"
           />
         )}
 
@@ -46,7 +49,11 @@ const EliMag = ({ blogs, title }: { blogs: Blog[]; title: string }) => {
           {blogs
             ?.slice(1, 4)
             .map((item, index) => (
-              <CardBlog2 key={item._id || index} blog={item} className="border border-[#E5EAEF]" />
+              <CardBlog2
+                key={item._id || index}
+                blog={item}
+                className="border border-[#E5EAEF] dark:border-[#505B74]"
+              />
             ))}
         </div>
       </div>

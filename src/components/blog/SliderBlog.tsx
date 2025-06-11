@@ -25,7 +25,7 @@ const SliderBlog = ({
   title,
   blogs,
   typeCardBlog = 'long',
-  className = '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] lg:!h-[320px]',
+  className = '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:!border-[#505B74] lg:!h-[320px]',
 }: Props) => {
   // if (Number(blogs?.length) < 1) return null;
   return (
@@ -34,7 +34,10 @@ const SliderBlog = ({
         <div className="flex items-center justify-between">
           <Title title={title} />
           <div className="flex items-center justify-between gap-10">
-            <Link className="flex items-center gap-3" href={''}>
+            <Link
+              className="flex h-[40px] items-center justify-center gap-3 rounded-lg border px-3 dark:border-white"
+              href={''}
+            >
               <p className="whitespace-nowrap font-medium text-main">مشاهده بیشتر</p>
               <span>
                 <svg
@@ -71,7 +74,7 @@ const SliderBlog = ({
       >
         {blogs?.map((item, idx) => {
           return (
-            <SwiperSlide className={className} key={idx}>
+            <SwiperSlide className={`overflow-hidden !bg-transparent ${className}`} key={idx}>
               {typeCardBlog === 'long' && <CardBlog1 blog={item} />}
               {typeCardBlog === 'short' && <CardBlog2 blog={item} />}
             </SwiperSlide>

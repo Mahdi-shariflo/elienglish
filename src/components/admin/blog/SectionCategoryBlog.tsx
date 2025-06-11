@@ -86,7 +86,7 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
   return (
     <div className="mt-10">
       <Input
-        formik={form}
+        formik={formik}
         label={'عنوان '}
         classNameInput={'!h-[45px] !bg-[#f5f6f6]'}
         name="sections2.title"

@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import StarRating from '../common/StarRateing';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
+import Title from '../common/Title';
 const Comments = ({ blog }: { blog: Blog }) => {
   const [open, setOpen] = useState(false);
   const user = useSession();
@@ -48,16 +49,14 @@ const Comments = ({ blog }: { blog: Blog }) => {
   }, [isSuccess]);
   return (
     <>
-      <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-[24px]">
-        <p className="relative mb-5 pr-4 font-extrabold text-2xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
-          ارسال دیدگاه
-        </p>
+      <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-[24px] dark:border-[#263248] dark:bg-[#172334]">
+        <Title title="ارسال دیدگاه" />
         <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
           <Input
             isRequired
             placeholder="نام و نام خانوادگی خود را وارد کنید"
             label={'نام و نام خانوادگی'}
-            classNameInput={'bg-[#f5f6f6]'}
+            classNameInput={'bg-[#f5f6f6] dark:!bg-[#0B1524]'}
             name="title"
             formik={formik}
           />
@@ -72,6 +71,7 @@ const Comments = ({ blog }: { blog: Blog }) => {
           />
           <Textarea
             name="content"
+            classNameInput="dark:!bg-[#0B1524]"
             formik={formik}
             className="lg:col-span-2"
             isRequired

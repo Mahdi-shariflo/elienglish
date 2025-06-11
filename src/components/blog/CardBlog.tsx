@@ -6,20 +6,19 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
   return (
     <Link
       href={`/blogs/${blog.url}`}
-      className="flex h-[160px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4"
+      className="flex h-[160px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74]"
     >
-      <div className="h-full">
-        <Image
-          className="h-full !w-[258px] overflow-hidden rounded-xl"
-          src={blog.thumbnailImage.url}
-          alt=""
-        />
-      </div>
+      <Image
+        classImg="object-fill"
+        className="h-full !w-[258px] overflow-hidden rounded-xl border-transparent"
+        src={blog.thumbnailImage.url}
+        alt=""
+      />
       <div className="space-y-4">
         <span className="flex h-[28px] w-fit items-center justify-center rounded-md bg-[#EDE8FC] px-2 font-medium text-[13px] text-main">
           آموزش گرامر
         </span>
-        <p className="font-medium text-[16px]">{blog.title}</p>
+        <p className="font-medium text-[16px] dark:text-white">{blog.title}</p>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <span>

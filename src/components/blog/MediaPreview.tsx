@@ -7,7 +7,7 @@ import { AudioPlayer } from '../common/AudioPlayer';
 const MediaPreview = ({ blog }: { blog: Blog }) => {
   return (
     <>
-      <div className="mt-[24px] h-[480px] overflow-hidden rounded-xl border border-[#E5EAEF]">
+      <div className="mt-[24px] h-[480px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none">
         {blog?.video?.url ? (
           <VideoPlayer poster={`${BASEURL}/${blog?.coverVideo?.url}`} url={blog?.video?.url} />
         ) : (

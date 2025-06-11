@@ -168,7 +168,7 @@ const Footer = () => {
   if (isProfilePage) return null;
   return (
     <>
-      <div className="h-fit w-full bg-[#F4F6FA] pb-10">
+      <div className="h-fit w-full bg-[#F4F6FA] pb-10 dark:bg-[#172334]">
         <section className="container_page mt-10 block bg-transparent pb-5 pt-3 lg:mb-0">
           <footer>
             {/* 1 */}
@@ -181,7 +181,7 @@ const Footer = () => {
               <div className="flex items-center">
                 <input
                   placeholder="شماره خود را وارد کنید"
-                  className="h-[40px] w-[320px] rounded-lg px-2 font-light"
+                  className="h-[40px] w-[320px] rounded-lg px-2 font-light dark:bg-[#33435A]"
                 />
                 <button className="-mr-6 h-[40px] w-[97px] rounded-lg bg-main font-medium text-white">
                   عضویت
@@ -204,7 +204,7 @@ const Footer = () => {
               <div className="flex-1">
                 <div className="w-[400px]">
                   <Logo />
-                  <p className="mt-4 font-medium text-[#6A7890]">
+                  <p className="mt-4 font-medium text-[#6A7890] dark:text-[#8E98A8]">
                     آکادمی الی انگلیش بستری است برای یادگیری اصولی زبان انگلیسی باتوجه به پتانسیل و
                     نیاز زبان آموزان. هدف ایجاد زیرساخت درست زبانی و توسعه مهارت های زبان انگلیسی
                     شماست!
@@ -268,7 +268,7 @@ const Footer = () => {
                 {footers.map((item, idx) => {
                   return (
                     <div className="flex flex-col" key={idx}>
-                      <p className="relative mb-5 pr-4 font-medium text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
+                      <p className="relative mb-5 pr-4 font-medium text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main dark:text-white">
                         {item.title}
                       </p>{' '}
                       <div className="flex flex-col gap-4">
@@ -286,7 +286,7 @@ const Footer = () => {
                   );
                 })}
                 <div>
-                  <p className="relative mb-5 pr-4 font-medium text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main">
+                  <p className="relative mb-5 pr-4 font-medium text-xl after:absolute after:right-0 after:h-full after:w-1 after:rounded-bl-full after:rounded-tl-full after:bg-main dark:text-white">
                     نمادها
                   </p>{' '}
                   <div className="flex items-center gap-4">
@@ -408,7 +408,9 @@ const Footer = () => {
               تمامی حقوق محفوظ است. طراحی و توسعه توسط وبداتیس
             </p>
             <div className="flex items-center gap-5">
-              <p className="font-[#172334] font-medium">ما را در شبکه های اجتماعی دنبال کنید:</p>
+              <p className="font-[#172334] font-medium dark:text-white">
+                ما را در شبکه های اجتماعی دنبال کنید:
+              </p>
               <div className="flex items-center">
                 {soicalMedia.map((item, idx) => (
                   <a href={item.href} key={idx}>
