@@ -18,7 +18,7 @@ const CardBlog2 = ({
     >
       <Image
         src={blog.thumbnailImage.url}
-        className="h-full w-[100px] overflow-hidden !rounded-lg object-cover transition-all duration-300 group-hover:scale-105"
+        className="h-[100px] !w-[100px] overflow-hidden !rounded-lg object-cover transition-all duration-300 group-hover:scale-105 lg:h-full"
         alt=""
       />
       <div className="flex h-full flex-col justify-between gap-3 py-2">

@@ -15,7 +15,7 @@ const CardBlog1 = ({
   return (
     <Link
       href={`/blogs/${blog.url}`}
-      className={`group relative flex h-full w-full flex-col justify-between overflow-hidden bg-white dark:bg-[#263248] ${className}`}
+      className={`group relative flex h-full w-full flex-col justify-between gap-4 overflow-hidden bg-white dark:bg-[#263248] ${className}`}
     >
       <Image
         src={blog.thumbnailImage.url}

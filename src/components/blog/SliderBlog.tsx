@@ -82,7 +82,7 @@ const SliderBlog = ({
         })}
       </Swiper>
 
-      <div className="flex flex-col gap-5 lg:hidden">
+      <div className="mt-6 flex flex-col gap-5 lg:hidden">
         {blogs?.slice(0, 3).map((item, idx) => {
           if (typeCardBlog === 'long')
             return <CardBlog1 className="overflow-hidden rounded-lg" key={idx} blog={item} />;
