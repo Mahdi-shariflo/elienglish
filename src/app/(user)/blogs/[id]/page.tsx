@@ -20,7 +20,7 @@ const Page = async ({ params }: Props) => {
   const blog = result?.data?.data?.blog;
   return (
     <div className="container_page pt-32">
-      <Breadcrumbs breadcrumbs={blog?.breadcrumbPath} />
+      <Breadcrumbs page="/blogs/category" breadcrumbs={blog?.breadcrumbPath} />
       <div className="mt-8 flex items-start gap-7">
         <div className="w-full gap-10 rounded-lg border border-[#F4F6FA] p-[24px] dark:!border-[#263248]">
           <p className="font-medium text-main">دیکشنری الی انگلیش</p>

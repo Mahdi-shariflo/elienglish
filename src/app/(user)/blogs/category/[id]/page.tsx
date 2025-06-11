@@ -16,10 +16,10 @@ const Page = async ({ searchParams, params }: Props) => {
   const result = await request({ url: `/blog/archive-category?slug=${id}` });
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
   return (
-    <div className="min-h-screen w-full">
-      <div className="container_page pt-32">
+    <div className="min-h-screen w-full bg-white">
+      <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs breadcrumbs={[]} />
-        <div className="flex items-start gap-10 pt-10">
+        <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             searchParams={searchParamsFilter}
             resultFilter={{
@@ -58,7 +58,7 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
+          <div className="w-full rounded-lg dark:bg-[#172334] lg:px-3">
             {blog.blogs.map((blog, idx) => (
               <CardBlog blog={blog} key={idx} />
             ))}

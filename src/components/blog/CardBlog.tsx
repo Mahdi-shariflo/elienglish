@@ -6,19 +6,21 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
   return (
     <Link
       href={`/blogs/${blog.url}`}
-      className="flex h-[160px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74]"
+      className="flex h-[117px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74] lg:h-[160px]"
     >
       <Image
         classImg="object-fill"
-        className="h-full !w-[258px] overflow-hidden rounded-xl border-transparent"
+        className="h-full !w-[150px] overflow-hidden rounded-xl border-transparent lg:!w-[258px]"
         src={blog.thumbnailImage.url}
         alt=""
       />
-      <div className="space-y-4">
-        <span className="flex h-[28px] w-fit items-center justify-center rounded-md bg-[#EDE8FC] px-2 font-medium text-[13px] text-main">
+      <div className="flex h-full flex-col justify-between">
+        <span className="flex h-[24px] w-fit items-center justify-center rounded-md bg-[#EDE8FC] px-2 font-medium text-[10px] text-main lg:h-[28px] lg:text-[13px]">
           آموزش گرامر
         </span>
-        <p className="font-medium text-[16px] dark:text-white">{blog.title}</p>
+        <p className="line-clamp-2 font-medium text-[12px] dark:text-white lg:text-[16px]">
+          {blog.title}
+        </p>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1">
             <span>
@@ -35,7 +37,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
                 />
               </svg>
             </span>
-            <span className="font-medium text-[14px] text-[#6A7890]">12</span>
+            <span className="font-medium text-[12px] text-[#6A7890] lg:text-[14px]">12</span>
           </div>
           <div className="flex items-center gap-1">
             <span>
@@ -76,7 +78,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
                 />
               </svg>
             </span>
-            <span className="font-medium text-[14px] text-[#6A7890]">
+            <span className="font-medium text-[12px] text-[#6A7890] lg:text-[14px]">
               {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
                 year: '2-digit',
                 month: '2-digit',

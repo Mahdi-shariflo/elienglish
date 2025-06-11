@@ -87,7 +87,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
   const sortName = sorts.find((item) => item?.sort === searchParams.sort);
   const searchParamsLength = Object.values(searchParams).filter((v) => v !== undefined).length;
   return (
-    <div className="sticky top-44">
+    <div className="sticky top-44 w-full lg:w-fit">
       {/* mobile sort and filter */}
       <div className="flex w-full items-center gap-3 lg:hidden">
         <Button onClick={() => setModalFilter(true)} className="relative z-10 w-full border">
@@ -104,9 +104,9 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
       </div>
 
       {/* title */}
-      <div>
+      <div className="mt-5 lg:mt-0">
         <Title title="دسته بندی بلاگ‌ها" />
-        <div className="hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 dark:bg-[#263248] lg:block lg:pl-3">
+        <div className="mt-5 hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 dark:bg-[#263248] lg:block lg:pl-3">
           <div className="flex !h-[56px] items-center justify-between">
             <p className="font-medium text-[20px] text-[#0C0C0C] dark:text-white">فیلتر‌ها</p>
             {searchParamsLength >= 3 && (

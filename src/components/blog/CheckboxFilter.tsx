@@ -161,7 +161,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                       key={attribute._id}
                       classNames={{
                         label: 'pr-1 !text-[14px] !font-medium text-[#33435A] dark:text-[#8E98A8]',
-                        wrapper: 'after:!bg-main border border-[#8E98A8]',
+                        wrapper: 'after:!bg-main',
                       }}
                       onValueChange={(value) => onAttributes(value, attribute._id)}
                     >
