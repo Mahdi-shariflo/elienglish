@@ -143,7 +143,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
       >
         <div>
           <div>
-            <ToggleFilter onToggle={onToggle} searchParams={searchParams} />
+            {/* <ToggleFilter onToggle={onToggle} searchParams={searchParams} /> */}
 
             <CheckboxFilter searchParams={searchParams} resultFilter={resultFilter} />
           </div>
