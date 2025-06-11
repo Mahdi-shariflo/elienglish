@@ -13,7 +13,7 @@ const Categories = ({ categories, children }: Props) => {
       <p className="text-center font-bold text-xl text-[#33435A] dark:text-white">
         دسته‌های پر مخاطب
       </p>
-      <div className="mt-[24px] grid grid-cols-3 gap-2 lg:flex lg:gap-4">
+      <div className="mt-[24px] grid grid-cols-3 justify-center gap-2 lg:flex lg:gap-4">
         {children}
         {categories.map((item, idx) => (
           <Link

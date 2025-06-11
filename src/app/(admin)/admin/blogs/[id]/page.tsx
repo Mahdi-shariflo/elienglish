@@ -45,7 +45,7 @@ interface InitialValues {
   canonicalurl: string;
   type: string;
   shortDescription: string;
-  cverVideo: { url: string; _id: string } | undefined;
+  coverVideo: { url: string; _id: string } | undefined;
   downloads: {
     title: string;
     size: string;
@@ -68,7 +68,7 @@ const Page = () => {
       downloads: [],
       shortDescription: '',
       requiredLogin: false,
-      cverVideo: undefined,
+      coverVideo: undefined,
       poddcast: undefined,
       video: undefined,
       tags: [],
@@ -103,7 +103,7 @@ const Page = () => {
         shortDescription: values?.shortDescription,
         isChosen: values.isChosen,
         requiredLogin: values.requiredLogin,
-        cverVideo: values.cverVideo?._id,
+        coverVideo: values.coverVideo?._id,
         video: values.video?._id,
         audio: values.poddcast?._id,
         readTime: values.readTime,
@@ -309,14 +309,14 @@ const Page = () => {
               <Media
                 className="w-full"
                 withModal
-                title="انتخاب پادکست"
-                onSelect={(img) => formik.setFieldValue('cverVideo', img)}
+                title="انتخاب کاور ویدیو"
+                onSelect={(img) => formik.setFieldValue('coverVideo', img)}
               >
                 <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
-                  {typeof formik.values.cverVideo === 'object' ? (
+                  {typeof formik.values.coverVideo === 'object' ? (
                     <img
                       className="h-full w-full object-contain"
-                      src={`${BASEURL}/${formik.values?.cverVideo?.url}`}
+                      src={`${BASEURL}/${formik.values?.coverVideo?.url}`}
                       alt="thumbnail"
                     />
                   ) : (

@@ -5,10 +5,8 @@ import { addToast } from '@heroui/react';
 
 export const useActionSetting = () => {
   return useMutation({
-    mutationFn: async ({ data, id }: { data: unknown; id: string }) =>
-      id
-        ? await safeRequest({ url: `/setting/admin/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: '/setting/admin', method: 'POST', data }),
+    mutationFn: async ({ data }: { data: unknown }) =>
+      await safeRequest({ url: `/setting/admin`, method: 'PATCH', data }),
     onSuccess: async () => {
       addToast({
         title: 'با موفقیت انجام شد',

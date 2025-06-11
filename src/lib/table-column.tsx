@@ -192,8 +192,8 @@ export const initialDataBlogs = ({ onDelete, onEdit }: Props) => [
   },
   {
     title: <HeaderCell title="وضعیت" />,
-    dataIndex: 'isPublic',
-    key: 'isPublic',
+    dataIndex: 'Published',
+    key: 'Published',
     render: (value: string) => (
       <p className="text-center text-xs text-gray-800">{value ? 'انتشار شده' : 'پیش نمایش'}</p>
     ),

@@ -28,7 +28,7 @@ const CardBlog1 = ({
         </span>
         <p className="font-medium dark:text-white">{blog.title}</p>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <svg
               width="20"
               height="21"
@@ -41,7 +41,7 @@ const CardBlog1 = ({
             </svg>
 
             <span className="font-light text-[12px] text-[#6A7890] dark:text-[#8E98A8]">5 </span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-2">
             <svg
               width="20"

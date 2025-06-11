@@ -84,7 +84,7 @@ const Page = () => {
         total={blogs?.totalPages}
         mainData={blogs?.blogs}
         showData={columns}
-        columns={['_id', 'title', 'action', 'createdAt', 'isPublic']}
+        columns={['_id', 'title', 'action', 'createdAt', 'Published']}
         nameAction="ایجاد بلاگ جدید"
         onAction={() => router.push(`/admin/blogs/add/`)}
         page={Number(filter.page)}

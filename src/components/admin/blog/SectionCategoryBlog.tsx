@@ -1,17 +1,18 @@
-import Media from '@/components/admin/common/Media';
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
 import { FormikProps, useFormik } from 'formik';
 import * as Yup from 'yup';
 import React, { useEffect, useState } from 'react';
-import { Category, Home } from '@/types/home';
-import Button from '@/components/common/Button';
+import { Category } from '@/types/home';
 import { Plus_icon } from '@/components/common/icon';
 import { generateRandomString } from '@/lib/fun';
 import Categories from '@/components/blog/Categories';
 type Props = {
   formik: FormikProps<any>;
-  data?: Home;
+  data?: {
+    cardTitle: string;
+    cardLink: string;
+  }[];
 };
 const SectionCategoryBlog = ({ formik, data }: Props) => {
   const [open, setOpen] = useState(false);
@@ -28,7 +29,8 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
     }),
     onSubmit: (values) => {
       const newCategory = {
-        ...values,
+        cardTitle: values.title,
+        cardLink: values.url,
         _id: values._id || generateRandomString(),
       };
 
@@ -37,12 +39,13 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
       );
 
       if (existingIndex !== -1) {
-        // اگر وجود داشت، مقدار جدید جایگزین مقدار قبلی شود
         const updated = [...formik.values.section2.cards];
         updated[existingIndex] = newCategory;
-        formik.setFieldValue('section2', { ...formik.values.section2, cards: updated });
+        formik.setFieldValue('section2', {
+          ...formik.values.section2,
+          cards: updated,
+        });
       } else {
-        // اگر وجود نداشت، اضافه شود
         formik.setFieldValue('section2', {
           ...formik.values.section2,
           cards: [...(formik.values?.section2?.cards || []), newCategory],
@@ -55,18 +58,7 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
 
   useEffect(() => {
     if (data) {
-      formik?.setValues({
-        sec: data.title,
-        ...(data._id ? { id: data._id } : null),
-        ...(data.productsCategories
-          ? {
-              productsCategories:
-                typeof data.productsCategories === 'string'
-                  ? JSON.parse(data.productsCategories)
-                  : data.productsCategories,
-            }
-          : []),
-      });
+      console.log(data, 'fygsduygtsuydtgfyusgftyusgtftuysfgsf');
     }
   }, [data]);
 
@@ -86,17 +78,22 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
   return (
     <div className="mt-10">
       <Input
+        value={formik.values?.section2?.title}
         formik={formik}
         label={'عنوان '}
         classNameInput={'!h-[45px] !bg-[#f5f6f6]'}
-        name="sections2.title"
+        name="section2.title"
         className="mb-10"
       />
       <Categories
         // className="!w-fit"
         // onEdit={onEdit}
         // onDelete={onDelete}
-        categories={formik?.values?.section2?.cards ?? []}
+        categories={
+          formik?.values?.section2?.cards.map((item: any) => {
+            return { title: item?.cardTitle, url: item?.cardLink };
+          }) ?? []
+        }
       >
         <button
           onClick={() => setOpen(true)}

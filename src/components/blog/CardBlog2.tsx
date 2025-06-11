@@ -6,10 +6,12 @@ const CardBlog2 = ({
   className,
   blog,
   showTag,
+  classImage,
 }: {
   blog: Blog;
   className?: string;
   showTag?: boolean;
+  classImage: string;
 }) => {
   return (
     <Link
@@ -18,7 +20,7 @@ const CardBlog2 = ({
     >
       <Image
         src={blog.thumbnailImage.url}
-        className="h-[100px] !w-[100px] overflow-hidden !rounded-lg object-cover transition-all duration-300 group-hover:scale-105 lg:h-full"
+        className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg object-fill transition-all duration-300 group-hover:scale-105 lg:h-full ${classImage}`}
         alt=""
       />
       <div className="flex h-full flex-col justify-between gap-3 py-2">
@@ -29,7 +31,7 @@ const CardBlog2 = ({
         )}
         <p className="line-clamp-1 font-bold text-[#0B1524] dark:text-white">{blog.title}</p>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <svg
               width="20"
               height="21"
@@ -42,7 +44,7 @@ const CardBlog2 = ({
             </svg>
 
             <span className="font-light text-[12px] text-[#6A7890] dark:text-[#8E98A8]">5 </span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-2">
             <svg
               width="20"

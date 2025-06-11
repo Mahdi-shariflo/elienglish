@@ -1,4 +1,4 @@
-import { Address, Blog, User } from '.';
+import { Address, Blog, ThumbnailImage, User } from '.';
 
 export type Home = {
   cards: Blog[];
@@ -44,6 +44,7 @@ export type Slider = {
 };
 
 export type Category = {
+  thumbnailImage: ThumbnailImage;
   description?: string;
   _id: string;
   children?: Category[];

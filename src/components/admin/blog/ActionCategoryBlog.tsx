@@ -7,6 +7,10 @@ import { Category } from '@/types/home';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import * as Yup from 'yup';
+import Media from '../common/Media';
+import { ThumbnailImage } from '@/types';
+import { BASEURL } from '@/lib/variable';
+import { useGetCategoryByBlog } from '@/hooks/admin/blogs/useGetCategoryByBlog';
 
 type Props = {
   modal: {
@@ -24,12 +28,19 @@ type Props = {
 };
 const ActionCategoryBlog = ({ modal, setModal }: Props) => {
   const onClose = () => setModal({ info: null, open: false, parent: false });
+  const { data: singleCategory } = useGetCategoryByBlog({ id: modal.info?._id });
   const { mutate, isPending, isSuccess, reset } = useActionCategoryBlog();
-  const formik = useFormik<{ url: null | string; title: string; description: string }>({
+  const formik = useFormik<{
+    url: null | string;
+    title: string;
+    description: string;
+    thumbnailImage: undefined | ThumbnailImage;
+  }>({
     initialValues: {
       title: '',
       url: null,
       description: '',
+      thumbnailImage: undefined,
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
@@ -40,6 +51,7 @@ const ActionCategoryBlog = ({ modal, setModal }: Props) => {
     onSubmit: (values) => {
       const data = {
         ...values,
+        ...(values.thumbnailImage ? { thumbnailImage: values.thumbnailImage._id } : null),
         url: values?.url ? values?.url : createURL(values.title),
         ...(modal.info?._id && modal.parent ? { parent: modal.info._id } : null),
       };
@@ -55,14 +67,16 @@ const ActionCategoryBlog = ({ modal, setModal }: Props) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (modal.info && !modal.parent) {
+    if (singleCategory && !modal.parent) {
+      const blog = singleCategory?.data?.data;
       formik.setValues({
-        title: modal.info?.title!,
+        title: blog?.title!,
         url: modal?.info?.url!,
-        description: modal.info?.description!,
+        description: blog?.description!,
+        thumbnailImage: blog?.thumbnailImage,
       });
     }
-  }, [modal.info]);
+  }, [singleCategory]);
   return (
     <>
       <BaseDialog
@@ -75,6 +89,25 @@ const ActionCategoryBlog = ({ modal, setModal }: Props) => {
         isLoadingFooterBtn={isPending}
       >
         <div className="mb-4 space-y-2">
+          <Media
+            className="w-full"
+            withModal
+            onSelect={(img) => formik.setFieldValue('thumbnailImage', img)}
+          >
+            <div className="mx-auto flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-xl border px-3">
+              {typeof formik.values.thumbnailImage === 'object' ? (
+                <img
+                  className="h-full w-full object-contain"
+                  src={`${BASEURL}/${formik.values?.thumbnailImage?.url}`}
+                  alt="thumbnail"
+                />
+              ) : (
+                <p className="text-center font-regular text-lg">
+                  انتخاب پوستر <span className="text-red-500">*</span>
+                </p>
+              )}
+            </div>
+          </Media>
           <Input
             helperText={
               modal.info?.url && !modal.parent ? modal.info.url : createURL(formik.values.title)

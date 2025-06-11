@@ -10,6 +10,10 @@ export default {
   ],
   theme: {
     extend: {
+    screens:{
+      "3xl":"1440px",
+      "4xl":"1700px"
+    },
       colors: {
         black: '#0c0c0c',
         main: '#6E3DFF',

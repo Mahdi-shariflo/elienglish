@@ -169,7 +169,7 @@ const Footer = () => {
   return (
     <>
       <div className="h-fit w-full bg-[#F4F6FA] pb-10 dark:bg-[#172334]">
-        <section className="container_page mt-10 block bg-transparent pb-5 pt-3 lg:mb-0">
+        <section className="container_page block bg-transparent pb-5 pt-10 lg:mb-0">
           <footer>
             {/* 1 */}
             <div className="flex flex-col items-center justify-between gap-5 border-b border-[#E5EAEF] py-6 lg:flex-row">

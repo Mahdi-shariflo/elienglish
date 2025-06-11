@@ -23,7 +23,7 @@ const positions = [
 const BlogSection1 = ({ blogs }: Props) => {
   return (
     <>
-      <div className="hidden !h-[700px] grid-cols-6 grid-rows-6 gap-4 lg:grid 2xl:!h-[800px]">
+      <div className="hidden !h-[700px] grid-cols-6 grid-rows-6 gap-4 lg:grid 4xl:!h-[850px]">
         {blogs.slice(0, positions.length).map((item, idx) => (
           <div key={item._id || idx} className={`${positions[idx]} overflow-hidden rounded-lg`}>
             <CardBlogSection1 blog={item} />
