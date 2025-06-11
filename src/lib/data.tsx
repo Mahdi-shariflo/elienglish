@@ -884,10 +884,6 @@ export const pages = [
 
 export const sorts = [
   {
-    name: 'بیشترین تخفیف',
-    sort: 'discount_desc',
-  },
-  {
     name: 'جدیدترین',
     sort: 'createdAt_desc',
   },
@@ -895,13 +891,5 @@ export const sorts = [
   {
     name: 'قدیمی‌ترین',
     sort: 'createdAt_asc',
-  },
-  {
-    name: 'گران‌ترین',
-    sort: 'price_desc',
-  },
-  {
-    name: 'ارزان‌ترین',
-    sort: 'price_asc',
   },
 ];

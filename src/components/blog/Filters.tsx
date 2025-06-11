@@ -97,7 +97,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
         <Button onClick={onToggleSort} className="relative z-10 w-full border">
           <span className="flex items-center gap-1">
             <Sort_icon />
-            <span>{sortName?.name ?? 'پر تخفیف ترین'}</span>
+            <span>{sortName?.name ?? 'پربازدیدترین‌ها'}</span>
           </span>
           <Arrow_back_mobile className="h-5 w-5 rotate-90" />
         </Button>

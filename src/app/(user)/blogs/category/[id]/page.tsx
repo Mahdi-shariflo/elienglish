@@ -58,7 +58,7 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full rounded-lg dark:bg-[#172334] lg:px-3">
+          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
             {blog.blogs.map((blog, idx) => (
               <CardBlog blog={blog} key={idx} />
             ))}

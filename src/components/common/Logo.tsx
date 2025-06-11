@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Logo = ({ className }: { className?: string }) => {
   return (
     <>
-      <Link className={`$flex items-center gap-2 ${className}`} href="/">
+      <Link className={`flex items-center gap-2 ${className}`} href="/">
         <Image
           className="h-[45px] w-[45px] rounded-full lg:h-[56px] lg:w-[56px]"
           src={LogoImage}
