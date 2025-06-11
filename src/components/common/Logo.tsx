@@ -13,10 +13,16 @@ const Logo = ({ className }: { className?: string }) => {
         />
         <div>
           <div>
-            <span className="inline-block font-bold text-[14px] dark:text-white">آکادمی</span>
-            <span className="inline-block font-bold text-[14px] dark:text-main">آلی انگلیش</span>
+            <span className="inline-block whitespace-nowrap font-bold text-[14px] dark:text-white">
+              آکادمی
+            </span>
+            <span className="inline-block whitespace-nowrap font-bold text-[14px] dark:text-main">
+              آلی انگلیش
+            </span>
           </div>
-          <span className="text-[14px] dark:text-[#E5EAEF]">Elienglish Academy</span>
+          <span className="whitespace-nowrap text-[14px] dark:text-[#E5EAEF]">
+            Elienglish Academy
+          </span>
         </div>
       </Link>
     </>
