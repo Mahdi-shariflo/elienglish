@@ -228,7 +228,7 @@ export default function UserInformation() {
       {!user?.accessToken ? (
         <Link
           href={'/auth/'}
-          className="!flex !h-[48px] items-center justify-center gap-2 rounded-xl bg-transparent font-medium text-[14px] text-white shadow-button lg:!w-[169px] lg:bg-main"
+          className="!flex !h-[48px] items-center justify-center gap-2 rounded-xl bg-transparent font-medium text-[14px] text-white lg:!w-[169px] lg:bg-main lg:shadow-button"
         >
           <span>
             <svg
