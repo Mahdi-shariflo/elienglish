@@ -30,7 +30,7 @@ const BlogSection1 = ({ blogs }: Props) => {
           </div>
         ))}
       </div>
-      <div className="custom_pagination_blog w-full overflow-hidden">
+      <div className="custom_pagination_blog w-full overflow-hidden lg:hidden">
         <Swiper
           speed={1000}
           autoplay={{

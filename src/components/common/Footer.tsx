@@ -172,16 +172,16 @@ const Footer = () => {
         <section className="container_page mt-10 block bg-transparent pb-5 pt-3 lg:mb-0">
           <footer>
             {/* 1 */}
-            <div className="flex items-center justify-between border-b border-[#E5EAEF] py-6">
+            <div className="flex flex-col items-center justify-between gap-5 border-b border-[#E5EAEF] py-6 lg:flex-row">
               <div>
                 <p className="font-extrabold text-2xl text-main">خبرنامه</p>
                 <p className="font-light text-[#6A7890]">از آخرین تخفیف‌های سایت باخیر باشید :)</p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex w-full items-center lg:w-fit">
                 <input
                   placeholder="شماره خود را وارد کنید"
-                  className="h-[40px] w-[320px] rounded-lg px-2 font-light dark:bg-[#33435A]"
+                  className="h-[40px] w-full rounded-lg px-2 font-light dark:bg-[#33435A] lg:w-[320px]"
                 />
                 <button className="-mr-6 h-[40px] w-[97px] rounded-lg bg-main font-medium text-white">
                   عضویت
@@ -199,10 +199,10 @@ const Footer = () => {
               </div>
             </div>
             {/* 2 */}
-            <div className="mt-[24px] flex items-start">
+            <div className="flex flex-col items-start lg:mt-[24px] lg:flex-row">
               {/* right */}
               <div className="flex-1">
-                <div className="w-[400px]">
+                <div className="lg:w-[400px]">
                   <Logo />
                   <p className="mt-4 font-medium text-[#6A7890] dark:text-[#8E98A8]">
                     آکادمی الی انگلیش بستری است برای یادگیری اصولی زبان انگلیسی باتوجه به پتانسیل و
@@ -264,7 +264,7 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-1 items-start justify-end gap-40">
+              <div className="flex flex-1 flex-col items-start justify-end lg:flex-row lg:gap-40">
                 {footers.map((item, idx) => {
                   return (
                     <div className="flex flex-col" key={idx}>
@@ -403,7 +403,7 @@ const Footer = () => {
               </div>
             </div>
           </footer>
-          <div className="mt-14 flex items-center justify-between">
+          <div className="mt-14 flex flex-col items-center justify-between gap-5 lg:flex-row">
             <p className="font-medium text-[#505B74]">
               تمامی حقوق محفوظ است. طراحی و توسعه توسط وبداتیس
             </p>
