@@ -19,10 +19,10 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
   return (
-    <div className="container_page pt-32">
+    <div className="container_page pt-10 lg:pt-32">
       <Breadcrumbs page="/blogs/category" breadcrumbs={blog?.breadcrumbPath} />
-      <div className="mt-8 flex items-start gap-7">
-        <div className="w-full gap-10 rounded-lg border border-[#F4F6FA] p-[24px] dark:!border-[#263248]">
+      <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
+        <div className="w-full gap-10 rounded-lg border border-[#F4F6FA] dark:!border-[#263248] lg:p-[24px]">
           <p className="font-medium text-main">دیکشنری الی انگلیش</p>
           <MediaPreview blog={blog} />
           {/* title */}
@@ -33,7 +33,7 @@ const Page = async ({ params }: Props) => {
         </div>
         <div className="min-w-[380px]">
           <RecommendSection />
-          <div className="mt-10">
+          <div className="mt-10 hidden lg:block">
             <Title title="دسترسی سریع" />
             <div className="mt-8">
               <Link

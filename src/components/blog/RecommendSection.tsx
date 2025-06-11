@@ -7,7 +7,7 @@ const RecommendSection = () => {
       <Image
         alt=""
         src={'upload/2025/06/1749571855689.jpg'}
-        className="h-[360px] overflow-hidden rounded-xl"
+        className="h-[319px] overflow-hidden rounded-xl lg:h-[360px]"
         classImg="object-fill"
       />
       <p className="mt-4 font-medium text-[#33435A] dark:text-[#8E98A8]">

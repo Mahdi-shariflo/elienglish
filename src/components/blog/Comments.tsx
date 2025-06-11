@@ -49,7 +49,7 @@ const Comments = ({ blog }: { blog: Blog }) => {
   }, [isSuccess]);
   return (
     <>
-      <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-[24px] dark:border-[#263248] dark:bg-[#172334]">
+      <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]">
         <Title title="ارسال دیدگاه" />
         <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
           <Input

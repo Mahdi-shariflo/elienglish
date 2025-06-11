@@ -4,10 +4,10 @@ import React from 'react';
 const InfoBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
-      <h1 className="pt-[24px] font-extrabold text-4xl text-[#172334] dark:text-white">
+      <h1 className="pt-[24px] font-extrabold text-xl text-[#172334] dark:text-white lg:text-4xl">
         {blog.title}
       </h1>
-      <div className="mt-[24px] flex items-center gap-[24px]">
+      <div className="mt-3 flex flex-wrap items-center gap-4 lg:mt-[24px] lg:gap-[24px]">
         <div className="flex items-center gap-2">
           <svg
             width="24"
@@ -36,7 +36,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
               />
             </defs>
           </svg>
-          <span className="font-light text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
+          <span className="font-light text-[12px] text-[#6A7890] dark:text-[#8E98A8] lg:text-[14px]">
             {blog.author.firstName} {blog.author.lastName}
           </span>
         </div>
@@ -56,8 +56,12 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
             />
           </svg>
           <div className="flex gap-1">
-            <span className="font-light text-[14px] text-[#8E98A8]">زمان مطالعه:</span>
-            <span className="font-light text-[14px] text-[#6A7890]">{blog.readTime} دقیقه</span>
+            <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">
+              زمان مطالعه:
+            </span>
+            <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
+              {blog.readTime} دقیقه
+            </span>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -77,8 +81,10 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
           </svg>
 
           <div className="flex gap-1">
-            <span className="font-light text-[14px] text-[#8E98A8]">زمان انتشار:</span>
-            <span className="font-light text-[14px] text-[#6A7890]">
+            <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">
+              زمان انتشار:
+            </span>
+            <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
               {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
                 year: '2-digit',
                 month: '2-digit',

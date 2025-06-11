@@ -199,7 +199,7 @@ const Footer = () => {
               </div>
             </div>
             {/* 2 */}
-            <div className="flex flex-col items-start lg:mt-[24px] lg:flex-row">
+            <div className="flex flex-col items-start gap-10 lg:mt-[24px] lg:flex-row">
               {/* right */}
               <div className="flex-1">
                 <div className="lg:w-[400px]">
@@ -264,7 +264,7 @@ const Footer = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-1 flex-col items-start justify-end lg:flex-row lg:gap-40">
+              <div className="flex flex-1 flex-wrap items-start gap-14 lg:flex-row lg:justify-end lg:gap-40">
                 {footers.map((item, idx) => {
                   return (
                     <div className="flex flex-col" key={idx}>
