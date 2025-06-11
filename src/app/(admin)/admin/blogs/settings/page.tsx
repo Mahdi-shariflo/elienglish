@@ -39,7 +39,11 @@ const Page = () => {
     <div>
       <div className="mb-5 flex items-center justify-between border-b pb-2">
         <Title title="تنظیمات بلاگ" />
-        <Button onClick={() => formik.handleSubmit()} className="w-fit bg-main !px-3 text-white">
+        <Button
+          isLoading={isPending}
+          onClick={() => formik.handleSubmit()}
+          className="w-fit bg-main !px-3 text-white"
+        >
           ثبت اطلاعات
         </Button>
       </div>

@@ -138,3 +138,40 @@ hr {
 .custom_pagination_blog .swiper-pagination-bullets .swiper-pagination-bullet-active {
   @apply !w-[40px] rounded-full bg-main;
 }
+
+.container_des_category strong {
+  @apply !text-main;
+}
+
+.container_des_category h1 {
+  @apply py-4 font-extrabold !text-[23m];
+}
+
+/* معمولاً 32px */
+.container_des_category h2 {
+  @apply py-4 !font-extrabold text-[1.5em];
+}
+
+/* معمولاً 24px */
+.container_des_category h3 {
+  @apply py-4 font-bold text-[1.17em];
+}
+
+/* معمولاً 18.72px */
+.container_des_category h4 {
+  @apply py-4 font-bold text-[1];
+}
+
+/* معمولاً 16px */
+.container_des_category h5 {
+  @apply py-4 font-bold text-[0.83em];
+}
+
+/* معمولاً 13.28px */
+.container_des_category h6 {
+  @apply py-4 font-bold text-[0.67em];
+}
+
+.container_des_category * {
+  @apply !text-justify;
+}

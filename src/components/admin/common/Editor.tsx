@@ -22,10 +22,17 @@ const Editor = ({ value, editorRef }: Props) => {
           ],
           language: 'fa',
           // plugins: 'anchor  autolink charmap codesample emoticons image link lists media searchreplace  visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate mentions  tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-          plugins:
-            'image link  media anchor autolink charmap codesample emoticons lists searchreplace visualblocks wordcount ',
-          toolbar:
-            'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media  mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          plugins: `
+            advlist anchor autolink autosave charmap code codesample directionality emoticons image 
+            insertdatetime link lists media nonbreaking pagebreak preview quickbars save searchreplace 
+            table visualblocks visualchars wordcount
+          `,
+          toolbar: `
+            undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |
+            alignleft aligncenter alignright alignjustify | outdent indent |
+            link image media | codesample code | bullist numlist | emoticons charmap |
+            preview save print | removeformat
+          `,
         }}
         initialValue={value}
       />

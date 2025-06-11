@@ -1,5 +1,6 @@
 import CardBlog2 from '@/components/blog/CardBlog2';
 import Comments from '@/components/blog/Comments';
+import Description from '@/components/blog/Description';
 import DownloadFiles from '@/components/blog/DownloadFiles';
 import InfoBlog from '@/components/blog/InfoBlog';
 import MediaPreview from '@/components/blog/MediaPreview';
@@ -18,6 +19,7 @@ const Page = async ({ params }: Props) => {
   console.log(`/blog/detail/${decodeURIComponent(id!)}`);
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
+  console.log(blog, 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
   return (
     <div className="bg-white">
       <div className="container_page pt-10 lg:pt-32">
@@ -28,6 +30,7 @@ const Page = async ({ params }: Props) => {
             <MediaPreview blog={blog} />
             {/* title */}
             <InfoBlog blog={blog} />
+            <Description blog={blog} />
             <DownloadFiles blog={blog} />
             <ShareAndCopy />
             <Comments blog={blog} />

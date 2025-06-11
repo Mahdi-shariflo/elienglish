@@ -233,6 +233,7 @@ export type ThumbnailImage = {
 };
 
 export type Blog = {
+  description: string;
   _id: string;
   author: User;
   type: string; // مثلا "video"
