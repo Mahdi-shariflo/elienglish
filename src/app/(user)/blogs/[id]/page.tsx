@@ -16,15 +16,16 @@ type Props = {
 };
 const Page = async ({ params }: Props) => {
   const { id } = await params;
-  console.log(`/blog/detail/${decodeURIComponent(id!)}`);
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
+  const blogSidebar = result?.data?.data?.blogSidebar;
+  console.log(blog);
   return (
-    <div className="bg-white">
+    <div className="bg-white pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs page="/blogs/category" breadcrumbs={blog?.breadcrumbPath} />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 rounded-lg border border-[#F4F6FA] p-10 dark:!border-[#263248]">
+          <div className="w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] p-10 dark:!border-[#263248]">
             <p className="font-medium text-main">دیکشنری الی انگلیش</p>
             <MediaPreview blog={blog} />
             {/* title */}
@@ -34,17 +35,22 @@ const Page = async ({ params }: Props) => {
             <ShareAndCopy />
             <Comments blog={blog} />
           </div>
-          <div className="min-w-[380px]">
-            <RecommendSection />
+          <div className="sticky top-32 w-[380px] min-w-[380px] overflow-hidden">
+            <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">
-              <Title title="دسترسی سریع" />
-              <div className="mt-8">
-                <Link
-                  className="flex !h-[36px] w-fit items-center justify-center rounded-lg bg-[#F4F6FA] px-4 font-medium text-main dark:bg-[#172334]"
-                  href={'/'}
-                >
-                  آموزش گرامر
-                </Link>
+              <Title title={blogSidebar?.section2?.title} />
+              <div className="mt-8 flex flex-wrap gap-3">
+                {blogSidebar?.section2.cards.map(
+                  (item: { cardTitle: string; cardLink: string }, idx: number) => (
+                    <Link
+                      key={idx}
+                      className="flex !h-[36px] w-fit items-center justify-center rounded-lg bg-[#F4F6FA] px-4 font-medium text-main dark:bg-[#172334]"
+                      href={item?.cardLink}
+                    >
+                      {item?.cardTitle}
+                    </Link>
+                  )
+                )}
               </div>
             </div>
             <div className="mt-10 block rounded-lg bg-[#F4F6FA] p-4 dark:bg-[#172334]">
@@ -63,7 +69,7 @@ const Page = async ({ params }: Props) => {
                     />
                   </svg>
                 </span>
-                <p className="font-medium text-[14px] text-main">جدیدترین‌های الی انگلیش</p>
+                <p className="font-medium text-[14px] text-main">{blogSidebar?.section3?.title}</p>
               </div>
               <div className="mt-3">
                 <CardBlog2 blog={blog} />

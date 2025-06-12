@@ -94,6 +94,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
           </div>
         </div>
       </div>
+      <p className="mt-10 font-medium text-[14px] text-[#33435A]">{blog.shortDescription}</p>
     </div>
   );
 };

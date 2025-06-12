@@ -1,17 +1,30 @@
 import React from 'react';
 import Image from '../common/Image';
 import Link from 'next/link';
-const RecommendSection = () => {
+type Props = {
+  blogSidebar: {
+    recommendSection: {
+      href: string;
+      imageUrl: string;
+      title: string;
+    };
+  };
+};
+const RecommendSection = ({ blogSidebar }: Props) => {
   return (
-    <Link href={'/'} className="block rounded-lg bg-[#F4F6FA] p-4 dark:bg-[#172334]">
+    <Link
+      href={blogSidebar?.recommendSection?.href}
+      className="block w-full rounded-lg bg-[#F4F6FA] p-4 dark:bg-[#172334]"
+    >
       <Image
         alt=""
-        src={'upload/2025/06/1749571855689.jpg'}
-        className="h-[319px] overflow-hidden rounded-xl lg:h-[360px]"
+        baseUrl={false}
+        src={blogSidebar?.recommendSection?.imageUrl}
+        className="h-[319px] w-full overflow-hidden rounded-xl lg:h-[270px]"
         classImg="object-fill"
       />
       <p className="mt-4 font-medium text-[#33435A] dark:text-[#8E98A8]">
-        دوره آموزش زمان ها و مکالمه های کاربردی در انگلیسی
+        {blogSidebar?.recommendSection?.title}
       </p>
     </Link>
   );

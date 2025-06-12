@@ -7,18 +7,26 @@ import { BASEURL } from '@/lib/variable';
 type Props = {
   src: string | StaticImageData;
   alt: string;
+  baseUrl?: boolean;
   classImg?: string;
   className?: string;
   aspectRatio?: string; // اضافه‌شده برای نسبت تصویر (مثلاً '16/9')
 };
 
-const Image = ({ src, alt, className = '', classImg = '', aspectRatio = '4/3' }: Props) => {
+const Image = ({
+  baseUrl = true,
+  src,
+  alt,
+  className = '',
+  classImg = '',
+  aspectRatio = '4/3',
+}: Props) => {
   const [isError, setIsError] = useState(false);
 
   return (
     <div className={`relative bg-white ${className}`} style={{ aspectRatio }}>
       <NextImage
-        src={isError ? Logo : typeof src === 'string' ? `${BASEURL}/${src}` : src}
+        src={isError ? Logo : typeof src === 'string' ? `${baseUrl ? BASEURL : ''}${src}` : src}
         alt={alt}
         fill
         onError={() => setIsError(true)}

@@ -42,24 +42,25 @@ const EliMag = ({ blogs, title, delay }: { delay?: number; blogs: Blog[]; title:
           </Link>
         </div>
       }
-      <div className="mt-10 hidden h-[450px] items-center gap-5 lg:flex">
+      <div className="mt-10 hidden h-[450px] items-center gap-5 lg:flex 3xl:h-[500px]">
         {blogs[0] && (
           <CardBlog1
             blog={blogs[0]}
-            classImage="!h-[300px] !rounded-lg"
+            classImage="!h-[300px] 3xl:!h-[350px] !rounded-lg"
             className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
           />
         )}
 
-        <div className="flex h-full w-1/2 flex-col justify-between gap-7">
+        <div className="flex h-full w-1/2 flex-col justify-between">
           {blogs
             ?.slice(1, 4)
             .map((item, index) => (
               <CardBlog2
+                classTitle="!line-clamp-2"
                 key={item._id || index}
                 blog={item}
-                classImage="!w-[240px] !min-w-[] !h-[125px]"
-                className="border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
+                classImage="!w-[200px] !min-w-[200px] !h-full"
+                className="!h-[128px] border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
               />
             ))}
         </div>

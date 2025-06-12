@@ -59,7 +59,7 @@ const Description = ({ blog }: { blog: Blog }) => {
         )}
       </div>
       <div
-        className="container_des_category font-regular leading-8"
+        className="container_des_category font-regular leading-8 text-[#33435A]"
         dangerouslySetInnerHTML={{ __html: cleanDescription }}
       ></div>
     </div>
