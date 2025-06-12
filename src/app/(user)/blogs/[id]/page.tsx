@@ -19,13 +19,12 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
-  console.log(blog);
   return (
     <div className="bg-white pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs page="/blogs/category" breadcrumbs={blog?.breadcrumbPath} />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] p-10 dark:!border-[#263248]">
+          <div className="w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
             <p className="font-medium text-main">دیکشنری الی انگلیش</p>
             <MediaPreview blog={blog} />
             {/* title */}
@@ -35,7 +34,7 @@ const Page = async ({ params }: Props) => {
             <ShareAndCopy />
             <Comments blog={blog} />
           </div>
-          <div className="sticky top-32 w-[380px] min-w-[380px] overflow-hidden">
+          <div className="sticky top-32 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
             <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">
               <Title title={blogSidebar?.section2?.title} />

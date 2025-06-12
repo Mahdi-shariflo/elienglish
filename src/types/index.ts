@@ -82,14 +82,14 @@ export type Comment = {
     firstName: string;
     lastName: string;
   };
-  published?: string;
+  published?: boolean;
   children: Comment[];
-  comment: string;
+  content: string;
   _id: string;
-  commentTitle: string;
+  title: string;
   createdAt: string;
   picture: string[];
-  rate: string;
+  rating: string;
   like: number;
   disLike: number;
 };

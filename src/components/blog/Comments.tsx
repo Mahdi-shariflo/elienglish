@@ -5,7 +5,6 @@ import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
 import CardComment from './CardComment';
 import { useSession } from '@/lib/auth/useSession';
-import { useGetCommentsProductById } from '@/hooks/comments/useGetCommentsProductById';
 import { useAddComment } from '@/hooks/comments/useAddComment';
 import { Blog } from '@/types';
 import { useFormik } from 'formik';
@@ -13,10 +12,11 @@ import * as yup from 'yup';
 import StarRating from '../common/StarRateing';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
+import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 const Comments = ({ blog }: { blog: Blog }) => {
   const [open, setOpen] = useState(false);
   const user = useSession();
-  const { data } = useGetCommentsProductById(blog._id!);
+  const { data } = useGetCommentById(blog._id!);
   const { isSuccess, mutate, isPending } = useAddComment();
   const [star, setStar] = useState(0);
   const formik = useFormik({
@@ -89,7 +89,10 @@ const Comments = ({ blog }: { blog: Blog }) => {
           </div>
         </form>
         <div className="mt-10">
-          {data?.data?.data?.comments?.map((comment: Comment, idx: number) => <CardComment />)}
+          {/* data?.data?.data?.comments */}
+          {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
+            <CardComment blog={blog} />
+          ))}
         </div>
         <ModalNeedLoginUser open={open} setOpen={setOpen} />
       </div>

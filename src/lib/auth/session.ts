@@ -35,7 +35,6 @@ export async function getSession(): Promise<User | null> {
   const finger = (await cookies()).get('finger')?.value as string;
   const viewport = (await cookies()).get('viewport')?.value as string;
   const theme = (await cookies()).get('theme')?.value as string;
-
   if (!rawSession) {
     return {
       finger,

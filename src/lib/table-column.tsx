@@ -1212,6 +1212,16 @@ export const initialDataComments = ({ onDelete, onEdit }: { onDelete?: any; onEd
     ),
   },
   {
+    title: <HeaderCell align="center" title="وضعیت" />,
+    dataIndex: 'published',
+    key: 'published',
+    render: (value: string) => (
+      <p className="mx-auto text-center text-[12px] text-gray-600">
+        {value ? 'منتشر شده' : 'در حال انتظار'}
+      </p>
+    ),
+  },
+  {
     title: <HeaderCell align="center" title="عملیات" />,
     dataIndex: 'action',
     key: 'action',

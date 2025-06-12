@@ -1,7 +1,7 @@
 import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetCommentsProductById = (id?: string) => {
+export const useGetCommentById = (id?: string) => {
   return useQuery({
     queryKey: ['comments-products', id],
     enabled: Boolean(id),

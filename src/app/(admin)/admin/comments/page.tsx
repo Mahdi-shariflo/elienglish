@@ -1,5 +1,6 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
+import CreateComment from '@/components/common/CreateComment';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
@@ -79,7 +80,7 @@ const Page = () => {
         total={comment?.totalPages}
         mainData={comment?.comments}
         showData={columns}
-        columns={['_id', 'firstName', 'mobile', 'comment', 'rate', 'title', 'action']}
+        columns={['_id', 'firstName', 'mobile', 'comment', 'rate', 'title', 'published', 'action']}
         page={Number(filter.page)}
         onChangePage={onChangePage}
       >
@@ -97,7 +98,7 @@ const Page = () => {
           ]}
         />
       </ReactTable>
-      {/* {modal.open && <CreateComment modal={modal} setModal={setModal} showCommentRate={false} />} */}
+      {modal.open && <CreateComment modal={modal} setModal={setModal} showCommentRate={false} />}
     </div>
   );
 };
