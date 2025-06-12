@@ -9,6 +9,7 @@ import ShareAndCopy from '@/components/blog/ShareAndCopy';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Title from '@/components/common/Title';
 import { request } from '@/lib/safeClient';
+import { Blog } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 type Props = {
@@ -70,8 +71,10 @@ const Page = async ({ params }: Props) => {
                 </span>
                 <p className="font-medium text-[14px] text-main">{blogSidebar?.section3?.title}</p>
               </div>
-              <div className="mt-3">
-                <CardBlog2 blog={blog} />
+              <div className="mt-3 space-y-4">
+                {blogSidebar?.section3?.listBlogs?.map((blog: Blog, idx: number) => (
+                  <CardBlog2 blog={blog} key={idx} />
+                ))}
               </div>
             </div>
           </div>
