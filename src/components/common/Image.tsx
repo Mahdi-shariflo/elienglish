@@ -26,7 +26,9 @@ const Image = ({
   return (
     <div className={`relative bg-white ${className}`} style={{ aspectRatio }}>
       <NextImage
-        src={isError ? Logo : typeof src === 'string' ? `${baseUrl ? BASEURL : ''}${src}` : src}
+        src={
+          isError ? Logo : typeof src === 'string' ? `${baseUrl ? `${BASEURL}/` : ''}${src}` : src
+        }
         alt={alt}
         fill
         onError={() => setIsError(true)}

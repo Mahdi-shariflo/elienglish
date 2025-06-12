@@ -47,6 +47,7 @@ const Comments = ({ blog }: { blog: Blog }) => {
       setStar(0);
     }
   }, [isSuccess]);
+  console.log(data);
   return (
     <>
       <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]">
