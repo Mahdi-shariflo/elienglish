@@ -1,186 +1,48 @@
 'use client';
-import useGlobalStore from '@/store/global-store';
 import React from 'react';
+import Profile from '@/../public/images/profile.jpg';
+import Image from 'next/image';
 import Button from '../common/Button';
-import { useSession } from 'next-auth/react';
-import { User } from '@/types';
-
 const ProfileInformation = () => {
-  const session = useSession();
-  const user = session.data as User;
-  const { setComingSoon } = useGlobalStore();
   return (
-    <div className="container_page space-y-4 rounded-2xl border-[#E4E7E9] lg:!w-full lg:border lg:bg-white lg:p-[16px]">
+    <div className="container_page rounded-2xl border-[#E4E7E9] bg-[linear-gradient(180deg,_#EDE8FC_-8.74%,_#FFFFFF_100%)] lg:!w-full lg:border lg:p-[16px]">
       {/* profile */}
-      <div className="relative flex items-center justify-center lg:justify-between">
-        <div className="flex flex-col items-center lg:flex-row lg:gap-3">
-          <span className="block !h-[70px] !w-[70px] lg:!h-[50px] lg:!w-[50px]">
+      <div className="relative mx-auto flex !h-[70px] !w-[70px] flex-col items-center justify-center rounded-full lg:!h-[100px] lg:!w-[100px] lg:gap-3">
+        <span className="block h-full w-full overflow-hidden rounded-full border-2 border-main">
+          <Image src={Profile} alt="" />
+          <Button className="absolute right-0 top-0 !w-fit">
             <svg
-              className="h-full w-full"
-              viewBox="0 0 44 44"
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="36" height="36" rx="18" fill="white" />
+              <path
+                d="M25 12.5H23.72L23.4 11.5C23.1926 10.9133 22.8077 10.4055 22.2989 10.0472C21.7901 9.68884 21.1824 9.49762 20.56 9.50002H15.44C14.8115 9.5012 14.1993 9.69971 13.6898 10.0675C13.1802 10.4353 12.799 10.9539 12.6 11.55L12.28 12.55H11C10.2044 12.55 9.44129 12.8661 8.87868 13.4287C8.31607 13.9913 8 14.7544 8 15.55V23.55C8 24.3457 8.31607 25.1087 8.87868 25.6713C9.44129 26.234 10.2044 26.55 11 26.55H25C25.7956 26.55 26.5587 26.234 27.1213 25.6713C27.6839 25.1087 28 24.3457 28 23.55V15.55C28.0066 15.1519 27.9339 14.7564 27.7862 14.3866C27.6384 14.0168 27.4184 13.6802 27.1392 13.3963C26.86 13.1124 26.527 12.887 26.1597 12.7331C25.7924 12.5792 25.3982 12.5 25 12.5ZM26 23.5C26 23.7652 25.8946 24.0196 25.7071 24.2071C25.5196 24.3947 25.2652 24.5 25 24.5H11C10.7348 24.5 10.4804 24.3947 10.2929 24.2071C10.1054 24.0196 10 23.7652 10 23.5V15.5C10 15.2348 10.1054 14.9805 10.2929 14.7929C10.4804 14.6054 10.7348 14.5 11 14.5H13C13.2181 14.5114 13.4339 14.4511 13.6144 14.3283C13.795 14.2055 13.9304 14.027 14 13.82L14.54 12.18C14.6071 11.9814 14.7349 11.8089 14.9054 11.6869C15.0758 11.5648 15.2804 11.4995 15.49 11.5H20.61C20.8196 11.4995 21.0242 11.5648 21.1946 11.6869C21.3651 11.8089 21.4929 11.9814 21.56 12.18L22.1 13.82C22.1642 14.0108 22.2844 14.1777 22.445 14.299C22.6055 14.4204 22.799 14.4904 23 14.5H25C25.2652 14.5 25.5196 14.6054 25.7071 14.7929C25.8946 14.9805 26 15.2348 26 15.5V23.5ZM18 14.5C17.2089 14.5 16.4355 14.7346 15.7777 15.1741C15.1199 15.6137 14.6072 16.2384 14.3045 16.9693C14.0017 17.7002 13.9225 18.5045 14.0769 19.2804C14.2312 20.0563 14.6122 20.769 15.1716 21.3284C15.731 21.8879 16.4437 22.2688 17.2196 22.4232C17.9956 22.5775 18.7998 22.4983 19.5307 22.1955C20.2616 21.8928 20.8864 21.3801 21.3259 20.7223C21.7654 20.0645 22 19.2911 22 18.5C22 17.4392 21.5786 16.4217 20.8284 15.6716C20.0783 14.9214 19.0609 14.5 18 14.5ZM18 20.5C17.6044 20.5 17.2178 20.3827 16.8889 20.163C16.56 19.9432 16.3036 19.6308 16.1522 19.2654C16.0009 18.8999 15.9613 18.4978 16.0384 18.1098C16.1156 17.7219 16.3061 17.3655 16.5858 17.0858C16.8655 16.8061 17.2219 16.6156 17.6098 16.5385C17.9978 16.4613 18.3999 16.5009 18.7654 16.6523C19.1308 16.8036 19.4432 17.06 19.6629 17.3889C19.8827 17.7178 20 18.1045 20 18.5C20 19.0305 19.7893 19.5392 19.4142 19.9142C19.0391 20.2893 18.5304 20.5 18 20.5Z"
+                fill="#6E3DFF"
+              />
+            </svg>
+          </Button>
+        </span>
+        <span className="absolute -bottom-4 flex h-[36px] w-[82px] items-center justify-center gap-2 rounded-full bg-main">
+          <span className="mt-1 font-medium text-white">B2</span>
+          <span>
+            <svg
+              width="18"
+              height="16"
+              viewBox="0 0 18 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                opacity="0.4"
-                d="M22.0001 40.3512C32.1253 40.3512 40.3334 32.1431 40.3334 22.0179C40.3334 11.8927 32.1253 3.68457 22.0001 3.68457C11.8749 3.68457 3.66675 11.8927 3.66675 22.0179C3.66675 32.1431 11.8749 40.3512 22.0001 40.3512Z"
-                fill="#F9A8DA"
-              />
-              <path
-                d="M22 12.7236C18.205 12.7236 15.125 15.8036 15.125 19.5986C15.125 23.3203 18.04 26.3453 21.9083 26.4553C21.9633 26.4553 22.0367 26.4553 22.0733 26.4553C22.11 26.4553 22.165 26.4553 22.2017 26.4553C22.22 26.4553 22.2383 26.4553 22.2383 26.4553C25.9417 26.327 28.8567 23.3203 28.875 19.5986C28.875 15.8036 25.795 12.7236 22 12.7236Z"
-                fill="#F472C0"
-              />
-              <path
-                d="M34.4301 35.4938C31.1667 38.5004 26.8034 40.3521 22.0001 40.3521C17.1967 40.3521 12.8334 38.5004 9.57007 35.4938C10.0101 33.8254 11.2017 32.3038 12.9434 31.1304C17.9484 27.7938 26.0884 27.7938 31.0567 31.1304C32.8167 32.3038 33.9901 33.8254 34.4301 35.4938Z"
-                fill="#F472C0"
+                d="M17.3332 6.05968C17.2806 5.90725 17.1849 5.77336 17.0577 5.67426C16.9305 5.57516 16.7772 5.51509 16.6166 5.50134L11.8749 4.80968L9.7499 0.501342C9.68166 0.360449 9.57512 0.241627 9.44247 0.158486C9.30983 0.0753458 9.15645 0.03125 8.9999 0.03125C8.84335 0.03125 8.68997 0.0753458 8.55733 0.158486C8.42468 0.241627 8.31814 0.360449 8.2499 0.501342L6.1249 4.80134L1.38323 5.50134C1.229 5.52326 1.084 5.58798 0.964692 5.68814C0.84538 5.7883 0.756533 5.9199 0.708233 6.06801C0.664021 6.21274 0.660053 6.36677 0.696756 6.51359C0.733459 6.6604 0.809448 6.79445 0.916567 6.90134L4.35823 10.2347L3.5249 14.968C3.49515 15.1242 3.51073 15.2857 3.56979 15.4334C3.62886 15.581 3.72894 15.7087 3.85823 15.8013C3.98425 15.8914 4.13288 15.9446 4.28744 15.9549C4.442 15.9652 4.59638 15.9322 4.73323 15.8597L8.9999 13.6347L13.2499 15.868C13.3669 15.934 13.499 15.9684 13.6332 15.968C13.8098 15.9686 13.9819 15.9132 14.1249 15.8097C14.2542 15.7171 14.3543 15.5894 14.4133 15.4417C14.4724 15.2941 14.488 15.1326 14.4582 14.9763L13.6249 10.243L17.0666 6.90967C17.1869 6.80774 17.2758 6.67376 17.323 6.5233C17.3702 6.37284 17.3738 6.21207 17.3332 6.05968ZM12.2082 9.39301C12.1105 9.48754 12.0374 9.60454 11.9953 9.73382C11.9531 9.8631 11.9433 10.0007 11.9666 10.1347L12.5666 13.6263L9.43323 11.9597C9.31266 11.8955 9.17816 11.8619 9.04157 11.8619C8.90497 11.8619 8.77047 11.8955 8.6499 11.9597L5.51657 13.6263L6.11657 10.1347C6.13985 10.0007 6.12999 9.8631 6.08787 9.73382C6.04575 9.60454 5.97263 9.48754 5.8749 9.39301L3.3749 6.89301L6.88323 6.38468C7.01823 6.3659 7.14656 6.31429 7.25698 6.23439C7.3674 6.15448 7.45653 6.04871 7.51657 5.92634L8.9999 2.75134L10.5666 5.93468C10.6266 6.05704 10.7157 6.16281 10.8262 6.24272C10.9366 6.32263 11.0649 6.37423 11.1999 6.39301L14.7082 6.90134L12.2082 9.39301Z"
+                fill="white"
               />
             </svg>
           </span>
-          <span className="pt-1 font-regular text-[16px] text-[#232429] lg:pt-0 lg:text-[14px]">
-            {user?.firstName} {user?.lastName}
-          </span>
-        </div>
-        {/* <span className='absolute lg:static left-[58%] top-[58%]  w-6 h-6 lg:w-fit lg:h-fit flex justify-center items-center -translate-y-1/2 lg:translate-y-0 bg-main rounded-full lg:bg-transparent -translate-x-1/2 lg:translate-x-0'>
-                    <svg className='stroke-white  lg:stroke-[#DD338B]' width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.84006 2.39982L3.36673 8.19315C3.16006 8.41315 2.96006 8.84649 2.92006 9.14649L2.6734 11.3065C2.58673 12.0865 3.14673 12.6198 3.92006 12.4865L6.06673 12.1198C6.36673 12.0665 6.78673 11.8465 6.9934 11.6198L12.4667 5.82649C13.4134 4.82649 13.8401 3.68649 12.3667 2.29315C10.9001 0.913152 9.78673 1.39982 8.84006 2.39982Z" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M7.92676 3.36621C8.21342 5.20621 9.70676 6.61288 11.5601 6.79954" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                        <path d="M2 14.667H14" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-
-                </span> */}
-      </div>
-      <div className="flex w-full items-center gap-4 rounded-xl bg-white p-[16px] lg:flex-col lg:items-start lg:gap-0 lg:space-y-4 lg:bg-transparent lg:p-0">
-        {/* wallet */}
-        <div className="flex w-full justify-between">
-          <div className="w-fit">
-            <div className="flex items-center gap-2 lg:gap-5">
-              <span>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M13 9H7"
-                    stroke="#7D8793"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M22 10.9702V13.0302C22 13.5802 21.56 14.0302 21 14.0502H19.0399C17.9599 14.0502 16.97 13.2602 16.88 12.1802C16.82 11.5502 17.0599 10.9602 17.4799 10.5502C17.8499 10.1702 18.36 9.9502 18.92 9.9502H21C21.56 9.9702 22 10.4202 22 10.9702Z"
-                    stroke="#7D8793"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M17.48 10.55C17.06 10.96 16.82 11.55 16.88 12.18C16.97 13.26 17.96 14.05 19.04 14.05H21V15.5C21 18.5 19 20.5 16 20.5H7C4 20.5 2 18.5 2 15.5V8.5C2 5.78 3.64 3.88 6.19 3.56C6.45 3.52 6.72 3.5 7 3.5H16C16.26 3.5 16.51 3.50999 16.75 3.54999C19.33 3.84999 21 5.76 21 8.5V9.95001H18.92C18.36 9.95001 17.85 10.17 17.48 10.55Z"
-                    stroke="#7D8793"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              <span className="whitespace-nowrap font-regular text-[14px] text-[#232429]">
-                کیف پول
-              </span>
-            </div>
-            <Button
-              onClick={() => setComingSoon(true)}
-              className="block !h-fit w-fit min-w-fit px-2 pt-1 text-left font-regular text-[10px] text-main lg:text-[12px]"
-            >
-              افزایش اعتبار
-            </Button>
-          </div>
-          <div className="mt-[2px] flex gap-1 lg:mt-0">
-            <span className="font-regular text-[12px] text-[#232429]">0 تومان</span>
-            <span className="lg:hidden">
-              <svg
-                width="17"
-                height="16"
-                viewBox="0 0 17 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.5002 13.2797L6.15355 8.93306C5.64022 8.41973 5.64022 7.57973 6.15355 7.06639L10.5002 2.71973"
-                  stroke="#7D8793"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
-        {/* roz */}
-        <div className="flex w-full justify-between">
-          <div className="w-fit">
-            <div className="flex items-center gap-2 lg:gap-5">
-              <span>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M10.8159 19.5549L3.50977 11.5277C2.8997 10.8564 2.82965 9.85321 3.34047 9.10401L6.29153 4.78104C6.6564 4.24589 7.26257 3.92578 7.91058 3.92578H16.0973C16.7453 3.92578 17.3524 4.24687 17.7173 4.78201L20.6596 9.10401C21.1704 9.85419 21.1004 10.8564 20.4893 11.5268L13.1822 19.5549C12.5478 20.2525 11.4503 20.2525 10.8159 19.5549Z"
-                    stroke="#7D8793"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M8.87416 12.1342L7.05078 10.1289"
-                    stroke="#7D8793"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
-              <span className="whitespace-nowrap font-regular text-[14px] text-[#232429]">
-                رز کلاب
-              </span>
-            </div>
-            <Button
-              onClick={() => setComingSoon(true)}
-              className="block !h-fit w-fit min-w-fit whitespace-nowrap px-2 pt-1 text-left font-regular text-[12px] text-main"
-            >
-              پلن‌های امتیازی
-            </Button>
-          </div>
-          <div className="mt-[2px] flex gap-1 lg:mt-0">
-            <span className="whitespace-nowrap pt-px font-regular text-[10px] text-[#232429] lg:pt-0 lg:text-[12px]">
-              5 امتیاز
-            </span>
-            <span className="lg:hidden">
-              <svg
-                width="17"
-                height="16"
-                viewBox="0 0 17 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.5002 13.2797L6.15355 8.93306C5.64022 8.41973 5.64022 7.57973 6.15355 7.06639L10.5002 2.71973"
-                  stroke="#7D8793"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </div>
-        </div>
+        </span>
       </div>
     </div>
   );

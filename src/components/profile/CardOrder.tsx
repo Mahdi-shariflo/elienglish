@@ -4,7 +4,6 @@ import Button from '../common/Button';
 import { useRouter } from 'next/navigation';
 import { statusIcon } from '@/lib/data';
 import { Order } from '@/types/profile';
-import { BASEURL } from '@/lib/variable';
 import Image from '../common/Image';
 
 type Props = {
@@ -22,7 +21,7 @@ const CardOrder = ({ order }: Props) => {
   }, 0);
 
   return (
-    <div className="rounded-xl border border-[#E4E7E9] px-4 lg:!w-full lg:bg-white">
+    <div className="rounded-xl border border-[#E4E7E9] px-4 lg:!w-full lg:bg-[#EDE8FC]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 lg:p-[16px]">
           <span>{findItem?.icon}</span>

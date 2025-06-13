@@ -88,11 +88,11 @@ const EmptyCartPage = ({ className }: { className?: string }) => {
         />
         <path
           d="M41.4907 14.7709V0H98.5776V14.7709L59.6242 61.7694H99.2492V76.5403H39.4758V61.7694L78.4293 14.7709H41.4907Z"
-          fill="#F472C0"
+          fill="#6E3DFF"
         />
         <path
           d="M88.5031 125.55V116.15H125.442V125.55L100.592 155.763H126.113V165.163H87.1599V155.763L112.01 125.55H88.5031Z"
-          fill="#F472C0"
+          fill="#6E3DFF"
         />
         <defs>
           <linearGradient

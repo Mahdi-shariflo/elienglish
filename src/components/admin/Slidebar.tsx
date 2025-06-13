@@ -75,38 +75,38 @@ const menus = [
       },
     ],
   },
-  // {
-  //   icon: Products_icon,
-  //   name: 'محصولات',
-  //   href: ['/admin/products/', '/admin/products/create/', '/admin/products/categories/'],
-  //   activeIcon: Products_fill_icon,
-  //   children: [
-  //     {
-  //       name: 'همه محصولات',
-  //       href: '/admin/products/',
-  //     },
-  //     {
-  //       name: 'ایجاد محصول',
-  //       href: '/admin/products/new/',
-  //     },
-  //     {
-  //       name: 'تگ محصولات',
-  //       href: '/admin/products/tags/',
-  //     },
-  //     {
-  //       name: 'ویژگی محصولات',
-  //       href: '/admin/products/properties/',
-  //     },
-  //     {
-  //       name: 'گروه ویژگی محصولات',
-  //       href: '/admin/products/group-properties/',
-  //     },
-  //     {
-  //       name: 'دسته‌بندی محصولات',
-  //       href: '/admin/products/categories/',
-  //     },
-  //   ],
-  // },
+  {
+    icon: Products_icon,
+    name: 'محصولات',
+    href: ['/admin/products/', '/admin/products/create/', '/admin/products/categories/'],
+    activeIcon: Products_fill_icon,
+    children: [
+      {
+        name: 'همه محصولات',
+        href: '/admin/products/',
+      },
+      {
+        name: 'ایجاد محصول',
+        href: '/admin/products/new/',
+      },
+      {
+        name: 'تگ محصولات',
+        href: '/admin/products/tags/',
+      },
+      {
+        name: 'ویژگی محصولات',
+        href: '/admin/products/properties/',
+      },
+      {
+        name: 'گروه ویژگی محصولات',
+        href: '/admin/products/group-properties/',
+      },
+      {
+        name: 'دسته‌بندی محصولات',
+        href: '/admin/products/categories/',
+      },
+    ],
+  },
   // {
   //   icon: Slider_icon,
   //   name: 'اسلایدر‌ها',

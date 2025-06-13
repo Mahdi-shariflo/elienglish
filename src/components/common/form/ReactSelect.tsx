@@ -136,7 +136,7 @@ const ReactSelect = ({
           name={name}
           className={`w-full`}
           classNames={{
-            trigger: `border h-[48px]  lg:h-[64px] ${triggerClass} ${isError ? '!bg-[#fee7ef]' : ''}`,
+            trigger: `border h-[48px]  dark:!bg-[#0B1524] dark:border-none  lg:h-[59px] ${triggerClass} ${isError ? '!bg-[#fee7ef]' : ''}`,
             value: 'text-[14px] !font-medium',
             label: '!text-gray-700 text-[12px]',
             listboxWrapper: 'listbox relative font-regular',
@@ -145,15 +145,6 @@ const ReactSelect = ({
           isInvalid={isError}
           errorMessage={formik?.errors[name!] as string}
         >
-          {/* <SelectItem textValue="search" classNames={{ selectedIcon: "hidden", base: "data-[hover=true]:!bg-transparent  !px-0 " }} isReadOnly className="text-center !h-[48px] mt-px" key={"search"}>
-                        <Input
-                            autoFocus
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            placeholder="جستجو"
-                            className="w-full !px-0"
-                            classNames={{ inputWrapper: "px-0 bg-[#f4f5f5]", input: "!border-none px-4  !h-[40px] outline-none" }} />
-                    </SelectItem> */}
           {filteredItems?.length > 0 ? (
             <SelectSection className="mt-3">
               {filteredItems.map((item) => (

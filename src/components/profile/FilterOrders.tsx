@@ -17,7 +17,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
   const activeItem = searchParams.get('sort') ?? 'Awaiting';
   const filters = [
     {
-      name: 'در انتظار پرداخت',
+      name: 'جاری',
       status: 'Awaiting',
       icon: (
         <svg
@@ -46,7 +46,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
       color: '#FFA216',
     },
     {
-      name: 'در حال انجام',
+      name: 'تحویل داده شده',
       status: 'Doing',
       icon: (
         <svg
@@ -71,7 +71,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
       color: '#1DA1F3',
     },
     {
-      name: 'در انتظار بررسی',
+      name: 'مرجوعی شده',
       status: 'Review',
       icon: (
         <svg
@@ -96,7 +96,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
       color: '#FFA216',
     },
     {
-      name: 'تحویل به پست',
+      name: 'لغو شده',
       status: 'Delivery',
       icon: (
         <svg
@@ -116,37 +116,6 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
       count: orderStatusCounts?.find((item) => item._id === 'Delivery')?.count ?? '0',
       color: '#1DA1F3',
     },
-    // {
-    //     name: "ارسال شده",
-    //     icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //         <rect width="32" height="32" rx="16" fill="#0ABF8C" />
-    //         <path d="M16 6C10.49 6 6 10.49 6 16C6 21.51 10.49 26 16 26C21.51 26 26 21.51 26 16C26 10.49 21.51 6 16 6ZM20.78 13.7L15.11 19.37C14.97 19.51 14.78 19.59 14.58 19.59C14.38 19.59 14.19 19.51 14.05 19.37L11.22 16.54C10.93 16.25 10.93 15.77 11.22 15.48C11.51 15.19 11.99 15.19 12.28 15.48L14.58 17.78L19.72 12.64C20.01 12.35 20.49 12.35 20.78 12.64C21.07 12.93 21.07 13.4 20.78 13.7Z" fill="white" />
-    //     </svg>
-    //     ,
-    //     count: 4,
-    //     color: "#0ABF8C"
-    // },
-    {
-      name: 'لغو شده',
-      icon: (
-        <svg
-          width="33"
-          height="32"
-          viewBox="0 0 33 32"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect x="0.333344" width="32" height="32" rx="16" fill="#F63D48" />
-          <path
-            d="M16.3333 6C10.8233 6 6.33334 10.49 6.33334 16C6.33334 21.51 10.8233 26 16.3333 26C21.8433 26 26.3333 21.51 26.3333 16C26.3333 10.49 21.8433 6 16.3333 6ZM19.6933 18.3C19.9833 18.59 19.9833 19.07 19.6933 19.36C19.5433 19.51 19.3533 19.58 19.1633 19.58C18.9733 19.58 18.7833 19.51 18.6333 19.36L16.3333 17.06L14.0333 19.36C13.8833 19.51 13.6933 19.58 13.5033 19.58C13.3133 19.58 13.1233 19.51 12.9733 19.36C12.6833 19.07 12.6833 18.59 12.9733 18.3L15.2733 16L12.9733 13.7C12.6833 13.41 12.6833 12.93 12.9733 12.64C13.2633 12.35 13.7433 12.35 14.0333 12.64L16.3333 14.94L18.6333 12.64C18.9233 12.35 19.4033 12.35 19.6933 12.64C19.9833 12.93 19.9833 13.41 19.6933 13.7L17.3933 16L19.6933 18.3Z"
-            fill="white"
-          />
-        </svg>
-      ),
-      count: orderStatusCounts?.find((item) => item._id === 'Canceled')?.count ?? '0',
-      status: 'Canceled',
-      color: '#F63D48',
-    },
   ];
 
   const pathname = usePathname();
@@ -161,7 +130,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
   };
   return (
     <>
-      <div className="container_page overflow-hidden lg:!mt-10 lg:!w-full"></div>
+      <div className="container_page overflow-hidden lg:!w-full"></div>
 
       {isMobile ? (
         <Tabs
@@ -181,24 +150,15 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           ))}
         </Tabs>
       ) : (
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-5 border-b border-[#EDEDED] pb-4 dark:border-[#505B74] lg:flex">
           {filters.map((filter, idx) => (
             <Button
               onPress={() => onSort(filter.status)}
-              style={{
-                background: activeItem === filter.status ? `${filter.color}1A` : '#fff',
-                borderColor: activeItem === filter.status ? filter.color : `#E4E7E9`,
-              }}
               key={idx}
-              className={`!h-[96px] w-full !min-w-fit flex-col rounded-xl border !bg-opacity-10 px-0 pt-1`}
+              className={`flex !h-[32px] !min-w-[135px] rounded-lg bg-transparent !bg-opacity-10 px-0 pt-1 ${activeItem === filter.status ? 'bg-main bg-opacity-15 text-main' : ''}`}
             >
-              <span>{filter.icon}</span>
-              <span style={{ color: filter.color }} className="font-medium text-[14px]">
-                {filter.name}
-              </span>
-              <span className="font-regular text-[10px] text-[#7D8793]">
-                سفارش ({filter.count})
-              </span>
+              <span className="font-medium text-[14px]">{filter.name}</span>
+              <span className="font-regular text-[10px]">({filter.count})</span>
             </Button>
           ))}
         </div>

@@ -7,8 +7,8 @@ export const useActionProductTags = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/admin/products/edit/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/product-tag/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/product/admin/tag/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/product/admin/tag`, method: 'POST', data });
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['product-tags-admin'] });

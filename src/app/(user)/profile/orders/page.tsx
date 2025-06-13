@@ -20,7 +20,7 @@ const Page = () => {
   const orderStatusCounts: { _id: string; count: number }[] = data?.data?.data?.orderStatusCounts;
 
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 lg:mb-10 lg:mt-5 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
       {/* <div className='container_page lg:!w-full lg:flex-row  flex  flex-col items-center gap-6 lg:justify-between'>
                 <p className='text-[#0C0C0C] hidden lg:block font-medium text-[14px] lg:text-[18px]'>تاریخچه سفارش‌های من</p>
@@ -36,7 +36,7 @@ const Page = () => {
       </Suspense>
 
       <div className="">
-        <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] lg:block lg:!w-full lg:text-[18px]">
+        <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
           آخرین سفارش‌ها
         </p>
         {isPending ? (

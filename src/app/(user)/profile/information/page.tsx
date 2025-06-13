@@ -6,9 +6,11 @@ const Page = () => {
   return (
     <div className="pt-4 lg:pt-0">
       <BackPrevPage title="اطلاعات کاربر" />
-      <div className="mx-auto !mt-5 w-[95%] space-y-4 rounded-2xl border-[#E4E7E9] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
+      <div className="mx-auto !mt-5 w-[95%] space-y-4 rounded-2xl border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
         <div className="flex items-center justify-between">
-          <p className="hidden font-medium text-[18px] text-[#0C0C0C] lg:block">اطلاعات کاربری</p>
+          <p className="hidden font-medium text-[18px] text-[#0C0C0C] dark:text-white lg:block">
+            اطلاعات کاربری
+          </p>
         </div>
         {/* <div className='p-[24px] rounded-xl bg-[#FFF9EB] flex lg:hidden items-center justify-center gap-2'>
                     <span>
