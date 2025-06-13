@@ -6,7 +6,7 @@ import Button from '../common/Button';
 import CardComment from './CardComment';
 import { useSession } from '@/lib/auth/useSession';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Blog } from '@/types';
+import { Blog, Comment } from '@/types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import StarRating from '../common/StarRateing';
@@ -40,6 +40,8 @@ const Comments = ({ blog }: { blog: Blog }) => {
       mutate({ data });
     },
   });
+
+  console.log(blog);
 
   useEffect(() => {
     if (isSuccess) {
@@ -89,10 +91,10 @@ const Comments = ({ blog }: { blog: Blog }) => {
             </Button>
           </div>
         </form>
-        <div className="mt-10">
+        <div className="mt-10 space-y-5">
           {/* data?.data?.data?.comments */}
           {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-            <CardComment blog={blog} />
+            <CardComment blog={blog} comment={comment} key={idx} />
           ))}
         </div>
         <ModalNeedLoginUser open={open} setOpen={setOpen} />

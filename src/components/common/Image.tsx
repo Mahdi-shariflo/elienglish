@@ -19,7 +19,7 @@ const Image = ({
   alt,
   className = '',
   classImg = '',
-  aspectRatio = '4/3',
+  aspectRatio = '1/1',
 }: Props) => {
   const [isError, setIsError] = useState(false);
 

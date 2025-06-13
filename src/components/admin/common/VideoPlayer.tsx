@@ -41,15 +41,15 @@ const VideoPlayer = ({ url, poster }: { url: string; poster: string }) => {
           {/* آیکن پلی */}
           <div className="relative z-10">
             <svg
-              width="101"
-              height="100"
-              viewBox="0 0 101 100"
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect x="0.5" width="100" height="100" rx="50" fill="#101010" fill-opacity="0.4" />
+              <rect width="80" height="80" rx="40" fill="#101010" fill-opacity="0.4" />
               <path
-                d="M27.0625 21.875L70.8125 50L27.0625 78.125V21.875Z"
+                d="M30 26.4004L50.8 40.0004L30 53.6004V26.4004Z"
                 stroke="white"
                 stroke-width="5"
                 stroke-linecap="round"

@@ -78,6 +78,7 @@ export type User = {
 };
 
 export type Comment = {
+  targetId?: string;
   author: {
     firstName: string;
     lastName: string;

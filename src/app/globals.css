@@ -139,39 +139,43 @@ hr {
   @apply !w-[40px] rounded-full bg-main;
 }
 
-.container_des_category strong {
+.container_des_category a {
   @apply !text-main;
 }
 
 .container_des_category h1 {
-  @apply py-4 font-extrabold !text-[23m];
+  @apply py-4 font-extrabold !text-[23m] dark:text-white;
 }
 
 /* معمولاً 32px */
 .container_des_category h2 {
-  @apply py-4 !font-extrabold text-[1.5em];
+  @apply py-4 !font-extrabold text-[1.5em] dark:text-white;
 }
 
 /* معمولاً 24px */
 .container_des_category h3 {
-  @apply py-4 font-bold text-[1.17em];
+  @apply py-4 font-bold text-[1.17em] dark:text-white;
 }
 
 /* معمولاً 18.72px */
 .container_des_category h4 {
-  @apply py-4 font-bold text-[1];
+  @apply py-4 font-bold text-[1] dark:text-white;
 }
 
 /* معمولاً 16px */
 .container_des_category h5 {
-  @apply py-4 font-bold text-[0.83em];
+  @apply py-4 font-bold text-[0.83em] dark:text-white;
 }
 
 /* معمولاً 13.28px */
 .container_des_category h6 {
-  @apply py-4 font-bold text-[0.67em];
+  @apply py-4 font-bold text-[0.67em] dark:text-white;
 }
 
 .container_des_category * {
   @apply !text-justify;
+}
+
+.drop_shadow_singleBlog {
+  box-shadow: 0px 30px 50px 0px #0000000a;
 }

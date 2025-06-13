@@ -12,7 +12,9 @@ export default {
     extend: {
     screens:{
       "3xl":"1440px",
-      "4xl":"1700px"
+      "4xl":"1700px",
+      "5xl":"1900px",
+      "6xl":"2000px",
     },
       colors: {
         black: '#0c0c0c',

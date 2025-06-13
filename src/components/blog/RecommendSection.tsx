@@ -14,13 +14,13 @@ const RecommendSection = ({ blogSidebar }: Props) => {
   return (
     <Link
       href={blogSidebar?.recommendSection?.href}
-      className="block w-full overflow-hidden rounded-lg bg-[#F4F6FA] p-4 dark:bg-[#172334]"
+      className="block w-full overflow-hidden rounded-lg bg-[#F4F6FA] p-4 dark:bg-[#172334] lg:mt-12"
     >
       <Image
         alt=""
         baseUrl={false}
         src={blogSidebar?.recommendSection?.imageUrl}
-        className="h-[200px] w-full overflow-hidden rounded-xl lg:h-[270px]"
+        className="h-[200px] w-full overflow-hidden rounded-xl lg:h-[360px] lg:w-[360px]"
         classImg="object-fill"
       />
       <p className="mt-4 font-medium text-[#33435A] dark:text-[#8E98A8]">

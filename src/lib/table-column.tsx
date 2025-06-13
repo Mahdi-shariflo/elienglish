@@ -513,7 +513,7 @@ export const initialDataTagProduct = ({ onDelete, onEdit, onView }: Props) => [
     render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
   },
   {
-    title: <HeaderCell title="لینک" />,
+    title: <HeaderCell title="توضیحات" />,
     dataIndex: 'description',
     key: 'description',
     render: (value: string) => (

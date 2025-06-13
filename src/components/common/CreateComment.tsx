@@ -7,7 +7,6 @@ import Textarea from '../common/form/Textarea';
 import Input from '../common/form/Input';
 import { useFormik } from 'formik';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Product } from '@/types/home';
 import { Comment, ThumbnailImage } from '@/types';
 import { BASEURL } from '@/lib/variable';
 import Select from '../common/Select';
@@ -24,6 +23,7 @@ type Props = {
   };
   showCommentRate?: boolean;
   modal: {
+    parent: string;
     admin?: boolean;
     open: boolean;
     info: Comment | null;
@@ -31,6 +31,7 @@ type Props = {
   setModal: React.Dispatch<
     React.SetStateAction<{
       open: boolean;
+      parent: string;
       admin?: boolean;
       info: Comment | null;
     }>
@@ -38,7 +39,6 @@ type Props = {
 };
 const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => {
   const isMobile = useMedia('(max-width: 480px)', false);
-
   const [oepnNeedLogin, setNeedOpenLogin] = useState(false);
   const {
     mutate: mutateUpdate,
@@ -46,11 +46,10 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
     isSuccess: isSuccessUpdate,
   } = useUpdateCommentByIdAdmin();
   const user = useSession();
-  const { data } = useGetCommentById(modal.info?._id);
+  const { data } = useGetCommentById(modal.info?._id, modal.admin);
   const comments: { rate: string }[] = data?.data?.data?.comments;
   const [rate, setRate] = useState(0);
-
-  const onClose = () => setModal({ open: false, info: null });
+  const onClose = () => setModal({ open: false, info: null, parent: '' });
   const { mutate, isPending, isSuccess } = useAddComment();
   const formik = useFormik({
     initialValues: {
@@ -69,15 +68,11 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
       const mainData = {
         ...values,
         targetType: 'blog',
-        targetId: modal.info?._id,
+        targetId: modal.info?.targetId,
+        ...(modal.parent ? { parent: modal.parent } : null),
         // @ts-expect-error error
         published: values.published === 'false' ? false : true,
       };
-      // if (modal.info && !modal.admin) {
-      //   formdata.append('parent', modal.info._id);
-      // } else {
-      //   formdata.append('location', product?._id!);
-      // }
 
       if (modal.admin) {
         mutateUpdate({ data: mainData, id: modal?.info?._id! });
@@ -112,7 +107,7 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
     if (!user?.accessToken) {
       return setNeedOpenLogin(true);
     }
-    setModal({ info: null, open: true });
+    setModal({ info: null, open: true, parent: '' });
   };
 
   useEffect(() => {
@@ -134,6 +129,7 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
       onClose();
     }
   }, [isSuccessUpdate]);
+
   return (
     <div>
       {showCommentRate && (
@@ -177,8 +173,8 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
             <div className="shadow-comment flex items-center gap-2 rounded-lg border border-gray-100 p-3">
               <Image
                 className="rounded-lg border border-[#E4E7E9]"
-                width={64}
-                height={64}
+                width={100}
+                height={100}
                 src={`${BASEURL}/${product?.thumbnailImage?.url}`}
                 alt=""
               />

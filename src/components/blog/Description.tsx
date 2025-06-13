@@ -39,7 +39,7 @@ const Description = ({ blog }: { blog: Blog }) => {
     <div>
       <div className="my-10">
         {headings.length === 0 ? null : (
-          <div className="md:w-[50%]mt-14 mx-auto rounded-lg bg-[#F5F6FA] p-4">
+          <div className="md:w-[50%]mt-14 mx-auto rounded-lg bg-[#F5F6FA] p-4 dark:bg-[#070118]">
             <p className="text-right font-medium text-[14px] text-[#0C0C0C]">
               دسترسی سریع به مطالب
             </p>
@@ -59,7 +59,7 @@ const Description = ({ blog }: { blog: Blog }) => {
         )}
       </div>
       <div
-        className="container_des_category font-regular leading-8 text-[#33435A]"
+        className="container_des_category font-regular leading-8 text-[#33435A] dark:text-[#8E98A8]"
         dangerouslySetInnerHTML={{ __html: cleanDescription }}
       ></div>
     </div>

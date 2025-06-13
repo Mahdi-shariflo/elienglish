@@ -5,6 +5,7 @@ import DownloadFiles from '@/components/blog/DownloadFiles';
 import InfoBlog from '@/components/blog/InfoBlog';
 import MediaPreview from '@/components/blog/MediaPreview';
 import RecommendSection from '@/components/blog/RecommendSection';
+import Share from '@/components/blog/Share';
 import ShareAndCopy from '@/components/blog/ShareAndCopy';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Title from '@/components/common/Title';
@@ -23,9 +24,12 @@ const Page = async ({ params }: Props) => {
   return (
     <div className="bg-white pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
-        <Breadcrumbs page="/blogs/category" breadcrumbs={blog?.breadcrumbPath} />
+        <Breadcrumbs
+          page="/blogs/category"
+          breadcrumbs={[...blog?.breadcrumbPath, { id: '333', title: blog.title, url: '#' }]}
+        />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
+          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
             <p className="font-medium text-main">دیکشنری الی انگلیش</p>
             <MediaPreview blog={blog} />
             {/* title */}
@@ -35,7 +39,8 @@ const Page = async ({ params }: Props) => {
             <ShareAndCopy />
             <Comments blog={blog} />
           </div>
-          <div className="sticky top-32 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
+          <div className="sticky top-24 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
+            <Share />
             <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">
               <Title title={blogSidebar?.section2?.title} />
