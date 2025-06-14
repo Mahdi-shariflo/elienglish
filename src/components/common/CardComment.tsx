@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Button from '../common/Button';
-import CreateComment from '../common/CreateComment';
-import { Blog, Comment } from '@/types';
+import Button from './Button';
+import CreateComment from './CreateComment';
+import { Comment, CommentInfo } from '@/types';
 
-const CardComment = ({ comment, blog }: { blog: Blog; comment?: Comment }) => {
+const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comment?: Comment }) => {
   const [modal, setModal] = useState<{
     open: boolean;
     info: null | Comment;
@@ -15,7 +15,6 @@ const CardComment = ({ comment, blog }: { blog: Blog; comment?: Comment }) => {
     parent: '',
     admin: false,
   });
-  console.log(comment?.createdAt, 'comment?.createdAtcomment?.createdAtcomment?.createdAt');
   return (
     <>
       <div>
@@ -162,7 +161,11 @@ const CardComment = ({ comment, blog }: { blog: Blog; comment?: Comment }) => {
       </div>
       {modal.open && (
         <CreateComment
-          product={{ thumbnailImage: blog?.thumbnailImage, title: blog?.title }}
+          product={{
+            thumbnailImage: commentInfo?.thumbnailImage,
+            title: commentInfo?.title,
+            targetType: commentInfo.targetType,
+          }}
           modal={modal}
           setModal={setModal}
         />

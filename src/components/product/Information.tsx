@@ -85,7 +85,7 @@ const Information = ({ product }: { product: Product }) => {
         {findainProperties?.length >= 1 && (
           <div className="border-b border-t border-[#E4E7E9] py-4 lg:mt-[16px] lg:border-0 lg:py-0">
             <p className="font-bold text-[14px] text-[#172334]">ویژگی‌های اصلی</p>
-            <ul className="mt-[14px] space-y-2">
+            <ul className="mt-[14px] space-y-4">
               {findainProperties.slice(0, 4).map((attribute, idx) => {
                 return (
                   <li key={idx} className="flex items-start gap-5">

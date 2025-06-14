@@ -1,5 +1,5 @@
 import CardBlog2 from '@/components/blog/CardBlog2';
-import Comments from '@/components/blog/Comments';
+import Comments from '@/components/common/Comments';
 import Description from '@/components/blog/Description';
 import DownloadFiles from '@/components/blog/DownloadFiles';
 import InfoBlog from '@/components/blog/InfoBlog';
@@ -37,7 +37,12 @@ const Page = async ({ params }: Props) => {
             <Description blog={blog} />
             <DownloadFiles blog={blog} />
             <ShareAndCopy />
-            <Comments blog={blog} />
+            <Comments
+              commentInfo={{
+                ...blog,
+                targetType: 'blog',
+              }}
+            />
           </div>
           <div className="sticky top-24 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
             <Share />

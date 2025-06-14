@@ -10,6 +10,7 @@ import AddCartSingleProduct from './AddCartSingleProduct';
 import useProductStore from '@/store/product-store';
 import { useMedia } from 'react-use';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 type Props = {
   breadcrumb: {
     Icon?: React.ElementType;
@@ -55,11 +56,11 @@ const ProductPage = ({ children, product, breadcrumb }: Props) => {
             <Gallery product={product} />
             <Information product={product} />
           </div>
+          <div className="mt-10">
+            <MoreInformationProduct product={product} />
+          </div>
         </div>
         {children}
-      </div>
-      <div className="lg:container_page">
-        <MoreInformationProduct product={product} />
       </div>
     </div>
   );

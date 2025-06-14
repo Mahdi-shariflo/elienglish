@@ -260,3 +260,10 @@ export type Blog = {
   createdAt: string; // یا Date
   updatedAt: string; // یا Date
 };
+
+export type CommentInfo = {
+  _id: string;
+  thumbnailImage: ThumbnailImage;
+  title: string;
+  targetType: 'blog' | 'product';
+};

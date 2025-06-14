@@ -61,6 +61,11 @@ export type Category = {
 };
 
 export type Product = {
+  tags: {
+    title: string;
+    type: string;
+    url: string;
+  }[];
   gtin: number;
   urlVar?: string;
   productId?: string;
@@ -91,29 +96,7 @@ export type Product = {
     property: string;
     _id: string;
   }[];
-  propertyLookup: {
-    archive: false;
-    author: string;
-    displayName: string;
-    displayType: string;
-    title: string;
-    url: string;
-    _id: string;
-  }[];
-  attributeLookup: {
-    color: string;
-    image: {
-      url: string;
-    };
-    createdAt: string;
-    keyWords: [];
-    property: string;
-    title: string;
-    updatedAt: string;
-    url: string;
-    __v: 0;
-    _id: string;
-  }[];
+
   enTitle: string;
   video: {
     url: string;
@@ -129,10 +112,7 @@ export type Product = {
   title: string;
   shortTitle: string;
   url: string;
-  thumbnailImage: {
-    url: string;
-    altpic: string;
-  };
+  thumbnailImage: ThumbnailImage;
   price: number;
   discountPrice: number;
   discountTime: string;

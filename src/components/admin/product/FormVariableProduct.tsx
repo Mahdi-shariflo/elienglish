@@ -6,6 +6,8 @@ import Input from '@/components/common/form/Input';
 import Datepicker from '@/components/common/Datepicker';
 import Checkbox from '@/components/common/form/Checkbox';
 import { BASEURL } from '@/lib/variable';
+import Select from '@/components/common/Select';
+import { StatusOptionsAdmin } from '@/lib/data';
 type Props = {
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
@@ -48,33 +50,26 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
         </Media>
 
         <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-5">
-          <Input
+          <Select
+            label="نوع محصول"
+            options={[
+              { label: 'فیزیکی', value: 'physical' },
+              { label: 'دیجیتال', value: 'digital' },
+            ]}
+            nameLabel="label"
+            nameValue="value"
+            name="type"
             formik={formik}
-            type="tel"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'gtin'}
-            name={`${baseName}.gtin`}
-            dir="rtl"
-            value={formik.values?.children?.[idx].gtin}
           />
-          <Input
+          <Select
+            label="وضعیت انتشار "
+            options={StatusOptionsAdmin}
+            nameLabel="label"
+            nameValue="value"
+            name="published"
             formik={formik}
-            type="tel"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'wooid'}
-            name={`${baseName}.wooid`}
-            dir="rtl"
-            value={formik.values?.children?.[idx].wooid}
           />
-          <Input
-            formik={formik}
-            type="tel"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'skuId'}
-            name={`${baseName}.skuId`}
-            dir="rtl"
-            value={formik.values?.children?.[idx].skuId}
-          />
+
           <Input
             formik={formik}
             price
@@ -87,8 +82,8 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             formik={formik}
             price
             classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'قیمت ویژه (تومان)'}
-            name={`${baseName}.discountPrice`}
+            label={'قیمت  پیشنهادی'}
+            name={`${baseName}.suggestedDiscount`}
             value={formik.values?.children?.[idx].discountPrice}
           />
           <Input
@@ -100,46 +95,6 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             dir="rtl"
             value={formik.values?.children?.[idx].count}
           />
-          <Input
-            formik={formik}
-            price
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'حداقل مقدار سبد خرید (تومان)'}
-            name={`${baseName}.minCart`}
-            value={formik.values?.children?.[idx].minCart}
-          />
-          <Datepicker
-            minDate={new Date()}
-            calendarPosition="top"
-            timepicker
-            inputClass="!h-[45px]"
-            formik={formik}
-            name={`${baseName}.discountTime`}
-            label="زمان بندی فروش"
-            className="col-span-2"
-            value={formik.values.children[idx].discountTime}
-          />
-
-          <div className="col-span-2 flex w-full items-center justify-between">
-            <Checkbox
-              isSelected={formik.values.children[idx].singleSale}
-              formik={formik}
-              name={`${baseName}.singleSale`}
-              label="فروش تکی دارد؟"
-            />
-            <Checkbox
-              formik={formik}
-              name={`${baseName}.towWorkingDays`}
-              label="ارسال تا دو روز کاری دیگر؟"
-              isSelected={formik.values.children[idx].towWorkingDays}
-            />
-            <Checkbox
-              isSelected={formik.values.children[idx].freedelivery}
-              formik={formik}
-              name={`${baseName}.freedelivery`}
-              label="این محصول شامل پلن هدیه میشود؟"
-            />
-          </div>
         </div>
       </div>
     </BaseDialog>

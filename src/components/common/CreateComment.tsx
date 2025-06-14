@@ -20,6 +20,7 @@ type Props = {
   product?: {
     thumbnailImage?: ThumbnailImage;
     title?: string;
+    targetType: 'blog' | 'product';
   };
   showCommentRate?: boolean;
   modal: {
@@ -64,10 +65,9 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
           title: 'لطفا امتیاز خود را درباره این محصول انتخاب کنید.',
           color: 'danger',
         });
-      const formdata = new FormData();
       const mainData = {
         ...values,
-        targetType: 'blog',
+        targetType: product?.targetType,
         targetId: modal.info?.targetId,
         ...(modal.parent ? { parent: modal.parent } : null),
         // @ts-expect-error error
@@ -77,7 +77,7 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
       if (modal.admin) {
         mutateUpdate({ data: mainData, id: modal?.info?._id! });
       } else {
-        mutate({ data: formdata });
+        mutate({ data: mainData });
       }
     },
   });

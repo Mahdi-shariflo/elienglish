@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react';
 import Input from '../common/form/Input';
 import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
-import CardComment from './CardComment';
 import { useSession } from '@/lib/auth/useSession';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Blog, Comment } from '@/types';
+import { Blog, Comment, CommentInfo } from '@/types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import StarRating from '../common/StarRateing';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
-const Comments = ({ blog }: { blog: Blog }) => {
+import CardComment from './CardComment';
+const Comments = ({ commentInfo }: { commentInfo: CommentInfo }) => {
   const [open, setOpen] = useState(false);
   const user = useSession();
-  const { data } = useGetCommentById(blog._id!);
+  const { data } = useGetCommentById(commentInfo._id!);
   const { isSuccess, mutate, isPending } = useAddComment();
   const [star, setStar] = useState(0);
   const formik = useFormik({
@@ -35,13 +35,11 @@ const Comments = ({ blog }: { blog: Blog }) => {
         ...values,
         rating: star,
         targetType: 'blog',
-        targetId: blog._id,
+        targetId: commentInfo._id,
       };
       mutate({ data });
     },
   });
-
-  console.log(blog);
 
   useEffect(() => {
     if (isSuccess) {
@@ -49,7 +47,6 @@ const Comments = ({ blog }: { blog: Blog }) => {
       setStar(0);
     }
   }, [isSuccess]);
-  console.log(data);
   return (
     <>
       <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]">
@@ -94,7 +91,7 @@ const Comments = ({ blog }: { blog: Blog }) => {
         <div className="mt-10 space-y-5">
           {/* data?.data?.data?.comments */}
           {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-            <CardComment blog={blog} comment={comment} key={idx} />
+            <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
           ))}
         </div>
         <ModalNeedLoginUser open={open} setOpen={setOpen} />

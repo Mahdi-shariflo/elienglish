@@ -13,7 +13,7 @@ const AddCartSingleProduct = ({ className, product }: Props) => {
   return (
     <>
       <div
-        className={`drop_shadow_cart sticky bottom-0 left-0 z-10 flex w-full flex-col lg:sticky lg:top-44 lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 ${className}`}
+        className={`drop_shadow_cart bottom-0 left-0 z-10 flex w-full flex-col lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 ${className}`}
       >
         <div className="border-t border-[#F4F6FA] bg-white p-2 lg:rounded-lg lg:border">
           <div className="mt-2 flex w-full flex-row-reverse items-center justify-between px-[20px] lg:mt-5 lg:flex-col lg:px-0">

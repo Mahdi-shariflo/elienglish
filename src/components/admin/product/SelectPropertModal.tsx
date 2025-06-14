@@ -15,13 +15,14 @@ type Props = {
 const SelectPropertyModal = ({ open, setOpen, formik }: Props) => {
   const [properties, setProperties] = useState<
     { property: string; attribiute: string; main: boolean }[]
-  >([]);
+  >(formik?.values?.properties);
   const form = useFormik({
     initialValues: {
       property: '',
       attribiute: '',
       main: false,
     },
+    enableReinitialize: true,
     validationSchema: Yup.object({
       property: Yup.string().required('نام اجباری است'),
       attribiute: Yup.string().required('مقدار اجباری است'),

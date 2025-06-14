@@ -21,7 +21,6 @@ import SeoOptions from '@/components/admin/common/SeoOptions';
 import Video from 'react-player';
 import { AudioPlayer } from '@/components/common/AudioPlayer';
 import DownloadFile from '@/components/admin/blog/DownloadFile';
-import { ThumbnailImage } from '@/types';
 import { Delete_icon } from '@/components/common/icon';
 interface InitialValues {
   tags: string[];

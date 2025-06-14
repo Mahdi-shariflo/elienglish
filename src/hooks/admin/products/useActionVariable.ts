@@ -8,8 +8,8 @@ export const useActionVariable = () => {
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id?: string }) =>
       id
-        ? await safeRequest({ url: `/admin/products/edit-variable/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: '/admin/products/add-variable', method: 'POST', data }),
+        ? await safeRequest({ url: `/product/admin/additive/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: '/product/admin/additive', method: 'POST', data }),
     onSuccess: async () => {
       addToast({
         title: 'با موفقیت انجام شد',

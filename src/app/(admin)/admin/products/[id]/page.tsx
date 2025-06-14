@@ -19,7 +19,6 @@ import { converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
 import { StatusOptionsAdmin } from '@/lib/data';
 import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
 import { BASEURL } from '@/lib/variable';
-import { FormValuesCreteProduct } from '@/types';
 import { Chip, Tab, Tabs } from '@heroui/react';
 import { useFormik } from 'formik';
 import { useParams } from 'next/navigation';
@@ -100,8 +99,11 @@ const Page = () => {
         ...values,
         discountTime: converDateGre(values.discountTime),
         published: values.published === 'false' ? false : true,
+        // @ts-expect-error error
         thumbnailImage: values?.thumbnailImage?._id!,
+        // @ts-expect-error error
         galleryImage: values?.galleryImage?.map((item) => item._id),
+        // @ts-expect-error error
         tags: values?.tags.map((item) => item._id),
         category: values?.category,
         categories: values?.categories,
@@ -115,26 +117,26 @@ const Page = () => {
       // add and update product
       mutate({ data: removeEmptyFields(data), id: id! });
       // add and update cariable product
-      // if (values.children.length >= 1) {
-      //   values?.children?.map((varible: any) =>
-      //     mutateVariable({
-      //       data: {
-      //         ...varible,
-      //         parent: id!,
-      //         thumbnailImage: varible?.thumbnailImage?._id,
-      //         title: `${formik.values.title} (${varible.title})`,
-      //         url: generateRandomString(),
-      //         urlVar: `${formik.values?.url}`,
-      //         price: +removeNumNumeric(varible.price),
-      //         discountPrice: +removeNumNumeric(varible.discountPrice),
-      //         minCart: +removeNumNumeric(varible.minCart),
-      //         count: Number(varible.count),
-      //         ...(varible.wooid ? { wooid: Number(varible.wooid) } : null),
-      //       },
-      //       id: varible._id!,
-      //     })
-      //   );
-      // }
+      if (values.children.length >= 1) {
+        values?.children?.map((varible: any) =>
+          mutateVariable({
+            data: {
+              ...varible,
+              parent: id!,
+              thumbnailImage: varible?.thumbnailImage?._id,
+              title: `${formik.values.title} (${varible.title})`,
+              url: generateRandomString(),
+              urlVar: `${formik.values?.url}`,
+              price: +removeNumNumeric(varible.price),
+              suggestedDiscount: +removeNumNumeric(varible.suggestedDiscount),
+              minCart: +removeNumNumeric(varible.minCart),
+              count: Number(varible.count),
+              published: varible.published === 'false' ? false : true,
+            },
+            id: varible._id!,
+          })
+        );
+      }
     },
   });
   const product = singleProduct?.data?.data;
@@ -142,6 +144,7 @@ const Page = () => {
   useEffect(() => {
     if (isSuccess) {
       if (product) {
+        // @ts-expect-error error
         formik.setValues(mapProductToFormValues(product));
       }
     }
@@ -165,8 +168,6 @@ const Page = () => {
       ...(formik.values.children || []),
     ]);
   };
-
-  const filterVariableProduct = formik.values.properties.filter((item) => item.isVariable === true);
   return (
     <IsClient>
       <div>
@@ -246,6 +247,7 @@ const Page = () => {
                       variant="shadow"
                       className="relative cursor-pointer"
                     >
+                      {/* @ts-expect-error ERROR */}
                       {item.property}: {item.attribiute}
                     </Chip>
                   ))}
@@ -278,29 +280,9 @@ const Page = () => {
                 </Tab>
                 <Tab key={'2'} title={<p>محصول متغیر</p>}>
                   <div>
-                    {filterVariableProduct.length >= 1 ? (
+                    {
                       <>
                         <div className="flex items-center justify-between border-b pb-4">
-                          <div className="flex items-center gap-1 whitespace-nowrap font-medium">
-                            محصول{' '}
-                            <span className="whitespace-nowrap text-main underline">
-                              {formik.values.title}{' '}
-                            </span>
-                            با ویژگی های{' '}
-                            <span className="flex w-full items-center gap-1">
-                              {formik.values.properties.map((item, idx) => {
-                                if (!item.isVariable) return null;
-                                return (
-                                  <span
-                                    className="inline-block font-light text-main underline"
-                                    key={idx}
-                                  >
-                                    {item.title},
-                                  </span>
-                                );
-                              })}
-                            </span>
-                          </div>
                           <Button
                             onClick={handleAddVariableProduct}
                             className="w-[120px] bg-orange-400 text-white"
@@ -309,15 +291,18 @@ const Page = () => {
                           </Button>
                         </div>
 
-                        {formik.values?.children?.map((product, idx) => (
-                          <SelectAttVariableProduct
-                            product={product}
-                            idx={idx}
-                            key={idx}
-                            // @ts-expect-error error
-                            formik={formik}
-                          />
-                        ))}
+                        {formik.values?.children?.map((product, idx) => {
+                          if (!product) return null;
+                          return (
+                            <SelectAttVariableProduct
+                              product={product}
+                              idx={idx}
+                              key={idx}
+                              // @ts-expect-error error
+                              formik={formik}
+                            />
+                          );
+                        })}
                         <Button
                           onClick={formik.handleSubmit}
                           isLoading={isPending || isPendingVariable}
@@ -326,11 +311,7 @@ const Page = () => {
                           ثبت محصول متغیر
                         </Button>
                       </>
-                    ) : (
-                      <p className="font-medium text-[14px]">
-                        لطفا از ویژگی های محصول، هر کدام که جز متغیر هستن مشخص کنید و سپس ادامه دهید
-                      </p>
-                    )}
+                    }
                   </div>
                 </Tab>
               </Tabs>
@@ -346,6 +327,7 @@ const Page = () => {
                   {typeof formik.values.thumbnailImage === 'object' ? (
                     <img
                       className="h-full w-full object-contain"
+                      // @ts-expect-error error
                       src={`${BASEURL}/${formik.values?.thumbnailImage?.url}`}
                       alt="thumbnail"
                     />
@@ -395,6 +377,7 @@ const Page = () => {
                         <img
                           key={idx}
                           className="h-[90px] w-[90px] rounded-xl border object-contain"
+                          // @ts-expect-error error
                           src={`${BASEURL}/${item?.url}`}
                           alt="thumbnail"
                         />
