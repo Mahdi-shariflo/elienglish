@@ -12,6 +12,7 @@ const VideoPlayer = ({ url, poster }: { url: string; poster: string }) => {
       className="relative aspect-video h-full w-full overflow-hidden rounded-xl bg-black"
       onContextMenu={(e) => e.preventDefault()} // غیرفعال کردن کلیک راست
     >
+      {/* // <Video poster={poster} src={`${BASEURL}/${url}`} /> */}
       <ReactPlayer
         url={`${BASEURL}/${url}`}
         playing={play}

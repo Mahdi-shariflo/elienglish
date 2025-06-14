@@ -9,8 +9,8 @@ export const useActionProductAdmin = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id !== 'new'
-        ? await safeRequest({ url: `/admin/products/edit/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/products/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/product/admin/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/product/admin`, method: 'POST', data });
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['products-admin'] });

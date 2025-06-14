@@ -8,6 +8,6 @@ export const useGetProductTagById = ({ id = '' }: Props) => {
   return useQuery({
     queryKey: ['product-tag-id-admin', id],
     enabled: Boolean(id),
-    queryFn: async () => await safeRequest({ url: `/admin/product-tag/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/product/admin/tag/${id}` }),
   });
 };

@@ -23,7 +23,7 @@ export const useGetProductsAdmin = ({
     queryKey: ['products-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/products/get-all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&id=${id}&${available ? `available=${available}&` : null}${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/product/admin?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&id=${id}&${available ? `available=${available}&` : null}${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

@@ -10,10 +10,11 @@ import { getRobotsMeta } from './common';
 
 export const getProduct = async (id: string) => {
   try {
-    const data = await safeRequest({ url: `/user/product/${id}`, method: 'GET' });
+    const data = await safeRequest({ url: `/product/detail/${id}`, method: 'GET' });
+    console.log(data?.data?.data?.product, 'jhfkdsfsfsfsfsfsf');
     return {
-      breadcrumb: data?.data?.data?.breadcrumb,
-      product: data?.data?.data?.product[0],
+      breadcrumb: data?.data?.data?.product?.breadcrumb,
+      product: data?.data?.data?.product,
     };
   } catch (error) {
     return {
@@ -82,7 +83,7 @@ export const jsonLdProduct = ({ breadcrumb, product, comments }: Props) => {
     mainProperty: product?.properties,
   });
   const findBrand: any = property?.find((item) => item?.title === 'برند');
-  const totalRate = comments?.reduce((acc, comment) => acc + Number(comment.rate), 0);
+  const totalRate = comments?.reduce((acc, comment) => acc + Number(comment.rating), 0);
   // Divide by the length of the array to get the average
   const averageRate = totalRate / comments?.length;
   return {
@@ -189,11 +190,11 @@ export const jsonLdProduct = ({ breadcrumb, product, comments }: Props) => {
           return {
             '@type': 'Review',
             '@id': `${BASEURL_SITE}/product/${product.url}/#li-comment-${comment._id}`,
-            description: comment.comment,
+            description: comment.content,
             datePublished: comment.createdAt,
             reviewRating: {
               '@type': 'Rating',
-              ratingValue: comment.rate,
+              ratingValue: comment.rating,
               bestRating: '5',
               worstRating: '1',
             },

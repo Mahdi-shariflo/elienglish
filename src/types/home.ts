@@ -87,7 +87,7 @@ export type Product = {
   updatedAt?: string;
   properties: {
     attribiute: string[];
-    mainProperty: boolean;
+    main: boolean;
     property: string;
     _id: string;
   }[];

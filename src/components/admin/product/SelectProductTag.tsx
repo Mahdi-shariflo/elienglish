@@ -21,7 +21,7 @@ export default function SelectProductTag({ values, onChange, title, className }:
   });
   useEffect(() => {
     if (isSuccess) {
-      const productTags = data?.data?.data?.productTags;
+      const productTags = data?.data?.data?.productTag;
       setOptions([...options, ...(Array.isArray(productTags) ? productTags : [])]);
     }
   }, [isSuccess]);

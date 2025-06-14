@@ -1,7 +1,6 @@
 import { useGetCategoryProductAdmin } from '@/hooks/admin/products/useGetCategoryProductAdmin';
 import { Category } from '@/types/home';
 import { Checkbox, Spinner } from '@heroui/react';
-import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
@@ -13,7 +12,7 @@ type Props = {
 
 const SelectCategoryProduct = ({ onSelect, selected, multiple, title }: Props) => {
   const { isLoading, data } = useGetCategoryProductAdmin({});
-  const productCategory: Category[] = data?.data?.data?.categories || [];
+  const productCategory: Category[] = data?.data?.data || [];
   const [selectedCategories, setSelectedCategories] = useState<string[]>(selected);
 
   // تابع برای مدیریت تغییر وضعیت دسته‌بندی‌ها

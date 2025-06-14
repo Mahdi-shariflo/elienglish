@@ -233,26 +233,6 @@ export const initialDataProducts = ({ onDelete, onSelect, selected, onEdit }: Pr
     ),
   },
   {
-    title: <HeaderCell align="center" title="شناسه محصول" />,
-    dataIndex: 'nid',
-    key: 'nid',
-    render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
-  },
-  {
-    title: <HeaderCell align="center" title="شناسه ووکامرس" />,
-    dataIndex: 'wooid',
-    key: 'wooid',
-    render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
-  },
-  {
-    title: <HeaderCell align="center" title="نو ایندکس" />,
-    dataIndex: 'noindex',
-    key: 'noindex',
-    render: (value: boolean) => (
-      <p className="text-center text-xs text-gray-800">{value === true ? 'بله' : '-'}</p>
-    ),
-  },
-  {
     title: <HeaderCell align="center" title="عنوان" />,
     dataIndex: 'title',
     key: 'title',

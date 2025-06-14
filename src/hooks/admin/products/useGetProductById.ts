@@ -8,7 +8,7 @@ export const useGetProductById = () => {
   return useQuery({
     queryKey: ['single-product-admin', id],
     enabled: id === 'new' ? false : true,
-    queryFn: async () => await safeRequest({ url: `/admin/products/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/product/admin/${id}` }),
     gcTime: 0,
     staleTime: 0,
     refetchOnMount: true,

@@ -86,7 +86,12 @@ export function createURL(inputText: string, baseUrl?: string): string {
   if (!inputText) return '';
 
   const trimmedText = inputText.trim();
-  const words = trimmedText.split(/\s+/); // شکستن بر اساس یک یا چند فاصله
+
+  // حذف تمام کاراکترهای غیر از حروف، اعداد، و فاصله‌ها (فارسی و انگلیسی)
+  const cleanedText = trimmedText.replace(/[^a-zA-Z0-9آ-ی\s]/g, '');
+
+  // تبدیل فاصله‌ها به خط تیره
+  const words = cleanedText.split(/\s+/);
   const urlPath = words.join('-');
 
   return baseUrl ? `${baseUrl}${urlPath}` : urlPath;

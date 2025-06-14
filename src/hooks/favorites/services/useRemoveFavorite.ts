@@ -1,6 +1,6 @@
-import { apiFavorite } from '@/actions/apis/favorites';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addToast } from '@heroui/react';
+import { apiFavorite } from '@/app/actions/apis/favorites';
 
 export function useRemoveFavorite() {
   const queryClient = useQueryClient();

@@ -17,32 +17,24 @@ import { useActionVariable } from '@/hooks/admin/products/useActionVariable';
 import { useGetProductById } from '@/hooks/admin/products/useGetProductById';
 import { converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
 import { StatusOptionsAdmin } from '@/lib/data';
-import {
-  createURL,
-  generateRandomString,
-  mergePropertiesAndAttributes,
-  removeEmptyFields,
-} from '@/lib/fun';
+import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
 import { BASEURL } from '@/lib/variable';
 import { FormValuesCreteProduct } from '@/types';
 import { Chip, Tab, Tabs } from '@heroui/react';
 import { useFormik } from 'formik';
-import Video from 'next-video';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { CgClose } from 'react-icons/cg';
-const initialValues: FormValuesCreteProduct = {
+const initialValues = {
   title: '',
-  shortTitle: '',
+  type: '',
   canonicalurl: '',
   url: '',
   enTitle: '',
   description: '',
   thumbnailImage: undefined,
-  video: undefined,
   galleryImage: [],
   tags: [],
-  gtin: '',
   properties: [],
   variables: [],
   category: [],
@@ -50,15 +42,9 @@ const initialValues: FormValuesCreteProduct = {
   price: '',
   discountPrice: '',
   discountTime: '',
-  skuId: '',
   count: 1,
-  freedelivery: false,
-  towWorkingDays: false,
-  towBuyThree: false,
   published: 'false',
   rozeBox: '',
-  minCart: '',
-  singleSale: false,
   metaTitle: '',
   metaDescription: '',
   keyWords: '',
@@ -67,36 +53,26 @@ const initialValues: FormValuesCreteProduct = {
   redirecturltype: '',
   redirecturl: '',
   children: [],
-  wooid: '',
 };
-const mapProductToFormValues = (product: any): FormValuesCreteProduct => ({
+const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
-  shortTitle: product.shortTitle || '',
+  type: product.type || '',
   canonicalurl: product.canonicalurl || '',
   url: product.url || '',
   enTitle: product.enTitle || '',
   description: product.description || '',
   thumbnailImage: product.thumbnailImage || undefined,
-  video: product.video || undefined,
   galleryImage: product.galleryImage || [],
   tags: product.tags || [],
-  properties: mergePropertiesAndAttributes(product?.properties),
+  properties: product?.properties,
   variables: product.variables || [],
   category: product?.category?._id ? [product.category._id] : [],
   categories: product.categories || [],
   price: product.price?.toString() || '',
   discountPrice: product.discountPrice?.toString() || '',
   discountTime: converDatePer(product.discountTime) || '',
-  skuId: product.skuId || '',
-  gtin: product.gtin || '',
   count: product.count || 1,
-  freedelivery: product.freedelivery || false,
-  towWorkingDays: product.towWorkingDays || false,
-  towBuyThree: product.towBuyThree || false,
   published: product.published ? 'true' : 'false',
-  rozeBox: product.rozeBox || '',
-  minCart: product.minCart?.toString() || '',
-  singleSale: product.singleSale || false,
   metaTitle: product.metaTitle || '',
   metaDescription: product.metaDescription || '',
   keyWords: product.keyWords || '',
@@ -105,7 +81,6 @@ const mapProductToFormValues = (product: any): FormValuesCreteProduct => ({
   redirecturltype: product.redirecturltype || '',
   redirecturl: product.redirecturl || '',
   children: product?.children,
-  wooid: product?.wooid,
 });
 
 const Page = () => {
@@ -126,60 +101,43 @@ const Page = () => {
         discountTime: converDateGre(values.discountTime),
         published: values.published === 'false' ? false : true,
         thumbnailImage: values?.thumbnailImage?._id!,
-        video: values?.video?._id!,
-        galleryImage: values?.galleryImage.map((gallery) => gallery._id).join(','),
-        tags: values?.tags?.map((tag) => tag._id).join(','),
-        category: values?.category?.join(','),
-        categories: values?.categories?.join(','),
+        galleryImage: values?.galleryImage?.map((item) => item._id),
+        tags: values?.tags.map((item) => item._id),
+        category: values?.category,
+        categories: values?.categories,
         price: +removeNumNumeric(values.price),
         discountPrice: +removeNumNumeric(values.discountPrice),
-        minCart: +removeNumNumeric(values.minCart),
         count: Number(values.count),
-        ...(values.wooid ? { wooid: Number(values.wooid) } : null),
         // @ts-expect-error error
-        description: editorRef.current.getContent(),
-        isVariable: values?.children?.length >= 1 ? true : false,
-        properties: values?.properties?.map((item) => {
-          return {
-            property: item?._id,
-            isVariable: item.isVariable,
-            mainProperty: item?.mainProperty ? true : false,
-            ...(Array.isArray(item?.attribiute)
-              ? {
-                  attribiute: item?.attribiute?.map((att: { _id: string }) => att._id),
-                }
-              : { attribiute: [] }),
-          };
-        }),
+        description: editorRef?.current?.getContent(),
+        properties: values?.properties,
       };
       // add and update product
       mutate({ data: removeEmptyFields(data), id: id! });
       // add and update cariable product
-      if (values.children.length >= 1) {
-        values?.children?.map((varible: any) =>
-          mutateVariable({
-            data: {
-              ...varible,
-              parent: id!,
-              thumbnailImage: varible?.thumbnailImage?._id,
-              title: `${formik.values.title} (${varible.title})`,
-              url: generateRandomString(),
-              urlVar: `${formik.values?.url}`,
-              price: +removeNumNumeric(varible.price),
-              discountPrice: +removeNumNumeric(varible.discountPrice),
-              minCart: +removeNumNumeric(varible.minCart),
-              count: Number(varible.count),
-              ...(varible.wooid ? { wooid: Number(varible.wooid) } : null),
-            },
-            id: varible._id!,
-          })
-        );
-      }
+      // if (values.children.length >= 1) {
+      //   values?.children?.map((varible: any) =>
+      //     mutateVariable({
+      //       data: {
+      //         ...varible,
+      //         parent: id!,
+      //         thumbnailImage: varible?.thumbnailImage?._id,
+      //         title: `${formik.values.title} (${varible.title})`,
+      //         url: generateRandomString(),
+      //         urlVar: `${formik.values?.url}`,
+      //         price: +removeNumNumeric(varible.price),
+      //         discountPrice: +removeNumNumeric(varible.discountPrice),
+      //         minCart: +removeNumNumeric(varible.minCart),
+      //         count: Number(varible.count),
+      //         ...(varible.wooid ? { wooid: Number(varible.wooid) } : null),
+      //       },
+      //       id: varible._id!,
+      //     })
+      //   );
+      // }
     },
   });
-  const product = Array.isArray(singleProduct?.data?.data?.product)
-    ? singleProduct?.data?.data?.product?.[0]
-    : null;
+  const product = singleProduct?.data?.data;
 
   useEffect(() => {
     if (isSuccess) {
@@ -238,20 +196,23 @@ const Page = () => {
                 className="lg:col-span-2"
                 formik={formik}
               />
-              <Input
-                isRequired
-                label="عنوان کوتاه"
-                classNameInput="!h-[48px] bg-[#f5f6f6]"
-                name="shortTitle"
-                className="lg:col-span-2"
-                formik={formik}
-              />
               <Select
                 label="وضعیت انتشار "
                 options={StatusOptionsAdmin}
                 nameLabel="label"
                 nameValue="value"
                 name="published"
+                formik={formik}
+              />
+              <Select
+                label="نوع محصول"
+                options={[
+                  { label: 'فیزیکی', value: 'physical' },
+                  { label: 'دیجیتال', value: 'digital' },
+                ]}
+                nameLabel="label"
+                nameValue="value"
+                name="type"
                 formik={formik}
               />
               <SelectProductTag
@@ -285,12 +246,7 @@ const Page = () => {
                       variant="shadow"
                       className="relative cursor-pointer"
                     >
-                      {item.title}
-                      {item?.attribiute?.length >= 1 ? (
-                        <span className="absolute -top-2 left-0 flex h-4 w-4 items-center justify-center rounded-full bg-main font-regular text-[12px] text-white">
-                          {item?.attribiute?.length}
-                        </span>
-                      ) : null}
+                      {item.property}: {item.attribiute}
                     </Chip>
                   ))}
                 </div>
@@ -353,7 +309,7 @@ const Page = () => {
                           </Button>
                         </div>
 
-                        {formik.values.children.map((product, idx) => (
+                        {formik.values?.children?.map((product, idx) => (
                           <SelectAttVariableProduct
                             product={product}
                             idx={idx}
@@ -400,7 +356,7 @@ const Page = () => {
                   )}
                 </div>
               </Media>
-              <Media
+              {/* <Media
                 title="ویدیو محصول"
                 className="w-full"
                 withModal
@@ -415,7 +371,7 @@ const Page = () => {
                     </p>
                   )}
                 </div>
-              </Media>
+              </Media> */}
               <Media
                 title="گالری محصول"
                 className="w-full"

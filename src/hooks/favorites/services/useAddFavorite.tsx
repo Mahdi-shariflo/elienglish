@@ -1,9 +1,9 @@
 import React from 'react';
-import { apiFavorite } from '@/actions/apis/favorites';
 import { useMutation } from '@tanstack/react-query';
 import { addToast, Button } from '@heroui/react';
 import { FaAngleLeft } from 'react-icons/fa';
 import Link from 'next/link';
+import { apiFavorite } from '@/app/actions/apis/favorites';
 
 export function useAddFavorite() {
   const { mutate, isPending } = useMutation({

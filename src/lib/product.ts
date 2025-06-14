@@ -90,7 +90,7 @@ export function getVariableProductDetails(product: Product): Result[] {
 
   // Process each child to extract variants
   const variants: Array<{ properties: { [propertyId: string]: any }; product: any }> = [];
-  product.children?.forEach((child) => {
+  product?.children?.forEach((child) => {
     const variantProperties: { [propertyId: string]: any } = {};
     child.variables?.forEach((variable) => {
       const property = product.propertyLookup.find((p) => p._id === variable.property);

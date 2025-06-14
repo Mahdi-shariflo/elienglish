@@ -58,7 +58,7 @@ const Page = () => {
     [isSuccess]
   );
 
-  const product = data?.data?.data;
+  const product = data?.data;
 
   // const onChangeInput = (search: string) => {
   //   setSearchInput(search);
@@ -105,19 +105,9 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.products}
+        mainData={product?.data}
         showData={columns}
-        columns={[
-          'select',
-          'nid',
-          'wooid',
-          'count',
-          'title',
-          'noindex',
-          'price',
-          'discountPrice',
-          'action',
-        ]}
+        columns={['select', 'count', 'title', 'price', 'discountPrice', 'action']}
         nameAction="ایجاد محصول جدید"
         onAction={() => router.push(`/admin/products/new/`)}
         onChangeSort={onChangeSort}
@@ -131,6 +121,7 @@ const Page = () => {
           label="فیلتر"
           options={options}
           name="filter"
+          // @ts-expect-error error
           onChange={(selectedKeys) => setFilter({ ...filter, filter: selectedKeys.currentKey! })}
         />
       </ReactTable>

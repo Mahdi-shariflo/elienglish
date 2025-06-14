@@ -21,7 +21,7 @@ export const useGetCategoryProductAdmin = ({
     queryKey: ['category-products-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/category/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/product/admin/category/nested?${filter ? filter : ''}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

@@ -1,3 +1,5 @@
+import { Product } from './home';
+
 export type Form = {
   isLoading?: boolean;
   isFetching?: boolean;
@@ -184,6 +186,8 @@ export interface TagType {
 
 export interface FormValuesCreteProduct {
   title: string;
+  type: string;
+  children?: Product[];
   shortTitle: string;
   canonicalurl: string;
   url: string;

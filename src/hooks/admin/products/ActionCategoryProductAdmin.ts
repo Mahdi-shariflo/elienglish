@@ -7,8 +7,8 @@ export const ActionCategoryProductAdmin = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/admin/category/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/category/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/product/admin/category/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/product/admin/category`, method: 'POST', data });
     },
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['category-products-admin'] });

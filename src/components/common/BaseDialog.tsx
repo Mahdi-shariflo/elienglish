@@ -82,7 +82,7 @@ export default function BaseDialog({
                     {children}
                   </ModalBody>
                   {Boolean(onClickFooter) ? (
-                    <ModalFooter className="bg-spring flex items-center justify-between rounded-lg">
+                    <ModalFooter className="bg-spring flex items-center justify-between rounded-lg !pb-0">
                       <Button onClick={onClose} className="w-[140px] border !text-black">
                         <span className="!text-black dark:text-white">{nameBtnBack}</span>
                       </Button>

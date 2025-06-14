@@ -21,7 +21,7 @@ export const useGetProductTagsAdmin = ({
     queryKey: ['product-tags-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/product/admin/tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}`,
+        url: `/product/admin/tag/all?${filter ? filter : ''}&page=${page}&limit=${20}`,
       }),
   });
 };

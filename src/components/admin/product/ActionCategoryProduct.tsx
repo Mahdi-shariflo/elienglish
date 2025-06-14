@@ -68,7 +68,8 @@ const ActionCategoryProduct = ({ modal, setModal }: Props) => {
         ...(values.keyWords ? { keyWords: values.keyWords } : null),
         // @ts-expect-error error
         ...(editorRef?.current?.getContent()
-          ? { description: editorRef.current.getContent() }
+          ? // @ts-expect-error error
+            { description: editorRef.current.getContent() }
           : null),
         ...(values.canonicalurl ? { canonicalurl: values.canonicalurl } : null),
         // @ts-expect-error error
@@ -138,9 +139,9 @@ const ActionCategoryProduct = ({ modal, setModal }: Props) => {
           >
             <div className="mr-3 flex items-center gap-2">
               {formik.values.thumbnailimage && (
-                // @ts-expect-error error
                 <img
                   className="h-[40px] w-[40px] rounded-full"
+                  // @ts-expect-error error
                   src={`${BASEURL}/${formik?.values?.thumbnailimage?.url}`}
                 />
               )}

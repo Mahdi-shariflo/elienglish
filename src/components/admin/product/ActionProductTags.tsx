@@ -78,7 +78,7 @@ const ActionProductTags = ({ modal, setModal }: Props) => {
 
   useEffect(() => {
     if (isSuccessCategoryUrl) {
-      const tags = data?.data?.data.ProductTag[0];
+      const tags = data?.data?.data;
       formik.setValues({
         ...tags,
         keyWords: tags?.keyWords?.join(', '),
@@ -87,6 +87,8 @@ const ActionProductTags = ({ modal, setModal }: Props) => {
       formik.resetForm();
     }
   }, [isSuccessCategoryUrl]);
+
+  console.log(data?.data);
 
   return (
     <>

@@ -1,6 +1,5 @@
 'use client';
 import ActionCategoryProduct from '@/components/admin/product/ActionCategoryProduct';
-import VerifyDelete from '@/components/admin/common/VerifyDelete';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import { Arrow_back_mobile, Delete_icon, Edit_icon, Plus_icon } from '@/components/common/icon';
@@ -23,7 +22,7 @@ const Page = () => {
 
   useEffect(() => {
     if (isSuccess || isFetching) {
-      const categories = data?.data?.data?.categories;
+      const categories = data?.data?.data;
       setCategories(categories);
     }
   }, [isSuccess, isFetching]);
@@ -35,7 +34,7 @@ const Page = () => {
       description: 'دسته‌بندی',
       info: category.title,
       updateCache: 'category-products-admin',
-      url: `/admin/category/remove/${category._id}`,
+      url: `/product/admin/category/${category._id}`,
     });
 
   // تابع بازگشتی برای نمایش دسته‌بندی‌ها و زیرمجموعه‌های آن‌ها
@@ -60,6 +59,7 @@ const Page = () => {
                 <Delete_icon />
               </Button>
               <Button
+                // @ts-expect-error error
                 onClick={() => setModal({ open: true, info: { _id: item._id }, parent: true })}
                 className="!h-fit w-fit"
               >

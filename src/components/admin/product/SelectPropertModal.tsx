@@ -1,145 +1,91 @@
 import BaseDialog from '@/components/common/BaseDialog';
-import React, { Dispatch } from 'react';
-import SelectProductProperties from './SelectProductProperties';
-import SelectGroupProperties from './SelectGroupProperties';
-import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
+import React, { Dispatch, useState } from 'react';
+import { FormikProps, useFormik } from 'formik';
+import Input from '@/components/common/form/Input';
+import Checkbox from '@/components/common/form/Checkbox';
+import * as Yup from 'yup';
 import Button from '@/components/common/Button';
-import { RiCloseCircleFill } from 'react-icons/ri';
-import { BiCheckCircle } from 'react-icons/bi';
-import SelectAtrributeBuyPropertyId from './SelectAtrributeBuyPropertyId';
-import { FormikProps } from 'formik';
+import { Chip } from '@heroui/react';
+import { Delete_icon } from '@/components/common/icon';
 type Props = {
   open: boolean;
   setOpen: Dispatch<React.SetStateAction<boolean>>;
   formik: FormikProps<any>;
 };
 const SelectPropertyModal = ({ open, setOpen, formik }: Props) => {
+  const [properties, setProperties] = useState<
+    { property: string; attribiute: string; main: boolean }[]
+  >([]);
+  const form = useFormik({
+    initialValues: {
+      property: '',
+      attribiute: '',
+      main: false,
+    },
+    validationSchema: Yup.object({
+      property: Yup.string().required('نام اجباری است'),
+      attribiute: Yup.string().required('مقدار اجباری است'),
+    }),
+    onSubmit: (values, { resetForm }) => {
+      setProperties([...properties, values]);
+      resetForm();
+    },
+  });
+
+  const handleDelete = (index: number) => {
+    const updated = [...properties];
+    updated.splice(index, 1);
+    setProperties(updated);
+  };
+
+  const onSubmit = () => {
+    setOpen(false);
+    formik.setFieldValue('properties', properties);
+  };
+
   return (
     <>
       <BaseDialog
         classBody="!min-h-[500px] !px-3"
         nameBtnFooter="ادامه فرایند"
-        onClickFooter={() => setOpen(false)}
+        onClickFooter={onSubmit}
         size="3xl"
         nameBtnBack="بستن"
         isOpen={open}
         onClose={() => {
           setOpen(!open);
         }}
-        title="انتخاب ویژگی برای محصول"
+        title=" ویژگی برای محصول"
       >
         <div className="container_category">
-          <div className="flex items-center gap-3">
-            <SelectProductProperties
-              title="انتخاب ویژگی"
-              onChange={(values) => formik.setFieldValue('properties', values)}
-              values={formik?.values?.properties}
-            />
-            <SelectGroupProperties
-              title="انتخاب از گروه ویژگی‌ها"
-              onChange={(values) => formik.setFieldValue('group', values)}
-              values={undefined}
-              onProperties={(values) =>
-                formik.setFieldValue('properties', [...formik?.values?.properties, ...values])
-              }
-            />
+          <form onSubmit={form.handleSubmit} className="grid grid-cols-2 gap-4">
+            <Input formik={form} label={'نام'} name="property" />
+            <Input formik={form} label={'مقدار'} name="attribiute" />
+            {/* @ts-expect-error Error */}
+            <Checkbox formik={form} name="main" label="جز مقادیر اصلی" />
+            <Button type="submit" className="bg-main text-white">
+              اضافه کردن
+            </Button>
+          </form>
+          <div className="mt-8 space-y-3">
+            {properties?.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between rounded-lg bg-white p-3 py-1 shadow-medium"
+              >
+                <p className="font-medium">
+                  <span>{item.property}:</span>
+                  <span>{item.attribiute}</span>
+                </p>
+                <div className="flex items-center gap-4">
+                  {item.main && <p className="font-medium">جز متغیر اصلی</p>}
+                  <Button onClick={() => handleDelete(idx)} className="w-fit min-w-fit">
+                    <Delete_icon />
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
-          <Accordion>
-            {/* @ts-expect-error formik */}
-            {formik?.values?.properties?.map((item, idx) => {
-              return (
-                <AccordionItem
-                  startContent={
-                    <Button
-                      onClick={() => {
-                        const newProperties = [...formik?.values?.properties];
-                        newProperties.splice(idx, 1);
-                        formik.setFieldValue('properties', newProperties);
-                      }}
-                    >
-                      <RiCloseCircleFill />
-                    </Button>
-                  }
-                  key={idx}
-                  aria-label="Accordion 1"
-                  title={
-                    <div className="flex items-center gap-2">
-                      <span>{item.title}</span>
-                      {item?.attribiute?.length >= 1 && (
-                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-main text-[12px] text-white">
-                          {item?.attribiute?.length}
-                        </span>
-                      )}
-
-                      {item.mainProperty ? (
-                        <span className="flex items-center gap-1 rounded-lg border p-px text-[12px] text-gray-400">
-                          جز ویژگی اصلی <BiCheckCircle />
-                        </span>
-                      ) : null}
-                      {item.isVariable ? (
-                        <span className="flex items-center gap-1 rounded-lg border p-px text-[12px] text-gray-400">
-                          جز متغیر ها <BiCheckCircle />
-                        </span>
-                      ) : null}
-                    </div>
-                  }
-                  classNames={{
-                    base: 'border-b border-[#E4E7E9] !px-0',
-                    title: 'font-medium !text-[14px] text-[#232429]',
-                    subtitle: 'text-[10px] text-[#7D8793] font-regular line-clamp-1',
-                    trigger: 'items-center !py-1',
-                    content: '!pt-0 !pb-3',
-                  }}
-                >
-                  <div className="space-y-3">
-                    <SelectAtrributeBuyPropertyId
-                      idx={idx}
-                      values={item?.attribiute}
-                      onChange={(values) => {
-                        const newProperties = [...formik?.values?.properties];
-                        newProperties[idx].attribiute = values;
-                        formik.setFieldValue('properties', newProperties);
-                      }}
-                      propertyId={item._id}
-                    />
-
-                    <div className="flex items-center gap-3">
-                      <Checkbox
-                        isSelected={item?.mainProperty}
-                        onValueChange={(value) => {
-                          const newProperties = [...formik?.values?.properties];
-                          newProperties[idx].mainProperty = value;
-                          formik.setFieldValue('properties', newProperties);
-                        }}
-                        classNames={{
-                          label:
-                            'pr-1 text-[14px] line-clamp-2 whitespace-nowrap !font-regular text-[#0C0C0C]',
-                          wrapper: 'after:!bg-main',
-                        }}
-                      >
-                        جز متغیر های اصلی
-                      </Checkbox>
-                      <Checkbox
-                        isSelected={item?.isVariable}
-                        onValueChange={(value) => {
-                          const newProperties = [...formik?.values?.properties];
-                          newProperties[idx].isVariable = value;
-                          formik.setFieldValue('properties', newProperties);
-                        }}
-                        classNames={{
-                          label:
-                            'pr-1 text-[14px] line-clamp-2 whitespace-nowrap !font-regular text-[#0C0C0C]',
-                          wrapper: 'after:!bg-main',
-                        }}
-                      >
-                        نمایش در متغیر ها
-                      </Checkbox>
-                    </div>
-                  </div>
-                </AccordionItem>
-              );
-            })}
-          </Accordion>
         </div>
       </BaseDialog>
     </>

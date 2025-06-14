@@ -94,14 +94,6 @@ const menus = [
         href: '/admin/products/tags/',
       },
       {
-        name: 'ویژگی محصولات',
-        href: '/admin/products/properties/',
-      },
-      {
-        name: 'گروه ویژگی محصولات',
-        href: '/admin/products/group-properties/',
-      },
-      {
         name: 'دسته‌بندی محصولات',
         href: '/admin/products/categories/',
       },
