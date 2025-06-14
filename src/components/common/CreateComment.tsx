@@ -7,7 +7,7 @@ import Textarea from '../common/form/Textarea';
 import Input from '../common/form/Input';
 import { useFormik } from 'formik';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Comment, ThumbnailImage } from '@/types';
+import { Comment, CommentInfo, ThumbnailImage } from '@/types';
 import { BASEURL } from '@/lib/variable';
 import Select from '../common/Select';
 import { useUpdateCommentByIdAdmin } from '@/hooks/admin/comments/useUpdateCommentByIdAdmin';
@@ -17,11 +17,7 @@ import { useMedia } from 'react-use';
 import { addToast } from '@heroui/react';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 type Props = {
-  product?: {
-    thumbnailImage?: ThumbnailImage;
-    title?: string;
-    targetType: 'blog' | 'product';
-  };
+  product?: CommentInfo;
   showCommentRate?: boolean;
   modal: {
     parent: string;
@@ -68,7 +64,7 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
       const mainData = {
         ...values,
         targetType: product?.targetType,
-        targetId: modal.info?.targetId,
+        targetId: product?._id ? product?._id : modal.info?.targetId,
         ...(modal.parent ? { parent: modal.parent } : null),
         // @ts-expect-error error
         published: values.published === 'false' ? false : true,

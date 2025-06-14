@@ -8,7 +8,7 @@ type Props = {
   id?: string;
   freePlan?: boolean;
 };
-export const useGetGroupProperties = ({
+export const useGetCategoryProductAdmin = ({
   page = '1',
   sort = '',
   search = '',
@@ -18,10 +18,10 @@ export const useGetGroupProperties = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['group-properties-admin', page, sort, search, filter, id],
+    queryKey: ['category-products-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/properties-groupe/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/product/admin/category/nested?${filter ? filter : ''}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

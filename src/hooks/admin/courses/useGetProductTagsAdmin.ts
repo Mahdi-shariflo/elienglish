@@ -1,28 +1,27 @@
 import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
 type Props = {
-  id?: string;
   page?: string;
   sort?: string;
   search?: string;
   filter?: string;
+  id?: string;
+  freePlan?: boolean;
 };
-export const useGetPropertyById = ({
-  id = '',
+export const useGetProductTagsAdmin = ({
   page = '1',
   sort = '',
   search = '',
   filter = '',
+  freePlan,
+  id = '',
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['propertybyid-admin', id, page, sort, search, filter],
-    enabled: Boolean(id),
+    queryKey: ['product-tags-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/property/${id}?${
-          filter ? filter : ''
-        }&sort=${sort}&page=${page}&limit=${20}&search=${search}`,
+        url: `/product/admin/tag/all?${filter ? filter : ''}&page=${page}&limit=${20}`,
       }),
   });
 };

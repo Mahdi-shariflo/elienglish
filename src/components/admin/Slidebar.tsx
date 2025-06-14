@@ -12,6 +12,8 @@ import {
   Comments_icon,
   Contact_fill_icon,
   Contact_icon,
+  Courses_fill_icon,
+  Courses_icon,
   Discount_fill_icon,
   Discount_icon,
   Home_fill_icon,
@@ -96,6 +98,30 @@ const menus = [
       {
         name: 'دسته‌بندی محصولات',
         href: '/admin/products/categories/',
+      },
+    ],
+  },
+  {
+    icon: Courses_icon,
+    name: 'دوره ها',
+    href: ['/admin/courses/', '/admin/courses/create/', '/admin/courses/categories/'],
+    activeIcon: Courses_fill_icon,
+    children: [
+      {
+        name: 'دوره ها',
+        href: '/admin/courses/',
+      },
+      {
+        name: 'ایجاد محصول',
+        href: '/admin/courses/new/',
+      },
+      {
+        name: 'تگ محصولات',
+        href: '/admin/courses/tags/',
+      },
+      {
+        name: 'دسته‌بندی محصولات',
+        href: '/admin/courses/categories/',
       },
     ],
   },

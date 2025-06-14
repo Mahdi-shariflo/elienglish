@@ -165,6 +165,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
             thumbnailImage: commentInfo?.thumbnailImage,
             title: commentInfo?.title,
             targetType: commentInfo.targetType,
+            _id: commentInfo._id,
           }}
           modal={modal}
           setModal={setModal}

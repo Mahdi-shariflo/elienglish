@@ -7,20 +7,15 @@ type Props = {
   filter?: string;
   id?: string;
   freePlan?: boolean;
+  available?: boolean;
 };
-export const useGetPropertiesAdmin = ({
-  page = '1',
-  sort = '',
-  search = '',
-  filter = '',
-  id = '',
-}: Props) => {
+export const useGetProductTag = ({ page = '1', sort = '', search = '', filter = '' }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['property-admin', page, sort, search, filter, id],
+    queryKey: ['product-tags-admin', page, sort, search, filter],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/property/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&search=${search}`,
+        url: `/admin/product-tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };
