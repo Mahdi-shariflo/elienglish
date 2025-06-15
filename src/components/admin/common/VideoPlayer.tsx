@@ -1,64 +1,40 @@
 'use client';
 
-import { BASEURL } from '@/lib/variable';
-import React, { useState } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useRef, useState } from 'react';
+import Video from 'next-video';
+import Image from 'next/image';
+import PlayIcon from '@/../public/icons/play.svg';
 
 const VideoPlayer = ({ url, poster }: { url: string; poster: string }) => {
-  const [play, setPlay] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <div
       className="relative aspect-video h-full w-full overflow-hidden rounded-xl bg-black"
-      onContextMenu={(e) => e.preventDefault()} // غیرفعال کردن کلیک راست
+      dir="ltr"
     >
-      {/* // <Video poster={poster} src={`${BASEURL}/${url}`} /> */}
-      <ReactPlayer
-        url={`${BASEURL}/${url}`}
-        playing={play}
-        controls
-        width="100%"
-        height="100%"
-        style={{ pointerEvents: play ? 'auto' : 'none' }}
-        config={{
-          file: {
-            attributes: {
-              controlsList: 'nodownload', // مخفی کردن دکمه دانلود در مرورگرهای پشتیبانی‌شده
-            },
-          },
-        }}
+      <Video
+        ref={videoRef}
+        poster={poster}
+        src={
+          'https://caspian19.cdn.asset.aparat.com/aparat-video/7a13c601c23aca9e0bde8ffc755d13c063599691-1080p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQ0Y2YzYmNlOWY5MjVjMDdiMmU0MmVjNDY0YWYwMzk1IiwiZXhwIjoxNzQ5OTc4MTAyLCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.R9ziFcoWJ1Xy-8yKM4jmw6mizSdhmK2wyoX3QopLYtM'
+        }
       />
-      {!play && (
-        <div
-          className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/60"
-          onClick={() => setPlay(true)}
+      {!isPlaying && (
+        <button
+          onClick={handlePlay}
+          className="absolute inset-0 z-10 flex items-center justify-center bg-black/40 transition hover:bg-black/60"
         >
-          {/* تصویر کاور */}
-          <img
-            src={poster}
-            alt="video cover"
-            className="absolute inset-0 z-0 h-full w-full object-fill"
-          />
-          {/* آیکن پلی */}
-          <div className="relative z-10">
-            <svg
-              width="80"
-              height="80"
-              viewBox="0 0 80 80"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="80" height="80" rx="40" fill="#101010" fill-opacity="0.4" />
-              <path
-                d="M30 26.4004L50.8 40.0004L30 53.6004V26.4004Z"
-                stroke="white"
-                stroke-width="5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-        </div>
+          <Image src={PlayIcon} alt="Play" width={64} height={64} />
+        </button>
       )}
     </div>
   );

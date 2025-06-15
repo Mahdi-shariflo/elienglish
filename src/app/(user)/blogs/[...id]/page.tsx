@@ -14,11 +14,11 @@ import { Blog } from '@/types';
 import Link from 'next/link';
 import React from 'react';
 type Props = {
-  params: Promise<{ [key: string]: string | undefined }>;
+  params: Promise<{ [key: string]: string[] }>;
 };
 const Page = async ({ params }: Props) => {
   const { id } = await params;
-  const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
+  const result = await request({ url: `/blog/detail/${decodeURIComponent(id[0]!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
   return (

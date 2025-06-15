@@ -1,9 +1,14 @@
+'use client';
 import React from 'react';
 import Image from '../common/Image';
 import { Blog } from '@/types';
 import VideoPlayer from '../admin/common/VideoPlayer';
 import { BASEURL } from '@/lib/variable';
-import { AudioPlayer } from '../common/AudioPlayer';
+import dynamic from 'next/dynamic';
+const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/react'), {
+  ssr: false,
+});
+
 const MediaPreview = ({ blog }: { blog: Blog }) => {
   return (
     <>
@@ -19,7 +24,31 @@ const MediaPreview = ({ blog }: { blog: Blog }) => {
           />
         )}
       </div>
-      {blog?.audio?.url ? <AudioPlayer className="mt-10" src={blog?.audio?.url} /> : null}
+      {blog?.audio?.url ? (
+        <MediaThemeSutroAudio
+          className="drop_shadow_cart mt-8"
+          style={{
+            '--media-primary-color': '#6E3DFF',
+            '--media-secondary-color': '#fff',
+            '--media-accent-color': '#E0D7FB',
+            width: '100%',
+            direction: 'ltr',
+          }}
+        >
+          <img
+            slot="poster"
+            src={`${BASEURL}/${blog.thumbnailImage.url}`}
+            alt="Audio Poster"
+            style={{ width: '100%', objectFit: 'cover' }}
+          />
+          <audio
+            slot="media"
+            src={`${BASEURL}/${blog.audio.url}`}
+            playsInline
+            crossOrigin="anonymous"
+          ></audio>
+        </MediaThemeSutroAudio>
+      ) : null}
     </>
   );
 };
