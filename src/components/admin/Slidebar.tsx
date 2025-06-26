@@ -112,15 +112,15 @@ const menus = [
         href: '/admin/courses/',
       },
       {
-        name: 'ایجاد محصول',
+        name: 'ایجاد دورره',
         href: '/admin/courses/new/',
       },
       {
-        name: 'تگ محصولات',
+        name: 'تگ دورره',
         href: '/admin/courses/tags/',
       },
       {
-        name: 'دسته‌بندی محصولات',
+        name: 'دسته‌بندی دوره',
         href: '/admin/courses/categories/',
       },
     ],

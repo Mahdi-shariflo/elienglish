@@ -66,7 +66,7 @@ const mapProductToFormValues = (product: any) => ({
   properties: product?.properties,
   variables: product.variables || [],
   category: product?.category?._id ? [product.category._id] : [],
-  categories: product.categories || [],
+  categories: product.categories.map((item: { _id: string }) => item._id) || [],
   price: product.price?.toString() || '',
   discountPrice: product.discountPrice?.toString() || '',
   discountTime: converDatePer(product.discountTime) || '',
@@ -129,7 +129,6 @@ const Page = () => {
               urlVar: `${formik.values?.url}`,
               price: +removeNumNumeric(varible.price),
               suggestedDiscount: +removeNumNumeric(varible.suggestedDiscount),
-              minCart: +removeNumNumeric(varible.minCart),
               count: Number(varible.count),
               published: varible.published === 'false' ? false : true,
             },
@@ -168,6 +167,7 @@ const Page = () => {
       ...(formik.values.children || []),
     ]);
   };
+  console.log(formik.values.children);
   return (
     <IsClient>
       <div>

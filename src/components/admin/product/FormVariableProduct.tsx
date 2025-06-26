@@ -3,8 +3,6 @@ import React, { Dispatch } from 'react';
 import Media from '../common/Media';
 import { FormikProps } from 'formik';
 import Input from '@/components/common/form/Input';
-import Datepicker from '@/components/common/Datepicker';
-import Checkbox from '@/components/common/form/Checkbox';
 import { BASEURL } from '@/lib/variable';
 import Select from '@/components/common/Select';
 import { StatusOptionsAdmin } from '@/lib/data';
@@ -58,7 +56,7 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             ]}
             nameLabel="label"
             nameValue="value"
-            name="type"
+            name={`${baseName}.type`}
             formik={formik}
           />
           <Select
@@ -66,7 +64,7 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             options={StatusOptionsAdmin}
             nameLabel="label"
             nameValue="value"
-            name="published"
+            name={`${baseName}.published`}
             formik={formik}
           />
 

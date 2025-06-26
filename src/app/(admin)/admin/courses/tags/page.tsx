@@ -1,9 +1,9 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
-import ActionProductTags from '@/components/admin/product/ActionProductTags';
+import ActionCourseTags from '@/components/admin/courses/ActionCourseTags';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
-import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
+import { useGetCourseTagsAdmin } from '@/hooks/admin/courses/useGetCourseTagsAdmin';
 import { initialDataTagProduct } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { TagType } from '@/types';
@@ -20,7 +20,7 @@ const Page = () => {
     search: '',
     filter: '',
   });
-  const { data, isPending, isSuccess, isFetching, isLoading } = useGetProductTagsAdmin({
+  const { data, isPending, isSuccess, isFetching, isLoading } = useGetCourseTagsAdmin({
     page: filter.page,
     search: filter.search,
     sort: filter.sort,
@@ -37,8 +37,8 @@ const Page = () => {
             title: 'حذف تگ',
             description: 'تگ محصولات',
             info: row.title,
-            updateCache: 'product-tags-admin',
-            url: `/product/admin/tag/${row._id}`,
+            updateCache: 'course-tags-admin',
+            url: `/course/admin/tag/${row._id}`,
           }),
       }),
     [isSuccess]
@@ -73,7 +73,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        محصولات تگ
+        تگ دوره ها
       </p>
       <Input
         value={filter.search}
@@ -90,7 +90,7 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.productTag}
+        mainData={product?.tag}
         showData={columns}
         columns={['_id', 'title', 'description', 'action']}
         nameAction="ایجاد تگ"
@@ -99,7 +99,7 @@ const Page = () => {
         onChangePage={onChangePage}
         sort={filter.sort}
       ></ReactTable>
-      <ActionProductTags modal={modal} setModal={setModal} />
+      <ActionCourseTags modal={modal} setModal={setModal} />
       {/* <CreateProduct/> */}
     </div>
   );

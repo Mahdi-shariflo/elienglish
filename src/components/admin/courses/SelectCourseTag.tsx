@@ -3,8 +3,8 @@ import { Product } from '@/types/home';
 import { Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
+import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
 import { TagType } from '@/types';
-import { useGetCourseTagsAdmin } from '@/hooks/admin/courses/useGetCourseTagsAdmin';
 
 type Props = {
   values: TagType[];
@@ -12,16 +12,16 @@ type Props = {
   title?: string;
   className?: string;
 };
-export default function SelectProductTag({ values, onChange, title, className }: Props) {
+export default function SelectCourseTag({ values, onChange, title, className }: Props) {
   const [selectedProductTags, setSelectedProductTags] = useState<TagType[]>(values);
   const [options, setOptions] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
-  const { isLoading, isSuccess, isFetching, data, isPending } = useGetCourseTagsAdmin({
+  const { isLoading, isSuccess, isFetching, data, isPending } = useGetProductTagsAdmin({
     page: page.toString(),
   });
   useEffect(() => {
     if (isSuccess) {
-      const productTags = data?.data?.data?.tag;
+      const productTags = data?.data?.data?.productTag;
       setOptions([...options, ...(Array.isArray(productTags) ? productTags : [])]);
     }
   }, [isSuccess]);

@@ -8,7 +8,7 @@ import BaseDialog from '../../common/BaseDialog';
 import ReactTable from '../common/ReactTable';
 import { initialDataProperties } from '@/lib/table-column';
 import Button from '../../common/Button';
-import { useGetPropertiesAdmin } from '@/hooks/admin/products/useGetPropertiesAdmin';
+import { useGetPropertiesAdmin } from '@/hooks/products/useGetPropertiesAdmin';
 
 type Props = {
   values: Product[];

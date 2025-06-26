@@ -1,9 +1,9 @@
 'use client';
-import ActionCategoryProduct from '@/components/admin/product/ActionCategoryProduct';
+import ActionCategoryCourse from '@/components/admin/courses/ActionCategoryCourse';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import { Arrow_back_mobile, Delete_icon, Edit_icon, Plus_icon } from '@/components/common/icon';
-import { useGetCategoryProductAdmin } from '@/hooks/admin/products/useGetCategoryProductAdmin';
+import { useGetCourseProductAdmin } from '@/hooks/admin/courses/useGetCategoryCourseAdmin';
 import useGlobalStore from '@/store/global-store';
 import { Category } from '@/types/home';
 import { Accordion, AccordionItem, Spinner } from '@heroui/react';
@@ -17,7 +17,7 @@ const Page = () => {
     info: null,
   });
 
-  const { data, isLoading, isSuccess, isFetching } = useGetCategoryProductAdmin({});
+  const { data, isLoading, isSuccess, isFetching } = useGetCourseProductAdmin({});
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -33,8 +33,8 @@ const Page = () => {
       title: 'حذف دسته‌بندی',
       description: 'دسته‌بندی',
       info: category.title,
-      updateCache: 'category-products-admin',
-      url: `/product/admin/category/${category._id}`,
+      updateCache: 'category-course-admin',
+      url: `/course/admin/category/${category._id}`,
     });
 
   // تابع بازگشتی برای نمایش دسته‌بندی‌ها و زیرمجموعه‌های آن‌ها
@@ -88,7 +88,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        دسته بندی محصولات
+        دسته بندی دوره
       </p>
 
       {isLoading ? (
@@ -115,7 +115,7 @@ const Page = () => {
         </div>
       )}
 
-      <ActionCategoryProduct modal={modal} setModal={setModal} />
+      <ActionCategoryCourse modal={modal} setModal={setModal} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ type Props = {
   id?: string;
   freePlan?: boolean;
 };
-export const useGetCategoryProductWithChildrenAdmin = ({
+export const useGetCourseTagsAdmin = ({
   page = '1',
   sort = '',
   search = '',
@@ -18,10 +18,10 @@ export const useGetCategoryProductWithChildrenAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['category-with-children-products-admin', page, sort, search, filter, id],
+    queryKey: ['course-tags-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/category/list-of-all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/course/admin/tag/all?${filter ? filter : ''}&page=${page}&limit=${20}`,
       }),
   });
 };

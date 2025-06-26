@@ -8,7 +8,7 @@ type Props = {
   id?: string;
   freePlan?: boolean;
 };
-export const useGetProductTagsAdmin = ({
+export const useGetCourseProductAdmin = ({
   page = '1',
   sort = '',
   search = '',
@@ -18,10 +18,10 @@ export const useGetProductTagsAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['product-tags-admin', page, sort, search, filter, id],
+    queryKey: ['category-course-admin', page, sort, search, filter, id],
     queryFn: async () =>
       await safeRequest({
-        url: `/product/admin/tag/all?${filter ? filter : ''}&page=${page}&limit=${20}`,
+        url: `/course/admin/category/nested?${filter ? filter : ''}&page=${page}&limit=${20}&id=${id}&${freePlan ? 'freePlan=true' : ''}${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

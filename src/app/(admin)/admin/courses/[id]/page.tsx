@@ -2,9 +2,9 @@
 import Editor from '@/components/admin/common/Editor';
 import Media from '@/components/admin/common/Media';
 import SeoOptions from '@/components/admin/common/SeoOptions';
+import SelectCategoryCourse from '@/components/admin/courses/SelectCategoryCourse';
 import GeneralProduct from '@/components/admin/product/GeneralProduct';
 import SelectAttVariableProduct from '@/components/admin/product/SelectAttVariableProduct';
-import SelectCategoryProduct from '@/components/admin/product/SelectCategoryProduct';
 import SelectProductTag from '@/components/admin/product/SelectProductTag';
 import SelectPropertyModal from '@/components/admin/product/SelectPropertModal';
 import VariableProductModal from '@/components/admin/product/VariableProductModal';
@@ -398,12 +398,12 @@ const Page = () => {
                 </div>
               </Media>
 
-              <SelectCategoryProduct
+              <SelectCategoryCourse
                 title="دسته بندی محصول پیش فرض"
                 selected={formik.values.category}
                 onSelect={(values) => formik.setFieldValue('category', values)}
               />
-              <SelectCategoryProduct
+              <SelectCategoryCourse
                 multiple
                 title="دسته بندی محصول"
                 selected={formik.values.categories}

@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 type Props = {
   id?: string;
 };
-export const useGetCategoryByIdAdmin = ({ id = '' }: Props) => {
+export const useGetCategoryCourseByIdAdmin = ({ id = '' }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['category-id-admin', id],
+    queryKey: ['category-course-id-admin', id],
     enabled: Boolean(id),
-    queryFn: async () => await safeRequest({ url: `/admin/category/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/course/admin/category/${id}` }),
   });
 };
