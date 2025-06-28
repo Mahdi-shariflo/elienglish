@@ -2,12 +2,12 @@
 import Editor from '@/components/admin/common/Editor';
 import Media from '@/components/admin/common/Media';
 import SeoOptions from '@/components/admin/common/SeoOptions';
+import DemoCourse from '@/components/admin/courses/DemoCourse';
 import SelectCategoryCourse from '@/components/admin/courses/SelectCategoryCourse';
 import GeneralProduct from '@/components/admin/product/GeneralProduct';
 import SelectAttVariableProduct from '@/components/admin/product/SelectAttVariableProduct';
 import SelectProductTag from '@/components/admin/product/SelectProductTag';
 import SelectPropertyModal from '@/components/admin/product/SelectPropertModal';
-import VariableProductModal from '@/components/admin/product/VariableProductModal';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import IsClient from '@/components/common/IsClient';
@@ -51,7 +51,7 @@ const initialValues = {
   robots: '',
   redirecturltype: '',
   redirecturl: '',
-  children: [],
+  demo: [],
 };
 const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
@@ -79,12 +79,11 @@ const mapProductToFormValues = (product: any) => ({
   robots: product.robots || '',
   redirecturltype: product.redirecturltype || '',
   redirecturl: product.redirecturl || '',
-  children: product?.children,
+  demo: product?.demo,
 });
 
 const Page = () => {
-  const [showVariableProductModal, setShowVariableProductModal] = useState(false);
-  const [selected, setSelected] = useState('1');
+  const [showDemoProductModal, setShowDemoProductModal] = useState(false);
   const { mutate: mutateVariable, isPending: isPendingVariable } = useActionVariable();
   const { id }: { id: string } = useParams();
   const { data: singleProduct, isSuccess, isFetching } = useGetProductById();
@@ -117,8 +116,8 @@ const Page = () => {
       // add and update product
       mutate({ data: removeEmptyFields(data), id: id! });
       // add and update cariable product
-      if (values.children.length >= 1) {
-        values?.children?.map((varible: any) =>
+      if (values.demo.length >= 1) {
+        values?.demo?.map((varible: any) =>
           mutateVariable({
             data: {
               ...varible,
@@ -150,22 +149,15 @@ const Page = () => {
     }
   }, [isSuccess, singleProduct, isFetching]);
 
-  const onSelectionChange = (key: string) => {
-    if (key === '2' && id === 'new') {
-      setShowVariableProductModal(true);
-      return;
-    }
-    setSelected(key);
-  };
   const handleAddVariableProduct = () => {
     const newProductId = generateRandomString();
     // اضافه کردن مقدار جدید به فرمیک
-    formik.setFieldValue('children', [
+    formik.setFieldValue('demo', [
       {
         productId: newProductId,
         mainVariableProperty: false,
       },
-      ...(formik.values.children || []),
+      ...(formik.values.demo || []),
     ]);
   };
   return (
@@ -254,9 +246,6 @@ const Page = () => {
                 </div>
               </div>
               <Tabs
-                selectedKey={selected}
-                // @ts-expect-error error
-                onSelectionChange={onSelectionChange}
                 variant="underlined"
                 classNames={{
                   base: 'w-full flex !mt-10 flex-col',
@@ -278,20 +267,28 @@ const Page = () => {
                     </Button>
                   </GeneralProduct>
                 </Tab>
-                <Tab key={'2'} title={<p>محصول متغیر</p>}>
+                <Tab key={'2'} title={<p>دمو </p>}>
                   <div>
                     {
                       <>
-                        <div className="flex items-center justify-between border-b pb-4">
+                        <div className="flex items-center justify-between gap-10 border-b pb-4">
+                          <Input
+                            isRequired
+                            label="عنوان "
+                            classNameInput="!h-[48px] bg-[#f5f6f6]"
+                            name="enTitle"
+                            className="lg:col-span-2"
+                            formik={formik}
+                          />
                           <Button
                             onClick={handleAddVariableProduct}
-                            className="w-[120px] bg-orange-400 text-white"
+                            className="mt-6 w-[120px] bg-orange-400 text-white"
                           >
-                            افزودن محصول
+                            افزودن
                           </Button>
                         </div>
 
-                        {formik.values?.children?.map((product, idx) => {
+                        {formik.values?.demo?.map((product, idx) => {
                           if (!product) return null;
                           return (
                             <SelectAttVariableProduct
@@ -359,12 +356,8 @@ const Page = () => {
                 className="w-full"
                 withModal
                 multiple
-                onSelect={(img) =>
-                  formik.setFieldValue('galleryImage', [
-                    ...formik.values.galleryImage,
-                    // @ts-expect-error array
-                    ...img,
-                  ])
+                onSelect={(img: any) =>
+                  formik.setFieldValue('galleryImage', [...formik.values.galleryImage, ...img])
                 }
               >
                 <div className="flex flex-wrap gap-3 overflow-hidden">
@@ -414,11 +407,8 @@ const Page = () => {
         </div>
       </div>
       {open && <SelectPropertyModal formik={formik} open={open} setOpen={setOpen} />}
-      {showVariableProductModal && (
-        <VariableProductModal
-          open={showVariableProductModal}
-          setOpen={setShowVariableProductModal}
-        />
+      {showDemoProductModal && (
+        <DemoCourse open={showDemoProductModal} setOpen={setShowDemoProductModal} />
       )}
     </IsClient>
   );
