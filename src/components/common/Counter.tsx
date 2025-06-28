@@ -239,7 +239,7 @@ const Counter = ({
             e.stopPropagation();
             mutate({ id: product._id });
           }}
-          className={`flex h-[48px] min-w-fit items-center justify-center gap-2 rounded-lg bg-main px-3 font-medium text-white lg:w-full ${classAddBtn}`}
+          className={`flex h-[36px] min-w-fit items-center justify-center gap-2 rounded-lg bg-main px-3 font-medium text-white lg:h-[48px] lg:w-full ${classAddBtn}`}
         >
           {showBasketIcon ? (
             <span>

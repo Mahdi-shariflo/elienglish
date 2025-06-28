@@ -29,7 +29,7 @@ const Page = async ({ params, searchParams }: Props) => {
   // const comments: Comment[] = data?.data?.data?.comments;
   const selectedProduct: Product = productData.product;
   return (
-    <div className="mt-14">
+    <div className="mb-14 mt-14 lg:mb-0">
       {/* <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -56,9 +56,11 @@ const Page = async ({ params, searchParams }: Props) => {
         }}
         id={id}
       >
-        <div className="mt-8 lg:w-[288px] lg:min-w-[288px] lg:space-y-5">
+        <div className="mt-8 space-y-5 px-4 lg:w-[288px] lg:min-w-[288px] lg:px-0">
           <AddCartSingleProduct className="hidden lg:block" product={selectedProduct} />
-          <div className={`drop_shadow_cart w-full rounded-lg p-3`}>
+          <div
+            className={`drop_shadow_cart w-full rounded-lg border border-gray-100 p-3 lg:border-gray-50`}
+          >
             <div className="flex items-center gap-3">
               <span>
                 <svg
@@ -90,7 +92,7 @@ const Page = async ({ params, searchParams }: Props) => {
           </div>
 
           <div
-            className={`drop_shadow_cart flex w-full flex-col items-center justify-center gap-3 rounded-lg p-3`}
+            className={`drop_shadow_cart flex w-full flex-col items-center justify-center gap-3 rounded-lg border border-gray-100 p-3 lg:border-gray-50`}
           >
             <span className="mx-auto flex w-full items-center justify-center">
               <svg
@@ -151,12 +153,12 @@ const Page = async ({ params, searchParams }: Props) => {
               بودم اما نهایتش آخرهای دوره پیش دانشگاهی تو دو هفته آخر تغییر رشته دادم ...
             </p>
           </div>
-          <AddCartSingleProduct
-            product={selectedProduct}
-            hideSendDes
-            className={'hidden lg:block lg:w-[288px]'}
-          />
         </div>
+        <AddCartSingleProduct
+          product={selectedProduct}
+          showDetail
+          className={'sticky mt-10 lg:hidden lg:w-[288px]'}
+        />
       </ProductPage>
     </div>
   );
