@@ -46,3 +46,23 @@ export const discountCalculation = (special_price: string | number, price: strin
   const off = (1 - math) * 100;
   return off.toFixed();
 };
+
+export function getMediaType(
+  filePath: string
+): 'image' | 'video' | 'audio' | 'document' | 'unknown' {
+  const extension = filePath.split('.').pop()?.toLowerCase();
+
+  if (!extension) return 'unknown';
+
+  const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+  const videoExts = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
+  const audioExts = ['mp3', 'wav', 'ogg', 'm4a', 'aac'];
+  const docExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt'];
+
+  if (imageExts.includes(extension)) return 'image';
+  if (videoExts.includes(extension)) return 'video';
+  if (audioExts.includes(extension)) return 'audio';
+  if (docExts.includes(extension)) return 'document';
+
+  return 'unknown';
+}

@@ -109,8 +109,8 @@ const Page = () => {
         mainData={product?.data}
         showData={columns}
         columns={['select', 'count', 'title', 'price', 'discountPrice', 'action']}
-        nameAction="ایجاد محصول جدید"
-        onAction={() => router.push(`/admin/products/new/`)}
+        nameAction="ایجاد دوره جدید"
+        onAction={() => router.push(`/admin/courses/new/`)}
         onChangeSort={onChangeSort}
         onChangePage={onChangePage}
         sort={filter.sort}

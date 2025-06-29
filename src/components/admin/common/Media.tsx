@@ -15,7 +15,7 @@ const Media = ({ withModal, children, className, onSelect, multiple, title }: Pr
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
   return (
-    <div className="w-full">
+    <div className="col-span-2">
       {withModal ? (
         <>
           <div className="w-full">

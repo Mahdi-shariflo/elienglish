@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import BaseDialog from '@/components/common/BaseDialog';
 type Props = {
   open: boolean;
@@ -7,7 +6,6 @@ type Props = {
 };
 const VariableProductModal = ({ open, setOpen }: Props) => {
   const onClose = () => setOpen(false);
-  const router = useRouter();
   return (
     <BaseDialog
       isOpen={open}

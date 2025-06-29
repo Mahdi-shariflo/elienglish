@@ -4,6 +4,7 @@ import Media from '@/components/admin/common/Media';
 import SeoOptions from '@/components/admin/common/SeoOptions';
 import DemoCourse from '@/components/admin/courses/DemoCourse';
 import SelectCategoryCourse from '@/components/admin/courses/SelectCategoryCourse';
+import SelectDemoCourse from '@/components/admin/courses/SelectDemoCourse';
 import GeneralProduct from '@/components/admin/product/GeneralProduct';
 import SelectAttVariableProduct from '@/components/admin/product/SelectAttVariableProduct';
 import SelectProductTag from '@/components/admin/product/SelectProductTag';
@@ -272,14 +273,6 @@ const Page = () => {
                     {
                       <>
                         <div className="flex items-center justify-between gap-10 border-b pb-4">
-                          <Input
-                            isRequired
-                            label="عنوان "
-                            classNameInput="!h-[48px] bg-[#f5f6f6]"
-                            name="enTitle"
-                            className="lg:col-span-2"
-                            formik={formik}
-                          />
                           <Button
                             onClick={handleAddVariableProduct}
                             className="mt-6 w-[120px] bg-orange-400 text-white"
@@ -291,7 +284,7 @@ const Page = () => {
                         {formik.values?.demo?.map((product, idx) => {
                           if (!product) return null;
                           return (
-                            <SelectAttVariableProduct
+                            <SelectDemoCourse
                               product={product}
                               idx={idx}
                               key={idx}

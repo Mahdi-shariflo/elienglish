@@ -82,6 +82,14 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             classNameInput="!h-[48px] bg-[#f5f6f6]"
             label={'قیمت  پیشنهادی'}
             name={`${baseName}.suggestedDiscount`}
+            value={formik.values?.children?.[idx].suggestedDiscount}
+          />
+          <Input
+            formik={formik}
+            price
+            classNameInput="!h-[48px] bg-[#f5f6f6]"
+            label={'قیمت  تخفیف خورده'}
+            name={`${baseName}.discountPrice`}
             value={formik.values?.children?.[idx].discountPrice}
           />
           <Input

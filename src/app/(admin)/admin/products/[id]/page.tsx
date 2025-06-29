@@ -128,6 +128,7 @@ const Page = () => {
               url: generateRandomString(),
               urlVar: `${formik.values?.url}`,
               price: +removeNumNumeric(varible.price),
+              discountPrice: +removeNumNumeric(varible.discountPrice),
               suggestedDiscount: +removeNumNumeric(varible.suggestedDiscount),
               count: Number(varible.count),
               published: varible.published === 'false' ? false : true,
