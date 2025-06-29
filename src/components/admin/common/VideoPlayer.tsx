@@ -24,6 +24,7 @@ const VideoPlayer = ({ url, poster }: { url: string; poster: string }) => {
       <Video
         ref={videoRef}
         poster={poster}
+        // src={url}
         src={
           'https://caspian19.cdn.asset.aparat.com/aparat-video/7a13c601c23aca9e0bde8ffc755d13c063599691-1080p.mp4?wmsAuthSign=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6ImQ0Y2YzYmNlOWY5MjVjMDdiMmU0MmVjNDY0YWYwMzk1IiwiZXhwIjoxNzQ5OTc4MTAyLCJpc3MiOiJTYWJhIElkZWEgR1NJRyJ9.R9ziFcoWJ1Xy-8yKM4jmw6mizSdhmK2wyoX3QopLYtM'
         }

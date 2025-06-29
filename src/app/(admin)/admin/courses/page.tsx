@@ -89,7 +89,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        محصولات
+        دوره‌ها
       </p>
       <Input
         value={searchInput}
@@ -110,7 +110,7 @@ const Page = () => {
         showData={columns}
         columns={['select', 'count', 'title', 'price', 'discountPrice', 'action']}
         nameAction="ایجاد دوره جدید"
-        onAction={() => router.push(`/admin/courses/new/`)}
+        onAction={() => router.push(`/admin/products/new/`)}
         onChangeSort={onChangeSort}
         onChangePage={onChangePage}
         sort={filter.sort}

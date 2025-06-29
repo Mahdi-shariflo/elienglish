@@ -58,7 +58,7 @@ const Information = ({ product }: { product: Product }) => {
             onClick={goComment}
             className="flex !w-full items-start justify-start gap-4 !rounded-none border-t border-[#E4E7E9] py-3 font-medium lg:border-b"
           >
-            <p className="text-[14px]">دیدگاه کاربران</p>
+            <p className="font-medium text-[14px]">دیدگاه کاربران</p>
             <div className="flex items-center gap-2">
               <span>
                 <svg
@@ -77,18 +77,21 @@ const Information = ({ product }: { product: Product }) => {
               <span className="font-regular text-[#6E3DFF]">
                 {isNaN(rate) ? 0 : rate.toFixed(1)}
               </span>
-              <span className="text-main">دیدگاه</span>
+              <span className="font-medium text-main">دیدگاه</span>
             </div>
           </button>
         </div>
         {/* property */}
         {findainProperties?.length >= 1 && (
-          <div className="border-b border-t border-[#E4E7E9] py-4 lg:mt-[16px] lg:border-0 lg:py-0">
+          <div className="border-b border-t border-[#E4E7E9] py-4 last:border-none lg:mt-[16px] lg:border-0 lg:py-0">
             <p className="font-bold text-[14px] text-[#172334]">ویژگی‌های اصلی</p>
             <ul className="mt-[14px] space-y-4">
               {findainProperties.slice(0, 4).map((attribute, idx) => {
                 return (
-                  <li key={idx} className="flex items-start gap-5">
+                  <li
+                    key={idx}
+                    className="flex items-start gap-5 border-b border-dashed pb-3 lg:border-none"
+                  >
                     <span className="flex !w-fit min-w-[80px] items-center !gap-3 font-regular text-[14px] text-[#7D8793] lg:min-w-[80px] lg:gap-1">
                       <span>
                         <svg

@@ -61,7 +61,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
     >
       {product?.description ? (
         <Tab key={'interdauce'} title={<p>معرفی محصول</p>}>
-          <div className="mt-5">
+          <div className="mt-5 px-3 lg:px-0">
             <Title title="معرفی محصول" />
             <div className="mt-4">
               <p

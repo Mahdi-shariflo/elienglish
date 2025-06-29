@@ -50,9 +50,9 @@ const ProductPage = ({ children, product, breadcrumb }: Props) => {
         breadcrumbs={[{ title: product.title, url: '', id: '1' }]}
       />
 
-      <div className="lg:container_page mt-3 flex flex-col items-start gap-2 lg:flex-row">
+      <div className="lg:container_page mt-3 flex flex-col items-start gap-2 lg:flex-row 2xl:gap-8">
         <div className="w-full">
-          <div className="flex flex-col items-start gap-[11px] lg:mt-[25px] lg:min-h-[503px] lg:flex-row">
+          <div className="flex flex-col items-start gap-[11px] lg:mt-[25px] lg:min-h-[503px] lg:flex-row 2xl:gap-8">
             <Gallery product={product} />
             <Information product={product} />
           </div>
