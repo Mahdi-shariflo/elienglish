@@ -183,3 +183,7 @@ hr {
 .drop_shadow_cart {
   box-shadow: -2px 2px 15px -1px #7171711f;
 }
+
+.drop_shadow_faq {
+  box-shadow: 0px 2px 32px 0px #1c1c1c0f;
+}
