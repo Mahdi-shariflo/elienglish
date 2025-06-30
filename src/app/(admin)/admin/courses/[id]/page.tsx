@@ -4,35 +4,36 @@ import Media from '@/components/admin/common/Media';
 import SeoOptions from '@/components/admin/common/SeoOptions';
 import DemoCourse from '@/components/admin/courses/DemoCourse';
 import SelectCategoryCourse from '@/components/admin/courses/SelectCategoryCourse';
+import SelectChaptersCourse from '@/components/admin/courses/SelectChaptersCourse';
 import SelectDemoCourse from '@/components/admin/courses/SelectDemoCourse';
 import GeneralProduct from '@/components/admin/product/GeneralProduct';
-import SelectAttVariableProduct from '@/components/admin/product/SelectAttVariableProduct';
 import SelectProductTag from '@/components/admin/product/SelectProductTag';
 import SelectPropertyModal from '@/components/admin/product/SelectPropertModal';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import IsClient from '@/components/common/IsClient';
 import Select from '@/components/common/Select';
-import { useActionProductAdmin } from '@/hooks/admin/products/useActionProductAdmin';
-import { useActionVariable } from '@/hooks/admin/products/useActionVariable';
-import { useGetProductById } from '@/hooks/admin/products/useGetProductById';
+import { useActionCourseAdmin } from '@/hooks/admin/courses/useActionCourseAdmin';
+import { useGetCourseById } from '@/hooks/admin/courses/useGetCourseById';
 import { converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
 import { StatusOptionsAdmin } from '@/lib/data';
 import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
+import { getMediaType } from '@/lib/utils';
 import { BASEURL } from '@/lib/variable';
 import { Chip, Tab, Tabs } from '@heroui/react';
 import { useFormik } from 'formik';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { CgClose } from 'react-icons/cg';
+import Video from 'next-video';
 const initialValues = {
   title: '',
   type: '',
   canonicalurl: '',
   url: '',
-  enTitle: '',
   description: '',
   thumbnailImage: undefined,
+  coverVideo: undefined,
+  video: undefined,
   galleryImage: [],
   tags: [],
   properties: [],
@@ -53,6 +54,7 @@ const initialValues = {
   redirecturltype: '',
   redirecturl: '',
   demo: [],
+  chapters: [],
 };
 const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
@@ -62,12 +64,12 @@ const mapProductToFormValues = (product: any) => ({
   enTitle: product.enTitle || '',
   description: product.description || '',
   thumbnailImage: product.thumbnailImage || undefined,
-  galleryImage: product.galleryImage || [],
+  coverVideo: product.coverVideo || undefined,
+  video: product.video || undefined,
   tags: product.tags || [],
   properties: product?.properties,
-  variables: product.variables || [],
   category: product?.category?._id ? [product.category._id] : [],
-  categories: product.categories || [],
+  categories: product.categories.map((item: { _id: string }) => item._id) || [],
   price: product.price?.toString() || '',
   discountPrice: product.discountPrice?.toString() || '',
   discountTime: converDatePer(product.discountTime) || '',
@@ -76,20 +78,19 @@ const mapProductToFormValues = (product: any) => ({
   metaTitle: product.metaTitle || '',
   metaDescription: product.metaDescription || '',
   keyWords: product.keyWords || '',
-  variablesAttribiutes: product.variablesAttribiutes || [],
   robots: product.robots || '',
   redirecturltype: product.redirecturltype || '',
   redirecturl: product.redirecturl || '',
   demo: product?.demo,
+  chapters: product?.chapters,
 });
 
 const Page = () => {
   const [showDemoProductModal, setShowDemoProductModal] = useState(false);
-  const { mutate: mutateVariable, isPending: isPendingVariable } = useActionVariable();
   const { id }: { id: string } = useParams();
-  const { data: singleProduct, isSuccess, isFetching } = useGetProductById();
+  const { data: singleProduct, isSuccess, isFetching } = useGetCourseById();
   const [open, setOpen] = useState(false);
-  const { mutate, isPending } = useActionProductAdmin();
+  const { mutate, isPending } = useActionCourseAdmin();
   const editorRef = useRef<HTMLInputElement | null>(null);
   const formik = useFormik({
     initialValues: initialValues,
@@ -102,10 +103,14 @@ const Page = () => {
         // @ts-expect-error error
         thumbnailImage: values?.thumbnailImage?._id!,
         // @ts-expect-error error
+        video: values?.video?._id!,
+        // @ts-expect-error error
+        coverVideo: values?.coverVideo?._id!,
+        // @ts-expect-error error
         galleryImage: values?.galleryImage?.map((item) => item._id),
         // @ts-expect-error error
         tags: values?.tags.map((item) => item._id),
-        category: values?.category,
+        ...(Array.isArray(values?.category) ? { category: values?.category[0] } : null),
         categories: values?.categories,
         price: +removeNumNumeric(values.price),
         discountPrice: +removeNumNumeric(values.discountPrice),
@@ -113,30 +118,41 @@ const Page = () => {
         // @ts-expect-error error
         description: editorRef?.current?.getContent(),
         properties: values?.properties,
+        demo: values.demo.map((item: any) => {
+          return {
+            title: item.title,
+            order: Number(item.order),
+            episodes: item.episodes.map((episode: any) => {
+              return {
+                title: episode.title,
+                order: Number(episode.order),
+                type: getMediaType(episode?.mediaUrl ? episode?.mediaUrl : episode.media.url),
+                mediaUrl: episode?.mediaUrl
+                  ? episode?.mediaUrl
+                  : `${BASEURL}/${episode?.media?.url}`,
+              };
+            }),
+          };
+        }),
+        chapters: values.chapters.map((item: any) => {
+          return {
+            title: item.title,
+            order: Number(item.order),
+            lessons: item.lessons,
+            duration: item.duration,
+            episodes: item.episodes.map((episode: any) => {
+              return {
+                title: episode.title,
+                order: Number(episode.order),
+                duration: episode.duration,
+              };
+            }),
+          };
+        }),
       };
       // add and update product
       mutate({ data: removeEmptyFields(data), id: id! });
       // add and update cariable product
-      if (values.demo.length >= 1) {
-        values?.demo?.map((varible: any) =>
-          mutateVariable({
-            data: {
-              ...varible,
-              parent: id!,
-              thumbnailImage: varible?.thumbnailImage?._id,
-              title: `${formik.values.title} (${varible.title})`,
-              url: generateRandomString(),
-              urlVar: `${formik.values?.url}`,
-              price: +removeNumNumeric(varible.price),
-              suggestedDiscount: +removeNumNumeric(varible.suggestedDiscount),
-              minCart: +removeNumNumeric(varible.minCart),
-              count: Number(varible.count),
-              published: varible.published === 'false' ? false : true,
-            },
-            id: varible._id!,
-          })
-        );
-      }
     },
   });
   const product = singleProduct?.data?.data;
@@ -161,6 +177,19 @@ const Page = () => {
       ...(formik.values.demo || []),
     ]);
   };
+  const handleAddChaptersProduct = () => {
+    const newProductId = generateRandomString();
+    // اضافه کردن مقدار جدید به فرمیک
+    formik.setFieldValue('chapters', [
+      {
+        productId: newProductId,
+        mainVariableProperty: false,
+      },
+      ...(formik.values.chapters || []),
+    ]);
+  };
+
+  console.log(formik.values);
   return (
     <IsClient>
       <div>
@@ -182,14 +211,6 @@ const Page = () => {
                 formik={formik}
               />
 
-              <Input
-                isRequired
-                label="عنوان انگلیسی"
-                classNameInput="!h-[48px] bg-[#f5f6f6]"
-                name="enTitle"
-                className="lg:col-span-2"
-                formik={formik}
-              />
               <Select
                 label="وضعیت انتشار "
                 options={StatusOptionsAdmin}
@@ -201,8 +222,8 @@ const Page = () => {
               <Select
                 label="نوع محصول"
                 options={[
-                  { label: 'فیزیکی', value: 'physical' },
-                  { label: 'دیجیتال', value: 'digital' },
+                  { label: 'حضوری', value: 'inPerson' },
+                  { label: 'آنلاین', value: 'virtual' },
                 ]}
                 nameLabel="label"
                 nameValue="value"
@@ -293,13 +314,35 @@ const Page = () => {
                             />
                           );
                         })}
-                        <Button
-                          onClick={formik.handleSubmit}
-                          isLoading={isPending || isPendingVariable}
-                          className="col-span-2 !mt-8 bg-main text-white"
-                        >
-                          ثبت محصول متغیر
-                        </Button>
+                      </>
+                    }
+                  </div>
+                </Tab>
+                <Tab key={'3'} title={<p>فصل‌ها</p>}>
+                  <div>
+                    {
+                      <>
+                        <div className="flex items-center justify-between gap-10 border-b pb-4">
+                          <Button
+                            onClick={handleAddChaptersProduct}
+                            className="mt-6 w-[120px] bg-orange-400 text-white"
+                          >
+                            افزودن
+                          </Button>
+                        </div>
+
+                        {formik.values?.chapters?.map((product, idx) => {
+                          if (!product) return null;
+                          return (
+                            <SelectChaptersCourse
+                              product={product}
+                              idx={idx}
+                              key={idx}
+                              // @ts-expect-error error
+                              formik={formik}
+                            />
+                          );
+                        })}
                       </>
                     }
                   </div>
@@ -328,7 +371,28 @@ const Page = () => {
                   )}
                 </div>
               </Media>
-              {/* <Media
+              <Media
+                title="پوستر ویدیو"
+                className="w-full"
+                withModal
+                onSelect={(img) => formik.setFieldValue('coverVideo', img)}
+              >
+                <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+                  {typeof formik.values.coverVideo === 'object' ? (
+                    <img
+                      className="h-full w-full object-contain"
+                      // @ts-expect-error error
+                      src={`${BASEURL}/${formik.values?.coverVideo?.url}`}
+                      alt="thumbnail"
+                    />
+                  ) : (
+                    <p className="text-center font-regular text-lg">
+                      انتخاب پوستر ویدیو <span className="text-red-500">*</span>
+                    </p>
+                  )}
+                </div>
+              </Media>
+              <Media
                 title="ویدیو محصول"
                 className="w-full"
                 withModal
@@ -336,51 +400,13 @@ const Page = () => {
               >
                 <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
                   {typeof formik.values.video === 'object' ? (
+                    // @ts-expect-error error G
                     <Video autoPlay src={`${BASEURL}/${formik?.values?.video?.url}`} />
                   ) : (
                     <p className="text-center font-regular text-lg">
                       انتخاب ویدیو محصول <span className="text-red-500">*</span>
                     </p>
                   )}
-                </div>
-              </Media> */}
-              <Media
-                title="گالری محصول"
-                className="w-full"
-                withModal
-                multiple
-                onSelect={(img: any) =>
-                  formik.setFieldValue('galleryImage', [...formik.values.galleryImage, ...img])
-                }
-              >
-                <div className="flex flex-wrap gap-3 overflow-hidden">
-                  <p className="flex h-[90px] w-[90px] items-center justify-center rounded-xl border text-center font-regular text-[12px]">
-                    انتخاب عکس
-                  </p>
-                  {formik.values.galleryImage.length >= 1 &&
-                    formik.values.galleryImage.map((item, idx) => (
-                      <span className="relative">
-                        <img
-                          key={idx}
-                          className="h-[90px] w-[90px] rounded-xl border object-contain"
-                          // @ts-expect-error error
-                          src={`${BASEURL}/${item?.url}`}
-                          alt="thumbnail"
-                        />
-                        <Button
-                          type="button"
-                          onClick={() => {
-                            const newImages = formik.values.galleryImage.filter(
-                              (_, i) => i !== idx
-                            );
-                            formik.setFieldValue('galleryImage', newImages);
-                          }}
-                          className="absolute left-0 top-0 !h-fit !w-fit min-w-fit rounded-br-full rounded-tr-full border !p-1"
-                        >
-                          <CgClose />
-                        </Button>{' '}
-                      </span>
-                    ))}
                 </div>
               </Media>
 

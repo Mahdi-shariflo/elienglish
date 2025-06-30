@@ -318,6 +318,104 @@ export const initialDataProducts = ({ onDelete, onSelect, selected, onEdit }: Pr
     ),
   },
 ];
+export const initialDataCoruses = ({ onDelete, onSelect, selected, onEdit }: Props) => [
+  {
+    title: <HeaderCell align="center" title="انتخاب" />,
+    dataIndex: 'select',
+    key: 'select',
+    render: (_: string, row: any) => (
+      <Checkbox
+        isSelected={selected?.includes(row._id)}
+        onValueChange={() => (onSelect ? onSelect(row) : {})}
+      />
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عنوان" />,
+    dataIndex: 'title',
+    key: 'title',
+    render: (value: string, row: any) => (
+      <div className="flex items-center gap-2">
+        <img
+          loading="eager"
+          key={row?.thumbnailImage?.url}
+          className="h-14 w-14 rounded-lg"
+          src={`${BASEURL}/${row?.thumbnailImage?.url}`}
+        />
+        <p className="w-[270px] overflow-hidden text-ellipsis text-justify text-xs text-gray-800">
+          {value}
+        </p>
+      </div>
+    ),
+  },
+
+  {
+    title: <HeaderCell align="center" title="نام انگلیسی" />,
+    dataIndex: 'enTitle',
+    key: 'enTitle',
+    render: (value: string) => (
+      <p className="text-center text-xs text-gray-800 [direction:ltr]">{value}</p>
+    ),
+  },
+  {
+    title: <HeaderCell title="قیمت" />,
+    dataIndex: 'price',
+    key: 'price',
+    render: (value: string) => <p className={`text-center`}>{Number(value).toLocaleString()}</p>,
+  },
+  {
+    title: <HeaderCell title="قیمت ویژه" />,
+    dataIndex: 'discountPrice',
+    key: 'discountPrice',
+    render: (value: string) => <p className={`text-center`}>{Number(value).toLocaleString()}</p>,
+  },
+  {
+    title: <HeaderCell title="تعداد" />,
+    dataIndex: 'count',
+    key: 'count',
+    render: (value: number) => (
+      <p className={`text-center ${Number(value) === 0 ? 'text-red-500' : 'text-green-500'}`}>
+        {value}
+      </p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="زمان بندی" />,
+    dataIndex: 'discountTime',
+    key: 'discountTime',
+    // render: (_: string, row: any) => <div>
+    //     <Countdown date={row.discountTime.split(" ")[1]} />
+    // </div>
+  },
+  {
+    title: <HeaderCell title="وضعیت" />,
+    dataIndex: 'published',
+    key: 'published',
+    render: (value: number) => <p className={`text-center`}>{value ? 'منتشر شده' : 'پیش نویس'}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="عملیات" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-3 text-gray-600">
+        {onDelete ? (
+          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+            <Delete_icon />
+          </Button>
+        ) : null}
+        {onEdit ? (
+          <Link target="_blank" href={`/admin/courses/${row._id}/`}>
+            <Edit_icon />
+          </Link>
+        ) : null}
+        <a target="_blank" href={`${BASEURL_SITE}/course/${row.url}/`}>
+          <CgEye size={18} />
+        </a>
+      </div>
+    ),
+  },
+];
 export const initialDataProperties = ({ onDelete, onEdit, onView }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,

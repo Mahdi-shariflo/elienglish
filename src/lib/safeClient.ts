@@ -71,14 +71,14 @@ client.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error.response);
+    console.log(error?.response?.status);
     const status = error.response?.status || error.status;
     if (status === 410) {
       return notFound();
     }
-    if (status === 404) {
-      return notFound();
-    }
+    // if (status === 404) {
+    //   return notFound();
+    // }
     if ((typeof window !== 'undefined' && status === 401) || status === 401) {
       // removeSession();
       location.href === '/auth';

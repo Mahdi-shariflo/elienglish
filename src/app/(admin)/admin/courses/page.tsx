@@ -4,8 +4,7 @@ import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetCoursesAdmin } from '@/hooks/admin/courses/useGetCoursesAdmin';
-import { useGetProductsAdmin } from '@/hooks/admin/products/useGetProductsAdmin';
-import { initialDataProducts } from '@/lib/table-column';
+import { initialDataCoruses } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -44,8 +43,8 @@ const Page = () => {
 
   const columns = useMemo(
     () =>
-      initialDataProducts({
-        onEdit: (row) => router.push(`/admin/products/${row._id}/`),
+      initialDataCoruses({
+        onEdit: (row) => router.push(`/admin/courses/${row._id}/`),
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
@@ -59,7 +58,7 @@ const Page = () => {
     [isSuccess]
   );
 
-  const product = data?.data;
+  const product = data?.data?.data;
 
   // const onChangeInput = (search: string) => {
   //   setSearchInput(search);
@@ -86,6 +85,8 @@ const Page = () => {
       behavior: 'smooth',
     });
   };
+
+  console.log(product);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -106,7 +107,7 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.data}
+        mainData={product?.course}
         showData={columns}
         columns={['select', 'count', 'title', 'price', 'discountPrice', 'action']}
         nameAction="ایجاد دوره جدید"

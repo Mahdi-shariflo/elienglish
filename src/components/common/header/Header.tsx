@@ -63,7 +63,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/mag',
+    src: '/courses',
   },
   {
     name: 'محصولات',
@@ -94,7 +94,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/mag',
+    src: '/products',
   },
   {
     name: 'وبلاگ',
