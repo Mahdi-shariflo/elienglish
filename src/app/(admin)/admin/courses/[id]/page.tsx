@@ -25,6 +25,7 @@ import { useFormik } from 'formik';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Video from 'next-video';
+import Title from '@/components/common/Title';
 const initialValues = {
   title: '',
   type: '',
@@ -294,11 +295,12 @@ const Page = () => {
                     {
                       <>
                         <div className="flex items-center justify-between gap-10 border-b pb-4">
+                          <Title title="دموی رایگان" />
                           <Button
                             onClick={handleAddVariableProduct}
-                            className="mt-6 w-[120px] bg-orange-400 text-white"
+                            className="w-[120px] border text-black"
                           >
-                            افزودن
+                            افزودن دمو
                           </Button>
                         </div>
 

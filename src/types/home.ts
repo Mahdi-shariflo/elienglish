@@ -61,6 +61,7 @@ export type Category = {
 };
 
 export type Product = {
+  order: number;
   tags: {
     title: string;
     type: string;
@@ -88,6 +89,85 @@ export type Product = {
   nid: string;
   wooid: string;
   skuId: string;
+  description: string;
+  updatedAt?: string;
+  properties: {
+    attribiute: string[];
+    main: boolean;
+    property: string;
+    _id: string;
+  }[];
+
+  enTitle: string;
+  video: {
+    url: string;
+  };
+  galleryImage: {
+    url: string;
+    title: string;
+    thumbnailImage: {
+      url: string;
+    };
+  }[];
+  _id: string;
+  title: string;
+  shortTitle: string;
+  url: string;
+  thumbnailImage: ThumbnailImage;
+  price: number;
+  discountPrice: number;
+  discountTime: string;
+  count: number;
+  freedelivery: boolean;
+  towBuyThree: boolean;
+  published: boolean;
+  minCart: number;
+  singleSale: boolean;
+  isVariable: boolean;
+  variables: Product[];
+  children: Product[];
+  property: string;
+  mainVariableProperty: string;
+  attribiute: {
+    color: string;
+    image: {
+      url: string;
+    };
+    createdAt: string;
+    keyWords: [];
+    property: string;
+    title: string;
+    updatedAt: string;
+    url: string;
+    __v: 0;
+    _id: string;
+  }[];
+};
+export type Coruse = {
+  episodes: { title: string; type: string }[];
+  order: number;
+  tags: {
+    title: string;
+    type: string;
+    url: string;
+  }[];
+  productId?: string;
+  amount: number;
+  breadcrumb: [];
+  metaDescription: string;
+  metaTitle: string;
+  createdAt?: string;
+  orderDiscountPrice: string;
+  productCount: number;
+  productDiscountPrice: number;
+  productPrice: number;
+  categories: { title: string }[];
+  category: {
+    metaTitle: string;
+    _id: string;
+    title: string;
+    url: string;
+  };
   description: string;
   updatedAt?: string;
   properties: {
