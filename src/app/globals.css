@@ -187,3 +187,11 @@ hr {
 .drop_shadow_faq {
   box-shadow: 0px 2px 32px 0px #1c1c1c0f;
 }
+
+.bg-faq {
+  background-image: url('../../public/images/faq-desktop.png');
+}
+
+.bg-contact-us {
+  background-image: url('../../public/images/bg-contact-us.png');
+}
