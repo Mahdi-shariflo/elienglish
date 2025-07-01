@@ -75,5 +75,6 @@ export async function getSession(): Promise<User | null> {
   return {
     finger,
     viewport,
+    theme,
   };
 }

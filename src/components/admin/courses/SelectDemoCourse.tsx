@@ -2,15 +2,16 @@ import { ResultAttribute } from '@/lib/product';
 import { FormikProps } from 'formik';
 import React, { useState } from 'react';
 import FormVariableCourse from './FormCourseDemo';
-import { Coruse, Product } from '@/types/home';
+import { Corurse } from '@/types/home';
 import useGlobalStore from '@/store/global-store';
 import { Accordion, AccordionItem } from '@heroui/react';
 import Button from '@/components/common/Button';
+import { Delete_icon } from '@/components/common/icon';
 
 type Props = {
   formik: FormikProps<{ [key: string]: ResultAttribute[] }>;
   idx: number;
-  product?: Coruse;
+  product?: Corurse;
 };
 const SelectDemoCourse = ({ formik, idx, product }: Props) => {
   const [showVariableForm, setShowVariableForm] = useState(false);
@@ -28,12 +29,16 @@ const SelectDemoCourse = ({ formik, idx, product }: Props) => {
     const updatedChildren = formik.values.demo.filter((_, i) => i !== idx);
     formik.setFieldValue('demo', updatedChildren);
   };
-  console.log(product, 'kkkkkkkkkkkkkkkkkkkkkkk');
   return (
     <>
       <div className="mt-3">
         <Accordion>
           <AccordionItem
+            startContent={
+              <Button onClick={onRemove} className="!h-fit !w-fit">
+                <Delete_icon />
+              </Button>
+            }
             indicator={({ isOpen }) => (
               <svg
                 width="24"

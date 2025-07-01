@@ -2,13 +2,16 @@
 import Slidebar from '@/components/admin/Slidebar';
 import Button from '@/components/common/Button';
 import Logo from '@/components/common/Logo';
+import { saveTheme } from '@/lib/auth/storage';
 import { Drawer, DrawerContent, Spinner } from '@heroui/react';
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 export const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [open, setOpen] = useState(false);
-
+  useEffect(() => {
+    saveTheme('light');
+  }, []);
   return (
     <div className="flex min-h-screen w-screen flex-col bg-[#F5F6FA] lg:flex-row lg:gap-5">
       <div className="container_page flex items-center justify-between py-4 lg:hidden">

@@ -1,11 +1,10 @@
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Filters from '@/components/blog/Filters';
 import React from 'react';
-import CardBlog from '@/components/blog/CardBlog';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Blog } from '@/types';
 import { Product } from '@/types/home';
+import CardProduct from '@/components/common/CardProduct';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -13,8 +12,7 @@ type Props = {
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
   const result = await request({ url: `/product/main` });
-  // const product: { blogs: Product[]; totalPages: number } = result?.data?.data;
-  console.log(result);
+  const product: { products: Product[]; totalPages: number } = result?.data?.data;
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
@@ -24,7 +22,7 @@ const Page = async ({ searchParams }: Props) => {
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
-              title: 'دسته بندی بلاگ‌ها',
+              title: 'دسته بندی محصولات',
               properties: [
                 {
                   title: 'نوع مقالات',
@@ -58,11 +56,18 @@ const Page = async ({ searchParams }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
-            {/* {product.blogs.map((blog, idx) => (
-              <CardBlog blog={blog} key={idx} />
-            ))}
-            <Pagination className="mt-10" total={blog?.totalPages} /> */}
+          <div className="w-full">
+            <div className="grid w-full grid-cols-3 gap-4 rounded-lg px-3 dark:bg-[#172334]">
+              {product?.products.map((product, idx) => (
+                <CardProduct
+                  classNameImage="mt-5 px-2"
+                  className="!h-[400px] w-full"
+                  product={product}
+                  key={idx}
+                />
+              ))}
+            </div>
+            <Pagination className="mt-10" total={product?.totalPages} />
           </div>
         </div>
       </div>

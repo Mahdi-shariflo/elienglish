@@ -143,7 +143,7 @@ export type Product = {
     _id: string;
   }[];
 };
-export type Coruse = {
+export type Corurse = {
   episodes: { title: string; type: string }[];
   order: number;
   tags: {
