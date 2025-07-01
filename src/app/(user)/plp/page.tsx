@@ -12,7 +12,7 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
-        <Breadcrumbs breadcrumbs={[]} />
+        <Breadcrumbs breadcrumbs={[{ id: '444', title: 'تعین سطح', url: '#' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="تعین سطح"
@@ -53,7 +53,7 @@ const Page = async ({ searchParams }: Props) => {
               children: [],
             }}
           />
-          <div className="grid w-full grid-cols-4 gap-4 rounded-lg px-3 dark:bg-[#172334]">
+          <div className="grid w-full gap-4 rounded-lg px-3 dark:bg-[#172334] lg:grid-cols-4">
             <CardPlp />
             <CardPlp />
             <CardPlp />

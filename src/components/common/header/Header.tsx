@@ -187,7 +187,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/contact-us',
+    src: '/about-us',
   },
   {
     name: 'سوالات متداول',
