@@ -26,6 +26,7 @@ import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Video from 'next-video';
 import Title from '@/components/common/Title';
+import SelectPropertyCourseModal from '@/components/admin/courses/SelectPropertyCourseModal';
 const initialValues = {
   title: '',
   type: '',
@@ -268,88 +269,92 @@ const Page = () => {
                   ))}
                 </div>
               </div>
-              <Tabs
-                variant="underlined"
-                classNames={{
-                  base: 'w-full flex !mt-10 flex-col',
-                  tabList:
-                    'gap-4 sm:gap-6 w-full font-regular relative rounded-none p-0 border-b border-divider',
-                  cursor: 'w-full h-[1.3px] bg-main',
-                  tab: 'max-w-full !text-[12px] text-[#616A76] lg:!text-[18px] px-0 h-10 lg:h-14',
-                  tabContent: 'group-data-[selected=true]:text-[#0C0C0C]',
-                }}
-              >
-                <Tab key={'1'} title={<p>محصول ساده</p>}>
-                  <GeneralProduct formik={formik}>
-                    <Button
-                      isLoading={isPending}
-                      className="col-span-2 !mt-8 bg-main text-white"
-                      onClick={() => formik.handleSubmit()}
-                    >
-                      {id === 'new' ? 'ثبت محصول' : 'ویرایش محصول'}
-                    </Button>
-                  </GeneralProduct>
-                </Tab>
-                <Tab key={'2'} title={<p>دمو </p>}>
-                  <div>
-                    {
-                      <>
-                        <div className="flex items-center justify-between gap-10 border-b pb-4">
-                          <Title title="دموی رایگان" />
-                          <Button
-                            onClick={handleAddVariableProduct}
-                            className="w-[120px] border text-black"
-                          >
-                            افزودن دمو
-                          </Button>
-                        </div>
+              <div className="flex min-h-[60vh] flex-col justify-between">
+                <div className="flex-1">
+                  <Tabs
+                    variant="underlined"
+                    classNames={{
+                      base: 'w-full flex !mt-10 flex-col',
+                      tabList:
+                        'gap-4 sm:gap-6 w-full font-regular relative rounded-none p-0 border-b border-divider',
+                      cursor: 'w-full h-[1.3px] bg-main',
+                      tab: 'max-w-full !text-[12px] text-[#616A76] lg:!text-[18px] px-0 h-10 lg:h-14',
+                      tabContent: 'group-data-[selected=true]:text-[#0C0C0C]',
+                    }}
+                  >
+                    <Tab key={'1'} title={<p>محصول ساده</p>}>
+                      <GeneralProduct formik={formik}></GeneralProduct>
+                    </Tab>
+                    <Tab key={'2'} title={<p>دمو </p>}>
+                      <div>
+                        {
+                          <>
+                            <div className="flex items-center justify-between gap-10 border-b pb-4">
+                              <Title title="دموی رایگان" />
+                              <Button
+                                onClick={handleAddVariableProduct}
+                                className="w-[120px] border text-black"
+                              >
+                                افزودن دمو
+                              </Button>
+                            </div>
 
-                        {formik.values?.demo?.map((product, idx) => {
-                          if (!product) return null;
-                          return (
-                            <SelectDemoCourse
-                              product={product}
-                              idx={idx}
-                              key={idx}
-                              // @ts-expect-error error
-                              formik={formik}
-                            />
-                          );
-                        })}
-                      </>
-                    }
-                  </div>
-                </Tab>
-                <Tab key={'3'} title={<p>فصل‌ها</p>}>
-                  <div>
-                    {
-                      <>
-                        <div className="flex items-center justify-between gap-10 border-b pb-4">
-                          <Button
-                            onClick={handleAddChaptersProduct}
-                            className="mt-6 w-[120px] bg-orange-400 text-white"
-                          >
-                            افزودن
-                          </Button>
-                        </div>
+                            {formik.values?.demo?.map((product, idx) => {
+                              if (!product) return null;
+                              return (
+                                <SelectDemoCourse
+                                  product={product}
+                                  idx={idx}
+                                  key={idx}
+                                  // @ts-expect-error error
+                                  formik={formik}
+                                />
+                              );
+                            })}
+                          </>
+                        }
+                      </div>
+                    </Tab>
+                    <Tab key={'3'} title={<p>فصل‌ها</p>}>
+                      <div>
+                        {
+                          <>
+                            <div className="flex items-center justify-between gap-10 border-b pb-4">
+                              <Title title="فصل دوره‌ها" />
+                              <Button
+                                onClick={handleAddVariableProduct}
+                                className="w-[120px] border text-black"
+                              >
+                                افزودن فصل جدید
+                              </Button>
+                            </div>
 
-                        {formik.values?.chapters?.map((product, idx) => {
-                          if (!product) return null;
-                          return (
-                            <SelectChaptersCourse
-                              product={product}
-                              idx={idx}
-                              key={idx}
-                              // @ts-expect-error error
-                              formik={formik}
-                            />
-                          );
-                        })}
-                      </>
-                    }
-                  </div>
-                </Tab>
-              </Tabs>
+                            {formik.values?.chapters?.map((product, idx) => {
+                              if (!product) return null;
+                              return (
+                                <SelectChaptersCourse
+                                  product={product}
+                                  idx={idx}
+                                  key={idx}
+                                  // @ts-expect-error error
+                                  formik={formik}
+                                />
+                              );
+                            })}
+                          </>
+                        }
+                      </div>
+                    </Tab>
+                  </Tabs>
+                </div>
+                <Button
+                  isLoading={isPending}
+                  className="col-span-2 !mt-8 bg-main text-white"
+                  onClick={() => formik.handleSubmit()}
+                >
+                  {id === 'new' ? 'ثبت محصول' : 'ویرایش محصول'}
+                </Button>
+              </div>
             </div>
             <div className="flex !w-[400px] min-w-[400px] flex-col gap-4 rounded-lg border p-3">
               <Media
@@ -427,7 +432,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-      {open && <SelectPropertyModal formik={formik} open={open} setOpen={setOpen} />}
+      {open && <SelectPropertyCourseModal formik={formik} open={open} setOpen={setOpen} />}
       {showDemoProductModal && (
         <DemoCourse open={showDemoProductModal} setOpen={setShowDemoProductModal} />
       )}
