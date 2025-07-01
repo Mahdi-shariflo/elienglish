@@ -31,7 +31,7 @@ const Page = async ({ params }: Props) => {
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
           <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
             <p className="font-medium text-main">دیکشنری الی انگلیش</p>
-            <MediaPreview blog={blog} />
+            <MediaPreview media={blog} />
             {/* title */}
             <InfoBlog blog={blog} />
             <Description blog={blog} />

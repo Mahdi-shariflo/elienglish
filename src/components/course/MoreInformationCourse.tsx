@@ -55,8 +55,9 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
           tabList:
             'gap-4 sm:gap-6 w-full font-regular relative rounded-none p-0 border-b border-divider',
           cursor: 'w-full h-[1.3px] bg-main',
-          tab: 'max-w-full !text-[12px] text-[#616A76] lg:!text-[18px] px-0 h-10 lg:h-14',
-          tabContent: 'group-data-[selected=true]:text-[#0C0C0C]',
+          tab: 'max-w-full !text-[12px] text-[#616A76]  lg:!text-[18px] px-0 h-10 lg:h-14',
+          tabContent:
+            'group-data-[selected=true]:text-[#0C0C0C] dark:group-data-[selected=true]:text-white',
         }}
       >
         {course?.description ? (

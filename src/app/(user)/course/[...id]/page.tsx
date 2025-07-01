@@ -21,15 +21,15 @@ const Page = async ({ params }: Props) => {
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
         />
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg px-3 pb-8 dark:!border-[#263248]">
-            <MediaPreview className="!mt-0" media={course} />
+          <div className="w-full gap-10 overflow-hidden rounded-lg border px-3 pb-8 dark:!border-[#263248]">
+            <MediaPreview className="!mt-0 dark:!mt-5" media={course} />
             <MoreInformationCourse course={course} />
           </div>
-          <div className="sticky top-24 w-full min-w-[380px] overflow-hidden rounded-lg bg-white p-4 drop-shadow-sm lg:w-[380px]">
-            <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524]">
+          <div className="sticky top-24 w-full min-w-[380px] overflow-hidden rounded-lg border bg-[#F4F6FA] p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:w-[380px]">
+            <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
               {course?.title}
             </p>
-            <p className="pt-4 font-regular text-[14px] text-[#33435A]">
+            <p className="pt-4 font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
               جلسات آموزش ویدیویی + جزوات تکمیلی + فایل‌های تمرین در هر جلسه
             </p>
             <div className="mt-10">
@@ -46,14 +46,16 @@ const Page = async ({ params }: Props) => {
                 </div>
               )}
               <div className="mt-4 flex items-center justify-between">
-                <p className="font-regular text-[14px] text-[#6A7890]">قیمت دوره</p>
+                <p className="font-regular text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
+                  قیمت دوره
+                </p>
                 <div className="flex items-center gap-1">
-                  <p className="font-extrabold text-[24px]">
+                  <p className="font-extrabold text-[24px] dark:text-white">
                     {course.discountPrice
                       ? Number(course.discountPrice).toLocaleString()
                       : Number(course.price).toLocaleString()}
                   </p>
-                  <span className="font-regular text-[#6A7890]">تومان</span>
+                  <span className="font-regular text-[#6A7890] dark:text-[#8E98A8]">تومان</span>
                 </div>
               </div>
             </div>
