@@ -125,6 +125,22 @@ const menus = [
       },
     ],
   },
+  {
+    icon: Courses_icon,
+    name: 'سوالات متداول',
+    href: ['/admin/faq'],
+    activeIcon: Courses_fill_icon,
+    children: [
+      {
+        name: 'دسته‌بندی',
+        href: '/admin/faq/categories/',
+      },
+      {
+        name: 'سوالات متداول',
+        href: '/admin/faq/',
+      },
+    ],
+  },
   // {
   //   icon: Slider_icon,
   //   name: 'اسلایدر‌ها',
