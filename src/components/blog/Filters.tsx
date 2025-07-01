@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
 import Button from '../common/Button';
 import { Arrow_back_mobile, Delete_icon, Filter_icon, Sort_icon } from '../common/icon';
-import ToggleFilter from './ToggleFilter';
 import CheckboxFilter from './CheckboxFilter';
 import BaseDialog from '../common/BaseDialog';
 import SortModal from './SortModal';
