@@ -6,7 +6,7 @@ import { Course } from '@/types/home';
 import useGlobalStore from '@/store/global-store';
 import { Accordion, AccordionItem } from '@heroui/react';
 import Button from '@/components/common/Button';
-import { Delete_icon } from '@/components/common/icon';
+import { Delete_icon, Edit_icon } from '@/components/common/icon';
 
 type Props = {
   formik: FormikProps<{ [key: string]: ResultAttribute[] }>;
@@ -35,9 +35,14 @@ const SelectDemoCourse = ({ formik, idx, product }: Props) => {
         <Accordion>
           <AccordionItem
             startContent={
-              <Button onClick={onRemove} className="!h-fit !w-fit">
-                <Delete_icon />
-              </Button>
+              <div>
+                <Button onClick={() => setShowVariableForm(true)} className="!h-fit !w-fit">
+                  <Edit_icon />
+                </Button>
+                <Button onClick={onRemove} className="!h-fit !w-fit">
+                  <Delete_icon />
+                </Button>
+              </div>
             }
             indicator={({ isOpen }) => (
               <svg
@@ -74,7 +79,7 @@ const SelectDemoCourse = ({ formik, idx, product }: Props) => {
               )
             }
           >
-            <div className="mt-2">
+            <div className="mt-2 space-y-6">
               {product?.episodes?.map((item, idx) => {
                 return (
                   <div className="flex items-center justify-between" key={idx}>
