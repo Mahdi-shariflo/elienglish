@@ -322,7 +322,7 @@ const Page = () => {
                             <div className="flex items-center justify-between gap-10 border-b pb-4">
                               <Title title="فصل دوره‌ها" />
                               <Button
-                                onClick={handleAddVariableProduct}
+                                onClick={handleAddChaptersProduct}
                                 className="w-[120px] border text-black"
                               >
                                 افزودن فصل جدید

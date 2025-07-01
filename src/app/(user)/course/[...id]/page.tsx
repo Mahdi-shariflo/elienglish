@@ -4,6 +4,7 @@ import React from 'react';
 import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
 import Button from '@/components/common/Button';
+import Breadcrumbs from '@/components/common/Breadcrumbs';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -12,16 +13,15 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/course/detail/${decodeURIComponent(id[0]!)}` });
   const course = result?.data?.data?.course;
 
-  console.log(course, 'ccccccccccccccccccccccccccc');
   return (
     <div className="pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
-        {/* <Breadcrumbs
-          page="/blogs/category"
-          breadcrumbs={[...blog?.breadcrumbPath, { id: '333', title: blog.title, url: '#' }]}
-        /> */}
-        <div className="flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg px-3 py-8 dark:!border-[#263248] lg:px-10">
+        <Breadcrumbs
+          page="/course/category"
+          breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
+        />
+        <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
+          <div className="w-full gap-10 overflow-hidden rounded-lg px-3 pb-8 dark:!border-[#263248]">
             <MediaPreview className="!mt-0" media={course} />
             <MoreInformationCourse course={course} />
           </div>
