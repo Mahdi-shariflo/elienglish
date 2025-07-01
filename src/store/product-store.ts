@@ -14,7 +14,7 @@ const useProductStore = create<ProductStore>()(
   devtools(
     immer((set) => ({
       selected: {
-        tab: '',
+        tab: 'interdauce',
         userInteracted: true,
       },
       setSelected: (data) => {

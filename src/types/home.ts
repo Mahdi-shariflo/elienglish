@@ -61,6 +61,9 @@ export type Category = {
 };
 
 export type Product = {
+  lessons: string;
+  duration: string;
+  episodes: { title: string; duration: string; order: number }[];
   order: number;
   tags: {
     title: string;
@@ -143,7 +146,19 @@ export type Product = {
     _id: string;
   }[];
 };
-export type Corurse = {
+export type Course = {
+  demo: {
+    title: string;
+    order: number;
+    episodes: { title: string; type: string }[];
+  }[];
+  chapters: {
+    title: string;
+    lessons: string;
+    duration: string;
+    order: number;
+    episodes: { title: string; duration: string; order: number }[];
+  }[];
   episodes: { title: string; type: string }[];
   order: number;
   tags: {

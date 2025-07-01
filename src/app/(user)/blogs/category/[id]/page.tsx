@@ -21,6 +21,7 @@ const Page = async ({ searchParams, params }: Props) => {
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
+            title="دسته‌بندی وبلاگ‌ها"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],

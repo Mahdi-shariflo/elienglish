@@ -6,8 +6,6 @@ import useProductStore from '@/store/product-store';
 import { useMedia } from 'react-use';
 import Title from '../common/Title';
 import Comments from '../common/Comments';
-import AddCartSingleProduct from './AddCartSingleProduct';
-import Link from 'next/link';
 
 const MoreInformationProduct = ({ product }: { product: Product }) => {
   const { selected, setSelected } = useProductStore();
