@@ -1,27 +1,21 @@
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Filters from '@/components/blog/Filters';
 import React from 'react';
-import CardBlog from '@/components/blog/CardBlog';
-import Pagination from '@/components/common/Pagination';
-import { request } from '@/lib/safeClient';
-import { Blog } from '@/types';
+import CardPlp from '@/components/plp/CardPlp';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-  params: Promise<{ [key: string]: string | undefined }>;
 };
 
-const Page = async ({ searchParams, params }: Props) => {
-  const { id } = await params;
+const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
-  const result = await request({ url: `/blog/archive-category?slug=${id}` });
-  const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
+
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
-            title="دسته‌بندی وبلاگ‌ها"
+            title="تعین سطح"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
@@ -59,11 +53,12 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
-            {blog.blogs.map((blog, idx) => (
-              <CardBlog blog={blog} key={idx} />
-            ))}
-            <Pagination className="mt-10" total={blog?.totalPages} />
+          <div className="grid w-full grid-cols-4 gap-4 rounded-lg px-3 dark:bg-[#172334]">
+            <CardPlp />
+            <CardPlp />
+            <CardPlp />
+            <CardPlp />
+            {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
           </div>
         </div>
       </div>
