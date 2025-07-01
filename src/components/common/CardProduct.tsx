@@ -6,6 +6,7 @@ import { discountCalculation } from '@/lib/utils';
 import Image from './Image';
 import { filterLowProduct } from '@/lib/fun';
 type Props = {
+  url: string;
   className?: string;
   classNameImage?: string;
   classImage?: string;
@@ -20,11 +21,12 @@ const CardProduct = ({
   classNameImage,
   showAddCartBtn,
   showTotalProduct,
+  url,
 }: Props) => {
   const product: any = pro?.children?.length > 0 ? filterLowProduct(pro.children) : pro;
   return (
     <Link
-      href={`/product/${pro.url}/`}
+      href={url}
       className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] ${className}`}
     >
       {product.count === 0 || product?.price === 0 ? (

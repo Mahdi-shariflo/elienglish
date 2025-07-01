@@ -9,22 +9,24 @@ const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/reac
   ssr: false,
 });
 
-const MediaPreview = ({ blog }: { blog: Blog }) => {
+const MediaPreview = ({ media, className }: { media: Blog; className?: string }) => {
   return (
     <>
-      <div className="mt-3 h-[193px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px]">
-        {blog?.video?.url ? (
-          <VideoPlayer poster={`${BASEURL}/${blog?.coverVideo?.url}`} url={blog?.video?.url} />
+      <div
+        className={`mt-3 h-[193px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px] ${className}`}
+      >
+        {media?.video?.url ? (
+          <VideoPlayer poster={`${BASEURL}/${media?.coverVideo?.url}`} url={media?.video?.url} />
         ) : (
           <Image
             className="h-full w-full"
             classImg="object-fill"
-            src={blog.thumbnailImage.url}
+            src={media.thumbnailImage.url}
             alt=""
           />
         )}
       </div>
-      {blog?.audio?.url ? (
+      {media?.audio?.url ? (
         <MediaThemeSutroAudio
           className="drop_shadow_cart mt-8"
           style={{
@@ -37,13 +39,13 @@ const MediaPreview = ({ blog }: { blog: Blog }) => {
         >
           <img
             slot="poster"
-            src={`${BASEURL}/${blog.thumbnailImage.url}`}
+            src={`${BASEURL}/${media.thumbnailImage.url}`}
             alt="Audio Poster"
             style={{ width: '100%', objectFit: 'cover' }}
           />
           <audio
             slot="media"
-            src={`${BASEURL}/${blog.audio.url}`}
+            src={`${BASEURL}/${media.audio.url}`}
             playsInline
             crossOrigin="anonymous"
           ></audio>

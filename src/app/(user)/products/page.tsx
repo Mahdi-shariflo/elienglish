@@ -19,6 +19,7 @@ const Page = async ({ searchParams }: Props) => {
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
+            title="دسته‌بندی محصولات"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
@@ -60,6 +61,7 @@ const Page = async ({ searchParams }: Props) => {
             <div className="grid w-full grid-cols-3 gap-4 rounded-lg px-3 dark:bg-[#172334]">
               {product?.products.map((product, idx) => (
                 <CardProduct
+                  url={`/product/${product.url}/`}
                   classNameImage="mt-5 px-2"
                   className="!h-[400px] w-full"
                   product={product}

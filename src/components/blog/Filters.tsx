@@ -13,6 +13,7 @@ import { sorts } from '@/lib/data';
 import Title from '../common/Title';
 
 type Props = {
+  title: string;
   resultFilter?: FilterCategory;
   searchParams: {
     attribiutes?: string;
@@ -25,7 +26,7 @@ type Props = {
   };
 };
 
-const Filters = ({ searchParams, resultFilter }: Props) => {
+const Filters = ({ searchParams, resultFilter, title }: Props) => {
   const [modalFilter, setModalFilter] = useState(false);
   const [selectFilter, setSelectFilter] = useState<{
     name: string;
@@ -105,7 +106,7 @@ const Filters = ({ searchParams, resultFilter }: Props) => {
 
       {/* title */}
       <div className="mt-5 lg:mt-0">
-        <Title title="دسته بندی بلاگ‌ها" />
+        <Title title={title} />
         <div className="mt-5 hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 dark:bg-[#263248] lg:block lg:pl-3">
           <div className="flex !h-[56px] items-center justify-between">
             <p className="font-medium text-[20px] text-[#0C0C0C] dark:text-white">فیلتر‌ها</p>
