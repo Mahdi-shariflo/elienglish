@@ -5,6 +5,7 @@ import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
 import Button from '@/components/common/Button';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
+import CountdownDiscounts from '@/components/CountdownDiscounts';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -12,7 +13,7 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id[0]!)}` });
   const course = result?.data?.data?.course;
-
+  console.log(course);
   return (
     <div className="bg-[#f7f7f7] pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
@@ -58,6 +59,7 @@ const Page = async ({ params }: Props) => {
                   <span className="font-regular text-[#6A7890] dark:text-[#8E98A8]">تومان</span>
                 </div>
               </div>
+              {course.discountTime && <CountdownDiscounts timer={course?.discountTime} />}
             </div>
             <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button>
           </div>
