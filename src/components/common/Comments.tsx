@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import Input from '../common/form/Input';
 import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
@@ -13,91 +13,97 @@ import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 import CardComment from './CardComment';
-const Comments = ({ commentInfo }: { commentInfo: CommentInfo }) => {
-  const [open, setOpen] = useState(false);
-  const user = useSession();
-  const { data } = useGetCommentById(commentInfo._id!);
-  const { isSuccess, mutate, isPending } = useAddComment();
-  const [star, setStar] = useState(0);
-  const formik = useFormik({
-    initialValues: {
-      title: '',
-      content: '',
-    },
-    validationSchema: yup.object({
-      title: yup.string().required('فیلد اجباری است'),
-      content: yup.string().required('فیلد اجباری است'),
-      star: yup.mixed().test('is-not-zero', 'امتیاز نباید صفر باشد', () => star > 0),
-    }),
-    onSubmit: (values) => {
-      if (!user?.accessToken) return setOpen(!open);
-      const data = {
-        ...values,
-        rating: star,
-        targetType: 'blog',
-        targetId: commentInfo._id,
-      };
-      mutate({ data });
-    },
-  });
 
-  useEffect(() => {
-    if (isSuccess) {
-      formik.resetForm();
-      setStar(0);
-    }
-  }, [isSuccess]);
-  return (
-    <>
-      <div className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]">
-        <Title title="ارسال دیدگاه" />
-        <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
-          <Input
-            isRequired
-            placeholder="نام و نام خانوادگی خود را وارد کنید"
-            label={'نام و نام خانوادگی'}
-            classNameInput={'bg-[#f5f6f6] dark:!bg-[#0B1524]'}
-            name="title"
-            formik={formik}
-          />
+const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
+  ({ commentInfo }, ref) => {
+    const [open, setOpen] = useState(false);
+    const user = useSession();
+    const { data } = useGetCommentById(commentInfo._id!);
+    const { isSuccess, mutate, isPending } = useAddComment();
+    const [star, setStar] = useState(0);
+    const formik = useFormik({
+      initialValues: {
+        title: '',
+        content: '',
+      },
+      validationSchema: yup.object({
+        title: yup.string().required('فیلد اجباری است'),
+        content: yup.string().required('فیلد اجباری است'),
+        star: yup.mixed().test('is-not-zero', 'امتیاز نباید صفر باشد', () => star > 0),
+      }),
+      onSubmit: (values) => {
+        if (!user?.accessToken) return setOpen(!open);
+        const data = {
+          ...values,
+          rating: star,
+          targetType: 'blog',
+          targetId: commentInfo._id,
+        };
+        mutate({ data });
+      },
+    });
 
-          <StarRating
-            onRate={(star) => setStar(star)}
-            isRequired
-            className="lg:col-span-2"
-            label="امتیاز شما"
-            setRating={setStar}
-            intialValue={star}
-          />
-          <Textarea
-            name="content"
-            classNameInput="dark:!bg-[#0B1524]"
-            formik={formik}
-            className="lg:col-span-2"
-            isRequired
-            placeholder="متن دیدگاه خود را یادداشت کنید"
-            label={'متن دیدگاه'}
-          />
-          <div className="mt-5 flex justify-end lg:col-span-2">
-            <Button
-              isLoading={isPending}
-              type="submit"
-              className="w-full bg-main px-10 text-white lg:w-fit"
-            >
-              ثبت دیدگاه
-            </Button>
+    useEffect(() => {
+      if (isSuccess) {
+        formik.resetForm();
+        setStar(0);
+      }
+    }, [isSuccess]);
+    return (
+      <>
+        <div
+          ref={ref}
+          className="mt-[24px] rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]"
+        >
+          <Title title="ارسال دیدگاه" />
+          <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
+            <Input
+              isRequired
+              placeholder="نام و نام خانوادگی خود را وارد کنید"
+              label={'نام و نام خانوادگی'}
+              classNameInput={'bg-[#f5f6f6] dark:!bg-[#0B1524]'}
+              name="title"
+              formik={formik}
+            />
+
+            <StarRating
+              onRate={(star) => setStar(star)}
+              isRequired
+              className="lg:col-span-2"
+              label="امتیاز شما"
+              setRating={setStar}
+              intialValue={star}
+            />
+            <Textarea
+              name="content"
+              classNameInput="dark:!bg-[#0B1524]"
+              formik={formik}
+              className="lg:col-span-2"
+              isRequired
+              placeholder="متن دیدگاه خود را یادداشت کنید"
+              label={'متن دیدگاه'}
+            />
+            <div className="mt-5 flex justify-end lg:col-span-2">
+              <Button
+                isLoading={isPending}
+                type="submit"
+                className="w-full bg-main px-10 text-white lg:w-fit"
+              >
+                ثبت دیدگاه
+              </Button>
+            </div>
+          </form>
+          <div className="mt-10 space-y-5">
+            {/* data?.data?.data?.comments */}
+            {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
+              <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
+            ))}
           </div>
-        </form>
-        <div className="mt-10 space-y-5">
-          {/* data?.data?.data?.comments */}
-          {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-            <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
-          ))}
+          <ModalNeedLoginUser open={open} setOpen={setOpen} />
         </div>
-        <ModalNeedLoginUser open={open} setOpen={setOpen} />
-      </div>
-    </>
-  );
-};
+      </>
+    );
+  }
+);
 
 export default Comments;

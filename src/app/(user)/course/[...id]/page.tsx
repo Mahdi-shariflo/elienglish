@@ -14,18 +14,18 @@ const Page = async ({ params }: Props) => {
   const course = result?.data?.data?.course;
 
   return (
-    <div className="pb-10 dark:bg-dark">
+    <div className="bg-[#f7f7f7] pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
         />
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg border px-3 pb-8 dark:!border-[#263248]">
-            <MediaPreview className="!mt-0 dark:!mt-5" media={course} />
+          <div className="w-full gap-10 overflow-hidden rounded-lg border border-transparent pb-8 dark:!border-[#263248]">
+            <MediaPreview className="!mt-0 border-gray-100 bg-white p-3" media={course} />
             <MoreInformationCourse course={course} />
           </div>
-          <div className="sticky top-24 w-full min-w-[380px] overflow-hidden rounded-lg border bg-[#F4F6FA] p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:w-[380px]">
+          <div className="sticky top-32 w-full min-w-[380px] overflow-hidden rounded-lg border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:w-[380px]">
             <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
               {course?.title}
             </p>

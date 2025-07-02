@@ -34,7 +34,7 @@ const Sort = () => {
         <DropdownTrigger>
           <Button className="bg-transparent">
             <span className="text-[#0B1524]">مرتب‌ سازی:</span>
-            <div>
+            <div className="flex items-center gap-2">
               <span className="font-regular text-[#505B74]">
                 {sort ? (sort === 'createdAt_desc' ? 'جدیدترین' : 'قدیمی‌ترین') : 'جدیدترین'}
               </span>
@@ -58,7 +58,7 @@ const Sort = () => {
             </div>
           </Button>
         </DropdownTrigger>
-        <DropdownMenu aria-label="Static Actions">
+        <DropdownMenu onAction={(value) => onSort(value as string)} aria-label="Static Actions">
           <DropdownItem className="font-medium" key="createdAt_desc">
             جدید‌ترین
           </DropdownItem>

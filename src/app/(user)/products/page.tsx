@@ -5,6 +5,7 @@ import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
 import { Product } from '@/types/home';
 import CardProduct from '@/components/common/CardProduct';
+import Sort from '@/components/common/Sort';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -26,28 +27,19 @@ const Page = async ({ searchParams }: Props) => {
               title: 'دسته بندی محصولات',
               properties: [
                 {
-                  title: 'نوع مقالات',
+                  title: 'نوع محصول',
                   attributes: [
                     {
                       _id: '1',
-                      title: 'متنی',
+                      title: 'فیزیکی',
                       url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
+                      type: '',
                     },
                     {
                       _id: '2',
-                      title: 'ویدیویی',
+                      title: 'دیجیتال',
                       url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                    {
-                      _id: '3',
-                      title: 'پادکست',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
+                      type: '',
                     },
                   ],
                   displayType: 'text',
@@ -58,7 +50,8 @@ const Page = async ({ searchParams }: Props) => {
             }}
           />
           <div className="w-full">
-            <div className="grid w-full grid-cols-3 gap-4 rounded-lg px-3 dark:bg-[#172334]">
+            <Sort />
+            <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3 5xl:grid-cols-5">
               {product?.products.map((product, idx) => (
                 <CardProduct
                   url={`/product/${product.url}/`}
