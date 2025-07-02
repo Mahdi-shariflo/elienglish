@@ -3,7 +3,7 @@ import React from 'react';
 
 import ReactCountdown from 'react-countdown';
 
-const CountdownDiscounts = ({ timer }: { timer: string }) => {
+const CountdownDiscounts = ({ timer, className }: { timer: string; className?: string }) => {
   const Completionist = () => '';
 
   const renderer = ({
@@ -28,7 +28,7 @@ const CountdownDiscounts = ({ timer }: { timer: string }) => {
         <div className="mx-auto flex !w-fit items-center justify-center gap-0 bg-transparent !p-0 font-medium text-[12px] text-sm !text-[#0C0C0C] transition-all duration-500 hover:!text-main lg:gap-2">
           <div className="flex flex-col items-center justify-center text-main">
             <span className="flex items-center gap-1 lg:gap-3">
-              <span className="flex h-[24px] w-[24px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[10px] lg:h-[40px] lg:w-[40px] lg:text-[14px]">
+              <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {seconds < 10 ? `0${seconds}` : seconds}
               </span>
               <span>:</span>
@@ -37,28 +37,28 @@ const CountdownDiscounts = ({ timer }: { timer: string }) => {
           </div>
           <div className="flex flex-col items-center justify-center text-main">
             <span className="flex items-center gap-1 lg:gap-3">
-              <span className="flex h-[24px] w-[24px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[10px] lg:h-[40px] lg:w-[40px] lg:text-[14px]">
+              <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {minutes < 10 ? `0${minutes}` : minutes}
               </span>
               <span>:</span>
             </span>
-            <p className="ml-3 text-center text-[10px] lg:text-[12px]">دقیقه</p>
+            <p className="ml-3 text-center text-[12px]">دقیقه</p>
           </div>
           <div className="flex flex-col items-center justify-center text-main">
             <span className="flex items-center gap-1 lg:gap-3">
-              <span className="flex h-[24px] w-[24px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[10px] lg:h-[40px] lg:w-[40px] lg:text-[14px]">
+              <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {hours < 10 ? `0${hours}` : hours}
               </span>
               <span>:</span>
             </span>
-            <p className="ml-3 text-center text-[10px] lg:text-[12px]">دقیقه</p>
+            <p className="ml-3 text-center text-[12px]">دقیقه</p>
           </div>
 
           <div className="flex flex-col items-center justify-center text-main">
-            <span className="flex h-[24px] w-[24px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[10px] lg:h-[40px] lg:w-[40px] lg:text-[14px]">
+            <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
               {days < 10 ? `0${days}` : days}
             </span>
-            <p className="text-center text-[10px] lg:text-[12px]">روز</p>
+            <p className="text-center text-[12px]">روز</p>
           </div>
         </div>
       );
@@ -66,7 +66,10 @@ const CountdownDiscounts = ({ timer }: { timer: string }) => {
   };
 
   return (
-    <div className="flex h-12 items-center justify-center lg:mt-10">
+    <div
+      className={`mt-14 flex h-12 flex-col items-center justify-center gap-5 lg:mt-10 lg:gap-0 ${className}`}
+    >
+      <p className="text-center font-bold text-[14px] text-[#505B74] lg:hidden">تا پایان تخفیف</p>
       <ReactCountdown
         date={timer}
         renderer={renderer}

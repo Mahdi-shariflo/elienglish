@@ -105,6 +105,8 @@ export type FilterCategory = {
     title: string;
     displayType: 'color' | 'text' | 'image';
     attributes: {
+      page?: string;
+      isLink?: boolean;
       type: string;
       _id: string;
       title: string;

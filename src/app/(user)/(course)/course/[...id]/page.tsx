@@ -9,6 +9,7 @@ import CountdownDiscounts from '@/components/CountdownDiscounts';
 import Image from 'next/image';
 import { Course } from '@/types/home';
 import Drop from '@/../public/images/drop.png';
+import PropertiesCourse from '@/components/course/PropertiesCourse';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -17,18 +18,21 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/course/detail/${decodeURIComponent(id[0]!)}` });
   const course: Course = result?.data?.data?.course;
   return (
-    <div className="bg-[#f7f7f7] pb-10 dark:bg-dark">
+    <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
         />
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg border border-transparent pb-8 dark:!border-[#263248]">
+          <div className="w-full gap-10 overflow-hidden rounded-lg border border-transparent dark:!border-[#263248] lg:pb-8">
             <MediaPreview className="!mt-0 border-gray-100 bg-white p-3" media={course} />
-            <div className="mt-4 rounded-lg border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
-              <p className="font-bold text-[18px] text-[#172334]">درباره دوره </p>
-              <p className="rounded-lg pt-2 font-medium text-[14px] text-[#8E98A8] lg:pt-5">
+            <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
+              <p className="hidden font-bold text-[18px] text-[#172334] lg:block">درباره دوره </p>
+              <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[20px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
+                {course?.title}
+              </p>
+              <p className="rounded-lg pt-2 text-justify font-medium text-[14px] text-[#8E98A8] lg:pt-5">
                 در این دوره، هر قسمت یک موضوع کاربردی و روزمره به همراه اسلایدهای گرافیکی، ویدیوهای
                 آموزشی، و فایل‌های صوتی مورد بررسی قرار گرفت و به تدریس پرداختیم. ویژگی متمایز این
                 دوره، استفاده از بهترین منابع آموزشی و آموزش تکنیک‌هایی برای مکالمه‌ی روان و بدون
@@ -36,16 +40,22 @@ const Page = async ({ params }: Props) => {
                 توانایی برسید که بتوانید به سادگی در مکالمات روزمره از زبان انگلیسی بهره ببرید.
               </p>
             </div>
+            <div className="lg:hidden">
+              {course.discountTime && <CountdownDiscounts timer={course?.discountTime} />}
+              <PropertiesCourse course={course} />
+            </div>
             <MoreInformationCourse course={course} />
           </div>
           <div className="sticky top-32 w-full space-y-4 overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
             <div className="border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
-              <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
-                {course?.title}
-              </p>
-              <p className="pt-4 font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
-                جلسات آموزش ویدیویی + جزوات تکمیلی + فایل‌های تمرین در هر جلسه
-              </p>
+              <div className="hidden lg:block">
+                <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
+                  {course?.title}
+                </p>
+                <p className="pt-4 font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
+                  جلسات آموزش ویدیویی + جزوات تکمیلی + فایل‌های تمرین در هر جلسه
+                </p>
+              </div>
               <div className="mt-10">
                 {course.discountPrice && (
                   <div className="flex items-center justify-between">
@@ -72,7 +82,9 @@ const Page = async ({ params }: Props) => {
                     <span className="font-regular text-[#6A7890] dark:text-[#8E98A8]">تومان</span>
                   </div>
                 </div>
-                {course.discountTime && <CountdownDiscounts timer={course?.discountTime} />}
+                {course.discountTime && (
+                  <CountdownDiscounts className="hidden" timer={course?.discountTime} />
+                )}
               </div>
               <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button>
               <div>
@@ -104,7 +116,8 @@ const Page = async ({ params }: Props) => {
                     <span className="font-medium text-[#6A7890]">امتیاز زبان آموزان</span>
                   </div>
                 </div>
-                <div className="mt-4">
+                {/* property */}
+                <div className="mt-4 hidden lg:block">
                   <p className="font-regular text-[#8E98A8]">اطلاعات دوره</p>
                   <div className="mt-5 flex flex-col gap-5">
                     {course.properties.map((item, idx) => (
@@ -118,10 +131,9 @@ const Page = async ({ params }: Props) => {
                     ))}
                   </div>
                 </div>
-                {/* property */}
               </div>
             </div>
-            <div className="flex items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
+            <div className="hidden items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:flex">
               <Image width={60} src={Drop} alt="" />
               <p className="font-bold text-[20px] text-[#172334]">
                 {course.status === 'complated' ? 'تکمیل ظبط' : 'در حال ظبط'}

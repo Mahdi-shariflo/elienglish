@@ -16,7 +16,18 @@ const Page = async ({ searchParams }: Props) => {
   const product: {
     course: Course[];
     totalPages: number;
+    categories: { title: string; url: string }[];
   } = result?.data?.data;
+  const categories = product.categories.map((item, idx) => {
+    return {
+      _id: idx.toString(),
+      title: item.title,
+      url: item.url,
+      type: '',
+      isLink: true,
+      page: `/course-category/${item.url}`,
+    };
+  });
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
@@ -29,6 +40,11 @@ const Page = async ({ searchParams }: Props) => {
               breadcrumb: [],
               title: '',
               properties: [
+                {
+                  title: 'دسته‌بندی‌ها',
+                  attributes: categories,
+                  displayType: 'text',
+                },
                 {
                   title: 'وضعیت دوره',
                   attributes: [
