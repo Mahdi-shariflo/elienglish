@@ -78,7 +78,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   break;
               }
             }}
-            className={`!h-[35px] !w-fit !min-w-fit !rounded-none border-b font-bold ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
+            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[18px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
           >
             {tab.name}
           </Button>

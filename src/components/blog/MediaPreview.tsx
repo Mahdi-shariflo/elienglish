@@ -5,11 +5,12 @@ import { Blog } from '@/types';
 import VideoPlayer from '../admin/common/VideoPlayer';
 import { BASEURL } from '@/lib/variable';
 import dynamic from 'next/dynamic';
+import { Course } from '@/types/home';
 const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/react'), {
   ssr: false,
 });
 
-const MediaPreview = ({ media, className }: { media: Blog; className?: string }) => {
+const MediaPreview = ({ media, className }: { media: Blog | Course; className?: string }) => {
   return (
     <>
       <div

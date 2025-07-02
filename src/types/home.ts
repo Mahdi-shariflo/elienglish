@@ -188,6 +188,7 @@ export type Course = {
   description: string;
   updatedAt?: string;
   properties: {
+    iconUrl: string;
     attribiute: string[];
     main: boolean;
     property: string;
@@ -210,6 +211,8 @@ export type Course = {
   shortTitle: string;
   url: string;
   thumbnailImage: ThumbnailImage;
+  coverVideo: ThumbnailImage;
+  audio: ThumbnailImage;
   price: number;
   discountPrice: number;
   discountTime: string;
