@@ -26,10 +26,20 @@ const Page = async ({ params }: Props) => {
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
           <div className="w-full gap-10 overflow-hidden rounded-lg border border-transparent pb-8 dark:!border-[#263248]">
             <MediaPreview className="!mt-0 border-gray-100 bg-white p-3" media={course} />
+            <div className="mt-4 rounded-lg border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
+              <p className="font-bold text-[18px] text-[#172334]">درباره دوره </p>
+              <p className="rounded-lg pt-2 font-medium text-[14px] text-[#8E98A8] lg:pt-5">
+                در این دوره، هر قسمت یک موضوع کاربردی و روزمره به همراه اسلایدهای گرافیکی، ویدیوهای
+                آموزشی، و فایل‌های صوتی مورد بررسی قرار گرفت و به تدریس پرداختیم. ویژگی متمایز این
+                دوره، استفاده از بهترین منابع آموزشی و آموزش تکنیک‌هایی برای مکالمه‌ی روان و بدون
+                وقفه است. هر جلسه معادل چندین کلاس ترم زبانی بوده و به شما کمک می‌کند به سطحی از
+                توانایی برسید که بتوانید به سادگی در مکالمات روزمره از زبان انگلیسی بهره ببرید.
+              </p>
+            </div>
             <MoreInformationCourse course={course} />
           </div>
-          <div className="sticky top-32 w-full min-w-[380px] space-y-4 overflow-hidden rounded-lg bg-white lg:w-[380px]">
-            <div className="border border-gray-50 p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
+          <div className="sticky top-32 w-full space-y-4 overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
+            <div className="border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
               <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                 {course?.title}
               </p>
@@ -40,7 +50,7 @@ const Page = async ({ params }: Props) => {
                 {course.discountPrice && (
                   <div className="flex items-center justify-between">
                     {Boolean(course.discountPrice) && (
-                      <span className="absolute top-5 z-30 flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[24px] lg:w-[41px] lg:text-[12px]">
+                      <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[24px] lg:w-[41px] lg:text-[12px]">
                         {discountCalculation(course.discountPrice, course.price)}%
                       </span>
                     )}
@@ -111,7 +121,7 @@ const Page = async ({ params }: Props) => {
                 {/* property */}
               </div>
             </div>
-            <div className="flex items-center justify-between border border-gray-50 pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
+            <div className="flex items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
               <Image width={60} src={Drop} alt="" />
               <p className="font-bold text-[20px] text-[#172334]">
                 {course.status === 'complated' ? 'تکمیل ظبط' : 'در حال ظبط'}

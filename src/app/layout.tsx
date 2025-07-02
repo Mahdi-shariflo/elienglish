@@ -29,7 +29,7 @@ export default async function RootLayout({
   return (
     <html lang="fa">
       <body className={`${sessionUser?.theme === 'dark' ? 'dark' : ''}`}>
-        <SessionProvider session={{ ...session, ...sessionUser }}>
+        <SessionProvider session={{ ...session }}>
           <SessionWrapper session={{ ...session, ...sessionUser }}>
             <Fetcher>
               <GlobalContextProvider theme={sessionUser?.theme}>{children}</GlobalContextProvider>
