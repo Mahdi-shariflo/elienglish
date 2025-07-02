@@ -105,8 +105,7 @@ export type FilterCategory = {
     title: string;
     displayType: 'color' | 'text' | 'image';
     attributes: {
-      image: string;
-      color: string;
+      type: string;
       _id: string;
       title: string;
       url: string;

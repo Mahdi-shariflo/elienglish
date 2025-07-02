@@ -147,6 +147,8 @@ export type Product = {
   }[];
 };
 export type Course = {
+  type: 'vitural' | 'inPerson';
+  status: 'complated' | 'inProgress';
   demo: {
     title: string;
     order: number;

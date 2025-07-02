@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Toman_Icon } from './icon';
 import Link from 'next/link';
-import { Product } from '@/types/home';
+import { Course, Product } from '@/types/home';
 import { discountCalculation } from '@/lib/utils';
 import Image from './Image';
 import { filterLowProduct } from '@/lib/fun';
@@ -10,8 +10,8 @@ type Props = {
   className?: string;
   classNameImage?: string;
   classImage?: string;
-  showAddCartBtn?: ReactNode;
-  product: Product;
+  children?: ReactNode;
+  product: Product | Course;
   showTotalProduct?: boolean;
 };
 const CardProduct = ({
@@ -19,7 +19,7 @@ const CardProduct = ({
   classImage,
   className,
   classNameImage,
-  showAddCartBtn,
+  children,
   showTotalProduct,
   url,
 }: Props) => {
@@ -43,7 +43,7 @@ const CardProduct = ({
       />
       <div className="px-2">
         <p
-          className={`line-clamp-2 font-regular text-[#232429] lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[12px]' : 'text-[12px] lg:text-[14px]'}`}
+          className={`line-clamp-2 font-bold text-[#0B1524] lg:font-bold ${showTotalProduct ? 'text-[12px] lg:text-[12px]' : 'text-[12px] lg:text-[14px]'}`}
         >
           {product.title.replaceAll('&#038;', '')}
         </p>
@@ -76,7 +76,7 @@ const CardProduct = ({
             </div>
           </div>
         )}
-        {showAddCartBtn}
+        {children}
       </div>
     </Link>
   );

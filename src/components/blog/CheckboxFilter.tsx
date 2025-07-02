@@ -25,42 +25,49 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const selectedAttributes = searchParams.attribiutes?.split(',') || [];
-  const defaultOpenAccordions = resultFilter?.properties
-    ?.map((property, idx) =>
-      property.attributes.some((attr) => selectedAttributes.includes(attr._id))
-        ? idx.toString()
-        : null
-    )
-    .filter(Boolean) as string[];
+  const selectedAttributes = Object.fromEntries(
+    Object.entries(searchParams).map(([key, value]) => [key, value?.split(',') ?? []])
+  );
 
   const handleSearchChange = (index: number, value: string) => {
     setSearchTerms((prev) => ({ ...prev, [index]: value }));
   };
 
-  const onAttributes = (checked: boolean, id: string) => {
+  const singleSelectTypes = ['statusCourse', 'sort', 'available']; // اینا فقط یک انتخاب مجاز دارن
+
+  const onAttributes = (checked: boolean, type: string, id: string) => {
     startTransition(() => {
       const currentUrl = new URL(window.location.href);
       const searchParams = new URLSearchParams(currentUrl.search);
-      const attributes = searchParams.get('attribiutes')?.split(',').filter(Boolean) || [];
+      const isSingle = singleSelectTypes.includes(type);
 
-      if (checked) {
-        if (!attributes.includes(id)) {
-          attributes.push(id);
+      let updated: string[] = [];
+
+      if (isSingle) {
+        // فقط همون آیتمی که الان انتخاب شده رو نگه داریم
+        if (checked) {
+          updated = [id];
+        } else {
+          // اگر آن‌چک شد، یعنی خالی بشه
+          updated = [];
         }
       } else {
-        const index = attributes.indexOf(id);
-        if (index !== -1) {
-          attributes.splice(index, 1);
+        const existing = searchParams.get(type)?.split(',').filter(Boolean) || [];
+        if (checked) {
+          updated = [...new Set([...existing, id])];
+        } else {
+          updated = existing.filter((item) => item !== id);
         }
       }
 
-      if (attributes.length > 0) {
-        searchParams.set('attribiutes', attributes.join(','));
+      if (updated.length > 0) {
+        searchParams.set(type, updated.join(','));
       } else {
-        searchParams.delete('attribiutes');
+        searchParams.delete(type);
       }
+
       searchParams.set('page', '1');
+
       const newQueryString = searchParams.toString();
       router.push(`${pathname}/?${newQueryString}`, { scroll: true });
     });
@@ -72,16 +79,12 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
 
   return (
     // @ts-expect-error error
-    <Accordion defaultSelectedKeys={['0', ...defaultOpenAccordions]} className="px-0">
+    <Accordion defaultSelectedKeys={['0']} className="px-0">
       <></>
       {resultFilter?.properties?.map((property, idx) => {
         const searchTerm = searchTerms[idx] || '';
         const filteredAttributes = property?.attributes?.filter((attr) =>
           attr.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-
-        const selectedAttributesForProperty = property?.attributes?.filter((attr) =>
-          selectedAttributes.includes(attr?._id)
         );
 
         return (
@@ -111,7 +114,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
           >
             <div>
               {/* نمایش فیلترهای انتخاب شده */}
-              {selectedAttributesForProperty?.length > 0 && (
+              {/* {selectedAttributesForProperty?.length > 0 && (
                 <div className="!mb-10">
                   <p className="mb-3 font-regular text-[14px] text-[#616A76]">
                     {' '}
@@ -143,7 +146,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                     ))}
                   </ul>
                 </div>
-              )}
+              )} */}
 
               <Input
                 classNameInput="!h-[45px] !bg-white dark:!bg-[#33435A] border-none"
@@ -157,23 +160,17 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                   filteredAttributes?.map((attribute) => (
                     <Checkbox
                       // انتخاب پیش‌فرض چک‌باکس‌ها
-                      isSelected={selectedAttributes.includes(attribute._id)}
+                      isSelected={selectedAttributes[attribute.type]?.includes(attribute.url)}
                       key={attribute._id}
                       classNames={{
                         label: 'pr-1 !text-[14px] !font-medium text-[#33435A] dark:text-[#8E98A8]',
                         wrapper: 'after:!bg-main',
                       }}
-                      onValueChange={(value) => onAttributes(value, attribute._id)}
+                      onValueChange={(value) =>
+                        onAttributes(value, attribute.type as string, attribute.url)
+                      }
                     >
-                      <div className="flex items-center gap-2">
-                        {property.displayType === 'color' ? (
-                          <span
-                            style={{ backgroundColor: attribute.color }}
-                            className="block h-4 w-4 rounded-full border"
-                          ></span>
-                        ) : null}
-                        {attribute.title}
-                      </div>
+                      <div className="flex items-center gap-2">{attribute.title}</div>
                     </Checkbox>
                   ))
                 ) : (

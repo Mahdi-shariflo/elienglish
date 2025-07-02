@@ -44,6 +44,7 @@ const initialValues = {
   categories: [],
   price: '',
   discountPrice: '',
+  shortTitle: '',
   discountTime: '',
   count: 1,
   published: 'false',
@@ -210,6 +211,14 @@ const Page = () => {
                 url
                 helperText={product?.url ? product?.url : createURL(formik.values.title)}
                 isAvailable={Boolean(product?.url)}
+                formik={formik}
+              />
+              <Input
+                isRequired
+                label="عنوان کوتاه"
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                name="shortTitle"
+                className="lg:col-span-2"
                 formik={formik}
               />
 
