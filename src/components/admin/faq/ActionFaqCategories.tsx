@@ -4,12 +4,11 @@ import { createURL } from '@/lib/fun';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
-import SeoOptions from '../common/SeoOptions';
-import Editor from '../common/Editor';
 import { TagType } from '@/types';
-import { useActionProductTags } from '@/hooks/admin/products/useActionProductTags';
 import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
 import Textarea from '@/components/common/form/Textarea';
+import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
+import { useActionFaqCategories } from '@/hooks/admin/faq/useActionFaqCategories';
 
 type Props = {
   modal: {
@@ -24,27 +23,14 @@ type Props = {
   >;
 };
 const ActionFaqCategories = ({ modal, setModal }: Props) => {
-  const {
-    isSuccess: isSuccessCategoryUrl,
-    data,
-    isLoading,
-  } = useGetProductTagById({ id: modal.info?._id! });
-  const editorRef = useRef<HTMLInputElement | null>(null);
   const onClose = () => setModal({ info: null, open: false });
-  const { mutate, isPending, isSuccess, reset } = useActionProductTags();
+  const { mutate, isPending, isSuccess, reset } = useActionFaqCategories();
   const formik = useFormik({
     initialValues: {
-      robots: '',
-      canonicalurl: '',
-      metaDescription: '',
       description: '',
       title: '',
-      redirecturl: '',
-      metaTitle: '',
-      rebots: '',
+
       url: '',
-      keyWords: '',
-      redirecturltype: '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
@@ -53,18 +39,7 @@ const ActionFaqCategories = ({ modal, setModal }: Props) => {
       const data = {
         title: values.title,
         url: values?.url,
-        ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
-        ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
-        ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
-        ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
-        ...(values.rebots ? { robots: values.robots } : null),
-        ...(values.keyWords ? { keyWords: values.keyWords } : null),
-        // @ts-expect-error error
-        ...(editorRef?.current?.getContent()
-          ? // @ts-expect-error error
-            { description: editorRef.current.getContent() }
-          : null),
-        ...(values.canonicalurl ? { canonicalurl: values.canonicalurl } : null),
+        description: values.description,
       };
       mutate({ data, id: modal.info?._id! });
     },
@@ -78,23 +53,19 @@ const ActionFaqCategories = ({ modal, setModal }: Props) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isSuccessCategoryUrl) {
-      const tags = data?.data?.data;
+    if (modal.info) {
       formik.setValues({
-        ...tags,
-        keyWords: tags?.keyWords?.join(', '),
+        ...formik.values,
+        ...modal.info,
       });
     } else {
       formik.resetForm();
     }
-  }, [isSuccessCategoryUrl]);
-
-  console.log(data?.data);
+  }, [modal.info]);
 
   return (
     <>
       <BaseDialog
-        isLoading={isLoading}
         onClose={onClose}
         isOpen={modal.open}
         title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} دسته‌بندی محصول`}

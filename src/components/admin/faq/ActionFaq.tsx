@@ -9,6 +9,10 @@ import Editor from '../common/Editor';
 import { TagType } from '@/types';
 import { useActionProductTags } from '@/hooks/admin/products/useActionProductTags';
 import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
+import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
+import Select from '@/components/common/Select';
+import { StatusOptionsAdmin } from '@/lib/data';
+import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
 
 type Props = {
   modal: {
@@ -28,15 +32,18 @@ const ActionFaq = ({ modal, setModal }: Props) => {
     data,
     isLoading,
   } = useGetProductTagById({ id: modal.info?._id! });
-  const editorRef = useRef<HTMLInputElement | null>(null);
   const onClose = () => setModal({ info: null, open: false });
-  const { mutate, isPending, isSuccess, reset } = useActionProductTags();
+  const { mutate, isPending, isSuccess, reset } = useActionFaq();
+  const { data: faqCategories } = useGetCategoriesFaqAdmin({});
   const formik = useFormik({
     initialValues: {
       robots: '',
+      question: '',
+      answer: '',
+      order: '',
+      published: '',
       canonicalurl: '',
       metaDescription: '',
-      description: '',
       title: '',
       redirecturl: '',
       metaTitle: '',
@@ -46,23 +53,21 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       redirecturltype: '',
     },
     validationSchema: Yup.object({
-      title: Yup.string().required('فیلد اجباری است'),
+      question: Yup.string().required('فیلد اجباری است'),
+      answer: Yup.string().required('فیلد اجباری است'),
+      order: Yup.string().required('فیلد اجباری است'),
     }),
     onSubmit: (values) => {
       const data = {
-        title: values.title,
-        url: values?.url,
+        question: values.question,
+        answer: values.answer,
+        order: values.order,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
         ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
         ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
         ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
         ...(values.rebots ? { robots: values.robots } : null),
         ...(values.keyWords ? { keyWords: values.keyWords } : null),
-        // @ts-expect-error error
-        ...(editorRef?.current?.getContent()
-          ? // @ts-expect-error error
-            { description: editorRef.current.getContent() }
-          : null),
         ...(values.canonicalurl ? { canonicalurl: values.canonicalurl } : null),
       };
       mutate({ data, id: modal.info?._id! });
@@ -87,7 +92,7 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       formik.resetForm();
     }
   }, [isSuccessCategoryUrl]);
-
+  const categories = faqCategories?.data?.data;
   return (
     <>
       <BaseDialog
@@ -102,19 +107,40 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       >
         <div className="mb-4 grid grid-cols-2 gap-4 space-y-2">
           <Input
-            helperText={modal.info?.url ? modal.info.url : createURL(formik.values.title)}
-            isAvailable={modal.info?.url ? true : false}
             formik={formik}
-            name="title"
-            url
-            label={'عنوان'}
-            className="col-span-2"
+            name="question"
+            label={'سوال'}
             classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
           />
-
+          <Input
+            formik={formik}
+            name="answer"
+            label={'جواب'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
+          <Input
+            formik={formik}
+            name="order"
+            label={'شماره گذاری'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
+          <Select
+            options={categories?.category}
+            nameLabel="title"
+            nameValue="_id"
+            formik={formik}
+            name="category"
+            label="انتخاب دسته‌بندی"
+          />
+          <Select
+            label="وضعیت انتشار "
+            options={StatusOptionsAdmin}
+            nameLabel="label"
+            nameValue="value"
+            name="published"
+            formik={formik}
+          />
           <SeoOptions formik={formik} />
-          {/* @ts-expect-error error */}
-          <Editor editorRef={editorRef} value={formik.values.description} />
         </div>
       </BaseDialog>
     </>

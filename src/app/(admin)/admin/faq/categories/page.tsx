@@ -35,11 +35,11 @@ const Page = () => {
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
-            title: 'حذف تگ',
-            description: 'تگ محصولات',
+            title: 'حذف دسته بندی',
+            description: 'دسته بندی سوالات',
             info: row.title,
-            updateCache: 'product-tags-admin',
-            url: `/product/admin/tag/${row._id}`,
+            updateCache: 'faq-categories-admin',
+            url: `/faq/admin/category/${row._id}`,
           }),
       }),
     [isSuccess]
@@ -70,11 +70,11 @@ const Page = () => {
       behavior: 'smooth',
     });
   };
-
+  console.log(product);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        محصولات تگ
+        دسته بندی سوالات متداول
       </p>
       <Input
         value={filter.search}
@@ -91,7 +91,7 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.productTag}
+        mainData={product?.category}
         showData={columns}
         columns={['_id', 'title', 'description', 'action']}
         nameAction="ایجاد دسته‌بندی"
