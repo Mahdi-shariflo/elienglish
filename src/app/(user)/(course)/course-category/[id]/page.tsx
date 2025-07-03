@@ -8,19 +8,32 @@ import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ [key: string]: string }>;
 };
 
-const Page = async ({ searchParams }: Props) => {
+const Page = async ({ searchParams, params }: Props) => {
+  const { id } = await params;
   const searchParamsFilter = await searchParams;
-  const result = await request({ url: `/course/main` });
+  const result = await request({ url: `/course/archive-category?slug=${id}` });
   const product: {
     course: Course[];
     totalPages: number;
+    categories: { title: string; url: string }[];
   } = result?.data?.data;
+  const categories = product.categories.map((item, idx) => {
+    return {
+      _id: idx.toString(),
+      title: item.title,
+      url: item.url,
+      type: '',
+      isLink: true,
+      page: `/course-category/${item.url}`,
+    };
+  });
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
-        <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '#' }]} />
+        <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '/courses' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی دوره‌ها"
@@ -29,6 +42,11 @@ const Page = async ({ searchParams }: Props) => {
               breadcrumb: [],
               title: '',
               properties: [
+                {
+                  title: 'دسته‌بندی‌ها',
+                  attributes: categories,
+                  displayType: 'text',
+                },
                 {
                   title: 'وضعیت دوره',
                   attributes: [
@@ -55,15 +73,7 @@ const Page = async ({ searchParams }: Props) => {
           <div className="w-full">
             <Sort />
             <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3 5xl:grid-cols-5">
-              {[
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-              ].map((course, idx) => (
+              {product?.course.map((course, idx) => (
                 <CardProduct
                   url={`/course/${course.url}/`}
                   classImage="!object-fill"

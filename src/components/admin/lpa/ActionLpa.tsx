@@ -13,6 +13,9 @@ import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqA
 import Select from '@/components/common/Select';
 import { StatusOptionsAdmin } from '@/lib/data';
 import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
+import Media from '../common/Media';
+import { BASEURL } from '@/lib/variable';
+import Datepicker from '@/components/common/Datepicker';
 
 type Props = {
   modal: {
@@ -26,7 +29,7 @@ type Props = {
     }>
   >;
 };
-const ActionFaq = ({ modal, setModal }: Props) => {
+const ActionLpa = ({ modal, setModal }: Props) => {
   const {
     isSuccess: isSuccessCategoryUrl,
     data,
@@ -106,38 +109,84 @@ const ActionFaq = ({ modal, setModal }: Props) => {
         isLoadingFooterBtn={isPending}
       >
         <div className="mb-4 grid grid-cols-2 gap-4 space-y-2">
-          <Input
-            formik={formik}
-            name="question"
-            label={'سوال'}
-            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
-          />
-          <Input
-            formik={formik}
-            name="answer"
-            label={'جواب'}
-            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
-          />
-          <Input
-            formik={formik}
-            name="order"
-            label={'شماره گذاری'}
-            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
-          />
+          <Media
+            className="mx-auto flex w-full items-center justify-center"
+            withModal
+            // @ts-expect-error error
+            onSelect={(img) => formik.setFieldValue('teacherProfile', `${BASEURL}/${img.url}`)}
+          >
+            <div className="flex h-[100px] w-[100px] items-center justify-center overflow-hidden rounded-full border">
+              {formik.values?.teacherProfile ? (
+                <img
+                  className="h-full w-full object-contain"
+                  // @ts-expect-error error
+                  src={`${formik.values?.teacherProfile}`}
+                  alt="thumbnail"
+                />
+              ) : (
+                <span className="font-medium">عکس استاد</span>
+              )}
+            </div>
+          </Media>
           <Select
-            options={categories?.category}
-            nameLabel="title"
-            nameValue="_id"
-            formik={formik}
-            name="category"
-            label="انتخاب دسته‌بندی"
-          />
-          <Select
-            label="وضعیت انتشار "
-            options={StatusOptionsAdmin}
+            options={[
+              { label: 'تعین سطح', value: 'LEVEL_TEST' },
+              { label: 'تعین سطح+مشاوره', value: 'LEVEL_TEST_WITH_COUNSELING' },
+            ]}
             nameLabel="label"
             nameValue="value"
-            name="published"
+            formik={formik}
+            name="type"
+            label="نوع"
+          />
+          <Input
+            formik={formik}
+            name="teacherName"
+            label={'نام استاد'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
+          <Datepicker name="date" label="تاریخ" formik={formik} />
+          <Datepicker name="time" label="زمان" timepicker formik={formik} />
+          <Input
+            formik={formik}
+            name="price"
+            price
+            label={'مبلغ'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
+          <Input
+            formik={formik}
+            name="discountPrice"
+            price
+            label={'مبلغ تخفیف'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
+
+          <Select
+            label="وضعیت  "
+            options={[
+              { label: 'موجود', value: 'AVAILABLE' },
+              { label: 'رزرو شده', value: 'RESERVED' },
+            ]}
+            nameLabel="label"
+            nameValue="value"
+            name="status"
+            formik={formik}
+          />
+          <Select
+            label="روز"
+            options={[
+              { label: 'شنبه', value: 'SATURDAY' },
+              { label: 'یک‌شنبه', value: 'SUNDAY' },
+              { label: 'دوشنبه', value: 'MONDAY' },
+              { label: 'سه‌شنبه', value: 'TUESDAY' },
+              { label: 'چهارشنبه', value: 'WEDNESDAY' },
+              { label: 'پنج‌شنبه', value: 'THURSDAY' },
+              { label: 'جمعه', value: 'FRIDAY' },
+            ]}
+            nameLabel="label"
+            nameValue="value"
+            name="weekday"
             formik={formik}
           />
           <SeoOptions formik={formik} />
@@ -147,4 +196,4 @@ const ActionFaq = ({ modal, setModal }: Props) => {
   );
 };
 
-export default ActionFaq;
+export default ActionLpa;

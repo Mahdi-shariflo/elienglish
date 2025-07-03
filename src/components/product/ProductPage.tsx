@@ -6,11 +6,8 @@ import Information from '@/components/product/Information';
 import MoreInformationProduct from '@/components/product/MoreInformationProduct';
 import { Product } from '@/types/home';
 import React, { ReactNode, useLayoutEffect } from 'react';
-import AddCartSingleProduct from './AddCartSingleProduct';
 import useProductStore from '@/store/product-store';
 import { useMedia } from 'react-use';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 type Props = {
   breadcrumb: {
     Icon?: React.ElementType;

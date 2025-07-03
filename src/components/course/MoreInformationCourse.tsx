@@ -49,7 +49,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
           ?.replace(/height=".*?"/g, '')
       : ''; // حذف ویژگی height
   return (
-    <div className="mt-4 rounded-lg bg-white p-3">
+    <div className="mt-10 rounded-lg border-t border-gray-200 bg-white p-3 lg:mt-4 lg:border-none">
       <div className="flex items-center gap-8 border-b border-[#E5EAEF]">
         {tabs.map((tab, idx) => (
           <Button
@@ -78,7 +78,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   break;
               }
             }}
-            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[18px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
+            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
           >
             {tab.name}
           </Button>

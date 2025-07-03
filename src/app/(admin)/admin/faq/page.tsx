@@ -4,8 +4,9 @@ import ActionFaq from '@/components/admin/faq/ActionFaq';
 import ActionProductTags from '@/components/admin/product/ActionProductTags';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
+import { useGetFaqAdmin } from '@/hooks/admin/faq/useGetFaqAdmin';
 import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
-import { initialDataTagProduct } from '@/lib/table-column';
+import { initialDataFaq, initialDataTagProduct } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { TagType } from '@/types';
 import React, { useMemo, useState } from 'react';
@@ -21,7 +22,7 @@ const Page = () => {
     search: '',
     filter: '',
   });
-  const { data, isPending, isSuccess, isFetching, isLoading } = useGetProductTagsAdmin({
+  const { data, isPending, isSuccess, isFetching, isLoading } = useGetFaqAdmin({
     page: filter.page,
     search: filter.search,
     sort: filter.sort,
@@ -30,16 +31,16 @@ const Page = () => {
   const { setVerifyDelete } = useGlobalStore();
   const columns = useMemo(
     () =>
-      initialDataTagProduct({
+      initialDataFaq({
         onEdit: (row) => setModal({ open: true, info: row }),
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
-            title: 'حذف تگ',
-            description: 'تگ محصولات',
-            info: row.title,
-            updateCache: 'product-tags-admin',
-            url: `/product/admin/tag/${row._id}`,
+            title: 'حذف سوال',
+            description: 'سوالات',
+            info: row.question,
+            updateCache: 'faq-admin',
+            url: `/faq/admin/${row._id}`,
           }),
       }),
     [isSuccess]
@@ -91,9 +92,9 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.productTag}
+        mainData={product?.faq}
         showData={columns}
-        columns={['_id', 'title', 'description', 'action']}
+        columns={['_id', 'question', 'answer', 'action']}
         nameAction="ایجاد سوال"
         onAction={() => setModal({ open: true, info: null })}
         onChangeSort={onChangeSort}

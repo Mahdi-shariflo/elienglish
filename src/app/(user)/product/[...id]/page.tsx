@@ -1,11 +1,8 @@
-import Image from '@/components/common/Image';
 import AddCartSingleProduct from '@/components/product/AddCartSingleProduct';
 import ProductPage from '@/components/product/ProductPage';
-import { Result } from '@/lib/product';
 import { getProduct } from '@/seo/product';
 import { Product } from '@/types/home';
 import Link from 'next/link';
-import LogoImage from '@/../public/icons/logo.jpg';
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -21,7 +18,6 @@ type Props = {
 
 const Page = async ({ params, searchParams }: Props) => {
   const { id } = await params;
-  const { text: textId, color: colorId } = await searchParams;
   const productData = await getProduct(id[0]);
   // const data = await safeRequest({
   //   url: `/user/comment/location/${productData?.product?._id}`,

@@ -35,8 +35,21 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
 
   const singleSelectTypes = ['statusCourse', 'sort', 'available']; // اینا فقط یک انتخاب مجاز دارن
 
-  const onAttributes = (checked: boolean, type: string, id: string) => {
+  const onAttributes = ({
+    checked,
+    type,
+    isLink,
+    id,
+    page,
+  }: {
+    id: string;
+    type: string;
+    checked: boolean;
+    page?: string;
+    isLink?: boolean;
+  }) => {
     startTransition(() => {
+      if (isLink && page) return router.push(page);
       const currentUrl = new URL(window.location.href);
       const searchParams = new URLSearchParams(currentUrl.search);
       const isSingle = singleSelectTypes.includes(type);
@@ -167,7 +180,13 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                         wrapper: 'after:!bg-main',
                       }}
                       onValueChange={(value) =>
-                        onAttributes(value, attribute.type as string, attribute.url)
+                        onAttributes({
+                          checked: value,
+                          id: attribute.url,
+                          type: attribute.type,
+                          page: attribute.page,
+                          isLink: attribute.isLink,
+                        })
                       }
                     >
                       <div className="flex items-center gap-2">{attribute.title}</div>

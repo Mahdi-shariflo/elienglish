@@ -1,35 +1,34 @@
 'use client';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Tab, Tabs } from '@heroui/react';
 import { Product } from '@/types/home';
-import useProductStore from '@/store/product-store';
-import { useMedia } from 'react-use';
 import Title from '../common/Title';
 import Comments from '../common/Comments';
-
+import Button from '../common/Button';
+const tabs = [
+  {
+    name: 'معرفی',
+  },
+  {
+    name: 'مشخصات محصول',
+  },
+  {
+    name: 'دیدگاه کاربران',
+  },
+];
 const MoreInformationProduct = ({ product }: { product: Product }) => {
-  const { selected, setSelected } = useProductStore();
-  const isMobile = useMedia('(max-width: 480px)', false);
+  const [select, setSelect] = useState(0);
 
-  const handleTabChange = (newTab: string) => {
-    if (isMobile) {
-      const element = document.getElementById(selected.tab);
-      if (element) {
-        setTimeout(() => {
-          window.scrollTo({ top: element.offsetTop - 140, behavior: 'smooth' });
-        }, 100);
-      }
-      setTimeout(() => {
-        setSelected({
-          tab: newTab,
-          userInteracted: true,
-        });
-      }, 200);
-    } else {
-      setSelected({
-        tab: newTab,
-        userInteracted: true,
-      });
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const propertiesRef = useRef<HTMLDivElement>(null);
+  const demoRef = useRef<HTMLDivElement>(null);
+  const faqRef = useRef<HTMLDivElement>(null);
+  const commentsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToRef = (ref: React.RefObject<HTMLDivElement> | null, index: number) => {
+    if (ref?.current) {
+      setSelect(index);
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
@@ -43,40 +42,48 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
           ?.replace(/height=".*?"/g, '')
       : ''; // حذف ویژگی height
   return (
-    <Tabs
-      selectedKey={selected.tab}
-      // @ts-expect-error errror
-      onSelectionChange={(key: string) => handleTabChange(key)}
-      variant="underlined"
-      classNames={{
-        base: 'w-full flex flex-col',
-        tabList:
-          'gap-4 sm:gap-6 w-full font-regular relative rounded-none p-0 border-b border-divider',
-        cursor: 'w-full h-[1.3px] bg-main',
-        tab: 'max-w-full !text-[12px] text-[#616A76] lg:!text-[18px] px-0 h-10 lg:h-14',
-        tabContent: 'group-data-[selected=true]:text-[#0C0C0C]',
-      }}
-    >
-      {product?.description ? (
-        <Tab key={'interdauce'} title={<p>معرفی محصول</p>}>
-          <div className="mt-5 px-3 lg:px-0">
-            <Title title="معرفی محصول" />
-            <div className="mt-4">
-              <p
-                dangerouslySetInnerHTML={{ __html: cleanDescription }}
-                className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] lg:text-[16px]"
-              ></p>
-            </div>
+    <div>
+      <div className="flex items-center gap-8 border-b border-[#E5EAEF]">
+        {tabs.map((tab, idx) => (
+          <Button
+            key={idx}
+            onClick={() => {
+              switch (idx) {
+                case 0:
+                  // @ts-expect-error error
+                  scrollToRef(descriptionRef, idx);
+                  break;
+                case 1:
+                  // @ts-expect-error error
+                  scrollToRef(propertiesRef, idx);
+                  break;
+                case 2:
+                  // @ts-expect-error error
+                  scrollToRef(commentsRef, idx);
+                  break;
+              }
+            }}
+            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
+          >
+            {tab.name}
+          </Button>
+        ))}
+      </div>
+
+      <div className="mt-5 flex flex-col gap-6 lg:gap-8">
+        {/* description */}
+        <div ref={descriptionRef}>
+          <Title className="!text-[16px]" title="معرفی محصول" />
+          <div className="mt-1">
+            <p
+              dangerouslySetInnerHTML={{ __html: cleanDescription }}
+              className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] lg:text-[16px]"
+            ></p>
           </div>
-          {/* <AccordinMoreInformation product={product} handleTabChange={handleTabChange} /> */}
-        </Tab>
-      ) : null}
-      {/* <Tab key={"use"} title={"نحوه استفاده"}>
-                        <AccordinMoreInformation product={product} selectedTab={selectedTab} handleTabChange={handleTabChange} />
-                    </Tab> */}
-      <Tab key={'information'} title={<p>مشخصات محصول</p>}>
-        <div className="mt-5">
-          <Title title="مشخصات محصول" />
+        </div>
+        {/* property */}
+        <div ref={propertiesRef} className="mt-5">
+          <Title className="!text-[16px]" title="مشخصات محصول" />
           <ul className="space-y-5 lg:mt-10">
             {product.properties?.map((attribute, idx) => (
               <li key={idx} className="flex items-start lg:border-b">
@@ -102,9 +109,8 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
             ))}
           </ul>
         </div>
-      </Tab>
-      <Tab key={'comments'} title={<p>دیدگاه کاربران</p>}>
         <Comments
+          ref={commentsRef}
           commentInfo={{
             _id: product._id,
             thumbnailImage: product.thumbnailImage,
@@ -112,8 +118,8 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
             targetType: 'product',
           }}
         />
-      </Tab>
-    </Tabs>
+      </div>
+    </div>
   );
 };
 

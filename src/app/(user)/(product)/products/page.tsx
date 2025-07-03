@@ -13,7 +13,22 @@ type Props = {
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
   const result = await request({ url: `/product/main` });
-  const product: { products: Product[]; totalPages: number } = result?.data?.data;
+  const product: {
+    products: Product[];
+    totalPages: number;
+    categories: { title: string; url: string }[];
+  } = result?.data?.data;
+  console.log(product);
+  const categories = product.categories.map((item, idx) => {
+    return {
+      _id: idx.toString(),
+      title: item.title,
+      url: item.url,
+      type: '',
+      isLink: true,
+      page: `/product-category/${item.url}`,
+    };
+  });
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
@@ -26,6 +41,11 @@ const Page = async ({ searchParams }: Props) => {
               breadcrumb: [],
               title: 'دسته بندی محصولات',
               properties: [
+                {
+                  title: 'دسته‌بندی‌ها',
+                  attributes: categories,
+                  displayType: 'text',
+                },
                 {
                   title: 'نوع محصول',
                   attributes: [
