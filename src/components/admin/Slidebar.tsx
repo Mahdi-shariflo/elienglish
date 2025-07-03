@@ -126,10 +126,10 @@ const menus = [
     ],
   },
   {
-    icon: Courses_icon,
+    icon: Menu_icon,
     name: 'سوالات متداول',
     href: ['/admin/faq'],
-    activeIcon: Courses_fill_icon,
+    activeIcon: Menu_fill_icon,
     children: [
       {
         name: 'دسته‌بندی',
@@ -187,12 +187,12 @@ const menus = [
     href: '/admin/media/',
     activeIcon: Media_fill_icon,
   },
-  // {
-  //   icon: Brand_icon,
-  //   name: 'برند‌ها',
-  //   href: '/admin/brands/',
-  //   activeIcon: Brand_fill_icon,
-  // },
+  {
+    icon: Brand_icon,
+    name: 'تعین سطح',
+    href: '/admin/lpa/',
+    activeIcon: Brand_fill_icon,
+  },
   // {
   //   icon: Transport_icon,
   //   name: 'حمل‌ونقل',
