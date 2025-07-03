@@ -104,20 +104,6 @@ const Page = async ({ params }: Props) => {
                     <span className="font-medium text-[#6A7890]">امتیاز زبان آموزان</span>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <p className="font-regular text-[#8E98A8]">اطلاعات دوره</p>
-                  <div className="mt-5 flex flex-col gap-5">
-                    {course.properties.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-2">
-                          <Image width={20} height={20} alt="" src={`${item.iconUrl}`} />
-                          <p className="font-regular text-[#33435A]">{item.property}</p>
-                        </div>
-                        <p className="font-regular text-[#33435A]">{item.attribiute}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
                 {/* property */}
               </div>
             </div>
