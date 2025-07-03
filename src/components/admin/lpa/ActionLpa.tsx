@@ -1,6 +1,6 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
-import { createURL } from '@/lib/fun';
+import { createURL, removeNumNumeric } from '@/lib/fun';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
@@ -16,6 +16,7 @@ import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
 import Datepicker from '@/components/common/Datepicker';
+import { useActionLpa } from '@/hooks/admin/lpa/useActionLpa';
 
 type Props = {
   modal: {
@@ -30,50 +31,38 @@ type Props = {
   >;
 };
 const ActionLpa = ({ modal, setModal }: Props) => {
-  const {
-    isSuccess: isSuccessCategoryUrl,
-    data,
-    isLoading,
-  } = useGetProductTagById({ id: modal.info?._id! });
   const onClose = () => setModal({ info: null, open: false });
-  const { mutate, isPending, isSuccess, reset } = useActionFaq();
-  const { data: faqCategories } = useGetCategoriesFaqAdmin({});
+  const { mutate, isPending, isSuccess, reset } = useActionLpa();
   const formik = useFormik({
     initialValues: {
-      robots: '',
-      question: '',
-      answer: '',
-      order: '',
-      published: '',
-      canonicalurl: '',
-      metaDescription: '',
-      title: '',
-      redirecturl: '',
-      metaTitle: '',
-      rebots: '',
-      url: '',
-      keyWords: '',
-      redirecturltype: '',
+      teacherProfile: '',
+      type: '',
+      teacherName: '',
+      date: '',
+      price: '',
+      discountPrice: '',
+      status: '',
+      weekday: '',
     },
     validationSchema: Yup.object({
-      question: Yup.string().required('فیلد اجباری است'),
-      answer: Yup.string().required('فیلد اجباری است'),
-      order: Yup.string().required('فیلد اجباری است'),
+      teacherProfile: Yup.string().required('فیلد اجباری است'),
+      type: Yup.string().required('فیلد اجباری است'),
+      teacherName: Yup.string().required('فیلد اجباری است'),
+      date: Yup.string().required('فیلد اجباری است'),
+      discountPrice: Yup.string().required('فیلد اجباری است'),
+      status: Yup.string().required('فیلد اجباری است'),
+      weekday: Yup.string().required('فیلد اجباری است'),
     }),
     onSubmit: (values) => {
       const data = {
-        question: values.question,
-        answer: values.answer,
-        order: values.order,
-        ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
-        ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
-        ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
-        ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
-        ...(values.rebots ? { robots: values.robots } : null),
-        ...(values.keyWords ? { keyWords: values.keyWords } : null),
-        ...(values.canonicalurl ? { canonicalurl: values.canonicalurl } : null),
+        ...values,
+        price: removeNumNumeric(values.price),
+        discountPrice: removeNumNumeric(values.discountPrice),
+        date: '',
+        time: '',
       };
-      mutate({ data, id: modal.info?._id! });
+      console.log(values);
+      // mutate({ data, id: modal.info?._id! });
     },
   });
   useEffect(() => {
@@ -84,29 +73,17 @@ const ActionLpa = ({ modal, setModal }: Props) => {
     }
   }, [isSuccess]);
 
-  useEffect(() => {
-    if (isSuccessCategoryUrl) {
-      const tags = data?.data?.data;
-      formik.setValues({
-        ...tags,
-        keyWords: tags?.keyWords?.join(', '),
-      });
-    } else {
-      formik.resetForm();
-    }
-  }, [isSuccessCategoryUrl]);
-  const categories = faqCategories?.data?.data;
   return (
     <>
       <BaseDialog
-        isLoading={isLoading}
         onClose={onClose}
         isOpen={modal.open}
-        title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} تگ محصول`}
+        title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} تعین سطح `}
         nameBtnFooter={modal.info?._id ? 'ویرایش' : 'ایجاد'}
         onClickFooter={() => formik.handleSubmit()}
-        size="full"
+        size="2xl"
         isLoadingFooterBtn={isPending}
+        classBody="!overflow-visible px-3"
       >
         <div className="mb-4 grid grid-cols-2 gap-4 space-y-2">
           <Media
@@ -119,7 +96,6 @@ const ActionLpa = ({ modal, setModal }: Props) => {
               {formik.values?.teacherProfile ? (
                 <img
                   className="h-full w-full object-contain"
-                  // @ts-expect-error error
                   src={`${formik.values?.teacherProfile}`}
                   alt="thumbnail"
                 />
@@ -145,8 +121,12 @@ const ActionLpa = ({ modal, setModal }: Props) => {
             label={'نام استاد'}
             classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
           />
-          <Datepicker name="date" label="تاریخ" formik={formik} />
-          <Datepicker name="time" label="زمان" timepicker formik={formik} />
+          <Datepicker
+            calendarPosition="absoulte"
+            name="date"
+            label="زمان و تاریخ"
+            formik={formik}
+          />
           <Input
             formik={formik}
             name="price"
@@ -189,7 +169,6 @@ const ActionLpa = ({ modal, setModal }: Props) => {
             name="weekday"
             formik={formik}
           />
-          <SeoOptions formik={formik} />
         </div>
       </BaseDialog>
     </>

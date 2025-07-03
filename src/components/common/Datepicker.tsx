@@ -12,7 +12,7 @@ interface Props {
   name: string;
   label?: string;
   disabled?: boolean;
-  required?: boolean;
+  isRequired?: boolean;
   isActive?: boolean;
   className?: string;
   timepicker?: boolean;
@@ -29,9 +29,8 @@ const Datepicker = ({
   name,
   label = 'تاریخ تولد',
   disabled,
-  required,
+  isRequired,
   className,
-  calendarPosition,
   format,
   endContent,
   inputClass,
@@ -47,8 +46,8 @@ const Datepicker = ({
   return (
     <div className={`container_datepicker ${className}`}>
       {label && (
-        <label className="block pb-[6px] font-medium text-[13px] text-[#3b3b3b]">
-          {label}:{required && <span className="text-sm text-[#DF2040]">*</span>}
+        <label className="text-block block pb-[6px] font-medium text-[13px]">
+          {label}:{isRequired && <span className="text-sm text-[#DF2040]">*</span>}
         </label>
       )}
       <div className="relative flex w-full items-center gap-3">
@@ -59,12 +58,12 @@ const Datepicker = ({
               ? formik.touched[name!] && formik.errors[name!] && '1px solid #ef4444'
               : null,
           }}
-          plugins={timepicker ? [<TimePicker position="right" />] : []}
+          format="YYYY-MM-DD HH:mm:ss"
+          plugins={[<TimePicker position="right" />]}
           value={formik ? formik.values[name] : null}
           onChange={handleChange}
           calendar={persian}
           locale={persian_fa}
-          format={format}
           disabled={disabled}
           placeholder="روز/ماه/سال"
           shadow={false}
@@ -74,12 +73,12 @@ const Datepicker = ({
           arrowClassName="!hidden"
           maxDate={maxDate ? maxDate : undefined}
           minDate={minDate ? minDate : undefined}
-          calendarPosition={calendarPosition}
+          calendarPosition={'top-center'}
           fixMainPosition
         />
         {endContent}
       </div>
-      <span className="font-es-regular inline-block pr-1 pt-2 text-[10px] text-red-600">
+      <span className="inline-block pr-1 pt-2 font-regular text-[10px] text-red-600">
         {formik
           ? formik.touched[name!] && formik.errors[name!]
             ? formik.errors[name!]

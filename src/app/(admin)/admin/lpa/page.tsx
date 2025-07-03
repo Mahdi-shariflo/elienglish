@@ -1,13 +1,10 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
-import ActionFaq from '@/components/admin/faq/ActionFaq';
 import ActionLpa from '@/components/admin/lpa/ActionLpa';
-import ActionProductTags from '@/components/admin/product/ActionProductTags';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
-import { useGetFaqAdmin } from '@/hooks/admin/faq/useGetFaqAdmin';
-import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
-import { initialDataFaq, initialDataTagProduct } from '@/lib/table-column';
+import { useGetLpaAdmin } from '@/hooks/admin/lpa/useGetLpaAdmin';
+import { initialDataFaq } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { TagType } from '@/types';
 import React, { useMemo, useState } from 'react';
@@ -23,7 +20,7 @@ const Page = () => {
     search: '',
     filter: '',
   });
-  const { data, isPending, isSuccess, isFetching, isLoading } = useGetFaqAdmin({
+  const { data, isPending, isSuccess, isFetching, isLoading } = useGetLpaAdmin({
     page: filter.page,
     search: filter.search,
     sort: filter.sort,
@@ -93,10 +90,10 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={product?.faq}
+        mainData={[]}
         showData={columns}
         columns={['_id', 'question', 'answer', 'action']}
-        nameAction="ایجاد سوال"
+        nameAction="ایجاد تعین سطح"
         onAction={() => setModal({ open: true, info: null })}
         onChangeSort={onChangeSort}
         onChangePage={onChangePage}
