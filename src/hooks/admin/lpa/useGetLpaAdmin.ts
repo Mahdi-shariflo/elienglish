@@ -9,10 +9,10 @@ type Props = {
 export const useGetLpaAdmin = ({ page = '1', sort = '', search = '', filter }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['products-admin', page, sort, search],
+    queryKey: ['lpa-admin', page, sort, search],
     queryFn: async () =>
       await safeRequest({
-        url: `/product/admin?${filter ? filter : ''}sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/lpa/admin?${filter ? filter : ''}sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

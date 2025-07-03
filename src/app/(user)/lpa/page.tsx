@@ -2,12 +2,27 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Filters from '@/components/blog/Filters';
 import React from 'react';
 import CardPlp from '@/components/plp/CardPlp';
+import { request } from '@/lib/safeClient';
+import { Lpa } from '@/types';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
+const days = [
+  { title: 'شنبه', url: 'SATURDAY', _id: '1', type: 'weekday' },
+  { title: 'یک‌شنبه', url: 'SUNDAY', _id: '2', type: 'weekday' },
+  { title: 'دوشنبه', url: 'MONDAY', _id: '3', type: 'weekday' },
+  { title: 'سه‌شنبه', url: 'TUESDAY', _id: '4', type: 'weekday' },
+  { title: 'چهارشنبه', url: 'WEDNESDAY', _id: '5', type: 'weekday' },
+  { title: 'پنج‌شنبه', url: 'THURSDAY', _id: '6', type: 'weekday' },
+  { title: 'جمعه', url: 'FRIDAY', _id: '7', type: 'weekday' },
+];
 
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
+  const data = await request({
+    url: `/lpa/archive?${searchParamsFilter.weekday ? `weekday=${searchParamsFilter?.weekday}` : ''}`,
+  });
+  const lpa: { lpa: Lpa[] } = data?.data?.data;
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
@@ -22,30 +37,8 @@ const Page = async ({ searchParams }: Props) => {
               title: 'دسته بندی بلاگ‌ها',
               properties: [
                 {
-                  title: 'نوع مقالات',
-                  attributes: [
-                    {
-                      _id: '1',
-                      title: 'متنی',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                    {
-                      _id: '2',
-                      title: 'ویدیویی',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                    {
-                      _id: '3',
-                      title: 'پادکست',
-                      url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
-                    },
-                  ],
+                  title: 'انتخاب روز',
+                  attributes: days,
                   displayType: 'text',
                 },
               ],
@@ -53,11 +46,9 @@ const Page = async ({ searchParams }: Props) => {
               children: [],
             }}
           />
-          <div className="grid w-full gap-4 rounded-lg px-3 dark:bg-[#172334] lg:grid-cols-4">
-            <CardPlp />
-            <CardPlp />
-            <CardPlp />
-            <CardPlp />
+          <div className="grid w-full grid-cols-3 gap-4 rounded-lg px-3 dark:bg-[#172334] 4xl:grid-cols-4">
+            {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
+
             {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
           </div>
         </div>

@@ -1,22 +1,16 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
-import { createURL, removeNumNumeric } from '@/lib/fun';
+import { removeNumNumeric } from '@/lib/fun';
 import { useFormik } from 'formik';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import * as Yup from 'yup';
-import SeoOptions from '../common/SeoOptions';
-import Editor from '../common/Editor';
 import { TagType } from '@/types';
-import { useActionProductTags } from '@/hooks/admin/products/useActionProductTags';
-import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
-import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
 import Select from '@/components/common/Select';
-import { StatusOptionsAdmin } from '@/lib/data';
-import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
 import Datepicker from '@/components/common/Datepicker';
 import { useActionLpa } from '@/hooks/admin/lpa/useActionLpa';
+import { converDateGre, converDatePer } from '@/lib/convert';
 
 type Props = {
   modal: {
@@ -43,6 +37,7 @@ const ActionLpa = ({ modal, setModal }: Props) => {
       discountPrice: '',
       status: '',
       weekday: '',
+      title: '',
     },
     validationSchema: Yup.object({
       teacherProfile: Yup.string().required('فیلد اجباری است'),
@@ -52,17 +47,22 @@ const ActionLpa = ({ modal, setModal }: Props) => {
       discountPrice: Yup.string().required('فیلد اجباری است'),
       status: Yup.string().required('فیلد اجباری است'),
       weekday: Yup.string().required('فیلد اجباری است'),
+      title: Yup.string().required('فیلد اجباری است'),
     }),
     onSubmit: (values) => {
       const data = {
-        ...values,
-        price: removeNumNumeric(values.price),
-        discountPrice: removeNumNumeric(values.discountPrice),
-        date: '',
-        time: '',
+        price: Number(removeNumNumeric(values.price)),
+        discountPrice: Number(removeNumNumeric(values.discountPrice)),
+        date: converDateGre(values.date, 'YYYY-MM-DD'),
+        time: converDateGre(values.date, 'HH:mm:ss'),
+        status: values.status,
+        weekday: values.weekday,
+        title: values.title,
+        type: values.type,
+        teacherName: values.teacherName,
+        teacherProfile: values.teacherProfile,
       };
-      console.log(values);
-      // mutate({ data, id: modal.info?._id! });
+      mutate({ data, id: modal.info?._id! });
     },
   });
   useEffect(() => {
@@ -72,6 +72,15 @@ const ActionLpa = ({ modal, setModal }: Props) => {
       reset();
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (modal.info) {
+      formik.setValues({
+        ...formik.values,
+        ...modal.info,
+      });
+    }
+  }, [modal.info]);
 
   return (
     <>
@@ -83,7 +92,6 @@ const ActionLpa = ({ modal, setModal }: Props) => {
         onClickFooter={() => formik.handleSubmit()}
         size="2xl"
         isLoadingFooterBtn={isPending}
-        classBody="!overflow-visible px-3"
       >
         <div className="mb-4 grid grid-cols-2 gap-4 space-y-2">
           <Media
@@ -104,6 +112,12 @@ const ActionLpa = ({ modal, setModal }: Props) => {
               )}
             </div>
           </Media>
+          <Input
+            formik={formik}
+            name="title"
+            label={'عنوان'}
+            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
+          />
           <Select
             options={[
               { label: 'تعین سطح', value: 'LEVEL_TEST' },
@@ -121,12 +135,7 @@ const ActionLpa = ({ modal, setModal }: Props) => {
             label={'نام استاد'}
             classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
           />
-          <Datepicker
-            calendarPosition="absoulte"
-            name="date"
-            label="زمان و تاریخ"
-            formik={formik}
-          />
+
           <Input
             formik={formik}
             name="price"
@@ -141,7 +150,12 @@ const ActionLpa = ({ modal, setModal }: Props) => {
             label={'مبلغ تخفیف'}
             classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
           />
-
+          <Datepicker
+            calendarPosition="absoulte"
+            name="date"
+            label="زمان و تاریخ"
+            formik={formik}
+          />
           <Select
             label="وضعیت  "
             options={[

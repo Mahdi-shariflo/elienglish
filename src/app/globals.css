@@ -193,5 +193,5 @@ hr {
 }
 
 .bg-contact-us {
-  background-image: url('../../public/images/bg-contact-us.png');
+  @apply bg-[url('../../public/images/bg-contactus.jpg')] lg:bg-[url('../../public/images/bg-contact-us.png')];
 }

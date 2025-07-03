@@ -1,13 +1,19 @@
 import React from 'react';
-import Profile from '@/../public/images/profile.jpg';
-import Image from 'next/image';
 import Button from '../common/Button';
-const CardPlp = () => {
+import { Lpa } from '@/types';
+import Image from 'next/image';
+const CardPlp = ({ lpa }: { lpa: Lpa }) => {
   return (
     <div className="rounded-lg border border-gray-50 p-3 drop-shadow-sm">
       <div className="flex items-center justify-between">
-        <p className="font-extrabold text-main">جلسه تعیین سطح</p>
-        <Image className="h-[60px] w-[60px] rounded-full" src={Profile} alt="" />
+        <p className="font-extrabold text-main">{lpa.title}</p>
+        <Image
+          width={60}
+          height={60}
+          className="h-[60px] w-[60px] rounded-full"
+          src={lpa?.teacherProfile}
+          alt=""
+        />
       </div>
       <div className="mt-3 space-y-3">
         <div className="flex items-center justify-between">
@@ -37,7 +43,7 @@ const CardPlp = () => {
               </svg>
             </span>
             <p className="font-regular text-[#33435A]">
-              استاد: <span className="font-medium">مهدی شریفلو</span>
+              استاد: <span className="font-medium">{lpa.teacherName}</span>
             </p>
           </div>
           <div className="flex items-center gap-1">
@@ -56,7 +62,14 @@ const CardPlp = () => {
               </svg>
             </span>
             <p className="font-regular text-[#33435A]">
-              تاریخ: <span className="font-medium">1404/07/09</span>
+              تاریخ:{' '}
+              <span className="font-medium">
+                {new Date(lpa.date).toLocaleDateString('fa-IR', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: 'numeric',
+                })}
+              </span>
             </p>
           </div>
         </div>
@@ -77,11 +90,14 @@ const CardPlp = () => {
               </svg>
             </span>
             <p className="font-regular text-[#33435A]">
-              زمان: <span className="font-medium">14:22</span>
+              زمان: <span className="font-medium">{lpa.time}</span>
             </p>
           </div>
           <p className="font-regular text-[#33435A]">
-            <span className="font-medium text-[14px]">165,000</span> تومان
+            <span className="font-medium text-[14px]">
+              {lpa.discountPrice ? lpa.discountPrice.toLocaleString() : lpa.price.toLocaleString()}
+            </span>{' '}
+            تومان
           </p>
         </div>
         <div className="flex items-center justify-between">

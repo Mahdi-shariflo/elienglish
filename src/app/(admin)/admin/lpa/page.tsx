@@ -4,7 +4,7 @@ import ActionLpa from '@/components/admin/lpa/ActionLpa';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import { useGetLpaAdmin } from '@/hooks/admin/lpa/useGetLpaAdmin';
-import { initialDataFaq } from '@/lib/table-column';
+import { initialDataFaq, initialDataLpa } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { TagType } from '@/types';
 import React, { useMemo, useState } from 'react';
@@ -29,16 +29,16 @@ const Page = () => {
   const { setVerifyDelete } = useGlobalStore();
   const columns = useMemo(
     () =>
-      initialDataFaq({
+      initialDataLpa({
         onEdit: (row) => setModal({ open: true, info: row }),
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
-            title: 'حذف سوال',
-            description: 'سوالات',
+            title: 'حذف تعین سطح',
+            description: 'تعین سطح',
             info: row.question,
-            updateCache: 'faq-admin',
-            url: `/faq/admin/${row._id}`,
+            updateCache: 'lpa-admin',
+            url: `/lpa/admin/${row._id}`,
           }),
       }),
     [isSuccess]
@@ -70,6 +70,7 @@ const Page = () => {
     });
   };
 
+  console.log(product);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -90,9 +91,9 @@ const Page = () => {
         isLoading={isPending || isLoading}
         page={Number(filter.page)}
         total={product?.totalPages}
-        mainData={[]}
+        mainData={product?.lpa}
         showData={columns}
-        columns={['_id', 'question', 'answer', 'action']}
+        columns={['_id', 'title', 'teacherName', 'price', 'discountPrice', 'action']}
         nameAction="ایجاد تعین سطح"
         onAction={() => setModal({ open: true, info: null })}
         onChangeSort={onChangeSort}

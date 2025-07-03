@@ -677,6 +677,71 @@ export const initialDataFaq = ({ onDelete, onEdit, onView }: Props) => [
     ),
   },
 ];
+export const initialDataLpa = ({ onDelete, onEdit, onView }: Props) => [
+  {
+    title: <HeaderCell align="center" title="ردیف" />,
+    dataIndex: '_id',
+    key: '_id',
+    render: (_: string, __: any, idx: number) => (
+      <p className="text-center text-xs text-gray-800">{idx + 1}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عنوان" />,
+    dataIndex: 'title',
+    key: 'title',
+    render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
+  },
+  {
+    title: <HeaderCell title="نام استاد" />,
+    dataIndex: 'teacherName',
+    key: 'teacherName',
+    render: (value: string) => <p className="mx-auto line-clamp-2 text-center">{value}</p>,
+  },
+  {
+    title: <HeaderCell title="مبلغ" />,
+    dataIndex: 'price',
+    key: 'price',
+    render: (value: number) => (
+      <p className="mx-auto line-clamp-2 text-center">{value.toLocaleString()}</p>
+    ),
+  },
+  {
+    title: <HeaderCell title="مبلغ ویژه" />,
+    dataIndex: 'discountPrice',
+    key: 'discountPrice',
+    render: (value: number) => (
+      <p className="mx-auto line-clamp-2 text-center">{value.toLocaleString()}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عملیات" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-2 text-gray-600">
+        {onDelete ? (
+          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+            <Delete_icon />
+          </Button>
+        ) : null}
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
+        {onView ? (
+          <Link
+            className="block text-center text-blue-500 underline"
+            href={`/product/tags/${row._id}/`}
+          >
+            <CgEye size={22} />
+          </Link>
+        ) : null}
+      </div>
+    ),
+  },
+];
 // ************************************************************** USER************************************************************
 export const initialDataUsers = ({ onDelete, onEdit, onAccess }: Props) => [
   {

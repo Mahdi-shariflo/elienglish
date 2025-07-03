@@ -268,3 +268,16 @@ export type CommentInfo = {
   title: string;
   targetType: 'blog' | 'product';
 };
+
+export type Lpa = {
+  teacherProfile: string;
+  title: string;
+  type: 'LEVEL_TEST_WITH_COUNSELING' | '';
+  teacherName: string;
+  date: string;
+  time: string;
+  price: number;
+  discountPrice: number;
+  status: string;
+  weekday: string;
+};
