@@ -73,15 +73,7 @@ const Page = async ({ searchParams, params }: Props) => {
           <div className="w-full">
             <Sort />
             <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3 5xl:grid-cols-5">
-              {[
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-                ...product?.course,
-              ].map((course, idx) => (
+              {product?.course.map((course, idx) => (
                 <CardProduct
                   url={`/course/${course.url}/`}
                   classImage="!object-fill"
