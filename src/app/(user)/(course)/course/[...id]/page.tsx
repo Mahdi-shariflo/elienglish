@@ -29,7 +29,7 @@ const Page = async ({ params }: Props) => {
             <MediaPreview className="!mt-0 border-gray-100 bg-white p-3" media={course} />
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
               <p className="hidden font-bold text-[18px] text-[#172334] lg:block">درباره دوره </p>
-              <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[20px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
+              <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[16px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
                 {course?.title}
               </p>
               <p className="rounded-lg pt-2 text-justify font-medium text-[14px] text-[#8E98A8] lg:pt-5">

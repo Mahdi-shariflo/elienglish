@@ -11,7 +11,7 @@ export const useGetSupportsAdmin = ({ page = '1', search = '', sort = '' }: Prop
     queryKey: ['supports-admin', page, search, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/contactus/get-all?page=${page}&sort=${sort}&search=${decodeURIComponent(search!)}`,
+        url: `/contactus/admin?page=${page}&sort=${sort}&search=${decodeURIComponent(search!)}`,
       }),
   });
 };

@@ -229,12 +229,12 @@ const menus = [
   //   href: '/admin/discounts/',
   //   activeIcon: Discount_fill_icon,
   // },
-  // {
-  //     icon: Contact_icon,
-  //     name: "تماس با ما",
-  //     href: "/admin/contact",
-  //     activeIcon: Contact_fill_icon
-  // },
+  {
+    icon: Contact_icon,
+    name: 'تماس با ما',
+    href: '/admin/contact',
+    activeIcon: Contact_fill_icon,
+  },
   // {
   //   icon: Settings_icon,
   //   name: 'تنظیمات',

@@ -1,3 +1,4 @@
+'use client';
 import React, { ReactNode } from 'react';
 import Message from '@/../public/images/message.png';
 import Image from 'next/image';
@@ -5,6 +6,9 @@ import Title from '@/components/common/Title';
 import Textarea from '@/components/common/form/Textarea';
 import Input from '@/components/common/form/Input';
 import Button from '@/components/common/Button';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useCreateContactus } from '@/hooks/contactus/useCreateContactus';
 const contact = [
   {
     title: 'تماس',
@@ -84,6 +88,29 @@ const contact = [
   },
 ];
 const page = () => {
+  const { mutate, isPending } = useCreateContactus();
+  const formik = useFormik({
+    initialValues: {
+      message: '',
+      first_name: '',
+      last_name: '',
+      mobileNumber: '',
+    },
+    validationSchema: Yup.object({
+      message: Yup.string().required('فیلد اجباری است'),
+      first_name: Yup.string().required('فیلد اجباری است'),
+      last_name: Yup.string().required('فیلد اجباری است'),
+      mobileNumber: Yup.string().required('فیلد اجباری است'),
+    }),
+    onSubmit: (values) => {
+      const mainData = {
+        message: values.message,
+        fullName: `${values.first_name} ${values.last_name}`,
+        mobileNumber: values.mobileNumber,
+      };
+      mutate({ data: mainData });
+    },
+  });
   return (
     <div className="relative mb-32 lg:!pt-[5.1rem]">
       <div className="pt-[25rem]">
@@ -109,20 +136,35 @@ const page = () => {
             </p>
             <div className="mt-10 rounded-lg border border-gray-100 p-4 pt-10 drop-shadow-sm lg:mt-0">
               <Title title="فرم تماس با ما" />
-              <form className="pt-5">
+              <form onSubmit={formik.handleSubmit} className="pt-5">
                 <div className="grid gap-4 lg:grid-cols-2">
                   <div className="grid gap-4 lg:grid-cols-2">
-                    <Input label={'نام'} />
-                    <Input label={'نام‌خانوادگی'} />
-                    <Input label={'آدرس ایمیل'} />
-                    <Input label={'شماره تماس'} />
+                    <Input formik={formik} name="first_name" label={'نام'} />
+                    <Input formik={formik} name="last_name" label={'نام‌خانوادگی'} />
+                    <Input
+                      formik={formik}
+                      name="mobileNumber"
+                      className="col-span-2"
+                      label={'شماره تماس'}
+                    />
                   </div>
                   <div>
-                    <Textarea classNameInput="!h-[160px]" label={'متن پیام'} />
+                    <Textarea
+                      formik={formik}
+                      name="message"
+                      classNameInput="!h-[160px]"
+                      label={'متن پیام'}
+                    />
                   </div>
                 </div>
                 <div className="mt-5 flex justify-end">
-                  <Button className="bg-main text-white lg:w-[120px]">ارسال پیام</Button>
+                  <Button
+                    isPending={isPending}
+                    type="submit"
+                    className="bg-main text-white lg:w-[120px]"
+                  >
+                    ارسال پیام
+                  </Button>
                 </div>
               </form>
             </div>

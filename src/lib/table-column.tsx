@@ -1236,18 +1236,14 @@ export const initialDataContactus = ({ onEye, onDelete }: Props) => [
   },
   {
     title: <HeaderCell align="center" title="نام و خانوادگی" />,
-    dataIndex: 'firstName',
-    key: 'firstName',
-    render: (_: string, row: any) => (
-      <p className="text-center text-[12px] text-gray-600">
-        {row?.firstName} {row.lastName}
-      </p>
-    ),
+    dataIndex: 'fullName',
+    key: 'fullName',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
   },
   {
     title: <HeaderCell align="center" title="موبایل" />,
-    dataIndex: 'mobile',
-    key: 'mobile',
+    dataIndex: 'mobileNumber',
+    key: 'mobileNumber',
     render: (value: string) => (
       <p className="text-center text-[12px] text-gray-600">{Number(value)}</p>
     ),

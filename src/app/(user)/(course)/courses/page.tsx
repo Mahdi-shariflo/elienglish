@@ -12,7 +12,14 @@ type Props = {
 
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
-  const result = await request({ url: `/course/main` });
+  const filterCourse = new URLSearchParams();
+  // Iterate over searchParams and encode key-value pairs
+  for (const [key, value] of Object.entries(searchParamsFilter!)) {
+    filterCourse.append(decodeURIComponent(key), decodeURIComponent(value as string));
+  }
+  const newQueryString = filterCourse.toString();
+
+  const result = await request({ url: `/course/main?${newQueryString}` });
   const product: {
     course: Course[];
     totalPages: number;

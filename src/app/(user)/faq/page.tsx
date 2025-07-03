@@ -1,9 +1,11 @@
 import Input from '@/components/common/form/Input';
 import Categories from '@/components/faq/Categories';
 import FrequentlyAskedQuestions from '@/components/faq/FrequentlyAskedQuestions';
+import { request } from '@/lib/safeClient';
 import React from 'react';
 
-const Page = () => {
+const Page = async () => {
+  const data = await request({ url: '' });
   return (
     <div className="mb-32 lg:pt-[5.1rem]">
       <div className="bg-faq flex h-[341px] w-full flex-col items-center justify-center">
