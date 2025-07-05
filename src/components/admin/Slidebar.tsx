@@ -223,12 +223,12 @@ const menus = [
   //   href: '/admin/orders/',
   //   activeIcon: Orders_fill_icon,
   // },
-  // {
-  //   icon: Discount_icon,
-  //   name: 'تخفیف‌ها',
-  //   href: '/admin/discounts/',
-  //   activeIcon: Discount_fill_icon,
-  // },
+  {
+    icon: Discount_icon,
+    name: 'تخفیف‌ها',
+    href: '/admin/discounts/',
+    activeIcon: Discount_fill_icon,
+  },
   {
     icon: Contact_icon,
     name: 'تماس با ما',

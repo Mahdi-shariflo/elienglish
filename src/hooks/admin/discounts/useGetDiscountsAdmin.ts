@@ -12,7 +12,7 @@ export const useGetDiscountsAdmin = ({ page = '1', search = '', sort = '' }: Pro
     queryKey: ['discount-admin', page, search, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/discount-code?page=${page}&sort=${sort}&limit=${20}&search=${decodeURIComponent(search!)}`,
+        url: `/disocuntcode/admin?page=${page}&sort=${sort}&limit=${20}&search=${decodeURIComponent(search!)}`,
       }),
   });
 };

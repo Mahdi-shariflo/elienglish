@@ -229,7 +229,7 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           inputClass="!h-[48px]"
           calendarPosition="bottom"
           minDate={new DateObject({ calendar: persian })}
-          required
+          isRequired
           label="تاریخ انقضا"
         />
         <div className="col-span-3 flex items-center gap-10">
