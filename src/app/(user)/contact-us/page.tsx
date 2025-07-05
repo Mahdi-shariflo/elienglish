@@ -115,11 +115,13 @@ const page = () => {
     <div className="relative mb-32 lg:!pt-[5.1rem]">
       <div className="pt-[25rem]">
         <div className="bg-contact-us absolute top-0 z-50 h-[672px] w-full lg:top-20"></div>
-        <div className="container_page relative z-50 rounded-lg bg-white p-3 lg:px-14">
+        <div className="container_page relative z-50 rounded-lg bg-white p-3 dark:bg-[#172334] lg:px-14">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-bold text-[16px] text-main lg:text-[32px]">تماس با الی انگلیش</p>
-              <p className="font-medium text-[#263248]">از مسیر های زیر با ما در ارتباط باشید.</p>
+              <p className="font-medium text-[#263248] dark:text-[#8E98A8]">
+                از مسیر های زیر با ما در ارتباط باشید.
+              </p>
             </div>
             <span className="-mt-20 hidden lg:block">
               <Image src={Message} alt="" />
@@ -131,10 +133,10 @@ const page = () => {
             ))}
           </div>
           <div className="pt-20">
-            <p className="font-medium text-[#0B1524]">
+            <p className="font-medium text-[#0B1524] dark:text-[#8E98A8]">
               با پر کردن فرم زیر کارشناسان ما در کمترین زمان ممکن با شما تماس خواهند گرفت.
             </p>
-            <div className="mt-10 rounded-lg border border-gray-100 p-4 pt-10 drop-shadow-sm lg:mt-0">
+            <div className="!mt-10 rounded-lg border border-gray-100 p-4 pt-10 drop-shadow-sm dark:border-[#263248] lg:mt-0">
               <Title title="فرم تماس با ما" />
               <form onSubmit={formik.handleSubmit} className="pt-5">
                 <div className="grid gap-4 lg:grid-cols-2">
@@ -186,7 +188,9 @@ const CardContactUs = ({
         {contact.icon}
       </div>
       <div>
-        <p className="font-extrabold text-[16px] text-[#33435A] lg:text-[28px]">{contact.title}</p>
+        <p className="font-extrabold text-[16px] text-[#33435A] dark:text-white lg:text-[28px]">
+          {contact.title}
+        </p>
         <p className="font-medium text-[12px] text-main lg:text-[16px]">{contact.content}</p>
         {contact.subContent && (
           <p className="font-medium text-[12px] text-[#6A7890] lg:text-[16px]">

@@ -3,7 +3,7 @@ import React from 'react';
 import Profile from '@/../public/images/profile.jpg';
 const OurTeam = () => {
   return (
-    <div className="mt-40 bg-[#F4F6FA] p-3 py-10">
+    <div className="mt-40 bg-[#F4F6FA] p-3 py-10 dark:bg-[#172334]">
       <div>
         <p className="text-center font-bold text-[36px] text-main">تیم ما</p>
         <span className="block text-center font-medium text-[18px] text-[#505B74]">

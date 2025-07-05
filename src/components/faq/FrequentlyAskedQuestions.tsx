@@ -31,7 +31,7 @@ const FrequentlyAskedQuestions = ({ faqs }: Props) => {
         <Accordion>
           {faqs.map((faq, idx) => (
             <AccordionItem
-              className="mt-4 rounded-lg border border-[#E5EAEF] p-3"
+              className="mt-4 rounded-lg border border-[#E5EAEF] p-3 dark:border-[#263248]"
               indicator={({ isOpen }) =>
                 isOpen ? (
                   <svg
@@ -99,7 +99,7 @@ const FrequentlyAskedQuestions = ({ faqs }: Props) => {
               key={idx}
               aria-label="Accordion 1"
               title={
-                <p className="font-medium text-[#263248] lg:text-[18px]">
+                <p className="font-medium text-[#263248] dark:text-[#8E98A8] lg:text-[18px]">
                   <span className="text-[18px] text-main">{idx + 1}.</span>
                   {faq.question}
                 </p>
