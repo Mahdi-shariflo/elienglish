@@ -49,8 +49,8 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
           ?.replace(/height=".*?"/g, '')
       : ''; // حذف ویژگی height
   return (
-    <div className="mt-10 rounded-lg border-t border-gray-200 bg-white p-3 lg:mt-4 lg:border-none">
-      <div className="flex items-center gap-8 border-b border-[#E5EAEF]">
+    <div className="mt-10 rounded-lg border-t border-gray-200 bg-white p-3 dark:bg-[#172334] lg:mt-4 lg:border-none">
+      <div className="flex items-center gap-8 border-b border-[#E5EAEF] dark:border-[#263248]">
         {tabs.map((tab, idx) => (
           <Button
             key={idx}
@@ -78,7 +78,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   break;
               }
             }}
-            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
+            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334] dark:text-[#8E98A8]'}`}
           >
             {tab.name}
           </Button>
@@ -92,7 +92,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
           <div className="mt-1">
             <p
               dangerouslySetInnerHTML={{ __html: cleanDescription }}
-              className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] lg:text-[16px]"
+              className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] dark:text-[#8E98A8] lg:text-[16px]"
             ></p>
           </div>
         </div>
@@ -122,10 +122,11 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   </svg>
                 )}
                 classNames={{
-                  heading: 'drop_shadow_faq border border-gray-100 !rounded-lg !px-2',
+                  heading:
+                    'drop_shadow_faq border dark:border-[#263248] border-gray-100 !rounded-lg !px-2',
                 }}
                 title={
-                  <p className="font-medium text-[14px] lg:text-[16px]">
+                  <p className="font-medium text-[14px] dark:text-[#8E98A8] lg:text-[16px]">
                     <span className="text-[14px] text-main lg:text-[16px]">{item?.order}. </span>
                     {item?.title}
                   </p>
@@ -259,12 +260,13 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   </div>
                 )}
                 classNames={{
-                  heading: 'drop_shadow_faq border border-gray-100 !rounded-lg !px-4',
+                  heading:
+                    'drop_shadow_faq border dark:border-[#263248] border-gray-100 !rounded-lg !px-4',
                 }}
                 title={
                   <div className="flex items-center justify-between">
                     <div className="lg:!space-y-4">
-                      <p className="font-medium text-[14px] lg:text-[16px]">
+                      <p className="font-medium text-[14px] dark:text-[#8E98A8] lg:text-[16px]">
                         <span className="text-[14px] text-main lg:text-[16px]">
                           {item?.order}.{' '}
                         </span>
@@ -272,7 +274,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                       </p>
                       <p className="font-medium text-[12px] text-[#8E98A8]">فصل {item.lessons}</p>
                     </div>
-                    <div className="hidden h-[50px] items-center gap-4 rounded-lg !bg-[#E5EAEF] px-4 lg:flex">
+                    <div className="hidden h-[50px] items-center gap-4 rounded-lg !bg-[#E5EAEF] px-4 dark:!bg-gray lg:flex">
                       <div className="flex items-center gap-2">
                         <span>
                           <svg

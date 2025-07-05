@@ -25,10 +25,15 @@ const Page = async ({ params }: Props) => {
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
         />
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg border border-transparent dark:!border-[#263248] lg:pb-8">
-            <MediaPreview className="!mt-0 border-gray-100 bg-white p-3" media={course} />
+          <div className="w-full gap-10 overflow-hidden rounded-lg lg:pb-8">
+            <MediaPreview
+              className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334]"
+              media={course}
+            />
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
-              <p className="hidden font-bold text-[18px] text-[#172334] lg:block">درباره دوره </p>
+              <p className="hidden font-bold text-[18px] text-[#172334] dark:text-white lg:block">
+                درباره دوره{' '}
+              </p>
               <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[16px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
                 {course?.title}
               </p>
@@ -46,7 +51,7 @@ const Page = async ({ params }: Props) => {
             </div>
             <MoreInformationCourse course={course} />
           </div>
-          <div className="sticky top-32 w-full space-y-4 overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
+          <div className="sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
             <div className="border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
               <div className="hidden lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
@@ -110,8 +115,8 @@ const Page = async ({ params }: Props) => {
                   </span>
                   <div className="flex items-center gap-1 font-medium">
                     <p className="flex items-center gap-1">
-                      <span className="font-bold text-[#33435A]">4.5</span>
-                      <span className="font-medium text-[#33435A]">از 5</span>
+                      <span className="font-bold text-[#33435A] dark:text-[#8E98A8]">4.5</span>
+                      <span className="font-medium text-[#33435A] dark:text-[#8E98A8]">از 5</span>
                     </p>
                     <span className="font-medium text-[#6A7890]">امتیاز زبان آموزان</span>
                   </div>
@@ -124,9 +129,13 @@ const Page = async ({ params }: Props) => {
                       <div key={idx} className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
                           <Image width={20} height={20} alt="" src={`${item.iconUrl}`} />
-                          <p className="font-regular text-[#33435A]">{item.property}</p>
+                          <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
+                            {item.property}
+                          </p>
                         </div>
-                        <p className="font-regular text-[#33435A]">{item.attribiute}</p>
+                        <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
+                          {item.attribiute}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -135,7 +144,7 @@ const Page = async ({ params }: Props) => {
             </div>
             <div className="hidden items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:flex">
               <Image width={60} src={Drop} alt="" />
-              <p className="font-bold text-[20px] text-[#172334]">
+              <p className="font-bold text-[20px] text-[#172334] dark:text-[#8E98A8]">
                 {course.status === 'complated' ? 'تکمیل ظبط' : 'در حال ظبط'}
               </p>
               <div className="pl flex flex-col items-center justify-center gap-2">
@@ -161,7 +170,7 @@ const Page = async ({ params }: Props) => {
                     </span>
                   ))}
                 </div>
-                <p className="font-medium text-[#33435A]">4.86 از 7 رای</p>
+                <p className="font-medium text-[#33435A] dark:text-[#8E98A8]">4.86 از 7 رای</p>
               </div>
             </div>
           </div>
