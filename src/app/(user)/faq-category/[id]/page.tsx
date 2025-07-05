@@ -3,9 +3,12 @@ import Categories from '@/components/faq/Categories';
 import FrequentlyAskedQuestions from '@/components/faq/FrequentlyAskedQuestions';
 import { request } from '@/lib/safeClient';
 import React from 'react';
-
-const Page = async () => {
-  const data = await request({ url: '/faq/main' });
+type Props = {
+  params: Promise<{ [key: string]: string }>;
+};
+const Page = async ({ params }: Props) => {
+  const { id } = await params;
+  const data = await request({ url: `/faq/archive-category?slug=${id}` });
   const faq = data?.data?.data;
   console.log(faq);
   return (
@@ -44,10 +47,13 @@ const Page = async () => {
           isClear
         />
       </div>
-      <div className="lg:container_page mt-10 flex flex-col gap-10 lg:gap-[100px]">
-        <Categories path="/faq-category" categories={faq?.categories} />
-        {faq?.faq?.length >= 1 && <FrequentlyAskedQuestions faqs={faq.faq} />}
-      </div>
+      {/* <div className="lg:container_page mt-10 flex flex-col gap-10 lg:gap-[100px]">
+        <Categories path="faq-category" categories={faq?.categories} />
+        {
+          faq?.faq?.length >=1 &&     <FrequentlyAskedQuestions faqs={faq.faq}/>
+
+        }
+      </div> */}
     </div>
   );
 };

@@ -183,6 +183,7 @@ export interface TagType {
   title?: string;
   url: string;
   link: string;
+  published: boolean;
 }
 
 export interface FormValuesCreteProduct {

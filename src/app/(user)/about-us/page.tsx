@@ -3,6 +3,8 @@ import React from 'react';
 import AboutImage from '@/../public/images/aboutimage.png';
 import Image from 'next/image';
 import SliderAboutus from './SliderAboutus';
+import BgAbout from '@/../public/images/bg-about.png';
+import OurTeam from './OurTeam';
 const info = [
   {
     title: 'محصول',
@@ -56,7 +58,7 @@ const page = () => {
         </div>
       </div>
       <div className="container_page mt-44 flex items-center justify-between gap-40">
-        <div>
+        <div className="flex-1">
           <p className="font-extrabold text-[28px] text-main">مسیر شروع زبان از اینجاست!</p>
           <p className="pt-10 font-medium text-[16px] leading-9 text-[#505B74]">
             بله، دوره‌های ما به گونه‌ای طراحی شده‌اند که برای تمامی سطوح زبان‌آموزان مناسب باشند. از
@@ -65,9 +67,11 @@ const page = () => {
             زبان‌آموزان در ابتدای دوره، برنامه‌های آموزشی متناسب با نیازهای هر فرد را ارائه می‌دهیم.
           </p>
         </div>
-
-        <SliderAboutus />
+        <div className="w-full flex-1">
+          <img className="block h-[245px] w-full" src={BgAbout.src} alt="" />
+        </div>
       </div>
+      <OurTeam />
     </div>
   );
 };

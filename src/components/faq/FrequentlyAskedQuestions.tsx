@@ -1,7 +1,13 @@
 'use client';
 import React from 'react';
 import { Accordion, AccordionItem } from '@heroui/accordion';
-const FrequentlyAskedQuestions = () => {
+type Props = {
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+};
+const FrequentlyAskedQuestions = ({ faqs }: Props) => {
   return (
     <div className="container_page lg:!w-full">
       <div className="drop_shadow_faq mx-auto flex h-[78px] w-[78px] items-center justify-center rounded-full border border-gray-100">
@@ -23,19 +29,56 @@ const FrequentlyAskedQuestions = () => {
       </p>
       <div className="mt-10">
         <Accordion>
-          <AccordionItem
-            className="rounded-lg border border-[#E5EAEF] p-3"
-            indicator={({ isOpen }) =>
-              isOpen ? (
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="!-rotate-90"
-                >
-                  <g clip-path="url(#clip0_491_8566)">
+          {faqs.map((faq, idx) => (
+            <AccordionItem
+              className="mt-4 rounded-lg border border-[#E5EAEF] p-3"
+              indicator={({ isOpen }) =>
+                isOpen ? (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="!-rotate-90"
+                  >
+                    <g clip-path="url(#clip0_491_8566)">
+                      <path
+                        d="M6.85547 12H17.1412"
+                        stroke="#6E3DFF"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M17.9983 0.855469H5.99833C3.158 0.855469 0.855469 3.158 0.855469 5.99833V17.9983C0.855469 20.8386 3.158 23.1412 5.99833 23.1412H17.9983C20.8386 23.1412 23.1412 20.8386 23.1412 17.9983V5.99833C23.1412 3.158 20.8386 0.855469 17.9983 0.855469Z"
+                        stroke="#6E3DFF"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_491_8566">
+                        <rect width="24" height="24" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                ) : (
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M12 6.85547V17.1412"
+                      stroke="#6E3DFF"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
                     <path
                       d="M6.85547 12H17.1412"
                       stroke="#6E3DFF"
@@ -50,62 +93,21 @@ const FrequentlyAskedQuestions = () => {
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_491_8566">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              ) : (
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 6.85547V17.1412"
-                    stroke="#6E3DFF"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.85547 12H17.1412"
-                    stroke="#6E3DFF"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M17.9983 0.855469H5.99833C3.158 0.855469 0.855469 3.158 0.855469 5.99833V17.9983C0.855469 20.8386 3.158 23.1412 5.99833 23.1412H17.9983C20.8386 23.1412 23.1412 20.8386 23.1412 17.9983V5.99833C23.1412 3.158 20.8386 0.855469 17.9983 0.855469Z"
-                    stroke="#6E3DFF"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              )
-            }
-            key="1"
-            aria-label="Accordion 1"
-            title={
-              <p className="font-medium text-[#263248] lg:text-[18px]">
-                <span className="text-[18px] text-main">1.</span> آیا دوره‌های شما برای همه سطوح
-                مناسب است؟
-              </p>
-            }
-          >
-            <p className="font-light text-[#6A7890] text-[]">
-              بله، دوره‌های ما به گونه‌ای طراحی شده‌اند که برای تمامی سطوح زبان‌آموزان مناسب باشند.
-              از مبتدیانی که هیچ تجربه‌ای در یادگیری زبان انگلیسی ندارند تا پیشرفته‌هایی که به دنبال
-              تقویت مهارت‌های خود هستند، می‌توانند از دوره‌های ما بهره‌مند شوند. ما با ارزیابی سطح
-              زبان‌آموزان در ابتدای دوره، برنامه‌های آموزشی متناسب با نیازهای هر فرد را ارائه
-              می‌دهیم.
-            </p>
-          </AccordionItem>
+                  </svg>
+                )
+              }
+              key={idx}
+              aria-label="Accordion 1"
+              title={
+                <p className="font-medium text-[#263248] lg:text-[18px]">
+                  <span className="text-[18px] text-main">{idx + 1}.</span>
+                  {faq.question}
+                </p>
+              }
+            >
+              <p className="font-light text-[#6A7890] text-[]">{faq.answer}</p>
+            </AccordionItem>
+          ))}
         </Accordion>
       </div>
     </div>

@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import Image from '../common/Image';
 import { ThumbnailImage } from '@/types';
 type Props = {
+  path?: string;
   children?: ReactNode;
   categories: {
     title: string;
@@ -10,7 +11,7 @@ type Props = {
     thumbnailImage: ThumbnailImage;
   }[];
 };
-const Categories = ({ categories, children }: Props) => {
+const Categories = ({ categories, children, path }: Props) => {
   return (
     <div className="container_page lg:!w-full">
       <div className="drop_shadow_faq mx-auto flex h-[78px] w-[78px] items-center justify-center rounded-full border border-gray-100">
@@ -67,7 +68,7 @@ const Categories = ({ categories, children }: Props) => {
           <Link
             key={idx}
             className="flex h-[108px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px]"
-            href={`/blogs/category/${item.url}`}
+            href={`${path}/${item.url}`}
           >
             <Image className="h-10 w-10" src={item?.thumbnailImage?.url} alt="" />
             <p className="font-bold text-main">{item.title}</p>

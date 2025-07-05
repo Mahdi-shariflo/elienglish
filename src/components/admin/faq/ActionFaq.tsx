@@ -27,11 +27,6 @@ type Props = {
   >;
 };
 const ActionFaq = ({ modal, setModal }: Props) => {
-  const {
-    isSuccess: isSuccessCategoryUrl,
-    data,
-    isLoading,
-  } = useGetProductTagById({ id: modal.info?._id! });
   const onClose = () => setModal({ info: null, open: false });
   const { mutate, isPending, isSuccess, reset } = useActionFaq();
   const { data: faqCategories } = useGetCategoriesFaqAdmin({});
@@ -62,6 +57,7 @@ const ActionFaq = ({ modal, setModal }: Props) => {
         question: values.question,
         answer: values.answer,
         order: values.order,
+        published: values.published === 'true' ? true : false,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
         ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
         ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
@@ -82,21 +78,20 @@ const ActionFaq = ({ modal, setModal }: Props) => {
   }, [isSuccess]);
 
   useEffect(() => {
-    if (isSuccessCategoryUrl) {
-      const tags = data?.data?.data;
+    if (modal.info) {
       formik.setValues({
-        ...tags,
-        keyWords: tags?.keyWords?.join(', '),
+        ...formik.values,
+        ...modal.info,
+        published: modal.info.published ? 'true' : 'false',
       });
     } else {
       formik.resetForm();
     }
-  }, [isSuccessCategoryUrl]);
+  }, [modal.info]);
   const categories = faqCategories?.data?.data;
   return (
     <>
       <BaseDialog
-        isLoading={isLoading}
         onClose={onClose}
         isOpen={modal.open}
         title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} تگ محصول`}
