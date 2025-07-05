@@ -337,7 +337,7 @@ const Header = ({ categories }: Props) => {
               ))}
               <div className="h-[32px] w-px bg-[#E4E7E9]" />
               <Link
-                href={'/plp/'}
+                href={'/lpa/'}
                 className="font-medium text-[14px] text-[#7D8793] dark:!text-white"
               >
                 تعین سطح

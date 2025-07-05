@@ -4,7 +4,7 @@ import { Lpa } from '@/types';
 import Image from 'next/image';
 const CardPlp = ({ lpa }: { lpa: Lpa }) => {
   return (
-    <div className="rounded-lg border border-gray-50 p-3 drop-shadow-sm">
+    <div className="rounded-lg border border-gray-50 p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334]">
       <div className="flex items-center justify-between">
         <p className="font-extrabold text-main">{lpa.title}</p>
         <Image
@@ -42,7 +42,7 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[#33435A]">
+            <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
               استاد: <span className="font-medium">{lpa.teacherName}</span>
             </p>
           </div>
@@ -61,7 +61,7 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[#33435A]">
+            <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
               تاریخ:{' '}
               <span className="font-medium">
                 {new Date(lpa.date).toLocaleDateString('fa-IR', {
@@ -89,11 +89,11 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[#33435A]">
+            <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
               زمان: <span className="font-medium">{lpa.time}</span>
             </p>
           </div>
-          <p className="font-regular text-[#33435A]">
+          <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
             <span className="font-medium text-[14px]">
               {lpa.discountPrice ? lpa.discountPrice.toLocaleString() : lpa.price.toLocaleString()}
             </span>{' '}

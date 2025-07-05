@@ -46,7 +46,7 @@ const Page = async ({ searchParams }: Props) => {
               children: [],
             }}
           />
-          <div className="grid w-full grid-cols-3 gap-4 rounded-lg px-3 dark:bg-[#172334] 4xl:grid-cols-4">
+          <div className="grid w-full gap-4 rounded-lg p-3 px-3 lg:grid-cols-3 4xl:grid-cols-4">
             {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
 
             {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
