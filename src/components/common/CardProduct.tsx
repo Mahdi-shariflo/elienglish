@@ -27,7 +27,7 @@ const CardProduct = ({
   return (
     <Link
       href={url}
-      className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] ${className}`}
+      className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border-2 border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] dark:border-[#505B74] ${className}`}
     >
       {product.count === 0 || product?.price === 0 ? (
         <span className="absolute left-2 top-2 z-20 flex w-fit rounded bg-[#7D8793] bg-opacity-70 px-1 py-px font-regular text-[12px] text-white lg:text-[14px]">
@@ -37,13 +37,13 @@ const CardProduct = ({
 
       <Image
         classImg={classImage}
-        className={`relative z-10 mx-auto flex h-[103px] w-[106px] items-center justify-center object-contain lg:h-[254px] lg:w-[231px] ${classNameImage}`}
+        className={`relative z-10 mx-auto flex h-[103px] w-[106px] items-center justify-center object-contain lg:h-[254px] lg:w-full ${classNameImage}`}
         src={pro?.thumbnailImage?.url}
         alt={pro.thumbnailImage?.altText ? pro.thumbnailImage?.altText : pro.title}
       />
       <div className="px-2">
         <p
-          className={`line-clamp-2 font-bold text-[#0B1524] lg:font-bold ${showTotalProduct ? 'text-[12px] lg:text-[12px]' : 'text-[12px] lg:text-[14px]'}`}
+          className={`line-clamp-2 font-bold text-[#0B1524] dark:text-white lg:font-bold ${showTotalProduct ? 'text-[12px] lg:text-[12px]' : 'text-[12px] lg:text-[14px]'}`}
         >
           {product.title.replaceAll('&#038;', '')}
         </p>
@@ -66,7 +66,7 @@ const CardProduct = ({
                 </p>
               )}
               <p className="flex items-center gap-1">
-                <span className="whitespace-nowrap font-bold text-[14px] text-[#0C0C0C]">
+                <span className="whitespace-nowrap font-bold text-[14px] text-[#0C0C0C] dark:text-white">
                   {product?.discountPrice
                     ? product?.discountPrice.toLocaleString()
                     : product.price.toLocaleString()}

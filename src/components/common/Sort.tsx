@@ -29,11 +29,13 @@ const Sort = () => {
     <div className="mb-3 flex justify-end">
       <Dropdown
         placement="bottom-start"
-        classNames={{ trigger: '!h-[40px] rounded-lg font-medium text-[16px] shadow' }}
+        classNames={{
+          trigger: '!h-[40px] rounded-lg dark:bg-[#172334] font-medium text-[16px] shadow',
+        }}
       >
         <DropdownTrigger>
           <Button className="bg-transparent">
-            <span className="text-[#0B1524]">مرتب‌ سازی:</span>
+            <span className="text-[#0B1524] dark:text-white">مرتب‌ سازی:</span>
             <div className="flex items-center gap-2">
               <span className="font-regular text-[#505B74]">
                 {sort ? (sort === 'createdAt_desc' ? 'جدیدترین' : 'قدیمی‌ترین') : 'جدیدترین'}
@@ -59,10 +61,10 @@ const Sort = () => {
           </Button>
         </DropdownTrigger>
         <DropdownMenu onAction={(value) => onSort(value as string)} aria-label="Static Actions">
-          <DropdownItem className="font-medium" key="createdAt_desc">
+          <DropdownItem className="font-medium dark:text-white" key="createdAt_desc">
             جدید‌ترین
           </DropdownItem>
-          <DropdownItem className="font-medium" key="createdAt_asc">
+          <DropdownItem className="font-medium dark:text-white" key="createdAt_asc">
             قدیمی ترین
           </DropdownItem>
         </DropdownMenu>

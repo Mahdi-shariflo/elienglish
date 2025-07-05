@@ -32,7 +32,7 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
-        <Breadcrumbs breadcrumbs={[]} />
+        <Breadcrumbs breadcrumbs={[{ id: 'l', title: 'محصولات', url: '#' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی محصولات"
@@ -71,7 +71,7 @@ const Page = async ({ searchParams }: Props) => {
           />
           <div className="w-full">
             <Sort />
-            <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3 5xl:grid-cols-5">
+            <div className="grid w-full gap-4 rounded-lg p-3 dark:bg-[#172334] lg:grid-cols-3 5xl:grid-cols-5">
               {product?.products.map((product, idx) => (
                 <CardProduct
                   url={`/product/${product.url}/`}
