@@ -43,7 +43,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
       : ''; // حذف ویژگی height
   return (
     <div>
-      <div className="flex items-center gap-8 border-b border-[#E5EAEF]">
+      <div className="flex items-center gap-8 border-b border-[#E5EAEF] dark:!border-[#263248]">
         {tabs.map((tab, idx) => (
           <Button
             key={idx}
@@ -63,7 +63,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
                   break;
               }
             }}
-            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334]'}`}
+            className={`!h-[40px] !w-fit !min-w-fit !rounded-none border-b font-bold text-[14px] lg:text-[16px] ${select === idx ? 'border-main text-main' : 'border-transparent text-[#172334] dark:text-[#8E98A8]'}`}
           >
             {tab.name}
           </Button>
@@ -77,7 +77,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
           <div className="mt-1">
             <p
               dangerouslySetInnerHTML={{ __html: cleanDescription }}
-              className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] lg:text-[16px]"
+              className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] dark:text-[#8E98A8] lg:text-[16px]"
             ></p>
           </div>
         </div>
@@ -86,7 +86,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
           <Title className="!text-[16px]" title="مشخصات محصول" />
           <ul className="space-y-5 lg:mt-10">
             {product.properties?.map((attribute, idx) => (
-              <li key={idx} className="flex items-start lg:border-b">
+              <li key={idx} className="flex items-start dark:border-[#263248] lg:border-b">
                 <span
                   style={{
                     wordBreak: 'break-word',
@@ -101,7 +101,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word',
                   }}
-                  className="block w-full pr-2 font-medium text-[14px] text-[#0B1524] lg:pb-3"
+                  className="block w-full pr-2 font-medium text-[14px] text-[#0B1524] dark:text-[#8E98A8] lg:pb-3"
                 >
                   {attribute.attribiute}
                 </span>

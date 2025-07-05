@@ -50,15 +50,15 @@ const Information = ({ product }: { product: Product }) => {
       <div className="container_page lg:!w-full">
         {/* title */}
         <div>
-          <h1 className="line-clamp-2 font-bold text-lg text-[#232429]">
+          <h1 className="line-clamp-2 font-bold text-lg text-[#232429] dark:text-white">
             {typeof product?.title === 'string' ? product.title.replaceAll('&#038;', '') : ''}
           </h1>
           {/* length comment , rate , brand */}
           <button
             onClick={goComment}
-            className="flex !w-full items-start justify-start gap-4 !rounded-none border-t border-[#E4E7E9] py-3 font-medium lg:border-b"
+            className="flex !w-full items-start justify-start gap-4 !rounded-none border-t border-[#E4E7E9] py-3 font-medium dark:border-[#263248] lg:border-b"
           >
-            <p className="font-medium text-[14px]">دیدگاه کاربران</p>
+            <p className="font-medium text-[14px] dark:text-[#8E98A8]">دیدگاه کاربران</p>
             <div className="flex items-center gap-2">
               <span>
                 <svg
@@ -84,7 +84,9 @@ const Information = ({ product }: { product: Product }) => {
         {/* property */}
         {findainProperties?.length >= 1 && (
           <div className="border-b border-t border-[#E4E7E9] py-4 last:border-none lg:mt-[16px] lg:border-0 lg:py-0">
-            <p className="font-bold text-[14px] text-[#172334]">ویژگی‌های اصلی</p>
+            <p className="font-bold text-[14px] text-[#172334] dark:text-[#8E98A8]">
+              ویژگی‌های اصلی
+            </p>
             <ul className="mt-[14px] space-y-4">
               {findainProperties.slice(0, 4).map((attribute, idx) => {
                 return (

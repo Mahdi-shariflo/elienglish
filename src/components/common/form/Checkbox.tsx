@@ -24,7 +24,9 @@ const Checkbox = ({ className, formik, label, name, onValueChange, isSelected }:
         }
         isInvalid={isInvalid}
         classNames={{
-          label: 'pr-3 text-[14px] line-clamp-2 whitespace-nowrap !font-regular text-[#0C0C0C]',
+          label:
+            'pr-3 text-[14px] line-clamp-2 whitespace-nowrap dark:text-[#8E98A8] !font-regular text-[#0C0C0C]',
+
           wrapper: 'after:!bg-main',
         }}
       >

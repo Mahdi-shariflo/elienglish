@@ -55,7 +55,7 @@ const Page = async ({ params, searchParams }: Props) => {
         <div className="mt-8 space-y-5 px-4 lg:w-[288px] lg:min-w-[288px] lg:px-0">
           <AddCartSingleProduct className="hidden lg:block" product={selectedProduct} />
           <div
-            className={`drop_shadow_cart w-full rounded-lg border border-gray-100 p-3 lg:border-gray-50`}
+            className={`drop_shadow_cart w-full rounded-lg border border-gray-100 p-3 dark:border-[#263248] dark:bg-[#172334] lg:border-gray-50`}
           >
             <div className="flex items-center gap-3">
               <span>
@@ -72,13 +72,13 @@ const Page = async ({ params, searchParams }: Props) => {
                   />
                 </svg>
               </span>
-              <p className="font-medium">برچسب‌ها</p>
+              <p className="font-medium dark:text-[#8E98A8]">برچسب‌ها</p>
             </div>
             <div className="mt-2 flex flex-wrap gap-3">
               {selectedProduct?.tags?.map((item, idx: number) => (
                 <Link
                   key={idx}
-                  className="flex !h-[36px] w-fit items-center justify-center rounded-lg bg-[#F4F6FA] px-4 font-medium text-main dark:bg-[#172334]"
+                  className="flex !h-[36px] w-fit items-center justify-center rounded-lg bg-[#F4F6FA] px-4 font-medium text-main dark:bg-[#172334] dark:text-[#8E98A8]"
                   href={item?.url}
                 >
                   {item?.title}
@@ -88,7 +88,7 @@ const Page = async ({ params, searchParams }: Props) => {
           </div>
 
           <div
-            className={`drop_shadow_cart flex w-full flex-col items-center justify-center gap-3 rounded-lg border border-gray-100 p-3 lg:border-gray-50`}
+            className={`drop_shadow_cart flex w-full flex-col items-center justify-center gap-3 rounded-lg border border-gray-100 p-3 dark:border-[#263248] dark:bg-[#172334] lg:border-gray-50`}
           >
             <span className="mx-auto flex w-full items-center justify-center">
               <svg
@@ -120,7 +120,7 @@ const Page = async ({ params, searchParams }: Props) => {
               </svg>
             </span>
             <div className="flex items-center gap-2 font-medium">
-              <p>الهام لواسانی</p>
+              <p className="dark:text-white">الهام لواسانی</p>
               <span>
                 <svg
                   width="20"
