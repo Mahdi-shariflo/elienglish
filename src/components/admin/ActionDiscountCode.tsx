@@ -45,8 +45,9 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
   const formik = useFormik({
     initialValues: {
       discountCode: null,
-      descriptionCode: null,
+      description: null,
       discountCodeType: 'fixed',
+      discountCodeItemType: '',
       freeShipping: false,
       generalDiscount: false,
       published: false,
@@ -99,7 +100,7 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
         ...(values.discountCodeType ? { discountCodeType: values.discountCodeType } : null),
         ...(values.epirationDate ? { epirationDate: converDateGre(values.epirationDate) } : null),
         ...(values.discountCode ? { discountCode: values.discountCode } : null),
-        ...(values.descriptionCode ? { descriptionCode: values.descriptionCode } : null),
+        ...(values.description ? { description: values.description } : null),
         ...(values.freeShipping !== undefined ? { freeShipping: values.freeShipping } : null),
         ...(values.generalDiscount !== undefined
           ? { generalDiscount: values.generalDiscount }
@@ -184,6 +185,17 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           triggerClass="!h-[48px]"
           options={[
             { label: 'درصد', value: 'percent' },
+            { label: 'ثابت', value: 'fixed' },
+          ]}
+        />
+        <ReactSelect
+          label={'نوع کد تخفیف محصولات'}
+          // @ts-expect-error error
+          formik={formik}
+          name="discountCodeItemType"
+          triggerClass="!h-[48px]"
+          options={[
+            { label: 'محصولات فیزیکی', value: 'PRODUCT_PHYSICAL' },
             { label: 'ثابت', value: 'fixed' },
           ]}
         />
@@ -280,7 +292,7 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
         <Textarea
           label={'توضیح مختصر درباری کد تخفیف'}
           className="col-span-3"
-          name="descriptionCode"
+          name="description"
           formik={formik}
         />
         <Checkbox
