@@ -58,7 +58,6 @@ const SectionCategoryBlog = ({ formik, data }: Props) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data, 'fygsduygtsuydtgfyusgftyusgtftuysfgsf');
     }
   }, [data]);
 

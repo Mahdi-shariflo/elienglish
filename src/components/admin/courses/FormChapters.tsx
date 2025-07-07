@@ -49,8 +49,6 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
   };
 
-  console.log(open, 'shferuitfityheruityure');
-
   return (
     <BaseDialog
       classBody="!overflow-x-hidden px-4"

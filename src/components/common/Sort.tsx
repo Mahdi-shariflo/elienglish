@@ -26,7 +26,7 @@ const Sort = () => {
     setIsPendingCategory(isPending);
   }, [isPending]);
   return (
-    <div className="mb-3 flex justify-end">
+    <div className="mb-3 hidden justify-end lg:flex">
       <Dropdown
         placement="bottom-start"
         classNames={{

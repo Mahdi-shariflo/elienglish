@@ -11,7 +11,6 @@ type Props = {
   }[];
 };
 const Categories = ({ categories, children }: Props) => {
-  console.log(categories, 'categoriescategoriescategories');
   return (
     <div className="container_page lg:!w-full">
       <p className="text-center font-bold text-xl text-[#33435A] dark:text-white">

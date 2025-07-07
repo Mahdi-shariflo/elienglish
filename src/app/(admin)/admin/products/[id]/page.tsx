@@ -168,7 +168,6 @@ const Page = () => {
       ...(formik.values.children || []),
     ]);
   };
-  console.log(formik.values.children);
   return (
     <IsClient>
       <div>

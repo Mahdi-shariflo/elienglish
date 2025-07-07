@@ -11,7 +11,6 @@ import { getRobotsMeta } from './common';
 export const getProduct = async (id: string) => {
   try {
     const data = await safeRequest({ url: `/product/detail/${id}`, method: 'GET' });
-    console.log(data?.data?.data?.product, 'jhfkdsfsfsfsfsfsf');
     return {
       breadcrumb: data?.data?.data?.product?.breadcrumb,
       product: data?.data?.data?.product,

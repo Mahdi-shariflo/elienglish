@@ -20,7 +20,6 @@ const Page = async ({ searchParams, params }: Props) => {
     totalPages: number;
     categories: { title: string; url: string }[];
   } = result?.data?.data;
-  console.log(product);
   const categories = product.categories.map((item, idx) => {
     return {
       _id: idx.toString(),

@@ -12,7 +12,6 @@ function getSectionByName(obj: { [key: string]: any[] }, sectionName: string) {
 
 const page = async () => {
   const blogs = await request({ url: '/blog/main' });
-  console.log(blogs.data);
   return (
     <div className="!mb-32 lg:py-32">
       <div className="lg:container_page flex flex-col gap-10 lg:gap-[100px]">
