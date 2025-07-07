@@ -67,11 +67,11 @@ const Categories = ({ categories, children, path }: Props) => {
         {categories.map((item, idx) => (
           <Link
             key={idx}
-            className="flex h-[108px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px]"
+            className="flex h-[108px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px] lg:gap-10"
             href={`${path}/${item.url}`}
           >
             <Image className="h-10 w-10" src={item?.thumbnailImage?.url} alt="" />
-            <p className="font-bold text-main">{item.title}</p>
+            <p className="text-center font-bold text-main">{item.title}</p>
           </Link>
         ))}
       </div>

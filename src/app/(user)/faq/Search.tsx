@@ -10,7 +10,7 @@ const Search = ({ search }: { search: string }) => {
       <Input
         value={search}
         onChange={(e) => router.push(`/faq?search=${e.target.value}`)}
-        className="mt-4 !w-[600px]"
+        className="mt-4 !w-[90%] lg:!w-[600px]"
         classNameInput={'!bg-white pl-2'}
         placeholder="جستجو کنید"
         endContent={

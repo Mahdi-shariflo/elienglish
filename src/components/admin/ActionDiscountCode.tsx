@@ -201,22 +201,6 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
         />
         <Input
           classNameInput={'bg-[#f5f6f6] !h-[48px]'}
-          name="minimumCost"
-          label={'حداقل هزینه'}
-          formik={formik}
-          price
-          disabled={formik.values.maximumCost ? true : false}
-        />
-        <Input
-          classNameInput={'bg-[#f5f6f6] !h-[48px]'}
-          name="maximumCost"
-          label={'حداکثر هزینه'}
-          formik={formik}
-          price
-          disabled={formik.values.minimumCost ? true : false}
-        />
-        <Input
-          classNameInput={'bg-[#f5f6f6] !h-[48px]'}
           name="limitForEachUser"
           formik={formik}
           label={'محدودیت استفاده برای هر کاربر'}
