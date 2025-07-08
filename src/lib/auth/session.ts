@@ -62,12 +62,13 @@ export async function getSession(): Promise<User | null> {
     }
 
     const user = await res.json();
+
     return {
       finger,
       theme,
       viewport,
       refreshToken,
-      ...user.user,
+      ...user.data,
       accessToken,
       accessTokenExpires,
     };

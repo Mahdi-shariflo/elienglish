@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useGetBasket } from './useGetBasket';
-import { Product } from '@/types/home';
 import { useCheckoutStore } from '@/store/checkout-store';
 import { freeShippingPrice } from '@/lib/variable';
+import { BasketItem } from '@/types';
 
 const useBasket = () => {
   const { checkout } = useCheckoutStore();
@@ -11,21 +11,21 @@ const useBasket = () => {
   const [total, setTotal] = useState(0);
   const { data, isLoading, isSuccess } = useGetBasket();
 
-  const baskets: { product: Product; total: number; count: number }[] = data?.data?.data?.basket;
+  const baskets: BasketItem[] = data?.data?.data?.items;
 
   const totalCountBasket = baskets?.reduce((total, basket) => {
     return total + (basket?.count ? basket?.count : 0);
   }, 0);
 
   const totalProductPriceWithoutDiscount = baskets?.reduce((sum, item) => {
-    const price = Number(item?.product.price) * Number(item?.count ? item?.count : 0);
+    const price = Number(item?.course.price) * Number(item?.count ? item?.count : 0);
     return sum + price;
   }, 0);
 
   const totalProductPriceWithDiscount = baskets?.reduce((sum, item) => {
-    const price = item?.product.discountPrice
-      ? Number(item?.product.discountPrice) * Number(item?.count ?? 0)
-      : Number(item?.product.price) * Number(item?.count ?? 0);
+    const price = item?.course.discountPrice
+      ? Number(item?.course.discountPrice) * Number(item?.count ?? 0)
+      : Number(item?.course.price) * Number(item?.count ?? 0);
     return sum + price;
   }, 0);
 

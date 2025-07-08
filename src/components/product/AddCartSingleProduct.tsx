@@ -13,6 +13,7 @@ type Props = {
   product: Product;
 };
 const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
+  console.log(product);
   return (
     <>
       <div
@@ -68,6 +69,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
             {/* btn add cart */}
             {product.count >= 1 ? (
               <Counter
+                type={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
                 classNameAddBtnName="text-[12px]"
                 classAddBtn="mt-4"
                 classCount="border-r border-l"

@@ -282,3 +282,98 @@ export type Lpa = {
   status: string;
   weekday: string;
 };
+
+type BasketItemType = 'COURSE';
+
+type MediaType = 'audio' | 'video' | 'document';
+
+export interface BasketItem {
+  _id: string;
+  userId: string;
+  __v: number;
+  basketItems: {
+    type: BasketItemType;
+    itemId: string;
+    count: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+  type: BasketItemType;
+  itemId: string;
+  count: number;
+  finalPrice: number;
+  course: Course;
+}
+
+interface Course {
+  _id: string;
+  type: 'inPerson' | string;
+  status: 'inProgress' | 'completed' | string;
+  title: string;
+  url: string;
+  author: string;
+  thumbnailImage: Image;
+  tags: string[];
+  properties: CourseProperty[];
+  demo: CourseDemo[];
+  chapters: CourseChapter[];
+  category: string;
+  categories: string[];
+  price: number;
+  discountPrice: number;
+  keyWords: string[];
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  coverVideo: string;
+  video: string;
+  description: string;
+  shortTitle: string;
+  discountTime: string;
+}
+
+interface Image {
+  _id: string;
+  url: string;
+  title: string;
+  altText: string;
+  author: string;
+  width: number;
+  height: number;
+  fileType: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface CourseProperty {
+  property: string;
+  attribiute: string;
+  iconUrl: string;
+}
+
+interface CourseDemo {
+  title: string;
+  order: number;
+  episodes: Episode[];
+}
+
+interface Episode {
+  title: string;
+  order: number;
+  type: MediaType;
+  mediaUrl: string;
+}
+
+interface CourseChapter {
+  title: string;
+  order: number;
+  lessons: string;
+  duration: string;
+  episodes: {
+    title: string;
+    order: number;
+    duration: string;
+  }[];
+}

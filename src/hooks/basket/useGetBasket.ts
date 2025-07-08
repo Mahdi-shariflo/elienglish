@@ -1,16 +1,16 @@
+import { useSession } from '@/lib/auth/useSession';
 import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
 
 export const useGetBasket = () => {
   const session = useSession();
-  const user: any = session.data;
+
   // Debounce the search input
   return useQuery({
     queryKey: ['baskets'],
-    enabled: Boolean(user?.finger || user?._id),
+    enabled: Boolean(session?.finger || session?._id),
     queryFn: async () => {
-      const url = `/user/basket/?${user?._id ? `userId=${user._id}` : `identifier=${user?.finger}`}`;
+      const url = `/basket/${session?._id ? `${session._id}` : ``}?${session?._id ? `sessionId=${session._id}` : `identifier=${session?.finger}`}`;
       return await safeRequest({ url });
     },
     retry: 1,

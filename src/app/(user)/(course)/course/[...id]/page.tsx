@@ -10,6 +10,7 @@ import Image from 'next/image';
 import { Course } from '@/types/home';
 import Drop from '@/../public/images/drop.png';
 import PropertiesCourse from '@/components/course/PropertiesCourse';
+import Counter from '@/components/common/Counter';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -91,7 +92,13 @@ const Page = async ({ params }: Props) => {
                   <CountdownDiscounts className="hidden" timer={course?.discountTime} />
                 )}
               </div>
-              <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button>
+              <Counter
+                // @ts-expect-error error
+                product={course}
+                classAddBtn="!mt-4"
+                type={'COURSE'}
+              />
+              {/* <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button> */}
               <div>
                 {/* rate */}
                 <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">

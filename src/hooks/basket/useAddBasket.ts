@@ -5,23 +5,22 @@ import { useSession } from 'next-auth/react';
 
 export const useAddBasket = () => {
   const session = useSession();
-  const user: any = session.data;
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ id }: { id: string }) => {
-      const dataBasket = {
-        identifier: user?.finger,
-        basket: [
-          {
-            product: id,
-            count: 1,
-          },
-        ],
-      };
+    mutationFn: async ({ itemId, type }: { itemId: string; type: string }) => {
+      // const dataBasket = {
+      //   identifier: user?.finger,
+      //   basket: [
+      //     {
+      //       product: id,
+      //       count: 1,
+      //     },
+      //   ],
+      // };
       return await safeRequest({
-        url: user?.Role ? '/user/basket/add-with-id' : '/user/basket/add-with-identifier',
+        url: '/basket',
         method: 'POST',
-        data: dataBasket,
+        data: { itemId, type },
       });
     },
     onSuccess: async () => {

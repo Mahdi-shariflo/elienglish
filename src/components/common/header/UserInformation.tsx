@@ -3,12 +3,12 @@ import useGlobalStore from '@/store/global-store';
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
 import Link from 'next/link';
 import { User_Icon } from '../icon';
-import { useSession } from 'next-auth/react';
 import { SITE_NAME } from '@/lib/variable';
+import { useSession } from '@/lib/auth/useSession';
 
 export default function UserInformation() {
   const session = useSession();
-  const user: any = session.data;
+  const user: any = session;
   const { setLogout } = useGlobalStore();
   const links = [
     {
@@ -218,6 +218,7 @@ export default function UserInformation() {
     },
   ];
 
+  console.log(user, 'jjffjfjfjjfj');
   const onAction = (key: string) => {
     if (key === 'logout') {
       setLogout();

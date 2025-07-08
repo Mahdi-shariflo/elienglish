@@ -18,6 +18,7 @@ import { Toman_Icon } from './icon';
 type Props = {
   product: Product;
   classNameCounter?: string;
+  type: string;
   container_Class?: string;
   classAddBtn?: string;
   classCount?: string;
@@ -37,15 +38,14 @@ const Counter = ({
   container_Class,
   showCartLink,
   classAddBtn,
+  type,
 }: Props) => {
   const { baskets } = useBasket();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const { mutate, isPending, isSuccess } = useAddBasket();
   const { mutate: mutateRemoveBasket, isPending: isPendingRemoveBasket } = useRemoveBasket();
-  const productIsBasket = baskets?.find(
-    (basket: { product: Product }) => basket?.product._id === product._id
-  );
+  const productIsBasket = baskets?.find((basket) => basket?.course._id === product._id);
 
   const onPress = () => {
     router.push('/cart/');
@@ -69,7 +69,7 @@ const Counter = ({
     if (Number(product.count) <= Number(productIsBasket?.count))
       return addToast({ title: `موجودی محصول کمتر از تعداد انتخابی شما است.`, color: 'danger' });
 
-    mutate({ id: product._id });
+    mutate({ itemId: product._id, type });
   };
   const descrement = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -237,7 +237,7 @@ const Counter = ({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            mutate({ id: product._id });
+            mutate({ itemId: product._id, type });
           }}
           className={`flex h-[36px] min-w-fit items-center justify-center gap-2 rounded-lg bg-main px-3 font-medium text-white lg:h-[48px] lg:w-full ${classAddBtn}`}
         >

@@ -16,7 +16,7 @@ type Props = {
 //   return generate_metadata_product({ id, hasQueryParams });
 // }
 
-const Page = async ({ params, searchParams }: Props) => {
+const Page = async ({ params }: Props) => {
   const { id } = await params;
   const productData = await getProduct(id[0]);
   // const data = await safeRequest({
