@@ -8,8 +8,8 @@ export const useActionDiscount = () => {
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id: string }) =>
       id
-        ? await safeRequest({ url: `/admin/discount-code/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: '/admin/discount-code/add', method: 'POST', data }),
+        ? await safeRequest({ url: `/disocuntcode/admin/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: '/disocuntcode/admin', method: 'POST', data }),
     onSuccess: async () => {
       addToast({
         title: 'با موفقیت انجام شد',

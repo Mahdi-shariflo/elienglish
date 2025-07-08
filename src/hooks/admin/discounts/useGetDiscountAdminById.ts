@@ -9,7 +9,7 @@ export const useGetDiscountAdminById = ({ id }: Props) => {
   return useQuery({
     queryKey: [id],
     enabled: Boolean(id),
-    queryFn: async () => await safeRequest({ url: `/admin/discount-code/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/disocuntcode/admin/${id}` }),
     gcTime: 0,
     staleTime: 0,
   });

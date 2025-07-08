@@ -1606,8 +1606,8 @@ export const initialDataDiscount = ({ onDelete, onEdit }: Props) => [
   },
   {
     title: <HeaderCell title="توضیحات" />,
-    dataIndex: 'descriptionCode',
-    key: 'descriptionCode',
+    dataIndex: 'description',
+    key: 'description',
     render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
   },
   {

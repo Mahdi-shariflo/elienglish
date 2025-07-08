@@ -10,6 +10,7 @@ import BaseDialog from '../../common/BaseDialog';
 import ReactTable from '../common/ReactTable';
 import { initialDataProducts } from '@/lib/table-column';
 import Button from '../../common/Button';
+import { useGetLpaAdmin } from '@/hooks/admin/lpa/useGetLpaAdmin';
 
 type Props = {
   values: Product[];
@@ -17,22 +18,21 @@ type Props = {
   title?: string;
   className?: string;
 };
-export default function ProductsSelect({ values, onChange, title, className }: Props) {
+export default function SelectLpa({ values, onChange, title, className }: Props) {
   const [search, setSearch] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<Product[]>(values);
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
-  const { isLoading, isSuccess, isFetching, data, isPending } = useGetProductsAdmin({
+  const { isLoading, isSuccess, isFetching, data, isPending } = useGetLpaAdmin({
     page: page.toString(),
-    available: true,
     search,
     sort: 'createdAt_desc',
   });
 
   useEffect(() => {
     if (isSuccess) {
-      const products = data?.data?.data;
+      const products = data?.data?.data.lpa;
       setOptions((prevOptions) => [...prevOptions, ...products]);
     }
   }, [isSuccess]);
@@ -67,7 +67,7 @@ export default function ProductsSelect({ values, onChange, title, className }: P
           <img
             loading="eager"
             className="h-10 w-10 rounded-full border border-gray-100 object-contain"
-            src={`${BASEURL}/${option?.thumbnailImage?.url}`}
+            src={`${option?.teacherProfile}`}
           />
           <p className="line-clamp-2">{option.title}</p>
           <div className="absolute left-0 top-0 flex flex-col items-end justify-end gap-1 group-hover:bg-gray-200">
@@ -108,7 +108,7 @@ export default function ProductsSelect({ values, onChange, title, className }: P
             <img
               loading="eager"
               className="jpeg-layer h-8 w-8 rounded-full border border-gray-100 object-contain"
-              src={`${BASEURL}/${item.thumbnailImage?.url}`}
+              src={item.teacherProfile}
             />
           </div>
         ))}

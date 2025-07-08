@@ -16,6 +16,7 @@ const UsersSelect = ({ values, onChange, className, isMulti = true }: Props) => 
   const { data, isPending, isLoading, isFetching, isSuccess } = useGetUsersAdmin({
     page: page.toString(),
     search,
+    sort: 'createdAt_desc',
   });
   const [options, setOptions] = useState<User[]>([]);
 

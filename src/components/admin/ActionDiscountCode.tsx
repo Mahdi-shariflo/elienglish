@@ -8,7 +8,6 @@ import ReactSelect from '../common/form/ReactSelect';
 import ProductsSelect from './product/ProductsSelect';
 import { useFormik } from 'formik';
 import Datepicker from '../common/Datepicker';
-import { useGetCategoryProductWithChildrenAdmin } from '@/hooks/admin/products/useGetCategoryProductWithChildrenAdmin';
 import UsersSelect from './UsersSelect';
 import * as Yup from 'yup';
 import Button from '../common/Button';
@@ -16,10 +15,11 @@ import { TbReload } from 'react-icons/tb';
 import { generateRandomString } from '@/lib/fun';
 import { useActionDiscount } from '@/hooks/admin/discounts/useActionDiscount';
 import { converDateGre, removeNumNumeric } from '@/lib/convert';
-import { User } from '@/types';
 import { useGetDiscountAdminById } from '@/hooks/admin/discounts/useGetDiscountAdminById';
 import { DateObject } from 'react-multi-date-picker';
 import persian from 'react-date-object/calendars/persian';
+import SelectCourse from './courses/SelectCourse';
+import SelectLpa from './lpa/SelectLpa';
 
 type Props = {
   modal: {
@@ -40,27 +40,21 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
     isLoading,
   } = useGetDiscountAdminById({ id: modal.id });
   const { mutate, isPending, isSuccess } = useActionDiscount();
-  const { data } = useGetCategoryProductWithChildrenAdmin({});
   const onClose = () => setModal({ open: false, id: '' });
   const formik = useFormik({
     initialValues: {
       discountCode: null,
       description: null,
-      discountCodeType: 'fixed',
+      discountCodeType: 'FIXED',
       discountCodeItemType: '',
       freeShipping: false,
       generalDiscount: false,
       published: false,
-      minimumCost: null,
-      maximumCost: null,
       IndividualUse: true,
-      withOutSpecialProduct: [],
-      withOutProducts: [],
-      withOutProductCategori: [],
       products: [],
-      productCategori: [],
+      courses: [],
+      lpas: [],
       userLimit: null,
-      installmentPaymentLimit: false,
       restrictionsOnUse: null,
       limitForEachUser: null,
       epirationDate: null,
@@ -70,27 +64,17 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
       discountCode: Yup.string().required('فیلد اجباری است'),
       discountCodePrice: Yup.string().required('فیلد اجباری است'),
       epirationDate: Yup.string().required('فیلد اجباری است'),
+      discountCodeItemType: Yup.string().required('فیلد اجباری است'),
     }),
     onSubmit: (values) => {
       const data = {
-        ...(Array.from(values.withOutProductCategori).length >= 1
-          ? {
-              withOutProductCategori: Array.from(values.withOutProductCategori).join(','),
-            }
-          : null),
-        ...(values.withOutProducts.length >= 1
-          ? {
-              withOutProducts: values.withOutProducts.map((item: any) => item._id).join(','),
-            }
-          : null),
         ...(values.products.length >= 1
-          ? { products: values.products.map((item: any) => item._id).join(',') }
+          ? { products: values.products.map((item: any) => item._id) }
           : null),
-        ...(Array.from(values.productCategori).length >= 1
-          ? {
-              productCategori: Array.from(values.productCategori).join(','),
-            }
+        ...(values.courses.length >= 1
+          ? { courses: values.courses.map((item: any) => item._id) }
           : null),
+        ...(values.lpas.length >= 1 ? { lpas: values.lpas.map((item: any) => item._id) } : null),
         ...(values.userLimit
           ? {
               // @ts-expect-error error
@@ -98,6 +82,9 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
             }
           : null),
         ...(values.discountCodeType ? { discountCodeType: values.discountCodeType } : null),
+        ...(values.discountCodeItemType
+          ? { discountCodeItemType: values.discountCodeItemType }
+          : null),
         ...(values.epirationDate ? { epirationDate: converDateGre(values.epirationDate) } : null),
         ...(values.discountCode ? { discountCode: values.discountCode } : null),
         ...(values.description ? { description: values.description } : null),
@@ -106,19 +93,11 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           ? { generalDiscount: values.generalDiscount }
           : null),
         ...(values.published !== undefined ? { published: values.published } : null),
-        ...(values.minimumCost ? { minimumCost: removeNumNumeric(values.minimumCost) } : null),
-        ...(values.maximumCost ? { maximumCost: removeNumNumeric(values.maximumCost) } : null),
         ...(values.IndividualUse !== undefined ? { IndividualUse: values.IndividualUse } : null),
-        ...(values.withOutSpecialProduct !== undefined
-          ? { withOutSpecialProduct: values.withOutSpecialProduct }
-          : null),
         ...(values.restrictionsOnUse
           ? { restrictionsOnUse: Number(values.restrictionsOnUse) }
           : null),
         ...(values.limitForEachUser ? { limitForEachUser: Number(values.limitForEachUser) } : null),
-        ...(values.installmentPaymentLimit !== undefined
-          ? { installmentPaymentLimit: values.installmentPaymentLimit }
-          : null),
         ...(values.discountCodePrice
           ? {
               discountCodePrice: Number(removeNumNumeric(values.discountCodePrice)),
@@ -139,14 +118,10 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
 
   useEffect(() => {
     if (isSuccessSingle) {
-      const discount = singleDiscount.data.data.discountCode[0];
+      const discount = singleDiscount.data.data;
       formik.setValues({
         ...formik.values,
         ...discount,
-        withOutProductCategori: new Set(
-          discount.withOutProductCategori.map((item: { _id: string }) => item._id)
-        ),
-        productCategori: new Set(discount.productCategori.map((item: { _id: string }) => item._id)),
       });
     }
   }, [isSuccessSingle]);
@@ -184,8 +159,8 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           name="discountCodeType"
           triggerClass="!h-[48px]"
           options={[
-            { label: 'درصد', value: 'percent' },
-            { label: 'ثابت', value: 'fixed' },
+            { label: 'درصد', value: 'PERCENT' },
+            { label: 'ثابت', value: 'FIXED' },
           ]}
         />
         <ReactSelect
@@ -196,7 +171,9 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           triggerClass="!h-[48px]"
           options={[
             { label: 'محصولات فیزیکی', value: 'PRODUCT_PHYSICAL' },
-            { label: 'ثابت', value: 'fixed' },
+            { label: 'محصولات دیجیتال', value: 'PRODUCT_DIGITAL' },
+            { label: 'دوره', value: 'COURSE' },
+            { label: 'تعین سطح', value: 'LEVEL' },
           ]}
         />
         <Input
@@ -214,10 +191,10 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
         <Input
           classNameInput={'bg-[#f5f6f6] !h-[48px]'}
           name="discountCodePrice"
-          label={`${formik.values.discountCodeType === 'fixed' ? 'مبلغ' : 'درصد'} کد تخفیف`}
+          label={`${formik.values.discountCodeType === 'FIXED' ? 'مبلغ' : 'درصد'} کد تخفیف`}
           formik={formik}
           isRequired
-          price={formik.values.discountCodeType === 'fixed' ? true : false}
+          price={formik.values.discountCodeType === 'FIXED' ? true : false}
         />
         <Datepicker
           formik={formik}
@@ -228,44 +205,21 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           isRequired
           label="تاریخ انقضا"
         />
-        <div className="col-span-3 flex items-center gap-10">
-          <ProductsSelect
-            onChange={(value) => formik.setFieldValue('products', value)}
-            values={formik.values.products}
-            title="انتخاب محصولات"
-          />
-          <ProductsSelect
-            onChange={(value) => formik.setFieldValue('withOutProducts', value)}
-            values={formik.values.withOutProducts}
-            title="به جز این محصولات"
-          />
-        </div>
-        <div className="col-span-3 flex items-center gap-10">
-          <ReactSelect
-            label="دسته‌‌های محصولات"
-            className="w-full"
-            options={data?.data.data.categories}
-            nameLabel="title"
-            nameValue="_id"
-            // @ts-expect-error error
-            formik={formik}
-            selectionMode="multiple"
-            triggerClass="!h-[48px]"
-            name="productCategori"
-          />
-          <ReactSelect
-            label="به جز این دسته‌بندی ها"
-            className="w-full"
-            options={data?.data.data.categories}
-            nameLabel="title"
-            nameValue="_id"
-            // @ts-expect-error error
-            formik={formik}
-            selectionMode="multiple"
-            triggerClass="!h-[48px]"
-            name="withOutProductCategori"
-          />
-        </div>
+        <ProductsSelect
+          onChange={(value) => formik.setFieldValue('products', value)}
+          values={formik.values.products}
+          title="انتخاب محصولات"
+        />
+        <SelectCourse
+          onChange={(value) => formik.setFieldValue('courses', value)}
+          values={formik.values.courses}
+          title="انتخاب دوره"
+        />
+        <SelectLpa
+          onChange={(value) => formik.setFieldValue('lpas', value)}
+          values={formik.values.lpas}
+          title="انتخاب تعین سطح"
+        />
 
         <UsersSelect
           isMulti={false}
@@ -279,12 +233,7 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
           name="description"
           formik={formik}
         />
-        <Checkbox
-          label="ارسال رایگان"
-          // @ts-expect-error error
-          formik={formik}
-          name="freeShipping"
-        />
+
         <Checkbox
           label="عمومی شود"
           name="generalDiscount"
@@ -300,18 +249,6 @@ const ActionDiscountCode = ({ modal, setModal }: Props) => {
         <Checkbox
           label="استفاده فردی"
           name="IndividualUse"
-          // @ts-expect-error error
-          formik={formik}
-        />
-        <Checkbox
-          label="محدوده‌ی استفاده ار درگاه پرداخت قسطی"
-          name="installmentPaymentLimit"
-          // @ts-expect-error error
-          formik={formik}
-        />
-        <Checkbox
-          label="جز محصولات فروش ویژه"
-          name="withOutSpecialProduct"
           // @ts-expect-error error
           formik={formik}
         />

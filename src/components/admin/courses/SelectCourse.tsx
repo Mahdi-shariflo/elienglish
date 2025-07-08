@@ -10,6 +10,7 @@ import BaseDialog from '../../common/BaseDialog';
 import ReactTable from '../common/ReactTable';
 import { initialDataProducts } from '@/lib/table-column';
 import Button from '../../common/Button';
+import { useGetCoursesAdmin } from '@/hooks/admin/courses/useGetCoursesAdmin';
 
 type Props = {
   values: Product[];
@@ -17,13 +18,13 @@ type Props = {
   title?: string;
   className?: string;
 };
-export default function ProductsSelect({ values, onChange, title, className }: Props) {
+export default function SelectCourse({ values, onChange, title, className }: Props) {
   const [search, setSearch] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<Product[]>(values);
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState<Product[]>([]);
   const [page, setPage] = useState(1);
-  const { isLoading, isSuccess, isFetching, data, isPending } = useGetProductsAdmin({
+  const { isLoading, isSuccess, isFetching, data, isPending } = useGetCoursesAdmin({
     page: page.toString(),
     available: true,
     search,
@@ -32,7 +33,7 @@ export default function ProductsSelect({ values, onChange, title, className }: P
 
   useEffect(() => {
     if (isSuccess) {
-      const products = data?.data?.data;
+      const products = data?.data?.data.course;
       setOptions((prevOptions) => [...prevOptions, ...products]);
     }
   }, [isSuccess]);

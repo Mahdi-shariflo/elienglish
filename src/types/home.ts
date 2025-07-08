@@ -63,6 +63,7 @@ export type Category = {
 export type Product = {
   lessons: string;
   duration: string;
+  teacherProfile: string;
   episodes: { title: string; duration: string; order: number }[];
   order: number;
   tags: {
