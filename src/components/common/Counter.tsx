@@ -29,7 +29,6 @@ const Counter = ({
   classNameAddBtnName,
   showBasketIcon = true,
   product,
-  showAddBasketDialog,
   classNameCounter,
   classCount,
   container_Class,

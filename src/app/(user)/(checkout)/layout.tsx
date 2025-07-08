@@ -1,6 +1,5 @@
 'use client';
 import Factor from '@/components/checkout/Factor';
-import ProgressBarCheckSendFree from '@/components/checkout/ProgressBarCheckSendFree';
 import Steps from '@/components/checkout/Steps';
 import BackPrevPage from '@/components/common/BackPrevPage';
 import useBasket from '@/hooks/basket/useBasket';
@@ -21,13 +20,10 @@ const Layout = ({ children }: Props) => {
     <div>
       <BackPrevPage className="-mt-44 mb-24" isLogo title="" />
       <div className="container_page pb-[12rem] lg:py-20">
-        {baskets?.length < 1 || !baskets ? null : <Steps />}
         <div className="flex flex-col items-start gap-4 lg:mt-24 lg:flex-row lg:gap-[104px]">
           <div className="w-full overflow-hidden">{children}</div>
           {baskets?.length >= 1 && (
             <div className="w-full lg:!w-[416px] lg:min-w-[416px]">
-              <ProgressBarCheckSendFree />
-
               <Factor />
             </div>
           )}

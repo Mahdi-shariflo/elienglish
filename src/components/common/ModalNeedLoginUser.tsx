@@ -9,7 +9,7 @@ type Props = {
 const ModalNeedLoginUser = ({
   open,
   setOpen,
-  title = 'برای افزودن دیدگاه ابتدا وارد  حساب کاربری شوید.',
+  title = 'برای انجام عملیات،نیاز به ورود حساب کاربری می باشد',
 }: Props) => {
   const onClose = () => setOpen(false);
   const router = useRouter();

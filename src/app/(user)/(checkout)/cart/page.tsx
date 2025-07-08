@@ -31,9 +31,7 @@ const Page = () => {
       transport: null,
     });
   }, []);
-  const avliableProducts = isSuccess
-    ? [...data?.data?.availableProducts, ...data.data?.unavailableProducts]
-    : [];
+
   const onSelectAddress = (address: AddressType) => {
     setSelectAddress(address);
     // mutate({ city: address.province! });
