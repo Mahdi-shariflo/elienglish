@@ -10,7 +10,7 @@ export const useRemoveBasket = () => {
   return useMutation({
     mutationFn: async ({ id }: { id: string }) => {
       return await safeRequest({
-        url: `/user/basket/remove/${id}?${user?._id ? `userId=${user._id}` : `identifier=${user?.finger}`}`,
+        url: `/basket/${id}?${user?._id ? `userId=${user._id}` : `identifier=${user?.finger}`}`,
         method: 'DELETE',
       });
     },

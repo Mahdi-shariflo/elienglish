@@ -70,7 +70,6 @@ const Page = () => {
     });
   };
 
-  console.log(product);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">

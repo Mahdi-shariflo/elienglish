@@ -9,7 +9,7 @@ type Props = {
 const ModalNeedLoginUser = ({
   open,
   setOpen,
-  title = 'برای افزودن دیدگاه ابتدا وارد شوید.',
+  title = 'برای افزودن دیدگاه ابتدا وارد  حساب کاربری شوید.',
 }: Props) => {
   const onClose = () => setOpen(false);
   const router = useRouter();
@@ -17,7 +17,7 @@ const ModalNeedLoginUser = ({
     <BaseDialog
       isOpen={open}
       onClose={onClose}
-      title="افزودن دیدگاه"
+      title="نیاز به ورود"
       size="lg"
       onClickFooter={() => router.push('/auth/')}
       nameBtnFooter="ورود به حساب کاربری"

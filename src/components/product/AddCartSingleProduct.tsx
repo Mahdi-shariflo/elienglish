@@ -7,20 +7,43 @@ import Counter from '../common/Counter';
 import Image from 'next/image';
 import { BASEURL } from '@/lib/variable';
 import Checkbox from '../common/form/Checkbox';
+import { useRemoveBasket } from '@/hooks/basket/useRemoveBasket';
+import { useAddBasket } from '@/hooks/basket/useAddBasket';
 type Props = {
   showDetail?: boolean;
   className?: string;
   product: Product;
 };
 const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
-  console.log(product);
+  const [selectedAddOns, setSelectedAddOns] = React.useState<Product[]>([]);
+  const { mutate: mutateRemove } = useRemoveBasket();
+  const { mutate: mutateAdd } = useAddBasket();
+  const handleToggleAddOn = (item: Product) => {
+    setSelectedAddOns((prev) => {
+      const exists = prev.find((p) => p._id === item._id);
+      if (exists) {
+        return prev.filter((p) => p._id !== item._id);
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
+
+  const mainPrice = product?.discountPrice ?? product?.price ?? 0;
+
+  const addonsTotal = selectedAddOns.reduce((sum, item) => {
+    return sum + (item.discountPrice ?? item.price ?? 0);
+  }, 0);
+
+  const finalPrice = mainPrice + addonsTotal;
+
   return (
     <>
       <div
         className={`drop_shadow_cart bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
       >
         <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:p-2">
-          <AddtiveProduct />
+          <AddtiveProduct products={product?.children} onToggle={handleToggleAddOn} />
           {showDetail && (
             <div className="hidden items-center gap-3 border-b border-[#E4E7E9] pb-2 dark:border-[#263248] lg:flex">
               <Image
@@ -53,13 +76,11 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
 
                 <div className="mt-[14px] items-center lg:flex lg:justify-between">
                   <p className="hidden font-medium text-[14px] text-[#616A76] lg:block">
-                    قیمت کالا
+                    قیمت نهایی
                   </p>
                   <p className="flex items-center justify-end gap-1">
                     <span className="font-bold text-[20px] text-[#0C0C0C] dark:text-white">
-                      {product?.discountPrice
-                        ? product.discountPrice.toLocaleString()
-                        : Number(product.price).toLocaleString()}
+                      {finalPrice.toLocaleString()}
                     </span>
                     <Toman_Icon />
                   </p>
@@ -69,7 +90,8 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
             {/* btn add cart */}
             {product.count >= 1 ? (
               <Counter
-                type={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
+                typeCounter={product.type}
+                typePayload={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
                 classNameAddBtnName="text-[12px]"
                 classAddBtn="mt-4"
                 classCount="border-r border-l"
@@ -93,7 +115,13 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
 
 export default AddCartSingleProduct;
 
-const AddtiveProduct = () => {
+const AddtiveProduct = ({
+  products,
+  onToggle,
+}: {
+  products: Product[];
+  onToggle: (item: Product) => void;
+}) => {
   return (
     <div className="bg-[#EDE8FC] px-2 pt-2 lg:bg-transparent lg:p-0">
       <div className="flex items-center justify-between">
@@ -178,18 +206,17 @@ const AddtiveProduct = () => {
         </span>
       </div>
       <div className="mt-4 flex flex-col gap-4 border-[#F4F6FA] px-4 pt-4 dark:border-[#263248] lg:border-t">
-        <div className="flex items-center justify-between border-dashed pb-3 dark:border-[#263248] lg:border-b">
-          <Checkbox label="خرید نسخه فیزیکی" />
-          <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
-            10%
-          </span>
-        </div>
-        <div className="flex items-center justify-between border-dashed pb-3 dark:border-[#263248] lg:border-b">
-          <Checkbox label="خرید نسخه فیزیکی" />
-          <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
-            10%
-          </span>
-        </div>
+        {products?.map((item, idx) => (
+          <div
+            key={idx}
+            className="flex items-center justify-between border-dashed pb-3 dark:border-[#263248] lg:border-b"
+          >
+            <Checkbox label={item.title} onValueChange={() => onToggle(item)} />
+            <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
+              {discountCalculation(item.discountPrice, item.price)}%
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

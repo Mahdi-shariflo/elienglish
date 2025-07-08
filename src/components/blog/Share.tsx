@@ -12,7 +12,6 @@ const Share = () => {
           title: document.title,
           url: currentUrl,
         });
-        console.log('Shared successfully');
       } catch (error) {
         console.error('Error sharing:', error);
       }

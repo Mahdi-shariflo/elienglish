@@ -88,8 +88,6 @@ const ActionProductTags = ({ modal, setModal }: Props) => {
     }
   }, [isSuccessCategoryUrl]);
 
-  console.log(data?.data);
-
   return (
     <>
       <BaseDialog

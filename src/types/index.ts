@@ -303,6 +303,7 @@ export interface BasketItem {
   count: number;
   finalPrice: number;
   course: Course;
+  product: Product;
 }
 
 interface Course {

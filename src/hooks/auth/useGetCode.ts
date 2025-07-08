@@ -16,7 +16,6 @@ export const useGetCode = () => {
       router.push(`/auth/verify/?mobile=${variable.mobile}`);
     },
     onError: (error) => {
-      console.log(error);
       addToast({
         // @ts-expect-error errror
         title: error?.response?.data.message[0] || error?.response?.data.message,

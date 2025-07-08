@@ -218,7 +218,6 @@ export default function UserInformation() {
     },
   ];
 
-  console.log(user, 'jjffjfjfjjfj');
   const onAction = (key: string) => {
     if (key === 'logout') {
       setLogout();

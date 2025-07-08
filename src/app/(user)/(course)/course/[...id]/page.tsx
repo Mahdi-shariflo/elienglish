@@ -96,7 +96,8 @@ const Page = async ({ params }: Props) => {
                 // @ts-expect-error error
                 product={course}
                 classAddBtn="!mt-4"
-                type={'COURSE'}
+                typePayload={'COURSE'}
+                typeCounter="course"
               />
               {/* <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button> */}
               <div>
