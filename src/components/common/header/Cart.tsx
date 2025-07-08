@@ -99,7 +99,13 @@ const Cart = () => {
                         showAddBasketDialog={false}
                         showOtherItem={false}
                         key={idx}
-                        product={product.product}
+                        product={
+                          product.type === 'PRODUCT_DIGITAL' || product.type === 'PRODUCT_PHYSICAL'
+                            ? product.product
+                            : product.type === 'COURSE'
+                              ? product.course
+                              : product.lpas
+                        }
                       />
                     ))}
                   </div>

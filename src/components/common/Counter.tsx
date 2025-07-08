@@ -6,7 +6,6 @@ import cn from '@/lib/classnames';
 import { Product } from '@/types/home';
 import { addToast, Spinner } from '@heroui/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import ModalNeedLoginUser from './ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
@@ -14,6 +13,7 @@ import { useSession } from '@/lib/auth/useSession';
 type Props = {
   product: Product;
   classNameCounter?: string;
+  classLinkCart?: string;
   typePayload: string;
   typeCounter: string;
   container_Class?: string;
@@ -36,6 +36,7 @@ const Counter = ({
   classAddBtn,
   typePayload,
   typeCounter,
+  classLinkCart,
 }: Props) => {
   const session = useSession();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
@@ -80,9 +81,9 @@ const Counter = ({
   return (
     <>
       {productIsBasket ? (
-        typeCounter === 'course' || typeCounter === 'digital' ? (
+        typeCounter === 'course' || typeCounter === 'digital' || typeCounter === 'lpas' ? (
           <Link
-            className="mt-3 flex h-[44px] w-full items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white"
+            className={`mt-3 flex h-[44px] w-full items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white ${classLinkCart}`}
             href={'/cart/'}
           >
             موجود در سبد خرید شما

@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../common/Button';
 import { Lpa } from '@/types';
 import Image from 'next/image';
+import Counter from '../common/Counter';
 const CardPlp = ({ lpa }: { lpa: Lpa }) => {
   return (
     <div className="rounded-lg border border-gray-50 p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334]">
@@ -104,9 +104,16 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
           <span className="flex h-[34px] w-[76px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] font-medium text-white">
             رزرو شده
           </span>
-          <Button className="h-[34px] w-[76px] min-w-fit border-2 border-[#F4F6FA] bg-[#8E98A8] text-white">
-            ثبت نام
-          </Button>
+          <Counter
+            // @ts-expect-error error
+            product={lpa}
+            typeCounter="lpas"
+            typePayload="LEVEL"
+            showBasketIcon={false}
+            classNameAddBtnName="!text-[14px]"
+            classAddBtn="!h-[34px] !w-[76px] !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
+            classLinkCart="!h-[34px] !w-[76px] !rounded-lg !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
+          />
         </div>
       </div>
     </div>

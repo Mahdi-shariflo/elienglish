@@ -35,9 +35,7 @@ const CardBasket = ({
       className={`flex h-fit w-full items-center justify-between rounded-xl border border-gray-100 bg-white px-4 shadow-md lg:p-4 ${className}`}
     >
       <Image src={ImageProfile} alt="" className="h-[80px] w-[80px] rounded-lg" />
-      <p className="font-bold text-[16px]">
-        کتاب کانکتیویتی سطح 2 | کتاب انگلیسی Connectivity Level 2
-      </p>
+      <p className="font-bold text-[16px]">{product.title}</p>
       <div className="flex flex-col items-center justify-between gap-5">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
         <div className="flex items-center gap-1">

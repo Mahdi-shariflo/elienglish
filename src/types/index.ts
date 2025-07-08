@@ -283,7 +283,7 @@ export type Lpa = {
   weekday: string;
 };
 
-type BasketItemType = 'COURSE';
+type BasketItemType = 'COURSE' | 'PRODUCT_DIGITAL' | 'LEVEL' | 'PRODUCT_PHYSICAL';
 
 type MediaType = 'audio' | 'video' | 'document';
 
@@ -304,6 +304,7 @@ export interface BasketItem {
   finalPrice: number;
   course: Course;
   product: Product;
+  lpas: Product;
 }
 
 interface Course {
