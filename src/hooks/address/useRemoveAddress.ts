@@ -6,7 +6,7 @@ export const useRemoveAddress = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ id }: { id?: string }) => {
-      return await safeRequest({ url: `/user/address/remove/${id}`, method: 'DELETE' });
+      return await safeRequest({ url: `/address/${id}`, method: 'DELETE' });
     },
     onSuccess: async () => {
       addToast({

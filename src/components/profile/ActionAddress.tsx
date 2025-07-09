@@ -121,21 +121,6 @@ const ActionAddress = ({ modal, setModal }: Props) => {
     }
   }, [modal.info]);
 
-  // const onValueChange = (value: boolean) => {
-  //     const element = document.getElementById("body-modal");
-
-  //     if (element) {
-  //         setTimeout(() => {
-  //             element.scrollTo({
-  //                 top: element.scrollHeight,
-  //                 behavior: "smooth" // اسکرول نرم
-  //             });
-  //         }, 100); // تاخیر برای اطمینان از لود شدن کامل محتوا
-  //     }
-
-  //     formik.setFieldValue("other", value);
-  // };
-
   const findProvince = province.find((item) => item?.slug === formik?.values?.province);
 
   return (

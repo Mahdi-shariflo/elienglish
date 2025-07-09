@@ -3,14 +3,15 @@ import Address from '@/components/checkout/Address';
 import CardBasket from '@/components/common/CardBasket';
 import Title from '@/components/common/Title';
 import useBasket from '@/hooks/basket/useBasket';
-import { useCheckAvailability } from '@/hooks/basket/useCheckAvailability';
 import { useCheckoutStore } from '@/store/checkout-store';
 import React, { useEffect, useState } from 'react';
 import { Address as AddressType, BasketItem } from '@/types';
-import { Product } from '@/types/home';
 import Input from '@/components/common/form/Input';
 import EmptyCartPage from '@/components/checkout/EmptyCartPage';
 import { useFormik } from 'formik';
+import { useSession } from '@/lib/auth/useSession';
+import ActionAddress from '@/components/profile/ActionAddress';
+import { useGetAddress } from '@/hooks/address/useGetAddress';
 function groupByParent(items: BasketItem[]) {
   const map = new Map();
   const result = [];
@@ -45,9 +46,12 @@ function groupByParent(items: BasketItem[]) {
 }
 
 const Page = () => {
+  const { data } = useGetAddress();
+  const session = useSession();
   const { setCheckout } = useCheckoutStore();
   const { baskets } = useBasket();
   const groupedItems = groupByParent(baskets ? baskets : []);
+  const address = data?.data?.data?.address;
 
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; info: AddressType | null }>({
     open: false,
@@ -75,8 +79,14 @@ const Page = () => {
   };
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      first_name: '',
+      last_name: '',
+    },
+    onSubmit: () => {},
   });
+
+  const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>
@@ -119,25 +129,28 @@ const Page = () => {
           </div>
         </div>
         <div className="rounded-lg border border-[#E5EAEF] p-3">
-          <Title title="انتخاب آدرس" />
-          <div className="mt-10">
-            <Address
-              setDeleteModal={setDeleteModal}
-              setModalAddress={setModalAddress}
-              isPending={false}
-              onSelectAddress={onSelectAddress}
-              selectAddress={selectAddress}
-              address={[]}
-            />
-          </div>
-        </div>
-        <div className="rounded-lg border border-[#E5EAEF] p-3">
           <Title title="اطلاعات ثبت‌نام کننده" />
-          <div className="mt-10">
-            <Input name="first_name" />
-            <Input name="last_name" />
+          <div className="mt-10 grid grid-cols-2 gap-4">
+            <Input label={'نام'} formik={formik} name="first_name" />
+            <Input label={'نام خانوادگی'} formik={formik} name="last_name" />
           </div>
         </div>
+        {true && (
+          <div className="rounded-lg border border-[#E5EAEF] p-3">
+            <Title title="انتخاب آدرس" />
+            <div className="mt-10">
+              <Address
+                setDeleteModal={setDeleteModal}
+                setModalAddress={setModalAddress}
+                isPending={false}
+                onSelectAddress={onSelectAddress}
+                selectAddress={selectAddress}
+                address={address}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="rounded-lg border border-[#E5EAEF] p-3">
           <Title title="ثبت سفارش و پرداخت" />
           <div className="mt-10">
@@ -212,33 +225,8 @@ const Page = () => {
             </div>
           </div>
         </div>
-
-        <div className="mt-7 flex w-full flex-col gap-4">
-          {/* {baskets?.map((product, idx) => {
-            const findProduct = avliableProducts.find(
-              (item) => item.product === product.product._id
-            );
-
-            return (
-              <CardBasket
-                classImage="!w-[125px] !h-[125px]"
-                container_left_class="flex flex-col justify-between"
-                product={product.product}
-                key={idx}
-                className={`${
-                  isSuccess && (!findProduct || findProduct.availableCount < product.count)
-                    ? 'border-main bg-main bg-opacity-5'
-                    : ''
-                }`}
-                is_in_stock={
-                  isSuccess && (!findProduct || findProduct.availableCount < product.count)
-                }
-                availableCount={findProduct?.availableCount}
-              />
-            );
-          })} */}
-        </div>
       </div>
+      {modalAddress && <ActionAddress modal={modalAddress} setModal={setModalAddress} />}
     </>
   );
 };

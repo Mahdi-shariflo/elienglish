@@ -67,6 +67,7 @@ const Select = ({
         </p>
       )}
       <RaectSelect
+        menuPosition="fixed"
         isDisabled={disabled}
         isMulti={selectionMode === 'multiple'}
         options={[

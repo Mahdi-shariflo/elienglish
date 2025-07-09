@@ -8,7 +8,7 @@ export const useUpdateAddress = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id?: string }) => {
-      return await safeRequest({ url: `/user/address/update/${id}`, method: 'PATCH', data });
+      return await safeRequest({ url: `/address/${id}`, method: 'PATCH', data });
     },
     onSuccess: async (_, variables) => {
       if (checkout.address?._id === variables.id) {

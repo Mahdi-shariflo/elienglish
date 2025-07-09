@@ -7,7 +7,7 @@ export const useGetAddressById = () => {
   return useQuery({
     queryKey: ['addressbyId', id],
     enabled: Boolean(id !== 'new'),
-    queryFn: async () => await safeRequest({ url: `/user/address/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/address/${id}` }),
     staleTime: 0,
     gcTime: 0,
   });

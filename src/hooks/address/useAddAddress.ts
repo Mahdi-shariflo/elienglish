@@ -7,7 +7,7 @@ export const useAddAddress = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data }: { data: Address }) => {
-      return await safeRequest({ url: '/user/address/add', method: 'POST', data });
+      return await safeRequest({ url: '/address', method: 'POST', data });
     },
     onSuccess: async () => {
       addToast({
