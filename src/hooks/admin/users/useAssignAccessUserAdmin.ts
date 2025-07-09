@@ -7,7 +7,7 @@ export const useAssignAccessUserAdmin = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id?: string }) =>
-      await safeRequest({ url: `/admin/user/edit-permissions/${id}`, method: 'PATCH', data }),
+      await safeRequest({ url: `/users/admin/permissions/${id}`, method: 'PATCH', data }),
     onSuccess: async () => {
       addToast({
         title: 'با موفقیت انجام شد',

@@ -8,8 +8,8 @@ export const useActionUserAdmin = () => {
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id?: string }) =>
       id
-        ? await safeRequest({ url: `/admin/user/edit-profile/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: '/admin/user/add', method: 'POST', data }),
+        ? await safeRequest({ url: `/users/admin/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: '/users/admin', method: 'POST', data }),
     onSuccess: async () => {
       addToast({
         title: 'با موفقیت انجام شد',

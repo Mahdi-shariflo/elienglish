@@ -12,7 +12,7 @@ export const useGetUsersAdmin = ({ page = '1', search = '', sort = '' }: Props) 
     queryKey: ['users-admin', page, search, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/user/admin?page=${page}&sort=${sort}&limit=${20}&search=${decodeURIComponent(search!)}`,
+        url: `/users/admin?page=${page}&sort=${sort}&limit=${20}&search=${decodeURIComponent(search!)}`,
       }),
   });
 };

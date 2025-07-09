@@ -3,15 +3,7 @@ import React from 'react';
 import useBasket from '@/hooks/basket/useBasket';
 import Link from 'next/link';
 const Cart = () => {
-  // const [open, setOpen] = useState(false);
   const { totalCountBasket } = useBasket();
-  // const router = useRouter();
-
-  // const onClose = () => setOpen(!open);
-  // const onRedirect = () => {
-  //   router.push('/cart/');
-  //   onClose();
-  // };
   return (
     <div className="flex items-center gap-4">
       <Link
@@ -34,7 +26,7 @@ const Cart = () => {
           </svg>
         </span>
         {totalCountBasket >= 1 ? (
-          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-main font-regular text-[12px] text-white">
+          <span className="absolute -right-1 top-0 flex h-5 w-5 items-center justify-center rounded-full bg-main pt-1 font-regular text-[12px] text-white">
             {totalCountBasket ?? 0}
           </span>
         ) : null}

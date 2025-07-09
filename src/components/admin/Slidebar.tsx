@@ -175,12 +175,12 @@ const menus = [
   //   href: '/admin/supports/',
   //   activeIcon: Comments_fill_icon,
   // },
-  // {
-  //   icon: User_icon,
-  //   name: 'کاربران',
-  //   href: '/admin/users/',
-  //   activeIcon: User_fill_icon,
-  // },
+  {
+    icon: User_icon,
+    name: 'کاربران',
+    href: '/admin/users/',
+    activeIcon: User_fill_icon,
+  },
   {
     icon: Media_icon,
     name: 'عکس‌وفیلم',
