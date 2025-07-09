@@ -1,18 +1,54 @@
 'use client';
 import Address from '@/components/checkout/Address';
-import EmptyCartPage from '@/components/checkout/EmptyCartPage';
 import CardBasket from '@/components/common/CardBasket';
 import Title from '@/components/common/Title';
 import useBasket from '@/hooks/basket/useBasket';
 import { useCheckAvailability } from '@/hooks/basket/useCheckAvailability';
 import { useCheckoutStore } from '@/store/checkout-store';
 import React, { useEffect, useState } from 'react';
-import { Address as AddressType } from '@/types';
+import { Address as AddressType, BasketItem } from '@/types';
+import { Product } from '@/types/home';
+import Input from '@/components/common/form/Input';
+import EmptyCartPage from '@/components/checkout/EmptyCartPage';
+import { useFormik } from 'formik';
+function groupByParent(items: BasketItem[]) {
+  const map = new Map();
+  const result = [];
+
+  for (const item of items) {
+    const parentId = item.product?.parent;
+
+    // اگر پرنت داره، یعنی زیرمجموعه است
+    if (parentId) {
+      if (!map.has(parentId)) {
+        map.set(parentId, { children: [] });
+      }
+
+      map.get(parentId).children.push(item);
+    } else {
+      const mainItem = { ...item, children: [] };
+      result.push(mainItem);
+      map.set(item.product?._id || item.course?._id || item.lpas?._id, mainItem);
+    }
+  }
+
+  return result.map((item) => {
+    const id = item.product?._id || item.course?._id || item.lpas?._id;
+    if (map.has(id) && map.get(id).children.length > 0) {
+      return {
+        ...item,
+        children: map.get(id).children,
+      };
+    }
+    return item;
+  });
+}
 
 const Page = () => {
-  const { data, isSuccess } = useCheckAvailability();
   const { setCheckout } = useCheckoutStore();
   const { baskets } = useBasket();
+  const groupedItems = groupByParent(baskets ? baskets : []);
+
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; info: AddressType | null }>({
     open: false,
     info: null,
@@ -37,14 +73,49 @@ const Page = () => {
     // mutate({ city: address.province! });
     // setCheckout({ ...checkout, address });
   };
-  // if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
+
+  const formik = useFormik({
+    initialValues: {},
+  });
+  if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>
-      <div className="mt-14 flex w-full flex-col gap-10 lg:mt-0">
+      <div className="mt-14 flex w-full flex-col lg:mt-0 lg:gap-10">
         <div className="rounded-lg border border-[#E5EAEF] p-3">
           <Title title="سبد خرید" />
-          <div className="mt-10">
-            <CardBasket product={null} />
+          <div className="mt-10 flex flex-col gap-5">
+            {groupedItems?.map((product, idx) => (
+              <div className="rounded-lg border border-gray-200 bg-white shadow-md">
+                <CardBasket
+                  showAddBasketDialog={false}
+                  showOtherItem={false}
+                  key={idx}
+                  // @ts-expect-error error
+                  product={
+                    product.type === 'PRODUCT_DIGITAL' || product.type === 'PRODUCT_PHYSICAL'
+                      ? product.product
+                      : product.type === 'COURSE'
+                        ? product.course
+                        : product.lpas
+                  }
+                />
+                {product?.children && (
+                  <div className="border-t border-[#E5EAEF] px-3">
+                    {product?.children?.map((item: any, idx: number) => (
+                      <CardBasket
+                        classImage="!w-[60px] !min-h-[40px] !min-w-[60px] !h-[40px]"
+                        showTotal={false}
+                        showAddBasketDialog={false}
+                        showOtherItem={false}
+                        key={idx}
+                        product={item?.product}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+            {/* <CardBasket product={null} /> */}
           </div>
         </div>
         <div className="rounded-lg border border-[#E5EAEF] p-3">
@@ -58,6 +129,13 @@ const Page = () => {
               selectAddress={selectAddress}
               address={[]}
             />
+          </div>
+        </div>
+        <div className="rounded-lg border border-[#E5EAEF] p-3">
+          <Title title="اطلاعات ثبت‌نام کننده" />
+          <div className="mt-10">
+            <Input name="first_name" />
+            <Input name="last_name" />
           </div>
         </div>
         <div className="rounded-lg border border-[#E5EAEF] p-3">

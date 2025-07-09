@@ -32,7 +32,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/brands',
+    src: '/',
   },
   {
     name: 'دوره‌های‌آموزشی',

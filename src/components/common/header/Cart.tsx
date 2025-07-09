@@ -1,26 +1,22 @@
 'use client';
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@heroui/react';
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import CardBasket from '../CardBasket';
+import React from 'react';
 import useBasket from '@/hooks/basket/useBasket';
 import Link from 'next/link';
-import EmptyCartPage from '../empty/EmptyCartPage';
 const Cart = () => {
-  const [open, setOpen] = useState(false);
-  const { totalProductPriceWithDiscount, totalCountBasket, baskets } = useBasket();
-  const router = useRouter();
+  // const [open, setOpen] = useState(false);
+  const { totalCountBasket } = useBasket();
+  // const router = useRouter();
 
-  const onClose = () => setOpen(!open);
-  const onRedirect = () => {
-    router.push('/cart/');
-    onClose();
-  };
+  // const onClose = () => setOpen(!open);
+  // const onRedirect = () => {
+  //   router.push('/cart/');
+  //   onClose();
+  // };
   return (
     <div className="flex items-center gap-4">
       <Link
-        href={'/cart/'}
-        className="relative overflow-visible rounded-[12px] bg-transparent lg:hidden"
+        href="/cart/"
+        className="!h-[48px] !w-[48px] min-w-[48px] overflow-visible rounded-[12px] border border-[#E5EAEF] bg-transparent"
       >
         <span>
           <svg
@@ -38,21 +34,21 @@ const Cart = () => {
           </svg>
         </span>
         {totalCountBasket >= 1 ? (
-          <span className="absolute -right-1 -top-1 flex h-4 w-5 items-center justify-center rounded-full bg-main font-regular text-[9px] text-white">
+          <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-main font-regular text-[12px] text-white">
             {totalCountBasket ?? 0}
           </span>
         ) : null}
       </Link>
-      <span className="hidden lg:block">
+      {/* <span className="hidden lg:block">
         <Dropdown
           closeOnSelect={false}
           placement="bottom-start"
           isOpen={open}
           onOpenChange={onClose}
-          // shouldCloseOnInteractOutside={onClose}
+        // shouldCloseOnInteractOutside={onClose}
         >
           <DropdownTrigger>
-            <Button
+            <Link
               onPress={onClose}
               className="!h-[48px] !w-[48px] min-w-[48px] overflow-visible rounded-[12px] border border-[#E5EAEF] bg-transparent"
             >
@@ -76,7 +72,7 @@ const Cart = () => {
                   {totalCountBasket ?? 0}
                 </span>
               ) : null}
-            </Button>
+            </Link>
           </DropdownTrigger>
           <DropdownMenu
             className="h-[550px] w-[516px]"
@@ -99,6 +95,7 @@ const Cart = () => {
                         showAddBasketDialog={false}
                         showOtherItem={false}
                         key={idx}
+                        // @ts-expect-error error
                         product={
                           product.type === 'PRODUCT_DIGITAL' || product.type === 'PRODUCT_PHYSICAL'
                             ? product.product
@@ -114,12 +111,12 @@ const Cart = () => {
                 )}
                 {baskets?.length >= 1 && (
                   <div className="mt-6 flex items-center justify-between gap-5">
-                    <Button
+                    <Link
                       onPress={onRedirect}
                       className="h-[48px] w-full bg-main font-medium text-white lg:w-full"
                     >
                       ثبت سفارش
-                    </Button>
+                    </Link>
                     <div className="space-y-3">
                       <span className="whitespace-nowrap font-medium text-[12px] text-[#7D8793]">
                         مبلغ قابل پرداخت
@@ -149,7 +146,7 @@ const Cart = () => {
             </>
           </DropdownMenu>
         </Dropdown>
-      </span>
+      </span> */}
     </div>
   );
 };

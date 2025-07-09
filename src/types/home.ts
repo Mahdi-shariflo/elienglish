@@ -62,7 +62,8 @@ export type Category = {
 
 export type Product = {
   lessons: string;
-  type: 'digital';
+  parent: string;
+  type: 'digital' | 'physical';
   duration: string;
   teacherProfile: string;
   episodes: { title: string; duration: string; order: number }[];

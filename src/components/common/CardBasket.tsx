@@ -3,11 +3,10 @@ import React from 'react';
 import Counter from './Counter';
 import { Product } from '@/types/home';
 import { Delete_icon, Toman_Icon } from './icon';
-import { discountCalculation } from '@/lib/utils';
-// import Image from './Image';
-import ImageProfile from '@/../public/images/profile.jpg';
 import Image from 'next/image';
 import Button from './Button';
+import { BASEURL } from '@/lib/variable';
+import { useRemoveBasket } from '@/hooks/basket/useRemoveBasket';
 type Props = {
   product: Product;
   className?: string;
@@ -15,48 +14,65 @@ type Props = {
   availableCount?: number;
   container_left_class?: string;
   showOtherItem?: boolean;
-  is_in_stock?: boolean;
+  showTotal?: boolean;
   showAddBasketDialog?: boolean;
 };
-const CardBasket = ({
-  showOtherItem,
-  showAddBasketDialog,
-  product,
-  className,
-  classImage,
-  container_left_class,
-  is_in_stock,
-  availableCount,
-}: Props) => {
+const CardBasket = ({ product, className, classImage, showTotal = true }: Props) => {
+  const { mutate, isPending } = useRemoveBasket();
   return (
     <Link
       href={'#'}
       // href={`/product/${product?.urlVar ? product?.urlVar : product.url}/`}
-      className={`flex h-fit w-full items-center justify-between rounded-xl border border-gray-100 bg-white px-4 shadow-md lg:p-4 ${className}`}
+      className={`flex h-fit w-full items-center justify-between rounded-xl px-4 lg:p-4 ${className}`}
     >
-      <Image src={ImageProfile} alt="" className="h-[80px] w-[80px] rounded-lg" />
-      <p className="font-bold text-[16px]">{product.title}</p>
-      <div className="flex flex-col items-center justify-between gap-5">
+      <div className="flex w-full flex-[4] items-center gap-3">
+        <div className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] ${classImage}`}>
+          <Image
+            fill
+            src={`${product?.thumbnailImage?.url ? `${BASEURL}/${product.thumbnailImage.url}` : product?.teacherProfile}`}
+            alt=""
+          />
+        </div>
+        <p className="line-clamp-2 font-medium text-[16px]">{product.title}</p>
+      </div>
+      <div className="flex flex-1 flex-col items-center justify-between gap-5">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
         <div className="flex items-center gap-1">
-          <p className="font-bold">24,234,234</p>
+          <p className="font-bold">
+            {Number(
+              product?.discountPrice ? product?.discountPrice : product?.price
+            ).toLocaleString()}
+          </p>
           <Toman_Icon />
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-1 flex-col items-center justify-center gap-5">
         <p className="font-medium text-[14px] text-[#8E98A8]">تعداد</p>
-        {/* <Counter product={{}}/> */}
+        {product?.type === 'physical' ? (
+          <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
+        ) : (
+          <p className="font-medium text-[14px] text-[#8E98A8]">
+            {product?.count ? product.count : 1}
+          </p>
+        )}
       </div>
-      <div className="flex flex-col items-center justify-between gap-5">
-        <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
-        <div className="flex items-center gap-1">
-          <p className="font-bold">24,234,234</p>
-          <Toman_Icon />
+      {showTotal && (
+        <div className="flex flex-1 flex-col items-center justify-between gap-5">
+          <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
+          <div className="flex items-center gap-1">
+            <p className="font-bold">
+              {Number(
+                Number(product?.discountPrice ? product?.discountPrice : product?.price) *
+                  (product?.count ? product.count : 1)
+              ).toLocaleString()}
+            </p>
+            <Toman_Icon />
+          </div>
         </div>
-      </div>
-      <div>
-        <Button>
+      )}
+      <div className="flex-1">
+        <Button isPending={isPending} onClick={() => mutate({ id: product._id })}>
           <Delete_icon />
         </Button>
       </div>
