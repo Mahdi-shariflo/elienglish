@@ -12,6 +12,7 @@ import { useFormik } from 'formik';
 import { useSession } from '@/lib/auth/useSession';
 import ActionAddress from '@/components/profile/ActionAddress';
 import { useGetAddress } from '@/hooks/address/useGetAddress';
+import { useGetPayment } from '@/hooks/checkout/useGetPayment';
 function groupByParent(items: BasketItem[]) {
   const map = new Map();
   const result = [];
@@ -46,9 +47,10 @@ function groupByParent(items: BasketItem[]) {
 }
 
 const Page = () => {
+  const { data: payment } = useGetPayment();
   const { data } = useGetAddress();
   const session = useSession();
-  const { setCheckout } = useCheckoutStore();
+  const { setCheckout, checkout } = useCheckoutStore();
   const { baskets } = useBasket();
   const groupedItems = groupByParent(baskets ? baskets : []);
   const address = data?.data?.data?.address;
@@ -74,8 +76,7 @@ const Page = () => {
 
   const onSelectAddress = (address: AddressType) => {
     setSelectAddress(address);
-    // mutate({ city: address.province! });
-    // setCheckout({ ...checkout, address });
+    setCheckout({ ...checkout, address });
   };
 
   const formik = useFormik({
@@ -87,6 +88,7 @@ const Page = () => {
   });
 
   const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
+  console.log(isCartPhycial, 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>
@@ -135,7 +137,7 @@ const Page = () => {
             <Input label={'نام خانوادگی'} formik={formik} name="last_name" />
           </div>
         </div>
-        {true && (
+        {isCartPhycial ? (
           <div className="rounded-lg border border-[#E5EAEF] p-3">
             <Title title="انتخاب آدرس" />
             <div className="mt-10">
@@ -149,7 +151,7 @@ const Page = () => {
               />
             </div>
           </div>
-        )}
+        ) : null}
 
         <div className="rounded-lg border border-[#E5EAEF] p-3">
           <Title title="ثبت سفارش و پرداخت" />
