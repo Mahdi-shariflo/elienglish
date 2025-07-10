@@ -1,6 +1,6 @@
 'use client';
 import { Input as ReactInput } from '@heroui/react';
-import { FormikProps } from 'formik';
+import { FormikProps, getIn } from 'formik';
 // @ts-ignore
 import PN from 'persian-number';
 import { KeyboardEventHandler, ReactElement, ReactNode, useState } from 'react';
@@ -71,7 +71,11 @@ const Input = ({
   isClear = false,
 }: Props) => {
   const [show, setShow] = useState(false);
-  const isError = formik ? formik.touched[name] && formik.errors[name] : false;
+
+  const fieldValue = value ?? (formik ? getIn(formik.values, name) : '');
+  const isError = formik ? getIn(formik.touched, name) && getIn(formik.errors, name) : false;
+  const errorMessage = formik ? getIn(formik.errors, name) : undefined;
+
   const onClose = () => {
     formik?.setFieldValue('url', null);
     setShow(!show);
@@ -115,13 +119,13 @@ const Input = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        value={value || (formik ? formik.values[name] : '')}
+        value={fieldValue || ''}
         onChange={handleChange}
         startContent={startContent}
         onKeyDown={onKeyDown}
         isInvalid={!!isError}
         endContent={endContent}
-        errorMessage={formik?.errors[name] as string}
+        errorMessage={errorMessage as string}
         description={
           url ? (
             <div className="flex items-center justify-end gap-1">
@@ -132,9 +136,9 @@ const Input = ({
               )}
               <span>{helperText}</span>
             </div>
-          ) : price && formik?.values[name] ? (
+          ) : price && fieldValue ? (
             <span className="inline-block pr-1 text-[12px]">
-              {PN.convert(Number(removeNumNumeric(formik?.values[name]!)))} تومان
+              {PN.convert(Number(removeNumNumeric(fieldValue)))} تومان
             </span>
           ) : (
             description
@@ -153,7 +157,7 @@ const Input = ({
         }}
         className={`font-light text-[14px] ${disabled ? '!opacity-70' : ''}`}
       />
-      {url && show && formik?.values[name].length >= 3 ? (
+      {url && show && fieldValue?.length >= 3 ? (
         <ReactInput
           placeholder=" "
           classNames={{
@@ -161,7 +165,7 @@ const Input = ({
             inputWrapper: `bg-[#F4F6FA] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] pl-0 h-[48px] w-full ${classNameInput}`,
           }}
           className="mt-3 font-light text-[14px]"
-          value={formik?.values?.url}
+          value={getIn(formik?.values, 'url') || ''}
           onChange={formik?.handleChange}
           name="url"
         />

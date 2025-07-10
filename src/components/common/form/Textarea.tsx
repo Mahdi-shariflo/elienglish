@@ -1,8 +1,7 @@
 'use client';
 import { addCommas, removeNumNumeric } from '@/lib/fun';
 import { Textarea as ReactInput } from '@heroui/react';
-import { FormikProps } from 'formik';
-// import PN from 'persian-number';
+import { FormikProps, getIn } from 'formik';
 import { ReactElement, ReactNode } from 'react';
 
 type Props = {
@@ -35,7 +34,7 @@ const Textarea = ({
   price,
   dir,
   isRequired,
-  disabled,
+  disabled = false,
   description,
   className = '',
   name = '',
@@ -53,17 +52,19 @@ const Textarea = ({
   classNameInput,
   classNameLabel,
 }: Props) => {
-  const isError = formik ? formik.touched[name] && formik.errors[name] : false;
+  const fieldValue = value ?? (formik ? getIn(formik.values, name) : '');
+  const isError = formik ? getIn(formik.touched, name) && getIn(formik.errors, name) : false;
+  const errorMessage = formik ? getIn(formik.errors, name) : undefined;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (onAction) onAction();
+
     if (url) {
       formik?.setFieldValue('url', e.target.value);
     }
 
     if (formik) {
       const newValue = price ? addCommas(removeNumNumeric(e.target.value)) : e.target.value;
-
       formik.setFieldValue(name, newValue);
     }
 
@@ -84,29 +85,27 @@ const Textarea = ({
       <ReactInput
         defaultValue={defaultValue}
         dir={dir}
-        // isClearable={false}
         aria-label={name}
         isDisabled={disabled}
         name={name}
         type={type}
         placeholder={placeholder}
-        value={value || (formik ? formik.values[name] : '')}
+        value={fieldValue || ''}
         onChange={handleChange}
         startContent={startContent}
         endContent={endContent}
         isInvalid={!!isError}
-        errorMessage={formik?.errors[name] as string}
+        errorMessage={errorMessage as string}
         description={
           price ? (
             <span className="inline-block pr-1 text-[12px]">
-              {/* {PN.convert(Number(removeNumNumeric(formik?.values[name]!)))}
-                تومان */}
+              {/* اگر خواستی می‌تونی PN.convert رو اینجا فعال کنی */}
+              {/* {PN.convert(Number(removeNumNumeric(fieldValue)))} تومان */}
             </span>
           ) : (
             description
           )
         }
-        // onClear={() => formik?.setFieldValue(name, '')}
         classNames={{
           input: 'px-2 !border-none !ring-0',
           inputWrapper: `bg-[#F4F6FA] dark:bg-[#0B1524] dark:!text-[#8E98A8] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] dark:border-none pl-0 !h-[120px] w-full ${classNameInput}`,

@@ -163,12 +163,12 @@ const menus = [
     href: '/admin/comments/',
     activeIcon: Comments_fill_icon,
   },
-  // {
-  //   icon: Home_icon,
-  //   name: 'صفحه اصلی',
-  //   href: '/admin/home/',
-  //   activeIcon: Home_fill_icon,
-  // },
+  {
+    icon: Home_icon,
+    name: 'صفحه اصلی',
+    href: '/admin/home/',
+    activeIcon: Home_fill_icon,
+  },
   // {
   //   icon: Support_icon,
   //   name: 'پشتیبانی',

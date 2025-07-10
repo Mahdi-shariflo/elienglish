@@ -5,6 +5,6 @@ export const useGetHomePage = () => {
   // Debounce the search input
   return useQuery({
     queryKey: ['home-page'],
-    queryFn: async () => await safeRequest({ url: `/admin/edit-mainpage/get-all` }),
+    queryFn: async () => await safeRequest({ url: `/mainpage/admin` }),
   });
 };

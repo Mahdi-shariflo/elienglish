@@ -1,25 +1,7 @@
 import { Address, Blog, ThumbnailImage, User } from '.';
 
 export type Home = {
-  cards: Blog[];
-  bannerTopHeaderDesktop: {
-    url: string;
-  };
-  bannerTopHeaderMobile: {
-    url: string;
-  };
-  _id: string;
-  link: string;
-  products: Product[];
-  title: string;
-  timer: string;
-  productSliderTitle: string;
-  productsCategories: string;
-  sliderCategories: { _id: string }[];
-  pictures: Slider[];
-  sliderCategory: {
-    sliders: Slider[];
-  };
+  section1: { title: string };
 };
 export type Slider = {
   _id: string;

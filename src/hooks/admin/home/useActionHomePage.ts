@@ -8,8 +8,8 @@ export const useActionHomePage = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/admin/edit-mainpage/update/${id}`, method: 'PATCH', data })
-        : await safeRequest({ url: `/admin/edit-mainpage/add`, method: 'POST', data });
+        ? await safeRequest({ url: `/mainpage/admin/${id}`, method: 'PATCH', data })
+        : await safeRequest({ url: `/mainpage/admin`, method: 'POST', data });
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['home-page'] });
