@@ -30,7 +30,7 @@ const Section1Admin = ({ formik }: Props) => {
         />
 
         {/* دکمه فعال */}
-        <div className="col-span-2 mt-4 rounded-lg border p-4">
+        <div className="mt-4 rounded-lg border p-4">
           <p className="font-bold text-[14px]">دکمه فعال</p>
           <div className="mt-7 grid grid-cols-2 gap-3">
             <Input formik={formik} name="section1.activeBtn.title" label="عنوان" />
@@ -39,7 +39,7 @@ const Section1Admin = ({ formik }: Props) => {
         </div>
 
         {/* دکمه دیگر */}
-        <div className="col-span-2 mt-4 rounded-lg border p-4">
+        <div className="mt-4 rounded-lg border p-4">
           <p className="font-bold text-[14px]">دکمه</p>
           <div className="mt-7 grid grid-cols-2 gap-3">
             <Input formik={formik} name="section1.btn.title" label="عنوان" />
@@ -54,7 +54,7 @@ const Section1Admin = ({ formik }: Props) => {
         <div className="col-span-2 mt-4 space-y-4 rounded-lg border p-3">
           <Input formik={formik} name="section1.picture.href" label="لینک تصویر" />
           <Media
-            title="تصویر محصول"
+            title="تصویر "
             className="w-full"
             withModal
             onSelect={(img: any) => {
@@ -70,7 +70,7 @@ const Section1Admin = ({ formik }: Props) => {
                 />
               ) : (
                 <p className="text-center font-regular text-lg">
-                  انتخاب تصویر محصول <span className="text-red-500">*</span>
+                  انتخاب تصویر <span className="text-red-500">*</span>
                 </p>
               )}
             </div>

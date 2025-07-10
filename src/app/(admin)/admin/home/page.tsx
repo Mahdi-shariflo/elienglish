@@ -7,6 +7,7 @@ import Button from '@/components/common/Button';
 import { useActionHomePage } from '@/hooks/admin/home/useActionHomePage';
 import { useGetHomePage } from '@/hooks/admin/home/useGetHomePage';
 import Section1Admin from '@/components/admin/home/Section1Admin';
+import Section2Admin from '@/components/admin/home/Section2Admin';
 
 // تعریف یک Map از کامپوننت‌های قابل نمایش
 
@@ -38,15 +39,16 @@ const Page = () => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      console.log(values);
-      mutate({ data: values, id: values.id });
+      const sectionKey = values.sec; // مثلا sec1
+      const sectionData = values[sectionKey]; // مثلا values['section1']
+      mutate({ data: sectionData, id: values._id || values.id });
     },
   });
 
   const sectionComponents: Record<string, JSX.Element> = {
     // 'top-banner': <TopBanner formik={formik} data={findItem('top-banner')} />,
     sec1: <Section1Admin formik={formik} />,
-    // sec2: <Section2 data={findItem('sec2')} formik={formik} />,
+    sec2: <Section2Admin formik={formik} />,
     // sec3: <SectionDiscountAdmin data={findItem('sec3')} formik={formik} />,
     // sec4: <CarouselSections data={findItem('sec4')} formik={formik} />,
     // sec5: <BannersSection data={findItem('sec5')} formik={formik} />,

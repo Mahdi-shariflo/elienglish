@@ -8,7 +8,7 @@ export const useActionHomePage = () => {
   return useMutation({
     mutationFn: async ({ id, data }: { id: string; data: unknown }) => {
       return id
-        ? await safeRequest({ url: `/mainpage/admin/${id}`, method: 'PATCH', data })
+        ? await safeRequest({ url: `/mainpage/admin`, method: 'PATCH', data })
         : await safeRequest({ url: `/mainpage/admin`, method: 'POST', data });
     },
     onSuccess: async () => {
