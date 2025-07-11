@@ -151,10 +151,10 @@ const Section3Admin = ({ formik, data }: Props) => {
             formik={form}
             classNameInput="!h-[45px] !bg-[#f5f6f6]"
           />
-          {/* @ts-expect-error error */}
           <Checkbox
             className="col-span-2"
             label="ایا جز دوره خاص است؟"
+            // @ts-expect-error error
             formik={form}
             name="special"
           />
