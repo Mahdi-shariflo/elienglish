@@ -1,5 +1,4 @@
 'use client';
-import { useGetProductsAdmin } from '@/hooks/admin/products/useGetProductsAdmin';
 import { BASEURL } from '@/lib/variable';
 import { Product } from '@/types/home';
 import { Spinner } from '@heroui/react';

@@ -12,6 +12,7 @@ const CardBlog1 = ({
   className?: string;
   classImage?: string;
 }) => {
+  if (!blog._id) return null;
   return (
     <Link
       href={`/blogs/${blog.url}`}

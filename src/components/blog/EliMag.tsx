@@ -11,11 +11,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-const EliMag = ({ blogs, title, delay }: { delay?: number; blogs: Blog[]; title: string }) => {
+const EliMag = ({
+  blogs,
+  title,
+  delay,
+  className,
+}: {
+  className?: string;
+  delay?: number;
+  blogs: Blog[];
+  title: string;
+}) => {
   if (Number(blogs?.length) < 1) return null;
 
   return (
-    <div className="container_page lg:w-full">
+    <div className={`container_page lg:w-full ${className}`}>
       {
         <div className="flex items-center justify-between">
           <Title title={title} />

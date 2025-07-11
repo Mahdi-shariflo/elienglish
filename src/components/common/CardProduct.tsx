@@ -23,6 +23,7 @@ const CardProduct = ({
   showTotalProduct,
   url,
 }: Props) => {
+  if (!pro._id) return null;
   const product: any = pro?.children?.length > 0 ? filterLowProduct(pro.children) : pro;
   return (
     <Link
@@ -45,7 +46,7 @@ const CardProduct = ({
         <p
           className={`line-clamp-2 font-bold text-[#0B1524] dark:text-white lg:font-bold ${showTotalProduct ? 'text-[12px] lg:text-[12px]' : 'text-[12px] lg:text-[14px]'}`}
         >
-          {product.title.replaceAll('&#038;', '')}
+          {product?.title?.replaceAll('&#038;', '')}
         </p>
 
         {product.count < 1 || product?.price === 0 ? null : (

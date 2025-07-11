@@ -12,7 +12,7 @@ const Section1CardList = ({ formik }: Props) => {
 
       <div className="grid grid-cols-2 gap-4">
         {/* @ts-expect-error error */}
-        {formik.values.section1.card.map((item, index) => (
+        {formik.values?.section1?.card.map((item, index) => (
           <div key={index} className="grid grid-cols-2 gap-2">
             <Input
               formik={formik}

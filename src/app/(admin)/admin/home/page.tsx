@@ -8,6 +8,11 @@ import { useActionHomePage } from '@/hooks/admin/home/useActionHomePage';
 import { useGetHomePage } from '@/hooks/admin/home/useGetHomePage';
 import Section1Admin from '@/components/admin/home/Section1Admin';
 import Section2Admin from '@/components/admin/home/Section2Admin';
+import Section3Admin from '@/components/admin/home/Section3Admin';
+import Section4Admin from '@/components/admin/home/Section4Admin';
+import Section5Admin from '@/components/admin/home/Section5Admin';
+import Section7Admin from '@/components/admin/home/Section7Admin';
+import { removeEmptyFields } from '@/lib/fun';
 
 // تعریف یک Map از کامپوننت‌های قابل نمایش
 
@@ -39,16 +44,35 @@ const Page = () => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      const sectionKey = values.sec; // مثلا sec1
-      const sectionData = values[sectionKey]; // مثلا values['section1']
-      mutate({ data: sectionData, id: values._id || values.id });
+      const sectionKey = values.sec; // مثلاً "section4"
+      const sectionData = { ...values[sectionKey] };
+
+      // فیلدهایی که باید فقط آرایه‌ای از id باشن
+      const arrayFields = ['course', 'product', 'blog'];
+
+      arrayFields.forEach((key) => {
+        if (Array.isArray(sectionData[key])) {
+          sectionData[key] = sectionData[key].map((item: any) => item?.id || item?._id || item);
+        }
+      });
+
+      mutate({
+        data: {
+          [sectionKey]: removeEmptyFields(sectionData),
+        },
+        id: values._id || values.id,
+      });
     },
   });
-
+  const sections = data?.data?.data;
   const sectionComponents: Record<string, JSX.Element> = {
     // 'top-banner': <TopBanner formik={formik} data={findItem('top-banner')} />,
-    sec1: <Section1Admin formik={formik} />,
-    sec2: <Section2Admin formik={formik} />,
+    section1: <Section1Admin formik={formik} />,
+    section2: <Section2Admin data={sections?.section2} formik={formik} />,
+    section3: <Section3Admin data={sections?.section3} formik={formik} />,
+    section4: <Section4Admin data={sections?.section4} formik={formik} />,
+    section5: <Section5Admin data={sections?.section5} formik={formik} />,
+    section7: <Section7Admin data={sections?.section7} formik={formik} />,
     // sec3: <SectionDiscountAdmin data={findItem('sec3')} formik={formik} />,
     // sec4: <CarouselSections data={findItem('sec4')} formik={formik} />,
     // sec5: <BannersSection data={findItem('sec5')} formik={formik} />,
@@ -66,7 +90,6 @@ const Page = () => {
     }
   }, [isSuccess]);
 
-  console.log(formik.values);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -82,7 +105,7 @@ const Page = () => {
             name="sec"
             nameLabel="label"
             nameValue="value"
-            className="w-full"
+            className="z-50 w-full"
           />
           {formik.values.sec ? (
             <Button

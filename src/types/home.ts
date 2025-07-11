@@ -7,18 +7,7 @@ export type Slider = {
   _id: string;
   title: string;
   url: string;
-  desktopPic: {
-    _id: string;
-    url: string;
-    title: string;
-    altpic: string;
-  };
-  mobilePic: {
-    _id: string;
-    url: string;
-    title: string;
-    altpic: string;
-  };
+  link: string;
   category: string;
   href: string;
   published: boolean;

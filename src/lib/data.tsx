@@ -784,55 +784,55 @@ export const landingOptions = [
   },
   {
     label: 'سکشن اول',
-    value: 'sec1',
+    value: 'section1',
   },
   {
     label: 'سکشن دوم',
-    value: 'sec2',
+    value: 'section2',
   },
   {
     label: 'سکشن سوم',
-    value: 'sec3',
+    value: 'section3',
   },
   {
     label: 'سکشن چهارم',
-    value: 'sec4',
+    value: 'section4',
   },
   {
     label: 'سکشن پنجم',
-    value: 'sec5',
+    value: 'section5',
   },
   {
     label: 'سکشن ششم',
-    value: 'sec6',
+    value: 'section6',
   },
   {
     label: 'سکشن هفتم',
-    value: 'sec7',
+    value: 'section7',
   },
   {
     label: 'سکشن هشتم',
-    value: 'sec8',
+    value: 'section8',
   },
   {
     label: 'سکشن نهم',
-    value: 'sec9',
+    value: 'section9',
   },
   {
     label: 'سکشن دهم',
-    value: 'sec10',
+    value: 'section10',
   },
   {
     label: 'سکشن یازدهم',
-    value: 'sec11',
+    value: 'section11',
   },
   {
     label: 'سکشن دوازدهم',
-    value: 'sec12',
+    value: 'section12',
   },
   {
     label: 'سکشن سیزدهم',
-    value: 'sec13',
+    value: 'section13',
   },
 ];
 

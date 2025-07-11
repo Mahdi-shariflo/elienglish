@@ -1,23 +1,26 @@
 'use client';
-import React from 'react';
+import React, { ReactNode } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image, { StaticImageData } from 'next/image';
+import { Slider as SliderType } from '@/types/home';
+import Link from 'next/link';
+import { BASEURL } from '@/lib/variable';
+import Image from 'next/image';
+import { Delete_icon } from './icon';
 
 type Props = {
-  sliders: { image: StaticImageData; title: string; description: string }[];
+  sliders: SliderType[];
   className?: string;
+  onDelete?: (item: number) => void;
 };
 
-export default function Slider({ sliders, className }: Props) {
+export default function Slider({ sliders, className, onDelete }: Props) {
   return (
-    <div
-      className={`custom_pagination relative flex h-full w-[90%] items-center justify-center ${className}`}
-    >
+    <div className={`container_page custom_pagination w-full ${className}`}>
       <Swiper
         speed={1000}
         autoplay={{
@@ -32,27 +35,48 @@ export default function Slider({ sliders, className }: Props) {
         }}
         modules={[Pagination, Autoplay]}
         loop
-        slidesPerView={1}
-        className="!pb-16"
       >
         {sliders.map((item, idx) => {
           return (
-            <SwiperSlide className="!h-fit w-full" key={idx}>
-              <span className="block !h-[512px]">
-                <Image
-                  src={`${item.image.src}`}
-                  alt={item.title}
-                  layout="fill"
-                  priority={idx === 0}
-                  className="!h-[512px] rounded-lg object-contain"
-                />
-              </span>
-              <p className="mt-4 text-center font-extrabold text-lg text-primary dark:text-[#E5EAEF]">
-                {item.title}
-              </p>
-              <p className="pt-3 text-center font-light text-[#8E98A8] dark:text-[#8E98A8]">
-                {item.description}
-              </p>
+            <SwiperSlide className="!h-[256px] lg:!h-[365px]" key={idx}>
+              <Link href={`${item.href}/`} className="relative block h-full w-full">
+                <picture className="h-full w-full overflow-hidden rounded-lg">
+                  {/* تصویر موبایل با وضوح مختلف */}
+                  <source
+                    media="(max-width: 768px)"
+                    srcSet={`${BASEURL}/${item.url} 1x, 
+               ${BASEURL}/${item.url} 2x`}
+                  />
+                  {/* تصویر دسکتاپ با وضوح مختلف */}
+                  <source
+                    media="(min-width: 769px)"
+                    srcSet={`${BASEURL}/${item.url} 1x, 
+               ${BASEURL}/${item.url} 2x, 
+               ${BASEURL}/${item.url} 3x`}
+                  />
+                  <Image
+                    src={`${BASEURL}/${item.url}`}
+                    alt={item.title}
+                    layout="fill"
+                    objectFit="cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={idx === 0}
+                    className="rounded-lg object-cover"
+                  />
+                </picture>
+                {onDelete && (
+                  <button
+                    className="absolute left-6 top-3 flex !h-[40px] !w-[40px] !min-w-[40px] items-center justify-center rounded-full bg-white p-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      e.preventDefault();
+                      onDelete(idx);
+                    }}
+                  >
+                    <Delete_icon />
+                  </button>
+                )}
+              </Link>
             </SwiperSlide>
           );
         })}

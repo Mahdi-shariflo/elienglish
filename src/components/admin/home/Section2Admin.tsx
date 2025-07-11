@@ -5,6 +5,7 @@ import { FormikProps, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
+import Slider from '@/components/common/Slider';
 
 type Props = {
   formik: FormikProps<any>;
@@ -22,22 +23,24 @@ const Section2Admin = ({ formik, data }: Props) => {
       order: '',
     },
     enableReinitialize: true,
-    onSubmit: (values) => {
+    onSubmit: (values, { resetForm }) => {
       formik.setValues({
-        sec: 'sec2',
+        sec: 'section2',
+        id: formik.values._id,
         section2: [...formik?.values?.section2, { ...values, order: Number(values.order) }],
       });
+      resetForm();
       setOpen(false);
     },
   });
 
   useEffect(() => {
     if (data) {
-      // form.setValues({
-      //   productSliderTitle: data.section2Title || '',
-      //   link: data.section2Link || '',
-      //   products: data.section2Products || [],
-      // });
+      formik.setValues({
+        sec: 'section2',
+        _id: formik.values._id,
+        section2: data,
+      });
     }
   }, [data]);
 
@@ -53,6 +56,15 @@ const Section2Admin = ({ formik, data }: Props) => {
   return (
     <>
       <Button onClick={onOpen}>ویرایش سکشن ۲</Button>
+      <Slider
+        onDelete={(index) => {
+          const updated = [...formik.values.section2];
+          updated.splice(index, 1);
+          formik.setFieldValue('section2', updated);
+        }}
+        className="!w-full"
+        sliders={formik.values?.section2}
+      />
 
       <BaseDialog
         onClose={() => setOpen(false)}

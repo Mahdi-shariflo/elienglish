@@ -1,7 +1,7 @@
 'use client';
 import Input from '@/components/common/form/Input';
 import Textarea from '@/components/common/form/Textarea';
-import { FieldArray, FormikProps } from 'formik';
+import { FormikProps } from 'formik';
 import React from 'react';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
@@ -15,12 +15,7 @@ const Section1Admin = ({ formik }: Props) => {
   return (
     <div>
       <div className="grid grid-cols-2 gap-4">
-        <Input
-          value={formik.values.section1.colorTitle}
-          formik={formik}
-          name="section1.colorTitle"
-          label="عنوان رنگی"
-        />
+        <Input formik={formik} name="section1.colorTitle" label="عنوان رنگی" />
         <Input formik={formik} name="section1.title" label="عنوان" />
         <Textarea
           className="col-span-2"
