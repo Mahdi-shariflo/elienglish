@@ -13,12 +13,16 @@ import Section4Admin from '@/components/admin/home/Section4Admin';
 import Section5Admin from '@/components/admin/home/Section5Admin';
 import Section7Admin from '@/components/admin/home/Section7Admin';
 import { removeEmptyFields } from '@/lib/fun';
+import Section6Admin from '@/components/admin/home/Section6Admin';
+import Section8Admin from '@/components/admin/home/Section8Admin';
 
 // تعریف یک Map از کامپوننت‌های قابل نمایش
 
 const Page = () => {
   const { mutate, isPending } = useActionHomePage();
   const { data, isSuccess } = useGetHomePage();
+  const home = data?.data?.data;
+
   const formik = useFormik<any>({
     initialValues: {
       section1: {
@@ -44,23 +48,38 @@ const Page = () => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      const sectionKey = values.sec; // مثلاً "section4"
-      const sectionData = { ...values[sectionKey] };
+      // اگر توضیحات بود، جداگانه ارسال شود
+      if (values?.description) {
+        return mutate({
+          data: { description: values?.description },
+          id: values.id || values._id,
+        });
+      }
 
-      // فیلدهایی که باید فقط آرایه‌ای از id باشن
+      const sectionKey = values.sec; // مثلاً "section2"
+      const sectionValue = values[sectionKey];
+
+      // اگر آرایه باشه، همون رو نگه می‌داریم، اگر نباشه با spread کپی می‌گیریم
+      let sectionData: any = Array.isArray(sectionValue) ? [...sectionValue] : { ...sectionValue };
+
+      // فیلدهایی که باید فقط آرایه‌ای از id باشن (در صورتی که sectionData آبجکت باشه)
       const arrayFields = ['course', 'product', 'blog'];
 
-      arrayFields.forEach((key) => {
-        if (Array.isArray(sectionData[key])) {
-          sectionData[key] = sectionData[key].map((item: any) => item?.id || item?._id || item);
-        }
-      });
+      if (!Array.isArray(sectionData)) {
+        arrayFields.forEach((key) => {
+          if (Array.isArray(sectionData[key])) {
+            sectionData[key] = sectionData[key].map((item: any) => item?.id || item?._id || item);
+          }
+        });
+
+        sectionData = removeEmptyFields(sectionData); // فقط روی آبجکت اجرا می‌کنیم
+      }
 
       mutate({
         data: {
-          [sectionKey]: removeEmptyFields(sectionData),
+          [sectionKey]: sectionData,
         },
-        id: values._id || values.id,
+        id: home?._id,
       });
     },
   });
@@ -72,20 +91,12 @@ const Page = () => {
     section3: <Section3Admin data={sections?.section3} formik={formik} />,
     section4: <Section4Admin data={sections?.section4} formik={formik} />,
     section5: <Section5Admin data={sections?.section5} formik={formik} />,
+    section6: <Section6Admin data={sections?.section6} formik={formik} />,
     section7: <Section7Admin data={sections?.section7} formik={formik} />,
-    // sec3: <SectionDiscountAdmin data={findItem('sec3')} formik={formik} />,
-    // sec4: <CarouselSections data={findItem('sec4')} formik={formik} />,
-    // sec5: <BannersSection data={findItem('sec5')} formik={formik} />,
-    // sec6: <CarouselSections data={findItem('sec6')} formik={formik} />,
-    // sec7: <BannersSection data={findItem('sec7')} formik={formik} />,
-    // sec8: <CarouselSections data={findItem('sec8')} formik={formik} />,
-    // sec9: <BannersSection data={findItem('sec9')} formik={formik} />,
-    // sec10: <CarouselSections data={findItem('sec10')} formik={formik} />,
-    // sec11: <BannersSection data={findItem('sec11')} formik={formik} />,
+    section8: <Section8Admin data={sections?.description} formik={formik} />,
   };
   useEffect(() => {
     if (isSuccess) {
-      const home = data.data.data;
       formik.setValues(home);
     }
   }, [isSuccess]);

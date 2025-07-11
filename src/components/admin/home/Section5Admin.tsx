@@ -4,7 +4,6 @@ import Input from '@/components/common/form/Input';
 import { Home } from '@/types/home';
 import { FormikProps, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import SelectCourse from '../courses/SelectCourse';
 import Carousel from '@/components/common/Carousel';
 import ProductsSelect from '../product/ProductsSelect';
 type Props = {

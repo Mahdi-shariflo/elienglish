@@ -1,10 +1,11 @@
 import React from 'react';
-import SliderHome from '../common/SliderHome';
+import { Slider as SliderType } from '@/types/home';
+import Slider from '../common/Slider';
 
-const Section2 = () => {
+const Section2 = ({ section }: { section: SliderType[] }) => {
   return (
     <>
-      <SliderHome sliders={[]} />
+      <Slider sliders={section} />
     </>
   );
 };

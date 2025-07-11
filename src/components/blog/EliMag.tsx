@@ -25,7 +25,7 @@ const EliMag = ({
   if (Number(blogs?.length) < 1) return null;
 
   return (
-    <div className={`container_page lg:w-full ${className}`}>
+    <div className={`container_page ${className}`}>
       {
         <div className="flex items-center justify-between">
           <Title title={title} />

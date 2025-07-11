@@ -19,6 +19,7 @@ type Props = {
 };
 
 export default function Slider({ sliders, className, onDelete }: Props) {
+  if (!Array.isArray(sliders)) return null;
   return (
     <div className={`container_page custom_pagination w-full ${className}`}>
       <Swiper
@@ -36,7 +37,7 @@ export default function Slider({ sliders, className, onDelete }: Props) {
         modules={[Pagination, Autoplay]}
         loop
       >
-        {sliders.map((item, idx) => {
+        {sliders?.map((item, idx) => {
           return (
             <SwiperSlide className="!h-[256px] lg:!h-[365px]" key={idx}>
               <Link href={`${item.href}/`} className="relative block h-full w-full">

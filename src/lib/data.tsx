@@ -814,26 +814,6 @@ export const landingOptions = [
     label: 'سکشن هشتم',
     value: 'section8',
   },
-  {
-    label: 'سکشن نهم',
-    value: 'section9',
-  },
-  {
-    label: 'سکشن دهم',
-    value: 'section10',
-  },
-  {
-    label: 'سکشن یازدهم',
-    value: 'section11',
-  },
-  {
-    label: 'سکشن دوازدهم',
-    value: 'section12',
-  },
-  {
-    label: 'سکشن سیزدهم',
-    value: 'section13',
-  },
 ];
 
 export const pages = [

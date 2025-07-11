@@ -3,8 +3,9 @@ import { Editor as EditorTinymce } from '@tinymce/tinymce-react';
 type Props = {
   editorRef: React.RefObject<HTMLInputElement>;
   value: string;
+  onBlur?: () => void;
 };
-const Editor = ({ value, editorRef }: Props) => {
+const Editor = ({ value, editorRef, onBlur }: Props) => {
   return (
     <div className="mt-4 lg:col-span-2">
       <EditorTinymce
@@ -35,6 +36,7 @@ const Editor = ({ value, editorRef }: Props) => {
           `,
         }}
         initialValue={value}
+        onBlur={onBlur}
       />
     </div>
   );

@@ -31,12 +31,10 @@ const Datepicker = ({
   disabled,
   isRequired,
   className,
-  format,
   endContent,
   inputClass,
   maxDate,
   range = false,
-  timepicker = false,
   minDate,
 }: Props) => {
   function handleChange(value: any) {
@@ -74,7 +72,6 @@ const Datepicker = ({
           maxDate={maxDate ? maxDate : undefined}
           minDate={minDate ? minDate : undefined}
           calendarPosition={'top-center'}
-          fixMainPosition
         />
         {endContent}
       </div>

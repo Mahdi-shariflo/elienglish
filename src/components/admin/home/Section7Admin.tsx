@@ -4,7 +4,6 @@ import Input from '@/components/common/form/Input';
 import { Home } from '@/types/home';
 import { FormikProps, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
-import Carousel from '@/components/common/Carousel';
 import SelectBlog from '../blog/SelectBlog';
 import EliMag from '@/components/blog/EliMag';
 type Props = {
@@ -49,13 +48,17 @@ const Section7Admin = ({ formik, data }: Props) => {
     });
     setOpen(true);
   };
-  console.log(formik.values);
   return (
     <div>
       <Button onClick={onOpen} className="bg-main px-4 text-white">
         ویرایش سکشن
       </Button>
-      <EliMag className="mt-10" delay={3200} title="الی مگ" blogs={formik.values?.section7?.blog} />
+      <EliMag
+        className="mt-10"
+        delay={3200}
+        title="الی مگ"
+        blogs={Array.isArray(formik.values?.section7?.blog) ? formik.values?.section7?.blog : []}
+      />
 
       <BaseDialog
         onClose={onClose}

@@ -2,7 +2,7 @@
 import Input from '@/components/common/form/Input';
 import Textarea from '@/components/common/form/Textarea';
 import { FormikProps } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
 import Section1CardList from './Section1CardList';
@@ -12,6 +12,9 @@ type Props = {
 };
 
 const Section1Admin = ({ formik }: Props) => {
+  useEffect(() => {
+    formik.setFieldValue('description', '');
+  }, []);
   return (
     <div>
       <div className="grid grid-cols-2 gap-4">

@@ -27,7 +27,10 @@ const Section2Admin = ({ formik, data }: Props) => {
       formik.setValues({
         sec: 'section2',
         id: formik.values._id,
-        section2: [...formik?.values?.section2, { ...values, order: Number(values.order) }],
+        section2: [
+          ...(Array.isArray(formik?.values?.section2) ? formik?.values?.section2 : []),
+          { ...values, order: Number(values.order) },
+        ],
       });
       resetForm();
       setOpen(false);
@@ -43,7 +46,7 @@ const Section2Admin = ({ formik, data }: Props) => {
       });
     }
   }, [data]);
-
+  console.log(formik.values);
   const onOpen = () => {
     // form.setValues({
     //   productSliderTitle: formik.values.section2Title || '',

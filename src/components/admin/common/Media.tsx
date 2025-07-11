@@ -10,12 +10,21 @@ type Props = {
   children?: React.ReactNode;
   onSelect?: (media: MediaType[] | MediaType) => void;
   title?: string;
+  container_class?: string;
 };
-const Media = ({ withModal, children, className, onSelect, multiple, title }: Props) => {
+const Media = ({
+  withModal,
+  children,
+  className,
+  container_class,
+  onSelect,
+  multiple,
+  title,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
   return (
-    <div className="col-span-2">
+    <div className={`col-span-2 ${container_class}`}>
       {withModal ? (
         <>
           <div className="w-full">
