@@ -39,7 +39,7 @@ export default function Slider({ sliders, className, onDelete }: Props) {
       >
         {sliders?.map((item, idx) => {
           return (
-            <SwiperSlide className="!h-[256px] lg:!h-[365px]" key={idx}>
+            <SwiperSlide className="!h-[206px] lg:!h-[365px]" key={idx}>
               <Link href={`${item.href}/`} className="relative block h-full w-full">
                 <picture className="h-full w-full overflow-hidden rounded-lg">
                   {/* تصویر موبایل با وضوح مختلف */}

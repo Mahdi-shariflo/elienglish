@@ -1,5 +1,6 @@
 // import { request } from '@/lib/safeClient';
 import EliMag from '@/components/blog/EliMag';
+import Description from '@/components/common/Description';
 import Section1 from '@/components/home/Section1';
 import Section2 from '@/components/home/Section2';
 import Section3 from '@/components/home/Section3';
@@ -12,7 +13,7 @@ const Page = async () => {
   const data = await request({ url: '/mainpage' });
   const home = data?.data?.data;
   return (
-    <div className="!mb-20 flex min-h-screen flex-col gap-10 pt-32">
+    <div className="!mb-20 flex min-h-screen flex-col gap-10 pt-10 lg:pt-32">
       <Section1 section={home?.section1} />
       <Section2 section={home?.section2} />
       <Section3 section={home?.section3} />
@@ -23,12 +24,7 @@ const Page = async () => {
       {/* <Section4  /> */}
       <EliMag delay={3200} title="الی مگ" blogs={home?.section7?.blog} />
 
-      {home?.description && (
-        <div
-          className="container_page font-medium text-[16px] leading-9"
-          dangerouslySetInnerHTML={{ __html: home?.description }}
-        ></div>
-      )}
+      {home?.description && <Description description={home?.description} />}
     </div>
   );
 };

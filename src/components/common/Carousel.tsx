@@ -70,55 +70,6 @@ const Carousel = ({
                 </svg>
               </Button>
             ) : null}
-            <div className={`flex items-center gap-2 ${classBtnArrows}`}>
-              <Button
-                onClick={async () => swiperRef?.current?.swiper.slidePrev()}
-                className="h-8 w-8 !min-w-fit bg-main lg:h-[40px] lg:!w-[40px]"
-              >
-                <span>
-                  <svg
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8.91016 20.7723L15.4302 14.2523C16.2002 13.4823 16.2002 12.2223 15.4302 11.4523L8.91016 4.93231"
-                      stroke="white"
-                      strokeWidth="2"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </Button>
-              <Button
-                onClick={async () => swiperRef?.current?.swiper.slideNext()}
-                className="h-8 w-8 !min-w-fit bg-main lg:h-[40px] lg:!w-[40px]"
-              >
-                <span>
-                  <svg
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.9998 20.7723L8.47984 14.2523C7.70984 13.4823 7.70984 12.2223 8.47984 11.4523L14.9998 4.93231"
-                      stroke="#FDF2F9"
-                      strokeWidth="2"
-                      strokeMiterlimit="10"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </Button>
-              {children}
-            </div>
           </div>
         </div>
         {Number(products?.length) >= 1 ? (
