@@ -1503,6 +1503,58 @@ export const initialDataPayment = ({ onDelete, onEdit }: Props) => [
     ),
   },
 ];
+export const initialDataPaymentList = ({ onDelete, onEdit }: Props) => [
+  {
+    title: <HeaderCell align="center" title="ردیف" />,
+    dataIndex: '_id',
+    key: '_id',
+    render: (_: string, __: any, idx: number) => (
+      <p className="text-center text-xs text-gray-800">{idx + 1}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="نام درگاه" />,
+    dataIndex: 'title',
+    key: 'title',
+    render: (value: string, row: any) => (
+      <div className="flex items-center justify-center gap-3">
+        <img className="h-10 w-10 rounded-full" src={`${BASEURL}/${row.logo}`} />
+        <p className="text-center text-xs text-gray-800">{value}</p>
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="نام انگلیسی" />,
+    dataIndex: 'enTitle',
+    key: 'enTitle',
+    render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
+  },
+  {
+    title: <HeaderCell title="توضیحات" />,
+    dataIndex: 'description',
+    key: 'description',
+    render: (value: string) => <p className="text-center text-xs text-gray-800">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="عملیات" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-2 text-gray-600">
+        {onDelete ? (
+          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+            <Delete_icon />
+          </Button>
+        ) : null}
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
+      </div>
+    ),
+  },
+];
 export const initialDataPaymentDetail = () => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
