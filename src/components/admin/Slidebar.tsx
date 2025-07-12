@@ -141,6 +141,22 @@ const menus = [
       },
     ],
   },
+  {
+    icon: Transaction_icon,
+    name: 'تراکنش‌ها',
+    href: ['/admin/transactions/'],
+    activeIcon: Transaction_fill_icon,
+    children: [
+      {
+        name: 'تراکنش‌ها',
+        href: '/admin/transactions/',
+      },
+      {
+        name: 'تنظیمات پرداخت',
+        href: '/admin/transactions/setting',
+      },
+    ],
+  },
   // {
   //   icon: Slider_icon,
   //   name: 'اسلایدر‌ها',
@@ -198,12 +214,6 @@ const menus = [
   //   name: 'حمل‌ونقل',
   //   href: '/admin/transports/',
   //   activeIcon: Transport_fill_icon,
-  // },
-  // {
-  //   icon: Transaction_icon,
-  //   name: 'تراکنش‌ها',
-  //   href: '/admin/transactions/',
-  //   activeIcon: Transaction_fill_icon,
   // },
   // {
   //   icon: Menu_icon,
