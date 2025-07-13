@@ -17,7 +17,6 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id[0]!)}` });
   const course: Course = result?.data?.data?.course;
-  console.log(course);
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">

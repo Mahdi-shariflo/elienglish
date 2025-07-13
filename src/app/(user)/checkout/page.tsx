@@ -88,7 +88,6 @@ const Page = () => {
   });
 
   const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
-  console.log(isCartPhycial, 'wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>

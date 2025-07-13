@@ -24,7 +24,6 @@ const Page = async ({ params }: Props) => {
   // });
   // const comments: Comment[] = data?.data?.data?.comments;
   const selectedProduct: Product = productData.product;
-  console.log(selectedProduct);
   return (
     <div className="mb-14 mt-14 lg:mb-0">
       {/* <Script

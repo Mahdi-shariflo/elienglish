@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import Video from 'next-video';
 import Image from 'next/image';
 import PlayIcon from '@/../public/icons/play.svg';
 
@@ -21,13 +20,14 @@ const VideoPlayer = ({ url, poster }: { url: string; poster: string }) => {
       className="relative aspect-video h-full w-full overflow-hidden rounded-xl bg-black"
       dir="ltr"
     >
-      <Video
+      <video
         ref={videoRef}
+        src={url}
         poster={poster}
-        // src={url}
-        src={
-          'https://elienglish.com/wp-content/uploads/dornalms/storage/676f64ade150a574861c2ca690af386a/l087a7e0cf97b0e499e976a237ce3615e.mp4'
-        }
+        controls={isPlaying} // فقط بعد از کلیک دکمه پخش
+        className="h-full w-full rounded-xl object-cover"
+        controlsList="nodownload"
+        disablePictureInPicture
       />
       {!isPlaying && (
         <button

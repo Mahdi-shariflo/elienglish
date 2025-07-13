@@ -46,7 +46,6 @@ const Section2Admin = ({ formik, data }: Props) => {
       });
     }
   }, [data]);
-  console.log(formik.values);
   const onOpen = () => {
     // form.setValues({
     //   productSliderTitle: formik.values.section2Title || '',

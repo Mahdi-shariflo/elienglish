@@ -11,13 +11,18 @@ const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/reac
 });
 
 const MediaPreview = ({ media, className }: { media: Blog | Course; className?: string }) => {
+  if (!media) return null;
+  console.log(media?.video?.url);
   return (
     <>
       <div
         className={`mt-3 h-[193px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px] 5xl:h-[600px] ${className}`}
       >
         {media?.video?.url ? (
-          <VideoPlayer poster={`${BASEURL}/${media?.coverVideo?.url}`} url={media?.video?.url} />
+          <VideoPlayer
+            poster={`${BASEURL}/${media?.coverVideo?.url}`}
+            url={`${BASEURL}/${media?.video?.url}`}
+          />
         ) : (
           <Image
             className="h-full w-full"

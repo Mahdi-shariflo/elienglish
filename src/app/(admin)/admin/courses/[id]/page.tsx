@@ -199,7 +199,6 @@ const Page = () => {
     ]);
   };
 
-  console.log(formik.values);
   return (
     <IsClient>
       <div>
