@@ -52,7 +52,6 @@ export function getMediaType(filePath: string): 'video' | 'audio' | 'document' |
 
   if (!extension) return 'unknown';
 
-  const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
   const videoExts = ['mp4', 'mov', 'avi', 'mkv', 'webm'];
   const audioExts = ['mp3', 'wav', 'ogg', 'm4a', 'aac'];
   const docExts = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt'];

@@ -48,11 +48,11 @@ const Page = () => {
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
-            title: 'حذف محصول',
-            description: 'محصولات',
+            title: 'حذف دوره',
+            description: 'دورها',
             info: row.title,
-            updateCache: 'products-admin',
-            url: `/admin/products/remove/${row._id}`,
+            updateCache: 'course-admin',
+            url: `/course/admin/${row._id}`,
           }),
       }),
     [isSuccess]

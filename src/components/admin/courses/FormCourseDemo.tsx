@@ -77,7 +77,6 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
           />
           <Input
             formik={formik}
-            price
             classNameInput="!h-[48px] bg-[#f5f6f6]"
             label={'شماره گذاری'}
             name={`${baseName}.order`}
@@ -166,7 +165,6 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
             <Input
               label="شماره"
               classNameInput="!h-[48px] bg-[#f5f6f6]"
-              price
               value={newEpisode.order.toString()}
               onChange={(e) => setNewEpisode({ ...newEpisode, order: e.target.value })}
             />

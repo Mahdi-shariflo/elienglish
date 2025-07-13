@@ -3,7 +3,6 @@ import { request } from '@/lib/safeClient';
 import React from 'react';
 import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
-import Button from '@/components/common/Button';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountdownDiscounts from '@/components/CountdownDiscounts';
 import Image from 'next/image';
@@ -18,6 +17,7 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id[0]!)}` });
   const course: Course = result?.data?.data?.course;
+  console.log(course);
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
@@ -39,11 +39,7 @@ const Page = async ({ params }: Props) => {
                 {course?.title}
               </p>
               <p className="rounded-lg pt-2 text-justify font-medium text-[14px] text-[#8E98A8] lg:pt-5">
-                در این دوره، هر قسمت یک موضوع کاربردی و روزمره به همراه اسلایدهای گرافیکی، ویدیوهای
-                آموزشی، و فایل‌های صوتی مورد بررسی قرار گرفت و به تدریس پرداختیم. ویژگی متمایز این
-                دوره، استفاده از بهترین منابع آموزشی و آموزش تکنیک‌هایی برای مکالمه‌ی روان و بدون
-                وقفه است. هر جلسه معادل چندین کلاس ترم زبانی بوده و به شما کمک می‌کند به سطحی از
-                توانایی برسید که بتوانید به سادگی در مکالمات روزمره از زبان انگلیسی بهره ببرید.
+                {course.short_des}
               </p>
             </div>
             <div className="lg:hidden">
@@ -59,22 +55,24 @@ const Page = async ({ params }: Props) => {
                   {course?.title}
                 </p>
                 <p className="pt-4 font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
-                  جلسات آموزش ویدیویی + جزوات تکمیلی + فایل‌های تمرین در هر جلسه
+                  {course?.shortTitle}
                 </p>
               </div>
               <div className="mt-10">
-                {course.discountPrice && (
+                {course.discountPrice ? (
                   <div className="flex items-center justify-between">
-                    {Boolean(course.discountPrice) && (
-                      <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[24px] lg:w-[41px] lg:text-[12px]">
-                        {discountCalculation(course.discountPrice, course.price)}%
-                      </span>
+                    {course.discountPrice && (
+                      <>
+                        <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[24px] lg:w-[41px] lg:text-[12px]">
+                          {discountCalculation(course.discountPrice, course.price)}%
+                        </span>
+                        <p className="font-regular text-[14px] text-[#8E98A8] line-through">
+                          {Number(course?.price).toLocaleString()} تومان
+                        </p>
+                      </>
                     )}
-                    <p className="font-regular text-[14px] text-[#8E98A8] line-through">
-                      {Number(course?.price).toLocaleString()} تومان
-                    </p>
                   </div>
-                )}
+                ) : null}
                 <div className="mt-4 flex items-center justify-between">
                   <p className="font-regular text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
                     قیمت دوره

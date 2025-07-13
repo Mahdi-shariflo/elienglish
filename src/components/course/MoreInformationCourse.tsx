@@ -99,7 +99,11 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
         {/* demo */}
         <div ref={demoRef}>
           <Title className="!text-[16px]" title="دموی رایگان" />
-          <Accordion className="mt-5 lg:!mt-10" itemClasses={{ base: '!mt-2 lg:!mt-5' }}>
+          <Accordion
+            defaultExpandedKeys={['0', '1', '2', '3', '4']}
+            className="mt-5 lg:!mt-10"
+            itemClasses={{ base: '!mt-2 lg:!mt-5' }}
+          >
             {course.demo.map((item, idx) => (
               <AccordionItem
                 key={idx}
@@ -216,11 +220,11 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                           <span className="font-medium text-main">{item.title}</span>
                         </div>
                         {item.type === 'video' ? (
-                          <Button className="h-[36px] w-fit min-w-fit !rounded-lg bg-[#EDE8FC] !px-2 text-main">
+                          <Button className="h-[36px] w-fit min-w-fit !rounded-lg bg-[#EDE8FC] !px-2 !font-medium text-main">
                             مشاهده ویدئو
                           </Button>
                         ) : (
-                          <a className="flex h-[36px] w-fit items-center justify-center rounded-lg bg-[#EDE8FC] px-2 !font-medium text-main">
+                          <a className="flex h-[36px] w-fit items-center justify-center rounded-lg bg-[#EDE8FC] px-2 !font-medium text-[12px] text-main">
                             دانلود فایل
                           </a>
                         )}
@@ -235,7 +239,11 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
         {/* problem */}
         <div ref={chaptersRef}>
           <Title className="!text-[16px]" title="برنامه آموزشی" />
-          <Accordion className="!mt-5 lg:!mt-10" itemClasses={{ base: '!mt-2 lg:!mt-5' }}>
+          <Accordion
+            defaultExpandedKeys={['0', '1', '2', '3', '4']}
+            className="!mt-5 lg:!mt-10"
+            itemClasses={{ base: '!mt-2 lg:!mt-5' }}
+          >
             {course.chapters.map((item, idx) => (
               <AccordionItem
                 key={idx}
@@ -352,7 +360,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                               </defs>
                             </svg>
                           </span>
-                          <span className="font-extrabold text-[16px] text-main">{item.title}</span>
+                          <span className="font-medium text-[16px] text-main">{item.title}</span>
                         </div>
                         <div className="flex h-[50px] items-center gap-4 rounded-lg px-4">
                           <div className="flex items-center gap-2">

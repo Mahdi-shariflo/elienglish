@@ -123,6 +123,7 @@ export type Product = {
 export type Course = {
   type: 'vitural' | 'inPerson';
   status: 'complated' | 'inProgress';
+  short_des?: string;
   demo: {
     title: string;
     order: number;

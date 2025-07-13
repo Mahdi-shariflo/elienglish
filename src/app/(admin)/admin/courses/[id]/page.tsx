@@ -8,7 +8,6 @@ import SelectChaptersCourse from '@/components/admin/courses/SelectChaptersCours
 import SelectDemoCourse from '@/components/admin/courses/SelectDemoCourse';
 import GeneralProduct from '@/components/admin/product/GeneralProduct';
 import SelectProductTag from '@/components/admin/product/SelectProductTag';
-import SelectPropertyModal from '@/components/admin/product/SelectPropertModal';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import IsClient from '@/components/common/IsClient';
@@ -28,6 +27,7 @@ import Video from 'next-video';
 import Title from '@/components/common/Title';
 import SelectPropertyCourseModal from '@/components/admin/courses/SelectPropertyCourseModal';
 import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
+import Textarea from '@/components/common/form/Textarea';
 const initialValues = {
   title: '',
   faqIdCat: '',
@@ -60,6 +60,7 @@ const initialValues = {
   redirecturl: '',
   demo: [],
   chapters: [],
+  short_des: '',
 };
 const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
@@ -88,6 +89,7 @@ const mapProductToFormValues = (product: any) => ({
   redirecturl: product.redirecturl || '',
   faqIdCat: product.faqIdCat || '',
   shortTitle: product.shortTitle || '',
+  short_des: product.short_des || '',
   demo: product?.demo,
   chapters: product?.chapters,
 });
@@ -196,6 +198,8 @@ const Page = () => {
       ...(formik.values.chapters || []),
     ]);
   };
+
+  console.log(formik.values);
   return (
     <IsClient>
       <div>
@@ -221,6 +225,14 @@ const Page = () => {
                 label="عنوان کوتاه"
                 classNameInput="!h-[48px] bg-[#f5f6f6]"
                 name="shortTitle"
+                className="lg:col-span-2"
+                formik={formik}
+              />
+              <Textarea
+                isRequired
+                label="توضیحات کوتاه"
+                classNameInput=" bg-[#f5f6f6]"
+                name="short_des"
                 className="lg:col-span-2"
                 formik={formik}
               />

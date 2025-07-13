@@ -12,6 +12,7 @@ import { useGetCategoryByIdAdmin } from '@/hooks/admin/products/useGetCategoryBy
 import { BASEURL } from '@/lib/variable';
 import { ActionCategoryProductAdmin } from '@/hooks/admin/products/ActionCategoryProductAdmin';
 import { ActionCategoryCourseAdmin } from '@/hooks/admin/courses/ActionCategoryCourseAdmin';
+import { useGetCategoryCourseByIdAdmin } from '@/hooks/admin/courses/useGetCategoryCourseByIdAdmin';
 
 type Props = {
   modal: {
@@ -32,7 +33,7 @@ const ActionCategoryCourse = ({ modal, setModal }: Props) => {
     isSuccess: isSuccessCategoryUrl,
     data,
     isLoading,
-  } = useGetCategoryByIdAdmin({ id: modal.info?._id! });
+  } = useGetCategoryCourseByIdAdmin({ id: modal.info?._id! });
   const editorRef = useRef<HTMLInputElement | null>(null);
   const onClose = () => setModal({ info: null, open: false, parent: false });
   const { mutate, isPending, isSuccess, reset } = ActionCategoryCourseAdmin();
@@ -92,7 +93,7 @@ const ActionCategoryCourse = ({ modal, setModal }: Props) => {
 
   useEffect(() => {
     if (isSuccessCategoryUrl && !modal.parent) {
-      const category = data?.data?.data.category[0];
+      const category = data?.data?.data;
       formik.setValues({
         ...category,
         keyWords: category?.keyWords?.join(', '),
