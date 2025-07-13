@@ -1,7 +1,6 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
 import ActionFaqCategories from '@/components/admin/faq/ActionFaqCategories';
-import ActionProductTags from '@/components/admin/product/ActionProductTags';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';

@@ -27,8 +27,10 @@ import { useEffect, useRef, useState } from 'react';
 import Video from 'next-video';
 import Title from '@/components/common/Title';
 import SelectPropertyCourseModal from '@/components/admin/courses/SelectPropertyCourseModal';
+import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
 const initialValues = {
   title: '',
+  faqIdCat: '',
   type: '',
   canonicalurl: '',
   url: '',
@@ -84,11 +86,14 @@ const mapProductToFormValues = (product: any) => ({
   robots: product.robots || '',
   redirecturltype: product.redirecturltype || '',
   redirecturl: product.redirecturl || '',
+  faqIdCat: product.faqIdCat || '',
+  shortTitle: product.shortTitle || '',
   demo: product?.demo,
   chapters: product?.chapters,
 });
 
 const Page = () => {
+  const { data: dataCategoryFaq, isLoading } = useGetCategoriesFaqAdmin({});
   const [showDemoProductModal, setShowDemoProductModal] = useState(false);
   const { id }: { id: string } = useParams();
   const { data: singleProduct, isSuccess, isFetching } = useGetCourseById();
@@ -191,19 +196,18 @@ const Page = () => {
       ...(formik.values.chapters || []),
     ]);
   };
-
   return (
     <IsClient>
       <div>
         <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-          ایجاد محصول
+          ایجاد دوره
         </p>
         <div className="mt-10">
           <div className="flex items-start gap-5">
             <div className="flex-1 space-y-3">
               <Input
                 isRequired
-                label="عنوان محصول"
+                label="عنوان دوره"
                 classNameInput="!h-[48px] bg-[#f5f6f6]"
                 name="title"
                 className="lg:col-span-2"
@@ -220,7 +224,14 @@ const Page = () => {
                 className="lg:col-span-2"
                 formik={formik}
               />
-
+              <Select
+                label="دسته بندی سوالات"
+                options={dataCategoryFaq?.data?.data?.category}
+                nameLabel="title"
+                nameValue="_id"
+                name="faqIdCat"
+                formik={formik}
+              />
               <Select
                 label="وضعیت انتشار "
                 options={StatusOptionsAdmin}
@@ -230,7 +241,7 @@ const Page = () => {
                 formik={formik}
               />
               <Select
-                label="نوع محصول"
+                label="نوع دوره"
                 options={[
                   { label: 'حضوری', value: 'inPerson' },
                   { label: 'آنلاین', value: 'virtual' },
@@ -240,6 +251,7 @@ const Page = () => {
                 name="type"
                 formik={formik}
               />
+
               <SelectProductTag
                 title="انتخاب تگ"
                 onChange={(values) => formik.setFieldValue('tags', values)}
@@ -253,7 +265,7 @@ const Page = () => {
                 editorRef={editorRef!}
               />
               <div className="!mt-10 border-b">
-                <p className="font-bold">لطفا ویژگی ها و اتریبیوت های محصول را انتخاب کنید</p>
+                <p className="font-bold">لطفا ویژگی ها و اتریبیوت های دوره را انتخاب کنید</p>
                 {/* property */}
                 <div className="my-5 flex flex-wrap gap-3 !font-regular">
                   <Chip
@@ -290,7 +302,7 @@ const Page = () => {
                       tabContent: 'group-data-[selected=true]:text-[#0C0C0C]',
                     }}
                   >
-                    <Tab key={'1'} title={<p>محصول ساده</p>}>
+                    <Tab key={'1'} title={<p>دوره ساده</p>}>
                       <GeneralProduct formik={formik}></GeneralProduct>
                     </Tab>
                     <Tab key={'2'} title={<p>دمو </p>}>
@@ -360,13 +372,13 @@ const Page = () => {
                   className="col-span-2 !mt-8 bg-main text-white"
                   onClick={() => formik.handleSubmit()}
                 >
-                  {id === 'new' ? 'ثبت محصول' : 'ویرایش محصول'}
+                  {id === 'new' ? 'ثبت دوره' : 'ویرایش دوره'}
                 </Button>
               </div>
             </div>
             <div className="flex !w-[400px] min-w-[400px] flex-col gap-4 rounded-lg border p-3">
               <Media
-                title="تصویر محصول"
+                title="تصویر دوره"
                 className="w-full"
                 withModal
                 onSelect={(img) => formik.setFieldValue('thumbnailImage', img)}
@@ -381,7 +393,7 @@ const Page = () => {
                     />
                   ) : (
                     <p className="text-center font-regular text-lg">
-                      انتخاب تصویر محصول <span className="text-red-500">*</span>
+                      انتخاب تصویر دوره <span className="text-red-500">*</span>
                     </p>
                   )}
                 </div>
@@ -408,7 +420,7 @@ const Page = () => {
                 </div>
               </Media>
               <Media
-                title="ویدیو محصول"
+                title="ویدیو دوره"
                 className="w-full"
                 withModal
                 onSelect={(img) => formik.setFieldValue('video', img)}
@@ -419,20 +431,20 @@ const Page = () => {
                     <Video autoPlay src={`${BASEURL}/${formik?.values?.video?.url}`} />
                   ) : (
                     <p className="text-center font-regular text-lg">
-                      انتخاب ویدیو محصول <span className="text-red-500">*</span>
+                      انتخاب ویدیو دوره <span className="text-red-500">*</span>
                     </p>
                   )}
                 </div>
               </Media>
 
               <SelectCategoryCourse
-                title="دسته بندی محصول پیش فرض"
+                title="دسته بندی دوره پیش فرض"
                 selected={formik.values.category}
                 onSelect={(values) => formik.setFieldValue('category', values)}
               />
               <SelectCategoryCourse
                 multiple
-                title="دسته بندی محصول"
+                title="دسته بندی دوره"
                 selected={formik.values.categories}
                 onSelect={(values) => formik.setFieldValue('categories', values)}
               />

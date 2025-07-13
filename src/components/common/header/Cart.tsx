@@ -7,7 +7,7 @@ const Cart = () => {
   return (
     <div className="flex items-center gap-4">
       <Link
-        href="/cart/"
+        href="/checkout/"
         className="relative flex !h-[48px] !w-[48px] min-w-[48px] items-center justify-center overflow-visible rounded-[12px] border border-[#E5EAEF] bg-transparent"
       >
         <span>

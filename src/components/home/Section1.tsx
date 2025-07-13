@@ -5,6 +5,8 @@ import BgHome from '@/../public/images/bg_home.png';
 import { useRouter } from 'next/navigation';
 import { BASEURL } from '@/lib/variable';
 import Link from 'next/link';
+import AnimatedCounter from '../common/AnimatedCounter';
+import { removeNumNumeric } from '@/lib/fun';
 type Props = {
   section: {
     colorTitle: string;
@@ -61,7 +63,8 @@ const Section1 = ({ section }: Props) => {
               key={idx}
               className="flex h-[90px] w-full flex-col items-center justify-between rounded-xl border p-4 lg:h-[144px]"
             >
-              <p className="font-extrabold text-[18px] text-black lg:text-[26px]">{item.count}</p>
+              <AnimatedCounter target={Number(removeNumNumeric(item.count))} duration={2500} />
+              {/* <p className="font-extrabold text-[18px] text-black lg:text-[26px]">{item.count}</p> */}
               <p className="text-center font-medium text-[12px] text-[#6A7890] lg:text-[14px]">
                 {item.title}
               </p>
