@@ -30,7 +30,7 @@ type Props = {
 const Section1 = ({ section }: Props) => {
   const router = useRouter();
   return (
-    <div className="container_page flex flex-col items-center gap-7 lg:flex-row lg:gap-20">
+    <div className="container_page flex flex-col items-center gap-7 lg:flex-row lg:justify-between lg:gap-20">
       <div className="lg:space-y-8">
         <div className="flex flex-col gap-4 lg:gap-14">
           <p className="font-black text-[20px] leading-[3rem] lg:w-[70%] lg:text-[40px] lg:leading-[6rem]">
