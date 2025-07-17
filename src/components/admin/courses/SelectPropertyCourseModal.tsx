@@ -49,7 +49,6 @@ const SelectPropertyCourseModal = ({ open, setOpen, formik }: Props) => {
   return (
     <>
       <BaseDialog
-        classBody="!min-h-[500px] !px-3"
         nameBtnFooter="ادامه فرایند"
         onClickFooter={onSubmit}
         size="3xl"

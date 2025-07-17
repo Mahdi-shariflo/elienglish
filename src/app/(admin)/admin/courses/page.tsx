@@ -110,7 +110,7 @@ const Page = () => {
         showData={columns}
         columns={['select', 'count', 'title', 'price', 'discountPrice', 'action']}
         nameAction="ایجاد دوره جدید"
-        onAction={() => router.push(`/admin/products/new/`)}
+        onAction={() => router.push(`/admin/courses/new/`)}
         onChangeSort={onChangeSort}
         onChangePage={onChangePage}
         sort={filter.sort}
