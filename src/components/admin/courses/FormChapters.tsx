@@ -7,6 +7,7 @@ import Button from '@/components/common/Button';
 import { getMediaType } from '@/lib/utils';
 import { Media as MediaType } from '@/types';
 import { Delete_icon } from '@/components/common/icon';
+import { Accordion, AccordionItem } from '@heroui/react';
 
 type Props = {
   open: boolean;
@@ -20,10 +21,14 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
     title: string;
     order: string;
     duration: string;
+    video: string;
+    type: string;
   }>({
     title: '',
     order: '',
     duration: '',
+    video: '',
+    type: '',
   });
 
   const onClose = () => setOpen(false);
@@ -33,12 +38,12 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
 
   const addEpisode = () => {
     if (!newEpisode.title) return;
-
+    const typeVideo = getMediaType(newEpisode.video);
     const currentEpisodes = formik.values.chapters[idx]?.episodes || [];
-    const updatedEpisodes = [...currentEpisodes, newEpisode];
+    const updatedEpisodes = [...currentEpisodes, { ...newEpisode, type: typeVideo }];
 
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
-    setNewEpisode({ title: '', order: '', duration: '' });
+    setNewEpisode({ title: '', order: '', duration: '', video: '', type: '' });
   };
 
   const removeEpisode = (epIndexToRemove: number) => {
@@ -49,71 +54,95 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
   };
 
+  console.log(formik.values);
+
   return (
     <BaseDialog
       classBody="!overflow-x-hidden px-4"
       onClickFooter={onClose}
       onClose={onClose}
       isOpen={open}
-      title="دمو"
-      size="full"
+      title="سر فصل دوره"
+      size="4xl"
     >
       <div>
-        <div className="grid grid-cols-2 gap-3">
-          <Input
-            formik={formik}
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'عنوان'}
-            name={`${baseName}.title`}
-            value={formik.values?.chapters?.[idx].title}
-          />
-          <Input
-            formik={formik}
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'فصل'}
-            name={`${baseName}.lessons`}
-            value={formik.values?.chapters?.[idx].lessons}
-          />
-          <Input
-            formik={formik}
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'زمان'}
-            name={`${baseName}.duration`}
-            value={formik.values?.chapters?.[idx].duration}
-          />
-          <Input
-            formik={formik}
-            price
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            label={'شماره گذاری'}
-            name={`${baseName}.order`}
-            value={formik.values?.chapters?.[idx].order}
-          />
-        </div>
+        <Accordion>
+          <AccordionItem
+            key="1"
+            aria-label="Accordion 1"
+            classNames={{ title: 'font-medium' }}
+            title="تنظیمات عنوان سر فصل دوره"
+          >
+            <div className="grid grid-cols-2 gap-3">
+              <Input
+                formik={formik}
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                label={'عنوان'}
+                name={`${baseName}.title`}
+                value={formik.values?.chapters?.[idx].title}
+              />
+              <Input
+                formik={formik}
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                label={'فصل'}
+                name={`${baseName}.lessons`}
+                value={formik.values?.chapters?.[idx].lessons}
+              />
 
-        <div className="mt-5 grid grid-cols-2 gap-4 rounded-lg border p-4">
-          <Input
-            label="عنوان اپیزود"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            value={newEpisode.title}
-            onChange={(e) => setNewEpisode({ ...newEpisode, title: e.target.value })}
-          />
-          <Input
-            label="شماره"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            value={newEpisode.order.toString()}
-            onChange={(e) => setNewEpisode({ ...newEpisode, order: e.target.value })}
-          />
-          <Input
-            label="زمان"
-            classNameInput="!h-[48px] bg-[#f5f6f6]"
-            value={newEpisode.duration.toString()}
-            onChange={(e) => setNewEpisode({ ...newEpisode, duration: e.target.value })}
-          />
-          <Button className="mt-8 w-full bg-main text-white" onClick={addEpisode}>
-            ذخیره اپیزود
-          </Button>
-        </div>
+              <Input
+                formik={formik}
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                label={'زمان'}
+                name={`${baseName}.duration`}
+                value={formik.values?.chapters?.[idx].duration}
+              />
+              <Input
+                formik={formik}
+                price
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                label={'شماره گذاری'}
+                name={`${baseName}.order`}
+                value={formik.values?.chapters?.[idx].order}
+              />
+            </div>
+          </AccordionItem>
+          <AccordionItem
+            key="2"
+            aria-label="Accordion 2"
+            classNames={{ title: 'font-medium' }}
+            title="اپیزود های دوره"
+          >
+            <div className="mt-5 grid grid-cols-2 gap-4 rounded-lg border p-4">
+              <Input
+                label="عنوان اپیزود"
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                value={newEpisode.title}
+                onChange={(e) => setNewEpisode({ ...newEpisode, title: e.target.value })}
+              />
+              <Input
+                label="شماره"
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                value={newEpisode.order.toString()}
+                onChange={(e) => setNewEpisode({ ...newEpisode, order: e.target.value })}
+              />
+              <Input
+                label="زمان"
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                value={newEpisode.duration.toString()}
+                onChange={(e) => setNewEpisode({ ...newEpisode, duration: e.target.value })}
+              />
+              <Input
+                label="لینک ویدئو یا پادکست"
+                classNameInput="!h-[48px] bg-[#f5f6f6]"
+                value={newEpisode.video.toString()}
+                onChange={(e) => setNewEpisode({ ...newEpisode, video: e.target.value })}
+              />
+              <Button className="mt-8 w-full bg-main text-white" onClick={addEpisode}>
+                ذخیره اپیزود
+              </Button>
+            </div>
+          </AccordionItem>
+        </Accordion>
 
         {/* لیست اپیزودهای فعلی */}
         <div className="mt-6 space-y-2">

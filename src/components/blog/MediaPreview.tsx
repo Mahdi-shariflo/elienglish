@@ -12,7 +12,6 @@ const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/reac
 
 const MediaPreview = ({ media, className }: { media: Blog | Course; className?: string }) => {
   if (!media) return null;
-  console.log(media?.video?.url);
   return (
     <>
       <div

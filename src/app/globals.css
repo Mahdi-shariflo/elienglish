@@ -195,3 +195,42 @@ hr {
 .bg-contact-us {
   @apply bg-[url('../../public/images/bg-contactus.jpg')] lg:bg-[url('../../public/images/bg-contact-us.png')];
 }
+
+.custom-volume::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -3px;
+  border: none;
+}
+
+.custom-volume::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+}
+
+.custom-volume::-ms-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  border: none;
+}
+
+/* برای حذف استایل پیش‌فرض برخی مرورگرها */
+.custom-volume::-webkit-slider-runnable-track {
+  background: transparent;
+  border: none;
+}
+.custom-volume::-moz-range-track {
+  background: transparent;
+  border: none;
+}

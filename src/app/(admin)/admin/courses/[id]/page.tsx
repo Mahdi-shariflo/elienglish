@@ -61,6 +61,10 @@ const initialValues = {
   demo: [],
   chapters: [],
   short_des: '',
+  btnCourse: {
+    title: '',
+    href: '',
+  },
 };
 const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
@@ -92,6 +96,7 @@ const mapProductToFormValues = (product: any) => ({
   short_des: product.short_des || '',
   demo: product?.demo,
   chapters: product?.chapters,
+  btnCourse: product?.btnCourse,
 });
 
 const Page = () => {
@@ -155,6 +160,8 @@ const Page = () => {
                 title: episode.title,
                 order: Number(episode.order),
                 duration: episode.duration,
+                type: episode.type ?? 'video',
+                video: episode.video,
               };
             }),
           };
@@ -227,6 +234,24 @@ const Page = () => {
                 className="lg:col-span-2"
                 formik={formik}
               />
+              <div className="flex items-center gap-4">
+                <Input
+                  value={formik.values?.btnCourse?.title}
+                  label="عنوان دکمه لینک تلگرام برای دوره"
+                  classNameInput="!h-[48px] bg-[#f5f6f6]"
+                  name="btnCourse.title"
+                  className="lg:col-span-2"
+                  formik={formik}
+                />
+                <Input
+                  value={formik.values?.btnCourse?.href}
+                  label="آدرس لینک تلگرامی"
+                  classNameInput="!h-[48px] bg-[#f5f6f6]"
+                  name="btnCourse.href"
+                  className="lg:col-span-2"
+                  formik={formik}
+                />
+              </div>
               <Textarea
                 isRequired
                 label="توضیحات کوتاه"
