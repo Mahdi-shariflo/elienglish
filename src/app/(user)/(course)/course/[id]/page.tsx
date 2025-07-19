@@ -96,7 +96,6 @@ const Page = async ({ params }: Props) => {
                 typePayload={'COURSE'}
                 typeCounter="course"
               />
-              {/* <Button className="mt-4 bg-main text-white">ثبت‌نام در دوره</Button> */}
               <div>
                 {/* rate */}
                 <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
