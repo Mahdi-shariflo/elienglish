@@ -25,6 +25,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'eli-backend.liara.run',
       },
+            {
+        protocol: 'https',
+        hostname: 'eli-backend-main.liara.run',
+      },
     ],
   },
   eslint: {
