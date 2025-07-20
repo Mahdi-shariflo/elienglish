@@ -72,8 +72,8 @@ const Section1 = ({ section }: Props) => {
           ))}
         </div>
       </div>
-      <Link href={section.picture.href} className="flex justify-end">
-        <img src={`${BASEURL}/${section.picture.url}`} alt="" />
+      <Link href={section.picture.href} className="flex justify-end lg:h-[550px] lg:w-[573px]">
+        <img className="h-full w-full" src={`${BASEURL}/${section.picture.url}`} alt="" />
       </Link>
     </div>
   );
