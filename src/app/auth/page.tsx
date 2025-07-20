@@ -22,7 +22,7 @@ const Page = () => {
     },
   });
   return (
-    <div className="mx-auto flex h-[95vh] flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]">
+    <div className="mx-auto flex h-[60vh] flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]">
       <div>
         <h1 className="font-extrabold text-2xl text-primary dark:text-[#E5EAEF]">ورود / ثبت نام</h1>
         <div className="mt-10">
