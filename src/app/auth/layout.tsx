@@ -1,5 +1,4 @@
 'use client';
-import Slider from '@/components/common/Slider';
 import { ReactNode, useEffect } from 'react';
 import LoginSlider from '@/../public/images/login-slider.png';
 import { useSession } from 'next-auth/react';
@@ -8,6 +7,7 @@ import Loading from '@/components/common/Loading';
 import LogoImage from '@/../public/icons/logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import Slider from './Slider';
 type Props = {
   children: ReactNode;
 };
@@ -38,21 +38,21 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:bg-[#0B1524]">
+      <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
-          <Image src={LogoImage} alt="" />
+          <Image className="h-20 w-44" src={LogoImage} alt="" />
           <Link
-            className="flex h-[48px] w-[220px] items-center justify-center rounded-lg border border-[#E5EAEF] font-medium text-main"
+            className="flex h-[48px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
             href={'/'}
           >
             بازگشت به صفحه اصلی
           </Link>
         </div>
       </header>
-      <div className="min-h-screen bg-white">
-        <div className="container_page !relative !z-[1] flex h-screen items-center justify-center">
+      <div className="bg-white dark:!bg-[#0B1524] lg:min-h-screen">
+        <div className="container_page !relative !z-[1] flex h-screen flex-col-reverse items-center justify-center lg:flex-row">
           <div className="w-full">{children}</div>
-          <div className="flex h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA] dark:bg-[#172334]">
+          <div className="hidden h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA] dark:bg-[#172334] lg:flex">
             <Slider sliders={sliders} />
           </div>
 

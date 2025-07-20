@@ -1,60 +1,62 @@
 'use client';
-import React, { ReactNode, useRef } from 'react';
+import React from 'react';
 // Import Swiper React components
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
-import { Autoplay } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Product } from '@/types/home';
+import Image, { StaticImageData } from 'next/image';
 
 type Props = {
-  title?: string;
+  sliders: { image: StaticImageData; title: string; description: string }[];
   className?: string;
-  showSwiperSlide?: boolean;
-  Icon?: () => React.JSX.Element;
-  slides?: Product[];
-  url?: string | null;
-  children?: ReactNode;
-  nameSec?: string;
-  classBtnArrows?: string;
-};
-const Slider = ({ className, showSwiperSlide, slides }: Props) => {
-  const swiperRef = useRef<SwiperRef | null>(null);
-  return (
-    <>
-      <div className={`custom_pagination ${className}`}>
-        {Number(slides?.length) >= 1 ? (
-          <Swiper
-            speed={1000}
-            autoplay={{
-              delay: 3000,
-              pauseOnMouseEnter: true,
-            }}
-            ref={swiperRef}
-            spaceBetween={10}
-            slidesPerView={'auto'}
-            modules={[Autoplay]}
-            loop
-            className={` ${showSwiperSlide ? '' : '!block'}`}
-          >
-            {slides?.map((item, idx) => {
-              if (item.count < 1) return null;
-              return (
-                <SwiperSlide
-                  // !w-[148px] !min-w-[148px]
-                  className="!h-[190px] !w-[148px] !min-w-[148px] lg:!h-[320px] lg:!w-[230px] lg:!min-w-[230px]"
-                  key={idx}
-                >
-                  {/* <CardProduct product={item} /> */}
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
-        ) : null}
-      </div>
-    </>
-  );
 };
 
-export default Slider;
+export default function Slider({ sliders, className }: Props) {
+  return (
+    <div
+      className={`custom_pagination relative flex h-full w-[90%] items-center justify-center ${className}`}
+    >
+      <Swiper
+        speed={1000}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        // centeredSlides={true}
+        // slidesPerView={1.2}
+        spaceBetween={10}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination, Autoplay]}
+        loop
+        slidesPerView={1}
+        className="!pb-16"
+      >
+        {sliders.map((item, idx) => {
+          return (
+            <SwiperSlide className="!h-fit w-full" key={idx}>
+              <span className="block !h-[512px]">
+                <Image
+                  src={`${item.image.src}`}
+                  alt={item.title}
+                  layout="fill"
+                  priority={idx === 0}
+                  className="!h-[512px] rounded-lg object-contain"
+                />
+              </span>
+              <p className="mt-4 text-center font-extrabold text-lg text-primary dark:text-[#E5EAEF]">
+                {item.title}
+              </p>
+              <p className="pt-3 text-center font-light text-[#8E98A8] dark:text-[#8E98A8]">
+                {item.description}
+              </p>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </div>
+  );
+}

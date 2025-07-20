@@ -9,7 +9,7 @@ const BtnGoogle = () => {
         signIn('google');
       }}
       // isLoading={isPending}
-      className="disabled !h-[48px] w-full border border-[#E5EAEF] font-bold text-black lg:mt-14 lg:!h-[48px]"
+      className="disabled mt-6 !h-[48px] w-full border border-[#E5EAEF] font-bold text-black lg:mt-14 lg:!h-[48px]"
     >
       <span>
         <svg
