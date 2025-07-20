@@ -8,6 +8,7 @@ import { getMediaType } from '@/lib/utils';
 import { Media as MediaType } from '@/types';
 import { Delete_icon } from '@/components/common/icon';
 import { Accordion, AccordionItem } from '@heroui/react';
+import Select from '@/components/common/Select';
 
 type Props = {
   open: boolean;
@@ -38,9 +39,8 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
 
   const addEpisode = () => {
     if (!newEpisode.title) return;
-    const typeVideo = getMediaType(newEpisode.video);
     const currentEpisodes = formik.values.chapters[idx]?.episodes || [];
-    const updatedEpisodes = [...currentEpisodes, { ...newEpisode, type: typeVideo }];
+    const updatedEpisodes = [...currentEpisodes, { ...newEpisode }];
 
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
     setNewEpisode({ title: '', order: '', duration: '', video: '', type: '' });
@@ -53,8 +53,6 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
     );
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
   };
-
-  console.log(formik.values);
 
   return (
     <BaseDialog
@@ -70,7 +68,7 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
           <AccordionItem
             key="1"
             aria-label="Accordion 1"
-            classNames={{ title: 'font-medium' }}
+            classNames={{ title: 'font-medium', base: 'border-b ' }}
             title="تنظیمات عنوان سر فصل دوره"
           >
             <div className="grid grid-cols-2 gap-3">
@@ -109,7 +107,7 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
           <AccordionItem
             key="2"
             aria-label="Accordion 2"
-            classNames={{ title: 'font-medium' }}
+            classNames={{ title: 'font-medium', base: 'border-b' }}
             title="اپیزود های دوره"
           >
             <div className="mt-5 grid grid-cols-2 gap-4 rounded-lg border p-4">
@@ -137,7 +135,18 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
                 value={newEpisode.video.toString()}
                 onChange={(e) => setNewEpisode({ ...newEpisode, video: e.target.value })}
               />
-              <Button className="mt-8 w-full bg-main text-white" onClick={addEpisode}>
+
+              <Select
+                value={newEpisode.type}
+                formik={formik}
+                options={[
+                  { label: 'ویدیو', value: 'video' },
+                  { label: 'پادکست', value: 'audio' },
+                ]}
+                name="type"
+              />
+
+              <Button className="w-full bg-main text-white" onClick={addEpisode}>
                 ذخیره اپیزود
               </Button>
             </div>
