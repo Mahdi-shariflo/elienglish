@@ -42,7 +42,7 @@ const Layout = ({ children }: Props) => {
         <div className="container_page flex items-center justify-between">
           <Image className="h-20 w-44" src={LogoImage} alt="" />
           <Link
-            className="flex h-[48px] w-[220px] items-center justify-center rounded-lg border border-[#E5EAEF] font-medium text-main dark:border-gray-400"
+            className="flex h-[48px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
             href={'/'}
           >
             بازگشت به صفحه اصلی
