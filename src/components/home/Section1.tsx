@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import Button from '../common/Button';
-import BgHome from '@/../public/images/bg_home.png';
 import { useRouter } from 'next/navigation';
 import { BASEURL } from '@/lib/variable';
 import Link from 'next/link';
