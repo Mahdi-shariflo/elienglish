@@ -121,6 +121,10 @@ export type Product = {
   }[];
 };
 export type Course = {
+  btnCourse: {
+    title: string;
+    href: string;
+  };
   type: 'vitural' | 'inPerson';
   status: 'complated' | 'inProgress';
   short_des?: string;
