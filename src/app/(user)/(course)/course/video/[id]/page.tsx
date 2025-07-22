@@ -1,4 +1,3 @@
-import MediaPreview from '@/components/blog/MediaPreview';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Comments from '@/components/common/Comments';
 import Title from '@/components/common/Title';

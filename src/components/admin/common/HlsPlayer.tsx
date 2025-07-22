@@ -33,8 +33,6 @@ const HlsPlayer = ({ src }: { src: string }) => {
 
         setQualities([{ label: 'خودکار', level: -1 }, ...qualityList]);
         setCurrentQuality(hls.currentLevel);
-        setIsPlaying(true);
-        video.play(); // اتوپلی
       });
 
       hlsInstance.current = hls;
@@ -64,12 +62,18 @@ const HlsPlayer = ({ src }: { src: string }) => {
       setDuration(video.duration);
     };
 
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault(); // جلوگیری از نمایش منوی راست کلیک
+    };
+
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('contextmenu', handleContextMenu);
 
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('contextmenu', handleContextMenu);
     };
   }, []);
 
@@ -154,7 +158,12 @@ const HlsPlayer = ({ src }: { src: string }) => {
       dir="ltr"
       className="video-player relative h-full w-full overflow-hidden rounded-lg"
     >
-      <video ref={videoRef} controls={false} className="h-full w-full rounded shadow" />
+      <video
+        onClick={togglePlay}
+        ref={videoRef}
+        controls={false}
+        className="h-full w-full rounded shadow"
+      />
       <div
         dir="ltr"
         className="absolute bottom-0 left-1/2 z-[9999] w-[95%] -translate-x-1/2 space-y-3"

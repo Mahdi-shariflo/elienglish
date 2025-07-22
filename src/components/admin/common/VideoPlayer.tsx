@@ -403,11 +403,7 @@ type Props = {
   poster: string;
 };
 const VideoPlayer = ({ url }: Props) => {
-  return (
-    <div>
-      <HlsPlayer src={url} />
-    </div>
-  );
+  return <HlsPlayer src={url} />;
 };
 
 export default VideoPlayer;
