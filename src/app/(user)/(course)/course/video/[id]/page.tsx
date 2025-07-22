@@ -17,7 +17,7 @@ const Page = async ({ params, searchParams }: Props) => {
   const { video } = await searchParams;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
-  const watchvideo = await request({ url: `/watchvideo?courseId=${course._id}` });
+  // const watchvideo = await request({ url: `/watchvideo?courseId=${course._id}` });
 
   const cleanDescription =
     typeof course?.description === 'string'
@@ -76,7 +76,7 @@ const Page = async ({ params, searchParams }: Props) => {
                   </p>
                 </div>
               </div>
-              <VideoPlayer poster="" url={video ? video : ''} />
+              <VideoPlayer poster="" url={video ? video : course.chapters[0].episodes[0].video} />
             </div>
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
               <p className="hidden font-bold text-[18px] text-[#172334] dark:text-white lg:block">
