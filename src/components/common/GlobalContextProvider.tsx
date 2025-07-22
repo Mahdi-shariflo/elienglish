@@ -6,7 +6,6 @@ import Logout from './Logout';
 import CommingSoon from './CommingSoon';
 import { ToastProvider } from '@heroui/toast';
 import VerifyDelete from './VerifyDelete';
-import { useSession } from 'next-auth/react';
 
 type Props = {
   children: ReactNode;

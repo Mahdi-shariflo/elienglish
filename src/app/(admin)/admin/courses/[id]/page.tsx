@@ -19,7 +19,7 @@ import { StatusOptionsAdmin } from '@/lib/data';
 import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
 import { getMediaType } from '@/lib/utils';
 import { BASEURL } from '@/lib/variable';
-import { Chip, Tab, Tabs } from '@heroui/react';
+import { Accordion, AccordionItem, Chip, Tab, Tabs } from '@heroui/react';
 import { useFormik } from 'formik';
 import { useParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
@@ -28,6 +28,7 @@ import Title from '@/components/common/Title';
 import SelectPropertyCourseModal from '@/components/admin/courses/SelectPropertyCourseModal';
 import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
 import Textarea from '@/components/common/form/Textarea';
+import Checkbox from '@/components/common/form/Checkbox';
 const initialValues = {
   title: '',
   faqIdCat: '',
@@ -59,6 +60,9 @@ const initialValues = {
   redirecturltype: '',
   redirecturl: '',
   demo: [],
+  installmentPrice: '',
+  installmentCount: '',
+  isInstallment: false,
   chapters: [],
   short_des: '',
   btnCourse: {
@@ -97,6 +101,9 @@ const mapProductToFormValues = (product: any) => ({
   demo: product?.demo,
   chapters: product?.chapters,
   btnCourse: product?.btnCourse,
+  installmentPrice: product?.installmentPrice,
+  installmentCount: product?.installmentCount,
+  isInstallment: product?.isInstallment,
 });
 
 const Page = () => {
@@ -129,7 +136,9 @@ const Page = () => {
         categories: values?.categories,
         price: +removeNumNumeric(values.price),
         discountPrice: +removeNumNumeric(values.discountPrice),
+        installmentPrice: +removeNumNumeric(values.installmentPrice),
         count: Number(values.count),
+        installmentCount: Number(values.installmentCount),
         // @ts-expect-error error
         description: editorRef?.current?.getContent(),
         properties: values?.properties,
@@ -293,6 +302,32 @@ const Page = () => {
                 onChange={(values) => formik.setFieldValue('tags', values)}
                 values={formik.values.tags}
               />
+              <Accordion>
+                <AccordionItem
+                  classNames={{
+                    base: 'border-b border-gray-200',
+                    title: 'font-medium',
+                  }}
+                  title="اقساط"
+                >
+                  <div className="grid grid-cols-2 gap-4">
+                    <Input
+                      label={'تعداد اقساط'}
+                      type="number"
+                      formik={formik}
+                      name="installmentCount"
+                    />
+                    <Input label={'مبلغ هر قسط'} price formik={formik} name="installmentPrice" />
+                    {/* @ts-expect-error error */}
+                    <Checkbox
+                      className="col-span-2"
+                      label="خرید با اقساط؟"
+                      formik={formik}
+                      name="isInstallment"
+                    />
+                  </div>
+                </AccordionItem>
+              </Accordion>
 
               <SeoOptions formik={formik} />
               <Editor

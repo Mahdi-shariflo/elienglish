@@ -40,16 +40,18 @@ const Layout = ({ children }: Props) => {
     <>
       <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
-          <Image className="h-20 w-44" src={LogoImage} alt="" />
+          <Link href={'/'}>
+            <Image className="h-32 w-48" src={LogoImage} alt="" />
+          </Link>
           <Link
-            className="flex h-[48px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
+            className="flex h-[46px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
             href={'/'}
           >
             بازگشت به صفحه اصلی
           </Link>
         </div>
       </header>
-      <div className="bg-white dark:!bg-[#0B1524] lg:min-h-screen">
+      <div className="bg-[#ECEFF4] dark:!bg-[#0B1524] lg:min-h-screen lg:bg-white">
         <div className="container_page !relative !z-[1] flex h-screen flex-col-reverse items-center justify-center lg:flex-row">
           <div className="w-full">{children}</div>
           <div className="hidden h-full w-full flex-col items-center justify-between overflow-hidden bg-[#F4F6FA] dark:bg-[#172334] lg:flex">

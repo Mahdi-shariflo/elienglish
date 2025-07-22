@@ -15,14 +15,19 @@ const Page = () => {
     },
 
     validationSchema: Yup.object({
-      mobile: Yup.string().required('فیلد اجبار ی است'),
+      mobile: Yup.string()
+        .required('فیلد اجباری است')
+        .matches(/^09\d{9}$/, 'شماره موبایل باید با 09 شروع شود و 11 رقم باشد'),
     }),
     onSubmit: (data) => {
       mutate({ mobile: toEnglishDigits(data.mobile) });
     },
   });
   return (
-    <div className="mx-auto flex h-[60vh] flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="mx-auto flex flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
+    >
       <div>
         <h1 className="font-extrabold text-2xl text-primary dark:text-[#E5EAEF]">ورود / ثبت نام</h1>
         <div className="mt-10">
@@ -41,20 +46,22 @@ const Page = () => {
               options={countriesList}
             /> */}
             <Input
+              min={11}
+              max={11}
               placeholder="09123456789"
               formik={formik}
               classNameLabel="text-[14px]"
               name="mobile"
-              type="tel"
+              type="number"
               className=""
-              classNameInput={'text-center'}
+              classNameInput={'text-center !text-[14px]'}
             />
           </div>
         </div>
       </div>
-      <div className="pb-10 lg:pb-0">
+      <div className="mt-8 pb-10 lg:mt-0 lg:pb-0">
         <Button
-          onClick={formik.handleSubmit}
+          type="submit"
           isPending={isPending}
           className="disabled !h-[48px] w-full bg-main font-medium text-white shadow-button lg:mt-8 lg:!h-[48px]"
         >
@@ -68,14 +75,14 @@ const Page = () => {
           </Link>{' '}
           می‌پذیرم.
         </span>
-        <div className="mt-14 flex items-center justify-center gap-10">
+        <div className="mt-7 flex items-center justify-center gap-10 lg:mt-14">
           <span className="block h-px w-[100px] bg-[#8E98A8] bg-opacity-20"></span>
           <p className="font-medium text-gray-200">یا</p>
           <span className="block h-px w-[100px] bg-[#8E98A8] bg-opacity-20"></span>
         </div>
         <BtnGoogle />
       </div>
-    </div>
+    </form>
   );
 };
 

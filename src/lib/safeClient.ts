@@ -49,6 +49,9 @@ const secret =
 
 // تولید signature با HMAC-SHA256 از یک پیام خاص (در اینجا رشته خالی)
 const signature = CryptoJS.HmacSHA256('', secret).toString(CryptoJS.enc.Hex);
+function cleanUrl(url: string) {
+  return url.replace(/\/+$/, ''); // حذف تمام اسلش‌های انتهایی
+}
 
 const getXFFHeader = async () => {
   const { headers } = await import('next/headers');
@@ -71,7 +74,6 @@ client.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error, 'jjjjjjjjjjjjjjjjjjjjjjjjjj');
     const status = error.response?.status || error.status;
     if (status === 410) {
       return notFound();
@@ -112,13 +114,18 @@ export async function safeRequest(config: AxiosRequestConfig) {
 
     if (rawSession) {
       const session = parseSessionCookie(rawSession);
-
       config.headers = {
         ...config.headers,
         Authorization: `Bearer ${session.accessToken}`,
       };
     }
   }
+
+  // 🧼 پاک کردن / انتهایی از آدرس
+  if (config.url) {
+    config.url = cleanUrl(config.url);
+  }
+
   return client.request(config);
 }
 
