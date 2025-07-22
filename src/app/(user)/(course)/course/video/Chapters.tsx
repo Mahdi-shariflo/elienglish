@@ -1,10 +1,11 @@
 'use client';
 import { Course } from '@/types/home';
 import { Accordion, AccordionItem } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const Chapters = ({ course }: { course: Course }) => {
-  console.log(course);
+const Chapters = ({ course, isLink }: { course: Course; isLink?: boolean }) => {
+  const router = useRouter();
   return (
     <>
       {Array.isArray(course?.chapters) && course.chapters.length > 0 && (
@@ -52,7 +53,15 @@ const Chapters = ({ course }: { course: Course }) => {
                   <div className="mt-2 flex flex-col gap-6">
                     {item?.episodes?.map((item, idx) => {
                       return (
-                        <div className="flex cursor-pointer items-center justify-between" key={idx}>
+                        <div
+                          onClick={() =>
+                            isLink
+                              ? router.push(`/course/video/${course.url}?video=${item.video}`)
+                              : undefined
+                          }
+                          className="flex cursor-pointer items-center justify-between"
+                          key={idx}
+                        >
                           <div className="flex items-center gap-2">
                             <span>
                               <svg

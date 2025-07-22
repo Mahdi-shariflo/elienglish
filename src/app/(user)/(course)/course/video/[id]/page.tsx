@@ -4,20 +4,20 @@ import Comments from '@/components/common/Comments';
 import Title from '@/components/common/Title';
 import { request } from '@/lib/safeClient';
 import { Course } from '@/types/home';
-import { Accordion, AccordionItem, CircularProgress } from '@heroui/react';
-import Link from 'next/link';
+import { CircularProgress } from '@heroui/react';
 import React from 'react';
 import Chapters from '../Chapters';
-import HLSPlayer from '@/components/HLSPlayer';
 import VideoPlayer from '@/components/admin/common/VideoPlayer';
 type Props = {
   params: Promise<{ [key: string]: string }>;
+  searchParams: Promise<{ [key: string]: string }>;
 };
-const Page = async ({ params }: Props) => {
+const Page = async ({ params, searchParams }: Props) => {
   const { id } = await params;
+  const { video } = await searchParams;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
-  console.log(course, 'kjdf');
+  const watchvideo = await request({ url: `/watchvideo?courseId=${course._id}` });
 
   const cleanDescription =
     typeof course?.description === 'string'
@@ -42,15 +42,41 @@ const Page = async ({ params }: Props) => {
                 <p className="font-extrabold text-[16px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
                 </p>
-                <CircularProgress
-                  color="success"
-                  label=""
-                  showValueLabel={true}
-                  size="lg"
-                  value={70}
-                />
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <CircularProgress
+                      color="success"
+                      label=""
+                      showValueLabel={false} // عدد رو مخفی می‌کنیم اگر فقط آیکن بخوایم
+                      size="lg"
+                      value={70}
+                      classNames={{
+                        svg: 'stroke-[#6E3DFF]', // رنگ خط دایره
+                        indicator: 'text-[#6E3DFF]', // رنگ متن/آیکن داخل
+                        value: 'text-[#6E3DFF]', // رنگ عدد داخل
+                      }}
+                    ></CircularProgress>
+                    <span className="-translate-y-1/ absolute left-1/2 top-[30%] block h-6 w-6 -translate-x-1/2">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M17.2187 14.418L14.9829 10.557C15.4404 9.71671 15.6788 8.7747 15.6759 7.81797C15.6759 6.28634 15.0675 4.81745 13.9845 3.73443C12.9015 2.6514 11.4326 2.04297 9.90094 2.04297C8.36931 2.04297 6.90042 2.6514 5.8174 3.73443C4.73437 4.81745 4.12594 6.28634 4.12594 7.81797C4.1231 8.7747 4.36144 9.71671 4.81894 10.557L2.58319 14.418C2.51064 14.5436 2.47251 14.6862 2.47266 14.8313C2.4728 14.9764 2.51121 15.1189 2.58401 15.2444C2.6568 15.3699 2.76142 15.474 2.88729 15.5462C3.01316 15.6183 3.15584 15.656 3.30094 15.6555H5.66869L6.87319 17.685C6.91379 17.7522 6.9638 17.8133 7.02169 17.8665C7.17463 18.0139 7.37853 18.0966 7.59094 18.0975H7.70644C7.83099 18.0804 7.95 18.0351 8.05437 17.9651C8.15875 17.895 8.24574 17.802 8.30869 17.6932L9.90094 14.9542L11.4932 17.718C11.5571 17.8252 11.6445 17.9166 11.7488 17.9852C11.8531 18.0538 11.9716 18.0978 12.0954 18.114H12.2109C12.4262 18.1153 12.6334 18.0324 12.7884 17.883C12.8439 17.8329 12.8912 17.7744 12.9287 17.7097L14.1332 15.6802H16.5009C16.6463 15.6808 16.7893 15.643 16.9153 15.5705C17.0413 15.4981 17.146 15.3936 17.2187 15.2677C17.2958 15.1394 17.3365 14.9925 17.3365 14.8428C17.3365 14.6932 17.2958 14.5463 17.2187 14.418ZM7.58269 15.6802L6.84844 14.451C6.77614 14.329 6.67363 14.2277 6.5508 14.1569C6.42797 14.0861 6.28896 14.0482 6.14719 14.0467H4.71994L5.89969 12.0007C6.71209 12.7835 7.73599 13.3113 8.84494 13.5187L7.58269 15.6802ZM9.90094 11.943C9.08509 11.943 8.28756 11.701 7.60921 11.2478C6.93086 10.7945 6.40215 10.1503 6.08994 9.39654C5.77772 8.64279 5.69604 7.81339 5.8552 7.01322C6.01436 6.21305 6.40723 5.47804 6.98412 4.90115C7.56101 4.32426 8.29602 3.93139 9.09619 3.77223C9.89636 3.61307 10.7258 3.69475 11.4795 4.00697C12.2333 4.31918 12.8775 4.84789 13.3308 5.52624C13.784 6.20459 14.0259 7.00212 14.0259 7.81797C14.0259 8.91199 13.5913 9.9612 12.8178 10.7348C12.0442 11.5084 10.995 11.943 9.90094 11.943ZM13.6547 14.0467C13.5129 14.0482 13.3739 14.0861 13.2511 14.1569C13.1282 14.2277 13.0257 14.329 12.9534 14.451L12.2192 15.6802L10.9652 13.494C12.0703 13.2823 13.0904 12.755 13.9022 11.976L15.0819 14.022L13.6547 14.0467Z"
+                          fill="#C6B6F7"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <p className="font-medium text-[#8E98A8]">
+                    پیشرفت شما: <span className="text-left text-main">%30</span>
+                  </p>
+                </div>
               </div>
-              <VideoPlayer url="https://elienglish.arvanvod.ir/AqZjy04YNg/eyL1dp1Xdg/h_,144_200,240_400,360_800,480_1500,720_2500,1080_4500,k.mp4.list/master.m3u8" />
+              <VideoPlayer poster="" url={video ? video : ''} />
             </div>
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
               <p className="hidden font-bold text-[18px] text-[#172334] dark:text-white lg:block">
@@ -114,7 +140,7 @@ const Page = async ({ params }: Props) => {
           </div>
           <div className="min-w-[342px] border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334] 3xl:min-w-[450px]">
             <p className="font-medium text-[18px]">محتوای دوره</p>
-            <Chapters course={course} />
+            <Chapters isLink course={course} />
           </div>
         </div>
       </div>

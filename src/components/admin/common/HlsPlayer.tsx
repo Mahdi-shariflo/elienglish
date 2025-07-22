@@ -15,12 +15,15 @@ const HlsPlayer = ({ src }: { src: string }) => {
   const hlsInstance = useRef<Hls | null>(null);
   const [qualities, setQualities] = useState<{ label: string; level: number }[]>([]);
   const [currentQuality, setCurrentQuality] = useState<number>(-1); // -1 = Auto
-
   useEffect(() => {
-    if (videoRef.current) {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // اگر HLS هست
+    if (Hls.isSupported() && src.endsWith('.m3u8')) {
       const hls = new Hls();
       hls.loadSource(src);
-      hls.attachMedia(videoRef.current);
+      hls.attachMedia(video);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         const qualityList = hls.levels.map((level, index) => ({
@@ -30,15 +33,24 @@ const HlsPlayer = ({ src }: { src: string }) => {
 
         setQualities([{ label: 'خودکار', level: -1 }, ...qualityList]);
         setCurrentQuality(hls.currentLevel);
+        setIsPlaying(true);
+        video.play(); // اتوپلی
       });
 
       hlsInstance.current = hls;
     }
+    // اگر Safari یا لینک معمولی (mp4)
+    else if (video.canPlayType('application/vnd.apple.mpegurl') || src.endsWith('.mp4')) {
+      video.src = src;
+      video.load();
+      video.play(); // اتوپلی
+      setIsPlaying(true);
+    }
 
     return () => {
-      hlsInstance.current?.destroy();
+      hlsInstance.current?.destroy?.();
     };
-  }, []);
+  }, [src]);
 
   useEffect(() => {
     const video = videoRef.current;
