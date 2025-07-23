@@ -395,7 +395,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                             <div className="flex h-[50px] items-center gap-4 rounded-lg px-4">
                               <Link
                                 className="font-medium text-main underline"
-                                href={`/course/video/${course.url}`}
+                                href={`/course/video/${course._id}`}
                               >
                                 مشاهده
                               </Link>

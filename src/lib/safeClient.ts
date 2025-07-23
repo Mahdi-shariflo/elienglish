@@ -90,8 +90,7 @@ client.interceptors.response.use(
     } else if (((typeof window !== 'undefined') !== undefined) !== undefined && status === 429) {
       location.href = '/too-many-request';
     }
-
-    return Promise.reject(error);
+    return error;
   }
 );
 

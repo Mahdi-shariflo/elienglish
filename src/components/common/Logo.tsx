@@ -1,29 +1,15 @@
 import Link from 'next/link';
 import React from 'react';
-import LogoImage from '@/../public/icons/logo.jpg';
+import LogoDark from '@/../public/images/logo-dark.png';
+import LogoLight from '@/../public/images/logo-light.png';
+
 import Image from 'next/image';
 const Logo = ({ className }: { className?: string }) => {
   return (
     <>
       <Link className={`flex items-center justify-center gap-2 ${className}`} href="/">
-        <Image
-          className="h-[45px] w-[45px] rounded-full lg:h-[56px] lg:w-[56px]"
-          src={LogoImage}
-          alt=""
-        />
-        <div>
-          <div>
-            <span className="inline-block whitespace-nowrap font-bold text-[14px] dark:text-white">
-              آکادمی
-            </span>
-            <span className="inline-block whitespace-nowrap font-bold text-[14px] dark:text-main">
-              آلی انگلیش
-            </span>
-          </div>
-          <span className="whitespace-nowrap text-[14px] dark:text-[#E5EAEF]">
-            Elienglish Academy
-          </span>
-        </div>
+        <Image className="dark:hidden" src={LogoDark} alt="" />
+        <Image className="hidden dark:block" src={LogoLight} alt="" />
       </Link>
     </>
   );

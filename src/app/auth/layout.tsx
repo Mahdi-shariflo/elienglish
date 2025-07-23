@@ -4,7 +4,8 @@ import LoginSlider from '@/../public/images/login-slider.png';
 import { useSession } from 'next-auth/react';
 import { useLoginGoogle } from '@/hooks/auth/useLoginGoogle';
 import Loading from '@/components/common/Loading';
-import LogoImage from '@/../public/icons/logo.svg';
+import LogoDark from '@/../public/images/logo-dark.png';
+import LogoLight from '@/../public/images/logo-light.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from './Slider';
@@ -41,7 +42,8 @@ const Layout = ({ children }: Props) => {
       <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
           <Link href={'/'}>
-            <Image className="h-32 w-48" src={LogoImage} alt="" />
+            <Image className="dark:hidden" src={LogoDark} alt="" />
+            <Image className="hidden dark:block" src={LogoLight} alt="" />
           </Link>
           <Link
             className="flex h-[46px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
