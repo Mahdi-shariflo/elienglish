@@ -6,7 +6,6 @@ import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { useRouter } from 'next/navigation';
 import CardComment from '../admin/common/CardComment';
 
 type Props = {
@@ -22,8 +21,8 @@ type Props = {
   };
 };
 const Section6 = ({ className, section }: Props) => {
+  if (!section) return;
   const swiperRef = useRef<SwiperRef | null>(null);
-  const router = useRouter();
   return (
     <div className="bg-[#F4F6FA] p-4 py-8">
       <div className={`container_page ${className}`}>

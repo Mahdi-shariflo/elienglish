@@ -255,6 +255,13 @@ export const findLowestPricedProduct = (data: { attributes: { product: Product }
 };
 
 export interface Order {
+  courseItems: {
+    price: number;
+    courseDiscountCode: string;
+    courseDiscountPrice: string;
+    courseDiscountType: 'FIXED' | 'PERCENT';
+  };
+  zibalTrackId?: string;
   orderTrackingCodeType: string;
   orderTrackingCode: string;
   orderDiscountPrice?: number;
@@ -272,7 +279,7 @@ export interface Order {
   transactionType: string;
   orderNote: { text: string; date: string }[];
   orderStatus: string;
-  author: User;
+  userId: User;
   orderAddress: Address;
   postPrice: number;
   postType: string;

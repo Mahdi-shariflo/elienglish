@@ -227,12 +227,18 @@ const menus = [
   //   href: '/admin/sms/',
   //   activeIcon: Sms_fill_icon,
   // },
-  // {
-  //   icon: Orders_icon,
-  //   name: 'سفارش‌ها',
-  //   href: '/admin/orders/',
-  //   activeIcon: Orders_fill_icon,
-  // },
+  {
+    icon: Orders_icon,
+    name: 'سفارش‌ها',
+    href: ['/admin/orders/course'],
+    activeIcon: Orders_fill_icon,
+    children: [
+      {
+        name: 'دوره ها',
+        href: '/admin/orders/course',
+      },
+    ],
+  },
   {
     icon: Discount_icon,
     name: 'تخفیف‌ها',

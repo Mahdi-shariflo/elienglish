@@ -47,7 +47,7 @@ const useBasket = () => {
 
       // محاسبه تخفیف
       if (checkout?.discountCode) {
-        if (checkout.discountCode.discountCodeType === 'fixed') {
+        if (checkout.discountCode.discountCodeType === 'FIXED') {
           setDiscountPrice(Number(checkout.discountCode.discountCodePrice));
           finalTotal -= Number(checkout.discountCode.discountCodePrice);
         } else {

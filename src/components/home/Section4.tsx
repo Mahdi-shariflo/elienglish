@@ -13,6 +13,7 @@ type Props = {
   };
 };
 const Section4 = ({ section }: Props) => {
+  if (!section) return;
   // if (Number(blogs?.length) < 1) return null;
   return (
     <div className="container_page">

@@ -71,10 +71,10 @@ const DiscountResult = ({ open, setOpen, discountData }: Props) => {
 
         <div>
           <p className="font-regular leading-8">
-            {discountData?.discountCodeType === 'fixed' ? 'مبلغ' : 'درصد'} کد تخفیف شما
+            {discountData?.discountCodeType === 'FIXED' ? 'مبلغ' : 'درصد'} کد تخفیف شما
             <span className="inline-block px-1 text-main">
               {Number(discountData?.discountCodePrice).toLocaleString()}{' '}
-              {discountData?.discountCodeType === 'fixed' ? 'تومان' : '%'}
+              {discountData?.discountCodeType === 'FIXED' ? 'تومان' : '%'}
             </span>
             می‌باشد. و با اعمال کد تخفیف، جمع سبد خرید شما{' '}
             <span className="inline-block px-1 text-main">

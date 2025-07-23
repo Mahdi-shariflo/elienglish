@@ -14,6 +14,8 @@ type Props = {
   }[];
 };
 const Section3 = ({ section }: Props) => {
+  if (!Array.isArray(section) || section.length < 1) return;
+  console.log(section);
   return (
     <div className="flex h-[305px] items-center justify-center bg-[#F4F6FA]">
       <div className="container_page flex flex-col items-center justify-between gap-10 lg:flex-row">

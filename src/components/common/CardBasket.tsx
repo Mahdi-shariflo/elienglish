@@ -33,12 +33,12 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
             alt=""
           />
         </div>
-        <p className="line-clamp-2 font-medium text-[16px]">{product.title}</p>
+        <p className="line-clamp-2 font-medium text-[16px] dark:text-white">{product.title}</p>
       </div>
       <div className="flex flex-1 flex-col items-center justify-between gap-5">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
         <div className="flex items-center gap-1">
-          <p className="font-bold">
+          <p className="font-bold dark:text-white">
             {Number(
               product?.discountPrice ? product?.discountPrice : product?.price
             ).toLocaleString()}
@@ -52,7 +52,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
         {product?.type === 'physical' ? (
           <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
         ) : (
-          <p className="font-medium text-[14px] text-[#8E98A8]">
+          <p className="font-medium text-[14px] text-[#8E98A8] dark:text-white">
             {product?.count ? product.count : 1}
           </p>
         )}
@@ -61,7 +61,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
         <div className="flex flex-1 flex-col items-center justify-between gap-5">
           <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
           <div className="flex items-center gap-1">
-            <p className="font-bold">
+            <p className="font-bold dark:text-white">
               {Number(
                 Number(product?.discountPrice ? product?.discountPrice : product?.price) *
                   (product?.count ? product.count : 1)

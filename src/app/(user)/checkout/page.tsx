@@ -92,11 +92,11 @@ const Page = () => {
   return (
     <>
       <div className="mt-14 flex w-full flex-col lg:mt-0 lg:gap-10">
-        <div className="rounded-lg border border-[#E5EAEF] p-3">
+        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
           <Title title="سبد خرید" />
           <div className="mt-10 flex flex-col gap-5">
             {groupedItems?.map((product, idx) => (
-              <div className="rounded-lg border border-gray-200 bg-white shadow-md">
+              <div className="rounded-lg border border-gray-200 bg-white shadow-md dark:border-[#505B74] dark:bg-[#172334]">
                 <CardBasket
                   showAddBasketDialog={false}
                   showOtherItem={false}
@@ -110,26 +110,29 @@ const Page = () => {
                         : product.lpas
                   }
                 />
-                {product?.children && (
-                  <div className="border-t border-[#E5EAEF] px-3">
-                    {product?.children?.map((item: any, idx: number) => (
-                      <CardBasket
-                        classImage="!w-[60px] !min-h-[40px] !min-w-[60px] !h-[40px]"
-                        showTotal={false}
-                        showAddBasketDialog={false}
-                        showOtherItem={false}
-                        key={idx}
-                        product={item?.product}
-                      />
-                    ))}
+                {product?.children && product?.children?.length >= 1 ? (
+                  <div className="border-t border-[#E5EAEF] px-3 dark:border-[#505B74]">
+                    {product?.children?.map((item: any, idx: number) => {
+                      if (!item.product.title) return null;
+                      return (
+                        <CardBasket
+                          classImage="!w-[60px] !min-h-[40px] !min-w-[60px] !h-[40px]"
+                          showTotal={false}
+                          showAddBasketDialog={false}
+                          showOtherItem={false}
+                          key={idx}
+                          product={item?.product}
+                        />
+                      );
+                    })}
                   </div>
-                )}
+                ) : null}
               </div>
             ))}
             {/* <CardBasket product={null} /> */}
           </div>
         </div>
-        <div className="rounded-lg border border-[#E5EAEF] p-3">
+        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
           <Title title="اطلاعات ثبت‌نام کننده" />
           <div className="mt-10 grid grid-cols-2 gap-4">
             <Input label={'نام'} formik={formik} name="first_name" />
@@ -152,7 +155,7 @@ const Page = () => {
           </div>
         ) : null}
 
-        <div className="rounded-lg border border-[#E5EAEF] p-3">
+        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
           <Title title="ثبت سفارش و پرداخت" />
           <div className="mt-10">
             <p className="flex items-center gap-2">

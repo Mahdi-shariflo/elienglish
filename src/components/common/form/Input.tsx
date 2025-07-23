@@ -153,7 +153,7 @@ const Input = ({
         }
         classNames={{
           input: `px-2 !border-none !ring-0  ${classNameInput}`,
-          inputWrapper: `bg-[#F4F6FA] dark:bg-[#0B1524] dark:!text-[#8E98A8] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] dark:border-[#100337] pl-0 h-[48px] lg:h-[56px] w-full ${classNameInput}`,
+          inputWrapper: `bg-[#F4F6FA] dark:bg-[#0B1524] dark:!text-[#8E98A8] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 dark:border-[#505B74] overflow-hidden font-medium border border-[#E5EAEF]  pl-0 h-[48px] lg:h-[56px] w-full ${classNameInput}`,
         }}
         className={`font-light text-[14px] ${disabled ? '!opacity-70' : ''}`}
       />

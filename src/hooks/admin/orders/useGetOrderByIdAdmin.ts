@@ -8,7 +8,7 @@ export const useGetOrderByIdAdmin = () => {
   return useQuery({
     queryKey: ['single-order-admin', id],
     enabled: id === 'add' ? false : true,
-    queryFn: async () => await safeRequest({ url: `/admin/order/${id}` }),
+    queryFn: async () => await safeRequest({ url: `/order/admin/course/${id}` }),
     gcTime: 0,
     staleTime: 0,
     refetchOnMount: true,

@@ -9,7 +9,7 @@ type Props = {
   startDate?: string;
   orderStatus?: string;
 };
-export const uaeGetOrdersAdmin = ({
+export const useGetOrdersAdmin = ({
   page = '1',
   search = '',
   sort = '',
@@ -22,7 +22,7 @@ export const uaeGetOrdersAdmin = ({
     queryKey: ['orders-admin', page, search, endDate, startDate, orderStatus],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/order/get-all?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
+        url: `/order/admin/course?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
       }),
   });
 };

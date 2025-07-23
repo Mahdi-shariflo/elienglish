@@ -1,37 +1,15 @@
 import { safeRequest } from '@/lib/safeClient';
-import { useCheckoutStore } from '@/store/checkout-store';
 import { addToast } from '@heroui/react';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCreateCheckout = () => {
-  const { setCheckout } = useCheckoutStore();
   return useMutation({
-    mutationFn: async ({ url, data }: { url: string; data: unknown }) => {
-      return await safeRequest({ url, method: 'POST', data });
+    mutationFn: async ({ data }: { data: unknown }) => {
+      return await safeRequest({ url: '/payment/getway', method: 'POST', data });
     },
-    onSuccess: async (data, variables) => {
-      if (data?.data?.data.gatewayURL) {
-        location.href = data?.data?.data.gatewayURL;
-        setTimeout(() => {
-          setCheckout({
-            address: null,
-            discountCode: null,
-            payment: null,
-            transport: null,
-          });
-        }, 2000);
-      }
-      if (variables.url === '/snapppayment/snappgetway') {
-        location.href = data.data.data.Request.response.paymentPageUrl;
-        setTimeout(() => {
-          setCheckout({
-            address: null,
-            discountCode: null,
-            payment: null,
-            transport: null,
-          });
-        }, 2000);
-      }
+    onSuccess: async (data) => {
+      console.log(data);
+      location.href = data?.data?.data?.paymentLink;
     },
     onError: (error) => {
       addToast({

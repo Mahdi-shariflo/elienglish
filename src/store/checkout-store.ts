@@ -7,7 +7,7 @@ type TypeCheckout = {
     address?: Address | null;
     payment?: Payment | null;
     discountCode?: {
-      discountCodeType: 'fixed' | 'percent';
+      discountCodeType: 'FIXED' | 'PERCENT';
       code: string;
       discountCodePrice: string;
       discountCode: { _id: string };

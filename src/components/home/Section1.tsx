@@ -30,9 +30,9 @@ const Section1 = ({ section }: Props) => {
   const router = useRouter();
   return (
     <div className="container_page flex flex-col items-center gap-7 lg:flex-row lg:justify-between lg:gap-20">
-      <div className="lg:space-y-8">
+      <div className="w-full lg:space-y-8">
         <div className="flex flex-col gap-4 lg:gap-14">
-          <p className="font-black text-[20px] leading-[3rem] lg:w-[70%] lg:text-[40px] lg:leading-[6rem]">
+          <p className="w-full font-black text-[20px] leading-[3rem] lg:w-[70%] lg:text-[40px] lg:leading-[6rem]">
             <span className="font-black text-[20px] leading-[3rem] text-main lg:text-[40px] lg:leading-[6rem]">
               {section.colorTitle}
             </span>{' '}
@@ -41,7 +41,7 @@ const Section1 = ({ section }: Props) => {
           <p className="font-medium text-[14px] text-[#6A7890] lg:text-[18px]">
             {section.description}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex w-full items-center gap-4">
             <Button
               onClick={() => router.push(section.activeBtn.href)}
               className="!h-[48px] w-full bg-main text-white lg:!w-[204px]"

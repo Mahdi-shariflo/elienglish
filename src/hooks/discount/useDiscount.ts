@@ -7,7 +7,7 @@ export const useDiscount = () => {
   return useMutation({
     mutationKey: ['discount'],
     mutationFn: async ({ code }: { code: string }) =>
-      await safeRequest({ url: `/user/discount-code/use?discountCode=${code}`, method: 'POST' }),
+      await safeRequest({ url: `/disocuntcode`, method: 'POST', data: { discountCode: code } }),
     onSuccess: (data, variables) => {
       const discountData = { code: variables.code, ...data?.data?.data };
       setCheckout({ ...checkout, discountCode: discountData });

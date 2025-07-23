@@ -935,27 +935,13 @@ export const initialDataCategorySliders = ({ onDelete, onEdit }: Props) => [
     ),
   },
 ];
-export const initialDataOrder = () => [
+export const initialDataOrder = ({ onEdit }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
     dataIndex: '_id',
     key: '_id',
     render: (_: string, __: any, idx: number) => (
       <p className="text-center text-xs text-gray-800">{idx + 1}</p>
-    ),
-  },
-  {
-    title: <HeaderCell align="center" title="گیرنده" />,
-    dataIndex: 'title',
-    key: 'title',
-    render: (_: string, row: any) => (
-      <div className="flex flex-col items-center justify-center">
-        <p className="text-[12px]">
-          {row?.orderAddress?.firstName
-            ? `${row?.orderAddress.firstName} ${row?.orderAddress.lastName}`
-            : row?.orderAddress?.recipientsName}
-        </p>
-      </div>
     ),
   },
   {
@@ -968,10 +954,10 @@ export const initialDataOrder = () => [
           href={`/admin/orders/${row._id}/`}
           className="block text-center text-xs text-blue-500 underline"
         >
-          {row?.author?.firstName ? row?.author?.firstName : 'کاربر'}{' '}
-          {row?.author?.lastName ? row?.author?.lastName : 'رز'}
+          {row?.userId?.firstName ? row?.userId?.firstName : 'کاربر'}{' '}
+          {row?.userId?.lastName ? row?.userId?.lastName : 'رز'}
         </Link>
-        <p className="text-[12px]">{row?.author?.mobile}</p>
+        <p className="text-[12px]">{row?.userId?.mobile}</p>
       </div>
     ),
   },
@@ -1006,21 +992,11 @@ export const initialDataOrder = () => [
   },
   {
     title: <HeaderCell align="center" title="وضعیت" />,
-    dataIndex: 'orderStatus',
-    key: 'orderStatus',
-    render: (value: string) => {
-      const status = statusIcon?.find((order) => order.status === value);
-      return (
-        <div className="flex items-center justify-center">
-          <p
-            className={`block !w-[120px] !min-w-[120px] rounded-lg bg-opacity-15 p-2 font-medium text-[12px]`}
-          >
-            {status?.name}
-          </p>
-          <span>{status?.icon}</span>
-        </div>
-      );
-    },
+    dataIndex: 'verify',
+    key: 'verify',
+    render: (value: string) => (
+      <p className="text-center text-xs text-gray-800">{value ? 'موفق' : 'ناموفق'}</p>
+    ),
   },
   {
     title: <HeaderCell align="center" title="مجموع" />,
@@ -1032,17 +1008,6 @@ export const initialDataOrder = () => [
       </p>
     ),
   },
-  {
-    title: <HeaderCell align="center" title="آدرس" />,
-    dataIndex: 'orderAddress',
-    key: 'orderAddress',
-    render: (_: string, row: any) => (
-      <p className="line-clamp-1 w-[140px] overflow-hidden text-ellipsis text-center text-xs text-gray-800">
-        {row.orderAddress.provinceLabel} - {row.orderAddress.city} - {row.orderAddress.address}
-      </p>
-    ),
-  },
-
   {
     title: <HeaderCell align="center" title="عملیات" />,
     dataIndex: 'action',
@@ -1059,7 +1024,13 @@ export const initialDataOrder = () => [
                     onEdit ?
                         <TbEdit onClick={() => onEdit(row)} className="text-green-600/80 cursor-pointer" size={23} />
                         : null
-                } */}
+                } 
+                 */}
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
         {/* <Tooltip className="bg-white" content={<span className="text-[10px]">در حال آماده سازی</span>}>
                     <button className="!px-0 w-fit" className="w-7 flex justify-center items-center rounded-lg h-7 border">
                         <CiMenuKebab />
@@ -1097,77 +1068,60 @@ export const initialDataDetailOrder = ({ onEdit, onDelete }: Props) => [
     key: '_id',
     render: (value: string) => <p className="text-center text-[12px] text-black">{value}</p>,
   },
+
   {
     title: <HeaderCell align="left" title="آیتم" />,
     dataIndex: 'createdAt',
     key: 'createdAt',
     render: (_: string, row: any) => (
       <div className="flex items-center gap-3">
-        <img className="h-10 w-10 rounded-lg border" src={`${BASEURL}/${row.thumbnailImage}`} />
+        <img className="h-10 w-10 rounded-lg border" src={`${BASEURL}/${row.thumbnailImage.url}`} />
         <div className="space-y-2">
           <p className="text-[12px] text-black">{row.title}</p>
-          <p className="text-[12px] text-black">skuId:{row.skuId}</p>
-          <p className="text-[12px] text-gray-600">
-            {Number(row.productPrice).toLocaleString()} تومان
-          </p>
+          <p className="text-[12px] text-gray-600">{Number(row.price).toLocaleString()} تومان</p>
         </div>
       </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="خرید با اقساط" />,
+    dataIndex: 'isInstallment',
+    key: 'isInstallment',
+    render: (value: string) => (
+      <p className="text-center text-[12px] text-black">{value ? 'بله' : 'خیر'}</p>
     ),
   },
 
   {
     title: <HeaderCell align="center" title="قیمت" />,
-    dataIndex: 'productPrice',
-    key: 'productPrice',
+    dataIndex: 'courseTotalAmount',
+    key: 'courseTotalAmount',
     render: (_: string, row: any) => (
       <p className="text-center text-[12px] text-gray-600">
-        {row?.productDiscountPrice
-          ? Number(row.productDiscountPrice).toLocaleString()
-          : Number(row.productPrice).toLocaleString()}{' '}
+        {row?.discountPrice
+          ? Number(row.discountPrice).toLocaleString()
+          : Number(row.courseTotalAmount).toLocaleString()}{' '}
         تومان
       </p>
     ),
   },
-  {
-    title: <HeaderCell align="center" title="تعداد" />,
-    dataIndex: 'productCount',
-    key: 'productCount',
-    render: (value: string) => (
-      <p className="text-center text-[12px] text-gray-600">{Number(value)}</p>
-    ),
-  },
-  {
-    title: <HeaderCell align="center" title="مجموع" />,
-    dataIndex: 'total',
-    key: 'total',
-    render: (_: string, row: any) => (
-      <p className={`text-center text-[12px] text-gray-600 ${row?.freePlan ? 'text-main' : ''}`}>
-        {row?.freePlan
-          ? 'رایگان شامل پلن هدیه'
-          : row?.productDiscountPrice
-            ? Number(Number(row.productCount) * Number(row.productDiscountPrice)).toLocaleString()
-            : Number(Number(row.productCount) * Number(row.productPrice)).toLocaleString()}{' '}
-        {row?.freePlan ? '' : 'تومان'}{' '}
-      </p>
-    ),
-  },
-  {
-    title: <HeaderCell align="center" title="عملیات" />,
-    dataIndex: 'action',
-    key: 'action',
-    render: (_: string, row: any) => (
-      <div className="flex items-center justify-center gap-2">
-        {onEdit ? (
-          <FaEye onClick={() => onEdit(row)} size={20} className="cursor-pointer text-gray-600" />
-        ) : null}
-        {onDelete ? (
-          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
-            <Delete_icon />
-          </Button>
-        ) : null}
-      </div>
-    ),
-  },
+  // {
+  //   title: <HeaderCell align="center" title="عملیات" />,
+  //   dataIndex: 'action',
+  //   key: 'action',
+  //   render: (_: string, row: any) => (
+  //     <div className="flex items-center justify-center gap-2">
+  //       {onEdit ? (
+  //         <FaEye onClick={() => onEdit(row)} size={20} className="cursor-pointer text-gray-600" />
+  //       ) : null}
+  //       {onDelete ? (
+  //         <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+  //           <Delete_icon />
+  //         </Button>
+  //       ) : null}
+  //     </div>
+  //   ),
+  // },
 ];
 export const initialDataAllList = ({ onEdit }: Props) => [
   {
