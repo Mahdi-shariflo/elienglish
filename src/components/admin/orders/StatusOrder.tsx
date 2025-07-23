@@ -3,7 +3,7 @@ import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import Select from '@/components/common/Select';
-import { useUpdateOrderById } from '@/hooks/admin/orders/useUpdateOrderById';
+import { useUpdateDigitalOrderById } from '@/hooks/admin/orders/digital/useUpdateDigitalOrderById';
 import { useGetStatusCheckout } from '@/hooks/checkout/useGetStatusCheckout';
 import { ordersStatus } from '@/lib/data';
 import { toEnglishDigits } from '@/lib/fun';
@@ -20,7 +20,7 @@ const StatusOrder = ({ order }: { order: Order }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const { mutate, isPending: isLoading } = useUpdateOrderById();
+  const { mutate, isPending: isLoading } = useUpdateDigitalOrderById();
   const formik = useFormik({
     initialValues: {
       orderStatus: '',

@@ -58,6 +58,7 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             nameValue="value"
             name={`${baseName}.type`}
             formik={formik}
+            value={formik.values?.children?.[idx].type}
           />
           <Select
             label="وضعیت انتشار "
@@ -66,6 +67,7 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
             nameValue="value"
             name={`${baseName}.published`}
             formik={formik}
+            value={formik.values?.children?.[idx].published ? 'true' : 'false'}
           />
 
           <Input

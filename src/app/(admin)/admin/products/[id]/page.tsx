@@ -124,7 +124,7 @@ const Page = () => {
               ...varible,
               parent: id!,
               thumbnailImage: varible?.thumbnailImage?._id,
-              title: `${formik.values.title} (${varible.title})`,
+              title: `${formik.values.title} ()`,
               url: generateRandomString(),
               urlVar: `${formik.values?.url}`,
               price: +removeNumNumeric(varible.price),

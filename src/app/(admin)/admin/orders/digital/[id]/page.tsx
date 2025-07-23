@@ -6,13 +6,12 @@ import ProductsOrder from '@/components/admin/orders/ProductsOrder';
 import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
 import TypeTransaction from '@/components/admin/orders/TypeTransaction';
-import { useGetCourseOrderByIdAdmin } from '@/hooks/admin/orders/course/useGetCourseOrderByIdAdmin';
-import { Order } from '@/types/home';
+import { useGetDigitalOrdersByIdAdmin } from '@/hooks/admin/orders/digital/useGetDigitalOrdersByIdAdmin';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 
 const Page = () => {
-  const { data: orderData, isLoading } = useGetCourseOrderByIdAdmin();
+  const { data: orderData, isLoading } = useGetDigitalOrdersByIdAdmin();
   const order = orderData?.data?.data ? orderData.data?.data : null;
   return (
     <div>
@@ -31,19 +30,15 @@ const Page = () => {
             <TypeTransaction order={order} />
             <DetailOrder order={order} />
 
-            <ProductsOrder name="courseItems" order={order} />
-            <DiscountOrder
-              code={order?.courseItems?.courseDiscountCode}
-              price={order?.courseItems?.courseDiscountPrice}
-              type={order?.courseItems?.courseDiscountType}
-            />
+            <ProductsOrder name="productDigitalItems" order={order} />
+            <DiscountOrder code="" price="" type="" />
             <TransportOrder order={order} />
           </div>
           <div className="min-w-[400px]">
             <FactorOrder
-              discountPrice={order?.courseItems?.price}
-              price={order?.courseItems?.price}
-              total={order?.courseItems?.courseTotalAmount}
+              price={order?.productDigitalItems?.price}
+              total={order?.productDigitalItems?.productDigitalTotalAmount}
+              discountPrice={order?.productDigitalItems?.discountPrice}
               order={order}
             />
             <StatusOrder order={order} />

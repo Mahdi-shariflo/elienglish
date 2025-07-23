@@ -9,7 +9,7 @@ type Props = {
   startDate?: string;
   orderStatus?: string;
 };
-export const useGetOrdersAdmin = ({
+export const useGetPhysicalOrderAdmin = ({
   page = '1',
   search = '',
   sort = '',
@@ -19,10 +19,10 @@ export const useGetOrdersAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['orders-admin', page, search, endDate, startDate, orderStatus],
+    queryKey: ['physical-orders-admin', page, search, endDate, startDate, orderStatus],
     queryFn: async () =>
       await safeRequest({
-        url: `/order/admin/course?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
+        url: `/order/product-physical?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
       }),
   });
 };

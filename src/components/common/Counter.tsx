@@ -84,7 +84,7 @@ const Counter = ({
         typeCounter === 'course' || typeCounter === 'digital' || typeCounter === 'lpas' ? (
           <Link
             className={`mt-3 flex h-[44px] w-full items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white ${classLinkCart}`}
-            href={'/cart/'}
+            href={'/checkout/'}
           >
             موجود در سبد خرید شما
           </Link>

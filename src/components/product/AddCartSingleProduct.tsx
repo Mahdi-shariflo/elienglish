@@ -21,7 +21,6 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   const session = useSession();
   const { baskets } = useBasket();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
-  const [selectedAddOns, setSelectedAddOns] = React.useState<Product[]>([]);
   const { mutate: mutateRemove } = useRemoveBasket();
   const { mutate: mutateAdd } = useAddBasket();
   const handleToggleAddOn = (item: Product) => {
@@ -34,11 +33,10 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
     } else {
       mutateAdd({
         itemId: item._id,
-        type: product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL',
+        type: 'PRODUCT_PHYSICAL',
       });
     }
   };
-
   const mainPrice = product?.discountPrice ?? product?.price ?? 0;
 
   const addonsTotal =

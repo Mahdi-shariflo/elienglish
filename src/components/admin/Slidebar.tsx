@@ -230,12 +230,29 @@ const menus = [
   {
     icon: Orders_icon,
     name: 'سفارش‌ها',
-    href: ['/admin/orders/course'],
+    href: [
+      '/admin/orders/course',
+      '/admin/orders/digital',
+      '/admin/orders/physical',
+      '/admin/orders/lpa',
+    ],
     activeIcon: Orders_fill_icon,
     children: [
       {
         name: 'دوره ها',
         href: '/admin/orders/course',
+      },
+      {
+        name: 'دیجیتال‌ها',
+        href: '/admin/orders/digital',
+      },
+      {
+        name: 'فیزیکی‌ها',
+        href: '/admin/orders/physical',
+      },
+      {
+        name: 'تعین سطح',
+        href: '/admin/orders/lpa',
       },
     ],
   },

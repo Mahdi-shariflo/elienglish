@@ -3,22 +3,14 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
 import Image from '@/components/common/Image';
-import { initialDataDetailOrder } from '@/lib/table-column';
+import { initialDataLpa } from '@/lib/table-column';
 import useOrderStore from '@/store/order-store';
 import { Order, Product } from '@/types/home';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import ReactTable from '../common/ReactTable';
 
-const ProductsOrder = ({
-  order,
-  products,
-  name,
-}: {
-  order: Order;
-  products?: [];
-  name?: string;
-}) => {
+const ProductsOrderLpa = ({ order }: { order: Order }) => {
   const [openEdit, setOpenEdit] = useState<{ open: boolean; info: null | Product }>({
     open: false,
     info: null,
@@ -35,7 +27,7 @@ const ProductsOrder = ({
 
   // Memoize columns - always call useMemo
   const columns: any = useMemo(() => {
-    return initialDataDetailOrder(
+    return initialDataLpa(
       isEdit
         ? {
             onDelete: (info) => setDeleteModal({ info, open: true }),
@@ -49,13 +41,13 @@ const ProductsOrder = ({
   useEffect(() => {
     if (order) {
       // @ts-expect-error error
-      setOrderItems(products ? products : [order[name]]);
+      setOrderItems([order['levelItems']]);
     }
   }, [order, setOrderItems]);
 
   // Early return if no orderItems to render
   // @ts-expect-error error
-  if (!order[name]) return null;
+  if (!order?.levelItems) return null;
 
   // Handlers
   const onCloseDelete = () => {
@@ -107,19 +99,7 @@ const ProductsOrder = ({
     <div className="mt-3 rounded-xl border border-[#E4E7E9] p-4">
       <ReactTable
         isSuccess={true}
-        columns={[
-          '_id',
-          'productCount',
-          'courseTotalAmount',
-          'isInstallment',
-          'title',
-          'url',
-          'pric',
-          'createdAt',
-          'total',
-          'nid',
-          'action',
-        ]}
+        columns={['_id', 'title', 'teacherName', 'price', 'discountPrice', 'action']}
         mainData={orderItems}
         showData={columns}
       />
@@ -192,4 +172,4 @@ const ProductsOrder = ({
   );
 };
 
-export default ProductsOrder;
+export default ProductsOrderLpa;

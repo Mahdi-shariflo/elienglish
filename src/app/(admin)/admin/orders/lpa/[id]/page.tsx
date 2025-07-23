@@ -3,17 +3,18 @@ import DetailOrder from '@/components/admin/orders/DetailOrder';
 import DiscountOrder from '@/components/admin/orders/DiscountOrder';
 import FactorOrder from '@/components/admin/orders/FactorOrder';
 import ProductsOrder from '@/components/admin/orders/ProductsOrder';
+import ProductsOrderLpa from '@/components/admin/orders/ProductsOrderLpa';
 import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
 import TypeTransaction from '@/components/admin/orders/TypeTransaction';
-import { useGetCourseOrderByIdAdmin } from '@/hooks/admin/orders/course/useGetCourseOrderByIdAdmin';
-import { Order } from '@/types/home';
+import { useGetLpaOrderAdmin } from '@/hooks/admin/orders/lpa/useGetLpaOrderAdmin';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 
 const Page = () => {
-  const { data: orderData, isLoading } = useGetCourseOrderByIdAdmin();
+  const { data: orderData, isLoading } = useGetLpaOrderAdmin();
   const order = orderData?.data?.data ? orderData.data?.data : null;
+
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -31,19 +32,15 @@ const Page = () => {
             <TypeTransaction order={order} />
             <DetailOrder order={order} />
 
-            <ProductsOrder name="courseItems" order={order} />
-            <DiscountOrder
-              code={order?.courseItems?.courseDiscountCode}
-              price={order?.courseItems?.courseDiscountPrice}
-              type={order?.courseItems?.courseDiscountType}
-            />
+            <ProductsOrderLpa order={order} />
+            <DiscountOrder code="" price="" type="" />
             <TransportOrder order={order} />
           </div>
           <div className="min-w-[400px]">
             <FactorOrder
-              discountPrice={order?.courseItems?.price}
-              price={order?.courseItems?.price}
-              total={order?.courseItems?.courseTotalAmount}
+              price={order?.levelItems?.price}
+              total={order?.levelItems?.lpaTotalAmount}
+              discountPrice={order?.levelItems?.discountPrice}
               order={order}
             />
             <StatusOrder order={order} />

@@ -3,7 +3,7 @@ import ReactTable from '@/components/admin/common/ReactTable';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
-import { useGetCoursesOrdersAdmin } from '@/hooks/admin/orders/course/useGetCoursesOrdersAdmin';
+import { useGetLpaOrdersAdmin } from '@/hooks/admin/orders/lpa/useGetLpaOrdersAdmin';
 import { getPrevDateTime } from '@/lib/DateTime';
 import { initialDataOrder, ordersStatus } from '@/lib/table-column';
 import { DateRangePicker } from '@heroui/react';
@@ -24,7 +24,7 @@ const Page = () => {
     search: '',
     orderStatus: '',
   });
-  const { data, isLoading, isSuccess } = useGetCoursesOrdersAdmin({
+  const { data, isLoading, isSuccess } = useGetLpaOrdersAdmin({
     page: filter.page,
     search: filter.search,
     sort: filter.sort,
@@ -36,7 +36,7 @@ const Page = () => {
   const columns = useMemo(
     () =>
       initialDataOrder({
-        onEdit: (row) => router.push(`/admin/orders/course/${row._id}`),
+        onEdit: (row) => router.push(`/admin/orders/lpa/${row._id}`),
       }),
     []
   );
@@ -68,7 +68,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        سفارشات دوره
+        سفارشات
       </p>
        
       <div className="flex w-full items-center justify-start gap-x-4">

@@ -6,14 +6,20 @@ import ProductsOrder from '@/components/admin/orders/ProductsOrder';
 import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
 import TypeTransaction from '@/components/admin/orders/TypeTransaction';
-import { useGetCourseOrderByIdAdmin } from '@/hooks/admin/orders/course/useGetCourseOrderByIdAdmin';
-import { Order } from '@/types/home';
+import { useGetPhysicalOrderByIdAdmin } from '@/hooks/admin/orders/physical/useGetPhysicalOrderByIdAdmin';
+import { Product } from '@/types/home';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 
 const Page = () => {
-  const { data: orderData, isLoading } = useGetCourseOrderByIdAdmin();
+  const { data: orderData, isLoading } = useGetPhysicalOrderByIdAdmin();
   const order = orderData?.data?.data ? orderData.data?.data : null;
+
+  const total = order?.productPhysicalItems?.products?.reduce((acc: any, product: Product) => {
+    const unitPrice = product.discountPrice || product.price;
+    const productTotal = unitPrice * product.count;
+    return acc + productTotal;
+  }, 0);
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -31,19 +37,19 @@ const Page = () => {
             <TypeTransaction order={order} />
             <DetailOrder order={order} />
 
-            <ProductsOrder name="courseItems" order={order} />
-            <DiscountOrder
-              code={order?.courseItems?.courseDiscountCode}
-              price={order?.courseItems?.courseDiscountPrice}
-              type={order?.courseItems?.courseDiscountType}
+            <ProductsOrder
+              products={order?.productPhysicalItems?.products}
+              name="productPhysicalItems"
+              order={order}
             />
+            <DiscountOrder code="" price="" type="" />
             <TransportOrder order={order} />
           </div>
           <div className="min-w-[400px]">
             <FactorOrder
-              discountPrice={order?.courseItems?.price}
-              price={order?.courseItems?.price}
-              total={order?.courseItems?.courseTotalAmount}
+              price={total}
+              total={order?.productPhysicalItems?.productPhysicalTotalAmount}
+              discountPrice={order?.productPhysicalItems?.discountPrice}
               order={order}
             />
             <StatusOrder order={order} />

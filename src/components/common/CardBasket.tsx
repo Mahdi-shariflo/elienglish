@@ -16,8 +16,15 @@ type Props = {
   showOtherItem?: boolean;
   showTotal?: boolean;
   showAddBasketDialog?: boolean;
+  showDeleteIcon?: boolean;
 };
-const CardBasket = ({ product, className, classImage, showTotal = true }: Props) => {
+const CardBasket = ({
+  product,
+  className,
+  classImage,
+  showTotal = true,
+  showDeleteIcon,
+}: Props) => {
   const { mutate, isPending } = useRemoveBasket();
   return (
     <Link
@@ -33,7 +40,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
             alt=""
           />
         </div>
-        <p className="line-clamp-2 font-medium text-[16px] dark:text-white">{product.title}</p>
+        <p className="line-clamp-2 font-medium text-[16px] dark:text-white">{product?.title}</p>
       </div>
       <div className="flex flex-1 flex-col items-center justify-between gap-5">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
@@ -71,11 +78,13 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
           </div>
         </div>
       )}
-      <div className="flex-1">
-        <Button isPending={isPending} onClick={() => mutate({ id: product._id })}>
-          <Delete_icon />
-        </Button>
-      </div>
+      {showDeleteIcon && (
+        <div className="flex-1">
+          <Button isPending={isPending} onClick={() => mutate({ id: product._id })}>
+            <Delete_icon />
+          </Button>
+        </div>
+      )}
     </Link>
   );
 };

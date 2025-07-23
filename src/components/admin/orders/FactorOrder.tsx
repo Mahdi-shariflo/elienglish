@@ -1,16 +1,15 @@
 'use client';
-
-import useOrderStore from '@/store/order-store';
 import { Order } from '@/types/home';
 import React, { useState } from 'react';
 
 interface FactorOrderProps {
   order: Order | null | undefined;
+  price?: number;
+  total?: number;
+  discountPrice: number;
 }
 
-const FactorOrder: React.FC<FactorOrderProps> = ({ order }) => {
-  const [discountPrice, setDiscountPrice] = useState(0);
-
+const FactorOrder: React.FC<FactorOrderProps> = ({ order, price, discountPrice, total }) => {
   if (!order) return null;
 
   return (
@@ -21,16 +20,16 @@ const FactorOrder: React.FC<FactorOrderProps> = ({ order }) => {
       <div className="mt-3 space-y-3">
         <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#616A76]">
-            قیمت محصولات بدون تخفیف ({order?.courseItems.price?.toLocaleString()})
+            قیمت محصولات بدون تخفیف ({price?.toLocaleString()})
           </p>
-          <p className="font-medium text-[14px] text-[#0C0C0C]">
-            {order?.courseItems.price?.toLocaleString()} تومان
+          <p className="whitespace-nowrap font-medium text-[14px] text-[#0C0C0C]">
+            {price?.toLocaleString()} تومان
           </p>
         </div>
         <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#616A76]">جمع سبد خرید</p>
-          <p className="font-medium text-[16px] text-[#0C0C0C]">
-            {order.totalAmount.toLocaleString()} تومان
+          <p className="whitespace-nowrap font-medium text-[16px] text-[#0C0C0C]">
+            {Number(total).toLocaleString()} تومان
           </p>
         </div>
         {order.orderDiscountCode && (
@@ -50,7 +49,7 @@ const FactorOrder: React.FC<FactorOrderProps> = ({ order }) => {
         <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#0C0C0C]">مجموع پرداختی</p>
           <p className="font-medium text-[16px] text-[#0C0C0C]">
-            {order.totalAmount.toLocaleString()} تومان
+            {Number(total).toLocaleString()} تومان
           </p>
         </div>
       </div>

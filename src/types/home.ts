@@ -256,6 +256,7 @@ export const findLowestPricedProduct = (data: { attributes: { product: Product }
 
 export interface Order {
   courseItems: {
+    courseTotalAmount?: number;
     price: number;
     courseDiscountCode: string;
     courseDiscountPrice: string;

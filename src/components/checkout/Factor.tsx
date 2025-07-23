@@ -61,13 +61,12 @@ const Factor = () => {
     //   });
 
     const checkoutFields = {
-      // orderAddressId: checkoutData.address?._id,
-      // postPrice: Number(total) >= freeShippingPrice ? 0 : checkoutData.transport?.shippingPrice,
-      // postType: checkoutData.transport?.type,
+      isInstallmentCourse: false,
       ...(checkoutData.discountCode?.code
         ? // @ts-expect-error error
           { discountCodeId: checkoutData.discountCode._id }
         : null),
+      ...(checkoutData.address?._id ? { address: checkoutData.address?._id } : null),
     };
 
     mutateCheckout({ data: checkoutFields });

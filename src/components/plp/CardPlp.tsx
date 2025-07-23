@@ -3,8 +3,12 @@ import { Lpa } from '@/types';
 import Image from 'next/image';
 import Counter from '../common/Counter';
 const CardPlp = ({ lpa }: { lpa: Lpa }) => {
+  console.log(lpa);
   return (
-    <div className="rounded-lg border border-gray-50 p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334]">
+    <button
+      disabled={lpa.status === 'RESERVED' ? true : false}
+      className={`rounded-lg border border-gray-200 p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334] ${lpa.status === 'RESERVED' ? 'bg-gray-200/20 blur-[0.9px]' : ''}`}
+    >
       <div className="flex items-center justify-between">
         <p className="font-extrabold text-main">{lpa.title}</p>
         <Image
@@ -101,22 +105,26 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
           </p>
         </div>
         <div className="flex items-center justify-between">
-          <span className="flex h-[34px] w-[76px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] font-medium text-white">
-            رزرو شده
+          <span
+            className={`flex h-[34px] w-[76px] items-center justify-center rounded-full border-2 border-[#FCEDE8] font-medium text-white ${lpa.status === 'RESERVED' ? 'bg-red-500' : 'bg-green-500'}`}
+          >
+            {lpa.status === 'RESERVED' ? 'رزرو شده' : 'در دسترس'}
           </span>
-          <Counter
-            // @ts-expect-error error
-            product={lpa}
-            typeCounter="lpas"
-            typePayload="LEVEL"
-            showBasketIcon={false}
-            classNameAddBtnName="!text-[14px]"
-            classAddBtn="!h-[34px] !w-[76px] !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
-            classLinkCart="!h-[34px] !w-[76px] !rounded-lg !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
-          />
+          {lpa.status !== 'RESERVED' && (
+            <Counter
+              // @ts-expect-error error
+              product={lpa}
+              typeCounter="lpas"
+              typePayload="LEVEL"
+              showBasketIcon={false}
+              classNameAddBtnName="!text-[14px]"
+              classAddBtn="!h-[34px] !w-[76px] !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
+              classLinkCart="!h-[34px] !w-[76px] !rounded-lg !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
+            />
+          )}
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
