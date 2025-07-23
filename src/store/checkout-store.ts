@@ -6,6 +6,7 @@ type TypeCheckout = {
     transport?: shippingMethod | null;
     address?: Address | null;
     payment?: Payment | null;
+    selectInstallment: string;
     discountCode?: {
       discountCodeType: 'FIXED' | 'PERCENT';
       code: string;
@@ -21,6 +22,7 @@ export const useCheckoutStore = create<TypeCheckout>()(
   persist(
     (set) => ({
       checkout: {
+        selectInstallment: 'online',
         address: null,
         discountCode: null,
         payment: null,

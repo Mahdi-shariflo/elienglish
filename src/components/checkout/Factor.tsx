@@ -1,10 +1,8 @@
 import useBasket from '@/hooks/basket/useBasket';
-import { useCheckAvailability } from '@/hooks/basket/useCheckAvailability';
 import { useCreateCheckout } from '@/hooks/checkout/useCreateCheckout';
 import { useDiscount } from '@/hooks/discount/useDiscount';
 import { freeShippingPrice } from '@/lib/variable';
 import { useCheckoutStore } from '@/store/checkout-store';
-import { addToast } from '@heroui/react';
 import { useFormik } from 'formik';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -20,11 +18,9 @@ const Factor = () => {
     totalCountBasket,
     totalProductPriceWithoutDiscount,
     total,
-    baskets,
     discountPrice,
     totalProductPriceWithDiscount,
   } = useBasket();
-  const router = useRouter();
   const pathname = usePathname();
   const formik = useFormik({
     initialValues: {
@@ -61,7 +57,7 @@ const Factor = () => {
     //   });
 
     const checkoutFields = {
-      isInstallmentCourse: false,
+      isInstallmentCourse: checkoutData.selectInstallment === 'online' ? false : true,
       ...(checkoutData.discountCode?.code
         ? // @ts-expect-error error
           { discountCodeId: checkoutData.discountCode._id }

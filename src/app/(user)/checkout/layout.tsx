@@ -1,6 +1,5 @@
 'use client';
 import Factor from '@/components/checkout/Factor';
-import Steps from '@/components/checkout/Steps';
 import BackPrevPage from '@/components/common/BackPrevPage';
 import useBasket from '@/hooks/basket/useBasket';
 import React, { ReactNode } from 'react';

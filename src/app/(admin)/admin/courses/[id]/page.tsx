@@ -317,11 +317,11 @@ const Page = () => {
                       formik={formik}
                       name="installmentCount"
                     />
-                    <Input label={'مبلغ هر قسط'} price formik={formik} name="installmentPrice" />
-                    {/* @ts-expect-error error */}
+                    <Input label={'مبلغ اقساط'} price formik={formik} name="installmentPrice" />
                     <Checkbox
                       className="col-span-2"
                       label="خرید با اقساط؟"
+                      // @ts-expect-error error
                       formik={formik}
                       name="isInstallment"
                     />

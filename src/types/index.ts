@@ -308,6 +308,9 @@ export interface BasketItem {
 }
 
 interface Course {
+  isInstallment?: boolean;
+  installmentCount?: number;
+  installmentPrice?: number;
   _id: string;
   type: 'inPerson' | string;
   status: 'inProgress' | 'completed' | string;

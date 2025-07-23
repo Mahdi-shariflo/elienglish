@@ -14,6 +14,8 @@ import { useGetAddress } from '@/hooks/address/useGetAddress';
 import { useGetPayment } from '@/hooks/checkout/useGetPayment';
 import { useSession } from '@/lib/auth/useSession';
 import DeleteAddress from '@/components/profile/DeleteAddress';
+import { Radio, RadioGroup } from '@heroui/react';
+import Installment from '@/components/checkout/Installment';
 function groupByParent(items: BasketItem[]) {
   const map = new Map();
   const result: any[] = [];
@@ -92,6 +94,7 @@ const Page = () => {
       discountCode: null,
       payment: null,
       transport: null,
+      selectInstallment: 'online',
     });
   }, []);
 
@@ -102,14 +105,26 @@ const Page = () => {
 
   const formik = useFormik({
     initialValues: {
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
     },
     enableReinitialize: true,
     onSubmit: () => {},
   });
+  const installmentCourses = baskets?.filter(
+    (item) => item.type === 'COURSE' && item.course?.isInstallment
+  );
 
   const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
+  useEffect(() => {
+    if (session) {
+      formik.setValues({
+        firstName: session?.firstName as string,
+        lastName: session?.lastName as string,
+      });
+    }
+  }, [session]);
+  console.log(checkout, 'dfhsfgsdf');
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>
@@ -158,8 +173,8 @@ const Page = () => {
         <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
           <Title title="اطلاعات ثبت‌نام کننده" />
           <div className="mt-10 grid grid-cols-2 gap-4">
-            <Input label={'نام'} formik={formik} name="first_name" />
-            <Input label={'نام خانوادگی'} formik={formik} name="last_name" />
+            <Input label={'نام'} formik={formik} name="firstName" />
+            <Input label={'نام خانوادگی'} formik={formik} name="lastName" />
           </div>
         </div>
         {isCartPhycial ? (
@@ -181,33 +196,59 @@ const Page = () => {
         <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
           <Title title="ثبت سفارش و پرداخت" />
           <div className="mt-10">
-            <p className="flex items-center gap-2">
-              <span>
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            {/* online */}
+            <div className="">
+              <RadioGroup
+                value={checkout.selectInstallment}
+                onValueChange={(value) => setCheckout({ ...checkout, selectInstallment: value })}
+              >
+                <Radio
+                  classNames={{
+                    control: 'group-data-[selected=true]:bg-main',
+                    wrapper: 'group-data-[selected=true]:!border-main',
+                  }}
+                  value="online"
                 >
-                  <rect
-                    x="3"
-                    y="3"
-                    width="18"
-                    height="18"
-                    rx="9"
-                    stroke="#6E3DFF"
-                    stroke-width="2"
-                  />
-                  <rect x="7" y="7" width="10" height="10" rx="5" fill="#6E3DFF" />
-                </svg>
-              </span>
-              <span className="font-medium text-[16px]">پرداخت اینترنتی</span>
-            </p>
-            <p className="pt-4 font-medium text-[12px] text-[#6A7890]">
-              پرداخت آنلاین توسط کلیه کارت‌های بانکی متصل به شبکه شتاب
-            </p>
-            <div className="mt-4"></div>
+                  <span className="font-medium">پرداخت اینترنتی</span>
+                </Radio>
+              </RadioGroup>
+              {checkout.selectInstallment === 'online' ? (
+                <>
+                  <p className="pt-4 font-medium text-[12px] text-[#6A7890]">
+                    پرداخت آنلاین توسط کلیه کارت‌های بانکی متصل به شبکه شتاب
+                  </p>
+                  <div className="mt-4"></div>
+                </>
+              ) : null}
+            </div>
+            {/* installment */}
+
+            {installmentCourses && (
+              <div className="mt-4">
+                <RadioGroup
+                  value={checkout.selectInstallment}
+                  onValueChange={(value) => setCheckout({ ...checkout, selectInstallment: value })}
+                >
+                  <Radio
+                    classNames={{
+                      control: 'group-data-[selected=true]:bg-main',
+                      wrapper: 'group-data-[selected=true]:!border-main',
+                    }}
+                    value="installment"
+                  >
+                    <span className="font-medium">پرداخت اقساطی</span>
+                  </Radio>
+                </RadioGroup>
+                {checkout.selectInstallment === 'installment' ? (
+                  <>
+                    <p className="pt-4 font-medium text-[12px] text-[#6A7890]">
+                      شما با پرداخت اقساطی میتوانید مبلغ دوره مد نظر را در 4 قسط پرداخت کنید.{' '}
+                    </p>
+                    <Installment />
+                  </>
+                ) : null}
+              </div>
+            )}
           </div>
         </div>
       </div>
