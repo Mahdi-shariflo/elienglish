@@ -76,11 +76,16 @@ const Page = async ({ params, searchParams }: Props) => {
                   </p>
                 </div>
               </div>
-              <VideoPlayer
-                isHls
-                poster=""
-                url={video ? video : course.chapters[0].episodes[0].video}
-              />
+              <div
+                className={`mt-3 h-[193px] w-full overflow-hidden rounded-xl border border-[#E5EAEF] bg-black dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px] 5xl:h-[600px]`}
+              >
+                <VideoPlayer
+                  course={course}
+                  isHls
+                  poster=""
+                  url={video ? video : course.chapters[0].episodes[0].video}
+                />
+              </div>
             </div>
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
               <p className="hidden font-bold text-[18px] text-[#172334] dark:text-white lg:block">

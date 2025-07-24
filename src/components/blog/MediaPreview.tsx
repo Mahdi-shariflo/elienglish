@@ -2,10 +2,10 @@
 import React from 'react';
 import Image from '../common/Image';
 import { Blog } from '@/types';
-import VideoPlayer from '../admin/common/VideoPlayer';
 import { BASEURL } from '@/lib/variable';
 import dynamic from 'next/dynamic';
 import { Course } from '@/types/home';
+import HlsPlayer from '../admin/common/HlsPlayer';
 const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/react'), {
   ssr: false,
 });
@@ -18,9 +18,9 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
         className={`mt-3 h-[193px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px] 5xl:h-[600px] ${className}`}
       >
         {media?.video?.url ? (
-          <VideoPlayer
+          <HlsPlayer
             poster={`${BASEURL}/${media?.coverVideo?.url}`}
-            url={`${BASEURL}/${media?.video?.url}`}
+            src={`${BASEURL}/${media?.video?.url}`}
           />
         ) : (
           <Image

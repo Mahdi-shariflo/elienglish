@@ -138,7 +138,14 @@ export type Course = {
     lessons: string;
     duration: string;
     order: number;
-    episodes: { title: string; duration: string; order: number; type: string; video: string }[];
+    episodes: {
+      title: string;
+      duration: string;
+      order: number;
+      type: string;
+      video: string;
+      _id: string;
+    }[];
   }[];
   episodes: { title: string; type: string }[];
   order: number;
