@@ -59,8 +59,8 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
           <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
             <Input
               isRequired
-              placeholder="نام و نام خانوادگی خود را وارد کنید"
-              label={'نام و نام خانوادگی'}
+              placeholder="عنوان"
+              label={'عنوان'}
               classNameInput={'bg-[#f5f6f6] dark:!bg-[#0B1524]'}
               name="title"
               formik={formik}

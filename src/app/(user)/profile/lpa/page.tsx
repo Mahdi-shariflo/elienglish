@@ -51,7 +51,10 @@ const Page = () => {
           <div className="container_page mt-5 flex flex-col gap-5 lg:!w-full">
             {orders.order.map((order, idx) => {
               return (
-                <div className="flex justify-between rounded-lg border p-4" key={idx}>
+                <div
+                  className="flex justify-between rounded-[16px] border border-[#E5EAEF] p-4"
+                  key={idx}
+                >
                   <div className="space-y-4">
                     <p className="font-regular text-[14px] text-[#6A7890]">نوع جلسه</p>
                     <p className="font-medium text-[12px] text-[#0B1524]">

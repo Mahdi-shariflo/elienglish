@@ -3,91 +3,80 @@ import React, { useState } from 'react';
 import StarRating from '../common/StarRateing';
 import Button from '../common/Button';
 import { statusIcon } from '@/lib/data';
-import { Product } from '@/types/home';
+import { Course } from '@/types/home';
 import Image from '../common/Image';
 import Link from 'next/link';
 type Props = {
   comment: {
-    product: Product;
-    commentTitle: string;
+    course: Course;
+    title: string;
     comment: string;
     createdAt: string;
     published: string;
-    rate: string;
+    rating: string;
   };
 };
 const CardComment = ({ comment }: Props) => {
   const [open, setOpen] = useState(false);
   const findStatus = statusIcon.find((item) => item.status === comment?.published);
   return (
-    <div className="shadow-favorite rounded-xl bg-white p-2 lg:p-4">
-      {comment?.product && (
+    <div className="shadow-favorite block w-full rounded-xl bg-white lg:p-4">
+      {comment?.course && (
         <Link
-          href={`/product/${comment?.product?.url}/`}
-          className="mb-3 flex flex-col items-start justify-between lg:flex-row"
+          href={`/product/${comment?.course?.url}/`}
+          className="mb-3 flex flex-col items-start justify-between gap-2 rounded-2xl border border-[#E5EAEF] p-6 lg:flex-row"
         >
-          <div className="flex items-center gap-2">
-            <span className="relative block h-[72px] w-[64px]">
+          <div className="flex w-full items-center">
+            <div className="flex flex-1 items-start gap-8 border-l border-[#EDEDED] pl-3">
               <Image
-                src={`${comment?.product?.thumbnailImage?.url}`}
+                src={`${comment?.course?.thumbnailImage?.url}`}
                 alt=""
-                className="h-14 w-14 object-contain"
+                className="!h-[102px] !w-[142px] overflow-hidden rounded-lg object-contain"
               />
-            </span>
-            <p className="line-clamp-2 font-medium text-[14px] text-[#232429]">
-              {comment?.product?.title}
-            </p>
+              <div className="w-full space-y-5">
+                <p className="line-clamp-2 font-semibold text-[18px] text-[#0B1524]">
+                  {comment?.course?.title}
+                </p>
+                <p className="font-regular text-[14px] text-[#505B74]">{comment?.title}</p>
+                <div className="flex items-center justify-end gap-2">
+                  <span className="font-regular text-[12px] text-[#172334]">{comment.rating}</span>
+                  <span>
+                    <svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.36487 3.37855C7.31486 1.67436 7.78985 0.822266 8.5 0.822266C9.21015 0.822266 9.68514 1.67436 10.6351 3.37855L10.8809 3.81944C11.1509 4.30372 11.2858 4.54586 11.4963 4.70562C11.7068 4.86539 11.9689 4.92469 12.4931 5.0433L12.9703 5.15129C14.8151 5.56868 15.7375 5.77738 15.9569 6.48306C16.1764 7.18875 15.5476 7.92407 14.2899 9.39471L13.9646 9.77518C13.6072 10.1931 13.4285 10.402 13.3481 10.6606C13.2677 10.9191 13.2947 11.1978 13.3488 11.7554L13.398 12.2631C13.5881 14.2252 13.6832 15.2063 13.1086 15.6424C12.5341 16.0786 11.6705 15.6809 9.94324 14.8856L9.49639 14.6799C9.00556 14.4539 8.76014 14.3409 8.5 14.3409C8.23986 14.3409 7.99444 14.4539 7.50362 14.6799L7.05676 14.8856C5.32951 15.6809 4.46588 16.0786 3.89136 15.6424C3.31684 15.2063 3.41191 14.2252 3.60205 12.2631L3.65124 11.7554C3.70527 11.1978 3.73229 10.9191 3.6519 10.6606C3.57151 10.402 3.39282 10.1931 3.03544 9.77518L2.71007 9.39471C1.45244 7.92407 0.823618 7.18875 1.04307 6.48306C1.26251 5.77738 2.18489 5.56868 4.02965 5.15129L4.50692 5.0433C5.03114 4.92469 5.29325 4.86539 5.50371 4.70562C5.71417 4.54586 5.84914 4.30372 6.1191 3.81944L6.36487 3.37855Z"
+                        fill="#FF9800"
+                        stroke="#FF9800"
+                        stroke-width="1.125"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-3 px-3">
+              <Link
+                className="flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-main font-medium text-white"
+                href={'/'}
+              >
+                مشاهده محصول
+              </Link>
+              <Link
+                className={`flex h-[40px] w-[120px] items-center justify-center rounded-lg border border-[#E5EAEF] font-medium ${comment.published ? 'text-[#34C759]' : 'text-[#FF383C]'}`}
+                href={'/'}
+              >
+                {comment.published ? 'تایید شده' : 'تایید نشده'}
+              </Link>
+            </div>
           </div>
-          <span className="flex w-full items-center justify-start gap-2 lg:w-[200px] lg:justify-end">
-            <span>{findStatus?.icon}</span>
-            <p className="line-clamp-2 font-medium text-[14px] text-[#393B40]">
-              {findStatus?.status === 'Awaiting' ? 'در انتظار تائید' : findStatus?.name}
-            </p>
-          </span>
         </Link>
       )}
 
-      <div className="border-b border-t border-[#E4E7E9] py-1 pt-2">
-        <div className="flex items-center justify-between">
-          <p className="font-medium text-[14px] text-[#616A76]">
-            {new Date(comment.createdAt).toLocaleDateString('fa-IR', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-          <StarRating setRating={() => {}} readonly intialValue={Number(comment.rate)} />
-        </div>
-        <p className="font-medium">{comment.commentTitle}</p>
-        <p
-          className={`py-3 font-regular text-[14px] text-[#40444A] ${open ? '' : 'line-clamp-2 lg:line-clamp-none'}`}
-        >
-          {comment.comment}
-        </p>
-        {comment.comment.length >= 160 && (
-          <Button onClick={() => setOpen(!open)} className="w-fit text-[12px] text-main lg:hidden">
-            <span>مشاهده {open ? 'کمتر' : 'بیشتر'}</span>
-            <span className={`${open ? 'rotate-180' : ''}`}>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M13.2797 5.9668L8.93306 10.3135C8.41973 10.8268 7.57973 10.8268 7.06639 10.3135L2.71973 5.9668"
-                  stroke="#DD338B"
-                  strokeWidth="1.5"
-                  strokeMiterlimit="10"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </Button>
-        )}
-      </div>
       {/* 
             <div className='flex items-center justify-end'>
                 <Button className='w-fit !min-w-fit px-2'>

@@ -119,7 +119,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
             <div ref={demoRef}>
               <Title className="!text-[16px]" title="دموی رایگان" />
               <Accordion
-                defaultExpandedKeys={['0', '1', '2', '3', '4']}
+                defaultExpandedKeys={['0']}
                 className="mt-5 lg:!mt-10"
                 itemClasses={{ base: '!mt-2 lg:!mt-5' }}
               >
