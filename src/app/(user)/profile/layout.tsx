@@ -7,7 +7,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className="h-full min-h-screen dark:bg-dark lg:bg-white lg:pt-32">
       <div className="lg:container_page flex-col items-start lg:flex lg:flex-row lg:gap-[20px] lg:!pb-20">
-        <div className="hidden w-full pt-5 lg:block lg:w-[296px]">
+        <div className="hidden w-full lg:block lg:w-[296px]">
           {/* <ProfileInformation /> */}
           <Sidebar />
         </div>

@@ -264,7 +264,7 @@ const menus = [
         />
       </svg>
     ),
-    href: '/profile/orders/',
+    href: '/profile/courses/',
   },
   {
     name: 'تعین سطح',
