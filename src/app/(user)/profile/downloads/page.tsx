@@ -1,25 +1,28 @@
 'use client';
-import CardOrder from '@/components/profile/CardOrder';
-import FilterOrders from '@/components/profile/FilterOrders';
+
 import React, { Suspense } from 'react';
 import Pagination from '@/components/common/Pagination';
 import BackPrevPage from '@/components/common/BackPrevPage';
-import { useGetOrders } from '@/hooks/profile/useGetOrders';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from '@heroui/react';
 import { Order, STATUSCOUNTS } from '@/types/profile';
 import EmptyOrder from '@/components/profile/EmptyOrder';
+import { useGetDownloads } from '@/hooks/profile/useGetDownloads';
+import FilterDownloads from '@/components/profile/FilterDownloads';
+import CardDownload from '@/components/profile/CardDownload';
 
 const Page = () => {
   const searchParams = useSearchParams();
-  const { data, isPending } = useGetOrders({
+  const { data, isPending } = useGetDownloads({
     page: searchParams.get('page')!,
   });
   const orders: { order: Order[]; totalPages: number; totalItems: number } = data?.data?.data;
   const orderStatusCounts: STATUSCOUNTS = data?.data?.data?.statusCounts;
   const sortOrders = orders?.order?.filter(
-    (item) => item.productPhysicalItems.status === (searchParams.get('sort') || 'AWAITING')
+    (item) => item.productDigitalItems.status === (searchParams.get('sort') || 'PENDING')
   );
+  const downloadLink = data?.data?.data?.downloadLinks;
+
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
@@ -33,12 +36,12 @@ const Page = () => {
                 />
             </div> */}
       <Suspense>
-        <FilterOrders orderStatusCounts={orderStatusCounts} />
+        <FilterDownloads orderStatusCounts={orderStatusCounts} />
       </Suspense>
 
       <div className="">
         <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
-          آخرین سفارش‌ها
+          فایل های دانلودی
         </p>
         {isPending ? (
           <Spinner
@@ -49,7 +52,18 @@ const Page = () => {
         ) : sortOrders?.length >= 1 ? (
           <div className="container_page flex flex-col gap-5 lg:!w-full">
             {sortOrders.map((order, idx) => (
-              <CardOrder name="productPhysicalItems" key={idx} order={order} />
+              <CardDownload
+                src={
+                  order.productDigitalItems.status === 'AVAILABLE'
+                    ? downloadLink.find(
+                        (item: { productId: string }) =>
+                          item.productId === order.productDigitalItems.productId
+                      )?.downloadUrl
+                    : undefined
+                }
+                key={idx}
+                order={order}
+              />
             ))}
           </div>
         ) : (

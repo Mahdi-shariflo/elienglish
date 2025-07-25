@@ -62,7 +62,6 @@ const HlsPlayer = ({ src, course, isHls, watchedTime }: Props) => {
       video.src = src;
       video.load();
       video.addEventListener('loadedmetadata', handleLoaded);
-      video.play();
       setIsPlaying(true);
       setIsLoading(false);
     }

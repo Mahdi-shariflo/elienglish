@@ -11,6 +11,8 @@ type Props = {
   children: ReactNode;
   theme?: string;
 };
+import { addToast } from '@heroui/react';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,9 +21,15 @@ const queryClient = new QueryClient({
       retryDelay: 1000,
       retry: (count, error: any) => {
         if ([404, 403].includes(error?.response?.status)) {
-          return false; // درخواست متوقف شود
+          return false;
         }
-        return count < 1; // فقط یکبار تلاش مجدد انجام شود
+        return count < 1;
+      },
+      // @ts-expect-error error
+      onError: (error: any) => {
+        if (typeof window !== 'undefined') {
+          alert('fdghbdsfsf');
+        }
       },
     },
   },

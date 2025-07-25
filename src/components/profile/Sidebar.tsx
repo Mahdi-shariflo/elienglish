@@ -232,7 +232,7 @@ const menus = [
         />
       </svg>
     ),
-    href: '/profile/orders/',
+    href: '/profile/downloads',
   },
   {
     name: 'دوره‌ها',

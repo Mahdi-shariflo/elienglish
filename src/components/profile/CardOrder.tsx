@@ -2,16 +2,15 @@
 import React from 'react';
 import Button from '../common/Button';
 import { useRouter } from 'next/navigation';
-import { statusIcon } from '@/lib/data';
 import { Order } from '@/types/profile';
 import Image from '../common/Image';
 
 type Props = {
   order: Order;
+  name: 'productPhysicalItems' | 'productDigitalItems';
 };
-const CardOrder = ({ order }: Props) => {
+const CardOrder = ({ order, name }: Props) => {
   const router = useRouter();
-  const findItem = statusIcon.find((status) => status.status === order.productPhysicalItems.status);
 
   return (
     <div className="overflow-hidden rounded-xl border border-[#E4E7E9] lg:!w-full">
@@ -50,7 +49,7 @@ const CardOrder = ({ order }: Props) => {
       </div>
 
       <div className="custom_scroll_gallery flex items-center gap-4 overflow-x-auto px-3 lg:py-4">
-        {order?.productPhysicalItems.products?.map((image, idx) => (
+        {order[name].products?.map((image, idx) => (
           <div key={idx} className="relative h-[131pxpx] w-[131pxpx]">
             <Image
               className="h-[115px] w-[115px] object-contain"
