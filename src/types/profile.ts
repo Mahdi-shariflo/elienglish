@@ -1,20 +1,45 @@
-import { Address } from '.';
-import { Product } from './home';
+import { Media } from '.';
 
 export type Order = {
-  author: string;
-  authority: string;
   createdAt: string;
-  orderAddress: Address;
-  orderItems: Product[];
-  orderNote: { title: string }[];
   orderNumber: number;
-  orderStatus: 'Awaiting';
-  paymentInvoiceNumber: string;
-  postPrice: number;
-  postType: string;
   totalAmount: number;
-  transactionType: 'Online';
+  productPhysicalItems: {
+    status: 'AWAITING' | 'CANCELED' | 'DELIVERY' | 'DOING' | 'POSTED' | 'REVIEW';
+    products: {
+      count: number;
+      discountPrice: number;
+      parent: string;
+      price: number;
+      productId: string;
+      suggestedDiscount: number;
+      thumbnailImage: Media;
+      title: string;
+      type: 'physical' | 'digital' | string; // اگر فقط physical هست می‌تونی فقط همونو بذاری
+      url: string;
+      urlVar: string;
+    }[];
+    orderAddress: {
+      firstName: string;
+      lastName: string;
+      mobileNumber: string;
+      address: string;
+      city: string;
+      postalCode: string;
+      province: string; // به انگلیسی مثل: East-Azerbaijan
+      provinceCode: string; // به اختصار مثل: EAZ
+      provinceLabel: string; // به فارسی مثل: آذربایجان شرقی
+    };
+  };
 
   _id: string;
+};
+
+export type STATUSCOUNTS = {
+  AWAITING: number;
+  CANCELED: number;
+  DELIVERY: number;
+  DOING: number;
+  POSTED: number;
+  REVIEW: number;
 };

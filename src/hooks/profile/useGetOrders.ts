@@ -1,12 +1,12 @@
 import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
 
-export const useGetOrders = ({ sort, page }: { sort: string; page: string }) => {
+export const useGetOrders = ({ page }: { page: string }) => {
   return useQuery({
-    queryKey: ['orders', page, sort],
+    queryKey: ['orders', page],
     queryFn: async () =>
       await safeRequest({
-        url: `/user/order/?page=${page ?? 1}&limit=20&status=${sort}&sort=createdAt_desc`,
+        url: `/order/product-physical/?page=${page ?? 1}&limit=20&sort=createdAt_desc`,
       }),
   });
 };

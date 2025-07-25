@@ -11,6 +11,7 @@ import { removeEmptyFields } from '@/lib/fun';
 import { addCommaCartBank, removeNumNumeric } from '@/lib/convert';
 import { User } from '@/types';
 import { useSession } from '@/lib/auth/useSession';
+import Datepicker from '../common/Datepicker';
 type Props = {
   disable?: boolean;
   showEdit?: boolean;
@@ -37,7 +38,7 @@ const ActionUser = ({ disable = false }: Props) => {
         .min(2, 'نام‌خانوادگی باید حداقل دو کارکتر باشد')
         .matches(namePattern, 'لطفا ادرس را با حروف فارسی وارد کنید')
         .required('فیلد اجباری است'),
-      // dateOfBirth: Yup.string().required('فیلد اجباری است'),
+      dateOfBirth: Yup.string().required('فیلد اجباری است'),
       nationalCode: Yup.string()
         .nullable() // این باعث می‌شود که فیلد اختیاری باشد
         .min(10, 'کد ملی باید دقیقا ۱۰ رقم باشد')
@@ -311,62 +312,21 @@ const ActionUser = ({ disable = false }: Props) => {
           }
         />
 
-        <ReactSelect
-          classNameLabel="text-[#616A76] "
-          options={[
-            { label: 'سیکل', value: 'rozCart' },
-            { label: 'دیپلم', value: 'cart' },
-          ]}
-          label={'تحصیلات'}
-          startContent={
-            <span>
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="10.5001" cy="10.5003" r="2.33333" stroke="#7D8793" strokeWidth="1.5" />
-                <path
-                  d="M15.1666 17.5003C15.1666 18.789 15.1666 19.8337 10.4999 19.8337C5.83325 19.8337 5.83325 18.789 5.83325 17.5003C5.83325 16.2117 7.92259 15.167 10.4999 15.167C13.0772 15.167 15.1666 16.2117 15.1666 17.5003Z"
-                  stroke="#7D8793"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M2.33325 14.0003C2.33325 9.60055 2.33325 7.40066 3.70009 6.03383C5.06692 4.66699 7.26681 4.66699 11.6666 4.66699H16.3333C20.733 4.66699 22.9329 4.66699 24.2997 6.03383C25.6666 7.40066 25.6666 9.60055 25.6666 14.0003C25.6666 18.4001 25.6666 20.6 24.2997 21.9668C22.9329 23.3337 20.733 23.3337 16.3333 23.3337H11.6666C7.26681 23.3337 5.06692 23.3337 3.70009 21.9668C2.33325 20.6 2.33325 18.4001 2.33325 14.0003Z"
-                  stroke="#7D8793"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M22.1667 14H17.5001"
-                  stroke="#7D8793"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M22.1667 10.5H16.3334"
-                  stroke="#7D8793"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M22.1667 17.5H18.6667"
-                  stroke="#7D8793"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-          }
-          disabled={disable}
-          nameLabel="label"
-          nameValue="value"
-          // @ts-expect-error error
+        <Input
           formik={formik}
-          name="refundMethod"
+          label="شبا کاربر"
+          placeholder=" "
+          name="shabanumber"
+          classNameInput={'!h-[45px] bg-[#f5f6f6]'}
+          classNameLabel="!text-[12px]"
+          type="tel"
         />
-
+        <Datepicker
+          formik={formik}
+          label="تاریخ تولد کاربر"
+          name="dateOfBirth"
+          inputClass="!h-[45px]"
+        />
         <div className="col-span-2 flex justify-end py-4">
           <Button
             isPending={isPending}

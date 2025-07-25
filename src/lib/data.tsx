@@ -2,8 +2,8 @@ import { freeShippingPrice } from './variable';
 
 export const statusIcon = [
   {
-    status: 'done',
-    name: 'ارسال شده',
+    status: 'DOING',
+    name: 'در حال انجام',
     icon: (
       <svg
         width="24"
@@ -20,7 +20,7 @@ export const statusIcon = [
     ),
   },
   {
-    status: 'Posted',
+    status: 'POSTED',
     name: 'ارسال شده',
     icon: (
       <svg
@@ -56,7 +56,7 @@ export const statusIcon = [
     ),
   },
   {
-    status: 'Delivery',
+    status: 'DELIVERY',
     name: 'تحویل به پست',
     icon: (
       <svg
@@ -92,7 +92,7 @@ export const statusIcon = [
     ),
   },
   {
-    status: 'back',
+    status: 'CANSELED',
     name: 'مرجوعی',
     icon: (
       <svg
@@ -114,7 +114,7 @@ export const statusIcon = [
     ),
   },
   {
-    status: 'waiting',
+    status: 'WAITING',
     name: 'در انتظار بررسی',
     icon: (
       <svg
@@ -210,7 +210,7 @@ export const statusIcon = [
     ),
   },
   {
-    status: 'Review',
+    status: 'REVIEW',
     name: 'در انتظار بررسی',
     icon: (
       <svg

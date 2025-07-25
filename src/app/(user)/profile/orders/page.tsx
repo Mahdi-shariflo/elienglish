@@ -7,18 +7,19 @@ import BackPrevPage from '@/components/common/BackPrevPage';
 import { useGetOrders } from '@/hooks/profile/useGetOrders';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from '@heroui/react';
-import { Order } from '@/types/profile';
+import { Order, STATUSCOUNTS } from '@/types/profile';
 import EmptyOrder from '@/components/profile/EmptyOrder';
 
 const Page = () => {
   const searchParams = useSearchParams();
   const { data, isPending } = useGetOrders({
-    sort: searchParams.get('sort') ? searchParams.get('sort')! : 'Awaiting',
     page: searchParams.get('page')!,
   });
-  const orders: { orders: Order[]; totalPages: number } = data?.data?.data;
-  const orderStatusCounts: { _id: string; count: number }[] = data?.data?.data?.orderStatusCounts;
-
+  const orders: { order: Order[]; totalPages: number; totalItems: number } = data?.data?.data;
+  const orderStatusCounts: STATUSCOUNTS = data?.data?.data?.statusCounts;
+  const sortOrders = orders?.order?.filter(
+    (item) => item.productPhysicalItems.status === (searchParams.get('sort') || 'AWAITING')
+  );
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
@@ -35,7 +36,7 @@ const Page = () => {
         <FilterOrders orderStatusCounts={orderStatusCounts} />
       </Suspense>
 
-      <div>
+      <div className="">
         <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
           آخرین سفارش‌ها
         </p>
@@ -45,9 +46,9 @@ const Page = () => {
             size="lg"
             className="!mt-20 flex items-center justify-center"
           />
-        ) : orders?.orders.length >= 1 ? (
+        ) : sortOrders?.length >= 1 ? (
           <div className="container_page flex flex-col gap-5 lg:!w-full">
-            {orders.orders.map((order, idx) => (
+            {sortOrders.map((order, idx) => (
               <CardOrder key={idx} order={order} />
             ))}
           </div>

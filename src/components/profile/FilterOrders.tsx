@@ -1,14 +1,12 @@
 'use client';
+import { STATUSCOUNTS } from '@/types/profile';
 import { Button, Tab, Tabs } from '@heroui/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { useMedia } from 'react-use';
 
 type Props = {
-  orderStatusCounts: {
-    count: number;
-    _id: string;
-  }[];
+  orderStatusCounts: STATUSCOUNTS;
 };
 const FilterOrders = ({ orderStatusCounts }: Props) => {
   const isMobile = useMedia('(max-width: 480px)', false);
@@ -17,8 +15,8 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
   const activeItem = searchParams.get('sort') ?? 'Awaiting';
   const filters = [
     {
-      name: 'جاری',
-      status: 'Awaiting',
+      name: 'در انتظار پرداخت',
+      status: 'AWITING',
       icon: (
         <svg
           width="33"
@@ -42,12 +40,12 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           />
         </svg>
       ),
-      count: orderStatusCounts?.find((item) => item._id === 'Awaiting')?.count ?? '0',
+      count: orderStatusCounts?.AWAITING,
       color: '#FFA216',
     },
     {
-      name: 'تحویل داده شده',
-      status: 'Doing',
+      name: 'در حال انجام',
+      status: 'DOING',
       icon: (
         <svg
           width="32"
@@ -67,12 +65,12 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           />
         </svg>
       ),
-      count: orderStatusCounts?.find((item) => item._id === 'Doing')?.count ?? '0',
+      count: orderStatusCounts?.DOING,
       color: '#1DA1F3',
     },
     {
-      name: 'مرجوعی شده',
-      status: 'Review',
+      name: 'در انتظار بررسی',
+      status: 'REVIEW',
       icon: (
         <svg
           width="32"
@@ -92,12 +90,12 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           />
         </svg>
       ),
-      count: orderStatusCounts?.find((item) => item._id === 'Review')?.count ?? '0',
+      count: orderStatusCounts?.REVIEW,
       color: '#FFA216',
     },
     {
-      name: 'لغو شده',
-      status: 'Delivery',
+      name: 'تحویل پست',
+      status: 'DELIVERY',
       icon: (
         <svg
           width="33"
@@ -113,7 +111,49 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           />
         </svg>
       ),
-      count: orderStatusCounts?.find((item) => item._id === 'Delivery')?.count ?? '0',
+      count: orderStatusCounts?.DELIVERY,
+      color: '#1DA1F3',
+    },
+    {
+      name: 'ارسال شده',
+      status: 'POSTED',
+      icon: (
+        <svg
+          width="33"
+          height="32"
+          viewBox="0 0 33 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.666626" width="32" height="32" rx="16" fill="#1DA1F3" />
+          <path
+            d="M23.0067 18.13L20.8267 16.38C20.5167 16.14 20.1267 16 19.7267 16H17.4167V13H21.8867C22.8567 13 23.6367 12.22 23.6367 11.25V7.75C23.6367 6.78 22.8567 6 21.8867 6H13.6267C13.2367 6 12.8467 6.14 12.5367 6.38L10.3467 8.13C9.47665 8.83 9.47665 10.17 10.3467 10.87L12.5367 12.62C12.8467 12.86 13.2367 13 13.6267 13H15.9167V16H11.4667C10.4967 16 9.71665 16.78 9.71665 17.75V21.25C9.71665 22.22 10.4967 23 11.4667 23H15.9167V25.25H13.6667C13.2567 25.25 12.9167 25.59 12.9167 26C12.9167 26.41 13.2567 26.75 13.6667 26.75H19.6667C20.0767 26.75 20.4167 26.41 20.4167 26C20.4167 25.59 20.0767 25.25 19.6667 25.25H17.4167V23H19.7267C20.1267 23 20.5167 22.86 20.8267 22.62L23.0067 20.87C23.8867 20.17 23.8867 18.83 23.0067 18.13Z"
+            fill="white"
+          />
+        </svg>
+      ),
+      count: orderStatusCounts?.POSTED,
+      color: '#1DA1F3',
+    },
+    {
+      name: 'لغو شده',
+      status: 'CANCELED',
+      icon: (
+        <svg
+          width="33"
+          height="32"
+          viewBox="0 0 33 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect x="0.666626" width="32" height="32" rx="16" fill="#1DA1F3" />
+          <path
+            d="M23.0067 18.13L20.8267 16.38C20.5167 16.14 20.1267 16 19.7267 16H17.4167V13H21.8867C22.8567 13 23.6367 12.22 23.6367 11.25V7.75C23.6367 6.78 22.8567 6 21.8867 6H13.6267C13.2367 6 12.8467 6.14 12.5367 6.38L10.3467 8.13C9.47665 8.83 9.47665 10.17 10.3467 10.87L12.5367 12.62C12.8467 12.86 13.2367 13 13.6267 13H15.9167V16H11.4667C10.4967 16 9.71665 16.78 9.71665 17.75V21.25C9.71665 22.22 10.4967 23 11.4667 23H15.9167V25.25H13.6667C13.2567 25.25 12.9167 25.59 12.9167 26C12.9167 26.41 13.2567 26.75 13.6667 26.75H19.6667C20.0767 26.75 20.4167 26.41 20.4167 26C20.4167 25.59 20.0767 25.25 19.6667 25.25H17.4167V23H19.7267C20.1267 23 20.5167 22.86 20.8267 22.62L23.0067 20.87C23.8867 20.17 23.8867 18.83 23.0067 18.13Z"
+            fill="white"
+          />
+        </svg>
+      ),
+      count: orderStatusCounts?.CANCELED,
       color: '#1DA1F3',
     },
   ];
