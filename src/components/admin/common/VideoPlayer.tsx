@@ -9,10 +9,11 @@ type Props = {
   poster: string;
   isHls?: boolean;
   course: Course;
+  watchedTime?: number;
 };
 
-const VideoPlayer = ({ url, isHls, course }: Props) => {
-  return <HlsPlayer course={course} isHls={isHls} src={url} />;
+const VideoPlayer = ({ url, isHls, course, watchedTime }: Props) => {
+  return <HlsPlayer watchedTime={watchedTime} course={course} isHls={isHls} src={url} />;
 };
 
 export default VideoPlayer;

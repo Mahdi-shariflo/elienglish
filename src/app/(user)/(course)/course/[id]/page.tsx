@@ -22,7 +22,7 @@ const Page = async ({ params }: Props) => {
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/course/category"
-          breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
+          breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}
         />
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
           <div className="w-full gap-10 overflow-hidden rounded-lg lg:pb-8">

@@ -18,6 +18,8 @@ const Page = async ({ params, searchParams }: Props) => {
     url: `/course/view-course-page?courseId=${decodeURIComponent(id)}`,
   });
   const course: Course = result?.data?.data?.course;
+  const watchVideoData = result.data.data?.WatchedVideo;
+  const accessibleChapters = result.data.data?.accessibleChapters;
 
   const cleanDescription =
     typeof course?.description === 'string'
@@ -28,6 +30,26 @@ const Page = async ({ params, searchParams }: Props) => {
           ?.replace(/width=".*?"/g, '') // حذف ویژگی width
           ?.replace(/height=".*?"/g, '')
       : ''; // حذف ویژگی height
+
+  const findIstComplated = watchVideoData?.videoProgresses?.find(
+    (item: { isCompleted: boolean }) => item.isCompleted === false
+  );
+  const allEpisodes = accessibleChapters?.flatMap((ch: { episodes: [] }) => ch.episodes); // همه اپیزودهای دوره
+  const totalEpisodes = allEpisodes.length;
+
+  const completedEpisodes = watchVideoData?.videoProgresses?.filter(
+    (p: { isCompleted: boolean; episodeId: string }) => {
+      return (
+        p.isCompleted === true && allEpisodes.some((e: { _id: string }) => e._id === p.episodeId)
+      );
+    }
+  ).length;
+
+  const progressPercent =
+    totalEpisodes > 0 ? Math.round((completedEpisodes / totalEpisodes) * 100) : 0;
+
+  console.log(accessibleChapters);
+
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
@@ -49,7 +71,7 @@ const Page = async ({ params, searchParams }: Props) => {
                       label=""
                       showValueLabel={false} // عدد رو مخفی می‌کنیم اگر فقط آیکن بخوایم
                       size="lg"
-                      value={70}
+                      value={progressPercent}
                       classNames={{
                         svg: 'stroke-[#6E3DFF]', // رنگ خط دایره
                         indicator: 'text-[#6E3DFF]', // رنگ متن/آیکن داخل
@@ -72,7 +94,7 @@ const Page = async ({ params, searchParams }: Props) => {
                     </span>
                   </div>
                   <p className="font-medium text-[#8E98A8]">
-                    پیشرفت شما: <span className="text-left text-main">%30</span>
+                    پیشرفت شما: <span className="text-left text-main">%{progressPercent}</span>
                   </p>
                 </div>
               </div>
@@ -83,7 +105,12 @@ const Page = async ({ params, searchParams }: Props) => {
                   course={course}
                   isHls
                   poster=""
-                  url={video ? video : course.chapters[0].episodes[0].video}
+                  watchedTime={findIstComplated?.watchedTime}
+                  url={
+                    watchVideoData?.episodeUrl
+                      ? watchVideoData?.episodeUrl
+                      : course.chapters[0].episodes[0].video
+                  }
                 />
               </div>
             </div>

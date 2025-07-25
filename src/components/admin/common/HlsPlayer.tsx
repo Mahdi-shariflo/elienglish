@@ -5,24 +5,24 @@ import Button from '@/components/common/Button';
 import Watermark from './Watermark';
 import { Course } from '@/types/home';
 import { useUpdateWatchVideo } from '@/hooks/watchedVideo/useUpdateWatchVideo';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 type Props = {
   src: string;
   isHls?: boolean;
   course?: Course;
   poster?: string;
+  watchedTime?: number;
 };
-const HlsPlayer = ({ src, course, isHls }: Props) => {
+const HlsPlayer = ({ src, course, isHls, watchedTime }: Props) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const currentTimeRef = useRef(0);
-  const [currentTime, setCurrentTime] = useState(0);
+  const [currentTime, setCurrentTime] = useState(watchedTime);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1); // پیش‌فرض صدا: 100%
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   const hlsInstance = useRef<Hls | null>(null);
   const [qualities, setQualities] = useState<{ label: string; level: number }[]>([]);
   const [currentQuality, setCurrentQuality] = useState<number>(-1); // -1 = Auto
@@ -30,7 +30,13 @@ const HlsPlayer = ({ src, course, isHls }: Props) => {
     const video = videoRef.current;
     if (!video) return;
 
-    // اگر HLS هست
+    const handleLoaded = () => {
+      if (watchedTime && watchedTime > 0) {
+        video.currentTime = watchedTime;
+      }
+    };
+
+    // برای HLS
     if (Hls.isSupported() && src.endsWith('.m3u8')) {
       const hls = new Hls();
       hls.loadSource(src);
@@ -47,25 +53,29 @@ const HlsPlayer = ({ src, course, isHls }: Props) => {
         setIsLoading(false);
       });
 
+      video.addEventListener('loadedmetadata', handleLoaded);
+
       hlsInstance.current = hls;
     }
-    // اگر Safari یا لینک معمولی (mp4)
+    // برای فایل‌های MP4
     else if (video.canPlayType('application/vnd.apple.mpegurl') || src.endsWith('.mp4')) {
       video.src = src;
       video.load();
-      video.play(); // اتوپلی
+      video.addEventListener('loadedmetadata', handleLoaded);
+      video.play();
       setIsPlaying(true);
       setIsLoading(false);
     }
 
     return () => {
       hlsInstance.current?.destroy?.();
+      video.removeEventListener('loadedmetadata', handleLoaded);
     };
-  }, [src]);
+  }, [src, watchedTime]);
 
   const { mutate } = useUpdateWatchVideo();
-  const router = useRouter();
   const { id } = useParams();
+
   useEffect(() => {
     if (!isPlaying || !isHls || !course || !src) return;
 
@@ -75,24 +85,46 @@ const HlsPlayer = ({ src, course, isHls }: Props) => {
 
     if (!episode?._id) return;
 
-    const interval = setInterval(() => {
+    const checkAndUpdate = () => {
+      const current = currentTimeRef.current;
+      const end = duration;
+
+      const remaining = end - current;
+
+      const isCompleted = remaining <= 29 || current >= end;
+
       mutate({
         data: {
+          isCompleted,
           courseId: id,
           episodeId: episode._id,
-          watchedTime: currentTimeRef.current, // مقدار به‌روز
+          watchedTime: current,
         },
       });
-    }, 30000); // هر ۳۰ ثانیه
+    };
 
-    return () => clearInterval(interval); // پاک‌سازی موقع unmount یا تغییر شرط‌ها
-  }, [isHls, isPlaying, src, course, mutate, id]);
+    const interval = setInterval(checkAndUpdate, 10000); // هر ۱۰ ثانیه بررسی
 
-  useEffect(() => {
-    if (src && isHls) {
-      router.push(`/course/video/${id}?video=${src}`);
-    }
-  }, [src]);
+    // وقتی ویدیو کامل تموم شد
+    const video = videoRef.current;
+    const handleEnded = () => {
+      mutate({
+        data: {
+          isCompleted: true,
+          courseId: id,
+          episodeId: episode._id,
+          watchedTime: duration,
+        },
+      });
+    };
+
+    video?.addEventListener('ended', handleEnded);
+
+    return () => {
+      clearInterval(interval);
+      video?.removeEventListener('ended', handleEnded);
+    };
+  }, [isHls, isPlaying, src, course, mutate, id, duration]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -379,7 +411,7 @@ const HlsPlayer = ({ src, course, isHls }: Props) => {
               </div>
               <div className="flex items-center gap-4">
                 <div className="text-md w-[100px] text-right font-medium text-white">
-                  {formatTime(currentTime)} / {formatTime(duration)}
+                  {formatTime(currentTime!)} / {formatTime(duration)}
                 </div>
                 <Button className="!w-fit !min-w-fit" onClick={toggleFullscreen}>
                   {isFullscreen ? (
@@ -437,8 +469,8 @@ const HlsPlayer = ({ src, course, isHls }: Props) => {
               appearance: none;
               background: linear-gradient(
                 to right,
-                #ffffff ${(currentTime / duration) * 100}%,
-                #ffffff80 ${(currentTime / duration) * 100}%
+                #ffffff ${(currentTime! / duration) * 100}%,
+                #ffffff80 ${(currentTime! / duration) * 100}%
               );
               border-radius: 4px;
               outline: none;
