@@ -1,18 +1,17 @@
 'use client';
-import { useGetOrders } from '@/hooks/profile/useGetOrders';
 import React from 'react';
-import Button from '../common/Button';
 import { useRouter } from 'next/navigation';
+import { useGetOverviewUser } from '@/hooks/profile/useGetOverviewUser';
 
 const RingkasanOrder = ({ className }: { className?: string }) => {
   const router = useRouter();
-  const { data } = useGetOrders({ sort: '', page: '1' });
-  const orderStatusCounts: { _id: string; count: number }[] = data?.data?.data?.orderStatusCounts;
-
+  const { data } = useGetOverviewUser();
+  const overview = data?.data?.data;
+  console.log(overview, 'dsgfusgfyugsfsdf');
   const newArray = [
     {
-      label: 'سفارشات من',
-      count: '0',
+      label: 'سفارش های فیزیکی',
+      count: overview?.physicalProducts,
       color: '#FFA216',
       icon: (
         <svg
@@ -33,8 +32,8 @@ const RingkasanOrder = ({ className }: { className?: string }) => {
       url: '/profile/orders?sort=Awaiting',
     },
     {
-      label: 'فایل های دانلودی',
-      count: '0',
+      label: 'سفارش های دیجیتال',
+      count: overview?.digitalProducts,
       color: '#0C0C0C',
       icon: (
         <svg
@@ -58,7 +57,7 @@ const RingkasanOrder = ({ className }: { className?: string }) => {
     },
     {
       label: 'دوره های من',
-      count: orderStatusCounts?.find((item) => item._id === 'Delivery')?.count ?? '0',
+      count: overview?.courses,
       color: '#0ABF8C',
       icon: (
         <svg

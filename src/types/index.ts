@@ -382,3 +382,9 @@ interface CourseChapter {
     duration: string;
   }[];
 }
+
+export type Notification = {
+  title: string;
+  description: string;
+  createdAt: string;
+};

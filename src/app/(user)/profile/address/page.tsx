@@ -57,14 +57,14 @@ const Page = () => {
                 >
                   <path
                     d="M6 12H18"
-                    stroke="#DD338B"
+                    stroke="#6E3DFF"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M12 18V6"
-                    stroke="#DD338B"
+                    stroke="#6E3DFF"
                     strokeWidth="1.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"

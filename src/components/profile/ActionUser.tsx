@@ -3,15 +3,14 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import React, { useEffect } from 'react';
 import ReactSelect from '../common/form/ReactSelect';
-import Datepicker from '../common/Datepicker';
 import { useUpdateUser } from '@/hooks/profile/useUpdateUser';
 import { useFormik } from 'formik';
 import { namePattern } from '@/lib/regexes';
 import * as Yup from 'yup';
 import { removeEmptyFields } from '@/lib/fun';
 import { addCommaCartBank, removeNumNumeric } from '@/lib/convert';
-import { useSession } from 'next-auth/react';
 import { User } from '@/types';
+import { useSession } from '@/lib/auth/useSession';
 type Props = {
   disable?: boolean;
   showEdit?: boolean;
@@ -38,7 +37,7 @@ const ActionUser = ({ disable = false }: Props) => {
         .min(2, 'نام‌خانوادگی باید حداقل دو کارکتر باشد')
         .matches(namePattern, 'لطفا ادرس را با حروف فارسی وارد کنید')
         .required('فیلد اجباری است'),
-      dateOfBirth: Yup.string().required('فیلد اجباری است'),
+      // dateOfBirth: Yup.string().required('فیلد اجباری است'),
       nationalCode: Yup.string()
         .nullable() // این باعث می‌شود که فیلد اختیاری باشد
         .min(10, 'کد ملی باید دقیقا ۱۰ رقم باشد')
@@ -70,7 +69,7 @@ const ActionUser = ({ disable = false }: Props) => {
     },
   });
   const session = useSession();
-  const user = session.data as User;
+  const user = session as User;
   useEffect(() => {
     if (user) {
       formik.setValues({

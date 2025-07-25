@@ -1,7 +1,14 @@
+'use client';
 import React from 'react';
 import CardNotfication from './CardNotfication';
+import { useGetNotfications } from '@/hooks/profile/useGetNotfications';
+import { Notification } from '@/types';
 
 const Notfications = () => {
+  const { data } = useGetNotfications();
+  const notfications: Notification[] = data?.data?.data?.notification;
+  if (Number(notfications?.length) < 1 || !data?.data) return null;
+  console.log(notfications);
   return (
     <div className="mr-auto mt-5 w-[95%] rounded-2xl border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
       <div className="flex items-center gap-4">
@@ -59,7 +66,9 @@ const Notfications = () => {
         <p className="font-medium text-[18px] text-[#0C0C0C] dark:text-white">تاریخچه اعلانات</p>
       </div>
       <div className="mt-5">
-        <CardNotfication />
+        {notfications?.map((notification, idx) => (
+          <CardNotfication notification={notification} key={idx} />
+        ))}
       </div>
     </div>
   );

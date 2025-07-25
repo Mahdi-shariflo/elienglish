@@ -9,7 +9,7 @@ export const useUpdateUser = () => {
   const userData = session.data as User;
   return useMutation({
     mutationFn: async ({ data }: { data: unknown }) => {
-      return await safeRequest({ url: '/user/update', method: 'PATCH', data });
+      return await safeRequest({ url: '/users', method: 'PATCH', data });
     },
     onSuccess: async (data) => {
       const user = data?.data?.data?.user;

@@ -35,7 +35,7 @@ const Page = () => {
         <FilterOrders orderStatusCounts={orderStatusCounts} />
       </Suspense>
 
-      <div className="">
+      <div>
         <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
           آخرین سفارش‌ها
         </p>

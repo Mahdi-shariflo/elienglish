@@ -74,7 +74,6 @@ client.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log('errrrrrrrrrrrrrrrrrrrrrrrrrrr');
     const status = error.response?.status || error.status;
     if (status === 410) {
       return notFound();
@@ -91,7 +90,7 @@ client.interceptors.response.use(
     } else if (((typeof window !== 'undefined') !== undefined) !== undefined && status === 429) {
       location.href = '/too-many-request';
     }
-    return error;
+    return Promise.reject(error);
   }
 );
 

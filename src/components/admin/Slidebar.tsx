@@ -185,12 +185,18 @@ const menus = [
     href: '/admin/home/',
     activeIcon: Home_fill_icon,
   },
-  // {
-  //   icon: Support_icon,
-  //   name: 'پشتیبانی',
-  //   href: '/admin/supports/',
-  //   activeIcon: Comments_fill_icon,
-  // },
+  {
+    icon: Support_icon,
+    name: 'پشتیبانی',
+    href: '/admin/supports/',
+    activeIcon: Comments_fill_icon,
+  },
+  {
+    icon: Support_icon,
+    name: 'اعلان‌ها',
+    href: '/admin/notifications/',
+    activeIcon: Comments_fill_icon,
+  },
   {
     icon: User_icon,
     name: 'کاربران',

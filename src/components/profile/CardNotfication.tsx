@@ -1,9 +1,10 @@
+import { Notification } from '@/types';
 import React from 'react';
 
-const CardNotfication = () => {
+const CardNotfication = ({ notification }: { notification: Notification }) => {
   return (
     <div className="flex items-center">
-      <div className="flex flex-1 items-start justify-between gap-3">
+      <div className="flex flex-1 items-start gap-3">
         <span>
           <svg
             width="36"
@@ -58,18 +59,20 @@ const CardNotfication = () => {
           </svg>
         </span>
         <div>
-          <p className="font-medium text-[#0B1524] dark:text-white">
-            ثبت نام ترم دوم کلاس های حضوری شروع شد.
+          <p className="text-right font-medium text-[#0B1524] dark:text-white">
+            {notification.title}
           </p>
-          <p className="line-clamp-1 font-light text-[#8E98A8]">
-            با سلام و احترام، باتوجه به استقبال و همراهی ارزشمند شما برای ثبت نام در کلاس های حضوری
-            تهران در ترم یک، زودتر از موعد قبت نام، پیش ثبت نام ترم دوم آغاز شد. برای اطلاعات بیشتر،
-            تعیین سطح و ثبت نام در ترم دوم روی گزینه “ارتباط در واتساپ” کلیک کنید.
+          <p className="line-clamp-1 text-right font-light text-[#8E98A8]">
+            {notification.description}
           </p>
         </div>
       </div>
       <p className="relative flex-1 text-left font-medium text-[#8E98A8] after:absolute after:-left-3 after:top-1/2 after:h-2 after:w-2 after:-translate-y-1/2 after:rounded-full after:bg-main">
-        سه شنبه ۳۰ بهمن ۱۴۰۳
+        {new Date(notification.createdAt).toLocaleDateString('fa-IR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
       </p>
     </div>
   );

@@ -1295,6 +1295,63 @@ export const initialDataContactus = ({ onEye, onDelete }: Props) => [
     ),
   },
 ];
+// ***********************************************initialDataNotifications****************************************************8888
+
+export const initialDataNotifications = ({ onEdit, onDelete }: Props) => [
+  {
+    title: <HeaderCell align="center" title="ردیف" />,
+    dataIndex: 'id',
+    key: 'id',
+    render: (_: string, row: any, idx: number) => (
+      <span className={`block text-center ${row ? '' : ''}`}>{idx + 1}</span>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عنوان" />,
+    dataIndex: 'title',
+    key: 'title',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="توضیحات" />,
+    dataIndex: 'description',
+    key: 'description',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="زمان ایجاد" />,
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (value: string) => (
+      <p className="mx-auto w-[200px] overflow-hidden text-ellipsis text-center text-[12px] text-gray-600">
+        {new Date(value).toLocaleDateString('fa-IR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-2">
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
+        {onDelete ? (
+          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+            <Delete_icon />
+          </Button>
+        ) : null}
+      </div>
+    ),
+  },
+];
 
 // ***********************************************comments****************************************************8888
 

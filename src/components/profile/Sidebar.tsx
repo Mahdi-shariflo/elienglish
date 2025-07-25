@@ -6,6 +6,7 @@ import Button from '../common/Button';
 import useGlobalStore from '@/store/global-store';
 import Profile from '@/../public/images/profile.jpg';
 import Image from 'next/image';
+import { useSession } from '@/lib/auth/useSession';
 
 const menus = [
   {
@@ -451,6 +452,7 @@ const menus = [
   },
 ];
 const Sidebar = () => {
+  const session = useSession();
   const { setLogout } = useGlobalStore();
   const pathname = usePathname();
   return (
@@ -495,9 +497,11 @@ const Sidebar = () => {
           </span>
         </div>
         <div className="mt-8 flex w-full flex-col items-center justify-center border-b border-[#E4E7E9] pb-3 dark:border-[#505B74]">
-          <p className="font-medium text-[16px] dark:text-white">فاطمه رحیمی</p>
+          <p className="font-medium text-[16px] dark:text-white">
+            {session?.firstName} {session?.lastName}
+          </p>
           <p className="pt-2 font-medium text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
-            09052549459
+            {session?.mobile}
           </p>
         </div>
       </div>
