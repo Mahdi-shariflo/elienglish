@@ -35,14 +35,14 @@ const Page = () => {
                 }
                 />
             </div> */}
-      <Suspense>
-        <FilterDownloads orderStatusCounts={orderStatusCounts} />
-      </Suspense>
 
-      <div className="">
-        <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
+      <div>
+        <p className="container_page !my-6 hidden border-b border-gray-200 pb-4 font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
           فایل های دانلودی
         </p>
+        <Suspense>
+          <FilterDownloads orderStatusCounts={orderStatusCounts} />
+        </Suspense>
         {isPending ? (
           <Spinner
             classNames={{ circle1: 'border-b-main', circle2: 'border-b-main' }}
