@@ -103,6 +103,30 @@ export type Order = {
       provinceLabel: string; // به فارسی مثل: آذربایجان شرقی
     };
   };
+  levelItems: {
+    thumbnailImage: Media;
+    productId: string;
+    date: string; // ISO string format
+    discountPrice: number;
+    lpaId: string;
+    lpaTotalAmount: number;
+    price: number;
+    status: 'SUBMITTED' | 'CANCELLED' | 'COMPLETED' | string; // یا فقط "SUBMITTED" اگر تنها همینه
+    teacherName: string;
+    teacherProfile: string; // URL
+    time: string; // فرمت زمان مثلاً "18:30"
+    title: string;
+    typeLevel: 'LEVEL_TEST' | 'REGULAR' | string; // بسته به نوع جلسه
+    weekday:
+      | 'SATURDAY'
+      | 'SUNDAY'
+      | 'MONDAY'
+      | 'TUESDAY'
+      | 'WEDNESDAY'
+      | 'THURSDAY'
+      | 'FRIDAY'
+      | string;
+  };
 
   _id: string;
 };
