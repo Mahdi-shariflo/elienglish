@@ -27,17 +27,7 @@ const Page = () => {
   );
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
-      <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
-      {/* <div className='container_page lg:!w-full lg:flex-row  flex  flex-col items-center gap-6 lg:justify-between'>
-                <p className='text-[#0C0C0C] hidden lg:block font-medium text-[14px] lg:text-[18px]'>تاریخچه سفارش‌های من</p>
-                <Input className='lg:!w-[284px]' placeholder='جستجو ' classNameInput='!h-[48px] bg-[#F5F6F6]' startContent={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#616A76" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M22 22L20 20" stroke="#616A76" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                }
-                />
-            </div> */}
-
+      <BackPrevPage url="/profile" title="تاریخچه سفارش‌ دوره" />
       <div className="">
         <div className="flex items-center gap-3">
           <span>

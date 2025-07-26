@@ -2,7 +2,7 @@ import { MdOutlineSwitchAccessShortcut, MdProductionQuantityLimits } from 'react
 import { TbEdit } from 'react-icons/tb';
 import { FaEye } from 'react-icons/fa';
 import { FcPrint } from 'react-icons/fc';
-import { CgEye } from 'react-icons/cg';
+import { CgCloseR, CgEye } from 'react-icons/cg';
 import Link from 'next/link';
 import HeaderCell from '@/components/common/HeaderCell';
 import { convertDatePer } from './convert';
@@ -1297,7 +1297,7 @@ export const initialDataContactus = ({ onEye, onDelete }: Props) => [
 ];
 // ***********************************************initialDataTickets****************************************************8888
 
-export const initialDataTickets = ({ onEye, onDelete, onEdit }: Props) => [
+export const initialDataTickets = ({ onEye, onDelete, onEdit, onView }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
     dataIndex: 'id',
@@ -1367,6 +1367,11 @@ export const initialDataTickets = ({ onEye, onDelete, onEdit }: Props) => [
         {onEdit ? (
           <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
             <Edit_icon />
+          </Button>
+        ) : null}
+        {onView ? (
+          <Button className="w-fit !px-0" onClick={() => onView(row)}>
+            <CgCloseR />
           </Button>
         ) : null}
       </div>

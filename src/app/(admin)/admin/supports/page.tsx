@@ -4,6 +4,7 @@ import SendMessageTicket from '@/components/admin/SendMessageTicket';
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
 import { SearchIcon, User_Icon } from '@/components/common/icon';
+import { useCloseTicket } from '@/hooks/admin/tickets/useCloseTicket';
 import { useGetTicketAdmin } from '@/hooks/admin/tickets/useGetTicketAdmin';
 import { initialDataTickets } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
@@ -11,6 +12,14 @@ import { Ticket } from '@/types/profile';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {
+  const { mutate: mutateClose, isPending: isPenadingClose } = useCloseTicket();
+  const [modalClose, setModalClose] = useState<{
+    open: boolean;
+    info: { _id: string } | null;
+  }>({
+    open: false,
+    info: null,
+  });
   const [modal, setModal] = useState<{
     open: boolean;
     info: { title: string; content: string } | null;
@@ -50,6 +59,7 @@ const Page = () => {
           }),
         onEye: (row) => setModal({ info: row, open: true }),
         onEdit: (row) => setModalSendMessage({ info: row, open: true }),
+        onView: (row) => setModalClose({ info: row, open: true }),
       }),
     [isSuccess]
   );
@@ -125,6 +135,19 @@ const Page = () => {
       {modalSendMessage.open && (
         <SendMessageTicket modal={modalSendMessage} setModal={setModalSendMessage} />
       )}
+
+      {modal.open ? (
+        <BaseDialog
+          isOpen={modalClose.open}
+          onClickFooter={() => mutateClose({ id: modalClose.info?._id! })}
+          onClose={() => setModalClose({ info: null, open: false })}
+          title="بستن تیکت"
+        >
+          <div>
+            <p>آیا میخواهید این تیکت را ببندید</p>
+          </div>
+        </BaseDialog>
+      ) : null}
     </div>
   );
 };

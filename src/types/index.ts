@@ -388,3 +388,16 @@ export type Notification = {
   description: string;
   createdAt: string;
 };
+
+export type Installment = {
+  amount: number;
+  courseId: string;
+  createdAt: string;
+  dueDate: string;
+  installmentNumber: number;
+  isPaid: boolean;
+  orderId: string;
+  paidAt: null;
+  status: 'AWAITING';
+  updatedAt: string;
+};
