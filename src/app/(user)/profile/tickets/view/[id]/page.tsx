@@ -2,6 +2,7 @@
 import BackPrevPage from '@/components/common/BackPrevPage';
 import Button from '@/components/common/Button';
 import { useGetTicketById } from '@/hooks/ticketing/useGetTicketById';
+import { BASEURL } from '@/lib/variable';
 import { Ticket } from '@/types/profile';
 import { Spinner } from '@heroui/react';
 import Link from 'next/link';
@@ -74,11 +75,15 @@ const Page = () => {
                   </span>
                   تیکت جدید
                 </Button>
-                <span
-                  className={`flex h-[42px] !w-[159px] items-center justify-center gap-1 rounded-lg border border-[#E4E7E9] px-2 font-regular text-[14px] text-main ${ticket.status === 'REVIEW' ? 'text-[#FF8D28]' : ''}`}
+                <p
+                  className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${ticket.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : value === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                 >
-                  {ticket.status === 'REVIEW' ? 'در حال بررسی' : ''}
-                </span>
+                  {ticket.status === 'REVIEW'
+                    ? 'در حال بررسی'
+                    : ticket.status === 'ANSWERED'
+                      ? 'ثبت شده'
+                      : 'بسته شده'}
+                </p>
               </div>
             </div>
             <div className="mt-5">
@@ -120,8 +125,9 @@ const Page = () => {
                           </span>
                         </div>
                         <a
+                          download
                           className="flex h-[32px] w-[119px] items-center justify-center gap-3 rounded-lg bg-main font-medium text-white"
-                          href=""
+                          href={`${BASEURL}/${item.attachmentUrl}`}
                         >
                           دانلود فایل
                           <span>

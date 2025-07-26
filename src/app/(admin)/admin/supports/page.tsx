@@ -1,17 +1,26 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
+import SendMessageTicket from '@/components/admin/SendMessageTicket';
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
 import { SearchIcon, User_Icon } from '@/components/common/icon';
-import { useGetSupportsAdmin } from '@/hooks/admin/supports/useGetSupportsAdmin';
-import { initialDataContactus } from '@/lib/table-column';
+import { useGetTicketAdmin } from '@/hooks/admin/tickets/useGetTicketAdmin';
+import { initialDataTickets } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
+import { Ticket } from '@/types/profile';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {
   const [modal, setModal] = useState<{
     open: boolean;
-    info: { firstName: string; lastName: string; message: string; mobile: string } | null;
+    info: { title: string; content: string } | null;
+  }>({
+    open: false,
+    info: null,
+  });
+  const [modalSendMessage, setModalSendMessage] = useState<{
+    open: boolean;
+    info: Ticket | null;
   }>({
     open: false,
     info: null,
@@ -21,7 +30,7 @@ const Page = () => {
     sort: 'createdAt_desc',
     search: '',
   });
-  const { data, isPending, isSuccess } = useGetSupportsAdmin({
+  const { data, isPending, isSuccess } = useGetTicketAdmin({
     page: filter.page,
     search: filter.search,
     sort: filter.sort,
@@ -29,7 +38,7 @@ const Page = () => {
   const { setVerifyDelete } = useGlobalStore();
   const columns = useMemo(
     () =>
-      initialDataContactus({
+      initialDataTickets({
         onDelete: (row) =>
           setVerifyDelete({
             open: true,
@@ -40,6 +49,7 @@ const Page = () => {
             url: `/admin/contactus/remove/${row._id}`,
           }),
         onEye: (row) => setModal({ info: row, open: true }),
+        onEdit: (row) => setModalSendMessage({ info: row, open: true }),
       }),
     [isSuccess]
   );
@@ -69,7 +79,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        تماس با ما
+        پشتیبانی
       </p>
       <Input
         value={filter.search}
@@ -84,9 +94,9 @@ const Page = () => {
         isSuccess={isSuccess}
         isLoading={isPending}
         total={comment?.totalPages}
-        mainData={comment?.contactus}
+        mainData={comment?.tickets}
         showData={columns}
-        columns={['_id', 'firstName', 'lastName', 'mobile', 'message', 'action']}
+        columns={['_id', 'title', 'ticketNumber', 'section', 'updatedAt', 'status', 'action']}
         page={Number(filter.page)}
         sort={filter.sort}
         onChangeSort={onChangeSort}
@@ -104,17 +114,17 @@ const Page = () => {
                 <User_Icon />
               </div>
               <div className="space-y-2">
-                <p>
-                  {modal.info?.firstName} {modal.info?.lastName}
-                </p>
-                <p>{modal.info?.mobile}</p>
+                <p>{modal.info?.title}</p>
               </div>
             </div>
 
-            <p className="mt-4 border-t border-gray-100 py-6 font-regular">{modal.info?.message}</p>
+            <p className="mt-4 border-t border-gray-100 py-6 font-regular">{modal.info?.content}</p>
           </div>
         </BaseDialog>
       ) : null}
+      {modalSendMessage.open && (
+        <SendMessageTicket modal={modalSendMessage} setModal={setModalSendMessage} />
+      )}
     </div>
   );
 };

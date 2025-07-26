@@ -1295,6 +1295,84 @@ export const initialDataContactus = ({ onEye, onDelete }: Props) => [
     ),
   },
 ];
+// ***********************************************initialDataTickets****************************************************8888
+
+export const initialDataTickets = ({ onEye, onDelete, onEdit }: Props) => [
+  {
+    title: <HeaderCell align="center" title="ردیف" />,
+    dataIndex: 'id',
+    key: 'id',
+    render: (_: string, row: any, idx: number) => (
+      <span className={`block text-center ${row ? '' : ''}`}>{idx + 1}</span>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عنوان" />,
+    dataIndex: 'title',
+    key: 'title',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="شماره تیکت" />,
+    dataIndex: 'ticketNumber',
+    key: 'ticketNumber',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="بخش" />,
+    dataIndex: 'section',
+    key: 'section',
+    render: (value: string) => <p className="text-center text-[12px] text-gray-600">{value}</p>,
+  },
+  {
+    title: <HeaderCell align="center" title="تاریخ ایجاد" />,
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (value: string) => (
+      <p className="text-center text-[12px] text-gray-600">
+        {new Date(value).toLocaleDateString('fa-IR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}
+      </p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="وضعیت" />,
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: string) => (
+      <p
+        className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${value === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : value === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+      >
+        {value === 'REVIEW' ? 'در حال بررسی' : value === 'ANSWERED' ? 'ثبت شده' : 'بسته شده'}
+      </p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-2">
+        {onEye ? (
+          <FaEye onClick={() => onEye(row)} size={20} className="cursor-pointer text-gray-600" />
+        ) : null}
+        {onDelete ? (
+          <Button className="w-fit !px-0" onClick={() => onDelete(row)}>
+            <Delete_icon />
+          </Button>
+        ) : null}
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
+      </div>
+    ),
+  },
+];
 // ***********************************************initialDataNotifications****************************************************8888
 
 export const initialDataNotifications = ({ onEdit, onDelete }: Props) => [

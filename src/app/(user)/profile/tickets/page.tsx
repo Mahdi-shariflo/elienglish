@@ -101,9 +101,13 @@ const Page = () => {
                   <div className="space-y-4">
                     <p className="font-regular text-[14px] text-[#6A7890]">وضعیت</p>
                     <p
-                      className={`flex h-[28px] w-[97px] items-center justify-center rounded-lg font-medium text-[12px] text-[#0B1524] ${item.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : ''}`}
+                      className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${item.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                     >
-                      {item.status === 'REVIEW' ? 'در حال بررسی' : ''}
+                      {item.status === 'REVIEW'
+                        ? 'در حال بررسی'
+                        : item.status === 'ANSWERED'
+                          ? 'ثبت شده'
+                          : 'بسته شده'}
                     </p>
                   </div>
                   <div className="space-y-4">
