@@ -76,7 +76,7 @@ const Page = () => {
                   تیکت جدید
                 </Button>
                 <p
-                  className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${ticket.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : value === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+                  className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${ticket.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : ticket.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                 >
                   {ticket.status === 'REVIEW'
                     ? 'در حال بررسی'
