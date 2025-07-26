@@ -12,7 +12,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
   const isMobile = useMedia('(max-width: 480px)', false);
 
   const searchParams = useSearchParams();
-  const activeItem = searchParams.get('sort') ?? 'Awaiting';
+  const activeItem = searchParams.get('sort') ?? 'AWITING';
   const filters = [
     {
       name: 'در انتظار پرداخت',

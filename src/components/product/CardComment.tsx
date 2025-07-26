@@ -63,7 +63,7 @@ const CardComment = ({ comment, productId, showAction = true }: Props) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="pt-1 font-regular text-[14px] text-white">{comment.rate}</span>
+            <span className="pt-1 font-regular text-[14px] text-white">{comment.rating}</span>
           </div>
         </div>
         {/* date */}
@@ -134,10 +134,10 @@ const CardComment = ({ comment, productId, showAction = true }: Props) => {
         </div>
 
         <p className="w-full text-wrap py-2 font-bold text-[14px] text-[#616A76]">
-          {comment.commentTitle}
+          {comment.title}
         </p>
         <p className="w-full text-wrap py-2 font-regular text-[14px] text-[#616A76]">
-          {comment.comment}
+          {comment.content}
         </p>
         {showAction && (
           <div className="flex items-center justify-end gap-3">
@@ -286,7 +286,7 @@ const CardComment = ({ comment, productId, showAction = true }: Props) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span className="pt-1 font-regular text-[14px] text-white">{child.rate}</span>
+                <span className="pt-1 font-regular text-[14px] text-white">{child.rating}</span>
               </div>
             </div>
             {/* date */}
@@ -356,7 +356,7 @@ const CardComment = ({ comment, productId, showAction = true }: Props) => {
               </span>
             </div>
 
-            <p className="py-2 font-regular text-[14px] text-[#616A76]">{child.comment}</p>
+            <p className="py-2 font-regular text-[14px] text-[#616A76]">{child.content}</p>
 
             <div className="flex items-center justify-end gap-3">
               <div className="flex items-center justify-end gap-3">

@@ -142,3 +142,17 @@ export type STATUSCOUNTS = {
   REVIEW: number;
   PAID: number;
 };
+
+export type Ticket = {
+  _id: string;
+  title: string;
+  content: string;
+  section: string;
+  submitDate: string;
+  attachmentUrl: string;
+  ticketNumber: number;
+  status: 'REVIEW';
+  fullName: string;
+  createdAt: string;
+  messages: Ticket[];
+};

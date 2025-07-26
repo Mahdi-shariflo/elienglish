@@ -37,7 +37,7 @@ const Page = () => {
             </div> */}
 
       <div>
-        <p className="container_page !my-6 hidden border-b border-gray-200 pb-4 font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
+        <p className="container_page !my-6 hidden font-medium text-[14px] text-[#0C0C0C] dark:text-white lg:block lg:!w-full lg:text-[18px]">
           فایل های دانلودی
         </p>
         <Suspense>
@@ -50,7 +50,7 @@ const Page = () => {
             className="!mt-20 flex items-center justify-center"
           />
         ) : sortOrders?.length >= 1 ? (
-          <div className="container_page flex flex-col gap-5 lg:!w-full">
+          <div className="container_page mt-5 flex flex-col gap-5 lg:!w-full">
             {sortOrders.map((order, idx) => (
               <CardDownload
                 src={

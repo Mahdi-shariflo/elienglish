@@ -4,14 +4,47 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import Textarea from '@/components/common/form/Textarea';
 import Select from '@/components/common/Select';
+import { useCreateTicket } from '@/hooks/ticketing/useCreateTicket';
 import { useFormik } from 'formik';
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import * as Yup from 'yup';
 const Page = () => {
-  const formik = useFormik({
-    initialValues: {},
-    onSubmit: () => {},
+  const { mutate, isPending, isSuccess } = useCreateTicket();
+  const formik = useFormik<any>({
+    initialValues: {
+      title: '',
+      descrption: '',
+      section: '',
+      files: undefined,
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().required('فیلد اجباری است'),
+      content: Yup.string().required('فیلد اجباری است'),
+      section: Yup.string().required('فیلد اجباری است'),
+    }),
+    onSubmit: (values) => {
+      const formdata = new FormData();
+      formdata.append('title', values.title);
+      formdata.append('content', values.content);
+      formdata.append('section', values.section);
+      if (values.files) {
+        formdata.append('files', values.files);
+      }
+
+      mutate({ data: values });
+    },
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      formik.setValues({
+        title: '',
+        description: '',
+        files: undefined,
+      });
+      formik.resetForm();
+    }
+  }, [isSuccess]);
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="درخواست پشتیبانی جدید" />
@@ -39,7 +72,7 @@ const Page = () => {
             درخواست پشتیانی جدید
           </p>
         </div>
-        <form className="mt-10 space-y-3">
+        <form onSubmit={formik.handleSubmit} className="mt-10 space-y-3">
           <Input isRequired name="title" formik={formik} label={'عنوان'} />
           <Select
             isRequired
@@ -49,7 +82,7 @@ const Page = () => {
             options={[
               {
                 label: 'مالی',
-                value: '',
+                value: 'مالی',
               },
             ]}
           />
@@ -62,41 +95,59 @@ const Page = () => {
               {'ارسال فایل'} {<span className="text-red-500">*</span>}
             </p>
             <div className="relative h-[200px] w-full rounded-lg border-2 border-dashed">
-              <label className="block h-full w-full" htmlFor="upload">
-                <div className="flex h-full flex-col items-center justify-center gap-3">
-                  <span>
-                    <svg
-                      width="72"
-                      height="72"
-                      viewBox="0 0 72 72"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M54 24C54 27.3137 51.3137 30 48 30C44.6863 30 42 27.3137 42 24C42 20.6863 44.6863 18 48 18C51.3137 18 54 20.6863 54 24Z"
-                        fill="#6A7890"
-                      />
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M35.8279 3.75H36.1721C43.0973 3.74996 48.5244 3.74993 52.7589 4.31924C57.0931 4.90196 60.5132 6.11798 63.1976 8.80241C65.882 11.4868 67.098 14.9069 67.6808 19.2411C68.2501 23.4756 68.25 28.9027 68.25 35.8279V36.0927C68.25 41.8191 68.25 46.5068 67.939 50.3236C67.6265 54.1592 66.9861 57.3643 65.5527 60.0262C64.9204 61.2003 64.1435 62.2517 63.1976 63.1976C60.5132 65.882 57.0931 67.098 52.7589 67.6808C48.5244 68.2501 43.0973 68.25 36.1721 68.25H35.8279C28.9027 68.25 23.4756 68.2501 19.2411 67.6808C14.9069 67.098 11.4868 65.882 8.80241 63.1976C6.42257 60.8178 5.1936 57.8557 4.54005 54.1813C3.89805 50.5718 3.78061 46.0809 3.75621 40.5044C3.75 39.086 3.75 37.5857 3.75 36.003V35.8279C3.74996 28.9027 3.74993 23.4756 4.31924 19.2411C4.90196 14.9069 6.11798 11.4868 8.80241 8.80241C11.4868 6.11798 14.9069 4.90196 19.2411 4.31924C23.4756 3.74993 28.9027 3.74996 35.8279 3.75ZM19.8407 8.77911C16.0055 9.29474 13.6934 10.2754 11.9844 11.9844C10.2754 13.6934 9.29474 16.0055 8.77911 19.8407C8.25478 23.7407 8.25 28.8653 8.25 36C8.25 36.8715 8.25 37.7144 8.25103 38.5305L11.2544 35.9025C13.9882 33.5105 18.1085 33.6477 20.6771 36.2163L33.5463 49.0855C35.608 51.1472 38.8534 51.4283 41.2389 49.7518L42.1335 49.1231C45.5662 46.7106 50.2105 46.9901 53.3291 49.7969L61.8204 57.439C62.6752 55.644 63.1828 53.2854 63.4539 49.9582C63.7483 46.3448 63.75 41.8376 63.75 36C63.75 28.8653 63.7452 23.7407 63.2209 19.8407C62.7053 16.0055 61.7246 13.6934 60.0156 11.9844C58.3066 10.2754 55.9945 9.29474 52.1593 8.77911C48.2593 8.25478 43.1347 8.25 36 8.25C28.8653 8.25 23.7407 8.25478 19.8407 8.77911Z"
-                        fill="#6A7890"
-                      />
-                    </svg>
-                  </span>
-                  <p className="text-center font-medium text-[#6A7890]">
-                    برای آپلود روی فایل کلیک کنید یا به این قسمت بکشید
-                  </p>
-                  <span className="font-medium text-[12px] text-[#8E98A8]">
-                    حجم فایل حداکثر10MBمجاز است.
-                  </span>
-                </div>
+              <label className="block h-full w-full cursor-pointer" htmlFor="upload">
+                {formik.values.files instanceof File ? (
+                  <img
+                    src={URL.createObjectURL(formik.values.files)}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <div className="flex h-full flex-col items-center justify-center gap-3">
+                    <span>
+                      <svg
+                        width="72"
+                        height="72"
+                        viewBox="0 0 72 72"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M54 24C54 27.3137 51.3137 30 48 30C44.6863 30 42 27.3137 42 24C42 20.6863 44.6863 18 48 18C51.3137 18 54 20.6863 54 24Z"
+                          fill="#6A7890"
+                        />
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M35.8279 3.75H36.1721C43.0973 3.74996 48.5244 3.74993 52.7589 4.31924C57.0931 4.90196 60.5132 6.11798 63.1976 8.80241C65.882 11.4868 67.098 14.9069 67.6808 19.2411C68.2501 23.4756 68.25 28.9027 68.25 35.8279V36.0927C68.25 41.8191 68.25 46.5068 67.939 50.3236C67.6265 54.1592 66.9861 57.3643 65.5527 60.0262C64.9204 61.2003 64.1435 62.2517 63.1976 63.1976C60.5132 65.882 57.0931 67.098 52.7589 67.6808C48.5244 68.2501 43.0973 68.25 36.1721 68.25H35.8279C28.9027 68.25 23.4756 68.2501 19.2411 67.6808C14.9069 67.098 11.4868 65.882 8.80241 63.1976C6.42257 60.8178 5.1936 57.8557 4.54005 54.1813C3.89805 50.5718 3.78061 46.0809 3.75621 40.5044C3.75 39.086 3.75 37.5857 3.75 36.003V35.8279C3.74996 28.9027 3.74993 23.4756 4.31924 19.2411C4.90196 14.9069 6.11798 11.4868 8.80241 8.80241C11.4868 6.11798 14.9069 4.90196 19.2411 4.31924C23.4756 3.74993 28.9027 3.74996 35.8279 3.75ZM19.8407 8.77911C16.0055 9.29474 13.6934 10.2754 11.9844 11.9844C10.2754 13.6934 9.29474 16.0055 8.77911 19.8407C8.25478 23.7407 8.25 28.8653 8.25 36C8.25 36.8715 8.25 37.7144 8.25103 38.5305L11.2544 35.9025C13.9882 33.5105 18.1085 33.6477 20.6771 36.2163L33.5463 49.0855C35.608 51.1472 38.8534 51.4283 41.2389 49.7518L42.1335 49.1231C45.5662 46.7106 50.2105 46.9901 53.3291 49.7969L61.8204 57.439C62.6752 55.644 63.1828 53.2854 63.4539 49.9582C63.7483 46.3448 63.75 41.8376 63.75 36C63.75 28.8653 63.7452 23.7407 63.2209 19.8407C62.7053 16.0055 61.7246 13.6934 60.0156 11.9844C58.3066 10.2754 55.9945 9.29474 52.1593 8.77911C48.2593 8.25478 43.1347 8.25 36 8.25C28.8653 8.25 23.7407 8.25478 19.8407 8.77911Z"
+                          fill="#6A7890"
+                        />
+                      </svg>
+                    </span>
+                    <p className="text-center font-medium text-[#6A7890]">
+                      برای آپلود روی فایل کلیک کنید یا به این قسمت بکشید
+                    </p>
+                    <span className="font-medium text-[12px] text-[#8E98A8]">
+                      حجم فایل حداکثر10MBمجاز است.
+                    </span>
+                  </div>
+                )}
               </label>
-              <input id="upload" type="file" className="absolute z-0 w-0" />
+              <input
+                onChange={(e) => {
+                  if (e.target.files) formik.setFieldValue('files', e.target.files[0]);
+                }}
+                id="upload"
+                type="file"
+                className="absolute z-0 w-0"
+              />
             </div>
           </div>
           <div className="!mt-10 flex justify-end">
-            <Button className="h-[40px] w-[120px] min-w-[120px] rounded-lg bg-main text-white">
+            <Button
+              type="submit"
+              isPending={isPending}
+              className="h-[40px] w-[120px] min-w-[120px] rounded-lg bg-main !px-2 text-white"
+            >
               <span className="text-[13px]">ثبت درخواست</span>
               <span>
                 <svg

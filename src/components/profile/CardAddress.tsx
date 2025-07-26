@@ -10,7 +10,7 @@ const CardAddress = ({ address, onDelete, onEdit }: Props) => {
   return (
     <div className="border-b border-[#E4E7E9] pb-3">
       <p className="font-medium text-[14px] text-[#232429]">{address.title}</p>
-      <div className="!mt-2 space-y-2">
+      <div className="!mt-2 grid-cols-2 gap-4 space-y-2 lg:grid lg:space-y-0">
         <p className="font-regular text-[14px] text-[#616A76]">{address.address}</p>
         <div className="flex items-center gap-2">
           <span>
