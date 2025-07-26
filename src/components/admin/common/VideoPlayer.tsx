@@ -8,6 +8,7 @@ import Watermark from './Watermark';
 import { useParams } from 'next/navigation';
 import { useUpdateWatchVideo } from '@/hooks/watchedVideo/useUpdateWatchVideo';
 import { Course } from '@/types/home';
+import { BASEURL_SITE } from '@/lib/variable';
 
 type Props = {
   url: string;
@@ -25,7 +26,7 @@ const VideoPlayer = ({ url, poster, course, watchedTime = 0 }: Props) => {
   const { id } = useParams();
   console.log(watchedTime, 'watchedTimewatchedTimewatchedTime');
   const isHls = url.endsWith('.m3u8');
-  const videoSrc = isHls ? url : `http://localhost:3000/api/video/${encodeURIComponent(url)}`;
+  const videoSrc = isHls ? url : `${BASEURL_SITE}/api/video/${encodeURIComponent(url)}`;
   const handlePlay = () => {
     if (videoRef.current) {
       videoRef.current.play();
