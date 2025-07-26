@@ -17,8 +17,6 @@ type Props = {
   };
 };
 const CardComment = ({ comment }: Props) => {
-  const [open, setOpen] = useState(false);
-  const findStatus = statusIcon.find((item) => item.status === comment?.published);
   return (
     <div className="shadow-favorite block w-full rounded-xl bg-white lg:p-4">
       {comment?.course && (
@@ -26,18 +24,20 @@ const CardComment = ({ comment }: Props) => {
           href={`/product/${comment?.course?.url}/`}
           className="mb-3 flex flex-col items-start justify-between gap-2 rounded-2xl border border-[#E5EAEF] p-6 lg:flex-row"
         >
-          <div className="flex w-full items-center">
-            <div className="flex flex-1 items-start gap-8 border-l border-[#EDEDED] pl-3">
+          <div className="flex w-full flex-col items-center lg:flex-row">
+            <div className="flex flex-1 items-start gap-4 border-[#EDEDED] pl-3 lg:gap-8 lg:border-l">
               <Image
                 src={`${comment?.course?.thumbnailImage?.url}`}
                 alt=""
                 className="!h-[102px] !w-[142px] overflow-hidden rounded-lg object-contain"
               />
               <div className="w-full space-y-5">
-                <p className="line-clamp-2 font-semibold text-[18px] text-[#0B1524]">
+                <p className="line-clamp-2 font-semibold text-[14px] text-[#0B1524] lg:text-[18px]">
                   {comment?.course?.title}
                 </p>
-                <p className="font-regular text-[14px] text-[#505B74]">{comment?.title}</p>
+                <p className="font-regular text-[12px] text-[#505B74] lg:text-[14px]">
+                  {comment?.title}
+                </p>
                 <div className="flex items-center justify-end gap-2">
                   <span className="font-regular text-[12px] text-[#172334]">{comment.rating}</span>
                   <span>
@@ -59,15 +59,15 @@ const CardComment = ({ comment }: Props) => {
                 </div>
               </div>
             </div>
-            <div className="space-y-3 px-3">
+            <div className="mt-4 w-full space-y-3 px-3 lg:w-fit">
               <Link
-                className="flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-main font-medium text-white"
+                className="flex h-[40px] w-full items-center justify-center rounded-lg bg-main font-medium text-white lg:w-[120px]"
                 href={'/'}
               >
                 مشاهده محصول
               </Link>
               <Link
-                className={`flex h-[40px] w-[120px] items-center justify-center rounded-lg border border-[#E5EAEF] font-medium ${comment.published ? 'text-[#34C759]' : 'text-[#FF383C]'}`}
+                className={`flex h-[40px] w-full items-center justify-center rounded-lg border border-[#E5EAEF] font-medium lg:w-[120px] ${comment.published ? 'text-[#34C759]' : 'text-[#FF383C]'}`}
                 href={'/'}
               >
                 {comment.published ? 'تایید شده' : 'تایید نشده'}

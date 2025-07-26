@@ -14,12 +14,12 @@ const Page = () => {
   const tickting: Ticket[] = data?.data?.data?.tickets;
 
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تیکت به پشتیبانی" />
 
-      <div>
+      <div className="px-4">
         <div className="flex items-center justify-between border-b pb-3">
-          <div className="flex items-center gap-3 border-gray-100">
+          <div className="hidden items-center gap-3 border-gray-100 lg:flex">
             <span>
               <svg
                 width="32"
@@ -83,25 +83,25 @@ const Page = () => {
             <div className="mt-5 space-y-4">
               {tickting.map((item, idx) => (
                 <div
-                  className="flex justify-between rounded-[16px] border border-[#E5EAEF] p-4"
+                  className="grid grid-cols-2 items-center gap-4 rounded-lg border border-[#E5EAEF] p-4 lg:flex lg:justify-between lg:rounded-[16px]"
                   key={idx}
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-4 border-b border-gray-200 pb-3 lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">موضوع درخواست</p>
                     <p className="font-medium text-[12px] text-[#0B1524]">{item.title}</p>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-4 border-b border-gray-200 pb-3 lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">بخش</p>
                     <p className="font-medium text-[12px] text-[#0B1524]">{item.section}</p>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-4 border-b border-gray-200 pb-3 lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">شماره تیکت</p>
                     <p className="font-medium text-[12px] text-[#0B1524]">{item.ticketNumber}</p>
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-4 border-b border-gray-200 pb-3 lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">وضعیت</p>
                     <p
-                      className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${item.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+                      className={`flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] lg:mx-auto ${item.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                     >
                       {item.status === 'REVIEW'
                         ? 'در حال بررسی'

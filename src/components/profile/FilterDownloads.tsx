@@ -98,7 +98,7 @@ const FilterDownloads = ({ orderStatusCounts }: Props) => {
             base: 'w-full !pr-2 lg:hidden',
             tabList: ' w-full pr-2 font-regular relative rounded-none p-0 border-b border-divider',
             cursor: 'w-full h-[1.3px]  bg-[#FFA216]',
-            tab: 'max-w-fit !text-[12px] px-0 h-10',
+            tab: 'max-w-full px-2 !text-[12px] lg:px-0 h-10',
             tabContent: 'group-data-[selected=true]:text-[#FFA216]',
           }}
         >

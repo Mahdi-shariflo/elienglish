@@ -10,10 +10,10 @@ const Page = () => {
   const { data, isLoading } = useGetInstallment();
   const installment: Installment[] = data?.data?.data?.installment;
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="اقساط" />
       <div>
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-3 lg:flex">
           <span>
             <svg
               width="33"
@@ -39,8 +39,8 @@ const Page = () => {
             className="!mt-20 flex items-center justify-center"
           />
         ) : (
-          <div>
-            <div className="flex items-center justify-between border-b border-[#EDEDED] pb-3">
+          <div className="px-4 lg:px-0">
+            <div className="hidden items-center justify-between border-b border-[#EDEDED] pb-3 lg:flex">
               <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">
                 شماره سفارش
               </p>
@@ -60,25 +60,50 @@ const Page = () => {
               {installment?.map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex h-[84px] items-center justify-between rounded-[12px] border border-[#E5EAEF] bg-[#F4F6FA]"
+                  className="grid h-fit grid-cols-2 gap-4 rounded-[12px] border border-[#E5EAEF] bg-[#F4F6FA] p-2 lg:flex lg:h-[84px] lg:items-center lg:justify-between lg:p-0"
                 >
-                  <p className="flex-1 text-center font-regular text-[#0B1524]">{item?.orderId}</p>
-                  <p className="flex-1 text-center font-regular text-[#0B1524]">
-                    قسط شماره {item.installmentNumber}
-                  </p>
-                  <p className="flex flex-1 items-center justify-center gap-1 text-center font-regular text-[#0B1524]">
-                    {Number(item.amount).toLocaleString()} <Toman_Icon />
-                  </p>
-                  <p className="flex-1 text-center font-regular text-[#0B1524]">
-                    {new Date(item.createdAt).toLocaleDateString('fa-IR', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </p>
+                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                      شماره سفارش
+                    </p>
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                      {item?.orderId}
+                    </p>
+                  </div>
+                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                      شماره قسط
+                    </p>
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                      قسط شماره {item.installmentNumber}
+                    </p>
+                  </div>
+                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden lg:pt-0">
+                      شماره سفارش
+                    </p>
+                    <p className="flex flex-1 items-center justify-center gap-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                      {Number(item.amount).toLocaleString()} <Toman_Icon />
+                    </p>
+                  </div>
+                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                      سررسید قسط
+                    </p>
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                      {new Date(item.createdAt).toLocaleDateString('fa-IR', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </p>
+                  </div>
                   <div className="flex-1">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                      وضعیت
+                    </p>
                     <p
-                      className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${item.status === 'AWAITING' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'PAID' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+                      className={`mx-auto mt-2 flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] lg:mt-0 ${item.status === 'AWAITING' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'PAID' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                     >
                       {item.status === 'AWAITING'
                         ? 'در انتظار پرداخت'

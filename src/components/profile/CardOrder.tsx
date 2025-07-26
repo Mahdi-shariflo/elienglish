@@ -14,7 +14,7 @@ const CardOrder = ({ order, name }: Props) => {
 
   return (
     <div className="overflow-hidden rounded-xl border border-[#E4E7E9] lg:!w-full">
-      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-8">
+      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-3 lg:py-8">
         {/* <div className="flex items-center justify-between ">
         <div className="flex items-center gap-2 lg:p-[16px]">
           <span>{findItem?.icon}</span>
@@ -27,7 +27,7 @@ const CardOrder = ({ order, name }: Props) => {
           جزئیات سفارش
         </Button>
       </div> */}
-        <div className="flex flex-col gap-3 lg:flex-1 lg:flex-row lg:items-center lg:gap-10">
+        <div className="flex justify-between gap-3 lg:flex-1 lg:flex-row lg:items-center lg:justify-start lg:gap-10">
           <p className="font-medium text-[14px] text-[#7D8793] lg:px-[16px]">
             {new Date(order.createdAt).toLocaleDateString('fa-IR', {
               year: 'numeric',
@@ -52,7 +52,7 @@ const CardOrder = ({ order, name }: Props) => {
         {order[name].products?.map((image, idx) => (
           <div key={idx} className="relative h-[131pxpx] w-[131pxpx]">
             <Image
-              className="h-[115px] w-[115px] object-contain"
+              className="h-[80px] w-[80px] object-contain lg:h-[115px] lg:w-[115px]"
               src={`${image?.thumbnailImage.url}`}
               alt=""
             />

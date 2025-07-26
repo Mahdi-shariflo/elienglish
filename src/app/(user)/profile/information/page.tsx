@@ -4,7 +4,7 @@ import ActionUser from '@/components/profile/ActionUser';
 
 const Page = () => {
   return (
-    <div className="pt-4 lg:pt-0">
+    <div className="lg:pt-0">
       <BackPrevPage title="اطلاعات کاربر" />
       <div className="mx-auto !mt-5 w-[95%] space-y-4 rounded-2xl border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
         <div className="flex items-center justify-between">

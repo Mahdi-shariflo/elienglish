@@ -3,7 +3,7 @@ import React from 'react';
 
 const CardNotfication = ({ notification }: { notification: Notification }) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-3 rounded-lg border p-2 lg:gap-0 lg:border-none">
       <div className="flex flex-1 items-start gap-3">
         <span>
           <svg
@@ -62,12 +62,12 @@ const CardNotfication = ({ notification }: { notification: Notification }) => {
           <p className="text-right font-medium text-[#0B1524] dark:text-white">
             {notification.title}
           </p>
-          <p className="line-clamp-1 text-right font-light text-[#8E98A8]">
+          <p className="text-right font-light text-[#8E98A8] lg:line-clamp-1">
             {notification.description}
           </p>
         </div>
       </div>
-      <p className="relative flex-1 text-left font-medium text-[#8E98A8] after:absolute after:-left-3 after:top-1/2 after:h-2 after:w-2 after:-translate-y-1/2 after:rounded-full after:bg-main">
+      <p className="relative text-left font-medium text-[#8E98A8] after:absolute after:-left-3 after:top-1/2 after:h-2 after:-translate-y-1/2 after:rounded-full after:bg-main lg:flex-1 lg:after:w-2">
         {new Date(notification.createdAt).toLocaleDateString('fa-IR', {
           year: 'numeric',
           month: 'long',

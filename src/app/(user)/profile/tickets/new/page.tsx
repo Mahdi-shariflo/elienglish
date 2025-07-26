@@ -46,11 +46,11 @@ const Page = () => {
     }
   }, [isSuccess]);
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="درخواست پشتیبانی جدید" />
 
       <div>
-        <div className="flex items-center gap-3 border-b border-gray-100">
+        <div className="hidden items-center gap-3 border-b border-gray-100 lg:flex">
           <span>
             <svg
               width="32"
@@ -72,7 +72,7 @@ const Page = () => {
             درخواست پشتیانی جدید
           </p>
         </div>
-        <form onSubmit={formik.handleSubmit} className="mt-10 space-y-3">
+        <form onSubmit={formik.handleSubmit} className="mt-10 px-3 lg:space-y-3">
           <Input isRequired name="title" formik={formik} label={'عنوان'} />
           <Select
             isRequired
@@ -146,7 +146,7 @@ const Page = () => {
             <Button
               type="submit"
               isPending={isPending}
-              className="h-[40px] w-[120px] min-w-[120px] rounded-lg bg-main !px-2 text-white"
+              className="h-[48px] w-full rounded-lg bg-main !px-2 text-white lg:h-[40px] lg:w-[120px] lg:min-w-[120px]"
             >
               <span className="text-[13px]">ثبت درخواست</span>
               <span>

@@ -1,21 +1,61 @@
 'use client';
 import BackPrevPage from '@/components/common/BackPrevPage';
+import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
 import { useGetTicketById } from '@/hooks/ticketing/useGetTicketById';
 import { BASEURL } from '@/lib/variable';
 import { Ticket } from '@/types/profile';
+import Textarea from '@/components/common/form/Textarea';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
 import { Spinner } from '@heroui/react';
-import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
+import { useSendMessageTicket } from '@/hooks/ticketing/useSendMessageTicket';
 
 const Page = () => {
+  const { id } = useParams();
+  const { mutate, isPending, isSuccess } = useSendMessageTicket();
+  const [show, setShow] = useState(false);
   const { data, isLoading } = useGetTicketById();
   const ticket: Ticket = data?.data?.data;
+  const formik = useFormik<any>({
+    initialValues: {
+      content: '',
+      files: undefined,
+    },
+    validationSchema: Yup.object({
+      content: Yup.string().required('فیلد اجباری است'),
+    }),
+    onSubmit: (values) => {
+      const formdata = new FormData();
+      formdata.append('content', values.content);
+      formdata.append('ticketId', id as string);
+      if (values.files) {
+        formdata.append('files', values.files);
+      }
+
+      mutate({ data: formdata });
+    },
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      formik.setValues({
+        title: '',
+        description: '',
+        files: undefined,
+      });
+      formik.resetForm();
+      setShow(false);
+    }
+  }, [isSuccess]);
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="مشاهده تیکت" />
 
-      <div>
+      <div className="px-5 lg:px-0">
         {isLoading ? (
           <Spinner
             classNames={{ circle1: 'border-b-main', circle2: 'border-b-main' }}
@@ -24,20 +64,27 @@ const Page = () => {
           />
         ) : (
           <>
-            <div className="flex items-center justify-between border-b pb-5">
-              <div>
-                <p className="font-medium text-[24px] text-[#33435A]">{ticket.title}</p>
+            <div className="flex flex-col items-center justify-between border-b pb-5 lg:flex-row">
+              <div className="w-full">
+                <p className="font-medium text-[16px] text-[#33435A] lg:text-[24px]">
+                  {ticket.title}
+                </p>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <p className="font-medium !text-[16px] text-[#33435A]">
+                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
                     شماره تیکت:{' '}
-                    <span className="text-[16px] text-[#6A7890]">{ticket.ticketNumber}</span>
+                    <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
+                      {ticket.ticketNumber}
+                    </span>
                   </p>
-                  <p className="font-medium text-[16px] text-[#33435A]">
-                    بخش: <span className="text-[16px] text-[#6A7890]">{ticket.section}</span>
+                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
+                    بخش:{' '}
+                    <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
+                      {ticket.section}
+                    </span>
                   </p>
-                  <p className="font-medium text-[16px] text-[#33435A]">
+                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
                     تاریخ ایجاد:{' '}
-                    <span className="text-[16px] text-[#6A7890]">
+                    <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
                       {new Date(ticket.createdAt).toLocaleDateString('fa-IR', {
                         year: 'numeric',
                         month: 'long',
@@ -47,8 +94,11 @@ const Page = () => {
                   </p>
                 </div>
               </div>
-              <div className="space-y-3">
-                <Button className="flex !h-[42px] !w-[159px] items-center gap-1 rounded-lg border border-[#E4E7E9] px-2 font-regular text-[14px] text-main">
+              <div className="mt-5 flex w-full flex-col justify-end space-y-3 lg:w-fit">
+                <Button
+                  onClick={() => setShow(!show)}
+                  className="flex !h-[42px] w-full items-center gap-1 rounded-lg border border-[#E4E7E9] px-2 font-regular text-[14px] text-main lg:!w-[159px]"
+                >
                   <span>
                     <svg
                       width="24"
@@ -76,7 +126,7 @@ const Page = () => {
                   تیکت جدید
                 </Button>
                 <p
-                  className={`mx-auto flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] ${ticket.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : ticket.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+                  className={`mx-auto flex h-[42px] w-full items-center justify-center rounded-lg text-center font-medium text-[12px] lg:!w-[159px] ${ticket.status === 'REVIEW' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : ticket.status === 'ANSWERED' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
                 >
                   {ticket.status === 'REVIEW'
                     ? 'در حال بررسی'
@@ -86,9 +136,9 @@ const Page = () => {
                 </p>
               </div>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 space-y-6">
               {ticket.messages.map((item, idx) => (
-                <div key={idx}>
+                <div className="border-b pb-3" key={idx}>
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-[16px] text-main">{item.fullName}</p>
                     <p className="font-medium text-[14px] text-[#6A7890]">
@@ -154,6 +204,75 @@ const Page = () => {
           </>
         )}
       </div>
+      {show && (
+        <BaseDialog
+          title="ارسال پیام"
+          nameBtnFooter="اعمال"
+          isLoadingFooterBtn={isPending}
+          onClickFooter={formik.handleSubmit}
+          onClose={() => setShow(false)}
+          isOpen={show}
+        >
+          <div>
+            <Textarea isRequired name="content" formik={formik} label={'توضیحات'} />
+            {/* files */}
+            <div className="mt-5">
+              <p
+                className={`mb-[6px] pr-1 font-medium text-[12px] dark:!text-[#8E98A8] lg:text-[14px]`}
+              >
+                {'ارسال فایل'} {<span className="text-red-500">*</span>}
+              </p>
+              <div className="relative h-[200px] w-full rounded-lg border-2 border-dashed">
+                <label className="block h-full w-full cursor-pointer" htmlFor="upload">
+                  {formik.values.files instanceof File ? (
+                    <img
+                      src={URL.createObjectURL(formik.values.files)}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col items-center justify-center gap-3">
+                      <span>
+                        <svg
+                          width="72"
+                          height="72"
+                          viewBox="0 0 72 72"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M54 24C54 27.3137 51.3137 30 48 30C44.6863 30 42 27.3137 42 24C42 20.6863 44.6863 18 48 18C51.3137 18 54 20.6863 54 24Z"
+                            fill="#6A7890"
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M35.8279 3.75H36.1721C43.0973 3.74996 48.5244 3.74993 52.7589 4.31924C57.0931 4.90196 60.5132 6.11798 63.1976 8.80241C65.882 11.4868 67.098 14.9069 67.6808 19.2411C68.2501 23.4756 68.25 28.9027 68.25 35.8279V36.0927C68.25 41.8191 68.25 46.5068 67.939 50.3236C67.6265 54.1592 66.9861 57.3643 65.5527 60.0262C64.9204 61.2003 64.1435 62.2517 63.1976 63.1976C60.5132 65.882 57.0931 67.098 52.7589 67.6808C48.5244 68.2501 43.0973 68.25 36.1721 68.25H35.8279C28.9027 68.25 23.4756 68.2501 19.2411 67.6808C14.9069 67.098 11.4868 65.882 8.80241 63.1976C6.42257 60.8178 5.1936 57.8557 4.54005 54.1813C3.89805 50.5718 3.78061 46.0809 3.75621 40.5044C3.75 39.086 3.75 37.5857 3.75 36.003V35.8279C3.74996 28.9027 3.74993 23.4756 4.31924 19.2411C4.90196 14.9069 6.11798 11.4868 8.80241 8.80241C11.4868 6.11798 14.9069 4.90196 19.2411 4.31924C23.4756 3.74993 28.9027 3.74996 35.8279 3.75ZM19.8407 8.77911C16.0055 9.29474 13.6934 10.2754 11.9844 11.9844C10.2754 13.6934 9.29474 16.0055 8.77911 19.8407C8.25478 23.7407 8.25 28.8653 8.25 36C8.25 36.8715 8.25 37.7144 8.25103 38.5305L11.2544 35.9025C13.9882 33.5105 18.1085 33.6477 20.6771 36.2163L33.5463 49.0855C35.608 51.1472 38.8534 51.4283 41.2389 49.7518L42.1335 49.1231C45.5662 46.7106 50.2105 46.9901 53.3291 49.7969L61.8204 57.439C62.6752 55.644 63.1828 53.2854 63.4539 49.9582C63.7483 46.3448 63.75 41.8376 63.75 36C63.75 28.8653 63.7452 23.7407 63.2209 19.8407C62.7053 16.0055 61.7246 13.6934 60.0156 11.9844C58.3066 10.2754 55.9945 9.29474 52.1593 8.77911C48.2593 8.25478 43.1347 8.25 36 8.25C28.8653 8.25 23.7407 8.25478 19.8407 8.77911Z"
+                            fill="#6A7890"
+                          />
+                        </svg>
+                      </span>
+                      <p className="text-center font-medium text-[#6A7890]">
+                        برای آپلود روی فایل کلیک کنید یا به این قسمت بکشید
+                      </p>
+                      <span className="font-medium text-[12px] text-[#8E98A8]">
+                        حجم فایل حداکثر10MBمجاز است.
+                      </span>
+                    </div>
+                  )}
+                </label>
+                <input
+                  onChange={(e) => {
+                    if (e.target.files) formik.setFieldValue('files', e.target.files[0]);
+                  }}
+                  id="upload"
+                  type="file"
+                  className="absolute z-0 w-0"
+                />
+              </div>
+            </div>
+          </div>
+        </BaseDialog>
+      )}
     </div>
   );
 };

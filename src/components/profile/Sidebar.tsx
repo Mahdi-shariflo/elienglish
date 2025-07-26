@@ -526,10 +526,10 @@ const Sidebar = () => {
   const { setLogout } = useGlobalStore();
   const pathname = usePathname();
   return (
-    <div className="overflow-hidden !rounded-2xl border border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248]">
+    <div className="mt-10 overflow-hidden !rounded-2xl border border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mt-0">
       {/* user profile */}
       <div className="flex flex-col items-center justify-center bg-[linear-gradient(180deg,_#EDE8FC_-8.74%,_#FFFFFF_100%)] dark:bg-none lg:!w-full lg:p-[16px]">
-        <div className="relative mx-auto flex !h-[70px] !w-[70px] flex-col items-center justify-center rounded-full lg:!h-[100px] lg:!w-[100px] lg:gap-3">
+        <div className="relative mx-auto flex !h-[70px] !w-[70px] flex-col items-center justify-center rounded-full pt-5 lg:!h-[100px] lg:!w-[100px] lg:gap-3 lg:pt-0">
           <span className="block h-full w-full overflow-hidden rounded-full border-2 border-main">
             <Image src={Profile} alt="" />
             <Button className="absolute right-0 top-0 !w-fit">

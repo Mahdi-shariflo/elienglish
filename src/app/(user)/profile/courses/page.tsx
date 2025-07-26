@@ -1,10 +1,7 @@
 'use client';
-import CardOrder from '@/components/profile/CardOrder';
-import FilterOrders from '@/components/profile/FilterOrders';
 import React, { Suspense } from 'react';
 import Pagination from '@/components/common/Pagination';
 import BackPrevPage from '@/components/common/BackPrevPage';
-import { useGetOrders } from '@/hooks/profile/useGetOrders';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from '@heroui/react';
 import { Order, STATUSCOUNTS } from '@/types/profile';
@@ -26,10 +23,10 @@ const Page = () => {
     (item) => item.courseItems.status === (searchParams.get('sort') || 'AWAITING')
   );
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تاریخچه سفارش‌ دوره" />
       <div className="">
-        <div className="flex items-center gap-3">
+        <div className="hidden items-center gap-3 lg:flex">
           <span>
             <svg
               width="29"
@@ -60,17 +57,20 @@ const Page = () => {
         ) : sortOrders?.length >= 1 ? (
           <div className="container_page mt-5 flex flex-col gap-5 lg:!w-full">
             {sortOrders.map((order, idx) => (
-              <div key={idx} className="flex items-center gap-4 border-b border-gray-200 pb-4">
+              <div
+                key={idx}
+                className="flex flex-col items-center gap-4 border-b border-gray-200 pb-4 lg:flex-row"
+              >
                 <div className="flex flex-1 gap-4">
                   <div>
                     <Image
-                      className="h-[130px] w-[130px] overflow-hidden rounded-lg"
+                      className="h-[80px] w-[80px] overflow-hidden rounded-lg lg:h-[130px] lg:w-[130px]"
                       alt=""
                       src={order.courseItems.thumbnailImage.url}
                     />
                   </div>
-                  <div className="flex-1 space-y-6 border-l border-[#EDEDED]">
-                    <p className="font-medium text-[16px] text-[#0B1524]">
+                  <div className="flex-1 space-y-2 border-[#EDEDED] lg:space-y-6 lg:border-l">
+                    <p className="line-clamp-1 font-medium text-[14px] text-[#0B1524] lg:text-[16px]">
                       {order.courseItems.title}
                     </p>{' '}
                     <div className="flex items-center gap-1">
@@ -92,7 +92,7 @@ const Page = () => {
                           />
                         </svg>
                       </span>
-                      <span className="font-medium text-[#6A7890]">
+                      <span className="font-medium text-[14px] text-[#6A7890]">
                         {order.courseItems.type === 'online' ? 'آنلاین' : 'حضوری'}
                       </span>
                     </div>
@@ -106,9 +106,9 @@ const Page = () => {
                     </p>
                   </div>
                 </div>
-                <div className="space-y-8">
+                <div className="flex flex-row gap-3 lg:flex-col lg:gap-0 lg:space-y-8">
                   <Link
-                    className="flex h-[40px] w-[186px] items-center justify-center rounded-lg bg-main font-medium text-white"
+                    className="flex h-[40px] w-[186px] flex-row items-center justify-center rounded-lg bg-main font-medium text-white"
                     href={`/course/video/${order.courseItems.courseId}`}
                   >
                     شروع یادگیری

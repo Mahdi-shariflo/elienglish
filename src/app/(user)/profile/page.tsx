@@ -6,7 +6,7 @@ import React from 'react';
 
 const Page = () => {
   return (
-    <div className="max-w-full !overflow-hidden pt-5 lg:pb-10">
+    <div className="max-w-full !overflow-hidden lg:pb-10 lg:pt-5">
       <BackPrevPage url="/" title="صفحه اصلی" />
       <div className="mt-4 max-w-full lg:mt-0 lg:hidden">
         {/* <ProfileInformation /> */}
