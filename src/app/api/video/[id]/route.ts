@@ -1,9 +1,11 @@
 // app/api/video/route.ts
 import { NextRequest } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  console.log(id, 'jhdfhfjfhdjhfjdhfdjh');
   const range = req.headers.get('range') || '';
-  const videoUrl = 'https://eli-backend-main.liara.run/upload/2025/07/1753187632504.mp4';
+  const videoUrl = `${id}`;
 
   const response = await fetch(videoUrl, {
     headers: {

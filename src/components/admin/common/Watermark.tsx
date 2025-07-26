@@ -17,7 +17,7 @@ const Watermark = () => {
 
   return (
     <div
-      className="pointer-events-none absolute select-none font-medium text-sm text-white opacity-20 transition-all duration-1000"
+      className="pointer-events-none absolute z-[9999] select-none font-medium text-sm text-white opacity-20 transition-all duration-1000"
       style={{
         top: `${position.top}%`,
         left: `${position.left}%`,

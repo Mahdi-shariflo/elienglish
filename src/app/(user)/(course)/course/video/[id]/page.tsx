@@ -48,8 +48,6 @@ const Page = async ({ params, searchParams }: Props) => {
   const progressPercent =
     totalEpisodes > 0 ? Math.round((completedEpisodes / totalEpisodes) * 100) : 0;
 
-  console.log(accessibleChapters);
-
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
