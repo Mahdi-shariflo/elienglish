@@ -6,6 +6,7 @@ import Logout from './Logout';
 import CommingSoon from './CommingSoon';
 import { ToastProvider } from '@heroui/toast';
 import VerifyDelete from './VerifyDelete';
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
 type Props = {
   children: ReactNode;
@@ -60,7 +61,16 @@ function GlobalContextProvider({ children, theme }: Props) {
     <HeroUIProvider>
       <QueryClientProvider client={queryClient}>
         {/* <SwipeBack/> */}
-        <div className="min-h-screen dark:bg-[#0B1524]">{children}</div>
+        <div className="min-h-screen dark:bg-[#0B1524]">
+          {children}
+
+          <ProgressBar
+            height="4px"
+            color="#fffd00"
+            options={{ showSpinner: false }}
+            shallowRouting
+          />
+        </div>
         <Logout />
         <VerifyDelete />
         <CommingSoon />
