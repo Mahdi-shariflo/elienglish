@@ -19,7 +19,7 @@ const CardBlog1 = ({
       className={`group relative flex h-full w-full flex-col justify-between gap-4 overflow-hidden bg-white dark:bg-[#263248] ${className}`}
     >
       <Image
-        src={blog.thumbnailImage.url}
+        src={blog?.thumbnailImage?.url}
         alt=""
         className={`h-[165px] !w-full overflow-hidden object-fill transition-all duration-300 group-hover:scale-105 ${classImage}`}
       />

@@ -21,6 +21,7 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id[0]!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
+
   return (
     <div className="bg-white pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
@@ -30,7 +31,7 @@ const Page = async ({ params }: Props) => {
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
           <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
-            <p className="font-medium text-main">دیکشنری الی انگلیش</p>
+            <p className="font-medium text-main">{blog?.category?.title}</p>
             <MediaPreview media={blog} />
             {/* title */}
             <InfoBlog blog={blog} />

@@ -13,6 +13,7 @@ import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 import CardComment from './CardComment';
+import TitleSection from './TitleSection';
 
 const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
   ({ commentInfo }, ref) => {
@@ -87,17 +88,20 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
               <Button
                 isLoading={isPending}
                 type="submit"
-                className="w-full bg-main px-10 text-white lg:w-fit"
+                className="w-full bg-main px-10 text-white lg:h-[56px] lg:w-[149px]"
               >
                 ثبت دیدگاه
               </Button>
             </div>
           </form>
-          <div className="mt-10 space-y-5">
-            {/* data?.data?.data?.comments */}
-            {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-              <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
-            ))}
+          <div className="mt-10">
+            <Title title="دیدگاه‌ها" />
+            <div className="mt-10 space-y-5">
+              {/* data?.data?.data?.comments */}
+              {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
+                <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
+              ))}
+            </div>
           </div>
           <ModalNeedLoginUser open={open} setOpen={setOpen} />
         </div>

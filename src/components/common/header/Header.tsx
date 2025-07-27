@@ -274,28 +274,6 @@ const Header = ({ categories }: Props) => {
           >
             <div className="flex items-center gap-2">
               <Sidebar />
-              <Link href={'/search/'}>
-                <span>
-                  <svg
-                    width="23"
-                    height="22"
-                    viewBox="0 0 23 22"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="8.5" cy="8.50041" r="7.5" stroke="#A6AFB9" strokeWidth="2" />
-                    <line
-                      x1="16.0931"
-                      y1="15.5377"
-                      x2="20.6682"
-                      y2="19.8082"
-                      stroke="#A6AFB9"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-              </Link>
             </div>
             <Logo className="h-10 w-full" />
             <div className="flex items-center gap-2">

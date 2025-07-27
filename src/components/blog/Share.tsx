@@ -22,7 +22,7 @@ const Share = () => {
   return (
     <div className="flex w-full justify-end">
       <Button onClick={handleShare} className="!mr-auto -mt-3 w-fit !min-w-fit">
-        <p className="font-bold text-[12px] text-[#0B1524] dark:text-white lg:text-[16px]">
+        <p className="font-medium text-[12px] text-[#0B1524] dark:text-white lg:text-[16px]">
           اشتراک گذاری مطلب
         </p>
         <span>

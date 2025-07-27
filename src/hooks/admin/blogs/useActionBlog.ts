@@ -14,12 +14,11 @@ export const useActionMag = () => {
         : await safeRequest({ url: `/blog/admin`, method: 'POST', data });
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['blogs-admin-page'] });
+      await queryClient.invalidateQueries({ queryKey: ['single-blog-admin'] });
       addToast({
         title: 'با موفقیت انجام شد',
         color: 'success',
       });
-      router.push('/admin/blogs/');
     },
     onError: (error) => {
       addToast({

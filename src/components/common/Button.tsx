@@ -25,7 +25,7 @@ const Button = ({ children, className, isLoading, isPending, onClick, disabled, 
         isDisabled={disabled}
         isLoading={isPending}
         onPress={onPress}
-        className={`h-[48px] w-full !min-w-fit bg-transparent px-0 font-medium ${className}`}
+        className={`h-[48px] w-full !min-w-fit rounded-lg bg-transparent px-0 font-medium ${className}`}
       >
         {children}
       </ReactButton>

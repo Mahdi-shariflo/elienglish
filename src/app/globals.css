@@ -138,6 +138,18 @@ hr {
 .custom_pagination_blog .swiper-pagination-bullets .swiper-pagination-bullet-active {
   @apply !w-[40px] rounded-full bg-main;
 }
+.container_des_category table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ececec;
+}
+
+.container_des_category table th,
+.container_des_category table td {
+  border: 1px solid #ececec;
+  padding: 8px;
+  text-align: left;
+}
 
 .container_des_category a {
   @apply !text-main;

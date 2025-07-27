@@ -8,8 +8,8 @@ const Logo = ({ className }: { className?: string }) => {
   return (
     <>
       <Link className={`flex items-center justify-center gap-2 ${className}`} href="/">
-        <Image className="dark:hidden" src={LogoDark} alt="" />
-        <Image className="hidden dark:block" src={LogoLight} alt="" />
+        <Image className="!w-[9rem] dark:hidden lg:!w-fit" src={LogoDark} alt="" />
+        <Image className="hidden !w-[9rem] dark:block lg:!w-fit" src={LogoLight} alt="" />
       </Link>
     </>
   );

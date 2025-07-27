@@ -1,17 +1,9 @@
 'use client';
-import Logo from '@/../public/icons/logo.svg';
 import Button from '@/components/common/Button';
-import {
-  Arrow_back_desktop,
-  Arrow_back_mobile,
-  Checkbox_blue,
-  Checkbox_Green,
-} from '@/components/common/icon';
 import { useVerifyAuth } from '@/hooks/auth/useVerifyAuth';
 import { toEnglishDigits } from '@/lib/fun';
 import { InputOtp } from '@heroui/react';
 import { useFormik } from 'formik';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState, useTransition } from 'react';
@@ -39,15 +31,15 @@ const Verify = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     startTransaction(() => {
-  //       setTimeout(() => {
-  //       location.href= "/"
-  //       }, 2000);
-  //     });
-  //   }
-  // }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) {
+      startTransaction(() => {
+        setTimeout(() => {
+          location.href = '/';
+        }, 2000);
+      });
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     if ('OTPCredential' in window) {
@@ -99,9 +91,9 @@ const Verify = () => {
                 classNames={{
                   errorMessage: 'font-regular',
                   base: '!mx-auto  mt-5',
-                  segmentWrapper: '!flex gap-3 lg:gap-6 justify-between',
+                  segmentWrapper: '!flex gap-3 lg:gap-3 justify-between',
                   segment:
-                    '!w-[83px] font-regular !h-[64px] data-[has-value=true]:!bg-main data-[has-value=true]:!text-white !bg-[#F4F6FA] dark:!bg-[#0B1524] border border-transparent data-[active=true]:border-[#6E3DFF] data-[active=true]:!bg-[#F4F6FA] data-[active=true]:!text-block',
+                    '!w-[53px] font-regular !h-[48px] data-[has-value=true]:!bg-main data-[has-value=true]:!text-white !bg-[#F4F6FA] dark:!bg-[#0B1524] border border-transparent data-[active=true]:border-[#6E3DFF] data-[active=true]:!bg-[#F4F6FA] data-[active=true]:!text-block',
                 }}
                 name="code"
                 onValueChange={(e) => formik.setFieldValue('code', e)}
@@ -130,7 +122,7 @@ const Verify = () => {
 
             <Link
               href={'/auth'}
-              className="flex !h-[48px] w-full items-center justify-center rounded-lg border border-[#E5EAEF] font-bold text-[#172334] dark:text-white lg:mt-14 lg:!h-[48px]"
+              className="flex !h-[48px] w-full items-center justify-center rounded-lg border border-[#E5EAEF] font-medium text-[#172334] dark:text-white lg:mt-14 lg:!h-[48px]"
             >
               تعییر شماره یا ثبت نام با ایمیل
             </Link>

@@ -4,7 +4,7 @@ import React from 'react';
 const InfoBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
-      <h1 className="pt-[24px] font-extrabold text-xl text-[#172334] dark:text-white lg:text-4xl">
+      <h1 className="pt-[24px] font-bold text-xl text-[#172334] dark:text-white lg:text-3xl">
         {blog.title}
       </h1>
       <div className="mt-3 flex flex-wrap items-center gap-4 lg:mt-[24px] lg:gap-[24px]">
@@ -94,7 +94,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
           </div>
         </div>
       </div>
-      <p className="mt-10 font-medium text-[14px] text-[#33435A] dark:text-[#8E98A8]">
+      <p className="mt-14 font-medium text-[14px] text-[#33435A] dark:text-[#8E98A8]">
         {blog.shortDescription}
       </p>
     </div>

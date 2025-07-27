@@ -11,7 +11,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
       <Image
         classImg="object-fill"
         className="h-full !w-[150px] overflow-hidden rounded-xl border-transparent lg:!w-[258px]"
-        src={blog.thumbnailImage.url}
+        src={blog?.thumbnailImage?.url}
         alt=""
       />
       <div className="flex h-full flex-col justify-between">

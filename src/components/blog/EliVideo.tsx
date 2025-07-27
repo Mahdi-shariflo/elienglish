@@ -60,7 +60,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
               <Image
                 classImg="!object-fill"
                 className="h-full w-full bg-white transition-all duration-400 group-hover:scale-105"
-                src={blog.thumbnailImage.url}
+                src={blog?.thumbnailImage?.url}
                 alt=""
               />
               <div className="absolute bottom-0 z-30 flex h-[65px] w-full flex-col justify-center bg-white/30 p-3 backdrop-blur-lg lg:h-[65px]">

@@ -39,7 +39,7 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <header className="fixed !z-[9999] flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
+      <header className="fixed !z-50 flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
           <Link href={'/'}>
             <Image className="dark:hidden" src={LogoDark} alt="" />

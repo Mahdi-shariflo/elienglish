@@ -256,22 +256,23 @@ export default function UserInformation() {
             </svg>
             <svg
               className="lg:hidden"
-              width="26"
-              height="26"
-              viewBox="0 0 26 26"
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M13.0035 24C15.9209 24 18.7188 22.8411 20.7817 20.7782C22.8446 18.7153 24.0035 15.9174 24.0035 13C24.0035 10.0826 22.8446 7.28473 20.7817 5.22183C18.7188 3.15893 15.9209 2 13.0035 2"
-                stroke="#D0006A"
-                strokeWidth="1.8"
+                d="M12 12.5C14.7614 12.5 17 10.2614 17 7.5C17 4.73858 14.7614 2.5 12 2.5C9.23858 2.5 7 4.73858 7 7.5C7 10.2614 9.23858 12.5 12 12.5Z"
+                stroke="#7D8793"
+                strokeWidth="2"
                 strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
-                d="M2 12.9988H15.75M15.75 12.9988L11.625 8.87385M15.75 12.9988L11.625 17.1238"
-                stroke="#D0006A"
-                strokeWidth="1.8"
+                d="M20.59 22.5C20.59 18.63 16.74 15.5 12 15.5C7.26003 15.5 3.41003 18.63 3.41003 22.5"
+                stroke="#7D8793"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />

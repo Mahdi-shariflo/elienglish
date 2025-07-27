@@ -41,7 +41,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                 />
               </svg>
             </span>
-            <p className="font-bold">
+            <p className="font-medium">
               {comment?.author.firstName} {comment?.author?.lastName}
             </p>
             <div className="flex items-center gap-2">
@@ -61,12 +61,11 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
               </svg>
 
               <div className="flex gap-1">
-                <span className="font-light text-[14px] text-[#8E98A8]">زمان انتشار:</span>
-                <span className="font-light text-[14px] text-[#6A7890]">
+                <span className="font-medium text-[14px] text-[#6A7890]">
                   {new Date(comment?.createdAt!).toLocaleDateString('fa-IR', {
-                    year: '2-digit',
+                    year: 'numeric',
                     month: '2-digit',
-                    day: '2-digit',
+                    day: 'numeric',
                   })}
                 </span>
               </div>

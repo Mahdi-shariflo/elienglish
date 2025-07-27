@@ -5,7 +5,6 @@ import { Blog } from '@/types';
 import { BASEURL } from '@/lib/variable';
 import dynamic from 'next/dynamic';
 import { Course } from '@/types/home';
-import HlsPlayer from '../admin/common/HlsPlayer';
 import VideoPlayer from '../admin/common/VideoPlayer';
 const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/react'), {
   ssr: false,
@@ -16,7 +15,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
   return (
     <>
       <div
-        className={`mt-3 h-[193px] overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] lg:h-[480px] 3xl:h-[500px] 5xl:h-[600px] ${className}`}
+        className={`mt-3 overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] ${className}`}
       >
         {media?.video?.url ? (
           <VideoPlayer
@@ -25,7 +24,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
           />
         ) : (
           <Image
-            className="h-full w-full"
+            className="h-[193px] w-full lg:h-[480px]"
             classImg="object-fill"
             src={media.thumbnailImage.url}
             alt=""

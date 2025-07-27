@@ -23,7 +23,7 @@ const CardBlog2 = ({
     >
       <Image
         classImg="!object-fill"
-        src={blog.thumbnailImage.url}
+        src={blog?.thumbnailImage?.url}
         className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg transition-all duration-300 group-hover:scale-105 lg:h-full ${classImage}`}
         alt=""
       />

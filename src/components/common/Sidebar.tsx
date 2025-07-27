@@ -26,12 +26,7 @@ const Sidebar = () => {
       src: '/',
     },
     {
-      title: 'برند‌ها',
-      Icon: BrandPage_icon,
-      src: '/brands',
-    },
-    {
-      title: 'رز مگ',
+      title: 'مقاله‌ها',
       Icon: BlogPage_icon,
       src: '/mag',
     },
@@ -139,49 +134,6 @@ const Sidebar = () => {
                     </div>
                   ) : (
                     <div className="flex w-full items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span>
-                          <svg
-                            width="23"
-                            height="19"
-                            viewBox="0 0 23 19"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <line
-                              x1="1.1"
-                              y1="-1.1"
-                              x2="21.9"
-                              y2="-1.1"
-                              transform="matrix(-1 0 0 1 23 3)"
-                              stroke="#A6AFB9"
-                              strokeWidth="2.2"
-                              strokeLinecap="round"
-                            />
-                            <line
-                              x1="1.1"
-                              y1="-1.1"
-                              x2="16.9"
-                              y2="-1.1"
-                              transform="matrix(-1 0 0 1 23 11)"
-                              stroke="#A6AFB9"
-                              strokeWidth="2.2"
-                              strokeLinecap="round"
-                            />
-                            <line
-                              x1="1.1"
-                              y1="-1.1"
-                              x2="13.9"
-                              y2="-1.1"
-                              transform="matrix(-1 0 0 1 23 19)"
-                              stroke="#A6AFB9"
-                              strokeWidth="2.2"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </span>
-                        <p>دسته‌بندی‌ها</p>
-                      </div>
                       <Button onClick={onClose} className="w-fit min-w-fit">
                         <CgClose size={20} />
                       </Button>
