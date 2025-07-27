@@ -100,6 +100,9 @@ export function createURL(inputText: string, baseUrl?: string): string {
 export function toEnglishDigits(str: string): string {
   return str.replace(/[۰-۹]/g, (d) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
 }
+export function cleanUrl(url: string) {
+  return url.replace(/\/+$/, ''); // حذف تمام اسلش‌های انتهایی
+}
 
 export function generateRandomString(
   length = 8,

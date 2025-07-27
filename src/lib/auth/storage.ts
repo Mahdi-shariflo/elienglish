@@ -1,6 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import { COOCIES_NAME } from '../variable';
+import { redirect } from 'next/navigation';
 
 interface Session {
   accessToken: string;
@@ -19,17 +20,17 @@ export const saveSession = async (session: Session) => {
     path: '/',
   });
 };
-export const saveTheme = async (session: string) => {
+export async function saveTheme() {
   const cookieStore = await cookies();
-  cookieStore.set({
-    name: 'theme',
-    value: session,
-    httpOnly: true,
-    maxAge: 7 * 24 * 60 * 60,
-    expires: 7 * 24 * 60 * 60,
+  const theme = cookieStore.get('theme');
+
+  const newTheme = theme?.value === 'dark' ? 'light' : 'dark';
+
+  cookieStore.set('theme', newTheme, {
     path: '/',
+    maxAge: 60 * 60 * 24 * 30, // ۳۰ روز
   });
-};
+}
 
 export async function removeSession() {
   (await cookies()).delete(COOCIES_NAME);

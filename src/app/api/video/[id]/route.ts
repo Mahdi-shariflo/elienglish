@@ -1,5 +1,4 @@
 // app/api/video/route.ts
-import { NextRequest } from 'next/server';
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

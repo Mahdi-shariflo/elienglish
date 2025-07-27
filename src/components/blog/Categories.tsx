@@ -21,10 +21,14 @@ const Categories = ({ categories, children }: Props) => {
         {categories.map((item, idx) => (
           <Link
             key={idx}
-            className="flex h-[108px] flex-col items-center justify-center gap-10 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px]"
+            className="flex h-[108px] flex-col items-center justify-center gap-7 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px]"
             href={`/blogs/category/${item.url}`}
           >
-            <Image className="h-10 w-10" src={item?.thumbnailImage?.url} alt="" />
+            <Image
+              className="h-20 w-20 mix-blend-multiply"
+              src={item?.thumbnailImage?.url}
+              alt=""
+            />
             <p className="font-bold text-main">{item.title}</p>
           </Link>
         ))}

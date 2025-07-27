@@ -7,12 +7,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import Editor from '../../../../../components/admin/common/Editor';
 import Media from '@/components/admin/common/Media';
 import { useParams, useRouter } from 'next/navigation';
-import SelectCategoryBlog from '@/components/admin/blog/SelectCategoryBlog';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { BASEURL, BASEURL_SITE } from '@/lib/variable';
 import Button from '@/components/common/Button';
-import { createURL, removeEmptyFields } from '@/lib/fun';
+import { cleanUrl, createURL, removeEmptyFields } from '@/lib/fun';
 import { useGetTagsBlogAdmin } from '@/hooks/admin/blogs/useGetTagsBlogAdmin';
 import { useActionMag } from '@/hooks/admin/blogs/useActionBlog';
 import { useGetBlogById } from '@/hooks/admin/blogs/useGetBlogById';
@@ -22,6 +21,7 @@ import Video from 'react-player';
 import { AudioPlayer } from '@/components/common/AudioPlayer';
 import DownloadFile from '@/components/admin/blog/DownloadFile';
 import { Delete_icon } from '@/components/common/icon';
+import SelectCategoryBlog from '@/components/admin/blog/SelectCategoryBlog';
 interface InitialValues {
   tags: string[];
   readTime: string;
@@ -32,7 +32,7 @@ interface InitialValues {
   poddcast: { url: string; _id: string } | undefined;
   Published: string;
   description: string;
-  category: string[];
+  categories: string[];
   title: string;
   thumbnailImage: { url: string; _id: string } | undefined;
   metaTitle: string;
@@ -76,7 +76,7 @@ const Page = () => {
       url: '',
       Published: 'false',
       description: '',
-      category: [],
+      categories: [],
       title: '',
       thumbnailImage: undefined,
       metaTitle: '',
@@ -90,8 +90,8 @@ const Page = () => {
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
-      shortDescription: Yup.string().required('فیلد اجباری است'),
-      category: Yup.array().required('فیلد اجباری است'),
+      // shortDescription: Yup.string().required('فیلد اجباری است'),
+      categories: Yup.array().required('فیلد اجباری است'),
       // thumbnailImage: Yup.object(),
     }),
     onSubmit: (values) => {
@@ -111,7 +111,7 @@ const Page = () => {
         // @ts-ignore
         description: editorRef.current.getContent(),
         tags: values?.tags,
-        category: values.category.map((option: string) => option).join(','),
+        categories: values.categories.map((option: string) => option),
         thumbnailImage: values.thumbnailImage?._id,
         robots: values.robots,
         canonicalurl: values.canonicalurl,
@@ -134,7 +134,7 @@ const Page = () => {
       formik.setValues({
         ...formik.values,
         ...blog,
-        category: [blog.category?._id],
+        categories: [blog.categories?._id],
         Published: blog.Published ? 'true' : 'false',
         isChosen: blog.isChosen,
         tags: blog?.tags?.map((item: { _id: string }) => item._id),
@@ -142,7 +142,7 @@ const Page = () => {
         video: blog.video,
         poddcast: blog.audio,
         title: blog.title,
-        url: blog?.url!,
+        url: cleanUrl(blog?.url!),
         description: blog.description,
         short_des: blog.short_des,
         metaTitle: blog.metaTitle,
@@ -228,7 +228,6 @@ const Page = () => {
             formik={formik}
           />
           <Textarea
-            isRequired
             label="توضیحات کوتاه درباره مقاله"
             className="lg:col-span-2"
             name="shortDescription"
@@ -343,8 +342,9 @@ const Page = () => {
             </>
           ) : null}
           <SelectCategoryBlog
-            onSelect={(values) => formik.setFieldValue('category', values)}
-            selected={formik.values.category}
+            multiple
+            onSelect={(values) => formik.setFieldValue('categories ', values)}
+            selected={formik.values.categories}
           />
           <div>
             <Checkbox

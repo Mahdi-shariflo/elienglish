@@ -4,7 +4,6 @@ import React from 'react';
 import { parseSessionCookie } from './utils';
 import { BASEURL, COOCIES_NAME } from './variable';
 import CryptoJS from 'crypto-js';
-import { addToast } from '@heroui/react';
 
 const secret =
   '6c0a9fc9f157c7ca2c70becb24a7e7a9b9e143eee5b29d6aee075639fba1c754ff0857c03ee1d6d7a241699e9ee02fce4620bdaeedb074d585318730580d6ae0';

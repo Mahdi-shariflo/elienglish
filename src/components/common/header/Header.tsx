@@ -272,7 +272,8 @@ const Header = ({ categories }: Props) => {
               cls === 'yes' ? 'flex lg:hidden' : 'hidden'
             }`}
           >
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
+              <ThemeSwitcher />
               <Sidebar />
             </div>
             <Logo className="h-10 w-full" />

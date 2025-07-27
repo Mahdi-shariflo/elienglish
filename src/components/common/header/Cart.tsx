@@ -8,7 +8,7 @@ const Cart = () => {
     <div className="flex items-center gap-4">
       <Link
         href="/checkout/"
-        className="relative flex !h-[48px] !w-[48px] min-w-[48px] items-center justify-center overflow-visible rounded-[12px] border border-[#E5EAEF] bg-transparent"
+        className="relative flex !h-[40px] !w-[40px] !min-w-[40px] items-center justify-center overflow-visible rounded-[12px] border border-[#E5EAEF] bg-transparent lg:!h-[48px] lg:!w-[48px] lg:min-w-[48px]"
       >
         <span>
           <svg
