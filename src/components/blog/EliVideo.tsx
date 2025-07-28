@@ -49,7 +49,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
                 />
               </svg>
             </span>
-            <p className="font-bold text-[24px] text-[#E5EAEF]">الی ویدیو</p>
+            <p className="font-bold text-[24px] text-[#33435A]">الی ویدیو</p>
           </div>
           <Link
             className="hidden h-[40px] items-center justify-center gap-3 rounded-lg border px-3 dark:border-white lg:flex"
