@@ -32,8 +32,8 @@ const Section1 = ({ section }: Props) => {
     <div className="container_page flex flex-col items-center gap-7 lg:flex-row lg:justify-between lg:gap-20">
       <div className="w-full lg:space-y-8">
         <div className="flex flex-col gap-4 lg:gap-14">
-          <p className="w-full font-black text-[20px] leading-[3rem] lg:w-[70%] lg:text-[40px] lg:leading-[6rem]">
-            <span className="font-black text-[20px] leading-[3rem] text-main lg:text-[40px] lg:leading-[6rem]">
+          <p className="w-full font-black text-[20px] leading-[3rem] dark:text-white lg:w-[70%] lg:text-[40px] lg:leading-[5rem]">
+            <span className="font-black text-[20px] leading-[3rem] text-main lg:text-[40px] lg:leading-[5rem]">
               {section.colorTitle}
             </span>{' '}
             {section.title}
@@ -50,7 +50,7 @@ const Section1 = ({ section }: Props) => {
             </Button>
             <Button
               onClick={() => router.push(section.btn.href)}
-              className="!h-[48px] w-full border border-[#E5EAEF] text-main lg:!w-[204px]"
+              className="!h-[48px] w-full border border-[#E5EAEF] text-main dark:border-[#263248] lg:!w-[204px]"
             >
               {section.btn.title}
             </Button>
@@ -60,11 +60,11 @@ const Section1 = ({ section }: Props) => {
           {section?.card?.map((item, idx) => (
             <div
               key={idx}
-              className="flex h-[90px] w-full flex-col items-center justify-between rounded-xl border p-4 lg:h-[144px]"
+              className="flex h-[90px] w-full flex-col items-center justify-center gap-6 rounded-[28px] border p-4 dark:border-[#263248] lg:h-[144px]"
             >
               <AnimatedCounter target={Number(removeNumNumeric(item.count))} duration={2500} />
               {/* <p className="font-extrabold text-[18px] text-black lg:text-[26px]">{item.count}</p> */}
-              <p className="text-center font-medium text-[12px] text-[#6A7890] lg:text-[14px]">
+              <p className="text-center font-regular text-[12px] text-[#6A7890] dark:text-[#8E98A8] lg:text-[16px]">
                 {item.title}
               </p>
             </div>
