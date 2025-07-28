@@ -18,7 +18,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
   return (
     <>
       <div>
-        <div className="lh:p-[24px] rounded-lg border-t border-[#E5EAEF] bg-[#F4F6FA] p-3 lg:h-[155px]">
+        <div className="rounded-lg border border-[#E5EAEF] bg-[#F4F6FA] p-3 dark:border-[#263248] dark:bg-[#172334] lg:h-fit lg:p-[24px]">
           <div className="flex items-center gap-2">
             <span>
               <svg
@@ -41,7 +41,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                 />
               </svg>
             </span>
-            <p className="font-medium">
+            <p className="font-medium dark:text-[#E5EAEF]">
               {comment?.author.firstName} {comment?.author?.lastName}
             </p>
             <div className="flex items-center gap-2">
@@ -71,12 +71,17 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
               </div>
             </div>
           </div>
-          <p className="mt-5 font-medium text-[#505B74]">{comment?.title}</p>
+          <p className="mt-5 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+            {comment?.title}
+          </p>
+          <p className="mt-2 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+            {comment?.content}
+          </p>
           <Button
             onClick={() =>
               setModal({ info: null, open: true, admin: false, parent: comment?._id! })
             }
-            className="mt-5 h-[36px] !w-[79px] border border-[#E5EAEF] text-main"
+            className="mt-5 h-[36px] !w-[79px] border-2 border-[#E5EAEF] text-main"
           >
             پاسخ
           </Button>
@@ -98,7 +103,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                   />
                 </svg>
               </span>
-              <div className="h-[155px] w-full rounded-lg border-t border-[#E5EAEF] bg-[#F4F6FA] p-3 lg:p-[24px]">
+              <div className="h-fit w-full rounded-lg border border-[#E5EAEF] bg-[#F4F6FA] p-3 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]">
                 <div className="flex items-center gap-2">
                   <span>
                     <svg
@@ -121,7 +126,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                       />
                     </svg>
                   </span>
-                  <p className="font-bold">
+                  <p className="font-medium">
                     {item?.author?.firstName} {item?.author?.lastName}
                   </p>
                   <div className="flex items-center gap-2">
@@ -152,7 +157,12 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                     </div>
                   </div>
                 </div>
-                <p className="mt-8 font-medium text-[#505B74]">{item.title}</p>
+                <p className="mt-5 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+                  {comment?.title}
+                </p>
+                <p className="mt-2 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+                  {comment?.content}
+                </p>
               </div>
             </div>
           ))}
