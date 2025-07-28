@@ -18,7 +18,7 @@ const CardBlog2 = ({
   if (!blog._id) return null;
   return (
     <Link
-      href={`/blog/${blog.url}`}
+      href={`/${blog.url}`}
       className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 dark:bg-[#263248] ${className}`}
     >
       <Image

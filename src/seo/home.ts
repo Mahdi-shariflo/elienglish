@@ -41,7 +41,7 @@ export const jsonLdHome = () => {
         '@type': 'WebPage',
         '@id': `${BASEURL_SITE}/#webpage`,
         url: BASEURL_SITE,
-        name: `${SITE_NAME}: فروشگاه اینترنتی خرید لوازم آرایشی، بهداشتی و ادکلن`,
+        name: `${SITE_NAME}: الی اینگلیش`,
         datePublished: '2023-08-30T15:00:46+03:30',
         dateModified: new Date().toISOString(),
         about: {
@@ -63,57 +63,53 @@ export const jsonLdHome = () => {
         logo: logo_image,
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '025-32140',
+          telephone: '021-828001623',
           contactType: 'customer service',
           contactOption: 'HearingImpairedSupported',
           areaServed: 'IR',
           availableLanguage: 'Persian',
         },
-        sameAs: [
-          'https://instagram.com/iranwhiterose',
-          'https://www.linkedin.com/in/rozesefid-company-b8596b237/',
-          BASEURL_SITE,
-        ],
+        sameAs: ['https://instagram.com/elienglish.academy', BASEURL_SITE],
       },
-      {
-        '@type': 'LocalBusiness',
-        '@id': `${BASEURL_SITE}/#localbusiness`,
-        name: SITE_NAME,
-        image: logo_image,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'قم، خیابان فلان، پلاک ۱۲۳',
-          addressLocality: 'قم',
-          postalCode: '3719611111',
-          addressCountry: 'IR',
-        },
-        geo: {
-          '@type': 'GeoCoordinates',
-          latitude: '34.6416',
-          longitude: '50.8756',
-        },
-        url: BASEURL_SITE,
-        telephone: '025-32140',
-        openingHoursSpecification: [
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
-            opens: '09:00',
-            closes: '18:00',
-          },
-          {
-            '@type': 'OpeningHoursSpecification',
-            dayOfWeek: 'Friday',
-            opens: '10:00',
-            closes: '14:00',
-          },
-        ],
-        sameAs: [
-          'https://instagram.com/iranwhiterose',
-          'https://www.linkedin.com/in/rozesefid-company-b8596b237/',
-        ],
-        priceRange: 'IRR',
-      },
+      // {
+      //   '@type': 'LocalBusiness',
+      //   '@id': `${BASEURL_SITE}/#localbusiness`,
+      //   name: SITE_NAME,
+      //   image: logo_image,
+      //   address: {
+      //     '@type': 'PostalAddress',
+      //     streetAddress: 'قم، خیابان فلان، پلاک ۱۲۳',
+      //     addressLocality: 'قم',
+      //     postalCode: '3719611111',
+      //     addressCountry: 'IR',
+      //   },
+      //   geo: {
+      //     '@type': 'GeoCoordinates',
+      //     latitude: '34.6416',
+      //     longitude: '50.8756',
+      //   },
+      //   url: BASEURL_SITE,
+      //   telephone: '025-32140',
+      //   openingHoursSpecification: [
+      //     {
+      //       '@type': 'OpeningHoursSpecification',
+      //       dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      //       opens: '09:00',
+      //       closes: '18:00',
+      //     },
+      //     {
+      //       '@type': 'OpeningHoursSpecification',
+      //       dayOfWeek: 'Friday',
+      //       opens: '10:00',
+      //       closes: '14:00',
+      //     },
+      //   ],
+      //   sameAs: [
+      //     'https://instagram.com/iranwhiterose',
+      //     'https://www.linkedin.com/in/rozesefid-company-b8596b237/',
+      //   ],
+      //   priceRange: 'IRR',
+      // },
     ],
   };
 };
@@ -148,8 +144,8 @@ export const default_meta_data: Metadata = {
 };
 
 export const home_meta_data: Metadata = {
-  title: `${SITE_NAME}: فروشگاه اینترنتی خرید لوازم آرایشی، بهداشتی و ادکلن`,
-  description: `خرید بهترین لوازم آرایشی، بهداشتی، عطر و ادکلن و لوازم برقی زنانه و مردانه اورجینال با بهترین قیمت در فروشگاه اینترنتی ${SITE_NAME}`,
+  title: `${SITE_NAME}: الی اینگلیش`,
+  description: `اینجا بستری است که آموزش زبان انگلیسی را به بهترین شکل ممکن، در سریع ترین زمان ممکن آموزش خواهید دید. در الی انگلیش، می‌توانید زبان انگلیس را رایگان بیاموزید`,
   alternates: {
     canonical: `${BASEURL_SITE}/`,
   },
@@ -160,10 +156,10 @@ export const home_meta_data: Metadata = {
     index: process.env.APP_ENV === 'stage' ? false : true,
     follow: process.env.APP_ENV === 'stage' ? false : true,
   },
-  other: {
-    'twitter:label1': `نویسنده`,
-    'twitter:data1': `پشتیبان سایت`,
-    'twitter:label2': `زمان خواندن`,
-    'twitter:data2': `28 دقیقه`,
-  },
+  // other: {
+  //   'twitter:label1': `نویسنده`,
+  //   'twitter:data1': `پشتیبان سایت`,
+  //   'twitter:label2': `زمان خواندن`,
+  //   'twitter:data2': `28 دقیقه`,
+  // },
 };

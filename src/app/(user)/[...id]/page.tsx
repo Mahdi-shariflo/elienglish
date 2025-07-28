@@ -2,7 +2,6 @@ import CardBlog2 from '@/components/blog/CardBlog2';
 import Comments from '@/components/common/Comments';
 import Description from '@/components/blog/Description';
 import DownloadFiles from '@/components/blog/DownloadFiles';
-import InfoBlog from '@/components/blog/InfoBlog';
 import MediaPreview from '@/components/blog/MediaPreview';
 import RecommendSection from '@/components/blog/RecommendSection';
 import Share from '@/components/blog/Share';
@@ -13,27 +12,53 @@ import { request } from '@/lib/safeClient';
 import { Blog } from '@/types';
 import Link from 'next/link';
 import React from 'react';
+import { getmetadatSingleMag, jsonLdSingleMag, jsonLdSingleMagBreadcramp } from '@/seo/mag';
+import { Metadata } from 'next';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  return getmetadatSingleMag({ id: id[0] });
+}
+
 const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id[0]!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
+
+  const breadcrumbPath = [
+    { id: '3334', title: 'خانه', url: '/' },
+    ...(Array.isArray(blog?.breadcrumbPath)
+      ? blog?.breadcrumbPath.map((item: { url: string }) => {
+          return { ...item, url: `/category/${item.url}` };
+        })
+      : []),
+    { id: '333', title: blog?.title, url: '#' },
+  ];
   return (
     <div className="bg-white pb-10 dark:bg-dark">
-      {/* <script
+      <script
         id="jsonld_mag"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSingleMag(blog)) }}
-      /> */}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdSingleMag({ mag: blog, commentCount: 12 })),
+        }}
+      />
+      <script
+        id="jsonld_breadcraumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLdSingleMagBreadcramp({ breadcrumbPath: breadcrumbPath })),
+        }}
+      />
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/blog/category"
           breadcrumbs={[
             ...(Array.isArray(blog?.breadcrumbPath) ? blog?.breadcrumbPath : []),
-            blog?.breadcrumbPath,
             { id: '333', title: blog?.title, url: '#' },
           ]}
         />

@@ -80,7 +80,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
           return (
             <Link
               key={blog._id || blog.title}
-              href={`/blog/${blog.url}`}
+              href={`/${blog.url}`}
               className={`group relative block h-full w-full cursor-pointer overflow-hidden rounded-lg bg-white ${className}`}
             >
               <Image

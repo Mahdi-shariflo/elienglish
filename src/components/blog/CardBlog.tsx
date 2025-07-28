@@ -16,7 +16,6 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
       />
       <div className="flex h-full flex-col justify-around">
         <div className="flex h-[24px] w-fit items-center justify-center rounded-md !bg-[#EDE8FC] px-2 font-medium text-[10px] text-main dark:!bg-[#172334] lg:h-[28px] lg:text-[13px]">
-          {/* @ts-expect-error error */}
           {Boolean(blog?.category?.title) ? blog?.category?.title : null}
         </div>
         <p className="line-clamp-2 font-medium text-[12px] dark:text-white lg:text-[16px]">

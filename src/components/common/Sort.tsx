@@ -28,9 +28,11 @@ const Sort = () => {
   return (
     <div className="mb-3 hidden justify-end lg:flex">
       <Dropdown
+        shouldBlockScroll={false}
         placement="bottom-start"
         classNames={{
-          trigger: '!h-[40px] rounded-lg dark:bg-[#172334] font-medium text-[16px] shadow',
+          trigger:
+            '!h-[40px] border !border-gray-100 rounded-lg dark:bg-[#172334] font-medium text-[16px] shadow',
         }}
       >
         <DropdownTrigger>

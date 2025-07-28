@@ -3,7 +3,7 @@ export const BASEURL_SITE =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
     : process.env.NEXT_PUBLIC_BASEURL_SITE;
-export const SITE_NAME = 'الی اینگلیش';
+export const SITE_NAME = 'آکادمی الی اینگلیش';
 export const freeShippingPrice = 1200000;
 
 export const logo_image = 'https://api.rozesefid.com/upload/2025/1/1738748628361.png';

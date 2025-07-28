@@ -241,6 +241,8 @@ export type ThumbnailImage = {
 
 export type Blog = {
   description: string;
+  redirectType: number;
+  redirecturl: string;
   _id: string;
   author: User;
   type: string; // مثلا "video"
@@ -249,18 +251,23 @@ export type Blog = {
   readTime: string;
   keyWords: string[];
   shortDescription: string;
+  metaTitle: string;
+  metaDescription: string;
+  canonicalurl: string;
+  robots: string;
   Published: boolean;
   thumbnailImage: ThumbnailImage;
   coverVideo: ThumbnailImage;
   audio: ThumbnailImage;
   video: ThumbnailImage; // به نظر میاد id ویدئو باشه
   tags: string[]; // آیدی‌های تگ‌ها
-  category: { title: string } | string; // آیدی دسته‌بندی
+  category: { title: string }; // آیدی دسته‌بندی
   isChosen: boolean;
   requiredLogin: boolean;
   downloads: any[]; // اگر ساختار دانلودها مشخص است، می‌تونیم دقیق‌تر تایپ کنیم
   createdAt: string; // یا Date
   updatedAt: string; // یا Date
+  short_des: string;
 };
 
 export type CommentInfo = {
