@@ -49,8 +49,10 @@ export default function BaseDialog({
               ) : (
                 <>
                   {title ? (
-                    <ModalHeader className="relative z-30 print:hidden">
-                      <p className="w-full border-b pb-4 text-center font-bold">{title}</p>
+                    <ModalHeader className="relative z-30 dark:!border-[#263248] dark:!bg-[#172334] print:hidden">
+                      <p className="w-full border-b pb-4 text-center font-bold dark:text-white">
+                        {title}
+                      </p>
 
                       <Button onClick={onClose} className="absolute left-3 top-2 w-fit !min-w-fit">
                         <svg

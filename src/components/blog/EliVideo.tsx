@@ -24,7 +24,33 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
     <div className="container_page lg:w-full">
       {
         <div className="flex items-center justify-between">
-          <Title title={'الی ویدیو'} />
+          <div className="flex items-center gap-2">
+            <span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M23 7L16 12L23 17V7Z"
+                  stroke="#8A62FF"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M14 5H3C1.89543 5 1 5.89543 1 7V17C1 18.1046 1.89543 19 3 19H14C15.1046 19 16 18.1046 16 17V7C16 5.89543 15.1046 5 14 5Z"
+                  stroke="#8A62FF"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <p className="font-bold text-[24px] text-[#33435A]">الی ویدیو</p>
+          </div>
           <Link
             className="hidden h-[40px] items-center justify-center gap-3 rounded-lg border px-3 dark:border-white lg:flex"
             href={''}
@@ -48,7 +74,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
           </Link>
         </div>
       }
-      <div className="mt-5 hidden !h-[400px] grid-cols-5 grid-rows-4 gap-4 lg:grid 2xl:!h-[500px]">
+      <div className="mt-5 hidden !h-[340px] grid-cols-5 grid-rows-4 gap-4 lg:grid">
         {blogs.slice(0, 5).map((blog, i) => {
           const className = gridPositions[i];
           return (

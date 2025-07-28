@@ -30,5 +30,9 @@ export default function AnimatedCounter({ target, duration = 2000 }: Props) {
     requestAnimationFrame(animate);
   }, [target, duration]);
 
-  return <span className="font-bold text-3xl">{count.toLocaleString()}</span>;
+  return (
+    <span className="font-black text-3xl text-[#222222] dark:text-white">
+      {count.toLocaleString()}
+    </span>
+  );
 }

@@ -39,6 +39,7 @@ export default {
         medium: 'medium',
         regular: 'regular',
         extrabold: 'extrabold',
+        demibold:"demibold"
       },
     },
   },

@@ -25,7 +25,7 @@ const EliMag = ({
   if (Number(blogs?.length) < 1) return null;
 
   return (
-    <div className={`container_page ${className}`}>
+    <div className={` ${className}`}>
       {
         <div className="flex items-center justify-between">
           <Title title={title} />
@@ -52,11 +52,11 @@ const EliMag = ({
           </Link>
         </div>
       }
-      <div className="mt-10 hidden h-[450px] items-center gap-5 lg:flex 3xl:h-[500px]">
+      <div className="mt-10 hidden h-[450px] items-center gap-5 lg:flex">
         {blogs[0] && (
           <CardBlog1
             blog={blogs[0]}
-            classImage="!h-[300px] 3xl:!h-[350px] !rounded-lg"
+            classImage="!h-fit  !rounded-lg"
             className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
           />
         )}

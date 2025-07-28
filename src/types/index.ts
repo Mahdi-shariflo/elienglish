@@ -255,7 +255,7 @@ export type Blog = {
   audio: ThumbnailImage;
   video: ThumbnailImage; // به نظر میاد id ویدئو باشه
   tags: string[]; // آیدی‌های تگ‌ها
-  category: string; // آیدی دسته‌بندی
+  category: { title: string } | string; // آیدی دسته‌بندی
   isChosen: boolean;
   requiredLogin: boolean;
   downloads: any[]; // اگر ساختار دانلودها مشخص است، می‌تونیم دقیق‌تر تایپ کنیم

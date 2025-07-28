@@ -17,23 +17,23 @@ const Section3 = ({ section }: Props) => {
   if (!Array.isArray(section) || section.length < 1) return;
   console.log(section);
   return (
-    <div className="flex h-[305px] items-center justify-center bg-[#F4F6FA]">
+    <div className="flex h-[305px] items-center justify-center bg-[#F4F6FA] dark:bg-transparent">
       <div className="container_page flex flex-col items-center justify-between gap-10 lg:flex-row">
         {section.map((item, idx) => (
           <Link
             key={idx}
             href={item?.btn?.href}
-            className="relative flex w-full cursor-pointer flex-col rounded-xl border border-[#E5EAEF] bg-white p-4 transition-all duration-400 hover:border-main hover:bg-transparent 5xl:p-7"
+            className="relative flex w-full cursor-pointer flex-col rounded-xl border border-[#E5EAEF] bg-white p-6 transition-all duration-400 hover:border-main hover:bg-transparent dark:border-[#263248] dark:bg-[#172334]"
           >
-            <p className="font-bold text-[20px]">{item.title}</p>
+            <p className="font-bold text-[20px] dark:text-white">{item.title}</p>
             <div className="mt-3 flex items-center justify-between">
               <p className="font-medium text-[16px] text-main">{item.subTitle}</p>
-              <p className="flex items-center gap-1 font-medium text-[18px]">
+              <p className="flex items-center gap-1 font-medium text-[18px] dark:text-white">
                 {Number(item.price).toLocaleString()} <Toman_Icon />
               </p>
             </div>
             <div className="mt-2 flex h-[35px] w-[185px] items-center justify-center gap-2 self-end rounded-lg bg-main font-medium text-white">
-              <span className="text-[14px]">{item?.btn?.title}</span>
+              <span className="text-[14px] dark:text-white">{item?.btn?.title}</span>
               <span>
                 <svg
                   width="24"
@@ -50,7 +50,7 @@ const Section3 = ({ section }: Props) => {
               </span>
             </div>
             {item.special && (
-              <span className="absolute left-2 top-2 rounded-full border border-gray-100">
+              <span className="absolute left-4 top-4 rounded-full border border-gray-100">
                 <svg
                   width="92"
                   height="36"

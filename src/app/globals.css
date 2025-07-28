@@ -97,6 +97,10 @@ input[type='number'] {
   src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-Medium.ttf');
 }
 
+@font-face {
+  font-family: 'demibold';
+  src: url('../../public/fonts/IranSansX/Farsi/IRANSansXFaNum-DemiBold.ttf');
+}
 .custom_pagination .swiper-pagination-bullets .swiper-pagination-bullet {
   @apply !mt-4 !h-[10px] !w-[10px] rounded-full bg-main bg-opacity-40;
 }

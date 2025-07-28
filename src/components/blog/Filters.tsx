@@ -100,8 +100,8 @@ const Filters = ({ searchParams, resultFilter, title }: Props) => {
       {/* title */}
       <div className="mt-5 lg:mt-0">
         <Title className="hidden lg:block" title={title} />
-        <div className="mt-5 hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] px-3 dark:bg-[#263248] lg:block lg:pl-3">
-          <div className="flex !h-[56px] items-center justify-between">
+        <div className="mt-5 hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-y-auto overflow-x-hidden rounded-xl bg-[#F4F6FA] !px-6 dark:bg-[#263248] lg:block lg:pl-3">
+          <div className="flex !h-[54px] items-center justify-between border-b dark:border-[#505B74]">
             <div className="flex items-center gap-2">
               <span>
                 <svg
@@ -120,9 +120,9 @@ const Filters = ({ searchParams, resultFilter, title }: Props) => {
                   <path d="M11.6667 18.1263C9.71667 18.1263 8.125 16.5346 8.125 14.5846C8.125 12.6346 9.71667 11.043 11.6667 11.043C13.6167 11.043 15.2083 12.6346 15.2083 14.5846C15.2083 16.5346 13.6167 18.1263 11.6667 18.1263ZM11.6667 12.293C10.4 12.293 9.375 13.318 9.375 14.5846C9.375 15.8513 10.4 16.8763 11.6667 16.8763C12.9333 16.8763 13.9583 15.8513 13.9583 14.5846C13.9583 13.318 12.9333 12.293 11.6667 12.293Z" />
                 </svg>
               </span>
-              <p className="font-medium text-[18px] text-[#172334] dark:text-white">فیلتر‌ها</p>
+              <p className="font-medium text-[18px] text-[#172334] dark:text-white">فیلتر‌</p>
             </div>
-            {searchParamsLength >= 3 && (
+            {searchParamsLength >= 1 && (
               <Button onClick={() => router.push(pathname)} className="w-fit text-main">
                 <Delete_icon />
                 <span>حذف فیلترها</span>

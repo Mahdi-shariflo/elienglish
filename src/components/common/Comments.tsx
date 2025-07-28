@@ -5,7 +5,7 @@ import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
 import { useSession } from '@/lib/auth/useSession';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Blog, Comment, CommentInfo } from '@/types';
+import { Comment, CommentInfo } from '@/types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import StarRating from '../common/StarRateing';
@@ -13,7 +13,7 @@ import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 import CardComment from './CardComment';
-import TitleSection from './TitleSection';
+import { addToast } from '@heroui/react';
 
 const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
   ({ commentInfo }, ref) => {
@@ -30,10 +30,14 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
       validationSchema: yup.object({
         title: yup.string().required('فیلد اجباری است'),
         content: yup.string().required('فیلد اجباری است'),
-        star: yup.mixed().test('is-not-zero', 'امتیاز نباید صفر باشد', () => star > 0),
       }),
       onSubmit: (values) => {
         if (!user?.accessToken) return setOpen(!open);
+        if (star === 0)
+          return addToast({
+            title: 'لطفا امتیاز خود را برای ثبت مقاله انتخاب کنید',
+            color: 'danger',
+          });
         const data = {
           ...values,
           rating: star,
@@ -52,12 +56,12 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
     }, [isSuccess]);
     return (
       <>
-        <div
-          ref={ref}
-          className="mt-[24px] w-full rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:p-[24px]"
-        >
+        <div ref={ref} className="mt-[24px]">
           <Title title="ارسال دیدگاه" />
-          <form onSubmit={formik.handleSubmit} className="mt-5 grid gap-4 lg:grid-cols-2">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="mt-5 grid w-full gap-4 rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] dark:bg-[#172334] lg:grid-cols-2 lg:p-[24px]"
+          >
             <Input
               isRequired
               placeholder="عنوان"
@@ -94,15 +98,17 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
               </Button>
             </div>
           </form>
-          <div className="mt-10">
-            <Title title="دیدگاه‌ها" />
-            <div className="mt-10 space-y-5">
-              {/* data?.data?.data?.comments */}
-              {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-                <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
-              ))}
+          {Number(data?.data?.data?.comments?.length) >= 1 && (
+            <div className="mt-10">
+              <Title title="دیدگاه‌ها" />
+              <div className="mt-10 space-y-5">
+                {/* data?.data?.data?.comments */}
+                {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
+                  <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <ModalNeedLoginUser open={open} setOpen={setOpen} />
         </div>
       </>

@@ -5,6 +5,8 @@ import CardBlog from '@/components/blog/CardBlog';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
 import { Blog } from '@/types';
+import SelectedFilterBlog from '@/components/blog/SelectedFilterBlog';
+import Sort from '@/components/common/Sort';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string | undefined }>;
@@ -34,22 +36,19 @@ const Page = async ({ searchParams, params }: Props) => {
                       _id: '1',
                       title: 'متنی',
                       url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
+                      type: 'text',
                     },
                     {
                       _id: '2',
                       title: 'ویدیویی',
                       url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
+                      type: 'video',
                     },
                     {
                       _id: '3',
                       title: 'پادکست',
                       url: 'dd',
-                      color: '#0ABF8C',
-                      image: 'ffffffff',
+                      type: 'padcast',
                     },
                   ],
                   displayType: 'text',
@@ -59,11 +58,17 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full rounded-lg px-3 dark:bg-[#172334]">
-            {blog.blogs.map((blog, idx) => (
-              <CardBlog blog={blog} key={idx} />
-            ))}
-            <Pagination className="mt-10" total={blog?.totalPages} />
+          <div className="flex-1">
+            <SelectedFilterBlog />
+            <div className="mt-5">
+              <Sort />
+              <div className="mt-2 w-full rounded-lg px-3 dark:bg-[#263248]">
+                {blog.blogs.map((blog, idx) => (
+                  <CardBlog blog={blog} key={idx} />
+                ))}
+                <Pagination className="mt-10" total={blog?.totalPages} />
+              </div>
+            </div>
           </div>
         </div>
       </div>

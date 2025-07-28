@@ -7,7 +7,7 @@ import Textarea from '../common/form/Textarea';
 import Input from '../common/form/Input';
 import { useFormik } from 'formik';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Comment, CommentInfo, ThumbnailImage } from '@/types';
+import { Comment, CommentInfo } from '@/types';
 import { BASEURL } from '@/lib/variable';
 import Select from '../common/Select';
 import { useUpdateCommentByIdAdmin } from '@/hooks/admin/comments/useUpdateCommentByIdAdmin';
@@ -163,10 +163,11 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
         title={modal.admin ? 'ویرایش دیدگاه' : 'افزودن دیدگاه'}
         isOpen={modal.open}
         isLoadingFooterBtn={isPending || isPendingUpdate}
+        classBody="dark:!bg-[#172334] !overflow-hidden !px-4"
       >
         <div>
           {product && (
-            <div className="shadow-comment flex items-center gap-2 rounded-lg border border-gray-100 p-3">
+            <div className="shadow-comment flex items-center gap-2 rounded-lg border border-gray-100 p-3 dark:border-[#263248]">
               <Image
                 className="rounded-lg border border-[#E4E7E9]"
                 width={100}
@@ -200,22 +201,8 @@ const CreateComment = ({ product, modal, setModal, showCommentRate }: Props) => 
                 ]}
               />
             )}
-            <Input
-              classNameLabel="text-[#616A76] font-regular"
-              label={'عنوان دیدگاه'}
-              classNameInput="!h-[48px] !bg-[#F5F6F6] font-regular text-[14px]"
-              isRequired
-              name="title"
-              formik={formik}
-            />
-            <Textarea
-              classNameLabel="text-[#616A76] font-regular"
-              label={'دیدگاه شما'}
-              isRequired
-              classNameInput="bg-[#F5F6F6] font-regular text-[14px]"
-              name="content"
-              formik={formik}
-            />
+            <Input label={'عنوان دیدگاه'} isRequired name="title" formik={formik} />
+            <Textarea label={'دیدگاه شما'} isRequired name="content" formik={formik} />
           </div>
 
           <div className="bg-spring mt-10 flex items-center justify-between gap-3 rounded-lg">

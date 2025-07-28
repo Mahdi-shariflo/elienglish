@@ -228,7 +228,10 @@ const Footer = () => {
                           />
                         </svg>
                       </span>
-                      <a className="font-light text-[#172334]" href="tel:02182891623">
+                      <a
+                        className="font-light text-[#172334] dark:text-[#8E98A8]"
+                        href="tel:02182891623"
+                      >
                         ۰۲۱۸۲۸۰۱۶۲۳
                       </a>
                     </div>
@@ -257,7 +260,10 @@ const Footer = () => {
                           />
                         </svg>
                       </span>
-                      <a className="font-light text-[#172334]" href="tel:02182891623">
+                      <a
+                        className="font-light text-[#172334] dark:text-[#8E98A8]"
+                        href="tel:02182891623"
+                      >
                         support@elienglish.com
                       </a>
                     </div>
@@ -404,7 +410,7 @@ const Footer = () => {
             </div>
           </footer>
           <div className="mt-14 flex flex-col items-center justify-between gap-5 lg:flex-row">
-            <p className="font-medium text-[#505B74]">
+            <p className="font-medium text-[#505B74] dark:text-[#8E98A8]">
               تمامی حقوق محفوظ است. طراحی و توسعه توسط وبداتیس
             </p>
             <div className="flex items-center gap-5">
