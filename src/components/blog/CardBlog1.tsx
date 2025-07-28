@@ -15,13 +15,13 @@ const CardBlog1 = ({
   if (!blog._id) return null;
   return (
     <Link
-      href={`/blogs/${blog.url}`}
+      href={`/blog/${blog.url}`}
       className={`group relative flex aspect-[16/9] h-full w-full flex-col justify-between gap-4 overflow-hidden bg-white dark:bg-[#263248] ${className}`}
     >
       <Image
         src={blog?.thumbnailImage?.url}
         alt=""
-        classImg="!object-fill"
+        classImg="!object-cover h-full w-full"
         className={`h-[165px] !w-full overflow-hidden transition-all duration-300 group-hover:scale-105 ${classImage}`}
       />
       <div className="space-y-4 px-5 pb-5">

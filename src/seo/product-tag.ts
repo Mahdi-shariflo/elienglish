@@ -34,9 +34,7 @@ export const getProductsTag = async ({
   }
   const newQueryString = filterProduct.toString();
   const result = await safeRequest({
-    url: `/user/product/alltag?limit=24&${
-      id ? `productTag=${decodeURIComponent(id)}` : ''
-    }&${newQueryString}`,
+    url: `/user/product/alltag?limit=24&${id ? `productTag=${decodeURIComponent(id)}` : ''}&${newQueryString}`,
   });
 
   return result;

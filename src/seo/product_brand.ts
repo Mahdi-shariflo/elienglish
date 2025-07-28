@@ -128,9 +128,7 @@ export const getProductsBrand = async ({
   const newQueryString = filterProduct.toString();
 
   const result = await safeRequest({
-    url: `/user/product/allattribiute?limit=21&${
-      id ? `attributeUrl=${decodeURIComponent(id)}` : ''
-    }&${newQueryString}`,
+    url: `/user/product/allattribiute?limit=21&${id ? `attributeUrl=${decodeURIComponent(id)}` : ''}&${newQueryString}`,
   });
 
   return result;

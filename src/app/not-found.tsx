@@ -3,7 +3,7 @@ import Link from 'next/link';
 const NotFound = () => {
   return (
     <div>
-      <div className="flex flex-col items-center justify-center pt-20 lg:mt-20">
+      <div className="flex flex-col items-center justify-center pt-20">
         <span className="h-[400px] w-[400px]">
           <svg
             className="h-full w-full"

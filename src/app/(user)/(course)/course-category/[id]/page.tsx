@@ -72,7 +72,7 @@ const Page = async ({ searchParams, params }: Props) => {
           />
           <div className="w-full">
             <Sort />
-            <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
+            <div className="grid w-full gap-4 rounded-lg p-3 dark:bg-[#172334] lg:grid-cols-3 lg:p-5">
               {product?.course.map((course, idx) => (
                 <CardProduct
                   url={`/course/${course.url}/`}

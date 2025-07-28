@@ -18,13 +18,13 @@ const CardBlog2 = ({
   if (!blog._id) return null;
   return (
     <Link
-      href={`/blogs/${blog.url}`}
+      href={`/blog/${blog.url}`}
       className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 dark:bg-[#263248] ${className}`}
     >
       <Image
-        classImg="!object-contain !h-full rounded-lg overflow-hidden"
+        classImg="!object-cover !h-full rounded-lg overflow-hidden"
         src={blog?.thumbnailImage?.url}
-        className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg border transition-all duration-300 group-hover:scale-105 lg:h-full ${classImage}`}
+        className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg border transition-all duration-300 group-hover:scale-105 dark:border-[#263248] lg:h-full ${classImage}`}
         alt=""
       />
       <div className="flex h-full flex-col justify-between gap-3 py-2">

@@ -22,7 +22,7 @@ const Categories = ({ categories, children }: Props) => {
           <Link
             key={idx}
             className="flex h-[108px] flex-col items-center justify-center gap-6 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px]"
-            href={`/blogs/category/${item.url}`}
+            href={`/blog/category/${item.url}`}
           >
             <Image className="h-[56px] w-[56px]" src={item?.thumbnailImage?.url} alt="" />
             <p className="font-demibold text-[14px] text-main">{item.title}</p>

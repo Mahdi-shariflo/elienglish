@@ -63,9 +63,7 @@ export const getProductsCategory = async ({
   }
   const newQueryString = filterProduct.toString();
   const result = await safeRequest({
-    url: `/user/product/all?limit=24&${
-      id ? `attributeUrl=${decodeURIComponent(id)}` : ''
-    }&${newQueryString}`,
+    url: `/user/product/all?limit=24&${id ? `categoryUrl=${decodeURIComponent(id)}` : ''}&${newQueryString}`,
   });
 
   return result;

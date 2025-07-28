@@ -5,7 +5,7 @@ import Link from 'next/link';
 const CardBlog = ({ blog }: { blog: Blog }) => {
   return (
     <Link
-      href={`/blogs/${blog.url}`}
+      href={`/${blog.url}`}
       className="flex h-[117px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74] lg:h-[160px]"
     >
       <Image

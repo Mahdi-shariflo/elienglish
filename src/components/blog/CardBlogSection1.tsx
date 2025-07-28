@@ -8,7 +8,7 @@ type Props = {
 const CardBlogSection1 = ({ blog }: Props) => {
   return (
     <Link
-      href={`/blogs/${blog.url}`}
+      href={`/blog/${blog.url}`}
       className="group relative block h-full w-full cursor-pointer overflow-hidden bg-white"
     >
       <Image

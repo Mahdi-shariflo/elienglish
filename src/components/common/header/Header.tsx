@@ -9,8 +9,7 @@ import Cart from './Cart';
 import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
-import TopHeader from '@/../public/images/top-banner.png';
-import Image from '../Image';
+
 const quickLicks = [
   {
     name: 'صفحه اصلی',
@@ -125,7 +124,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/blogs',
+    src: '/blog',
   },
   {
     name: 'تماس با ما',

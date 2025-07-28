@@ -26,7 +26,7 @@ const Page = async ({ params }: Props) => {
     <div className="bg-white pb-10 dark:bg-dark">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
-          page="/blogs/category"
+          page="/blog/category"
           breadcrumbs={[...blog?.breadcrumbPath, { id: '333', title: blog.title, url: '#' }]}
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
