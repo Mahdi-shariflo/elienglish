@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from '../common/Image';
 import { Blog } from '@/types';
-import { BASEURL } from '@/lib/variable';
+import { BASEURL, BASEURL_SITE } from '@/lib/variable';
 import dynamic from 'next/dynamic';
 import { Course } from '@/types/home';
 import VideoPlayer from '../admin/common/VideoPlayer';
@@ -12,6 +12,7 @@ const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/reac
 
 const MediaPreview = ({ media, className }: { media: Blog | Course; className?: string }) => {
   if (!media) return null;
+  console.log(`${BASEURL}/${media.audio.url}`, 'hgjfgbdsfff');
   return (
     <>
       <div
@@ -48,14 +49,27 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
             alt="Audio Poster"
             style={{ width: '100%', objectFit: 'cover' }}
           />
-          <audio
-            slot="media"
-            src={`${BASEURL}/${media.audio.url}`}
-            playsInline
-            crossOrigin="anonymous"
-          ></audio>
+          <audio slot="media" src={`${BASEURL}/${media?.audio?.url}`} playsInline></audio>
         </MediaThemeSutroAudio>
-      ) : null}
+      ) : // <MediaThemeSutroAudio
+      //   className="drop_shadow_cart mt-8"
+      //   style={{
+      //     '--media-primary-color': '#6E3DFF',
+      //     '--media-secondary-color': '#fff',
+      //     '--media-accent-color': '#E0D7FB',
+      //     width: '100%',
+      //     direction: 'ltr',
+      //   }}
+      // >
+      //   <img
+      //     slot="poster"
+      //     src={`${BASEURL}/${media.thumbnailImage.url}`}
+      //     alt="Audio Poster"
+      //     style={{ width: '100%', objectFit: 'cover' }}
+      //   />
+      //   <audio controls src={`${BASEURL}/${media.audio.url}`} />
+      // </MediaThemeSutroAudio>
+      null}
     </>
   );
 };

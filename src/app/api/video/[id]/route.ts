@@ -2,7 +2,6 @@
 
 export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  console.log(id, 'jhdfhfjfhdjhfjdhfdjh');
   const range = req.headers.get('range') || '';
   const videoUrl = `${id}`;
 
