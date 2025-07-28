@@ -61,7 +61,7 @@ const Page = async ({ params }: Props) => {
               }}
             />
           </div>
-          <div className="sticky top-24 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
+          <div className="sticky top-48 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
             <Share />
             <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">

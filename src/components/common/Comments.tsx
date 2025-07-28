@@ -13,6 +13,7 @@ import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import Title from '../common/Title';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 import CardComment from './CardComment';
+import { addToast } from '@heroui/react';
 
 const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
   ({ commentInfo }, ref) => {
@@ -29,10 +30,14 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
       validationSchema: yup.object({
         title: yup.string().required('فیلد اجباری است'),
         content: yup.string().required('فیلد اجباری است'),
-        star: yup.mixed().test('is-not-zero', 'امتیاز نباید صفر باشد', () => star > 0),
       }),
       onSubmit: (values) => {
         if (!user?.accessToken) return setOpen(!open);
+        if (star === 0)
+          return addToast({
+            title: 'لطفا امتیاز خود را برای ثبت مقاله انتخاب کنید',
+            color: 'danger',
+          });
         const data = {
           ...values,
           rating: star,
@@ -49,7 +54,6 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
         setStar(0);
       }
     }, [isSuccess]);
-    console.log(data?.data?.data);
     return (
       <>
         <div ref={ref} className="mt-[24px]">
