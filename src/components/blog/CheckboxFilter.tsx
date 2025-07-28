@@ -1,5 +1,5 @@
 import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
-import React, { useEffect, useState, useTransition } from 'react';
+import React, { useEffect, useMemo, useState, useTransition } from 'react';
 import { FilterCategory } from '@/types';
 import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
@@ -25,15 +25,18 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const selectedAttributes = Object.fromEntries(
-    Object.entries(searchParams).map(([key, value]) => [key, value?.split(',') ?? []])
-  );
+  // ✅ به‌روزرسانی خودکار فیلترهای انتخاب شده از روی searchParams
+  const selectedAttributes = useMemo(() => {
+    return Object.fromEntries(
+      Object.entries(searchParams).map(([key, value]) => [key, value?.split(',') ?? []])
+    );
+  }, [searchParams]);
 
   const handleSearchChange = (index: number, value: string) => {
     setSearchTerms((prev) => ({ ...prev, [index]: value }));
   };
 
-  const singleSelectTypes = ['statusCourse', 'sort', 'available']; // اینا فقط یک انتخاب مجاز دارن
+  const singleSelectTypes = ['statusCourse', 'sort', 'available'];
 
   const onAttributes = ({
     checked,
@@ -57,11 +60,9 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
       let updated: string[] = [];
 
       if (isSingle) {
-        // فقط همون آیتمی که الان انتخاب شده رو نگه داریم
         if (checked) {
           updated = [id];
         } else {
-          // اگر آن‌چک شد، یعنی خالی بشه
           updated = [];
         }
       } else {
@@ -80,7 +81,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
       }
 
       searchParams.set('page', '1');
-
       const newQueryString = searchParams.toString();
       router.push(`${pathname}/?${newQueryString}`, { scroll: true });
     });
@@ -126,41 +126,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
             title={property.title}
           >
             <div>
-              {/* نمایش فیلترهای انتخاب شده */}
-              {/* {selectedAttributesForProperty?.length > 0 && (
-                <div className="!mb-10">
-                  <p className="mb-3 font-regular text-[14px] text-[#616A76]">
-                    {' '}
-                    فیلترهای انتخاب شده:
-                  </p>
-                  <ul className="flex list-disc flex-col gap-2">
-                    {selectedAttributesForProperty?.map((attribute) => (
-                      <Checkbox
-                        // انتخاب پیش‌فرض چک‌باکس‌ها
-                        isSelected={selectedAttributes.includes(attribute._id)}
-                        key={attribute._id}
-                        classNames={{
-                          label:
-                            'pr-1 !text-[14px] !font-regular text-[#0C0C0C] dark:text-[#8E98A8]',
-                          wrapper: 'after:!bg-main',
-                        }}
-                        onValueChange={(value) => onAttributes(value, attribute._id)}
-                      >
-                        <div className="flex items-center gap-2">
-                          {property.displayType === 'color' ? (
-                            <span
-                              style={{ backgroundColor: attribute.color }}
-                              className="block h-4 w-4 rounded-full border"
-                            ></span>
-                          ) : null}
-                          {attribute.title}
-                        </div>
-                      </Checkbox>
-                    ))}
-                  </ul>
-                </div>
-              )} */}
-
               <Input
                 classNameInput="!h-[45px] !bg-white dark:!bg-[#33435A] border-none"
                 placeholder="جستجو"
@@ -172,9 +137,11 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                 {filteredAttributes?.length > 0 ? (
                   filteredAttributes?.map((attribute) => (
                     <Checkbox
-                      // انتخاب پیش‌فرض چک‌باکس‌ها
-                      isSelected={selectedAttributes[attribute.type]?.includes(attribute.url)}
+                      size="lg"
                       key={attribute._id}
+                      isSelected={
+                        selectedAttributes[attribute.type]?.includes(attribute.url) ?? false
+                      }
                       classNames={{
                         label: 'pr-1 !text-[14px] !font-medium text-[#33435A] dark:text-[#8E98A8]',
                         wrapper: 'after:!bg-main',

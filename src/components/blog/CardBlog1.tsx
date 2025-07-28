@@ -21,7 +21,8 @@ const CardBlog1 = ({
       <Image
         src={blog?.thumbnailImage?.url}
         alt=""
-        className={`h-[165px] !w-full overflow-hidden object-fill transition-all duration-300 group-hover:scale-105 ${classImage}`}
+        classImg="!object-fill"
+        className={`h-[165px] !w-full overflow-hidden transition-all duration-300 group-hover:scale-105 ${classImage}`}
       />
       <div className="space-y-4 px-5 pb-5">
         <span className="text-amin h-[32px] rounded bg-[#EDE8FC] px-2 font-light text-[14px] text-main">

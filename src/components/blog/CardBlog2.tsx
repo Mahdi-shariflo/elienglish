@@ -22,7 +22,7 @@ const CardBlog2 = ({
       className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 dark:bg-[#263248] ${className}`}
     >
       <Image
-        classImg="!object-fill"
+        classImg="!object-cover"
         src={blog?.thumbnailImage?.url}
         className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg transition-all duration-300 group-hover:scale-105 lg:h-full ${classImage}`}
         alt=""
@@ -33,7 +33,9 @@ const CardBlog2 = ({
             مکالمه انگلیسی
           </p>
         )}
-        <p className={`line-clamp-1 font-bold text-[#0B1524] dark:text-white ${classTitle}`}>
+        <p
+          className={`line-clamp-2 font-bold leading-7 text-[#0B1524] dark:text-white ${classTitle}`}
+        >
           {blog.title}
         </p>
         <div className="flex items-center gap-4">

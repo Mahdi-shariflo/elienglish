@@ -14,7 +14,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
         src={blog?.thumbnailImage?.url}
         alt=""
       />
-      <div className="flex h-full flex-col justify-between">
+      <div className="flex h-full flex-col justify-around">
         <span className="flex h-[24px] w-fit items-center justify-center rounded-md bg-[#EDE8FC] px-2 font-medium text-[10px] text-main lg:h-[28px] lg:text-[13px]">
           آموزش گرامر
         </span>
@@ -22,7 +22,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
           {blog.title}
         </p>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <span>
               <svg
                 width="20"
@@ -38,7 +38,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
               </svg>
             </span>
             <span className="font-medium text-[12px] text-[#6A7890] lg:text-[14px]">12</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-1">
             <span>
               <svg
