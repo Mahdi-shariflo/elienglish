@@ -13,7 +13,6 @@ import { request } from '@/lib/safeClient';
 import { Blog } from '@/types';
 import Link from 'next/link';
 import React from 'react';
-import { jsonLdSingleMag } from '@/seo/mag';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -22,18 +21,21 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id[0]!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
-
   return (
     <div className="bg-white pb-10 dark:bg-dark">
-      <script
+      {/* <script
         id="jsonld_mag"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSingleMag(blog)) }}
-      />
+      /> */}
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/blog/category"
-          breadcrumbs={[...blog?.breadcrumbPath, { id: '333', title: blog.title, url: '#' }]}
+          breadcrumbs={[
+            ...(Array.isArray(blog?.breadcrumbPath) ? blog?.breadcrumbPath : []),
+            blog?.breadcrumbPath,
+            { id: '333', title: blog?.title, url: '#' },
+          ]}
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
           <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
@@ -56,7 +58,7 @@ const Page = async ({ params }: Props) => {
             </div>
             <MediaPreview media={blog} />
             {/* title */}
-            <InfoBlog blog={blog} />
+            {/* <InfoBlog blog={blog} /> */}
             <Description blog={blog} />
             <DownloadFiles blog={blog} />
             <ShareAndCopy />
@@ -73,7 +75,7 @@ const Page = async ({ params }: Props) => {
             <div className="mt-10 hidden lg:block">
               <Title title={blogSidebar?.section2?.title} />
               <div className="mt-8 flex flex-wrap gap-3">
-                {blogSidebar?.section2.cards.map(
+                {blogSidebar?.section2?.cards?.map(
                   (item: { cardTitle: string; cardLink: string }, idx: number) => (
                     <Link
                       key={idx}

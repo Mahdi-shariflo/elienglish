@@ -11,6 +11,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
   const [show, setShow] = useState(false);
   const user = useSession();
   if (Number(blog?.downloads?.length) < 1) return null;
+  console.log(blog?.downloads);
   return (
     <>
       <div className="mt-[24px]">
@@ -44,7 +45,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
           </div>
         ) : null}
         <div>
-          {blog.downloads.map((item, idx) => (
+          {blog?.downloads?.map((item, idx) => (
             <div
               key={idx}
               className="!mt-[24px] flex h-[88px] items-center justify-between gap-3 rounded-[16px] border-r-[3px] border-[#E0D7FB] bg-[#EDE8FC] px-[24px] dark:border-[#263248] dark:bg-[#172334]"
@@ -67,7 +68,8 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
               </div>
               {user?.accessToken ? (
                 <a
-                  href=""
+                  download
+                  href={item?.url}
                   className="flex h-[40px] w-[120px] items-center justify-center gap-2 rounded-lg bg-main font-medium text-white"
                 >
                   <span>دانلود</span>

@@ -26,7 +26,7 @@ const Description = ({ blog }: { blog: Blog }) => {
   useEffect(() => {
     // Parse the HTML content
     const parser = new DOMParser();
-    const doc = parser.parseFromString(blog.description, 'text/html');
+    const doc = parser.parseFromString(blog?.description, 'text/html');
     const h2Elements = doc.querySelectorAll('h2');
 
     const h2Headings = Array.from(h2Elements).map((h2) => ({

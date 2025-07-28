@@ -111,7 +111,9 @@ const Page = () => {
         // @ts-ignore
         description: editorRef.current.getContent(),
         tags: values?.tags,
-        categories: values.categories.map((option: string) => option),
+        categories: values.categories
+          .map((option: string) => option)
+          .filter((item) => Boolean(item)),
         thumbnailImage: values.thumbnailImage?._id,
         robots: values.robots,
         canonicalurl: values.canonicalurl,
@@ -143,7 +145,7 @@ const Page = () => {
         poddcast: blog.audio,
         title: blog.title,
         url: cleanUrl(blog?.url!),
-        description: blog.description,
+        description: blog?.description,
         short_des: blog.short_des,
         metaTitle: blog.metaTitle,
         metaDescription: blog.metaDescription,
@@ -343,7 +345,7 @@ const Page = () => {
           ) : null}
           <SelectCategoryBlog
             multiple
-            onSelect={(values) => formik.setFieldValue('categories ', values)}
+            onSelect={(values) => formik.setFieldValue('categories', values)}
             selected={formik.values.categories}
           />
           <div>

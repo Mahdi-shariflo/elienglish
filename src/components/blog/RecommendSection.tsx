@@ -11,6 +11,7 @@ type Props = {
   };
 };
 const RecommendSection = ({ blogSidebar }: Props) => {
+  if (!blogSidebar?.recommendSection) return null;
   return (
     <Link
       href={blogSidebar?.recommendSection?.href}

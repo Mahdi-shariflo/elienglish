@@ -22,14 +22,14 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
             poster={`${BASEURL}/${media?.coverVideo?.url}`}
             url={`${BASEURL}/${media?.video?.url}`}
           />
-        ) : (
+        ) : media?.thumbnailImage?.url ? (
           <Image
             className="h-[193px] w-full lg:h-[480px]"
             classImg="object-fill"
-            src={media.thumbnailImage.url}
+            src={media?.thumbnailImage?.url}
             alt=""
           />
-        )}
+        ) : null}
       </div>
       {media?.audio?.url ? (
         <MediaThemeSutroAudio

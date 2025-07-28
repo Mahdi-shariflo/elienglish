@@ -5,7 +5,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
   return (
     <div>
       <h1 className="pt-[24px] font-bold text-xl text-[#172334] dark:text-white lg:text-3xl">
-        {blog.title}
+        {blog?.title}
       </h1>
       <div className="mt-3 flex flex-wrap items-center gap-4 lg:mt-[24px] lg:gap-[24px]">
         <div className="flex items-center gap-2">
@@ -37,7 +37,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
             </defs>
           </svg>
           <span className="font-light text-[12px] text-[#6A7890] dark:text-[#8E98A8] lg:text-[14px]">
-            {blog.author.firstName} {blog.author.lastName}
+            {blog?.author?.firstName} {blog?.author?.lastName}
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -60,7 +60,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
               زمان مطالعه:
             </span>
             <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
-              {blog.readTime} دقیقه
+              {blog?.readTime} دقیقه
             </span>
           </div>
         </div>
@@ -85,7 +85,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
               زمان انتشار:
             </span>
             <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
-              {new Date(blog.createdAt).toLocaleDateString('fa-IR', {
+              {new Date(blog?.createdAt).toLocaleDateString('fa-IR', {
                 year: '2-digit',
                 month: '2-digit',
                 day: '2-digit',
@@ -95,7 +95,7 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
         </div>
       </div>
       <p className="mt-14 text-justify font-medium text-[14px] leading-8 text-[#33435A] dark:text-[#8E98A8]">
-        {blog.shortDescription}
+        {blog?.shortDescription}
       </p>
     </div>
   );
