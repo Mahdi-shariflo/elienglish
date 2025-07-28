@@ -255,15 +255,16 @@ export const getmetadatSingleMag = async ({ id }: { id: string }) => {
     };
   } else return {};
 };
+
 export const metadatMagPage: Metadata = {
-  title: `رز مگ | ${SITE_NAME}`,
+  title: `الی اینگلیش | ${SITE_NAME}`,
   robots: getRobotsMeta(),
   alternates: {
     canonical: `${BASEURL_SITE}/mag/`,
   },
   openGraph: {
     locale: `fa_IR`,
-    title: `رز مگ | ${SITE_NAME}`,
+    title: `الی اینگلیش | ${SITE_NAME}`,
     description: `بهترین کانسیلر برای پوست چرب و جوش دار چه ویژگی هایی دارد؟ پوست چرب، یکی از انواع پوست های رایج است که با تولید بیش از حد سبوم یا چربی مشخص می شود. این امر می تواند منجر به بروز...`,
     url: `${BASEURL_SITE}/mag/`,
     siteName: `${SITE_NAME}`,
@@ -271,7 +272,7 @@ export const metadatMagPage: Metadata = {
   },
   twitter: {
     card: `summary_large_image`,
-    title: `رز مگ | ${SITE_NAME}`,
+    title: `الی اینگلیش | ${SITE_NAME}`,
     description: `بهترین کانسیلر برای پوست چرب و جوش دار چه ویژگی هایی دارد؟ پوست چرب، یکی از انواع پوست های رایج است که با تولید بیش از حد سبوم یا چربی مشخص می شود. این امر می تواند منجر به بروز...`,
   },
   other: {

@@ -13,6 +13,7 @@ import { request } from '@/lib/safeClient';
 import { Blog } from '@/types';
 import Link from 'next/link';
 import React from 'react';
+import { jsonLdSingleMag } from '@/seo/mag';
 type Props = {
   params: Promise<{ [key: string]: string[] }>;
 };
@@ -24,6 +25,11 @@ const Page = async ({ params }: Props) => {
 
   return (
     <div className="bg-white pb-10 dark:bg-dark">
+      <script
+        id="jsonld_mag"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSingleMag(blog)) }}
+      />
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/blog/category"

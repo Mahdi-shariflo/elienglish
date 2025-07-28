@@ -5,15 +5,25 @@ import EliMag from '@/components/blog/EliMag';
 import EliVideo from '@/components/blog/EliVideo';
 import SliderBlog from '@/components/blog/SliderBlog';
 import { request } from '@/lib/safeClient';
+import { jsonLdMag, metadatMagPage } from '@/seo/mag';
 import React from 'react';
 function getSectionByName(obj: { [key: string]: any[] }, sectionName: string) {
   return obj[sectionName];
 }
 
+export const metadata = {
+  ...metadatMagPage,
+};
+
 const page = async () => {
   const blogs = await request({ url: '/blog/main' });
   return (
     <div className="!mb-32 lg:py-32">
+      <script
+        id="jsonld_mag"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdMag()) }}
+      />
       <div className="lg:container_page flex flex-col gap-10 lg:gap-[100px]">
         <BlogSection1 blogs={getSectionByName(blogs.data.data, 'sec1')} />
         <Categories categories={getSectionByName(blogs.data.data, 'sec2')} />

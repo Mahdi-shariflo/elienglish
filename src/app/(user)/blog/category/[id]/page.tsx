@@ -7,9 +7,14 @@ import { request } from '@/lib/safeClient';
 import { Blog } from '@/types';
 import SelectedFilterBlog from '@/components/blog/SelectedFilterBlog';
 import Sort from '@/components/common/Sort';
+import { metadatMagPageCategories } from '@/seo/mag';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string | undefined }>;
+};
+
+export const metadata = {
+  ...metadatMagPageCategories,
 };
 
 const Page = async ({ searchParams, params }: Props) => {
@@ -19,6 +24,11 @@ const Page = async ({ searchParams, params }: Props) => {
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
+      {/* <script
+        id="jsonld_mag"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCategoryMag(blog)) }}
+      /> */}
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs breadcrumbs={[]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
