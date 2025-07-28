@@ -37,7 +37,7 @@ const Sort = () => {
           <Button className="bg-transparent">
             <span className="text-[#0B1524] dark:text-white">مرتب‌ سازی:</span>
             <div className="flex items-center gap-2">
-              <span className="font-regular text-[#505B74]">
+              <span className="font-regular text-[#505B74] dark:text-[#8E98A8]">
                 {sort ? (sort === 'createdAt_desc' ? 'جدیدترین' : 'قدیمی‌ترین') : 'جدیدترین'}
               </span>
               <span>

@@ -94,15 +94,17 @@ const Comments = forwardRef<HTMLDivElement, { commentInfo: CommentInfo }>(
               </Button>
             </div>
           </form>
-          <div className="mt-10">
-            <Title title="دیدگاه‌ها" />
-            <div className="mt-10 space-y-5">
-              {/* data?.data?.data?.comments */}
-              {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
-                <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
-              ))}
+          {data?.data?.data?.comments.length >= 1 && (
+            <div className="mt-10">
+              <Title title="دیدگاه‌ها" />
+              <div className="mt-10 space-y-5">
+                {/* data?.data?.data?.comments */}
+                {data?.data?.data?.comments?.map((comment: Comment, idx: number) => (
+                  <CardComment commentInfo={commentInfo} comment={comment} key={idx} />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
           <ModalNeedLoginUser open={open} setOpen={setOpen} />
         </div>
       </>
