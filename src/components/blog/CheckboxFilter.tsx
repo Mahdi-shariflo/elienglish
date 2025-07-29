@@ -151,7 +151,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                           id: attribute.url,
                           type: attribute.type,
                           page: attribute.page,
-                          isLink: false,
+                          isLink: attribute.isLink,
                         })
                       }
                     >

@@ -6,8 +6,15 @@ import Title from '../common/Title';
 import Comments from '../common/Comments';
 import Button from '../common/Button';
 import Link from 'next/link';
+import WatchVideo from '../common/WatchVideo';
+import { BASEURL, BASEURL_SITE } from '@/lib/variable';
 
 const MoreInformationCourse = ({ course }: { course: Course }) => {
+  const [modal, setModal] = useState({
+    open: false,
+    poster: '',
+    url: '',
+  });
   const [select, setSelect] = useState(0);
 
   const descriptionRef = useRef<HTMLDivElement>(null);
@@ -64,8 +71,8 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
 
   const visibleTabs = tabItems.filter((tab) => tab.show);
   return (
-    <div className="mt-10 rounded-lg border-t border-gray-200 bg-white p-3 dark:bg-[#172334] lg:mt-4 lg:border-none">
-      <div className="flex items-center gap-8 border-b border-[#E5EAEF] pb-1 dark:border-[#263248]">
+    <div className="mt-10 rounded-lg border border-gray-200 bg-white p-8 dark:!border-[#263248] dark:bg-[#0B1524] lg:mt-4">
+      <div className="flex items-center gap-8 border-b border-[#E5EAEF] pb-1 dark:!border-[#263248]">
         {visibleTabs.map((tab, idx) => (
           <Button
             key={idx}
@@ -100,7 +107,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
         ))}
       </div>
 
-      <div className="mt-5 flex flex-col gap-6 lg:gap-8">
+      <div className="mt-10 flex flex-col gap-6 lg:gap-8">
         {/* description */}
         {cleanDescription && (
           <div ref={descriptionRef}>
@@ -120,7 +127,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
               <Title className="!text-[16px]" title="دموی رایگان" />
               <Accordion
                 defaultExpandedKeys={['0']}
-                className="mt-5 lg:!mt-10"
+                className="mt-5 !rounded-lg dark:bg-[#172334] dark:!p-6 lg:!mt-10"
                 itemClasses={{ base: '!mt-2 lg:!mt-5' }}
               >
                 {course.demo.map((item, idx) => (
@@ -146,7 +153,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                     )}
                     classNames={{
                       heading:
-                        'drop_shadow_faq border dark:border-[#263248] border-gray-100 !rounded-lg !px-2',
+                        'drop_shadow_faq border dark:border-[#263248] border-gray-200 !rounded-lg !px-2',
                     }}
                     title={
                       <p className="font-medium text-[14px] dark:text-[#8E98A8] lg:text-[16px]">
@@ -241,11 +248,24 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                               <span className="font-medium text-main">{item.title}</span>
                             </div>
                             {item.type === 'video' ? (
-                              <Button className="h-[36px] w-fit min-w-fit !rounded-lg bg-[#EDE8FC] !px-2 !font-medium text-main">
+                              <Button
+                                onClick={() =>
+                                  setModal({
+                                    open: true,
+                                    url: item.mediaUrl,
+                                    poster: `${BASEURL_SITE}/${course?.thumbnailImage?.url}`,
+                                  })
+                                }
+                                className="h-[36px] w-fit min-w-fit !rounded-lg bg-[#EDE8FC] !px-2 !font-medium text-main"
+                              >
                                 مشاهده ویدئو
                               </Button>
                             ) : (
-                              <a className="flex h-[36px] w-fit items-center justify-center rounded-lg bg-[#EDE8FC] px-2 !font-medium text-[12px] text-main">
+                              <a
+                                download
+                                href={item.mediaUrl}
+                                className="flex h-[36px] w-fit items-center justify-center rounded-lg bg-[#EDE8FC] px-2 !font-medium text-[12px] text-main"
+                              >
                                 دانلود فایل
                               </a>
                             )}
@@ -267,7 +287,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
               <Title className="!text-[16px]" title="برنامه آموزشی" />
               <Accordion
                 defaultExpandedKeys={['0', '1', '2', '3', '4']}
-                className="!mt-5 lg:!mt-10"
+                className="mt-5 !rounded-lg dark:bg-[#172334] dark:!p-6 lg:!mt-10"
                 itemClasses={{ base: '!mt-2 lg:!mt-5' }}
               >
                 {course.chapters.map((item, idx) => (
@@ -295,7 +315,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                     )}
                     classNames={{
                       heading:
-                        'drop_shadow_faq border dark:border-[#263248] border-gray-100 !rounded-lg !px-4',
+                        'drop_shadow_faq border dark:border-[#263248] border-gray-200 !rounded-lg !px-4',
                     }}
                     title={
                       <div className="flex items-center justify-between">
@@ -458,6 +478,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
           }}
         />
       </div>
+      {modal.open && <WatchVideo modal={modal} setModal={setModal} />}
     </div>
   );
 };

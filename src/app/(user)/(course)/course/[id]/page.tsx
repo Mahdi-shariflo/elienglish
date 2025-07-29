@@ -19,7 +19,7 @@ const Page = async ({ params }: Props) => {
   const course: Course = result?.data?.data?.course;
   console.log(course, 'course?.thumbnailImage?.urlcourse?.thumbnailImage?.url');
   return (
-    <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
+    <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
           page="/course/category"
@@ -28,10 +28,10 @@ const Page = async ({ params }: Props) => {
         <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
           <div className="w-full gap-10 overflow-hidden rounded-lg lg:pb-8">
             <MediaPreview
-              className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334]"
+              className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#0B1524]"
               media={course}
             />
-            <div className="mt-4 flex items-start rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
+            <div className="mt-4 flex items-start rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#0B1524] lg:border lg:border-gray-50 lg:drop-shadow-sm">
               {/* {course?.thumbnailImage?.url && (
                 <Image 
                 className='!w-[300px] !h-full'
@@ -58,7 +58,7 @@ const Page = async ({ params }: Props) => {
             <MoreInformationCourse course={course} />
           </div>
           <div className="sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
-            <div className="border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
+            <div className="border border-gray-50 bg-white p-8 drop-shadow-sm dark:!border-[#263248] dark:bg-[#0B1524]">
               <div className="hidden lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
@@ -108,7 +108,7 @@ const Page = async ({ params }: Props) => {
               />
               <div>
                 {/* rate */}
-                <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
+                {/* <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
                   <span>
                     <svg
                       width="20"
@@ -134,7 +134,7 @@ const Page = async ({ params }: Props) => {
                     </p>
                     <span className="font-medium text-[#6A7890]">امتیاز زبان آموزان</span>
                   </div>
-                </div>
+                </div> */}
                 {/* property */}
                 <div className="mt-4 hidden lg:block">
                   <p className="font-regular text-[#8E98A8]">اطلاعات دوره</p>

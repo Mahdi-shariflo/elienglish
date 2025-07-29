@@ -131,7 +131,7 @@ export type Course = {
   demo: {
     title: string;
     order: number;
-    episodes: { title: string; type: string }[];
+    episodes: { title: string; type: string; mediaUrl: string }[];
   }[];
   chapters: {
     title: string;
@@ -147,7 +147,7 @@ export type Course = {
       _id: string;
     }[];
   }[];
-  episodes: { title: string; type: string }[];
+  episodes: { title: string; type: string; mediaUrl: string }[];
   order: number;
   tags: {
     title: string;

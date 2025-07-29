@@ -34,7 +34,7 @@ export default function BaseDialog({
   return (
     <>
       <Modal
-        className={`relative !z-50 rounded-lg !shadow-none ${className}`}
+        className={`relative !z-50 rounded-lg !shadow-none dark:bg-[#172334] ${className}`}
         scrollBehavior="inside"
         size={size}
         hideCloseButton
@@ -80,7 +80,10 @@ export default function BaseDialog({
                       </Button>
                     </ModalHeader>
                   ) : null}
-                  <ModalBody id="body-modal" className={`px-0 pt-0 !shadow-none ${classBody}`}>
+                  <ModalBody
+                    id="body-modal"
+                    className={`w-full px-0 pt-0 !shadow-none dark:bg-[#172334] ${classBody}`}
+                  >
                     {children}
                   </ModalBody>
                   {Boolean(onClickFooter) ? (

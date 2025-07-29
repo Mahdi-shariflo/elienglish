@@ -15,7 +15,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
   return (
     <>
       <div
-        className={`mt-3 overflow-hidden rounded-xl border border-[#E5EAEF] dark:!border-none lg:mt-[24px] ${className}`}
+        className={`mt-3 overflow-hidden rounded-xl border border-[#E5EAEF] lg:mt-[24px] ${className}`}
       >
         {media?.video?.url ? (
           <VideoPlayer
