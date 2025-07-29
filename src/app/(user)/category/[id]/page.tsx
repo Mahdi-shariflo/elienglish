@@ -36,7 +36,7 @@ const Page = async ({ searchParams, params }: Props) => {
   });
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-dark">
+    <div className="min-h-[50vh] w-full bg-white pt-14 dark:bg-dark lg:min-h-screen">
       {/* <script
         id="jsonld_mag"
         type="application/ld+json"
@@ -49,7 +49,9 @@ const Page = async ({ searchParams, params }: Props) => {
             {
               id: '1234',
               title: decodeURIComponent(
-                Array.isArray(blog.blogs) ? blog.blogs[0].category.title : 'مقاله'
+                Array.isArray(blog?.blogs) && Number(blog?.blogs?.length) >= 1
+                  ? blog.blogs[0].category.title
+                  : 'مقاله'
               ),
               url: '#',
             },
@@ -92,11 +94,11 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="flex-1">
+          <div className="w-full flex-1">
             <SelectedFilterBlog />
-            <div className="mt-5">
-              {Number(blog.blogs.length) <= 0 ? (
-                <p className="dark:txet-white mt-10 text-center font-medium text-[14px] text-[#505B74] lg:mt-32 lg:text-[18px]">
+            <div className="mt-5 w-full">
+              {Number(blog?.blogs?.length) <= 0 ? (
+                <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
                   مقاله‌ای یافت نشد
                 </p>
               ) : (

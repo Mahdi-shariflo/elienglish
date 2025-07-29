@@ -15,17 +15,17 @@ import React from 'react';
 import { getmetadatSingleMag, jsonLdSingleMag, jsonLdSingleMagBreadcramp } from '@/seo/mag';
 import { Metadata } from 'next';
 type Props = {
-  params: Promise<{ [key: string]: string[] }>;
+  params: Promise<{ [key: string]: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  return getmetadatSingleMag({ id: id[0] });
+  return getmetadatSingleMag({ id: id });
 }
 
 const Page = async ({ params }: Props) => {
   const { id } = await params;
-  const result = await request({ url: `/blog/detail/${decodeURIComponent(id[0]!)}` });
+  const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
 
@@ -56,14 +56,14 @@ const Page = async ({ params }: Props) => {
       />
       <div className="container_page pt-10 lg:pt-32">
         <Breadcrumbs
-          page="/blog/category"
+          page="/category"
           breadcrumbs={[
             ...(Array.isArray(blog?.breadcrumbPath) ? blog?.breadcrumbPath : []),
             { id: '333', title: blog?.title, url: '#' },
           ]}
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-8 dark:!border-[#263248] lg:p-10">
+          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] px-3 py-4 dark:!border-[#263248] lg:p-10 lg:py-8">
             <div className="flex items-center gap-2">
               <span>
                 <svg
@@ -129,11 +129,15 @@ const Page = async ({ params }: Props) => {
                     />
                   </svg>
                 </span>
-                <p className="font-medium text-[14px] text-main">{blogSidebar?.section3?.title}</p>
+                <p className="font-medium text-[16px] text-main">{blogSidebar?.section3?.title}</p>
               </div>
               <div className="mt-3 space-y-4">
                 {blogSidebar?.section3?.listBlogs?.map((blog: Blog, idx: number) => (
-                  <CardBlog2 blog={blog} key={idx} />
+                  <CardBlog2
+                    classImage="lg:!h-[85px] lg:min-w-[135px] lg:!w-[85px]"
+                    blog={blog}
+                    key={idx}
+                  />
                 ))}
               </div>
             </div>

@@ -32,14 +32,17 @@ export default {
       showPagination:"0px 12px 16px 0px #6E3DFF33"
       },
       fontFamily: {
-        bold: 'bold',
-        semibold: 'semibold',
-        light: 'light',
-        black: 'black',
-        medium: 'medium',
-        regular: 'regular',
-        extrabold: 'extrabold',
-        demibold:"demibold"
+        "black":"black",
+        extrablack:"extrablack",
+        bold:"bold",
+        extrabold:"extrabold",
+        heavy:"heavy",
+        regular:"regular",
+        "light":"light",
+        medium:"medium",
+        "demibold":"demibold",
+        "thin":"thin",
+        "ultralight":"ultralight"
       },
     },
   },

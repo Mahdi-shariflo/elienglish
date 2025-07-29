@@ -108,7 +108,7 @@ const Textarea = ({
         }
         classNames={{
           input: 'px-2 !border-none !ring-0',
-          inputWrapper: `bg-[#F4F6FA] !rounded-lg dark:bg-[#0B1524] dark:!border-[#505B74]  dark:!text-[#8E98A8] group-data-[focus-visible=true]:!ring-0 !ring-0 overflow-hidden font-medium border border-[#E5EAEF] dark:border-none pl-0 !h-[120px] w-full ${classNameInput}`,
+          inputWrapper: `bg-[#F4F6FA] dark:bg-[#0B1524] !h-[150px] text-[#6A7890] dark:!text-[#8E98A8] rounded-[8px] group-data-[focus-visible=true]:!ring-0 !ring-0 dark:border-[#505B74] overflow-hidden font-medium border border-[#E5EAEF]  pl-0  w-full ${classNameInput}`,
         }}
         className="font-light text-[14px]"
       />

@@ -25,7 +25,7 @@ const SliderBlog = ({
   title,
   blogs,
   typeCardBlog = 'long',
-  className = '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:!border-[#505B74] lg:!h-[320px]',
+  className = '!h-[350px] lg:!w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:!border-[#505B74] lg:!h-[320px]',
 }: Props) => {
   // if (Number(blogs?.length) < 1) return null;
   return (
@@ -85,7 +85,7 @@ const SliderBlog = ({
       <div className="mt-6 flex flex-col gap-5 lg:hidden">
         {blogs?.slice(0, 3).map((item, idx) => {
           if (typeCardBlog === 'long')
-            return <CardBlog1 className="overflow-hidden rounded-lg" key={idx} blog={item} />;
+            return <CardBlog1 className={className} key={idx} blog={item} />;
           if (typeCardBlog === 'short')
             return <CardBlog2 className="overflow-hidden rounded-lg" key={idx} blog={item} />;
           return null;

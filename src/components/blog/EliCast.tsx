@@ -67,7 +67,7 @@ const EliCast = ({ delay, blogs }: Props) => {
                 </defs>
               </svg>
             </span>
-            <p className="font-bold text-2xl text-main">الی کست</p>
+            <p className="font-medium text-[24px] text-main">الی کست</p>
           </div>
           <div className="hidden items-center gap-4 lg:flex">
             <Button>
@@ -125,7 +125,7 @@ const EliCast = ({ delay, blogs }: Props) => {
           return (
             <SwiperSlide
               className={
-                '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
+                '!h-[350px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
               }
               key={idx}
             >

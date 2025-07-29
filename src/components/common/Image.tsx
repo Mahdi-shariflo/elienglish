@@ -24,7 +24,7 @@ const Image = ({
   const [isError, setIsError] = useState(false);
 
   return (
-    <div className={`relative bg-white ${className}`} style={{ aspectRatio }}>
+    <div className={`relative bg-transparent ${className}`} style={{ aspectRatio }}>
       <NextImage
         src={
           isError ? Logo : typeof src === 'string' ? `${baseUrl ? `${BASEURL}/` : ''}${src}` : src

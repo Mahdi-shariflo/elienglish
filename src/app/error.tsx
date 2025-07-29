@@ -9,7 +9,7 @@ function Error({ error }: { error: Error & { digest?: string } }) {
   }, [error]);
   return (
     <div>
-      <div className="mt-20 flex flex-col items-center justify-center lg:mt-20">
+      <div className="flex flex-col items-center justify-center pt-20 lg:pt-20">
         <span className="h-[400px] w-[400px]">
           <svg
             width="381"

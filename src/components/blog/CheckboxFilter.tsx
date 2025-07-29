@@ -36,7 +36,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     setSearchTerms((prev) => ({ ...prev, [index]: value }));
   };
 
-  const singleSelectTypes = ['statusCourse', 'sort', 'available'];
+  const singleSelectTypes = ['statusCourse', 'sort', 'available', 'blogType'];
 
   const onAttributes = ({
     checked,
@@ -152,7 +152,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
                           id: attribute.url,
                           type: attribute.type,
                           page: attribute.page,
-                          isLink: attribute.isLink,
+                          isLink: false,
                         })
                       }
                     >

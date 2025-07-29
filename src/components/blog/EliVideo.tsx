@@ -49,7 +49,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
                 />
               </svg>
             </span>
-            <p className="font-bold text-[24px] text-[#33435A]">الی ویدیو</p>
+            <p className="font-medium text-[24px] text-[#33435A] dark:text-white">الی ویدیو</p>
           </div>
           <Link
             className="hidden h-[40px] items-center justify-center gap-3 rounded-lg border px-3 dark:border-white lg:flex"
@@ -74,18 +74,18 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
           </Link>
         </div>
       }
-      <div className="mt-5 hidden !h-[340px] grid-cols-5 grid-rows-4 gap-4 lg:grid">
+      <div className="mt-5 hidden !h-[540px] grid-cols-5 grid-rows-4 gap-4 lg:grid">
         {blogs.slice(0, 5).map((blog, i) => {
           const className = gridPositions[i];
           return (
             <Link
               key={blog._id || blog.title}
               href={`/${blog.url}`}
-              className={`group relative block h-full w-full cursor-pointer overflow-hidden rounded-lg bg-white ${className}`}
+              className={`group relative block h-full w-full cursor-pointer overflow-hidden rounded-lg ${className}`}
             >
               <Image
                 classImg="!object-cover"
-                className="h-full w-full bg-white transition-all duration-400 group-hover:scale-105"
+                className="h-full w-full transition-all duration-400 group-hover:scale-105"
                 src={blog?.thumbnailImage?.url}
                 alt=""
               />
@@ -132,7 +132,7 @@ const EliVideo = ({ blogs }: { blogs: Blog[] }) => {
             return (
               <SwiperSlide
                 className={
-                  '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
+                  '!h-[350px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
                 }
                 key={idx}
               >

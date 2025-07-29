@@ -21,8 +21,8 @@ const RecommendSection = ({ blogSidebar }: Props) => {
         alt=""
         baseUrl={false}
         src={blogSidebar?.recommendSection?.imageUrl}
-        className="h-[200px] w-full overflow-hidden rounded-xl lg:h-[360px] lg:w-[360px]"
-        classImg="object-fill"
+        className="h-[340px] w-full overflow-hidden rounded-xl lg:h-[360px] lg:w-[360px]"
+        classImg="object-cover lg:object-fill"
       />
       <p className="mt-4 font-medium text-[#33435A] dark:text-[#8E98A8]">
         {blogSidebar?.recommendSection?.title}

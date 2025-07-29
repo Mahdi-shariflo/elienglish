@@ -7,10 +7,12 @@ const CardBlog1 = ({
   blog,
   className,
   classImage,
+  classTitle,
 }: {
   blog: Blog;
   className?: string;
   classImage?: string;
+  classTitle?: string;
 }) => {
   if (!blog._id) return null;
   return (
@@ -21,14 +23,14 @@ const CardBlog1 = ({
       <Image
         src={blog?.thumbnailImage?.url}
         alt=""
-        classImg="!object-cover h-full w-full"
-        className={`h-[165px] !w-full overflow-hidden transition-all duration-300 group-hover:scale-105 ${classImage}`}
+        classImg="!object-cover"
+        className={`!w-full overflow-hidden transition-all duration-300 group-hover:scale-105 ${classImage}`}
       />
       <div className="space-y-4 px-5 pb-5">
-        <span className="text-amin h-[32px] rounded bg-[#EDE8FC] px-2 font-light text-[14px] text-main">
-          مکالمه انگلیسی
+        <span className="flex h-[28px] w-fit items-center justify-center rounded bg-[#EDE8FC] px-2 font-medium text-[14px] text-main dark:bg-[#172334]">
+          {blog?.category?.title}
         </span>
-        <p className="font-medium dark:text-white">{blog.title}</p>
+        <p className={`line-clamp-2 font-medium dark:text-white ${classTitle}`}>{blog.title}</p>
         <div className="flex items-center gap-4">
           {/* <div className="flex items-center gap-2">
             <svg

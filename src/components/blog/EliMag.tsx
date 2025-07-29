@@ -25,7 +25,7 @@ const EliMag = ({
   if (Number(blogs?.length) < 1) return null;
 
   return (
-    <div className={` ${className}`}>
+    <div className={`!px-4 lg:px-0 ${className}`}>
       {
         <div className="flex items-center justify-between">
           <Title title={title} />
@@ -52,25 +52,27 @@ const EliMag = ({
           </Link>
         </div>
       }
-      <div className="mt-10 hidden h-[450px] items-center gap-5 lg:flex">
+      <div className="mt-10 hidden h-[580px] items-center gap-5 lg:flex">
         {blogs[0] && (
           <CardBlog1
+            classTitle="text-[18px]"
             blog={blogs[0]}
-            classImage="!h-fit  !rounded-lg"
+            classImage="!object-fill !h-[450px]  !rounded-lg"
             className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
           />
         )}
 
         <div className="flex h-full w-1/2 flex-col justify-between">
           {blogs
-            ?.slice(1, 4)
+            ?.slice(1, 5)
             .map((item, index) => (
               <CardBlog2
-                classTitle="!line-clamp-2"
+                classTitle="!line-clamp-1"
                 key={item._id || index}
                 blog={item}
-                classImage="!w-[200px] !min-w-[200px] !h-full"
-                className="!h-[128px] border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
+                showTag
+                classImage="!w-[180x] !min-w-[180px] !h-[110px]"
+                className="!h-[128px] border border-[#E5EAEF] !px-3 !py-0 dark:border-[#505B74]"
               />
             ))}
         </div>
@@ -94,7 +96,7 @@ const EliMag = ({
             return (
               <SwiperSlide
                 className={
-                  '!h-[256px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
+                  '!h-[350px] !w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] !bg-transparent dark:!border-none lg:!h-[320px]'
                 }
                 key={idx}
               >

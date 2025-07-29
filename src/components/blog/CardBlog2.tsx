@@ -24,13 +24,13 @@ const CardBlog2 = ({
       <Image
         classImg="!object-cover !h-full rounded-lg overflow-hidden"
         src={blog?.thumbnailImage?.url}
-        className={`h-[100px] !min-h-[100px] !w-[100px] !min-w-[100px] overflow-hidden !rounded-lg border transition-all duration-300 group-hover:scale-105 dark:border-[#263248] lg:h-full ${classImage}`}
+        className={`h-[85px] min-h-[85px] w-[150px] min-w-[150px] overflow-hidden !rounded-lg border transition-all duration-300 group-hover:scale-105 dark:border-[#263248] lg:h-full ${classImage}`}
         alt=""
       />
-      <div className="flex h-full flex-col justify-between gap-3 py-2">
+      <div className="flex h-full flex-col justify-around gap-1 py-2">
         {showTag && (
-          <p className="text-amin h-fit w-fit rounded bg-[#EDE8FC] px-2 font-light text-[14px] text-main">
-            مکالمه انگلیسی
+          <p className="flex h-[28px] w-fit items-center justify-center rounded bg-[#EDE8FC] px-2 font-medium text-[14px] text-main dark:bg-[#172334]">
+            {blog.category.title}
           </p>
         )}
         <p

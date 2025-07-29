@@ -186,7 +186,7 @@ const quickLicks = [
         />
       </svg>
     ),
-    src: '/about-us',
+    src: '/about',
   },
   {
     name: 'سوالات متداول',
@@ -222,7 +222,7 @@ const quickLicks = [
 ];
 
 // const profilePages = ['/category', '/home', '/address', '/checkout', '/profile'];
-const profilePages = ['/category', '/home', '/address', '/checkout', '/cart', '/profile/'];
+const profilePages = ['/home', '/address', '/checkout', '/cart', '/profile/'];
 type Props = {
   categories: string;
 };

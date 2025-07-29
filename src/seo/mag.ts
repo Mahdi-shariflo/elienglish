@@ -97,11 +97,11 @@ export const jsonLdSingleMag = ({ mag, commentCount }: { mag: Blog; commentCount
       '@id': 'https://www.example.com/namone-matn-maqala',
     },
     headline: mag?.title,
-    alternativeHeadline: mag.title,
-    description: mag.short_des,
+    alternativeHeadline: mag?.title,
+    description: mag?.short_des,
     image: {
       '@type': 'ImageObject',
-      url: `${BASEURL}/${mag?.thumbnailImage.url}`,
+      url: `${BASEURL}/${mag?.thumbnailImage?.url}`,
       width: mag?.thumbnailImage?.width,
       height: mag?.thumbnailImage?.height,
     },
@@ -126,7 +126,7 @@ export const jsonLdSingleMag = ({ mag, commentCount }: { mag: Blog; commentCount
     datePublished: mag?.createdAt,
     dateModified: mag?.updatedAt,
     articleSection: mag?.category?.title,
-    keywords: mag.keyWords,
+    keywords: mag?.keyWords,
     wordCount: mag?.description?.length,
     commentCount: commentCount,
     // "interactionStatistic": {
@@ -134,7 +134,7 @@ export const jsonLdSingleMag = ({ mag, commentCount }: { mag: Blog; commentCount
     //   "interactionType": { "@type": "CommentAction" },
     //   "userInteractionCount": 12
     // },
-    url: `${BASEURL_SITE}/${mag.url}`,
+    url: `${BASEURL_SITE}/${mag?.url}`,
     isAccessibleForFree: 'True',
   };
 };
@@ -151,7 +151,7 @@ export const jsonLdSingleMagBreadcramp = ({
         '@type': 'ListItem',
         position: idx + 1,
         name: item.title,
-        item: `${BASEURL_SITE}/${item.url}`,
+        item: `${BASEURL_SITE}/${item?.url}`,
       };
     }),
 
@@ -184,7 +184,7 @@ export const jsonLdSingleMagBreadcramp = ({
 };
 export const getmetadatSingleMag = async ({ id }: { id: string }) => {
   const result = await safeRequest({ url: `/blog/detail/${decodeURIComponent(id)}` });
-  const blog: Blog = result?.data?.data.blog;
+  const blog: Blog = result?.data?.data?.blog;
 
   if (blog?.redirectType === 302) redirect(blog.redirecturl);
   if (blog?.redirectType === 301) permanentRedirect(blog.redirecturl);
