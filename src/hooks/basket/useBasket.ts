@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useGetBasket } from './useGetBasket';
 import { useCheckoutStore } from '@/store/checkout-store';
 import { freeShippingPrice } from '@/lib/variable';
-import { BasketItem } from '@/types';
+import { BasketItem } from '@/store/types';
 
 const useBasket = () => {
   const { checkout } = useCheckoutStore();

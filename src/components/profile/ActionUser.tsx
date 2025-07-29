@@ -9,7 +9,7 @@ import { namePattern } from '@/lib/regexes';
 import * as Yup from 'yup';
 import { removeEmptyFields } from '@/lib/fun';
 import { addCommaCartBank, removeNumNumeric } from '@/lib/convert';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { useSession } from '@/lib/auth/useSession';
 import Datepicker from '../common/Datepicker';
 type Props = {

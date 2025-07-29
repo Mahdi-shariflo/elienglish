@@ -8,7 +8,7 @@ import { useGetStatusCheckout } from '@/hooks/checkout/useGetStatusCheckout';
 import { ordersStatus } from '@/lib/data';
 import { toEnglishDigits } from '@/lib/fun';
 import useOrderStore from '@/store/order-store';
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import { addToast } from '@heroui/react';
 import { useFormik } from 'formik';
 import { usePathname, useRouter } from 'next/navigation';

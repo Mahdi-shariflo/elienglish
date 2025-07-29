@@ -1,5 +1,5 @@
 import { safeRequest } from '@/lib/safeClient';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 import { addToast } from '@heroui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 

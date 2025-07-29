@@ -30,6 +30,12 @@ const SeoOptions = ({ formik }: Props) => {
               name="keyWords"
               formik={formik}
             />
+            <Select
+              label="انتخاب نوع ریدایرکت"
+              options={optionRedirectType}
+              formik={formik}
+              name="redirectType"
+            />
             <Textarea
               label="توضیحات سئو"
               className="lg:col-span-2"
@@ -49,12 +55,6 @@ const SeoOptions = ({ formik }: Props) => {
               classNameInput="!h-[48px] "
               name="redirecturl"
               formik={formik}
-            />
-            <Select
-              label="انتخاب نوع ریدایرکت"
-              options={optionRedirectType}
-              formik={formik}
-              name="redirecturltype"
             />
           </div>
         </AccordionItem>

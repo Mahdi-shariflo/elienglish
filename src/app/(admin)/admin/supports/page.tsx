@@ -8,7 +8,7 @@ import { useCloseTicket } from '@/hooks/admin/tickets/useCloseTicket';
 import { useGetTicketAdmin } from '@/hooks/admin/tickets/useGetTicketAdmin';
 import { initialDataTickets } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
-import { Ticket } from '@/types/profile';
+import { Ticket } from '@/store/types/profile';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {

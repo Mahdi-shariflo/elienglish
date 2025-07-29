@@ -4,7 +4,6 @@ import React from 'react';
 import ReactCountdown from 'react-countdown';
 
 const CountdownDiscounts = ({ timer, className }: { timer: string; className?: string }) => {
-  console.log(timer, 'timerrrr');
   const renderer = ({
     minutes,
     seconds,

@@ -3,7 +3,7 @@ import { useAddBasket } from '@/hooks/basket/useAddBasket';
 import useBasket from '@/hooks/basket/useBasket';
 import { useRemoveBasket } from '@/hooks/basket/useRemoveBasket';
 import cn from '@/lib/classnames';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { addToast, Spinner } from '@heroui/react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';

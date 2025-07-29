@@ -3,12 +3,12 @@ import Input from '@/components/common/form/Input';
 import Textarea from '@/components/common/form/Textarea';
 import { useActionCategoryBlog } from '@/hooks/admin/blogs/useActionCategoryBlog';
 import { createURL } from '@/lib/fun';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import * as Yup from 'yup';
 import Media from '../common/Media';
-import { ThumbnailImage } from '@/types';
+import { ThumbnailImage } from '@/store/types';
 import { BASEURL } from '@/lib/variable';
 import { useGetCategoryByBlog } from '@/hooks/admin/blogs/useGetCategoryByBlog';
 

@@ -3,7 +3,6 @@ import { generateUniqueToken } from './middleware.lib';
 
 export function handleFingerprint(request: NextRequest, response: NextResponse) {
   const finger = request.cookies.get('finger')?.value;
-  console.log('finger in middleware: ', finger);
   const { device } = userAgent(request);
   const viewport = device.type === 'mobile' ? 'mobile' : 'desktop';
 

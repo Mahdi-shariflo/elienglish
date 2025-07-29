@@ -5,7 +5,7 @@ import { SearchIcon } from '@/components/common/icon';
 import { useGetSupportsAdmin } from '@/hooks/admin/supports/useGetSupportsAdmin';
 import { initialDataContactus } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {

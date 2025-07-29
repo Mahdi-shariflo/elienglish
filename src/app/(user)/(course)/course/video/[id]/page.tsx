@@ -2,7 +2,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Comments from '@/components/common/Comments';
 import Title from '@/components/common/Title';
 import { request } from '@/lib/safeClient';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import { CircularProgress } from '@heroui/react';
 import React from 'react';
 import Chapters from '../Chapters';

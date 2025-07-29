@@ -4,7 +4,7 @@ import { removeNumNumeric } from '@/lib/fun';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import * as Yup from 'yup';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import Select from '@/components/common/Select';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';

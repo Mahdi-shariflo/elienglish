@@ -3,7 +3,7 @@ import Filters from '@/components/blog/Filters';
 import React from 'react';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 type Props = {
@@ -18,7 +18,6 @@ const Page = async ({ searchParams }: Props) => {
     filterCourse.append(decodeURIComponent(key), decodeURIComponent(value as string));
   }
   const newQueryString = filterCourse.toString();
-  console.log(`/course/main?${newQueryString}`);
 
   const result = await request({ url: `/course/main?${newQueryString}` });
   const product: {

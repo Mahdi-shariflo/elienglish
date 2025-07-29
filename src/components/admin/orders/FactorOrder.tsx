@@ -1,5 +1,5 @@
 'use client';
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import React, { useState } from 'react';
 
 interface FactorOrderProps {

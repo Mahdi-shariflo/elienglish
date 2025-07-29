@@ -1,6 +1,6 @@
 import Media from '@/components/admin/common/Media';
 import { BASEURL } from '@/lib/variable';
-import { Home } from '@/types/home';
+import { Home } from '@/store/types/home';
 import { FormikProps } from 'formik';
 import React, { useEffect } from 'react';
 type Props = {

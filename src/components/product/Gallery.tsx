@@ -4,7 +4,7 @@ import Video from 'next-video';
 import ActionFavShare from './ActionFavShare';
 import MoreImageGallery from './MoreImageGallery';
 import Button from '../common/Button';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { useMedia } from 'react-use';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';

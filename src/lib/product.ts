@@ -1,4 +1,4 @@
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 
 type PropsgroupAttributesByProperty = {
   attribiutsLookup: {

@@ -8,7 +8,6 @@ export const useCreateCheckout = () => {
       return await safeRequest({ url: '/payment/getway', method: 'POST', data });
     },
     onSuccess: async (data) => {
-      console.log(data);
       location.href = data?.data?.data?.paymentLink;
     },
     onError: (error) => {

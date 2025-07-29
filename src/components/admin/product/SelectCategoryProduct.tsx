@@ -1,5 +1,5 @@
 import { useGetCategoryProductAdmin } from '@/hooks/admin/products/useGetCategoryProductAdmin';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { Checkbox, Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 

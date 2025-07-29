@@ -5,7 +5,7 @@ import Input from '@/components/common/form/Input';
 import { Arrow_back_mobile, Delete_icon, Edit_icon, Plus_icon } from '@/components/common/icon';
 import { useGetCourseProductAdmin } from '@/hooks/admin/courses/useGetCategoryCourseAdmin';
 import useGlobalStore from '@/store/global-store';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { Accordion, AccordionItem, Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 

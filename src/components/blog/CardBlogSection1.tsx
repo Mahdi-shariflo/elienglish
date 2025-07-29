@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from '../common/Image';
 import Link from 'next/link';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 type Props = {
   blog: Blog;
 };

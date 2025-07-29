@@ -259,3 +259,13 @@ hr {
   background: transparent;
   border: none;
 }
+
+div.info {
+  display: none !important;
+}
+/* این رو توی فایل globals.css یا style اصلیت بذار */
+@media (max-width: 1023px) {
+  media-theme-sutro-audio::part(poster) {
+    display: none !important;
+  }
+}

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Button from '../common/Button';
-import { Order } from '@/types/profile';
+import { Order } from '@/store/types/profile';
 import Image from '../common/Image';
 import { useGetDownloadFile } from '@/hooks/profile/useGetDownloadFile';
 

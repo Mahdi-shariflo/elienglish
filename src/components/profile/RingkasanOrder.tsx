@@ -7,7 +7,6 @@ const RingkasanOrder = ({ className }: { className?: string }) => {
   const router = useRouter();
   const { data } = useGetOverviewUser();
   const overview = data?.data?.data;
-  console.log(overview, 'dsgfusgfyugsfsdf');
   const newArray = [
     {
       label: 'سفارش های فیزیکی',

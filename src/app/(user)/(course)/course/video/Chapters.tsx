@@ -1,5 +1,5 @@
 'use client';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import { Accordion, AccordionItem } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';

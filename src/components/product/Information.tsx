@@ -1,6 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 
 import useProductStore from '@/store/product-store';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';

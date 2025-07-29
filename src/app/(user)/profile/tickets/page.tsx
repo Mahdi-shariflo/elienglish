@@ -2,7 +2,7 @@
 import BackPrevPage from '@/components/common/BackPrevPage';
 import Button from '@/components/common/Button';
 import { useGetTickets } from '@/hooks/ticketing/useGetTickets';
-import { Ticket } from '@/types/profile';
+import { Ticket } from '@/store/types/profile';
 import { Spinner } from '@heroui/react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

@@ -5,7 +5,7 @@ import Pagination from '@/components/common/Pagination';
 import BackPrevPage from '@/components/common/BackPrevPage';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from '@heroui/react';
-import { Order, STATUSCOUNTS } from '@/types/profile';
+import { Order, STATUSCOUNTS } from '@/store/types/profile';
 import EmptyOrder from '@/components/profile/EmptyOrder';
 import { useGetDownloads } from '@/hooks/profile/useGetDownloads';
 import FilterDownloads from '@/components/profile/FilterDownloads';

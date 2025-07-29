@@ -9,7 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import CardBlog1 from './CardBlog1';
 import Button from '../common/Button';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 type Props = {
   delay: number;
   blogs?: Blog[];

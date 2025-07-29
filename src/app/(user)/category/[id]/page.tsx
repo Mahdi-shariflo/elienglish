@@ -4,7 +4,7 @@ import React from 'react';
 import CardBlog from '@/components/blog/CardBlog';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import SelectedFilterBlog from '@/components/blog/SelectedFilterBlog';
 import Sort from '@/components/common/Sort';
 import { metadatMagPageCategories } from '@/seo/mag';
@@ -42,7 +42,7 @@ const Page = async ({ searchParams, params }: Props) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCategoryMag(blog)) }}
       /> */}
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page pt-10 lg:pt-20">
         <Breadcrumbs
           page={`/category/${decodeURIComponent(id!)}`}
           breadcrumbs={[
@@ -57,7 +57,7 @@ const Page = async ({ searchParams, params }: Props) => {
             },
           ]}
         />
-        <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
+        <div className="flex flex-col items-start lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی وبلاگ‌ها"
             searchParams={searchParamsFilter}
@@ -104,7 +104,7 @@ const Page = async ({ searchParams, params }: Props) => {
               ) : (
                 <>
                   <Sort />
-                  <div className="mt-2 w-full rounded-lg px-3 dark:bg-[#263248]">
+                  <div className="w-full rounded-lg dark:bg-[#263248] lg:mt-2 lg:px-3">
                     {blog.blogs.map((blog, idx) => (
                       <CardBlog blog={blog} key={idx} />
                     ))}

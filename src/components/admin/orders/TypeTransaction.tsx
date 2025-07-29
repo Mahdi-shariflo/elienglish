@@ -1,4 +1,4 @@
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import React from 'react';
 type Props = {
   order: Order;

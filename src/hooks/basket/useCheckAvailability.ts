@@ -1,5 +1,5 @@
 import { safeRequest } from '@/lib/safeClient';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 

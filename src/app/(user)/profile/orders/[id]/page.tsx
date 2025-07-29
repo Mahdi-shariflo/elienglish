@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { Toman_Icon } from '@/components/common/icon';
-import { Order } from '@/types/profile';
+import { Order } from '@/store/types/profile';
 import { BASEURL } from '@/lib/variable';
 import { discountCalculation } from '@/lib/utils';
 import BackPrevPage from '@/components/common/BackPrevPage';

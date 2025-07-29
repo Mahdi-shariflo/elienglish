@@ -4,7 +4,7 @@ import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Gallery from '@/components/product/Gallery';
 import Information from '@/components/product/Information';
 import MoreInformationProduct from '@/components/product/MoreInformationProduct';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import React, { ReactNode, useLayoutEffect } from 'react';
 import useProductStore from '@/store/product-store';
 import { useMedia } from 'react-use';

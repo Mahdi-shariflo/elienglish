@@ -1,5 +1,5 @@
 'use client';
-import { STATUSCOUNTS } from '@/types/profile';
+import { STATUSCOUNTS } from '@/store/types/profile';
 import { Button, Tab, Tabs } from '@heroui/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';

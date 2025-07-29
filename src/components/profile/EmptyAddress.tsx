@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../common/Button';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 type Props = {
   setModal: React.Dispatch<React.SetStateAction<{ open: boolean; info: null | Address }>>;
 };

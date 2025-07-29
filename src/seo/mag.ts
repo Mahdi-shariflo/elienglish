@@ -1,6 +1,6 @@
 import { safeRequest } from '@/lib/safeClient';
 import { BASEURL, BASEURL_SITE, logo_image, SITE_NAME } from '@/lib/variable';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import { htmlToText } from 'html-to-text';
 import { Metadata } from 'next';
 import { permanentRedirect, redirect } from 'next/navigation';
@@ -212,8 +212,8 @@ export const getmetadatSingleMag = async ({ id }: { id: string }) => {
           {
             url: `${BASEURL}/${blog?.thumbnailImage?.url}`,
             secureUrl: `${BASEURL}/${blog?.thumbnailImage?.url}`,
-            width: blog?.thumbnailImage.width,
-            height: blog.thumbnailImage.height,
+            width: blog?.thumbnailImage?.width,
+            height: blog.thumbnailImage?.height,
             alt: blog?.thumbnailImage?.url ? blog?.thumbnailImage?.url : blog.title,
             type: `image/jpeg`,
           },

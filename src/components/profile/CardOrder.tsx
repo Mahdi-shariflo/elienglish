@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '../common/Button';
 import { useRouter } from 'next/navigation';
-import { Order } from '@/types/profile';
+import { Order } from '@/store/types/profile';
 import Image from '../common/Image';
 
 type Props = {

@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import { Slider as SliderType } from '@/types/home';
+import { Slider as SliderType } from '@/store/types/home';
 import Link from 'next/link';
 import { BASEURL } from '@/lib/variable';
 import Image from 'next/image';

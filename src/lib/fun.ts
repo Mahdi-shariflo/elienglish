@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { COOCIES_NAME } from './variable';
 
 export const cookieName = COOCIES_NAME;

@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import SeoOptions from '../common/SeoOptions';
 import Editor from '../common/Editor';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
 import { useActionCourseTags } from '@/hooks/admin/courses/useActionCourseTags';
 
@@ -43,7 +43,7 @@ const ActionCourseTags = ({ modal, setModal }: Props) => {
       rebots: '',
       url: '',
       keyWords: '',
-      redirecturltype: '',
+      redirectType: '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
@@ -54,7 +54,7 @@ const ActionCourseTags = ({ modal, setModal }: Props) => {
         url: values?.url,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
         ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
-        ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
+        ...(values.redirectType ? { redirectType: values?.redirectType } : null),
         ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
         ...(values.rebots ? { robots: values.robots } : null),
         ...(values.keyWords ? { keyWords: values.keyWords } : null),

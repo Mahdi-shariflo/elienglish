@@ -8,7 +8,7 @@ import Button from '../common/Button';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Navigation } from 'swiper/modules';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { BASEURL } from '@/lib/variable';
 // import '../../../node_modules/react-inner-image-zoom/lib/InnerImageZoom';
 import 'swiper/css';

@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import { useGetMediaAdmin } from '@/hooks/admin/media/useGetMediaAdmin';
-import { Media as MediaType } from '@/types';
+import { Media as MediaType } from '@/store/types';
 import { SelectItem, Select, Spinner, Pagination } from '@heroui/react';
 import React, { useState } from 'react';
 type Props = {

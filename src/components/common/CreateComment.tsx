@@ -7,7 +7,7 @@ import Textarea from '../common/form/Textarea';
 import Input from '../common/form/Input';
 import { useFormik } from 'formik';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Comment, CommentInfo } from '@/types';
+import { Comment, CommentInfo } from '@/store/types';
 import { BASEURL } from '@/lib/variable';
 import Select from '../common/Select';
 import { useUpdateCommentByIdAdmin } from '@/hooks/admin/comments/useUpdateCommentByIdAdmin';

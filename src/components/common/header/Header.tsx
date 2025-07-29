@@ -221,8 +221,8 @@ const quickLicks = [
   },
 ];
 
-// const profilePages = ['/category', '/home', '/address', '/checkout', '/profile'];
 const profilePages = ['/home', '/address', '/checkout', '/cart', '/profile/'];
+
 type Props = {
   categories: string;
 };
@@ -306,8 +306,8 @@ const Header = ({ categories }: Props) => {
             <div className="flex items-center gap-[16px]">
               {categories && <CategoryMenu categories={categories} />}
               {quickLicks.map((link, idx) => (
-                <Link className="flex items-center gap-2" href={`${link.src}/`} key={idx}>
-                  {link.icon && <span>{link.icon}</span>}
+                <Link className="flex items-center gap-3" href={`${link.src}/`} key={idx}>
+                  {/* {link.icon && <span>{link.icon}</span>} */}
                   <span className="font-medium text-[14px] text-[#7D8793] dark:!text-white">
                     {link.name}
                   </span>

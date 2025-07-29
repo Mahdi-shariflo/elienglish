@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import { User } from '@/types';
+import { User } from '@/store/types';
 
 type SessionProvider =
   | null

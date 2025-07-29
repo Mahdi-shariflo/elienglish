@@ -1,10 +1,10 @@
 'use client';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 
 type Props = {
   values: TagType[];

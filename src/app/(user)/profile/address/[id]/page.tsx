@@ -20,7 +20,7 @@ import { useGetAddressById } from '@/hooks/address/useGetAddressById';
 import Loading from '@/components/common/Loading';
 import { SharedSelection } from '@heroui/react';
 import { useSession } from 'next-auth/react';
-import { User } from '@/types';
+import { User } from '@/store/types';
 
 const ActionAddress = () => {
   const { id } = useParams();

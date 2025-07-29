@@ -1,9 +1,8 @@
 import React from 'react';
-import { Lpa } from '@/types';
+import { Lpa } from '@/store/types';
 import Image from 'next/image';
 import Counter from '../common/Counter';
 const CardPlp = ({ lpa }: { lpa: Lpa }) => {
-  console.log(lpa);
   return (
     <button
       disabled={lpa.status === 'RESERVED' ? true : false}

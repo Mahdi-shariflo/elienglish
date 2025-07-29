@@ -1,16 +1,16 @@
 import React from 'react';
 import Image from '../common/Image';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import Link from 'next/link';
 const CardBlog = ({ blog }: { blog: Blog }) => {
   return (
     <Link
       href={`/${blog.url}`}
-      className="flex h-[117px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74] lg:h-[160px]"
+      className="flex h-[127px] w-full items-center gap-4 border-b border-[#E5EAEF] py-4 dark:border-[#505B74] lg:h-[160px]"
     >
       <Image
         classImg="object-fill"
-        className="h-full !w-[150px] overflow-hidden rounded-xl border-transparent lg:!w-[258px]"
+        className="h-full !min-w-[150px] overflow-hidden rounded-xl border-transparent lg:!w-[258px]"
         src={blog?.thumbnailImage?.url}
         alt=""
       />
@@ -18,7 +18,7 @@ const CardBlog = ({ blog }: { blog: Blog }) => {
         <div className="flex h-[24px] w-fit items-center justify-center rounded-md !bg-[#EDE8FC] px-2 font-medium text-[10px] text-main dark:!bg-[#172334] lg:h-[28px] lg:text-[13px]">
           {Boolean(blog?.category?.title) ? blog?.category?.title : null}
         </div>
-        <p className="line-clamp-2 font-medium text-[12px] dark:text-white lg:text-[16px]">
+        <p className="line-clamp-2 font-medium text-[14px] leading-6 dark:text-white lg:text-[16px]">
           {blog.title}
         </p>
         <div className="flex items-center gap-4">

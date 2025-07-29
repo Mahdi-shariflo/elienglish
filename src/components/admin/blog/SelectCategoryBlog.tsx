@@ -1,15 +1,21 @@
 import { useGetCategoriesBlog } from '@/hooks/admin/blogs/useGetCategoriesBlog';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { Checkbox, Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 
 type Props = {
+  title?: string;
   onSelect: (values: string[]) => void;
   selected: string[];
   multiple?: boolean;
 };
 
-const SelectCategoryBlog = ({ onSelect, selected, multiple }: Props) => {
+const SelectCategoryBlog = ({
+  onSelect,
+  selected,
+  multiple,
+  title = 'دسته‌بندی بلاگ‌ها ',
+}: Props) => {
   const { isPending, data } = useGetCategoriesBlog({});
   const magCategory: Category[] = data?.data?.data?.blogCategory || [];
   const [selectedCategories, setSelectedCategories] = useState<string[]>(selected);
@@ -48,7 +54,7 @@ const SelectCategoryBlog = ({ onSelect, selected, multiple }: Props) => {
       ) : (
         <div>
           <p className="hidden pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-            دسته‌بندی بلاگ‌ها <span className="text-red-500">*</span>
+            {title} <span className="text-red-500">*</span>
           </p>
           <div className="custom_sidebar_category flex flex-col gap-3 overflow-y-auto font-regular">
             {magCategory.map((category, idx) => (

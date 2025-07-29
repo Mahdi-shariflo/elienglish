@@ -6,7 +6,7 @@ import CardAddress from '@/components/profile/CardAddress';
 import DeleteAddress from '@/components/profile/DeleteAddress';
 import EmptyAddress from '@/components/profile/EmptyAddress';
 import { useGetAddress } from '@/hooks/address/useGetAddress';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 import { addToast, Spinner } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';

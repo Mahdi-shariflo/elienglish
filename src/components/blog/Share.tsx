@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '../common/Button';
 
-const Share = () => {
+const Share = ({ className }: { className?: string }) => {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const handleShare = async () => {
@@ -20,7 +20,7 @@ const Share = () => {
     }
   };
   return (
-    <div className="flex w-full justify-end">
+    <div className={`flex w-full justify-end ${className}`}>
       <Button onClick={handleShare} className="!mr-auto -mt-3 w-fit !min-w-fit">
         <p className="pt-1 font-medium text-[14px] text-[#0B1524] dark:text-white lg:text-[16px]">
           اشتراک گذاری مطلب

@@ -1,6 +1,6 @@
 import { safeRequest } from '@/lib/safeClient';
 import { BASEURL, BASEURL_SITE, SITE_NAME } from '@/lib/variable';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { htmlToText } from 'html-to-text';
 import { permanentRedirect, redirect } from 'next/navigation';
 import { getRobotsMeta } from './common';
@@ -172,8 +172,8 @@ export const generate_metadata_productCategory = async ({
     minProductPrice: number;
     totalProducts: number;
   } = Array.isArray(products.data.data.products) ? products.data.data : [];
-  if (category?.redirecturltype === 302) redirect(category.redirecturl);
-  if (category?.redirecturltype === 301) permanentRedirect(category.redirecturl);
+  if (category?.redirectType === 302) redirect(category.redirecturl);
+  if (category?.redirectType === 301) permanentRedirect(category.redirecturl);
   const fullHtml = category?.description;
 
   const textContent = htmlToText(fullHtml, {

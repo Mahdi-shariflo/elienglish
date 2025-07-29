@@ -4,7 +4,7 @@ import { Input, Spinner } from '@heroui/react';
 import { SearchIcon } from '../icon';
 import Image from 'next/image';
 import { useSerach } from '@/hooks/serach/useSearch';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { BASEURL } from '@/lib/variable';
 import { useRouter } from 'next/navigation';
 import Loading from '../Loading';

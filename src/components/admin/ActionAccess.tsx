@@ -3,7 +3,7 @@ import BaseDialog from '../common/BaseDialog';
 import { useState, useEffect } from 'react';
 import { permissions } from '@/lib/data';
 import { useAssignAccessUserAdmin } from '@/hooks/admin/users/useAssignAccessUserAdmin';
-import { User } from '@/types';
+import { User } from '@/store/types';
 type Props = {
   modal: { open: boolean; info: null | User };
   setModal: React.Dispatch<

@@ -4,7 +4,7 @@ import Input from '@/components/common/form/Input';
 import ReactSelect from '@/components/common/form/ReactSelect';
 import { useActionUserAdmin } from '@/hooks/admin/users/useActionUserAdmin';
 import { converDateGre } from '@/lib/convert';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import * as Yup from 'yup';

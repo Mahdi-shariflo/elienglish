@@ -1,6 +1,6 @@
 import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
 import React, { useEffect, useMemo, useState, useTransition } from 'react';
-import { FilterCategory } from '@/types';
+import { FilterCategory } from '@/store/types';
 import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
 

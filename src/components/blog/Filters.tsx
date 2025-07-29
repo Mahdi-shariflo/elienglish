@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState, useTransition } from 'react';
-import { FilterCategory } from '@/types';
+import { FilterCategory } from '@/store/types';
 import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
 import Button from '../common/Button';

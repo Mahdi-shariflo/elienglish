@@ -6,10 +6,12 @@ import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetCommentsAdmin } from '@/hooks/admin/comments/useGetCommentsAdmin';
 import { initialDataComments } from '@/lib/table-column';
-import { Comment } from '@/types';
+import useGlobalStore from '@/store/global-store';
+import { Comment } from '@/store/types';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {
+  const { setVerifyDelete } = useGlobalStore();
   const [modal, setModal] = useState<{ open: boolean; info: null | Comment; admin?: boolean }>({
     open: false,
     info: null,
@@ -32,6 +34,15 @@ const Page = () => {
       initialDataComments({
         // @ts-expect-error error
         onEdit: (row) => setModal({ info: row, open: true, admin: true }),
+        onDelete: (row: any) =>
+          setVerifyDelete({
+            open: true,
+            title: 'حذف کامنت',
+            description: 'کامنت‌‌ها',
+            info: row.title,
+            updateCache: 'comments-admin',
+            url: `/comment/admin/${row._id}`,
+          }),
       }),
     []
   );

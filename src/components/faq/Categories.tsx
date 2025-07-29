@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
 import Image from '../common/Image';
-import { ThumbnailImage } from '@/types';
+import { ThumbnailImage } from '@/store/types';
 type Props = {
   path?: string;
   children?: ReactNode;

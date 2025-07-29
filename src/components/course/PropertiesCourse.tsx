@@ -1,5 +1,5 @@
 'use client';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import Image from 'next/image';
 import React, { useState } from 'react';
 

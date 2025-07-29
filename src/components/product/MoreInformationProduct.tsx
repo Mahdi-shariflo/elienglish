@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import { Tab, Tabs } from '@heroui/react';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import Title from '../common/Title';
 import Comments from '../common/Comments';
 import Button from '../common/Button';

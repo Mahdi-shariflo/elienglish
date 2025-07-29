@@ -2,7 +2,7 @@
 import BackPrevPage from '@/components/common/BackPrevPage';
 import { Toman_Icon } from '@/components/common/icon';
 import { useGetInstallment } from '@/hooks/admin/installment/useGetInstallment';
-import { Installment } from '@/types';
+import { Installment } from '@/store/types';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 

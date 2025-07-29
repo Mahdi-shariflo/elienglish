@@ -8,7 +8,7 @@ import { useGetFaqAdmin } from '@/hooks/admin/faq/useGetFaqAdmin';
 import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
 import { initialDataFaq, initialDataTagProduct } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {

@@ -6,7 +6,7 @@ import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import { useGetUsersAdmin } from '@/hooks/admin/users/useGetUsersAdmin';
 import { initialDataUsers } from '@/lib/table-column';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {

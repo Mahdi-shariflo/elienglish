@@ -5,7 +5,7 @@ import Textarea from '../common/form/Textarea';
 import Button from '../common/Button';
 import { useSession } from '@/lib/auth/useSession';
 import { useAddComment } from '@/hooks/comments/useAddComment';
-import { Comment, CommentInfo } from '@/types';
+import { Comment, CommentInfo } from '@/store/types';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import StarRating from '../common/StarRateing';

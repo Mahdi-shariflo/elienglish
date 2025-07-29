@@ -1,6 +1,6 @@
 'use client';
 import { BASEURL } from '@/lib/variable';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { Spinner } from '@heroui/react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PiEye } from 'react-icons/pi';
@@ -9,7 +9,7 @@ import BaseDialog from '../../common/BaseDialog';
 import ReactTable from '../common/ReactTable';
 import { initialDataProducts } from '@/lib/table-column';
 import Button from '../../common/Button';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import { useGetBlogsAdmin } from '@/hooks/admin/blogs/useGetBlogsAdmin';
 
 type Props = {

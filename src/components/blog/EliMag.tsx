@@ -4,7 +4,7 @@ import Title from '../common/Title';
 import Link from 'next/link';
 import CardBlog1 from './CardBlog1';
 import CardBlog2 from './CardBlog2';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles

@@ -1,4 +1,4 @@
-import { User } from '@/types';
+import { User } from '@/store/types';
 
 export interface Session {
   accessToken: string;

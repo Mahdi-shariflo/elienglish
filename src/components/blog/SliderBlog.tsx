@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import CardBlog1 from './CardBlog1';
 import CardBlog2 from './CardBlog2';
 import Title from '../common/Title';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 type Props = {
   typeCardBlog: 'short' | 'long';
   className?: string;

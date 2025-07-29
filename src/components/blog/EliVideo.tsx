@@ -1,5 +1,5 @@
 'use client';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import React from 'react';
 import Title from '../common/Title';
 import Link from 'next/link';

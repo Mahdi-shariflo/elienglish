@@ -9,7 +9,7 @@ import { BASEURL } from '@/lib/variable';
 import Textarea from '@/components/common/form/Textarea';
 import Datepicker from '@/components/common/Datepicker';
 import CardComment from '../common/CardComment';
-import { Home } from '@/types/home';
+import { Home } from '@/store/types/home';
 
 type Props = {
   formik: FormikProps<any>;

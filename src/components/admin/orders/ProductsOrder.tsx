@@ -5,7 +5,7 @@ import Button from '@/components/common/Button';
 import Image from '@/components/common/Image';
 import { initialDataDetailOrder } from '@/lib/table-column';
 import useOrderStore from '@/store/order-store';
-import { Order, Product } from '@/types/home';
+import { Order, Product } from '@/store/types/home';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import ReactTable from '../common/ReactTable';
@@ -101,7 +101,6 @@ const ProductsOrder = ({
 
     setOpenEdit({ info: null, open: false });
   };
-  console.log(orderItems);
 
   return (
     <div className="mt-3 rounded-xl border border-[#E4E7E9] p-4">

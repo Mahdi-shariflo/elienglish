@@ -4,7 +4,7 @@ import Pagination from '@/components/common/Pagination';
 import BackPrevPage from '@/components/common/BackPrevPage';
 import { useSearchParams } from 'next/navigation';
 import { Spinner } from '@heroui/react';
-import { Order } from '@/types/profile';
+import { Order } from '@/store/types/profile';
 import EmptyOrder from '@/components/profile/EmptyOrder';
 import { useGetLpa } from '@/hooks/profile/useGetLpa';
 import Button from '@/components/common/Button';

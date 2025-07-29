@@ -54,8 +54,8 @@ export const generate_metadata_productTag = async ({
 
   const category = data?.data?.data ? data?.data?.data?.tag : null;
 
-  if (category?.redirecturltype === 302) redirect(category.redirecturl);
-  if (category?.redirecturltype === 301) permanentRedirect(category.redirecturl);
+  if (category?.redirectType === 302) redirect(category.redirecturl);
+  if (category?.redirectType === 301) permanentRedirect(category.redirecturl);
   const fullHtml = category?.description;
 
   const textContent = htmlToText(fullHtml, {

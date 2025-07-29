@@ -4,7 +4,7 @@ import { createURL } from '@/lib/fun';
 import { useFormik } from 'formik';
 import React, { useEffect } from 'react';
 import * as Yup from 'yup';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
 import Select from '@/components/common/Select';
 import Checkbox from '@/components/common/form/Checkbox';

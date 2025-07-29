@@ -1,4 +1,4 @@
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import React from 'react';
 
 const InfoBlog = ({ blog }: { blog: Blog }) => {

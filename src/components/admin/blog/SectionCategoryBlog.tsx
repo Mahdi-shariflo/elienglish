@@ -3,7 +3,7 @@ import Input from '@/components/common/form/Input';
 import { FormikProps, useFormik } from 'formik';
 import * as Yup from 'yup';
 import React, { useEffect, useState } from 'react';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { Plus_icon } from '@/components/common/icon';
 import { generateRandomString } from '@/lib/fun';
 import Categories from '@/components/blog/Categories';

@@ -3,7 +3,7 @@ import { useUpdateFavorite } from '@/hooks/favorites/useUpdateFavorite';
 import { useSession } from '@/lib/auth/useSession';
 import { BASEURL_SITE } from '@/lib/variable';
 import useGlobalStore from '@/store/global-store';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { addToast } from '@heroui/react';
 import { useState } from 'react';
 import BaseDialog from '../common/BaseDialog';

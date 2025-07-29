@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Button from '../common/Button';
-import { Comment } from '@/types';
+import { Comment } from '@/store/types';
 import { useAcrionLikeComment } from '@/hooks/comments/useAcrionLikeComment';
 type Props = {
   comment: Comment;

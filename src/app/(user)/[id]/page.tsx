@@ -9,7 +9,7 @@ import ShareAndCopy from '@/components/blog/ShareAndCopy';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Title from '@/components/common/Title';
 import { request } from '@/lib/safeClient';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import Link from 'next/link';
 import React from 'react';
 import { getmetadatSingleMag, jsonLdSingleMag, jsonLdSingleMagBreadcramp } from '@/seo/mag';
@@ -39,7 +39,7 @@ const Page = async ({ params }: Props) => {
     { id: '333', title: blog?.title, url: '#' },
   ];
   return (
-    <div className="bg-white pb-10 dark:bg-dark">
+    <div className="bg-white pb-10 pt-20 dark:bg-dark lg:pt-10">
       <script
         id="jsonld_mag"
         type="application/ld+json"
@@ -95,7 +95,7 @@ const Page = async ({ params }: Props) => {
             />
           </div>
           <div className="sticky top-48 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
-            <Share />
+            <Share className="!hidden lg:!flex" />
             <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">
               <Title title={blogSidebar?.section2?.title} />

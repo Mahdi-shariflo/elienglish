@@ -1,5 +1,5 @@
-import { Address } from '@/types';
-import { Order, Product } from '@/types/home';
+import { Address } from '@/store/types';
+import { Order, Product } from '@/store/types/home';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';

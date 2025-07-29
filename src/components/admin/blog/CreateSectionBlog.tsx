@@ -3,7 +3,7 @@ import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import { converDatePer } from '@/lib/convert';
-import { Home } from '@/types/home';
+import { Home } from '@/store/types/home';
 import { FormikProps, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import SelectBlog from './SelectBlog';

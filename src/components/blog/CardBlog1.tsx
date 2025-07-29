@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import Image from '../common/Image';
 
 const CardBlog1 = ({

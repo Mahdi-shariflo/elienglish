@@ -2,7 +2,7 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import { convertDatePer } from '@/lib/convert';
 import useOrderStore from '@/store/order-store';
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../common/Button';
 import { useGetOrders } from '@/hooks/profile/useGetOrders';
-import { Order } from '@/types/profile';
-import { Product } from '@/types/home';
+import { Order } from '@/store/types/profile';
+import { Product } from '@/store/types/home';
 import CardProduct from '../common/CardProduct';
 import EmptyOrder from './EmptyOrder';
 import { useRouter } from 'next/navigation';

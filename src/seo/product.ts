@@ -1,8 +1,8 @@
 import { groupAttributesByProperty } from '@/lib/product';
 import { safeRequest } from '@/lib/safeClient';
 import { BASEURL, BASEURL_SITE, SITE_NAME } from '@/lib/variable';
-import { Comment } from '@/types';
-import { Product } from '@/types/home';
+import { Comment } from '@/store/types';
+import { Product } from '@/store/types/home';
 import { htmlToText } from 'html-to-text';
 
 import { permanentRedirect, redirect } from 'next/navigation';
@@ -244,8 +244,8 @@ export const generate_metadata_product = async ({
   const productData = await getProduct(id);
   const product = productData?.product || {};
 
-  if (product?.redirecturltype === 302) redirect(product.redirecturl);
-  if (product?.redirecturltype === 301) permanentRedirect(product.redirecturl);
+  if (product?.redirectType === 302) redirect(product.redirecturl);
+  if (product?.redirectType === 301) permanentRedirect(product.redirecturl);
   // @ts-expect-error error
   const property: {
     url: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import { Home } from '@/types/home';
+import { Home } from '@/store/types/home';
 import { FormikProps } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import Editor from '../common/Editor'; // فرض بر اینه که این TinyMCE رو رپ کرده

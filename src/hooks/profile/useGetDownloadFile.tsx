@@ -5,7 +5,6 @@ export const useGetDownloadFile = ({ src }: { src?: string }) => {
   const cleanedSrc =
     typeof src === 'string' && src.startsWith('/download/') ? src.replace('/download/', '') : src;
 
-  console.log(src);
   return useQuery({
     queryKey: ['download-file', cleanedSrc],
     gcTime: 0,

@@ -3,7 +3,7 @@ import { ResultAttribute } from '@/lib/product';
 import { FormikProps } from 'formik';
 import React, { useState } from 'react';
 import FormVariableProduct from './FormVariableProduct';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import Image from '@/components/common/Image';
 import useGlobalStore from '@/store/global-store';
 

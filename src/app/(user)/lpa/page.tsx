@@ -3,7 +3,7 @@ import Filters from '@/components/blog/Filters';
 import React from 'react';
 import CardPlp from '@/components/plp/CardPlp';
 import { request } from '@/lib/safeClient';
-import { Lpa } from '@/types';
+import { Lpa } from '@/store/types';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };

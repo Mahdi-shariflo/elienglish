@@ -11,7 +11,10 @@ const UploadNewFile = () => {
   const { mutate, isPending, isSuccess, reset } = useAddMediaAdmin();
   const [files, setFiles] = useState<File[]>([]);
   const [open, setOpen] = useState(false);
-  const onClose = () => setOpen(false);
+  const onClose = () => {
+    setFiles([]);
+    setOpen(false);
+  };
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles((prev) => [...prev, ...acceptedFiles]);

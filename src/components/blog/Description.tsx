@@ -1,5 +1,5 @@
 'use client';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import { Accordion, AccordionItem } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 

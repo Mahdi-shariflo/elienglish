@@ -2,7 +2,7 @@ import { ResultAttribute } from '@/lib/product';
 import { FormikProps } from 'formik';
 import React, { useState } from 'react';
 import FormVariableCourse from './FormCourseDemo';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import useGlobalStore from '@/store/global-store';
 import { Accordion, AccordionItem } from '@heroui/react';
 import Button from '@/components/common/Button';

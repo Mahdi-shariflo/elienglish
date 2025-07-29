@@ -1,7 +1,7 @@
 'use client';
 import React, { useRef, useState } from 'react';
 import { Accordion, AccordionItem } from '@heroui/react';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import Title from '../common/Title';
 import Comments from '../common/Comments';
 import Button from '../common/Button';
@@ -71,7 +71,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
 
   const visibleTabs = tabItems.filter((tab) => tab.show);
   return (
-    <div className="mt-10 rounded-lg border border-gray-200 bg-white p-8 dark:!border-[#263248] dark:bg-[#0B1524] lg:mt-4">
+    <div className="mt-10 rounded-lg border !border-gray-100 bg-white p-8 dark:!border-[#263248] dark:bg-[#0B1524] lg:mt-4">
       <div className="flex items-center gap-8 border-b border-[#E5EAEF] pb-1 dark:!border-[#263248]">
         {visibleTabs.map((tab, idx) => (
           <Button

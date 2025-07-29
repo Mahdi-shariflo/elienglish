@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Accordion, AccordionItem } from '@heroui/react';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { groupAttributesByProperty } from '@/lib/product';
 import Link from 'next/link';
 import CardComment from './CardComment';
 import CreateComment from './CreateComment';
-import { Comment } from '@/types';
+import { Comment } from '@/store/types';
 import useProductStore from '@/store/product-store';
 import { useMedia } from 'react-use';
 import { useGetCommentById } from '@/hooks/comments/useGetCommentById';

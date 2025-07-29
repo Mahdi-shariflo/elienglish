@@ -4,7 +4,7 @@ import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
 import { useGetTicketById } from '@/hooks/ticketing/useGetTicketById';
 import { BASEURL } from '@/lib/variable';
-import { Ticket } from '@/types/profile';
+import { Ticket } from '@/store/types/profile';
 import Textarea from '@/components/common/form/Textarea';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';

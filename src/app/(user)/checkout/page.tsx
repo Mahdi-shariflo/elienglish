@@ -5,7 +5,7 @@ import Title from '@/components/common/Title';
 import useBasket from '@/hooks/basket/useBasket';
 import { useCheckoutStore } from '@/store/checkout-store';
 import React, { useEffect, useState } from 'react';
-import { Address as AddressType, BasketItem } from '@/types';
+import { Address as AddressType, BasketItem } from '@/store/types';
 import Input from '@/components/common/form/Input';
 import EmptyCartPage from '@/components/checkout/EmptyCartPage';
 import { useFormik } from 'formik';
@@ -124,7 +124,6 @@ const Page = () => {
       });
     }
   }, [session]);
-  console.log(checkout, 'dfhsfgsdf');
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>

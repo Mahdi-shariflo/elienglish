@@ -1,4 +1,4 @@
-import { Ticket } from '@/types/profile';
+import { Ticket } from '@/store/types/profile';
 import React, { useEffect } from 'react';
 import BaseDialog from '../common/BaseDialog';
 import { useSendMessageTicket } from '@/hooks/admin/tickets/useSendMessageTicket';

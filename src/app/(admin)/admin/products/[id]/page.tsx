@@ -49,7 +49,7 @@ const initialValues = {
   keyWords: '',
   variablesAttribiutes: [],
   robots: '',
-  redirecturltype: '',
+  redirectType: '',
   redirecturl: '',
   children: [],
 };
@@ -77,7 +77,7 @@ const mapProductToFormValues = (product: any) => ({
   keyWords: product.keyWords || '',
   variablesAttribiutes: product.variablesAttribiutes || [],
   robots: product.robots || '',
-  redirecturltype: product.redirecturltype || '',
+  redirectType: product.redirectType || '',
   redirecturl: product.redirecturl || '',
   children: product?.children,
 });

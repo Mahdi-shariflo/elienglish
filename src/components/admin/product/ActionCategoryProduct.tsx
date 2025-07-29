@@ -1,7 +1,7 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import Input from '@/components/common/form/Input';
 import { createURL } from '@/lib/fun';
-import { Category } from '@/types/home';
+import { Category } from '@/store/types/home';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
@@ -50,7 +50,7 @@ const ActionCategoryProduct = ({ modal, setModal }: Props) => {
       url: '',
       keyWords: '',
       thumbnailimage: null,
-      redirecturltype: '',
+      redirectType: '',
       properties: [],
     },
     validationSchema: Yup.object({
@@ -62,7 +62,7 @@ const ActionCategoryProduct = ({ modal, setModal }: Props) => {
         url: values?.url,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
         ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
-        ...(values.redirecturltype ? { redirecturltype: values?.redirecturltype } : null),
+        ...(values.redirectType ? { redirectType: values?.redirectType } : null),
         ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
         ...(values.rebots ? { robots: values.robots } : null),
         ...(values.keyWords ? { keyWords: values.keyWords } : null),

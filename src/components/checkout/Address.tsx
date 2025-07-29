@@ -1,4 +1,4 @@
-import { Address as AddressType } from '@/types';
+import { Address as AddressType } from '@/store/types';
 import React from 'react';
 import Button from '../common/Button';
 import { addToast, Spinner } from '@heroui/react';

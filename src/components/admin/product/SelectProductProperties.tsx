@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { Spinner } from '@heroui/react';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { PiEye } from 'react-icons/pi';

@@ -4,7 +4,7 @@ import React from 'react';
 import CardBlog from '@/components/blog/CardBlog';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import SelectedFilterBlog from '@/components/blog/SelectedFilterBlog';
 import Sort from '@/components/common/Sort';
 import { metadatMagPageCategories } from '@/seo/mag';

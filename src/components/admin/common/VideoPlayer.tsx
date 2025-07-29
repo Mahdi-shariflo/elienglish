@@ -7,7 +7,7 @@ import PlayIcon from '@/../public/icons/play.svg';
 import Watermark from './Watermark';
 import { useParams } from 'next/navigation';
 import { useUpdateWatchVideo } from '@/hooks/watchedVideo/useUpdateWatchVideo';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import { BASEURL_SITE } from '@/lib/variable';
 
 type Props = {

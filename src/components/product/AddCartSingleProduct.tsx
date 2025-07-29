@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Toman_Icon } from '../common/icon';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { discountCalculation } from '@/lib/utils';
 import Counter from '../common/Counter';
 import Image from 'next/image';

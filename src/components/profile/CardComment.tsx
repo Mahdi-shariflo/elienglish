@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import StarRating from '../common/StarRateing';
 import Button from '../common/Button';
 import { statusIcon } from '@/lib/data';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import Image from '../common/Image';
 import Link from 'next/link';
 type Props = {
@@ -32,7 +32,7 @@ const CardComment = ({ comment }: Props) => {
                 className="!h-[102px] !w-[142px] overflow-hidden rounded-lg object-contain"
               />
               <div className="w-full space-y-5">
-                <p className="line-clamp-2 font-semibold text-[14px] text-[#0B1524] lg:text-[18px]">
+                <p className="line-clamp-2 text-[14px] font-semibold text-[#0B1524] lg:text-[18px]">
                   {comment?.course?.title}
                 </p>
                 <p className="font-regular text-[12px] text-[#505B74] lg:text-[14px]">

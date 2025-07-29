@@ -3,7 +3,7 @@ import React from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Carousel from '../common/Carousel';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 type Props = {
   section: {
     colorTitle: string;

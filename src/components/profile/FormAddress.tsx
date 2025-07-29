@@ -6,7 +6,7 @@ import Select from '../common/Select';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAddAddress } from '@/hooks/address/useAddAddress';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 import { useUpdateAddress } from '@/hooks/address/useUpdateAddress';
 import { useMedia } from 'react-use';
 import { province } from '@/lib/provinces';

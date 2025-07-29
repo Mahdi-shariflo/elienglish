@@ -3,7 +3,7 @@ import Filters from '@/components/blog/Filters';
 import React from 'react';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 type Props = {

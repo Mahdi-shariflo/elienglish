@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from '../common/Image';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 import Link from 'next/link';
 const CardBlog2 = ({
   className,
@@ -34,7 +34,7 @@ const CardBlog2 = ({
           </p>
         )}
         <p
-          className={`line-clamp-2 font-bold leading-7 text-[#0B1524] dark:text-white ${classTitle}`}
+          className={`line-clamp-2 font-medium leading-7 text-[#0B1524] dark:text-white ${classTitle}`}
         >
           {blog.title}
         </p>

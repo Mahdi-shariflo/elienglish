@@ -1,5 +1,5 @@
 'use client';
-import { Slider } from '@/types/home';
+import { Slider } from '@/store/types/home';
 import Link from 'next/link';
 import React, { JSX } from 'react';
 import Image from '../common/Image';

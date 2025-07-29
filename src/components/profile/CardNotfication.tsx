@@ -1,4 +1,4 @@
-import { Notification } from '@/types';
+import { Notification } from '@/store/types';
 import React from 'react';
 
 const CardNotfication = ({ notification }: { notification: Notification }) => {

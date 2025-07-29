@@ -2,7 +2,7 @@
 import BaseDialog from '@/components/common/BaseDialog';
 import React, { useState } from 'react';
 import MediaComponent from './MediaComponent';
-import { Media as MediaType } from '@/types';
+import { Media as MediaType } from '@/store/types';
 type Props = {
   withModal?: boolean;
   multiple?: boolean;

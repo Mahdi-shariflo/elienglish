@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { Toman_Icon } from './icon';
 import Link from 'next/link';
-import { Course, Product } from '@/types/home';
+import { Course, Product } from '@/store/types/home';
 import { discountCalculation } from '@/lib/utils';
 import Image from './Image';
 import { filterLowProduct } from '@/lib/fun';

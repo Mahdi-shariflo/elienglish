@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
 import SeoOptions from '../common/SeoOptions';
 import Editor from '../common/Editor';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import { useActionPropertyById } from '@/hooks/admin/products/useActionPropertyById';
 import { useGetPropertyDetailId } from '@/hooks/admin/products/useGetPropertyDetailId';
 import { useParams, useSearchParams } from 'next/navigation';
@@ -46,7 +46,7 @@ const ActionPropertyById = ({ modal, setModal }: Props) => {
       rebots: '',
       url: '',
       keyWords: '',
-      redirecturltype: '',
+      redirectType: '',
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import Counter from './Counter';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { Delete_icon, Toman_Icon } from './icon';
 import Image from 'next/image';
 import Button from './Button';

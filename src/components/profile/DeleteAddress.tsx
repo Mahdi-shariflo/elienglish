@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import BaseDialog from '../common/BaseDialog';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 import { useRemoveAddress } from '@/hooks/address/useRemoveAddress';
 type Props = {
   open: {

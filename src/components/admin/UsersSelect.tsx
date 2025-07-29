@@ -1,5 +1,5 @@
 import { useGetUsersAdmin } from '@/hooks/admin/users/useGetUsersAdmin';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { Spinner } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';

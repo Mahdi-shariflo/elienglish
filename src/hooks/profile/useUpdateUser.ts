@@ -1,5 +1,5 @@
 import { safeRequest } from '@/lib/safeClient';
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { addToast } from '@heroui/react';
 import { useMutation } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';

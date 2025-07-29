@@ -1,7 +1,7 @@
 import { ResultAttribute } from '@/lib/product';
 import { FormikProps } from 'formik';
 import React, { useState } from 'react';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import useGlobalStore from '@/store/global-store';
 import FormChapters from './FormChapters';
 import { Accordion, AccordionItem } from '@heroui/react';

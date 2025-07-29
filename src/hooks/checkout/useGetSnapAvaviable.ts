@@ -2,7 +2,7 @@ import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
 import useBasket from '../basket/useBasket';
 import { useGetPayment } from './useGetPayment';
-import { Payment } from '@/types';
+import { Payment } from '@/store/types';
 
 export const useGetSnapAvaviable = () => {
   const { total } = useBasket();

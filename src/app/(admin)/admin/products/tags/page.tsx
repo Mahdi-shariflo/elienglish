@@ -6,7 +6,7 @@ import { SearchIcon } from '@/components/common/icon';
 import { useGetProductTagsAdmin } from '@/hooks/admin/products/useGetProductTagsAdmin';
 import { initialDataTagProduct } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import React, { useMemo, useState } from 'react';
 
 const Page = () => {

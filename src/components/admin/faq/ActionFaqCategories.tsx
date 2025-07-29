@@ -4,7 +4,7 @@ import { createURL } from '@/lib/fun';
 import { useFormik } from 'formik';
 import React, { useEffect, useRef } from 'react';
 import * as Yup from 'yup';
-import { TagType } from '@/types';
+import { TagType } from '@/store/types';
 import Textarea from '@/components/common/form/Textarea';
 import { useActionFaqCategories } from '@/hooks/admin/faq/useActionFaqCategories';
 import SeoOptions from '../common/SeoOptions';

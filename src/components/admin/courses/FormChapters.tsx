@@ -5,7 +5,7 @@ import Input from '@/components/common/form/Input';
 import { BASEURL } from '@/lib/variable';
 import Button from '@/components/common/Button';
 import { getMediaType } from '@/lib/utils';
-import { Media as MediaType } from '@/types';
+import { Media as MediaType } from '@/store/types';
 import { Delete_icon } from '@/components/common/icon';
 import { Accordion, AccordionItem } from '@heroui/react';
 import Select from '@/components/common/Select';

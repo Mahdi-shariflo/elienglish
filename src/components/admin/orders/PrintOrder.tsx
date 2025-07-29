@@ -1,7 +1,7 @@
 'use client';
 import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import { Tooltip } from '@heroui/react';
 import React, { useState } from 'react';
 import { FcPrint } from 'react-icons/fc';

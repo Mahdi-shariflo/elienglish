@@ -2,7 +2,7 @@
 import React from 'react';
 import CardNotfication from './CardNotfication';
 import { useGetNotfications } from '@/hooks/profile/useGetNotfications';
-import { Notification } from '@/types';
+import { Notification } from '@/store/types';
 
 const Notfications = () => {
   const { data } = useGetNotfications();

@@ -1,4 +1,4 @@
-import { Address, Payment, shippingMethod } from '@/types';
+import { Address, Payment, shippingMethod } from '@/store/types';
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 type TypeCheckout = {

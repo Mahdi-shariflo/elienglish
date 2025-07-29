@@ -39,9 +39,9 @@ client.interceptors.response.use(
     if (status === 410) {
       return notFound();
     }
-    // if (status === 404) {
-    //   return notFound();
-    // }
+    if (status === 404) {
+      return notFound();
+    }
     if ((typeof window !== 'undefined' && status === 401) || status === 401) {
       // removeSession();
       location.href === '/auth';

@@ -1,5 +1,5 @@
 import { converDatePer } from '@/lib/convert';
-import { Order } from '@/types/home';
+import { Order } from '@/store/types/home';
 import React from 'react';
 
 const Note = ({ order }: { order: Order }) => {

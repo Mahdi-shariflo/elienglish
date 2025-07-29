@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { User } from '@/types';
+import { User } from '@/store/types';
 import { cookies } from 'next/headers';
 import { headers } from '../safeClient';
 import { BASEURL, COOCIES_NAME } from '../variable';

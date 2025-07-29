@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../common/Button';
-import { Address } from '@/types';
+import { Address } from '@/store/types';
 type Props = {
   address: Address;
   onDelete?: () => void;

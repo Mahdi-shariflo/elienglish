@@ -7,7 +7,7 @@ import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
 import TypeTransaction from '@/components/admin/orders/TypeTransaction';
 import { useGetPhysicalOrderByIdAdmin } from '@/hooks/admin/orders/physical/useGetPhysicalOrderByIdAdmin';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 

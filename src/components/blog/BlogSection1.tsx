@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import CardBlogSection1 from './CardBlogSection1';
-import { Blog } from '@/types';
+import { Blog } from '@/store/types';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles

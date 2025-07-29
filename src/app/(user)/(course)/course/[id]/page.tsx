@@ -5,7 +5,7 @@ import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountdownDiscounts from '@/components/CountdownDiscounts';
-import { Course } from '@/types/home';
+import { Course } from '@/store/types/home';
 import Drop from '@/../public/images/drop.png';
 import PropertiesCourse from '@/components/course/PropertiesCourse';
 import Counter from '@/components/common/Counter';
@@ -17,7 +17,6 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
-  console.log(course, 'course?.thumbnailImage?.urlcourse?.thumbnailImage?.url');
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
@@ -31,7 +30,7 @@ const Page = async ({ params }: Props) => {
               className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#0B1524]"
               media={course}
             />
-            <div className="mt-4 flex items-start rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#0B1524] lg:border lg:border-gray-50 lg:drop-shadow-sm">
+            <div className="l mt-4 flex items-start rounded-lg border !border-gray-100 bg-white p-4 dark:!border-[#263248] dark:bg-[#0B1524] lg:drop-shadow-sm">
               {/* {course?.thumbnailImage?.url && (
                 <Image 
                 className='!w-[300px] !h-full'

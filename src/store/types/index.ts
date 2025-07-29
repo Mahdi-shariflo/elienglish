@@ -84,6 +84,7 @@ export type Comment = {
   author: {
     firstName: string;
     lastName: string;
+    role: 'GOD' | 'ADMIN';
   };
   published?: boolean;
   children: Comment[];
@@ -168,7 +169,7 @@ export interface Article {
   metaDescription: string;
   metaTitle: string;
   redirecturl: string;
-  redirecturltype: number; // معمولا 301 یا 302
+  redirectType: number; // معمولا 301 یا 302
   robots: string;
   breadcrumb: { title: string; url: string; order: number; id: string }[];
 }
@@ -221,7 +222,7 @@ export interface FormValuesCreteProduct {
   keyWords: string;
   variablesAttribiutes: any[];
   robots: string;
-  redirecturltype: any;
+  redirectType: any;
   redirecturl: string;
 }
 

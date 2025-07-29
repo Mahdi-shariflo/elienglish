@@ -1,7 +1,7 @@
 import AddCartSingleProduct from '@/components/product/AddCartSingleProduct';
 import ProductPage from '@/components/product/ProductPage';
 import { getProduct } from '@/seo/product';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import Link from 'next/link';
 
 type Props = {

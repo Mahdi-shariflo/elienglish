@@ -1,6 +1,6 @@
 'use client';
 import { BASEURL } from '@/lib/variable';
-import { Media } from '@/types';
+import { Media } from '@/store/types';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import BaseDialog from '../common/BaseDialog';

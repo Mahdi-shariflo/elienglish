@@ -9,7 +9,7 @@ import Media from '@/components/admin/common/Media';
 import { useParams, useRouter } from 'next/navigation';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { BASEURL, BASEURL_SITE } from '@/lib/variable';
+import { BASEURL } from '@/lib/variable';
 import Button from '@/components/common/Button';
 import { cleanUrl, createURL, removeEmptyFields } from '@/lib/fun';
 import { useGetTagsBlogAdmin } from '@/hooks/admin/blogs/useGetTagsBlogAdmin';
@@ -33,6 +33,7 @@ interface InitialValues {
   Published: string;
   description: string;
   categories: string[];
+  category: [];
   title: string;
   thumbnailImage: { url: string; _id: string } | undefined;
   metaTitle: string;
@@ -40,7 +41,7 @@ interface InitialValues {
   keyWords: string;
   robots: string;
   redirecturl: string;
-  redirecturltype: string;
+  redirectType: string;
   canonicalurl: string;
   type: string;
   shortDescription: string;
@@ -65,6 +66,7 @@ const Page = () => {
   const formik = useFormik<InitialValues>({
     initialValues: {
       downloads: [],
+      category: [],
       shortDescription: '',
       requiredLogin: false,
       coverVideo: undefined,
@@ -84,7 +86,7 @@ const Page = () => {
       keyWords: '',
       robots: '',
       redirecturl: '',
-      redirecturltype: '',
+      redirectType: '',
       canonicalurl: '',
       readTime: '',
     },
@@ -114,10 +116,11 @@ const Page = () => {
         categories: values.categories
           .map((option: string) => option)
           .filter((item) => Boolean(item)),
+        category: values.category.map((option: string) => option).join(','),
         thumbnailImage: values.thumbnailImage?._id,
         robots: values.robots,
         canonicalurl: values.canonicalurl,
-        redirecturltype: Number(values?.redirecturltype),
+        redirectType: Number(values?.redirectType),
         redirecturl: values.redirecturl,
         metaTitle: values.metaTitle,
         metaDescription: values.metaDescription,
@@ -136,7 +139,8 @@ const Page = () => {
       formik.setValues({
         ...formik.values,
         ...blog,
-        categories: [blog.categories?._id],
+        category: [blog.category?._id],
+        categories: blog.categories.map((item: { _id: string }) => item._id),
         Published: blog.Published ? 'true' : 'false',
         isChosen: blog.isChosen,
         tags: blog?.tags?.map((item: { _id: string }) => item._id),
@@ -153,10 +157,10 @@ const Page = () => {
         ...(blog.robots ? { robots: blog.robots } : null),
         ...(blog.canonicalurl ? { canonicalurl: blog.canonicalurl } : null),
         ...(blog.redirecturl ? { redirecturl: blog.redirecturl } : null),
-        ...(blog.redirecturltype
+        ...(blog.redirectType
           ? {
-              redirecturltype: optionRedirectType.find(
-                (item) => item.value === blog.redirecturltype
+              redirectType: optionRedirectType.find(
+                (item) => Number(item.value) === blog.redirectType
               )?.value,
             }
           : ''),
@@ -343,6 +347,11 @@ const Page = () => {
               </Media>
             </>
           ) : null}
+          <SelectCategoryBlog
+            title="انتخاب یک دسته بندی برای بلاگ"
+            onSelect={(values) => formik.setFieldValue('category', values)}
+            selected={formik.values.category}
+          />
           <SelectCategoryBlog
             multiple
             onSelect={(values) => formik.setFieldValue('categories', values)}

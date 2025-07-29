@@ -7,7 +7,7 @@ import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Button from '../common/Button';
-import { Product } from '@/types/home';
+import { Product } from '@/store/types/home';
 import { useRouter } from 'next/navigation';
 import CardProduct from './CardProduct';
 

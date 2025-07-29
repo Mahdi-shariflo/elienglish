@@ -11,7 +11,7 @@ import { removeNumNumeric } from '@/lib/convert';
 import { BASEURL } from '@/lib/variable';
 import { Delete_icon, Edit_icon } from '../common/icon';
 import { useActionTransport } from '@/hooks/admin/transports/useActionTransport';
-import { Transport } from '@/types';
+import { Transport } from '@/store/types';
 import { useGetTransportByIdAdmin } from '@/hooks/admin/transports/useGetTransportByIdAdmin';
 type Props = {
   modal: {
