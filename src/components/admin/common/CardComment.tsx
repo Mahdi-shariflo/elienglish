@@ -14,7 +14,9 @@ type Props = {
 };
 const CardComment = ({ onDelete, comment, className }: Props) => {
   return (
-    <div className={`relative rounded-lg border border-gray-100 p-3 shadow-md ${className}`}>
+    <div
+      className={`relative rounded-lg border border-gray-100 p-3 shadow-md dark:border-[#505B74] ${className}`}
+    >
       <div className="flex items-center gap-2">
         <Image
           width={45}
@@ -24,11 +26,13 @@ const CardComment = ({ onDelete, comment, className }: Props) => {
           src={comment.profile}
         />
         <div>
-          <p className="font-medium text-[16px]">{comment.fullName}</p>
-          <span className="font-regular text-[12px] text-[#6A7890]">{comment.item}</span>
+          <p className="font-medium text-[16px] dark:text-white">{comment.fullName}</p>
+          <span className="font-regular text-[12px] text-[#6A7890] dark:text-[#8E98A8]">
+            {comment.item}
+          </span>
         </div>
       </div>
-      <p className="mt-5 text-justify font-regular text-[12px] leading-7 text-[#6A7890]">
+      <p className="mt-5 text-justify font-regular text-[12px] leading-7 text-[#6A7890] dark:text-[#8E98A8]">
         {comment.comment}
       </p>
       <div className="mt-5 flex items-center justify-end gap-2">

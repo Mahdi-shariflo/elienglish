@@ -9,7 +9,7 @@ export default function Description({ description }: { description: string }) {
     <div>
       <div
         dangerouslySetInnerHTML={{ __html: description }}
-        className={`container_page container_des_category mt-14 overflow-hidden font-medium leading-8 drop-shadow ${open ? '' : '!h-[250px]'}`}
+        className={`container_page container_des_category mt-14 overflow-hidden font-medium leading-8 drop-shadow dark:text-[#8E98A8] ${open ? '' : '!h-[250px]'}`}
         style={{ height: 'auto' }}
       ></div>
       <span className="container_page flex justify-center border-b border-[#E4E7E9]">

@@ -22,7 +22,7 @@ const Page = async () => {
       <Section4 section={home?.section5} />
       <Section6 section={home?.section6} />
       {/* <Section4  /> */}
-      <EliMag delay={3200} title="الی مگ" blogs={home?.section7?.blog} />
+      <EliMag className="container_page" delay={3200} title="الی مگ" blogs={home?.section7?.blog} />
 
       {home?.description && <Description description={home?.description} />}
     </div>
