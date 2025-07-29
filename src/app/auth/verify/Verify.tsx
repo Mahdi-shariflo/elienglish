@@ -79,7 +79,7 @@ const Verify = () => {
           className="flex h-[85vh] flex-col justify-between lg:mt-10 lg:h-fit lg:w-[524px]"
         >
           <div className="w-full">
-            <h1 className="font-extrabold text-2xl text-primary dark:text-[#E5EAEF]">
+            <h1 className="font-demibold text-2xl text-primary dark:text-[#E5EAEF]">
               ثبت نام در الی انگلیش
             </h1>
 

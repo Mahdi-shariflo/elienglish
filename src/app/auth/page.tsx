@@ -29,7 +29,7 @@ const Page = () => {
       className="mx-auto flex flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
     >
       <div>
-        <h1 className="font-extrabold text-2xl text-primary dark:text-[#E5EAEF]">ورود / ثبت نام</h1>
+        <h1 className="font-demibold text-2xl text-primary dark:text-[#E5EAEF]">ورود / ثبت نام</h1>
         <div className="mt-10">
           <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black dark:text-[#8E98A8]`}>
             شماره موبایل {<span className="text-red-500">*</span>}

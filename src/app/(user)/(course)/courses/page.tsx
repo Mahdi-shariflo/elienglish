@@ -18,6 +18,7 @@ const Page = async ({ searchParams }: Props) => {
     filterCourse.append(decodeURIComponent(key), decodeURIComponent(value as string));
   }
   const newQueryString = filterCourse.toString();
+  console.log(`/course/main?${newQueryString}`);
 
   const result = await request({ url: `/course/main?${newQueryString}` });
   const product: {
@@ -77,13 +78,13 @@ const Page = async ({ searchParams }: Props) => {
           />
           <div className="w-full">
             <Sort />
-            <div className="grid w-full gap-4 rounded-lg p-3 dark:bg-[#172334] lg:grid-cols-3">
+            <div className="grid w-full gap-4 rounded-lg p-2 dark:bg-[#172334] lg:grid-cols-3 lg:p-10">
               {product?.course.map((course, idx) => (
                 <CardProduct
                   url={`/course/${course.url}/`}
-                  classImage="!object-fill"
-                  classNameImage="!w-full !h-[254px] !w-full"
-                  className="!h-[380px] w-full lg:!h-[400px]"
+                  classImage="!object-cover"
+                  classNameImage="!w-full !h-[294px] !w-full"
+                  className="!h-[380px] w-full lg:!h-[450px]"
                   product={course}
                   key={idx}
                 >

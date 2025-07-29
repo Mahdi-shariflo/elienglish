@@ -4,8 +4,7 @@ import React from 'react';
 import ReactCountdown from 'react-countdown';
 
 const CountdownDiscounts = ({ timer, className }: { timer: string; className?: string }) => {
-  const Completionist = () => '';
-
+  console.log(timer, 'timerrrr');
   const renderer = ({
     minutes,
     seconds,
@@ -21,7 +20,7 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
   }) => {
     if (completed) {
       // Render a completed state
-      return <Completionist />;
+      return null;
     } else {
       // Render a countdown
       return (

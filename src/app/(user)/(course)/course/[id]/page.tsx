@@ -5,11 +5,11 @@ import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountdownDiscounts from '@/components/CountdownDiscounts';
-import Image from 'next/image';
 import { Course } from '@/types/home';
 import Drop from '@/../public/images/drop.png';
 import PropertiesCourse from '@/components/course/PropertiesCourse';
 import Counter from '@/components/common/Counter';
+import ImageNextjs from 'next/image';
 type Props = {
   params: Promise<{ [key: string]: string }>;
 };
@@ -17,6 +17,7 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
+  console.log(course, 'course?.thumbnailImage?.urlcourse?.thumbnailImage?.url');
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page pt-10 lg:pt-32">
@@ -30,16 +31,25 @@ const Page = async ({ params }: Props) => {
               className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334]"
               media={course}
             />
-            <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
-              <p className="hidden font-bold text-[18px] text-[#172334] dark:text-white lg:block">
-                درباره دوره{' '}
-              </p>
-              <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[16px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
-                {course?.title}
-              </p>
-              <p className="rounded-lg pt-2 text-justify font-medium text-[14px] text-[#8E98A8] lg:pt-5">
-                {course.short_des}
-              </p>
+            <div className="mt-4 flex items-start rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
+              {/* {course?.thumbnailImage?.url && (
+                <Image 
+                className='!w-[300px] !h-full'
+                alt="" 
+                src={`${BASEURL}/${course.thumbnailImage.url}`}
+                 />
+              )} */}
+              <div>
+                <p className="hidden font-demibold text-[18px] text-[#172334] dark:text-white lg:block">
+                  درباره دوره{' '}
+                </p>
+                <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[16px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8] lg:hidden">
+                  {course?.title}
+                </p>
+                <p className="rounded-lg pt-2 text-justify font-medium text-[15px] leading-8 text-[#8E98A8] lg:pt-3">
+                  {course.short_des}
+                </p>
+              </div>
             </div>
             <div className="lg:hidden">
               {course.discountTime && <CountdownDiscounts timer={course?.discountTime} />}
@@ -50,7 +60,7 @@ const Page = async ({ params }: Props) => {
           <div className="sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
             <div className="border border-gray-50 bg-white p-4 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334]">
               <div className="hidden lg:block">
-                <p className="border-b border-[#E5EAEF] pb-4 font-extrabold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
+                <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
                 </p>
                 <p className="pt-4 font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
@@ -77,7 +87,7 @@ const Page = async ({ params }: Props) => {
                     قیمت دوره
                   </p>
                   <div className="flex items-center gap-1">
-                    <p className="font-extrabold text-[24px] dark:text-white">
+                    <p className="font-demibold text-[24px] dark:text-white">
                       {course.discountPrice
                         ? Number(course.discountPrice).toLocaleString()
                         : Number(course.price).toLocaleString()}
@@ -132,7 +142,7 @@ const Page = async ({ params }: Props) => {
                     {course.properties.map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2">
-                          <Image width={20} height={20} alt="" src={`${item.iconUrl}`} />
+                          <ImageNextjs width={20} height={20} alt="" src={`${item.iconUrl}`} />
                           <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">
                             {item.property}
                           </p>
@@ -146,8 +156,8 @@ const Page = async ({ params }: Props) => {
                 </div>
               </div>
             </div>
-            <div className="hidden items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:flex">
-              <Image width={60} src={Drop} alt="" />
+            {/* <div className="hidden items-center justify-between border border-gray-50 bg-white pl-5 drop-shadow-sm dark:!border-[#263248] dark:bg-[#172334] lg:flex">
+              <ImageNextjs width={60} src={Drop} alt="" />
               <p className="font-bold text-[20px] text-[#172334] dark:text-[#8E98A8]">
                 {course.status === 'complated' ? 'تکمیل ظبط' : 'در حال ظبط'}
               </p>
@@ -176,7 +186,7 @@ const Page = async ({ params }: Props) => {
                 </div>
                 <p className="font-medium text-[#33435A] dark:text-[#8E98A8]">4.86 از 7 رای</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState, useTransition } from 'react';
 import { FilterCategory } from '@/types';
 import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
-import Input from '../common/form/Input';
 
 type Props = {
   resultFilter?: FilterCategory;
@@ -92,7 +91,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
 
   return (
     // @ts-expect-error error
-    <Accordion defaultSelectedKeys={['0']} className="px-0">
+    <Accordion defaultSelectedKeys={['0', '1']} className="px-0">
       <></>
       {resultFilter?.properties?.map((property, idx) => {
         const searchTerm = searchTerms[idx] || '';
@@ -121,19 +120,19 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
             aria-label={`Accordion ${idx}`}
             classNames={{
               base: 'border-b last:border-none !border-[#E4E7E9]',
-              title: 'text-[#172334] !text-[14px] lg:text-[16px] dark:text-[#E5EAEF] font-bold',
+              title: 'text-[#172334] !text-[14px] lg:text-[16px] dark:text-[#E5EAEF] font-demibold',
             }}
             title={property.title}
           >
             <div>
-              <Input
+              {/* <Input
                 classNameInput="!h-[45px] !bg-white dark:!bg-[#33435A] border-none"
                 placeholder="جستجو"
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(idx, e.target.value)}
-              />
+              /> */}
 
-              <div className="mt-5 flex flex-col gap-4">
+              <div className="flex flex-col gap-4">
                 {filteredAttributes?.length > 0 ? (
                   filteredAttributes?.map((attribute) => (
                     <Checkbox
