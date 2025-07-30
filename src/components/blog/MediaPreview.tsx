@@ -12,8 +12,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
   if (!media) return null;
 
   // تشخیص دسکتاپ سمت کلاینت
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
-
+  console.log(media?.audio?.url);
   return (
     <>
       <div
@@ -35,12 +34,15 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
       </div>
 
       {media?.audio?.url ? (
-        // <MediaThemeTailwindAudio
-        // style={{ "--media-primary-color": "#6E3DFF", "--media-secondary-color": "#fff", "--media-accent-color": "#6E3DFF",width:"100%",boxShadow:"none" }}
-        // dir='ltr'
-        // className='mt-10'
-        // >
-        <audio src={`${BASEURL}/${media.audio.url}`} playsInline></audio>
+        <audio
+          controlsList="nodownload noplaybackrate"
+          className="mt-5 w-full rounded-lg border border-gray-200/60 !bg-transparent font-medium"
+          controls
+        >
+          <source src={`${BASEURL}/${media.audio.url}`} type="audio/ogg" />
+          <source src={`${BASEURL}/${media.audio.url}`} type="audio/mpeg" />
+          Your browser does not support the audio element.
+        </audio>
       ) : // </MediaThemeTailwindAudio>
       null}
     </>

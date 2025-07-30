@@ -259,13 +259,9 @@ hr {
   background: transparent;
   border: none;
 }
-
-.info-poster {
-  display: none !important;
-}
-/* این رو توی فایل globals.css یا style اصلیت بذار */
-@media (max-width: 1023px) {
-  media-theme-sutro-audio::part(poster) {
-    display: none !important;
-  }
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: #fff;
+  color: #fff;
+  font-family: light !important;
 }
