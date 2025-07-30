@@ -32,13 +32,13 @@ const Section1 = ({ section }: Props) => {
     <div className="container_page flex flex-col items-center gap-7 lg:flex-row lg:justify-between lg:gap-20">
       <div className="w-full lg:space-y-8">
         <div className="flex flex-col gap-4 lg:gap-14">
-          <p className="w-full font-black text-[20px] leading-[3rem] dark:text-white lg:w-[70%] lg:text-[40px] lg:leading-[5rem]">
-            <span className="font-black text-[20px] leading-[3rem] text-main lg:text-[40px] lg:leading-[5rem]">
+          <p className="w-full font-demibold text-[24px] leading-[3rem] dark:text-white lg:w-[70%] lg:text-[40px] lg:leading-[5rem]">
+            <span className="font-demibold text-[24px] leading-[3rem] text-main lg:text-[40px] lg:leading-[5rem]">
               {section.colorTitle}
             </span>{' '}
             {section.title}
           </p>
-          <p className="font-medium text-[14px] text-[#6A7890] lg:text-[18px]">
+          <p className="font-medium text-[16px] leading-8 text-[#6A7890] lg:text-[18px]">
             {section.description}
           </p>
           <div className="flex w-full items-center gap-4">

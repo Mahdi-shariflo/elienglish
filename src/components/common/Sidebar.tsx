@@ -8,9 +8,12 @@ import {
   DrawerContent,
   DrawerHeader,
 } from '@heroui/react';
-import { BlogPage_icon, BrandPage_icon, ContactPage_icon, Home_icon } from './icon';
+import { BlogPage_icon, ContactPage_icon, Courses_icon, Home_icon, Products_icon } from './icon';
 import { useRouter } from 'next/navigation';
 import { CgClose } from 'react-icons/cg';
+import { FcAbout } from 'react-icons/fc';
+import { BiQuestionMark } from 'react-icons/bi';
+import { FaLaptopMedical } from 'react-icons/fa';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -26,14 +29,39 @@ const Sidebar = () => {
       src: '/',
     },
     {
+      title: 'دوره‌های آموزشی',
+      Icon: Courses_icon,
+      src: '/course',
+    },
+    {
+      title: 'محصولات',
+      Icon: Products_icon,
+      src: '/products',
+    },
+    {
       title: 'مقاله‌ها',
       Icon: BlogPage_icon,
-      src: '/mag',
+      src: '/blog',
     },
     {
       title: 'تماس با ما',
       Icon: ContactPage_icon,
       src: '/contact-us',
+    },
+    {
+      title: 'درباره‌ی ما',
+      Icon: FcAbout,
+      src: '/contact-us',
+    },
+    {
+      title: 'سوالات متداول',
+      Icon: BiQuestionMark,
+      src: '/faq',
+    },
+    {
+      title: 'تعین سطح',
+      Icon: FaLaptopMedical,
+      src: '/lpa',
     },
   ];
   // @ts-expect-error error
@@ -166,7 +194,7 @@ const Sidebar = () => {
                           className="flex h-[83px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border"
                         >
                           <menu.Icon
-                            className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main' : ''}`}
+                            className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main text-main' : 'text-main'}`}
                           />
                           <span className="font-light text-[#4A4A4A]">{menu.title}</span>
                         </div>

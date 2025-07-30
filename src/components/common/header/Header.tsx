@@ -303,7 +303,7 @@ const Header = ({ categories }: Props) => {
               cls === 'yes' ? 'hidden lg:flex' : 'hidden'
             }`}
           >
-            <div className="flex items-center gap-[16px]">
+            <div className="flex items-center gap-[20px]">
               {categories && <CategoryMenu categories={categories} />}
               {quickLicks.map((link, idx) => (
                 <Link className="flex items-center gap-3" href={`${link.src}/`} key={idx}>
