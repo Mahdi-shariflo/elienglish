@@ -60,7 +60,7 @@ const Section1 = ({ section }: Props) => {
           {section?.card?.map((item, idx) => (
             <div
               key={idx}
-              className="flex h-[90px] w-full flex-col items-center justify-center gap-6 rounded-[28px] border p-4 dark:border-[#263248] lg:h-[144px]"
+              className="flex h-[90px] w-full flex-col items-center justify-center gap-3 rounded-lg border p-4 dark:border-[#263248] lg:h-[144px] lg:gap-6 lg:rounded-[28px]"
             >
               <AnimatedCounter target={Number(removeNumNumeric(item.count))} duration={2500} />
               {/* <p className="font-extrabold text-[18px] text-black lg:text-[26px]">{item.count}</p> */}

@@ -28,7 +28,6 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/blog/detail/${decodeURIComponent(id!)}` });
   const blog = result?.data?.data?.blog;
   const blogSidebar = result?.data?.data?.blogSidebar;
-
   const breadcrumbPath = [
     { id: '3334', title: 'خانه', url: '/' },
     ...(Array.isArray(blog?.breadcrumbPath)

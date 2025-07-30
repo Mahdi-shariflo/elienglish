@@ -260,7 +260,7 @@ hr {
   border: none;
 }
 
-div.info {
+.info-poster {
   display: none !important;
 }
 /* این رو توی فایل globals.css یا style اصلیت بذار */

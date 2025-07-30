@@ -2,15 +2,11 @@
 import React from 'react';
 import Image from '../common/Image';
 import { Blog } from '@/store/types';
-import { BASEURL } from '@/lib/variable';
+import { BASEURL, BASEURL_SITE } from '@/lib/variable';
 import dynamic from 'next/dynamic';
 import { Course } from '@/store/types/home';
 import VideoPlayer from '../admin/common/VideoPlayer';
-
-// پخش‌کننده صوتی داینامیک
-const MediaThemeSutroAudio = dynamic(() => import('player.style/sutro-audio/react'), {
-  ssr: false,
-});
+import MediaThemeTailwindAudio from 'player.style/tailwind-audio/react';
 
 const MediaPreview = ({ media, className }: { media: Blog | Course; className?: string }) => {
   if (!media) return null;
@@ -39,29 +35,14 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
       </div>
 
       {media?.audio?.url ? (
-        <MediaThemeSutroAudio
-          className="drop_shadow_cart mt-8"
-          style={{
-            '--media-primary-color': '#6E3DFF',
-            '--media-secondary-color': '#fff',
-            '--media-accent-color': '#E0D7FB',
-            width: '100%',
-            direction: 'ltr',
-          }}
-        >
-          {/* فقط در دسکتاپ رندر کن */}
-          {isDesktop && (
-            <div slot="poster">
-              <img
-                src={`${BASEURL}/${media.thumbnailImage.url}`}
-                alt="Audio Poster"
-                style={{ width: '100%', objectFit: 'cover' }}
-              />
-            </div>
-          )}
-          <audio slot="media" src={`${BASEURL}/${media.audio.url}`} playsInline />
-        </MediaThemeSutroAudio>
-      ) : null}
+        // <MediaThemeTailwindAudio
+        // style={{ "--media-primary-color": "#6E3DFF", "--media-secondary-color": "#fff", "--media-accent-color": "#6E3DFF",width:"100%",boxShadow:"none" }}
+        // dir='ltr'
+        // className='mt-10'
+        // >
+        <audio src={`${BASEURL}/${media.audio.url}`} playsInline></audio>
+      ) : // </MediaThemeTailwindAudio>
+      null}
     </>
   );
 };

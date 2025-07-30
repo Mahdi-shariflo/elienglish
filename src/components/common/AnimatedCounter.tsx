@@ -31,7 +31,7 @@ export default function AnimatedCounter({ target, duration = 2000 }: Props) {
   }, [target, duration]);
 
   return (
-    <span className="font-black text-3xl text-[#222222] dark:text-white">
+    <span className="font-black text-xl text-[#222222] dark:text-white lg:text-3xl">
       {count.toLocaleString()}
     </span>
   );
