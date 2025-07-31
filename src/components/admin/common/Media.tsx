@@ -31,8 +31,13 @@ const Media = ({
             {title ? <p className="pb-2 font-medium text-[14px]">{title}</p> : null}
 
             <button
+              type="button"
               className={`!block min-w-fit !overflow-hidden ${className}`}
-              onClick={() => setOpen(true)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setOpen(true);
+              }}
             >
               {children}
             </button>

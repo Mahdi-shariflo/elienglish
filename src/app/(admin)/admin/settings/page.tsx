@@ -1,5 +1,6 @@
 'use client';
 import SliderLogin from '@/components/admin/settings/SliderLogin';
+import TopBanner from '@/components/admin/settings/TopBanner';
 import Select from '@/components/common/Select';
 import { useFormik } from 'formik';
 import React from 'react';
@@ -23,6 +24,10 @@ const Page = () => {
             label: 'اسلایدر لاگین',
             value: 'sliderLogin',
           },
+          {
+            label: 'بنر هدر',
+            value: 'bannerHeader',
+          },
         ]}
         label="انتخاب سکشن"
         value={formik.values.selectSec}
@@ -30,7 +35,8 @@ const Page = () => {
         formik={formik}
         className="mt-10"
       />
-      <div>{formik.values.selectSec === 'sliderLogin' ? <SliderLogin /> : null}</div>
+      <>{formik.values.selectSec === 'sliderLogin' ? <SliderLogin /> : null}</>
+      <>{formik.values.selectSec === 'bannerHeader' ? <TopBanner /> : null}</>
     </div>
   );
 };

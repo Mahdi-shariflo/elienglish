@@ -6,14 +6,14 @@ import { Comments_icon } from '../common/icon';
 
 const InfoBlog = ({ blog }: { blog: Blog }) => {
   const { isSuccess, data } = useGetCommentById(blog._id);
-  const comments = data?.data;
-  console.log(comments, 'jcvhfgyksdfsd');
+  const count = isSuccess ? data?.data?.data?.ratingStats[0]?.count : 0;
+
   return (
     <div>
       <h1 className="pt-[24px] font-bold text-xl text-[#172334] dark:text-white lg:text-3xl">
         {blog?.title}
       </h1>
-      <div className="mt-3 flex flex-wrap items-center gap-4 lg:mt-[24px] lg:gap-[24px]">
+      <div className="mt-3 grid grid-cols-2 flex-wrap items-center gap-4 lg:mt-[24px] lg:flex lg:gap-[24px]">
         <div className="flex items-center gap-2">
           <svg
             width="24"
@@ -99,22 +99,20 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-2">
-          <Comments_icon className="h-7 w-7" />
+        {isSuccess && (
+          <div className="flex items-center gap-2">
+            <Comments_icon className="h-7 w-7" />
 
-          <div className="flex gap-1">
-            <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">دیدگاه‌ها:</span>
-            <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
-              {new Date(blog?.createdAt).toLocaleDateString('fa-IR', {
-                year: '2-digit',
-                month: '2-digit',
-                day: '2-digit',
-              })}
-            </span>
+            <div className="flex gap-1">
+              <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">
+                دیدگاه‌ها:
+              </span>
+              <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">{count}</span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
-      <p className="mt-14 text-justify font-medium text-[14px] leading-8 text-[#33435A] dark:text-[#8E98A8]">
+      <p className="mt-8 text-justify font-medium text-[14px] leading-8 text-[#33435A] dark:text-[#8E98A8] lg:mt-14">
         {blog?.shortDescription}
       </p>
     </div>

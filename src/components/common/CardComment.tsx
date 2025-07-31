@@ -94,7 +94,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
           <p className="mt-5 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
             {comment?.title}
           </p>
-          <p className="mt-2 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+          <p className="mt-2 text-wrap font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
             {comment?.content}
           </p>
           <Button
@@ -180,7 +180,7 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                 <p className="mt-5 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
                   {item?.title}
                 </p>
-                <p className="mt-2 font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
+                <p className="mt-2 text-wrap font-medium text-[14px] text-[#505B74] dark:text-[#8E98A8]">
                   {item?.content}
                 </p>
               </div>

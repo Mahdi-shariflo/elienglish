@@ -76,7 +76,7 @@ const Description = ({ blog }: { blog: Blog }) => {
                 }
                 title={
                   <div className="flex items-center gap-2">
-                    <span>
+                    <span className="rotate-90">
                       <svg
                         className="rotate-90 stroke-[#0B1524] dark:stroke-white"
                         width="24"
