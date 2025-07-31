@@ -32,7 +32,7 @@ const Layout = ({ children }: Props) => {
     <>
       <header className="fixed !z-50 flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
-          <Logo />
+          <Logo className="lg:w-[160px]" />
           <Link
             className="flex h-[40px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-[14px] text-main dark:border-gray-400 lg:h-[46px] lg:w-[220px]"
             href={'/'}
