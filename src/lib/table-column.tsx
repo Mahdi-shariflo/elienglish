@@ -1458,11 +1458,48 @@ export const initialDataComments = ({ onDelete, onEdit }: { onDelete?: any; onEd
     ),
   },
   {
-    title: <HeaderCell align="center" title="موبایل" />,
-    dataIndex: 'mobile',
-    key: 'mobile',
+    title: <HeaderCell align="center" title="کامنت" />,
+    dataIndex: 'targetId',
+    key: 'targetId',
     render: (_: string, row: any) => (
-      <p className="text-center text-[12px] text-gray-600">{Number(row?.author?.mobile)}</p>
+      <span className="block text-center text-[12px] text-gray-600">
+        {row?.blog ? (
+          <div className="flex items-center justify-start gap-4">
+            <img
+              className="block !h-[80px] !w-[80px] rounded-lg object-cover"
+              src={`${BASEURL}/${row?.blog?.thumbnailImage?.url}`}
+            />
+            <Link className="!text-blue-400 underline" href={`/${row.blog.url}`}>
+              <span className="block text-start">(مقاله)</span>
+              {row?.blog?.title}
+            </Link>
+          </div>
+        ) : row?.course ? (
+          <div className="flex items-center justify-start gap-4">
+            <img
+              className="block !h-[80px] !w-[80px] rounded-lg object-cover"
+              src={`${BASEURL}/${row?.course?.thumbnailImage?.url}`}
+            />
+            <Link className="!text-blue-400 underline" href={`/${row.course.url}`}>
+              <span className="block text-start">(مقاله)</span>
+              {row?.course?.title}
+            </Link>
+          </div>
+        ) : (
+          <div className="flex items-center justify-start gap-4">
+            <img
+              className="block !h-[80px] !w-[80px] rounded-lg"
+              src={`${BASEURL}/${row?.product?.thumbnailImage?.url}`}
+            />
+
+            <Link className="!text-blue-400 underline" href={`/product/${row?.product?.url}`}>
+              <span className="block text-start">(محصول)</span>
+
+              {row?.product?.title}
+            </Link>
+          </div>
+        )}
+      </span>
     ),
   },
   {

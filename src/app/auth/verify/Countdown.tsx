@@ -48,7 +48,7 @@ const Countdown = () => {
     } else {
       // Render a countdown
       return (
-        <div className="mx-auto flex !w-fit items-center justify-start gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm text-[#263248] transition-all duration-500 hover:!text-main dark:text-[#8E98A8]">
+        <div className="mx-auto mt-5 flex !w-fit items-center justify-start gap-1 bg-transparent !p-0 font-medium text-[12px] text-sm text-[#263248] transition-all duration-500 hover:!text-main dark:text-[#8E98A8] lg:mt-0">
           <span>دریافت کد مجدد</span>
           <span>
             ( {minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds})

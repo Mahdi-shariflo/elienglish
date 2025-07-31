@@ -274,12 +274,12 @@ const menus = [
     href: '/admin/contact',
     activeIcon: Contact_fill_icon,
   },
-  // {
-  //   icon: Settings_icon,
-  //   name: 'تنظیمات',
-  //   href: '/admin/settings/',
-  //   activeIcon: Settings_fill_icon,
-  // },
+  {
+    icon: Settings_icon,
+    name: 'تنظیمات',
+    href: '/admin/settings/',
+    activeIcon: Settings_fill_icon,
+  },
 ];
 
 type Props = {

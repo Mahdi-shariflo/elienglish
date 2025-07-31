@@ -4,10 +4,19 @@ type Props = {
   editorRef: React.RefObject<HTMLInputElement>;
   value: string;
   onBlur?: () => void;
+  label?: string;
+  isRequired?: boolean;
 };
-const Editor = ({ value, editorRef, onBlur }: Props) => {
+const Editor = ({ value, editorRef, onBlur, label, isRequired }: Props) => {
   return (
     <div className="mt-4 lg:col-span-2">
+      {typeof label === 'string' ? (
+        <p className={`mb-[6px] pr-1 font-medium text-[12px] dark:!text-[#8E98A8] lg:text-[14px]`}>
+          {label} {isRequired && <span className="text-red-500">*</span>}
+        </p>
+      ) : (
+        label
+      )}
       <EditorTinymce
         // @ts-ignore
         onInit={(_evt, editor) => (editorRef.current! = editor)}

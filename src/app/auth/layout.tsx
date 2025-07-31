@@ -9,25 +9,14 @@ import LogoLight from '@/../public/images/logo-light.png';
 import Image from 'next/image';
 import Link from 'next/link';
 import Slider from './Slider';
+import { useGetSliderLogin } from '@/hooks/auth/useGetSliderLogin';
+import Logo from '@/components/common/Logo';
 type Props = {
   children: ReactNode;
 };
 
-const sliders = [
-  {
-    image: LoginSlider,
-    title: 'آزمون تعیین سطح ',
-    description:
-      'آزمون تعیین سطح به ما کمک می‌کند تا سطح دانش زبان شما را به‌درستی ارزیابی کنیم و متناسب با آن، بهترین دوره آموزشی را به شما پیشنهاد دهیم.',
-  },
-  {
-    image: LoginSlider,
-    title: 'آزمون تعیین سطح ',
-    description:
-      'آزمون تعیین سطح به ما کمک می‌کند تا سطح دانش زبان شما را به‌درستی ارزیابی کنیم و متناسب با آن، بهترین دوره آموزشی را به شما پیشنهاد دهیم.',
-  },
-];
 const Layout = ({ children }: Props) => {
+  const { data: dataSlider, isLoading } = useGetSliderLogin();
   // @ts-expect-error error
   const data: { data: { idToken: string } } = useSession();
   const { mutate, isPending } = useLoginGoogle();
@@ -37,16 +26,15 @@ const Layout = ({ children }: Props) => {
     }
   }, [data]);
 
+  console.log(dataSlider, 'dataSliderdataSlider');
+  const sliders = dataSlider?.data.data;
   return (
     <>
       <header className="fixed !z-50 flex !h-[84px] !w-full justify-between bg-white bg-opacity-100 shadow-header dark:!bg-[#0B1524]">
         <div className="container_page flex items-center justify-between">
-          <Link href={'/'}>
-            <Image className="dark:hidden" src={LogoDark} alt="" />
-            <Image className="hidden dark:block" src={LogoLight} alt="" />
-          </Link>
+          <Logo />
           <Link
-            className="flex h-[46px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-main dark:border-gray-400 lg:w-[220px]"
+            className="flex h-[40px] w-fit items-center justify-center rounded-lg border border-[#E5EAEF] !px-4 font-medium text-[14px] text-main dark:border-gray-400 lg:h-[46px] lg:w-[220px]"
             href={'/'}
           >
             بازگشت به صفحه اصلی

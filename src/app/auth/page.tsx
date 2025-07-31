@@ -7,7 +7,11 @@ import { useFormik } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
 import BtnGoogle from './BtnGoogle';
+import { useMedia } from 'react-use';
+import Flag from '@/../public/images/download.png';
 const Page = () => {
+  const isMobile = useMedia('(max-width: 480px)', false);
+
   const { mutate, isPending } = useGetCode();
   const formik = useFormik({
     initialValues: {
@@ -46,15 +50,17 @@ const Page = () => {
               options={countriesList}
             /> */}
             <Input
+              endContent={<img src={Flag.src} className="h-10 w-10 object-contain" />}
               min={11}
               max={11}
               placeholder="09123456789"
               formik={formik}
               classNameLabel="text-[14px]"
               name="mobile"
-              type="number"
+              type={isMobile ? 'tel' : 'number'}
               className=""
-              classNameInput={'text-center !text-[14px]'}
+              classNameInput={'text-center pl-3 !text-[14px]'}
+              isClear={true}
             />
           </div>
         </div>

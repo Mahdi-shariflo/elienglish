@@ -14,6 +14,7 @@ import Link from 'next/link';
 import React from 'react';
 import { getmetadatSingleMag, jsonLdSingleMag, jsonLdSingleMagBreadcramp } from '@/seo/mag';
 import { Metadata } from 'next';
+import InfoBlog from '@/components/blog/InfoBlog';
 type Props = {
   params: Promise<{ [key: string]: string }>;
 };
@@ -82,7 +83,7 @@ const Page = async ({ params }: Props) => {
             </div>
             <MediaPreview media={blog} />
             {/* title */}
-            {/* <InfoBlog blog={blog} /> */}
+            <InfoBlog blog={blog} />
             <Description blog={blog} />
             <DownloadFiles blog={blog} />
             <ShareAndCopy />

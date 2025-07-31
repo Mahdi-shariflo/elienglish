@@ -7,8 +7,6 @@ import * as Yup from 'yup';
 import SeoOptions from '../common/SeoOptions';
 import Editor from '../common/Editor';
 import { TagType } from '@/store/types';
-import { useActionProductTags } from '@/hooks/admin/products/useActionProductTags';
-import { useGetProductTagById } from '@/hooks/admin/products/useGetProductTagById';
 import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
 import Select from '@/components/common/Select';
 import { StatusOptionsAdmin } from '@/lib/data';
@@ -27,6 +25,8 @@ type Props = {
   >;
 };
 const ActionFaq = ({ modal, setModal }: Props) => {
+  const editorRef = useRef<HTMLInputElement | null>(null);
+
   const onClose = () => setModal({ info: null, open: false });
   const { mutate, isPending, isSuccess, reset } = useActionFaq();
   const { data: faqCategories } = useGetCategoriesFaqAdmin({});
@@ -55,7 +55,8 @@ const ActionFaq = ({ modal, setModal }: Props) => {
     onSubmit: (values) => {
       const data = {
         question: values.question,
-        answer: values.answer,
+        // @ts-expect-error error
+        description: editorRef.current.getContent(),
         order: values.order,
         published: values.published === 'true' ? true : false,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
@@ -94,7 +95,7 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       <BaseDialog
         onClose={onClose}
         isOpen={modal.open}
-        title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} تگ محصول`}
+        title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} سوال`}
         nameBtnFooter={modal.info?._id ? 'ویرایش' : 'ایجاد'}
         onClickFooter={() => formik.handleSubmit()}
         size="full"
@@ -107,12 +108,7 @@ const ActionFaq = ({ modal, setModal }: Props) => {
             label={'سوال'}
             classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
           />
-          <Input
-            formik={formik}
-            name="answer"
-            label={'جواب'}
-            classNameInput={'!h-[50px] !bg-[#f5f6f6]'}
-          />
+
           <Input
             formik={formik}
             name="order"
@@ -134,6 +130,12 @@ const ActionFaq = ({ modal, setModal }: Props) => {
             nameValue="value"
             name="published"
             formik={formik}
+          />
+          <Editor
+            // @ts-expect-error error
+            editorRef={editorRef}
+            value={formik.values.answer}
+            label="جواب"
           />
           <SeoOptions formik={formik} />
         </div>

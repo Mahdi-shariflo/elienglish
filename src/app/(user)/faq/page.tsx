@@ -1,4 +1,3 @@
-import Input from '@/components/common/form/Input';
 import Categories from '@/components/faq/Categories';
 import FrequentlyAskedQuestions from '@/components/faq/FrequentlyAskedQuestions';
 import { request } from '@/lib/safeClient';
@@ -11,6 +10,7 @@ const Page = async ({ searchParams }: Props) => {
   const { search } = await searchParams;
   const data = await request({ url: `/faq/main?search=${search}` });
   const faq = data?.data?.data;
+  console.log(faq);
   return (
     <div className="mb-32 lg:pt-[5.1rem]">
       <div className="bg-faq flex h-[341px] w-full flex-col items-center justify-center">

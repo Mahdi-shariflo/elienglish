@@ -21,7 +21,7 @@ const Verify = () => {
     },
 
     validationSchema: Yup.object({
-      code: Yup.string().length(5).required('فیلد اجبار ی است'),
+      code: Yup.string().required('وارد کردن کد الزامی است').length(5, 'کد باید دقیقاً ۵ رقم باشد'),
     }),
     onSubmit: (data) => {
       mutate({
@@ -73,19 +73,20 @@ const Verify = () => {
 
   return (
     <Suspense>
-      <div className="mx-auto flex h-[95vh] w-fit flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit">
+      <div className="mx-auto flex h-[56vh] w-fit flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit">
         <form
           onSubmit={formik.handleSubmit}
-          className="flex h-[85vh] flex-col justify-between lg:mt-10 lg:h-fit lg:w-[524px]"
+          className="mx-auto flex flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
         >
           <div className="w-full">
-            <h1 className="font-demibold text-2xl text-primary dark:text-[#E5EAEF]">
+            <h1 className="font-bold text-[28px] text-primary dark:text-[#E5EAEF]">
               ثبت نام در الی انگلیش
             </h1>
 
             <div className="mt-10 flex flex-col">
-              <p className="text-right font-medium dark:text-white">
-                لطفا کد پنج رقمی ارسال شده را وارد نمایید
+              <p className="text-right font-medium text-[#263248] dark:text-white">
+                کد تایید ۴ رقمی ارسال شده برای شماره {searchParams.get('mobile')} را در کادر زیر
+                وارد کنید.{' '}
               </p>
               <InputOtp
                 classNames={{
@@ -119,10 +120,14 @@ const Verify = () => {
               وررود به حساب
             </Button>
             <Countdown />
-
+            <div className="mt-7 flex items-center justify-center gap-10 lg:mt-14 lg:hidden">
+              <span className="block h-px w-[100px] bg-[#8E98A8] bg-opacity-20"></span>
+              <p className="font-medium text-[#8E98A8]">یا</p>
+              <span className="block h-px w-[100px] bg-[#8E98A8] bg-opacity-20"></span>
+            </div>
             <Link
               href={'/auth'}
-              className="flex !h-[48px] w-full items-center justify-center rounded-lg border border-[#E5EAEF] font-medium text-[#172334] dark:text-white lg:mt-14 lg:!h-[48px]"
+              className="mt-5 flex !h-[48px] w-full items-center justify-center rounded-lg border border-[#E5EAEF] font-medium text-[#172334] dark:text-white lg:mt-14 lg:!h-[48px]"
             >
               تعییر شماره یا ثبت نام با ایمیل
             </Link>

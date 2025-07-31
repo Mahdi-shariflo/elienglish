@@ -59,7 +59,7 @@ const Categories = ({ categories, children, path }: Props) => {
           </defs>
         </svg>
       </div>
-      <p className="mt-5 text-center font-bold text-xl text-[#33435A] dark:text-white">
+      <p className="mt-5 text-center font-demibold text-2xl text-[#33435A] dark:text-white">
         دسته‌بندی پرسش‌ها
       </p>
       <div className="mt-[24px] grid grid-cols-3 justify-center gap-2 lg:flex lg:gap-4">
@@ -67,11 +67,11 @@ const Categories = ({ categories, children, path }: Props) => {
         {categories.map((item, idx) => (
           <Link
             key={idx}
-            className="flex h-[108px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px] lg:gap-10"
+            className="flex h-[108px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px] lg:gap-5"
             href={`${path}/${item.url}`}
           >
-            <Image className="h-10 w-10" src={item?.thumbnailImage?.url} alt="" />
-            <p className="text-center font-bold text-main">{item.title}</p>
+            <Image className="h-14 w-14 object-cover" src={item?.thumbnailImage?.url} alt="" />
+            <p className="text-wrap px-3 text-center font-demibold text-main">{item.title}</p>
           </Link>
         ))}
       </div>

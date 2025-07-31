@@ -19,7 +19,6 @@ type Props = {
 
 const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   const { setIsPendingCategory } = useGlobalStore();
-  const [searchTerms, setSearchTerms] = useState<{ [key: number]: string }>({});
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
@@ -30,10 +29,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
       Object.entries(searchParams).map(([key, value]) => [key, value?.split(',') ?? []])
     );
   }, [searchParams]);
-
-  const handleSearchChange = (index: number, value: string) => {
-    setSearchTerms((prev) => ({ ...prev, [index]: value }));
-  };
 
   const singleSelectTypes = ['statusCourse', 'sort', 'available', 'blogType'];
 
@@ -94,10 +89,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     <Accordion defaultSelectedKeys={['0', '1']} className="px-0">
       <></>
       {resultFilter?.properties?.map((property, idx) => {
-        const searchTerm = searchTerms[idx] || '';
-        const filteredAttributes = property?.attributes?.filter((attr) =>
-          attr.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const filteredAttributes = property?.attributes;
 
         return (
           <AccordionItem

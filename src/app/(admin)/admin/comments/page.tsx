@@ -91,7 +91,16 @@ const Page = () => {
         total={comment?.totalPages}
         mainData={comment?.comments}
         showData={columns}
-        columns={['_id', 'firstName', 'mobile', 'comment', 'rate', 'title', 'published', 'action']}
+        columns={[
+          '_id',
+          'firstName',
+          'targetId',
+          'comment',
+          'rate',
+          'title',
+          'published',
+          'action',
+        ]}
         page={Number(filter.page)}
         onChangePage={onChangePage}
       >
@@ -109,7 +118,15 @@ const Page = () => {
           ]}
         />
       </ReactTable>
-      {modal.open && <CreateComment modal={modal} setModal={setModal} showCommentRate={false} />}
+      {/* @ts-expect-error error */}
+      {modal.open && (
+        <CreateComment
+          product={modal?.info?.blog || modal?.info?.course || modal?.info?.product}
+          modal={modal}
+          setModal={setModal}
+          showCommentRate={false}
+        />
+      )}
     </div>
   );
 };

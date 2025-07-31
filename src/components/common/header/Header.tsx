@@ -9,7 +9,8 @@ import Cart from './Cart';
 import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
-
+import Image from 'next/image';
+import TopBanner from '@/../public/images/top-banner.png';
 const quickLicks = [
   {
     name: 'صفحه اصلی',
@@ -259,9 +260,9 @@ const Header = ({ categories }: Props) => {
   //todo: Change this style to flex-shrink-0
   return (
     <>
-      {/* <Image className="h-[60px] w-full" src={TopHeader.src} alt="" /> */}
+      {/* <Image className="h-[60px] w-full" src={TopBanner} alt="" /> */}
       <header
-        className={`fixed left-0 right-0 top-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] dark:shadow-darkHeader ${
+        className={`fixed left-0 right-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] dark:shadow-darkHeader ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >
@@ -303,7 +304,7 @@ const Header = ({ categories }: Props) => {
               cls === 'yes' ? 'hidden lg:flex' : 'hidden'
             }`}
           >
-            <div className="flex items-center gap-[20px]">
+            <div className="flex items-center gap-[24px]">
               {categories && <CategoryMenu categories={categories} />}
               {quickLicks.map((link, idx) => (
                 <Link className="flex items-center gap-3" href={`${link.src}/`} key={idx}>

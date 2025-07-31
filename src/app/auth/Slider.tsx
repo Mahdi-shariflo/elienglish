@@ -6,10 +6,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
+import { BASEURL } from '@/lib/variable';
 
 type Props = {
-  sliders: { image: StaticImageData; title: string; description: string }[];
+  sliders: { imageUrl: string; title: string; description: string }[];
   className?: string;
 };
 
@@ -35,12 +36,12 @@ export default function Slider({ sliders, className }: Props) {
         slidesPerView={1}
         className="!pb-16"
       >
-        {sliders.map((item, idx) => {
+        {sliders?.map((item, idx) => {
           return (
             <SwiperSlide className="!h-fit w-full" key={idx}>
               <span className="block !h-[512px]">
                 <Image
-                  src={`${item.image.src}`}
+                  src={`${`${BASEURL}/${item.imageUrl}`}`}
                   alt={item.title}
                   layout="fill"
                   priority={idx === 0}

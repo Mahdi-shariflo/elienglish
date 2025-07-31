@@ -1,7 +1,13 @@
+'use client';
+import { useGetCommentById } from '@/hooks/comments/useGetCommentById';
 import { Blog } from '@/store/types';
 import React from 'react';
+import { Comments_icon } from '../common/icon';
 
 const InfoBlog = ({ blog }: { blog: Blog }) => {
+  const { isSuccess, data } = useGetCommentById(blog._id);
+  const comments = data?.data;
+  console.log(comments, 'jcvhfgyksdfsd');
   return (
     <div>
       <h1 className="pt-[24px] font-bold text-xl text-[#172334] dark:text-white lg:text-3xl">
@@ -84,6 +90,20 @@ const InfoBlog = ({ blog }: { blog: Blog }) => {
             <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">
               زمان انتشار:
             </span>
+            <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
+              {new Date(blog?.createdAt).toLocaleDateString('fa-IR', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Comments_icon className="h-7 w-7" />
+
+          <div className="flex gap-1">
+            <span className="font-light text-[12px] text-[#8E98A8] lg:text-[14px]">دیدگاه‌ها:</span>
             <span className="font-light text-[12px] text-[#6A7890] lg:text-[14px]">
               {new Date(blog?.createdAt).toLocaleDateString('fa-IR', {
                 year: '2-digit',
