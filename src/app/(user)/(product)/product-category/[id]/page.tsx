@@ -75,20 +75,28 @@ const Page = async ({ searchParams, params }: Props) => {
           />
           <div className="w-full">
             <Sort />
-            <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
-              {product?.products?.map((product, idx) => (
-                <CardProduct
-                  url={`/product/${product.url}/`}
-                  classImage="!object-contain"
-                  classNameImage="mt-2 px-2 lg:h-[220px]"
-                  className="!h-[430px] w-full"
-                  product={product}
-                  key={idx}
-                />
-              ))}
-            </div>
-            {product?.products?.length >= 1 && (
-              <Pagination className="mt-10" total={product?.totalPages} />
+            {product?.products.length >= 1 ? (
+              <>
+                <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
+                  {product?.products?.map((product, idx) => (
+                    <CardProduct
+                      url={`/product/${product.url}/`}
+                      classImage="!object-contain"
+                      classNameImage="mt-2 px-2 lg:h-[220px]"
+                      className="!h-[430px] w-full"
+                      product={product}
+                      key={idx}
+                    />
+                  ))}
+                </div>
+                {product?.products?.length >= 1 && (
+                  <Pagination className="mt-10" total={product?.totalPages} />
+                )}
+              </>
+            ) : (
+              <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
+                مقاله‌ای یافت نشد
+              </p>
             )}
           </div>
         </div>

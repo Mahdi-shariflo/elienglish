@@ -1,51 +1,62 @@
 import AddCartSingleProduct from '@/components/product/AddCartSingleProduct';
 import ProductPage from '@/components/product/ProductPage';
-import { getProduct } from '@/seo/product';
+import { safeRequest } from '@/lib/safeClient';
+import {
+  generate_metadata_product,
+  getProduct,
+  jsonLdProduct,
+  jsonLdProductBreadcrub,
+} from '@/seo/product';
 import { Product } from '@/store/types/home';
+import { Metadata } from 'next';
 import Link from 'next/link';
+import Script from 'next/script';
 
 type Props = {
   params: Promise<{ id: string }>;
   searchParams: Promise<{ text: string; color: string }>;
 };
 
-// export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-//   const { id } = await params;
-//   const searchParamsFilter = await searchParams;
-//   const hasQueryParams: boolean = Object.keys(searchParamsFilter).length > 0;
-//   return generate_metadata_product({ id, hasQueryParams });
-// }
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams: boolean = Object.keys(searchParamsFilter).length > 0;
+  return generate_metadata_product({ id, hasQueryParams });
+}
 
 const Page = async ({ params }: Props) => {
   const { id } = await params;
   const productData = await getProduct(id[0]);
-  console.log(productData, 'hdhdhhdhdhdh');
-  // const data = await safeRequest({
-  //   url: `/user/comment/location/${productData?.product?._id}`,
-  // });
-  // const comments: Comment[] = data?.data?.data?.comments;
+  const data = await safeRequest({
+    url: `/comment/comment-page?pageLocation=${productData?.product?._id}`,
+  });
+
+  const comments: Comment[] = data?.data?.data;
   const selectedProduct: Product = productData.product;
   return (
     <div className="mb-14 lg:mb-0">
-      {/* <Script
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdProductBreadcrub({
+              product: selectedProduct,
+            })
+          ),
+        }}
+      />
+      <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             jsonLdProduct({
-              comments,
               product: selectedProduct,
-              breadcrumb: [
-                ...productData.breadcrumb,
-                {
-                  title: selectedProduct?.title,
-                  url: `product/${id}`,
-                  customUrl: true,
-                },
-              ],
+              // @ts-expect-error error
+              comments: comments.ratingStats[0],
             })
           ),
         }}
-      /> */}
+      />
       <ProductPage
         breadcrumb={[]}
         product={{

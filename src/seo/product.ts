@@ -39,13 +39,7 @@ const findWarrantyTitle = function (
 
 type Props = {
   product: Product;
-  comments: Comment[];
-  breadcrumb: {
-    title: string;
-    order: number;
-    url: string;
-    customUrl?: boolean;
-  }[];
+  comments?: Comment[];
 };
 
 export const sortBreadcumb = (breadcrumb: { order: number; title: string; url: string }[]) => {
@@ -58,139 +52,86 @@ export const sortBreadcumb = (breadcrumb: { order: number; title: string; url: s
     : [];
 };
 
-export const jsonLdProduct = ({ breadcrumb, product, comments }: Props) => {
+export const jsonLdProduct = ({ product, comments }: Props) => {
+  // Divide by the length of the array to get the average
+  // تقسیم متن به جملات و انتخاب چند جمله اول
+  const fullHtml = product?.description;
+
+  const textContent = htmlToText(fullHtml, {
+    wordwrap: 130,
+  });
+
+  // تقسیم متن به جملات و انتخاب چند جمله اول
+  const sentences = textContent.slice(0, 168); // برای نمایش ۲ جمله اول
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'Product',
+    name: product.metaTitle ? product.metaTitle : product.title,
+    description: product.metaDescription ? product.metaDescription : sentences,
+    // @ts-expect-error error
+    robots: getRobotsMeta(product?.robots),
+    alternates: {
+      canonical: product?.canonicalurl ? product.canonicalurl : `${BASEURL_SITE}/${product.url}/`,
+    },
+    image: [`${BASEURL}/${product.thumbnailImage.url}`],
+    ...(product.discountPrice
+      ? {
+          offers: {
+            '@type': 'Offer',
+            url: `${BASEURL_SITE}/product/${product.url}`,
+            priceCurrency: 'IRR',
+            price: product.price,
+            priceValidUntil: product.createdAt,
+            itemCondition: 'https://schema.org/NewCondition',
+            availability: 'https://schema.org/InStock',
+            seller: {
+              '@type': 'Organization',
+              name: SITE_NAME,
+            },
+          },
+        }
+      : null),
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.6',
+      reviewCount: '10',
+    },
+    review: [
+      // {
+      //   '@type': 'Review',
+      //   reviewRating: {
+      //     '@type': 'Rating',
+      //     ratingValue: '5',
+      //     bestRating: '5',
+      //   },
+      //   author: {
+      //     '@type': 'Person',
+      //     name: 'علی رضایی',
+      //   },
+      //   reviewBody: 'گوشی بسیار عالی و با کیفیتی هست، پیشنهاد می‌کنم!',
+      // },
+    ],
+  };
+};
+
+export const jsonLdProductBreadcrub = ({ product }: Props) => {
   // Divide by the length of the array to get the average
   return {
     '@context': 'https://schema.org',
-    '@graph': [
+    '@type': 'ItemList',
+    name: product.title,
+    itemListOrder: 'https://schema.org/ItemListOrderDescending',
+    numberOfItems: 3,
+    itemListElement: [
       {
-        '@type': 'Organization',
-        '@id': `${BASEURL_SITE}/#organization`,
-        name: product.title,
+        '@type': 'ListItem',
+        position: 1,
         url: BASEURL_SITE,
       },
       {
-        '@type': 'WebSite',
-        '@id': `${BASEURL_SITE}/#website`,
-        url: BASEURL_SITE,
-        name: product.title,
-        publisher: {
-          '@id': `${BASEURL_SITE}/#organization`,
-        },
-        inLanguage: 'fa-IR',
-      },
-      {
-        '@type': 'ImageObject',
-        '@id': `${BASEURL}/${product.thumbnailImage?.url}`,
-        url: `${BASEURL}/${product.thumbnailImage?.url}`,
-        width: '1000',
-        height: '1000',
-        inLanguage: 'fa-IR',
-      },
-      {
-        '@type': 'BreadcrumbList',
-        '@id': `${BASEURL_SITE}/product/${product.url}/#breadcrumb`,
-        itemListElement: breadcrumb.map((item, idx) => {
-          // اطمینان از URL منحصر به فرد برای هر item
-          return {
-            '@type': 'ListItem',
-            position: idx + 1,
-            item: {
-              '@id': item?.customUrl
-                ? `${BASEURL_SITE}/${item.url}`
-                : `${BASEURL_SITE}/product-category/${item.url}`, // استفاده از URL خاص
-              name: item.title, // نام یکتا برای هر بخش
-            },
-          };
-        }),
-      },
-      {
-        '@type': 'ItemPage',
-        '@id': `${product.title}/product/${product.url}/#webpage`,
-        url: `${BASEURL_SITE}/product/${product.url}/`,
-        name: product.title,
-        datePublished: product.createdAt,
-        dateModified: product.updatedAt,
-        isPartOf: {
-          '@id': `${BASEURL_SITE}/#website`,
-        },
-        primaryImageOfPage: {
-          '@id': `${BASEURL}/${product.thumbnailImage?.url}`,
-        },
-        inLanguage: 'fa-IR',
-        breadcrumb: {
-          '@id': `${BASEURL_SITE}/product/${product.url}/#breadcrumb`,
-        },
-      },
-      {
-        '@type': 'Product',
-        name: product.title,
-        description: product.title,
-        sku: product.skuId,
-        category: product.category?.title,
-        mainEntityOfPage: {
-          '@id': `${BASEURL_SITE}/product/${product.url}/#webpag`,
-        },
-        image: [product.thumbnailImage, ...product?.galleryImage]?.map((image) => {
-          return {
-            '@type': 'ImageObject',
-            // @ts-expect-error error
-            url: `${BASEURL}/${image?.thumbnailImage?.url}`,
-            height: '1000',
-            width: '1000',
-          };
-        }),
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '5.00',
-          bestRating: '5',
-          // ratingCount: averageRate ? averageRate.toFixed(0) : 1,
-          // reviewCount: averageRate ? averageRate.toFixed(0) : 1,
-        },
-        review: comments.map((comment) => {
-          return {
-            '@type': 'Review',
-            '@id': `${BASEURL_SITE}/product/${product.url}/#li-comment-${comment._id}`,
-            // description: comment.comment,
-            datePublished: comment.createdAt,
-            reviewRating: {
-              '@type': 'Rating',
-              // ratingValue: comment.rate,
-              bestRating: '5',
-              worstRating: '1',
-            },
-            author: {
-              '@type': 'Person',
-              name: `${comment?.author?.firstName} ${comment?.author?.lastName}`,
-            },
-          };
-        }),
-        offers: {
-          '@type': 'Offer',
-          price: product.price,
-          priceCurrency: 'IRR',
-          priceValidUntil: '2026-12-31',
-          availability: `https://schema.org/${product.count === 0 ? 'outStock' : 'InStock'}`,
-          itemCondition: 'NewCondition',
-          url: `${BASEURL_SITE}/product/${product.url}`,
-          seller: {
-            '@type': 'Organization',
-            '@id': `${BASEURL_SITE}`,
-            name: product.title,
-            url: BASEURL_SITE,
-            logo: '',
-          },
-        },
-        additionalProperty: [
-          {
-            '@type': 'PropertyValue',
-            name: 'pa_licensor',
-            value:
-              '\u0633\u0627\u0632\u0645\u0627\u0646 \u063a\u0630\u0627 \u0648 \u062f\u0627\u0631\u0648',
-          },
-        ],
-        gtin12: product.gtin,
-        '@id': `${BASEURL_SITE}/product/${product.url}/#richSnippet`,
+        '@type': 'ListItem',
+        position: 2,
+        url: `${BASEURL_SITE}/${product.url}`,
       },
     ],
   };

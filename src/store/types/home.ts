@@ -32,6 +32,8 @@ export type Category = {
 };
 
 export type Product = {
+  suggestedDiscount?: number;
+  canonicalurl?: string;
   lessons: string;
   parent: string;
   type: 'digital' | 'physical';

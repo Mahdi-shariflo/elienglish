@@ -3,46 +3,67 @@ import React, { useState } from 'react';
 import { Toman_Icon } from '../common/icon';
 import { Product } from '@/store/types/home';
 import { discountCalculation } from '@/lib/utils';
-import Counter from '../common/Counter';
 import Image from 'next/image';
 import { BASEURL } from '@/lib/variable';
-import { useRemoveBasket } from '@/hooks/basket/useRemoveBasket';
 import { useAddBasket } from '@/hooks/basket/useAddBasket';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
 import useBasket from '@/hooks/basket/useBasket';
 import { Checkbox } from '@heroui/react';
+import Button from '../common/Button';
+import Counter from '../common/Counter';
+
 type Props = {
   showDetail?: boolean;
   className?: string;
   product: Product;
 };
+
 const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   const session = useSession();
   const { baskets } = useBasket();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
-  const { mutate: mutateRemove } = useRemoveBasket();
   const { mutate: mutateAdd } = useAddBasket();
-  const handleToggleAddOn = (item: Product) => {
+  const [selectedAddons, setSelectedAddons] = useState<Product[]>([]);
+
+  const handleSelectAddon = (item: Product) => {
+    setSelectedAddons((prev) => {
+      const exists = prev.some((p) => p._id === item._id);
+      return exists ? prev.filter((p) => p._id !== item._id) : [...prev, item];
+    });
+  };
+
+  const handleAddToCart = () => {
     if (!session?.accessToken) return setOpenNeedLogin(true);
 
-    const exists = baskets?.some((p) => p.product?._id === item._id || p.course?._id === item._id);
+    // افزودن محصول اصلی
+    mutateAdd({
+      itemId: product._id,
+      type: 'PRODUCT_PHYSICAL',
+    });
 
-    if (exists) {
-      mutateRemove({ id: item._id });
-    } else {
+    // افزودن افزودنی‌ها
+    selectedAddons.forEach((item) => {
       mutateAdd({
         itemId: item._id,
         type: 'PRODUCT_PHYSICAL',
       });
-    }
+    });
   };
   const mainPrice = product?.discountPrice ?? product?.price ?? 0;
 
-  const addonsTotal =
-    baskets
-      ?.filter((b) => b.product?._id && product?.children?.some((c) => c._id === b.product._id))
-      ?.reduce((sum, b) => sum + (b.product.discountPrice ?? b.product.price ?? 0), 0) ?? 0;
+  console.log(selectedAddons, 'selectedAddonsselectedAddonsselectedAddons');
+  const addonsTotal = selectedAddons.reduce((sum, item) => {
+    const hasDiscount = item.discountPrice && item.discountPrice > 0;
+
+    const basePrice = hasDiscount ? item.discountPrice : (item.price ?? 0) + (product.price ?? 0);
+
+    const discount = item?.suggestedDiscount ?? 0;
+
+    const finalAddonPrice = basePrice - discount;
+
+    return sum + finalAddonPrice;
+  }, 0);
 
   const finalPrice = mainPrice + addonsTotal;
 
@@ -55,10 +76,11 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
           {product?.children && (
             <AddtiveProduct
               products={product?.children}
-              onToggle={handleToggleAddOn}
-              baskets={baskets}
+              onToggle={handleSelectAddon}
+              selected={selectedAddons}
             />
           )}
+
           {showDetail && (
             <div className="hidden items-center gap-3 border-b border-[#E4E7E9] pb-2 dark:border-[#263248] lg:flex">
               <Image
@@ -71,8 +93,8 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
               <p className="font-medium text-xs text-[#616A76]">{product?.title}</p>
             </div>
           )}
+
           <div className="mt-2 flex w-full flex-row-reverse items-center justify-between border-[#F4F6FA] px-[20px] !pt-4 dark:border-[#263248] lg:mt-5 lg:flex-col lg:border-t lg:px-0">
-            {/* discount */}
             {product?.count < 1 ? null : (
               <div className="w-full">
                 <div className="flex items-center justify-end gap-2">
@@ -87,7 +109,6 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
                     </>
                   ) : null}
                 </div>
-                {/* price */}
 
                 <div className="mt-[14px] items-center lg:flex lg:justify-between">
                   <p className="hidden font-medium text-[14px] text-[#616A76] lg:block">
@@ -102,7 +123,8 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
                 </div>
               </div>
             )}
-            {/* btn add cart */}
+
+            {/* دکمه افزودن به سبد خرید */}
             {product?.count >= 1 ? (
               <Counter
                 typeCounter={product.type}
@@ -124,6 +146,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
           </div>
         </div>
       </div>
+
       <ModalNeedLoginUser open={openNeedLogin} setOpen={setOpenNeedLogin} />
     </>
   );
@@ -134,20 +157,17 @@ export default AddCartSingleProduct;
 const AddtiveProduct = ({
   products,
   onToggle,
-  baskets,
+  selected,
 }: {
   products: Product[];
   onToggle: (item: Product) => void;
-  baskets: any[];
+  selected: Product[];
 }) => {
   return (
     <div className="bg-[#EDE8FC] px-2 pt-2 lg:bg-transparent lg:p-0">
-      <div className="flex items-center justify-between">{/* Title */}</div>
       <div className="mt-4 flex flex-col gap-4 border-[#F4F6FA] px-4 pt-4 dark:border-[#263248] lg:border-t">
         {products?.map((item, idx) => {
-          const isChecked = baskets?.some(
-            (b) => b.product?._id === item._id || b.course?._id === item._id
-          );
+          const isChecked = selected.some((p) => p._id === item._id);
 
           return (
             <div
@@ -157,13 +177,12 @@ const AddtiveProduct = ({
               <Checkbox
                 size="lg"
                 isSelected={isChecked}
+                onValueChange={() => onToggle(item)}
                 classNames={{
                   label:
                     'pr-3 text-[14px] w-[180px] overflow-hidden text-ellipsis  whitespace-nowrap dark:text-[#8E98A8] !font-regular text-[#0C0C0C]',
-
                   wrapper: 'after:!bg-main',
                 }}
-                onValueChange={() => onToggle(item)}
               >
                 {item.title}
               </Checkbox>
