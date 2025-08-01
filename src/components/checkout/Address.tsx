@@ -52,7 +52,7 @@ const Address = ({
               <Button
                 onClick={() => onSelectAddress(item)}
                 key={idx}
-                className={`!h-fit !min-h-[73px] items-start justify-between rounded-lg border py-2 ${selectAddress?._id === item._id ? 'border-main bg-main bg-opacity-10' : 'border-transparent bg-[#F6F6F6]'}`}
+                className={`!h-fit !min-h-[73px] items-start justify-between rounded-lg border py-2 ${selectAddress?._id === item._id ? 'border-main bg-main bg-opacity-10' : 'border-transparent bg-[#F6F6F6] dark:bg-[#172334]'}`}
               >
                 <div className="flex h-full flex-col items-start justify-center space-y-2 px-2">
                   <div className="flex items-center gap-2">
@@ -67,7 +67,7 @@ const Address = ({
                       {item?.title}
                     </p>
                   </div>
-                  <p className="text-wrap pt-2 font-regular text-[12px] text-[#545A66] lg:pt-0 lg:text-[14px]">
+                  <p className="text-wrap pt-2 font-regular text-[12px] text-[#545A66] dark:text-[#8E98A8] lg:pt-0 lg:text-[14px]">
                     {item.address}
                   </p>
                 </div>
@@ -181,7 +181,7 @@ const Address = ({
           </p>
           <Button
             onClick={onNewAddress}
-            className="mt-5 h-[32px] w-fit min-w-fit self-end rounded-md bg-main px-2 text-white lg:mt-0 lg:h-[40px] lg:rounded-lg"
+            className="mt-5 h-[32px] w-fit min-w-fit self-end rounded-md bg-main px-2 text-white dark:text-[#8E98A8] lg:mt-0 lg:h-[40px] lg:rounded-lg"
           >
             <span>
               <Plus_icon />

@@ -54,7 +54,7 @@ const Page = async ({ params }: Props) => {
           __html: JSON.stringify(jsonLdSingleMagBreadcramp({ breadcrumbPath: breadcrumbPath })),
         }}
       />
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page">
         <Breadcrumbs
           page="/category"
           breadcrumbs={[

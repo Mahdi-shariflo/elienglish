@@ -30,7 +30,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     );
   }, [searchParams]);
 
-  const singleSelectTypes = ['statusCourse', 'sort', 'available', 'blogType'];
+  const singleSelectTypes = ['statusCourse', 'sort', 'available', 'blogType', 'coursType'];
 
   const onAttributes = ({
     checked,
@@ -84,6 +84,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     setIsPendingCategory(isPending);
   }, [isPending]);
 
+  console.log(searchParams, 'searchParamssearchParamssearchParamssearchParams');
   return (
     // @ts-expect-error error
     <Accordion defaultSelectedKeys={['0', '1']} className="px-0">

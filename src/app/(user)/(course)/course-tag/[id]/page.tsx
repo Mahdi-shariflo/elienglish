@@ -8,18 +8,15 @@ import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: Promise<{ [key: string]: string }>;
 };
 
-const Page = async ({ searchParams }: Props) => {
+const Page = async ({ searchParams, params }: Props) => {
+  const { id } = await params;
   const searchParamsFilter = await searchParams;
-  const filterCourse = new URLSearchParams();
-  // Iterate over searchParams and encode key-value pairs
-  for (const [key, value] of Object.entries(searchParamsFilter!)) {
-    filterCourse.append(decodeURIComponent(key), decodeURIComponent(value as string));
-  }
-  const newQueryString = filterCourse.toString();
-
-  const result = await request({ url: `/course/main?${newQueryString}` });
+  const result = await request({
+    url: `/course/archive-tag?slug=${id}${searchParamsFilter.statusCourse ? `&statusCourse=${searchParamsFilter.statusCourse}` : ''}`,
+  });
   const product: {
     course: Course[];
     totalPages: number;
@@ -30,19 +27,21 @@ const Page = async ({ searchParams }: Props) => {
       _id: idx.toString(),
       title: item.title,
       url: item.url,
-      type: '',
+      type: 'coursType',
       isLink: true,
       page: `/course-category/${item.url}`,
     };
   });
+
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
       <div className="container_page">
-        <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '#' }]} />
+        <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '/courses' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی دوره‌ها"
-            searchParams={searchParamsFilter}
+            // @ts-expect-error error
+            searchParams={{ ...searchParamsFilter, coursType: decodeURIComponent(id) }}
             resultFilter={{
               breadcrumb: [],
               title: '',
@@ -60,16 +59,12 @@ const Page = async ({ searchParams }: Props) => {
                       title: 'تکمیل شده',
                       url: 'completed',
                       type: 'statusCourse',
-                      isLink: true,
-                      page: `/course-category?statusCourse=completed`,
                     },
                     {
                       _id: '2',
                       title: 'در حال برگزاری',
                       url: 'inProgress',
                       type: 'statusCourse',
-                      isLink: true,
-                      page: `/course-category?statusCourse=inProgress`,
                     },
                   ],
                   displayType: 'text',

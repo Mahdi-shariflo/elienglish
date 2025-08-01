@@ -16,66 +16,15 @@ import { useSession } from '@/lib/auth/useSession';
 import DeleteAddress from '@/components/profile/DeleteAddress';
 import { Radio, RadioGroup } from '@heroui/react';
 import Installment from '@/components/checkout/Installment';
-function groupByParent(items: BasketItem[]) {
-  const map = new Map();
-  const result: any[] = [];
-  const parentIdsWithChildren = new Set<string>();
-
-  for (const item of items) {
-    const parentId = item.product?.parent;
-
-    if (parentId) {
-      // parent هنوز اضافه نشده؟
-      if (!map.has(parentId)) {
-        const parentItem = items.find(
-          (i) =>
-            i.product?._id === parentId || i.course?._id === parentId || i.lpas?._id === parentId
-        );
-
-        if (parentItem) {
-          const mainItem = { ...parentItem, children: [] };
-          result.push(mainItem);
-          map.set(parentId, mainItem);
-          parentIdsWithChildren.add(parentId); // علامت‌گذاری اینکه این parent بچه دارد
-        } else {
-          // اگر parent داخل لیست نبود
-          const mainItem = { _id: parentId, children: [] };
-          result.push(mainItem);
-          map.set(parentId, mainItem);
-          parentIdsWithChildren.add(parentId);
-        }
-      }
-
-      map.get(parentId).children.push(item);
-    }
-  }
-
-  // حالا آیتم‌هایی که نه parent هستند و نه زیرمجموعه، به نتیجه اضافه شوند
-  for (const item of items) {
-    const itemId = item.product?._id || item.course?._id || item.lpas?._id;
-
-    // اگر این آیتم parent یک زیرمجموعه است، اضافه نکن
-    if (parentIdsWithChildren.has(itemId)) continue;
-
-    const parentId = item.product?.parent;
-    // اگر خود آیتم زیرمجموعه است، اضافه نکن
-    if (parentId) continue;
-
-    // آیتم مستقل است، اضافه کن
-    const mainItem = { ...item, children: [] };
-    result.push(mainItem);
-  }
-
-  return result;
-}
+import Button from '@/components/common/Button';
+import EditInfo from '@/components/checkout/EditInfo';
+import BacketItems from '@/components/checkout/BacketItems';
 
 const Page = () => {
-  const session = useSession();
   const { data: payment } = useGetPayment();
   const { data } = useGetAddress();
   const { setCheckout, checkout } = useCheckoutStore();
   const { baskets } = useBasket();
-  const groupedItems = groupByParent(baskets ? baskets : []);
   const address = data?.data?.data?.address;
 
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; info: AddressType | null }>({
@@ -103,81 +52,20 @@ const Page = () => {
     setCheckout({ ...checkout, address });
   };
 
-  const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-    },
-    enableReinitialize: true,
-    onSubmit: () => {},
-  });
   const installmentCourses = baskets?.filter(
     (item) => item.type === 'COURSE' && item.course?.isInstallment
   );
 
   const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
-  useEffect(() => {
-    if (session) {
-      formik.setValues({
-        firstName: session?.firstName as string,
-        lastName: session?.lastName as string,
-      });
-    }
-  }, [session]);
+
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>
-      <div className="mt-14 flex w-full flex-col lg:mt-0 lg:gap-10">
-        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
-          <Title title="سبد خرید" />
-          <div className="mt-10 flex flex-col gap-5">
-            {groupedItems?.map((product, idx) => (
-              <div className="rounded-lg border border-gray-200 bg-white shadow-md dark:border-[#505B74] dark:bg-[#172334]">
-                <CardBasket
-                  showDeleteIcon={true}
-                  showAddBasketDialog={false}
-                  showOtherItem={false}
-                  key={idx}
-                  product={
-                    product.type === 'PRODUCT_DIGITAL' || product.type === 'PRODUCT_PHYSICAL'
-                      ? { ...product.product, count: product.count }
-                      : product.type === 'COURSE'
-                        ? product.course
-                        : product.lpas
-                  }
-                />
-                {product?.children && product?.children?.length >= 1 ? (
-                  <div className="border-t border-[#E5EAEF] px-3 dark:border-[#505B74]">
-                    {product?.children?.map((item: any, idx: number) => {
-                      if (!item.product.title) return null;
-                      return (
-                        <CardBasket
-                          classImage="!w-[60px] !min-h-[40px] !min-w-[60px] !h-[40px]"
-                          showTotal={false}
-                          showAddBasketDialog={false}
-                          showOtherItem={false}
-                          key={idx}
-                          product={item?.product}
-                          showDeleteIcon={false}
-                        />
-                      );
-                    })}
-                  </div>
-                ) : null}
-              </div>
-            ))}
-            {/* <CardBasket product={null} /> */}
-          </div>
-        </div>
-        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
-          <Title title="اطلاعات ثبت‌نام کننده" />
-          <div className="mt-10 grid grid-cols-2 gap-4">
-            <Input label={'نام'} formik={formik} name="firstName" />
-            <Input label={'نام خانوادگی'} formik={formik} name="lastName" />
-          </div>
-        </div>
+      <div className="mt-6 flex w-full flex-col gap-10 lg:mt-0">
+        <BacketItems />
+        <EditInfo />
         {isCartPhycial ? (
-          <div className="rounded-lg border border-[#E5EAEF] p-3">
+          <div className="rounded-lg border-[#E5EAEF] dark:border-[#263248] lg:border lg:p-[25px]">
             <Title title="انتخاب آدرس" />
             <div className="mt-10">
               <Address
@@ -192,11 +80,11 @@ const Page = () => {
           </div>
         ) : null}
 
-        <div className="rounded-lg border border-[#E5EAEF] p-3 dark:border-[#505B74]">
+        <div className="rounded-lg border-[#E5EAEF] dark:border-[#263248] lg:border lg:p-[25px]">
           <Title title="ثبت سفارش و پرداخت" />
-          <div className="mt-10">
+          <div className="mt-10 space-y-6">
             {/* online */}
-            <div className="">
+            <div className="cardPayment">
               <RadioGroup
                 value={checkout.selectInstallment}
                 onValueChange={(value) => setCheckout({ ...checkout, selectInstallment: value })}
@@ -223,7 +111,7 @@ const Page = () => {
             {/* installment */}
 
             {installmentCourses && (
-              <div className="mt-4">
+              <div className="cardPayment mt-4">
                 <RadioGroup
                   value={checkout.selectInstallment}
                   onValueChange={(value) => setCheckout({ ...checkout, selectInstallment: value })}
@@ -240,9 +128,6 @@ const Page = () => {
                 </RadioGroup>
                 {checkout.selectInstallment === 'installment' ? (
                   <>
-                    <p className="pt-4 font-medium text-[12px] text-[#6A7890]">
-                      شما با پرداخت اقساطی میتوانید مبلغ دوره مد نظر را در 4 قسط پرداخت کنید.{' '}
-                    </p>
                     <Installment />
                   </>
                 ) : null}

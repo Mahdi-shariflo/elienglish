@@ -14,7 +14,9 @@ type Props = {
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
-  const result = await request({ url: `/course/archive-category?slug=${id}` });
+  const result = await request({
+    url: `/course/archive-category?slug=${id}${searchParamsFilter.statusCourse ? `&statusCourse=${searchParamsFilter.statusCourse}` : ''}`,
+  });
   const product: {
     course: Course[];
     totalPages: number;
@@ -25,19 +27,21 @@ const Page = async ({ searchParams, params }: Props) => {
       _id: idx.toString(),
       title: item.title,
       url: item.url,
-      type: '',
+      type: 'coursType',
       isLink: true,
       page: `/course-category/${item.url}`,
     };
   });
+
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page">
         <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '/courses' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی دوره‌ها"
-            searchParams={searchParamsFilter}
+            // @ts-expect-error error
+            searchParams={{ ...searchParamsFilter, coursType: decodeURIComponent(id) }}
             resultFilter={{
               breadcrumb: [],
               title: '',
@@ -72,13 +76,13 @@ const Page = async ({ searchParams, params }: Props) => {
           />
           <div className="w-full">
             <Sort />
-            <div className="grid w-full gap-4 rounded-lg p-3 dark:bg-[#172334] lg:grid-cols-3 lg:p-5">
+            <div className="grid w-full gap-4 rounded-lg p-2 dark:bg-[#172334] lg:grid-cols-3 lg:p-10">
               {product?.course.map((course, idx) => (
                 <CardProduct
                   url={`/course/${course.url}/`}
-                  classImage="!object-fill"
-                  classNameImage="!w-full !h-[254px] !w-full"
-                  className="!h-[380px] w-full lg:!h-[400px]"
+                  classImage="!object-cover"
+                  classNameImage="!w-full !h-[286px] !w-full"
+                  className="!h-[380px] w-full lg:!h-[460px]"
                   product={course}
                   key={idx}
                 >

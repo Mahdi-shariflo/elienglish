@@ -42,7 +42,7 @@ const Page = async ({ searchParams, params }: Props) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdCategoryMag(blog)) }}
       /> */}
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page">
         <Breadcrumbs
           page={`/category/${decodeURIComponent(id!)}`}
           breadcrumbs={[

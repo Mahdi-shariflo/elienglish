@@ -28,7 +28,7 @@ const CardProduct = ({
   return (
     <Link
       href={url}
-      className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between gap-4 overflow-hidden rounded-lg border-2 border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] dark:border-[#505B74] ${className}`}
+      className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border-2 border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] dark:border-[#505B74] ${className}`}
     >
       <div>
         <Image
@@ -39,7 +39,7 @@ const CardProduct = ({
         />
 
         <p
-          className={`line-clamp-2 px-2 pt-4 font-bold text-[#0B1524] dark:text-white lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[18px]'}`}
+          className={`line-clamp-2 px-2 pt-4 font-demibold text-[14px] text-[#0B1524] dark:text-white lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[18px]'}`}
         >
           {product?.title?.replaceAll('&#038;', '')}
         </p>

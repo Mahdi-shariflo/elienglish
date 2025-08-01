@@ -19,7 +19,7 @@ const Page = async ({ params }: Props) => {
   const course: Course = result?.data?.data?.course;
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}

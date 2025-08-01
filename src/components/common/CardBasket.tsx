@@ -60,10 +60,12 @@ const CardBasket = ({
     <Link
       href={'#'}
       // href={`/product/${product?.urlVar ? product?.urlVar : product.url}/`}
-      className={`flex h-fit w-full items-center justify-between rounded-xl px-4 lg:p-4 ${className}`}
+      className={`grid h-fit w-full grid-cols-2 items-center justify-between gap-4 rounded-xl p-3 lg:flex lg:p-4 ${className}`}
     >
-      <div className="flex w-full flex-[4] items-center gap-3">
-        <div className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] ${classImage}`}>
+      <div className="col-span-2 flex w-full flex-[4] items-center gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
+        <div
+          className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] overflow-hidden rounded-lg ${classImage}`}
+        >
           {product?.thumbnailImage?.url && (
             <Image
               fill
@@ -72,12 +74,14 @@ const CardBasket = ({
             />
           )}
         </div>
-        <p className="line-clamp-2 font-medium text-[16px] dark:text-white">{product?.title}</p>
+        <p className="line-clamp-2 font-medium text-[14px] dark:text-white lg:text-[16px]">
+          {product?.title}
+        </p>
       </div>
-      <div className="flex flex-1 flex-col items-center justify-between gap-5">
+      <div className="flex flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
         <div className="flex items-center gap-1">
-          <p className="font-bold dark:text-white">
+          <p className="font-demibold dark:text-white">
             {Number(
               product?.discountPrice ? product?.discountPrice : product?.price
             ).toLocaleString()}
@@ -86,7 +90,7 @@ const CardBasket = ({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-5">
+      <div className="flex flex-1 flex-col items-center justify-center gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
         <p className="font-medium text-[14px] text-[#8E98A8]">تعداد</p>
         {product?.type === 'physical' ? (
           <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
@@ -97,10 +101,10 @@ const CardBasket = ({
         )}
       </div>
       {showTotal && (
-        <div className="flex flex-1 flex-col items-center justify-between gap-5">
+        <div className="flex flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
           <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
           <div className="flex items-center gap-1">
-            <p className="font-bold dark:text-white">
+            <p className="font-demibold dark:text-white">
               {Number(
                 Number(product?.discountPrice ? product?.discountPrice : product?.price) *
                   (product?.count ? product.count : 1)
@@ -111,9 +115,14 @@ const CardBasket = ({
         </div>
       )}
       {showDeleteIcon && (
-        <div className="flex-1">
-          <Button isPending={isPending} onClick={handleDelete}>
+        <div className="col-span-2 flex-1">
+          <Button
+            className="w-full bg-main bg-opacity-20 lg:w-fit lg:bg-transparent"
+            isPending={isPending}
+            onClick={handleDelete}
+          >
             <Delete_icon />
+            <span>حذف</span>
           </Button>
         </div>
       )}

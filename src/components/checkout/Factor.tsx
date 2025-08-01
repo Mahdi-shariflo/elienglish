@@ -70,9 +70,9 @@ const Factor = () => {
 
   return (
     <>
-      <div className="w-full rounded-lg border border-[#E4E7E9] p-[24px] dark:border-[#505B74]">
+      <div className="w-full rounded-lg border border-[#E4E7E9] p-[25px] dark:border-[#263248]">
         <p className="font-medium text-[18px] text-[#0C0C0C] dark:text-white">جزئیات پرداخت</p>
-        <div className="border-b border-[#E4E7E9] pb-4 dark:border-[#505B74]">
+        <div className="border-b border-[#E4E7E9] pb-4 dark:border-[#263248]">
           <div className="mt-4 space-y-3">
             <div className="flex items-center justify-between">
               <p className="font-regular text-[16px] text-[#616A76] dark:text-[#A8AFB8]">
@@ -119,7 +119,7 @@ const Factor = () => {
                 </div>
               </>
             ) : null}
-            <div className="flex items-center justify-between border-t border-[#E4E7E9] pt-3 dark:border-[#505B74]">
+            <div className="flex items-center justify-between border-t border-[#E4E7E9] pt-3 dark:border-[#263248]">
               <p className="font-regular text-[16px] text-[#0C0C0C] dark:text-[#A8AFB8]">مجموع</p>
               <p className="font-medium text-[16px] text-[#0C0C0C] dark:text-white">
                 {Number(total).toLocaleString()} تومان
@@ -170,7 +170,7 @@ const Factor = () => {
             <Button
               isPending={isPending}
               onClick={() => formik.handleSubmit()}
-              className="w-[100px] min-w-[100px] border text-main dark:border-[#505B74]"
+              className="w-[100px] min-w-[100px] border text-main dark:border-[#263248]"
             >
               {checkoutData?.discountCode ? 'حذف کد' : 'اعمال کد'}
             </Button>
@@ -182,7 +182,7 @@ const Factor = () => {
         <Button onClick={onNextLevel} className="w-fit bg-main px-3 text-white">
           تائید و تکمیل سفارش
         </Button>
-        <div className="flex flex-col items-center justify-between gap-1 border-[#E4E7E9] pt-3 dark:border-[#505B74] lg:border-t">
+        <div className="flex flex-col items-center justify-between gap-1 border-[#E4E7E9] pt-3 dark:border-[#263248] lg:border-t">
           <p className="font-regular text-[16px] text-[#0C0C0C]">مجموع</p>
           <p className="font-medium text-[16px] text-[#0C0C0C]">
             {Number(Number(total)).toLocaleString()} تومان

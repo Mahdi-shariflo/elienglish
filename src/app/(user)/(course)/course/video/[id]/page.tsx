@@ -50,7 +50,7 @@ const Page = async ({ params, searchParams }: Props) => {
 
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
-      <div className="container_page pt-10 lg:pt-32">
+      <div className="container_page">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}

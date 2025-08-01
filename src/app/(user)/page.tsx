@@ -13,7 +13,7 @@ const Page = async () => {
   const data = await request({ url: '/mainpage' });
   const home = data?.data?.data;
   return (
-    <div className="!mb-20 flex min-h-screen flex-col gap-10 pt-[10rem] dark:!bg-[#0B1524] lg:pt-52">
+    <div className="!mb-20 flex min-h-screen flex-col gap-10 dark:!bg-[#0B1524]">
       <Section1 section={home?.section1} />
       <Section2 section={home?.section2} />
       <Section3 section={home?.section3} />

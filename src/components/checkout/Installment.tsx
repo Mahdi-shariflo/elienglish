@@ -25,54 +25,63 @@ const Installment = () => {
   };
 
   return (
-    <div className="mt-3 space-y-4">
-      {installmentCourses?.map((item) => {
-        const course = item.course;
-        const installmentCount = course.installmentCount || 0;
-        const installmentPrice = course.installmentPrice || 0;
-        const today = new Date();
+    <>
+      {installmentCourses?.length === 1 && (
+        <p className="pt-4 font-medium text-[12px] text-[#6A7890]">
+          شما با پرداخت اقساطی میتوانید مبلغ دوره مد نظر را در{' '}
+          {installmentCourses[0]?.course?.installmentCount} قسط پرداخت کنید.
+        </p>
+      )}
 
-        const perInstallment =
-          installmentCount > 0 ? Math.floor(installmentPrice / installmentCount) : 0;
+      <div className="mt-3 space-y-4">
+        {installmentCourses?.map((item) => {
+          const course = item.course;
+          const installmentCount = course.installmentCount || 0;
+          const installmentPrice = course.installmentPrice || 0;
+          const today = new Date();
 
-        return (
-          <div key={item._id}>
-            {Array.from({ length: installmentCount }).map((_, index) => {
-              const installmentDate = getPersianDate(today, index); // تاریخ هر قسط
+          const perInstallment =
+            installmentCount > 0 ? Math.floor(installmentPrice / installmentCount) : 0;
 
-              return (
-                <div key={index} className="flex items-center justify-between pb-4 pt-4">
-                  <div className="flex items-center gap-6">
-                    <span>
-                      {/* آیکون */}
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6 11C5.80222 11 5.60888 11.0586 5.44443 11.1685C..."
-                          fill="#6E3DFF"
-                        />
-                      </svg>
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-[#33435A]">قسط {index + 1}</span>-
-                      <span className="font-medium text-[#33435A]">{installmentDate}</span>
+          return (
+            <div key={item._id}>
+              {Array.from({ length: installmentCount }).map((_, index) => {
+                const installmentDate = getPersianDate(today, index); // تاریخ هر قسط
+
+                return (
+                  <div key={index} className="flex items-center justify-between pb-4 pt-4">
+                    <div className="flex items-center gap-6">
+                      <span>
+                        {/* آیکون */}
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M6 11C5.80222 11 5.60888 11.0586 5.44443 11.1685C..."
+                            fill="#6E3DFF"
+                          />
+                        </svg>
+                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-[#33435A]">قسط {index + 1}</span>-
+                        <span className="font-medium text-[#33435A]">{installmentDate}</span>
+                      </div>
                     </div>
+                    <p className="font-medium text-[#33435A]">
+                      {perInstallment.toLocaleString()} تومان
+                    </p>
                   </div>
-                  <p className="font-medium text-[#33435A]">
-                    {perInstallment.toLocaleString()} تومان
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        );
-      })}
-    </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
