@@ -71,7 +71,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
 
   const visibleTabs = tabItems.filter((tab) => tab.show);
   return (
-    <div className="mt-10 rounded-lg border !border-gray-100 bg-white p-8 dark:!border-[#263248] dark:bg-[#0B1524] lg:mt-4">
+    <div className="mt-10 rounded-lg border !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:mt-4 lg:p-8">
       <div className="flex items-center gap-8 border-b border-[#E5EAEF] pb-1 dark:!border-[#263248]">
         {visibleTabs.map((tab, idx) => (
           <Button
@@ -100,7 +100,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                   break;
               }
             }}
-            className={`!h-[40px] !w-fit !min-w-fit overflow-visible !rounded-none font-demibold text-[14px] after:absolute after:-bottom-1 after:h-1 after:w-full lg:text-[16px] ${select === idx ? 'after:bg-main' : 'border-transparent text-[#172334] dark:text-[#8E98A8]'}`}
+            className={`!h-[40px] !w-fit !min-w-fit overflow-visible !rounded-none font-demibold text-[14px] after:absolute after:-bottom-1 after:h-1 after:w-full after:rounded-lg lg:text-[16px] ${select === idx ? 'after:bg-main' : 'border-transparent text-[#172334] dark:text-[#8E98A8]'}`}
           >
             {tab.name}
           </Button>

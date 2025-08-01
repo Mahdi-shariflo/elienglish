@@ -95,7 +95,7 @@ const Page = async ({ searchParams, params }: Props) => {
               </>
             ) : (
               <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
-                مقاله‌ای یافت نشد
+                محصولی یافت نشد
               </p>
             )}
           </div>

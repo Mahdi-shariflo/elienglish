@@ -6,7 +6,6 @@ import { discountCalculation } from '@/lib/utils';
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import CountdownDiscounts from '@/components/CountdownDiscounts';
 import { Course } from '@/store/types/home';
-import Drop from '@/../public/images/drop.png';
 import PropertiesCourse from '@/components/course/PropertiesCourse';
 import Counter from '@/components/common/Counter';
 import ImageNextjs from 'next/image';
@@ -18,19 +17,19 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
   return (
-    <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
+    <div className="bg-white pb-10 pt-20 dark:bg-[#0B1524] lg:bg-[#f7f7f7] lg:pt-16">
       <div className="container_page">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}
         />
-        <div className="mt-10 flex flex-col items-start gap-7 lg:flex-row">
+        <div className="flex flex-col items-start gap-7 pt-10 lg:flex-row">
           <div className="w-full gap-10 overflow-hidden rounded-lg lg:pb-8">
             <MediaPreview
-              className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#0B1524]"
+              className="!mt-0 border border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-3"
               media={course}
             />
-            <div className="l mt-4 flex items-start rounded-lg border !border-gray-100 bg-white p-4 dark:!border-[#263248] dark:bg-[#0B1524] lg:drop-shadow-sm">
+            <div className="mt-4 flex items-start rounded-lg border !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-4 lg:drop-shadow-sm">
               {/* {course?.thumbnailImage?.url && (
                 <Image 
                 className='!w-[300px] !h-full'
@@ -57,7 +56,7 @@ const Page = async ({ params }: Props) => {
             <MoreInformationCourse course={course} />
           </div>
           <div className="sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
-            <div className="border border-gray-50 bg-white p-8 drop-shadow-sm dark:!border-[#263248] dark:bg-[#0B1524]">
+            <div className="border border-gray-50 bg-white drop-shadow-sm dark:!border-[#263248] dark:bg-[#0B1524] lg:p-8">
               <div className="hidden lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
