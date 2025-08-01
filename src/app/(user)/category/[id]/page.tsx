@@ -36,8 +36,8 @@ const Page = async ({ searchParams, params }: Props) => {
   });
   const blog: { blogs: Blog[]; totalPages: number } = result?.data?.data;
   return (
-    <div className="min-h-[50vh] w-full bg-white pt-14 dark:bg-dark lg:min-h-screen">
-      <div className="container_page pt-10 lg:pt-20">
+    <div className="min-h-[50vh] w-full bg-white dark:bg-dark lg:min-h-screen">
+      <div className="container_page">
         <Breadcrumbs
           page={`/category/${decodeURIComponent(id!)}`}
           breadcrumbs={[

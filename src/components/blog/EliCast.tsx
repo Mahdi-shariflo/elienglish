@@ -67,7 +67,7 @@ const EliCast = ({ delay, blogs }: Props) => {
                 </defs>
               </svg>
             </span>
-            <p className="font-medium text-[24px] text-main">الی کست</p>
+            <p className="font-medium text-[18px] text-main lg:text-[24px]">الی کست</p>
           </div>
           <div className="hidden items-center gap-4 lg:flex">
             <Button>
