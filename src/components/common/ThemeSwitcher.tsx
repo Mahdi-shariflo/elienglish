@@ -23,8 +23,6 @@ export function ThemeSwitcher() {
         document.body.classList.remove('dark');
       }
     }
-
-    location.reload();
   }
 
   return (

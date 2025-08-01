@@ -12,7 +12,7 @@ body {
 
 @layer utilities {
   .container_page {
-    @apply mx-auto w-[95%] max-w-[1440px] md:w-[90%] print:w-full;
+    @apply mx-auto w-[90%] max-w-[1440px] md:w-[90%] print:w-full;
   }
 }
 

@@ -9,8 +9,7 @@ import Cart from './Cart';
 import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
-import Image from 'next/image';
-import TopBanner from '@/../public/images/top-banner.png';
+import TopBanner from './TopBanner';
 const quickLicks = [
   {
     name: 'صفحه اصلی',
@@ -260,12 +259,12 @@ const Header = ({ categories }: Props) => {
   //todo: Change this style to flex-shrink-0
   return (
     <>
-      {/* <Image className="h-[60px] w-full" src={TopBanner} alt="" /> */}
       <header
-        className={`fixed left-0 right-0 z-50 h-fit w-full bg-white pt-2 shadow-header dark:bg-[#0B1524] dark:shadow-darkHeader ${
+        className={`fixed left-0 right-0 z-50 h-fit w-full bg-white shadow-header dark:bg-[#0B1524] dark:shadow-darkHeader ${
           cls === 'yes' ? 'pb-2 lg:pb-4' : 'lg:pb-2'
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >
+        <TopBanner className={`${cls === 'yes' ? '' : 'hidden'}`} />
         <div className={`container_page`}>
           <div
             className={`items-center justify-between ${
@@ -273,13 +272,11 @@ const Header = ({ categories }: Props) => {
             }`}
           >
             <div className="flex items-center gap-4">
-              <ThemeSwitcher />
               <Sidebar />
             </div>
             <Logo className="h-10 w-full" />
             <div className="flex items-center gap-2">
               <UserInformation />
-              <Cart />
             </div>
           </div>
 
@@ -300,12 +297,11 @@ const Header = ({ categories }: Props) => {
           </div>
 
           <div
-            className={`items-center justify-between ${
-              cls === 'yes' ? 'hidden lg:flex' : 'hidden'
+            className={`items-center justify-between transition-all duration-300 ${
+              cls === 'yes' ? 'h-0 opacity-0 lg:flex lg:h-fit lg:opacity-100' : 'h-0 opacity-0'
             }`}
           >
             <div className="flex items-center gap-[24px]">
-              {categories && <CategoryMenu categories={categories} />}
               {quickLicks.map((link, idx) => (
                 <Link className="flex items-center gap-3" href={`${link.src}/`} key={idx}>
                   {/* {link.icon && <span>{link.icon}</span>} */}
@@ -314,11 +310,24 @@ const Header = ({ categories }: Props) => {
                   </span>
                 </Link>
               ))}
-              <div className="h-[32px] w-px bg-[#E4E7E9]" />
               <Link
                 href={'/lpa/'}
-                className="font-medium text-[14px] text-[#7D8793] dark:!text-white"
+                className="flex items-center gap-1 font-medium text-[14px] text-main"
               >
+                <span>
+                  <svg
+                    width="20"
+                    height="21"
+                    viewBox="0 0 20 21"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.3332 8.5587C18.2806 8.40627 18.1849 8.27239 18.0577 8.17328C17.9305 8.07418 17.7772 8.01411 17.6166 8.00037L12.8749 7.3087L10.7499 3.00037C10.6817 2.85947 10.5751 2.74065 10.4425 2.65751C10.3098 2.57437 10.1564 2.53027 9.9999 2.53027C9.84335 2.53027 9.68997 2.57437 9.55733 2.65751C9.42468 2.74065 9.31814 2.85947 9.2499 3.00037L7.1249 7.30037L2.38323 8.00037C2.229 8.02229 2.084 8.087 1.96469 8.18716C1.84538 8.28733 1.75653 8.41893 1.70823 8.56703C1.66402 8.71176 1.66005 8.8658 1.69676 9.01261C1.73346 9.15942 1.80945 9.29347 1.91657 9.40037L5.35823 12.7337L4.5249 17.467C4.49515 17.6233 4.51073 17.7847 4.56979 17.9324C4.62886 18.0801 4.72894 18.2078 4.85823 18.3004C4.98425 18.3905 5.13288 18.4436 5.28744 18.4539C5.442 18.4642 5.59638 18.4313 5.73323 18.3587L9.9999 16.1337L14.2499 18.367C14.3669 18.433 14.4989 18.4675 14.6332 18.467C14.8098 18.4677 14.9819 18.4122 15.1249 18.3087C15.2542 18.2161 15.3543 18.0884 15.4133 17.9407C15.4724 17.7931 15.488 17.6316 15.4582 17.4754L14.6249 12.742L18.0666 9.4087C18.1869 9.30676 18.2758 9.17278 18.323 9.02232C18.3702 8.87186 18.3738 8.71109 18.3332 8.5587ZM13.2082 11.892C13.1105 11.9866 13.0374 12.1036 12.9953 12.2328C12.9531 12.3621 12.9433 12.4997 12.9666 12.6337L13.5666 16.1254L10.4332 14.4587C10.3127 14.3945 10.1782 14.3609 10.0416 14.3609C9.90497 14.3609 9.77047 14.3945 9.6499 14.4587L6.51657 16.1254L7.11657 12.6337C7.13985 12.4997 7.12999 12.3621 7.08787 12.2328C7.04575 12.1036 6.97263 11.9866 6.8749 11.892L4.3749 9.39203L7.88323 8.8837C8.01823 8.86492 8.14656 8.81332 8.25698 8.73341C8.3674 8.6535 8.45653 8.54773 8.51657 8.42537L9.9999 5.25037L11.5666 8.4337C11.6266 8.55606 11.7157 8.66183 11.8262 8.74174C11.9366 8.82165 12.0649 8.87325 12.1999 8.89203L15.7082 9.40037L13.2082 11.892Z"
+                      fill="#6E3DFF"
+                    />
+                  </svg>
+                </span>
                 تعین سطح
               </Link>
             </div>

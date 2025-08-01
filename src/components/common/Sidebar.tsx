@@ -14,6 +14,8 @@ import { CgClose } from 'react-icons/cg';
 import { FcAbout } from 'react-icons/fc';
 import { BiQuestionMark } from 'react-icons/bi';
 import { FaLaptopMedical } from 'react-icons/fa';
+import { ThemeSwitcher } from './ThemeSwitcher';
+import Cart from './header/Cart';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -178,28 +180,41 @@ const Sidebar = () => {
                       category={selectedCategory?.children}
                     />
                   ) : (
-                    // نمایش منوی اصلی
-                    <div className="mt-3 grid grid-cols-2 gap-4">
-                      {menus.map((menu, idx) => (
-                        <div
-                          key={idx}
-                          onClick={
-                            menu?.src!
-                              ? () => {
-                                  onClose();
-                                  router.push(`${menu.src!}/`);
-                                }
-                              : () => handleCategoryClick(menu)
-                          }
-                          className="flex h-[83px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border"
-                        >
-                          <menu.Icon
-                            className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main text-main' : 'text-main'}`}
-                          />
-                          <span className="font-light text-[#4A4A4A]">{menu.title}</span>
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <ThemeSwitcher />
+                        <Cart />
+                      </div>
+                      <div className="mt-5">
+                        <p className="border-b border-gray-200 pb-3 font-medium text-[16px] text-[#4A4A4A] dark:border-[#263248] dark:text-[#8E98A8]">
+                          منوی صفحات
+                        </p>
+                        <div className="mt-5 grid grid-cols-2 gap-4">
+                          {menus.map((menu, idx) => (
+                            <div
+                              key={idx}
+                              onClick={
+                                menu?.src!
+                                  ? () => {
+                                      onClose();
+                                      router.push(`${menu.src!}/`);
+                                    }
+                                  : () => handleCategoryClick(menu)
+                              }
+                              className="flex h-[83px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border dark:border-[#263248]"
+                            >
+                              <menu.Icon
+                                className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main text-main' : 'text-main'}`}
+                              />
+                              <span className="font-light text-[#4A4A4A] dark:text-[#8E98A8]">
+                                {menu.title}
+                              </span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
                     </div>
+                    // نمایش منوی اصلی
                   )}
                 </DrawerBody>
               </>

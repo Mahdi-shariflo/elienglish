@@ -26,9 +26,9 @@ const Section6 = ({ className, section }: Props) => {
   const swiperRef = useRef<SwiperRef | null>(null);
 
   return (
-    <div className="bg-[#F4F6FA] p-4 py-8 dark:bg-transparent">
+    <div className="bg-[#F4F6FA] py-8 dark:bg-transparent lg:p-4">
       <div className={`container_page ${className}`}>
-        <p className="text-center font-bold text-[28px] text-[#172334] dark:text-white">
+        <p className="text-center font-demibold text-[28px] text-[#172334] dark:text-white">
           نظر زبان آموزان الی انگلیش
         </p>
         {Number(section?.comments?.length) >= 1 ? (

@@ -19,6 +19,7 @@ type Props = {
 const Page = async ({ params }: Props) => {
   const { id } = await params;
   const productData = await getProduct(id[0]);
+  console.log(productData, 'hdhdhhdhdhdh');
   // const data = await safeRequest({
   //   url: `/user/comment/location/${productData?.product?._id}`,
   // });

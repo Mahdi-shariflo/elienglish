@@ -232,7 +232,7 @@ const Footer = () => {
         <section className="container_page block bg-transparent pb-5 lg:mb-0">
           <footer>
             {/* 1 */}
-            <div className="flex flex-col items-center justify-between gap-5 border-b border-[#E5EAEF] py-6 lg:flex-row">
+            <div className="flex flex-col items-center justify-between gap-5 border-b border-[#E5EAEF] py-6 dark:border-[#263248] lg:flex-row">
               <div>
                 <p className="font-extrabold text-2xl text-main">خبرنامه</p>
                 <p className="font-light text-[#6A7890]">از آخرین تخفیف‌های سایت باخیر باشید :)</p>
@@ -263,7 +263,7 @@ const Footer = () => {
               {/* right */}
               <div className="flex-1">
                 <div className="lg:w-[400px]">
-                  <Logo className="!justify-start" />
+                  <Logo className="!justify-start lg:!w-[200px]" />
                   <p className="mt-4 font-medium leading-9 text-[#6A7890] dark:text-[#8E98A8]">
                     آکادمی الی انگلیش بستری است برای یادگیری اصولی زبان انگلیسی باتوجه به پتانسیل و
                     نیاز زبان آموزان. هدف ایجاد زیرساخت درست زبانی و توسعه مهارت های زبان انگلیسی

@@ -101,7 +101,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
               </div>
             )}
             {/* btn add cart */}
-            {product.count >= 1 ? (
+            {product?.count >= 1 ? (
               <Counter
                 typeCounter={product.type}
                 typePayload={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}

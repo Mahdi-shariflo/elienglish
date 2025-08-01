@@ -20,7 +20,7 @@ export const saveSession = async (session: Session) => {
     path: '/',
   });
 };
-export async function saveTheme(th: string) {
+export async function saveTheme(th?: string) {
   const cookieStore = await cookies();
   const theme = cookieStore.get('theme');
 

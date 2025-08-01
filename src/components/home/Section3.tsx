@@ -16,13 +16,13 @@ type Props = {
 const Section3 = ({ section }: Props) => {
   if (!Array.isArray(section) || section.length < 1) return;
   return (
-    <div className="flex h-[305px] items-center justify-center bg-[#F4F6FA] dark:bg-transparent">
-      <div className="container_page flex flex-col items-center justify-between gap-10 lg:flex-row">
+    <div className="flex items-center justify-center bg-[#F4F6FA] py-10 dark:bg-transparent lg:h-[358px] lg:py-0">
+      <div className="container_page flex flex-col items-center justify-between gap-5 lg:flex-row lg:gap-10">
         {section.map((item, idx) => (
           <Link
             key={idx}
             href={item?.btn?.href}
-            className="relative flex w-full cursor-pointer flex-col rounded-xl border border-[#E5EAEF] bg-white p-6 transition-all duration-400 hover:border-main hover:bg-transparent dark:border-[#263248] dark:bg-[#172334]"
+            className="relative flex h-[150px] w-full cursor-pointer flex-col justify-center rounded-lg border border-[#E5EAEF] bg-white !p-[15px] transition-all duration-400 after:absolute after:left-1/2 after:top-1/2 after:h-[97%] after:w-[99%] after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-[16px] after:border after:border-transparent after:transition-all after:duration-300 after:content-[''] hover:bg-[#EDE8FC] hover:bg-transparent after:hover:border-main dark:border-[#263248] dark:bg-[#172334] lg:h-[196px] lg:rounded-[16px] lg:!p-[32px]"
           >
             <p className="font-bold text-[20px] dark:text-white">{item.title}</p>
             <div className="mt-3 flex items-center justify-between">

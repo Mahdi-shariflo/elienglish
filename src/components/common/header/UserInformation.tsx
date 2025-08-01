@@ -322,7 +322,11 @@ export default function UserInformation() {
             </svg>
           </Link>
           <span className="hidden lg:block">
-            <Dropdown placement="bottom-start" shouldBlockScroll={false}>
+            <Dropdown
+              className="dark:bg-[#263248]"
+              placement="bottom-start"
+              shouldBlockScroll={false}
+            >
               <DropdownTrigger className="!w-[80px] !min-w-[80px] !max-w-[80px]">
                 <Button className="bg-transparent">
                   <User_Icon />
@@ -352,7 +356,7 @@ export default function UserInformation() {
                         className="flex items-center justify-between font-regular text-[12px] text-[#545A66]"
                         href={`${link.src}/`}
                       >
-                        <span className="flex items-center gap-2 font-regular text-[14px]">
+                        <span className="flex items-center gap-2 font-regular text-[14px] dark:text-[#8E98A8]">
                           {link.icon}
                           {link.name}
                         </span>
