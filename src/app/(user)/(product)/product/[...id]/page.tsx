@@ -32,6 +32,7 @@ const Page = async ({ params }: Props) => {
   });
 
   const comments: Comment[] = data?.data?.data;
+  console.log(comments);
   const selectedProduct: Product = productData.product;
   return (
     <div className="mb-14 lg:mb-0">

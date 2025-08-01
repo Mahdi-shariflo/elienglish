@@ -102,8 +102,9 @@ export const jsonLdProduct = ({ product, comments }: Props) => {
       : null),
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: comments?.ratingStats[0].totalRating,
-      reviewCount: comments?.ratingStats[0].count,
+      ratingValue:
+        Number(comments?.ratingStats.length) >= 1 ? comments?.ratingStats[0].totalRating : 0,
+      reviewCount: Number(comments?.ratingStats.length) >= 1 ? comments?.ratingStats[0].count : 0,
     },
     review: comments?.comments?.map((item) => {
       return {
