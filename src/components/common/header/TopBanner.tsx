@@ -7,7 +7,6 @@ import Image from 'next/image';
 const TopBanner = ({ className }: { className?: string }) => {
   const { data, isSuccess } = useGetTopBanner();
   const topBannerData = data?.data?.data;
-  console.log(topBannerData);
   if (!isSuccess) return null;
   return (
     <Link

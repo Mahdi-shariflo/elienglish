@@ -9,6 +9,7 @@ import Button from '@/components/common/Button';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useCreateContactus } from '@/hooks/contactus/useCreateContactus';
+import { useGetTopBanner } from '@/hooks/settings/useGetTopBanner';
 const contact = [
   {
     title: 'تماس',
@@ -88,6 +89,7 @@ const contact = [
   },
 ];
 const page = () => {
+  const { data } = useGetTopBanner();
   const { mutate, isPending } = useCreateContactus();
   const formik = useFormik({
     initialValues: {
@@ -111,8 +113,12 @@ const page = () => {
       mutate({ data: mainData });
     },
   });
+  const topBannerData = data?.data?.data;
+
   return (
-    <div className="relative mb-32 lg:!pt-[5.1rem]">
+    <div
+      className={`relative mb-32 ${topBannerData ? '-mt-[1.6rem] lg:-mt-[7.2rem]' : '-mt-24 lg:-mt-[10.9rem]'}`}
+    >
       <div className="pt-[25rem]">
         <div className="bg-contact-us absolute top-0 z-50 h-[672px] w-full lg:top-20"></div>
         <div className="container_page relative z-50 rounded-lg bg-white p-3 dark:bg-[#172334] lg:px-14">

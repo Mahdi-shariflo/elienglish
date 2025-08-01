@@ -1,10 +1,11 @@
+'use client';
 import Button from '@/components/common/Button';
 import React from 'react';
 import AboutImage from '@/../public/images/aboutimage.png';
 import Image from 'next/image';
-import SliderAboutus from './SliderAboutus';
 import BgAbout from '@/../public/images/bg-about.png';
 import OurTeam from './OurTeam';
+import { useGetTopBanner } from '@/hooks/settings/useGetTopBanner';
 const info = [
   {
     title: 'محصول',
@@ -24,12 +25,15 @@ const info = [
   },
 ];
 const page = () => {
+  const { data } = useGetTopBanner();
+  const topBannerData = data?.data?.data;
+
   return (
-    <div className="!mb-32">
-      <div className="h-[600px] rounded-br-[225px] bg-main pt-32">
-        <div className="container_page flex items-center justify-between">
+    <div className={`!mb-32 ${topBannerData ? '-mt-7' : '-mt-24'}`}>
+      <div className="bg-main pb-10 pt-10 lg:h-[600px] lg:rounded-br-[225px] lg:pb-0 lg:pt-32">
+        <div className="container_page flex flex-col-reverse items-center justify-between gap-8 lg:flex-row">
           <div className="flex-1">
-            <p className="font-extrabold text-[28px] text-white"> درباره الی انگلیش</p>
+            <p className="font-demibold text-[28px] text-white"> درباره الی انگلیش</p>
             <p className="mt-10 font-medium text-[16px] leading-10 text-white">
               بله، دوره‌های ما به گونه‌ای طراحی شده‌اند که برای تمامی سطوح زبان‌آموزان مناسب باشند.
               از مبتدیانی که هیچ تجربه‌ای در یادگیری زبان انگلیسی ندارند تا پیشرفته‌هایی که به دنبال
@@ -45,10 +49,10 @@ const page = () => {
             <Image className="h-[418px] w-[418px]" src={AboutImage} alt="" />
           </div>
         </div>
-        <div className="container_page flex justify-end gap-4">
+        <div className="container_page mt-10 grid grid-cols-2 gap-4 lg:mt-10 lg:flex lg:justify-end">
           {info.map((item, idx) => (
             <div
-              className="flex h-[123px] w-[163px] flex-col items-center justify-center rounded-lg border border-gray-100 bg-white font-bold text-main"
+              className="flex h-[123px] flex-col items-center justify-center rounded-lg border border-gray-100 bg-white font-demibold text-main lg:w-[163px]"
               key={idx}
             >
               <p className="text-[24px]">{item.count}</p>
@@ -57,10 +61,10 @@ const page = () => {
           ))}
         </div>
       </div>
-      <div className="container_page mt-44 flex items-center justify-between gap-40">
+      <div className="container_page mt-10 flex flex-col-reverse items-center justify-between gap-10 lg:mt-44 lg:flex-row lg:gap-40">
         <div className="flex-1">
-          <p className="font-extrabold text-[28px] text-main">مسیر شروع زبان از اینجاست!</p>
-          <p className="pt-10 font-medium text-[16px] leading-9 text-[#505B74]">
+          <p className="font-demibold text-[28px] text-main">مسیر شروع زبان از اینجاست!</p>
+          <p className="pt-5 text-justify font-medium text-[16px] leading-9 text-[#505B74] lg:pt-10">
             بله، دوره‌های ما به گونه‌ای طراحی شده‌اند که برای تمامی سطوح زبان‌آموزان مناسب باشند. از
             مبتدیانی که هیچ تجربه‌ای در یادگیری زبان انگلیسی ندارند تا پیشرفته‌هایی که به دنبال
             تقویت مهارت‌های خود هستند، می‌توانند از دوره‌های ما بهره‌مند شوند. ما با ارزیابی سطح

@@ -12,7 +12,7 @@ const Page = async ({ searchParams }: Props) => {
   const faq = data?.data?.data;
   console.log(faq);
   return (
-    <div className="mb-32 lg:pt-[5.1rem]">
+    <div className="-mt-7 mb-32">
       <div className="bg-faq flex h-[341px] w-full flex-col items-center justify-center">
         <p className="font-extrabold text-[24px] text-white">موضوع پرسش خود را جستجو کنید</p>
         <Search search={search} />
