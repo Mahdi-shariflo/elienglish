@@ -295,3 +295,14 @@ audio::-webkit-media-controls-panel {
   box-sizing: border-box;
   box-shadow: -2px 1px 15px -1px rgba(113, 113, 113, 0.12);
 }
+
+.style_factor_course {
+  /* Frame 1321315422 */
+
+  box-sizing: border-box;
+
+  background: #ffffff;
+  border: 1px solid #f4f6fa;
+  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
+  border-radius: 12px;
+}

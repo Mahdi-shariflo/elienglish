@@ -9,6 +9,7 @@ import { Course } from '@/store/types/home';
 import PropertiesCourse from '@/components/course/PropertiesCourse';
 import Counter from '@/components/common/Counter';
 import ImageNextjs from 'next/image';
+import Image from '@/components/common/Image';
 type Props = {
   params: Promise<{ [key: string]: string }>;
 };
@@ -17,8 +18,8 @@ const Page = async ({ params }: Props) => {
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
   return (
-    <div className="bg-white pb-10 pt-20 dark:bg-[#0B1524] lg:bg-[#f7f7f7] lg:pt-16">
-      <div className="container_page">
+    <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
+      <div className="container_page pt-14 lg:pt-16">
         <Breadcrumbs
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}
@@ -29,14 +30,14 @@ const Page = async ({ params }: Props) => {
               className="!mt-0 border border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-3"
               media={course}
             />
-            <div className="mt-4 flex items-start rounded-lg border !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-4 lg:drop-shadow-sm">
-              {/* {course?.thumbnailImage?.url && (
-                <Image 
-                className='!w-[300px] !h-full'
-                alt="" 
-                src={`${BASEURL}/${course.thumbnailImage.url}`}
-                 />
-              )} */}
+            <div className="mt-4 flex items-start gap-5 rounded-lg border !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-4 lg:drop-shadow-sm">
+              {course?.thumbnailImage?.url && (
+                <Image
+                  className="hidden !h-[190px] !min-w-[190px] overflow-hidden rounded-lg lg:block"
+                  alt=""
+                  src={`${course.thumbnailImage.url}`}
+                />
+              )}
               <div>
                 <p className="hidden font-demibold text-[18px] text-[#172334] dark:text-white lg:block">
                   درباره دوره{' '}
@@ -55,7 +56,7 @@ const Page = async ({ params }: Props) => {
             </div>
             <MoreInformationCourse course={course} />
           </div>
-          <div className="sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
+          <div className="style_factor_product sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
             <div className="border border-gray-50 bg-white drop-shadow-sm dark:!border-[#263248] dark:bg-[#0B1524] lg:p-8">
               <div className="hidden lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
@@ -70,7 +71,7 @@ const Page = async ({ params }: Props) => {
                   <div className="flex items-center justify-between">
                     {course.discountPrice && (
                       <>
-                        <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[24px] lg:w-[41px] lg:text-[12px]">
+                        <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[32px] lg:w-[54px] lg:text-[12px]">
                           {discountCalculation(course.discountPrice, course.price)}%
                         </span>
                         <p className="font-regular text-[14px] text-[#8E98A8] line-through">
@@ -94,13 +95,16 @@ const Page = async ({ params }: Props) => {
                   </div>
                 </div>
                 {course.discountTime && (
-                  <CountdownDiscounts className="hidden" timer={course?.discountTime} />
+                  <CountdownDiscounts
+                    className="hidden lg:mt-8 lg:block"
+                    timer={course?.discountTime}
+                  />
                 )}
               </div>
               <Counter
                 // @ts-expect-error error
                 product={course}
-                classAddBtn="!mt-4"
+                classAddBtn="!mt-10"
                 typePayload={'COURSE'}
                 typeCounter="course"
               />
