@@ -36,7 +36,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
       {media?.audio?.url ? (
         <audio
           controlsList="nodownload noplaybackrate"
-          className="mt-5 w-full rounded-lg border border-gray-200/60 !bg-transparent font-medium"
+          className="mt-5 w-full rounded-lg border border-gray-200/60 !bg-transparent font-medium dark:!bg-[#172334]"
           controls
         >
           <source src={`${BASEURL}/${media.audio.url}`} type="audio/ogg" />

@@ -63,7 +63,7 @@ const Page = async ({ params }: Props) => {
           ]}
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border border-[#F4F6FA] py-4 dark:!border-[#263248] lg:p-10 lg:px-3 lg:py-8">
+          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border-[#F4F6FA] py-4 dark:!border-[#263248] lg:border lg:p-10 lg:px-3 lg:py-8">
             <div className="flex items-center gap-2">
               <span>
                 <svg

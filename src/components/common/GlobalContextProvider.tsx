@@ -61,7 +61,7 @@ function GlobalContextProvider({ children, theme }: Props) {
     <HeroUIProvider>
       <QueryClientProvider client={queryClient}>
         {/* <SwipeBack/> */}
-        <div className="min-h-screen dark:bg-[#0B1524]">
+        <div className="min-h-screen bg-white dark:bg-[#0B1524]">
           {children}
 
           <ProgressBar
