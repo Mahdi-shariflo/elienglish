@@ -28,7 +28,7 @@ const CardProduct = ({
   return (
     <Link
       href={url}
-      className={`hover:shadow-hover_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-lg border-2 border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] dark:border-[#505B74] ${className}`}
+      className={`hover:shadow-hover_product card_style_product group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-md border-2 border-gray-100 pb-3 drop-shadow-sm transition-all duration-300 hover:scale-[1.01] dark:border-[#263248] lg:rounded-lg ${className}`}
     >
       <div>
         <Image

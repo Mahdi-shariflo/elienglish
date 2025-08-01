@@ -26,7 +26,7 @@ const Page = async ({ params }: Props) => {
   // const comments: Comment[] = data?.data?.data?.comments;
   const selectedProduct: Product = productData.product;
   return (
-    <div className="mb-14 mt-14 lg:mb-0">
+    <div className="mb-14 lg:mb-0">
       {/* <Script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -47,7 +47,7 @@ const Page = async ({ params }: Props) => {
         }}
       /> */}
       <ProductPage
-        breadcrumb={productData.breadcrumb}
+        breadcrumb={[]}
         product={{
           ...selectedProduct,
         }}

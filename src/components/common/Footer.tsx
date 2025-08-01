@@ -264,7 +264,7 @@ const Footer = () => {
               <div className="flex-1">
                 <div className="lg:w-[400px]">
                   <Logo className="!justify-start lg:!w-[200px]" />
-                  <p className="mt-4 font-medium leading-9 text-[#6A7890] dark:text-[#8E98A8]">
+                  <p className="mt-4 text-justify font-medium leading-9 text-[#6A7890] dark:text-[#8E98A8]">
                     آکادمی الی انگلیش بستری است برای یادگیری اصولی زبان انگلیسی باتوجه به پتانسیل و
                     نیاز زبان آموزان. هدف ایجاد زیرساخت درست زبانی و توسعه مهارت های زبان انگلیسی
                     شماست!

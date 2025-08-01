@@ -50,13 +50,13 @@ const Information = ({ product }: { product: Product }) => {
       <div className="container_page lg:!w-full">
         {/* title */}
         <div>
-          <h1 className="line-clamp-2 font-bold text-lg text-[#232429] dark:text-white">
+          <h1 className="line-clamp-2 pb-[16px] font-demibold text-[28px] text-lg text-[#232429] dark:text-white">
             {typeof product?.title === 'string' ? product.title.replaceAll('&#038;', '') : ''}
           </h1>
           {/* length comment , rate , brand */}
           <button
             onClick={goComment}
-            className="flex !w-full items-start justify-start gap-4 !rounded-none border-t border-[#E4E7E9] py-3 font-medium dark:border-[#263248] lg:border-b"
+            className="flex !w-full items-start justify-start gap-4 !rounded-none border-t border-[#E5EAEF] py-[16px] font-medium dark:border-[#263248] lg:border-b"
           >
             <p className="font-medium text-[14px] dark:text-[#8E98A8]">دیدگاه کاربران</p>
             <div className="flex items-center gap-2">
@@ -84,17 +84,14 @@ const Information = ({ product }: { product: Product }) => {
         {/* property */}
         {findainProperties?.length >= 1 && (
           <div className="border-b border-t border-[#E4E7E9] py-4 last:border-none lg:mt-[16px] lg:border-0 lg:py-0">
-            <p className="font-bold text-[14px] text-[#172334] dark:text-[#8E98A8]">
+            <p className="font-demibold text-[20px] text-[#172334] dark:text-[#8E98A8]">
               ویژگی‌های اصلی
             </p>
-            <ul className="mt-[14px] space-y-4">
+            <ul className="mt-[20px] space-y-4">
               {findainProperties.slice(0, 4).map((attribute, idx) => {
                 return (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-5 border-b border-dashed pb-3 lg:border-none"
-                  >
-                    <span className="flex !w-fit min-w-[80px] items-center !gap-3 font-regular text-[14px] text-[#7D8793] lg:min-w-[80px] lg:gap-1">
+                  <li key={idx} className="flex items-start gap-5 border-dashed pb-3 lg:border-b-2">
+                    <span className="flex !w-fit min-w-[150px] items-center !gap-3 font-regular text-[14px] text-[#7D8793] lg:min-w-[166px] lg:gap-1">
                       <span>
                         <svg
                           width="20"
@@ -126,9 +123,11 @@ const Information = ({ product }: { product: Product }) => {
                           </defs>
                         </svg>
                       </span>
-                      <span className="text-[#6A7890]">{attribute?.property}</span>
+                      <span className="font-medium text-[16px] text-[#6A7890]">
+                        {attribute?.property}
+                      </span>
                     </span>
-                    <span className="text-wrap font-regular text-[14px] text-[#0B1524]">
+                    <span className="text-wrap font-medium text-[16px] text-[#0B1524]">
                       {attribute.attribiute}
                     </span>
                   </li>

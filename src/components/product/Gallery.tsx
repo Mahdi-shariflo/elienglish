@@ -30,7 +30,7 @@ const Gallery = ({ product }: { product: Product }) => {
     <>
       <div className="relative h-full w-full lg:w-[435px]">
         <div className="container_page flex flex-col lg:!w-full lg:gap-[11px]">
-          <div className="relative h-fit w-full overflow-hidden rounded-lg border-[#E4E7E9] lg:h-[389px] lg:border">
+          <div className="relative h-fit w-full overflow-hidden rounded-lg lg:h-[389px]">
             <ActionFavShare product={product} />
             {isMobile ? (
               <Swiper
@@ -79,11 +79,11 @@ const Gallery = ({ product }: { product: Product }) => {
                   onClick={() => setSelect(idx)}
                   key={idx}
                   className={`flex !h-[72px] !w-[72px] items-center justify-center rounded-lg border ${
-                    select === idx ? 'border-main' : 'border-[#CCD0D5]'
+                    select === idx ? 'border-main' : 'border-[#E5EAEF]'
                   }`}
                 >
                   <Image
-                    className="h-[70px] w-[70px] overflow-hidden !object-fill"
+                    className="h-[65px] w-[70px] overflow-hidden !object-fill"
                     src={`${img?.url}`}
                     alt=""
                   />

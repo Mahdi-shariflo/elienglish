@@ -49,14 +49,16 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   return (
     <>
       <div
-        className={`drop_shadow_cart bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
+        className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
       >
         <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:p-2">
-          <AddtiveProduct
-            products={product?.children}
-            onToggle={handleToggleAddOn}
-            baskets={baskets}
-          />
+          {product?.children && (
+            <AddtiveProduct
+              products={product?.children}
+              onToggle={handleToggleAddOn}
+              baskets={baskets}
+            />
+          )}
           {showDetail && (
             <div className="hidden items-center gap-3 border-b border-[#E4E7E9] pb-2 dark:border-[#263248] lg:flex">
               <Image
