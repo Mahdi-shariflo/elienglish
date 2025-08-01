@@ -1,5 +1,5 @@
 import MediaPreview from '@/components/blog/MediaPreview';
-import { request } from '@/lib/safeClient';
+import { request, safeRequest } from '@/lib/safeClient';
 import React from 'react';
 import MoreInformationCourse from '@/components/course/MoreInformationCourse';
 import { discountCalculation } from '@/lib/utils';
@@ -17,6 +17,10 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
   const course: Course = result?.data?.data?.course;
+  const data = await safeRequest({
+    url: `/comment/comment-page?pageLocation=${course?._id}`,
+  });
+  const totalRating = data?.data?.data?.ratingStats?.avgRating;
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
       <div className="container_page pt-14 lg:pt-16">
@@ -110,7 +114,7 @@ const Page = async ({ params }: Props) => {
               />
               <div>
                 {/* rate */}
-                {/* <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
+                <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
                   <span>
                     <svg
                       width="20"
@@ -131,12 +135,14 @@ const Page = async ({ params }: Props) => {
                   </span>
                   <div className="flex items-center gap-1 font-medium">
                     <p className="flex items-center gap-1">
-                      <span className="font-bold text-[#33435A] dark:text-[#8E98A8]">4.5</span>
+                      <span className="font-demibold text-[#33435A] dark:text-[#8E98A8]">
+                        {totalRating}
+                      </span>
                       <span className="font-medium text-[#33435A] dark:text-[#8E98A8]">از 5</span>
                     </p>
                     <span className="font-medium text-[#6A7890]">امتیاز زبان آموزان</span>
                   </div>
-                </div> */}
+                </div>
                 {/* property */}
                 <div className="mt-4 hidden lg:block">
                   <p className="font-regular text-[#8E98A8]">اطلاعات دوره</p>

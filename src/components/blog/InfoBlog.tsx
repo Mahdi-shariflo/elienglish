@@ -6,7 +6,7 @@ import { Comments_icon } from '../common/icon';
 
 const InfoBlog = ({ blog }: { blog: Blog }) => {
   const { isSuccess, data } = useGetCommentById(blog._id);
-  const count = isSuccess ? data?.data?.data?.ratingStats[0]?.count : 0;
+  const count = isSuccess ? data?.data?.data?.ratingStats?.count : 0;
 
   return (
     <div>

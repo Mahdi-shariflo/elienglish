@@ -224,7 +224,7 @@ const Counter = ({
                 className="flex h-[24px] w-fit items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white"
                 href={'/cart/'}
               >
-                مشاهده در سبد خرید
+                تکمیل سبد خرید
               </Link>
             )}
           </div>

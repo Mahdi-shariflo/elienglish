@@ -40,13 +40,12 @@ const findWarrantyTitle = function (
 type Props = {
   product: Product;
   comments?: {
-    ratingStats: [
-      {
-        avgRating: number;
-        totalRating: number;
-        count: number;
-      },
-    ];
+    ratingStats: {
+      avgRating: number;
+      totalRating: number;
+      count: number;
+    };
+
     comments: Comment[];
   };
 };
@@ -102,9 +101,8 @@ export const jsonLdProduct = ({ product, comments }: Props) => {
       : null),
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue:
-        Number(comments?.ratingStats.length) >= 1 ? comments?.ratingStats[0].totalRating : 0,
-      reviewCount: Number(comments?.ratingStats.length) >= 1 ? comments?.ratingStats[0].count : 0,
+      ratingValue: comments?.ratingStats?.totalRating,
+      reviewCount: comments?.ratingStats?.count,
     },
     review: comments?.comments?.map((item) => {
       return {

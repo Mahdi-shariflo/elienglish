@@ -24,8 +24,8 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
       // Render a countdown
       return (
         <div className="mx-auto flex !w-fit items-center justify-center gap-0 bg-transparent !p-0 font-medium text-[12px] text-sm !text-[#0C0C0C] transition-all duration-500 hover:!text-main lg:gap-2">
-          <div className="flex flex-col items-center justify-center text-main">
-            <span className="flex items-center gap-1 lg:gap-3">
+          <div className="flex flex-col items-center justify-center pl-1 text-main lg:pl-0">
+            <span className="flex items-center gap-2 lg:gap-2">
               <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {seconds < 10 ? `0${seconds}` : seconds}
               </span>
@@ -33,8 +33,8 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
             </span>
             <p className="ml-2 text-center text-[10px] lg:ml-4 lg:text-[12px]">ثانیه</p>
           </div>
-          <div className="flex flex-col items-center justify-center text-main">
-            <span className="flex items-center gap-1 lg:gap-3">
+          <div className="flex flex-col items-center justify-center pl-1 text-main lg:pl-0">
+            <span className="flex items-center gap-1 lg:gap-2">
               <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {minutes < 10 ? `0${minutes}` : minutes}
               </span>
@@ -42,8 +42,8 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
             </span>
             <p className="ml-3 text-center text-[12px]">دقیقه</p>
           </div>
-          <div className="flex flex-col items-center justify-center text-main">
-            <span className="flex items-center gap-1 lg:gap-3">
+          <div className="flex flex-col items-center justify-center pl-1 text-main lg:pl-0">
+            <span className="flex items-center gap-1 lg:gap-2">
               <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
                 {hours < 10 ? `0${hours}` : hours}
               </span>
