@@ -10,6 +10,7 @@ import BaseDialog from '../common/BaseDialog';
 import SortModal from './SortModal';
 import { sorts } from '@/lib/data';
 import Title from '../common/Title';
+import Loading from '../common/Loading';
 
 type Props = {
   title: string;
@@ -37,7 +38,7 @@ const Filters = ({ searchParams, resultFilter, title }: Props) => {
     type: '',
   });
   const pathname = usePathname();
-  const { setIsPendingCategory } = useGlobalStore();
+  const { setIsPendingCategory, isPendingCategory } = useGlobalStore();
   const [openSort, setOpenSort] = useState(false);
   const onToggleSort = () => setOpenSort(!openSort);
   const router = useRouter();
