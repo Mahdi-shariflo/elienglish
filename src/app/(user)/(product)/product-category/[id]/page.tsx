@@ -15,14 +15,14 @@ const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
   const result = await request({
-    url: `/product/archive-category?slug=${id}${searchParamsFilter.productType ? `productType=${searchParamsFilter.productType}` : ''}`,
+    url: `/product/archive-category?slug=${id}${searchParamsFilter.productType ? `&productType=${searchParamsFilter.productType}` : ''}`,
   });
   const product: {
     products: Product[];
     totalPages: number;
     categories: { title: string; url: string }[];
   } = result?.data?.data;
-  const categories = product.categories.map((item, idx) => {
+  const categories = product?.categories?.map((item, idx) => {
     return {
       _id: idx.toString(),
       title: item.title,
@@ -76,7 +76,7 @@ const Page = async ({ searchParams, params }: Props) => {
           <div className="w-full">
             <Sort />
             <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
-              {product?.products.map((product, idx) => (
+              {product?.products?.map((product, idx) => (
                 <CardProduct
                   url={`/product/${product.url}/`}
                   classImage="!object-contain"
@@ -87,7 +87,7 @@ const Page = async ({ searchParams, params }: Props) => {
                 />
               ))}
             </div>
-            {product?.products.length >= 1 && (
+            {product?.products?.length >= 1 && (
               <Pagination className="mt-10" total={product?.totalPages} />
             )}
           </div>
