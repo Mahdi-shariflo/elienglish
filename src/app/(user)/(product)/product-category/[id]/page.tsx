@@ -14,7 +14,9 @@ type Props = {
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
-  const result = await request({ url: `/product/archive-category?slug=${id}` });
+  const result = await request({
+    url: `/product/archive-category?slug=${id}${searchParamsFilter.productType ? `productType=${searchParamsFilter.productType}` : ''}`,
+  });
   const product: {
     products: Product[];
     totalPages: number;
@@ -25,7 +27,7 @@ const Page = async ({ searchParams, params }: Props) => {
       _id: idx.toString(),
       title: item.title,
       url: item.url,
-      type: '',
+      type: 'productTypeCategory',
       isLink: true,
       page: `/product-category/${item.url}`,
     };
@@ -37,7 +39,8 @@ const Page = async ({ searchParams, params }: Props) => {
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی محصولات"
-            searchParams={searchParamsFilter}
+            // @ts-expect-error error
+            searchParams={{ ...searchParamsFilter, productTypeCategory: decodeURIComponent(id) }}
             resultFilter={{
               breadcrumb: [],
               title: 'دسته بندی محصولات',
@@ -53,14 +56,14 @@ const Page = async ({ searchParams, params }: Props) => {
                     {
                       _id: '1',
                       title: 'فیزیکی',
-                      url: 'dd',
-                      type: '',
+                      url: 'physical',
+                      type: 'productType',
                     },
                     {
                       _id: '2',
                       title: 'دیجیتال',
-                      url: 'dd',
-                      type: '',
+                      url: 'digital',
+                      type: 'productType',
                     },
                   ],
                   displayType: 'text',
@@ -76,8 +79,9 @@ const Page = async ({ searchParams, params }: Props) => {
               {product?.products.map((product, idx) => (
                 <CardProduct
                   url={`/product/${product.url}/`}
-                  classNameImage="mt-5 px-2"
-                  className="!h-[400px] w-full"
+                  classImage="!object-contain"
+                  classNameImage="mt-2 px-2 lg:h-[220px]"
+                  className="!h-[430px] w-full"
                   product={product}
                   key={idx}
                 />

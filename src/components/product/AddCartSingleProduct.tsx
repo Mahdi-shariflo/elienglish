@@ -94,7 +94,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
                     قیمت نهایی
                   </p>
                   <p className="flex items-center justify-end gap-1">
-                    <span className="font-bold text-[20px] text-[#0C0C0C] dark:text-white">
+                    <span className="font-demibold text-[20px] text-[#0C0C0C] dark:text-white">
                       {finalPrice.toLocaleString()}
                     </span>
                     <Toman_Icon />

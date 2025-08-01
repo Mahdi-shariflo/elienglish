@@ -105,8 +105,8 @@ const Page = () => {
         galleryImage: values?.galleryImage?.map((item) => item._id),
         // @ts-expect-error error
         tags: values?.tags.map((item) => item._id),
-        category: values?.category,
-        categories: values?.categories,
+        category: values?.category.map((item: { _id: string }) => item._id).join(','),
+        categories: values?.categories.map((item: { _id: string }) => item._id).join(','),
         price: +removeNumNumeric(values.price),
         discountPrice: +removeNumNumeric(values.discountPrice),
         count: Number(values.count),
