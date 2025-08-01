@@ -4,20 +4,16 @@ import { safeRequest } from '@/lib/safeClient';
 const url = '/user/favorite-product';
 
 export const apiFavorite = {
-  add: (favoriteProduct: string) =>
+  add: (data: unknown) =>
     safeRequest({
-      url: `${url}/add`,
+      url: `/favoriteitem`,
       method: 'POST',
-      data: { favoriteProduct },
+      data,
     }),
   edit: (productId: string, params: Favorites) =>
     safeRequest({
       url,
       method: 'PATCH',
-      params: {
-        productId,
-        ...params,
-      },
     }),
   get: (productId: string) =>
     safeRequest({

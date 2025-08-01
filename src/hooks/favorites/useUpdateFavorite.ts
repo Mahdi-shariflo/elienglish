@@ -19,8 +19,8 @@ export function useUpdateFavorite() {
    * @param {string} productId - ID of the product to update
    * @param {boolean} isFavorite - New favorite status (true = add, false = remove)
    */
-  const updateFavorite = (productId: string, isFavorite: boolean) => {
-    if (isFavorite) addFavorite(productId);
+  const updateFavorite = (productId: string, isFavorite?: boolean) => {
+    if (isFavorite) addFavorite({ itemId: productId, type: 'PRODUCT_PHYSICAL' });
     else removeFavorite(productId);
   };
   return {

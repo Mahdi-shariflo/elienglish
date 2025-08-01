@@ -1,8 +1,5 @@
-import React from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { addToast, Button } from '@heroui/react';
-import { FaAngleLeft } from 'react-icons/fa';
-import Link from 'next/link';
+import { addToast } from '@heroui/react';
 import { apiFavorite } from '@/app/actions/apis/favorites';
 
 export function useAddFavorite() {
@@ -12,24 +9,7 @@ export function useAddFavorite() {
       const { message } = data?.data || {};
       addToast({
         title: message,
-        classNames: {
-          base: 'flex flex-col items-start rounded-lg',
-          icon: 'w-6 h-6 fill-current',
-        },
 
-        endContent: (
-          <Button
-            className="mb-2 mt-3 flex items-center justify-between gap-x-1 underline-offset-2"
-            color={'success'}
-            size="md"
-            variant="light"
-            as={Link}
-            href="/profile/favorite/"
-          >
-            <label>مشاهده</label>
-            <FaAngleLeft />
-          </Button>
-        ),
         color: 'success',
       });
     },

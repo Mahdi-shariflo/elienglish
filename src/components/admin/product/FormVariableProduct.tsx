@@ -48,6 +48,13 @@ const FormVariableProduct = ({ open, setOpen, formik, idx }: Props) => {
         </Media>
 
         <div className="mt-5 grid grid-cols-2 gap-x-3 gap-y-5">
+          <Input
+            formik={formik}
+            classNameInput="!h-[48px] bg-[#f5f6f6]"
+            label={'عنوان'}
+            name={`${baseName}.title`}
+            value={formik.values?.children?.[idx].title}
+          />
           <Select
             label="نوع محصول"
             options={[

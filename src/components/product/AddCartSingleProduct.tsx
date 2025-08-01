@@ -21,7 +21,6 @@ type Props = {
 
 const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   const session = useSession();
-  const { baskets } = useBasket();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
   const { mutate: mutateAdd } = useAddBasket();
   const [selectedAddons, setSelectedAddons] = useState<Product[]>([]);
@@ -52,11 +51,10 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   };
   const mainPrice = product?.discountPrice ?? product?.price ?? 0;
 
-  console.log(selectedAddons, 'selectedAddonsselectedAddonsselectedAddons');
   const addonsTotal = selectedAddons.reduce((sum, item) => {
     const hasDiscount = item.discountPrice && item.discountPrice > 0;
 
-    const basePrice = hasDiscount ? item.discountPrice : (item.price ?? 0) + (product.price ?? 0);
+    const basePrice = hasDiscount ? item.discountPrice : (item.price ?? 0);
 
     const discount = item?.suggestedDiscount ?? 0;
 
@@ -70,7 +68,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   return (
     <>
       <div
-        className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
+        className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 p-4 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
       >
         <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:p-2">
           {product?.children && (
@@ -127,6 +125,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
             {/* دکمه افزودن به سبد خرید */}
             {product?.count >= 1 ? (
               <Counter
+                handleAddToCart={handleAddToCart}
                 typeCounter={product.type}
                 typePayload={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
                 classNameAddBtnName="text-[12px]"
@@ -164,8 +163,89 @@ const AddtiveProduct = ({
   selected: Product[];
 }) => {
   return (
-    <div className="bg-[#EDE8FC] px-2 pt-2 lg:bg-transparent lg:p-0">
-      <div className="mt-4 flex flex-col gap-4 border-[#F4F6FA] px-4 pt-4 dark:border-[#263248] lg:border-t">
+    <div className="rounded-lg bg-[#EDE8FC] p-4 lg:rounded-none lg:bg-transparent lg:p-0">
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.5 9.40094L7.5 4.21094"
+                stroke="#6E3DFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M21 16.0019V8.00186C20.9996 7.65113 20.9071 7.30667 20.7315 7.00302C20.556 6.69937 20.3037 6.44722 20 6.27186L13 2.27186C12.696 2.09632 12.3511 2.00391 12 2.00391C11.6489 2.00391 11.304 2.09632 11 2.27186L4 6.27186C3.69626 6.44722 3.44398 6.69937 3.26846 7.00302C3.09294 7.30667 3.00036 7.65113 3 8.00186V16.0019C3.00036 16.3526 3.09294 16.697 3.26846 17.0007C3.44398 17.3043 3.69626 17.5565 4 17.7319L11 21.7319C11.304 21.9074 11.6489 21.9998 12 21.9998C12.3511 21.9998 12.696 21.9074 13 21.7319L20 17.7319C20.3037 17.5565 20.556 17.3043 20.7315 17.0007C20.9071 16.697 20.9996 16.3526 21 16.0019Z"
+                stroke="#6E3DFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M3.26953 6.96094L11.9995 12.0109L20.7295 6.96094"
+                stroke="#6E3DFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12 22.08V12"
+                stroke="#6E3DFF"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <p className="font-demibold text-[16px] text-[#172334]">سفارشی سازی محصول</p>
+        </div>
+        <span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_9_22658)">
+              <path
+                d="M10.0013 18.3346C14.6037 18.3346 18.3346 14.6037 18.3346 10.0013C18.3346 5.39893 14.6037 1.66797 10.0013 1.66797C5.39893 1.66797 1.66797 5.39893 1.66797 10.0013C1.66797 14.6037 5.39893 18.3346 10.0013 18.3346Z"
+                stroke="#8E98A8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 13.332H10.0083"
+                stroke="#8E98A8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 6.66797V10.0013"
+                stroke="#8E98A8"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_9_22658">
+                <rect width="20" height="20" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </span>
+      </div>
+      <div className="mt-4 flex flex-col gap-4 pt-4 dark:border-[#263248]">
         {products?.map((item, idx) => {
           const isChecked = selected.some((p) => p._id === item._id);
 
@@ -179,6 +259,7 @@ const AddtiveProduct = ({
                 isSelected={isChecked}
                 onValueChange={() => onToggle(item)}
                 classNames={{
+                  base: '!px-2',
                   label:
                     'pr-3 text-[14px] w-[180px] overflow-hidden text-ellipsis  whitespace-nowrap dark:text-[#8E98A8] !font-regular text-[#0C0C0C]',
                   wrapper: 'after:!bg-main',
@@ -186,9 +267,11 @@ const AddtiveProduct = ({
               >
                 {item.title}
               </Checkbox>
-              <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
-                {discountCalculation(item.discountPrice, item.price)}%
-              </span>
+              {item.discountPrice !== 0 && (
+                <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
+                  {discountCalculation(item.discountPrice, item.price)}%
+                </span>
+              )}
             </div>
           );
         })}

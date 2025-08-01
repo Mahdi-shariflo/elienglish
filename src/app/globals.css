@@ -290,18 +290,8 @@ audio::-webkit-media-controls-panel {
   flex-grow: 0;
 }
 
-.card_style_product {
-  /* Frame 2147225945 */
-
-  border: 1.5px solid #f4f6fa;
-  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
-  filter: drop-shadow(0px 23.2759px 38.7931px rgba(0, 0, 0, 0.04));
-  border-radius: 12px;
-}
-
 .style_factor_product {
   /* Frame 1321315422 */
   box-sizing: border-box;
-  background: #ffffff;
-  box-shadow: -2px 2px 15px -1px rgba(113, 113, 113, 0.12);
+  box-shadow: -2px 1px 15px -1px rgba(113, 113, 113, 0.12);
 }

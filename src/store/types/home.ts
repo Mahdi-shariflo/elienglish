@@ -32,6 +32,9 @@ export type Category = {
 };
 
 export type Product = {
+  basketItems: {
+    count: number;
+  };
   suggestedDiscount?: number;
   canonicalurl?: string;
   lessons: string;

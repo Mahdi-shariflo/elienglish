@@ -24,6 +24,7 @@ type Props = {
   showAddBasketDialog?: boolean;
   showDeleteIcon?: boolean;
   showBasketIcon?: boolean;
+  handleAddToCart?: () => void;
 };
 const Counter = ({
   classNameAddBtnName,
@@ -37,6 +38,7 @@ const Counter = ({
   typePayload,
   typeCounter,
   classLinkCart,
+  handleAddToCart,
 }: Props) => {
   const session = useSession();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
@@ -67,8 +69,11 @@ const Counter = ({
     //  if(Number(productIsBasket?.count) >= product.minCart) return toast.error(``)
     if (Number(product.count) <= Number(productIsBasket?.count))
       return addToast({ title: `موجودی محصول کمتر از تعداد انتخابی شما است.`, color: 'danger' });
-
-    mutate({ itemId: product._id, type: typePayload });
+    if (handleAddToCart) {
+      handleAddToCart();
+    } else {
+      mutate({ itemId: product._id, type: typePayload });
+    }
   };
   const descrement = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     if (!session?.accessToken) return setOpenNeedLogin(true);

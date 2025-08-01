@@ -96,7 +96,7 @@ const CardBasket = ({
           <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
         ) : (
           <p className="font-medium text-[14px] text-[#8E98A8] dark:text-white">
-            {product?.count ? product.count : 1}
+            {product?.basketItems ? product?.basketItems?.count : 1}
           </p>
         )}
       </div>
@@ -122,7 +122,7 @@ const CardBasket = ({
             onClick={handleDelete}
           >
             <Delete_icon />
-            <span>حذف</span>
+            <span className="lg:hidden">حذف</span>
           </Button>
         </div>
       )}

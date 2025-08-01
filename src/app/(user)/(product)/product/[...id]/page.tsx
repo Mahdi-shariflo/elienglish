@@ -30,10 +30,10 @@ const Page = async ({ params }: Props) => {
   const data = await safeRequest({
     url: `/comment/comment-page?pageLocation=${productData?.product?._id}`,
   });
-
   const comments: Comment[] = data?.data?.data;
-  console.log(comments);
+
   const selectedProduct: Product = productData.product;
+
   return (
     <div className="mb-14 lg:mb-0">
       <Script
@@ -59,13 +59,12 @@ const Page = async ({ params }: Props) => {
         }}
       />
       <ProductPage
-        breadcrumb={[]}
         product={{
           ...selectedProduct,
         }}
         id={id}
       >
-        <div className="mt-8 space-y-5 px-4 lg:w-[288px] lg:min-w-[288px] lg:px-0">
+        <div className="sticky top-20 mt-8 space-y-5 px-4 lg:w-[288px] lg:min-w-[288px] lg:px-0">
           <AddCartSingleProduct className="hidden lg:block" product={selectedProduct} />
 
           {/* tags */}
@@ -166,6 +165,7 @@ const Page = async ({ params }: Props) => {
               بودم اما نهایتش آخرهای دوره پیش دانشگاهی تو دو هفته آخر تغییر رشته دادم ...
             </p>
           </div>
+          <AddCartSingleProduct className="hidden lg:block" product={selectedProduct} />
         </div>
         <AddCartSingleProduct
           product={selectedProduct}
