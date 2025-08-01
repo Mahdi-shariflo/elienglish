@@ -39,7 +39,16 @@ const findWarrantyTitle = function (
 
 type Props = {
   product: Product;
-  comments?: Comment[];
+  comments?: {
+    ratingStats: [
+      {
+        avgRating: number;
+        totalRating: number;
+        count: number;
+      },
+    ];
+    comments: Comment[];
+  };
 };
 
 export const sortBreadcumb = (breadcrumb: { order: number; title: string; url: string }[]) => {
@@ -93,24 +102,24 @@ export const jsonLdProduct = ({ product, comments }: Props) => {
       : null),
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.6',
-      reviewCount: '10',
+      ratingValue: comments?.ratingStats[0].totalRating,
+      reviewCount: comments?.ratingStats[0].count,
     },
-    review: [
-      // {
-      //   '@type': 'Review',
-      //   reviewRating: {
-      //     '@type': 'Rating',
-      //     ratingValue: '5',
-      //     bestRating: '5',
-      //   },
-      //   author: {
-      //     '@type': 'Person',
-      //     name: 'علی رضایی',
-      //   },
-      //   reviewBody: 'گوشی بسیار عالی و با کیفیتی هست، پیشنهاد می‌کنم!',
-      // },
-    ],
+    review: comments?.comments?.map((item) => {
+      return {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: item.rating,
+          bestRating: '5',
+        },
+        author: {
+          '@type': 'Person',
+          name: `${item.author.firstName} ${item.author.lastName}`,
+        },
+        reviewBody: item.content,
+      };
+    }),
   };
 };
 

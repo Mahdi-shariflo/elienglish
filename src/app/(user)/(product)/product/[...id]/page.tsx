@@ -52,7 +52,7 @@ const Page = async ({ params }: Props) => {
             jsonLdProduct({
               product: selectedProduct,
               // @ts-expect-error error
-              comments: comments.ratingStats[0],
+              comments: comments,
             })
           ),
         }}
