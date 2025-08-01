@@ -73,10 +73,10 @@ const Verify = () => {
 
   return (
     <Suspense>
-      <div className="mx-auto flex h-[56vh] w-fit flex-col justify-between rounded-xl p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit">
+      <div className="mx-auto flex h-fit w-fit flex-col justify-between rounded-xl p-2 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:p-5">
         <form
           onSubmit={formik.handleSubmit}
-          className="mx-auto flex flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
+          className="mx-auto flex w-full flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
         >
           <div className="w-full">
             <h1 className="font-bold text-[28px] text-primary dark:text-[#E5EAEF]">
@@ -94,7 +94,7 @@ const Verify = () => {
                   base: '!mx-auto  mt-5',
                   segmentWrapper: '!flex gap-3 lg:gap-3 justify-between',
                   segment:
-                    '!w-[53px] font-regular !h-[48px] data-[has-value=true]:!bg-main data-[has-value=true]:!text-white !bg-[#F4F6FA] dark:!bg-[#0B1524] border border-transparent data-[active=true]:border-[#6E3DFF] data-[active=true]:!bg-[#F4F6FA] data-[active=true]:!text-block',
+                    'lg:!w-[53px] font-regular !h-[48px] data-[has-value=true]:!bg-main data-[has-value=true]:!text-white !bg-[#F4F6FA] dark:!bg-[#0B1524] border border-transparent data-[active=true]:border-[#6E3DFF] data-[active=true]:!bg-[#F4F6FA] data-[active=true]:!text-block',
                 }}
                 name="code"
                 onValueChange={(e) => formik.setFieldValue('code', e)}
