@@ -177,7 +177,7 @@ hr {
 }
 
 .container_des_category h1 {
-  @apply py-4 font-demibold_en_num !text-[23m] dark:text-white;
+  @apply py-4 font-demibold_en_num !text-[2em] dark:text-white;
 }
 
 /* معمولاً 32px */

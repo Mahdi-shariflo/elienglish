@@ -60,6 +60,7 @@ const BacketItems = () => {
   const { baskets } = useBasket();
 
   const groupedItems = groupByParent(baskets ? baskets : []);
+  console.log(groupedItems, 'groupedItemsgroupedItemsgroupedItems');
   return (
     <div className="rounded-lg border-[#E5EAEF] dark:border-[#263248] lg:border lg:p-[25px]">
       <Title title="سبد خرید" />

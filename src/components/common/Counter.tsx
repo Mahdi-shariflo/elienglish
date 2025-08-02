@@ -91,7 +91,7 @@ const Counter = ({
             className={`mt-3 flex h-[44px] w-full items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white ${classLinkCart}`}
             href={'/checkout/'}
           >
-            موجود در سبد خرید شما
+            تکمیل سبد خرید
           </Link>
         ) : (
           <div className={cn(container_Class)}>
@@ -236,7 +236,11 @@ const Counter = ({
             if (!session?.accessToken) return setOpenNeedLogin(true);
             e.preventDefault();
             e.stopPropagation();
-            mutate({ itemId: product._id, type: typePayload });
+            if (handleAddToCart) {
+              handleAddToCart();
+            } else {
+              mutate({ itemId: product._id, type: typePayload });
+            }
           }}
           className={`flex h-[36px] min-w-fit items-center justify-center gap-2 rounded-lg bg-main px-3 font-medium text-white lg:h-[48px] lg:w-full ${classAddBtn}`}
         >

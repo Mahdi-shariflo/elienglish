@@ -19,46 +19,44 @@ type Props = {
   showAddBasketDialog?: boolean;
   showDeleteIcon?: boolean;
 };
-const CardBasket = ({
-  product,
-  className,
-  classImage,
-  showTotal = true,
-  showDeleteIcon,
-}: Props) => {
+const CardBasket = ({ product, className, classImage, showTotal = true }: Props) => {
   const { baskets } = useBasket();
-  const { mutate, isPending } = useRemoveBasket();
-  const handleDelete = () => {
-    // والد یا فرزند بودن رو تشخیص بده
-    const isChild = !!product.parent; // اگر parent داره، یعنی فرزنده
+  const { mutate } = useRemoveBasket();
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // @ts-expect-error error
+    const isChild = product?.isChild === true;
+    // @ts-expect-error error
+    const isParent = product?.isParent === true;
+
+    console.log('isChild:', isChild);
+    console.log('isParent:', isParent);
 
     if (isChild) {
-      // اینجا می‌تونی لیست سبد خرید رو چک کنی و بررسی کنی آیا فقط همین یک فرزند داره یا نه
-      // باید `baskets` و `groupedItems` رو به این کامپوننت پاس بدی یا از استور بگیری
-
-      // مثلاً:
       const parentId = product.parent;
       const siblings = baskets.filter((item) => item.product?.parent === parentId);
 
       if (siblings.length <= 1) {
-        // یعنی این تنها بچه‌س، پس خودش و والد رو حذف کن
         mutate({ id: product._id });
         const parentItem = baskets.find((item) => item.product?._id === parentId);
         if (parentItem) mutate({ id: parentItem.product._id });
       } else {
         mutate({ id: product._id });
       }
-    } else {
-      // آیتم والد هست، پس باید خودش و childrenهاش حذف بشن
+    } else if (isParent) {
       mutate({ id: product._id });
       const children = baskets.filter((item) => item.product?.parent === product._id);
       children.forEach((child) => mutate({ id: child._id }));
+    } else {
+      // اگر نه والد نه فرزند باشه (مورد خاص)
+      mutate({ id: product._id });
     }
   };
 
   return (
     <Link
-      href={'#'}
+      href={`${product?.type === 'physical' || product?.type === 'digital' ? `/product/${product.url}` : product?.type === 'virtual' || product?.type === 'inPerson' ? `/course/${product?.url}` : `/lpa`}`}
       // href={`/product/${product?.urlVar ? product?.urlVar : product.url}/`}
       className={`grid h-fit w-full grid-cols-2 items-center justify-between gap-4 rounded-xl p-3 lg:flex lg:p-4 ${className}`}
     >
@@ -66,13 +64,13 @@ const CardBasket = ({
         <div
           className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] overflow-hidden rounded-lg ${classImage}`}
         >
-          {product?.thumbnailImage?.url && (
+          {product?.thumbnailImage?.url || product?.teacherProfile ? (
             <Image
               fill
               src={`${product?.thumbnailImage?.url ? `${BASEURL}/${product.thumbnailImage.url}` : product?.teacherProfile}`}
               alt=""
             />
-          )}
+          ) : null}
         </div>
         <p className="line-clamp-2 font-medium text-[14px] dark:text-white lg:text-[16px]">
           {product?.title}
@@ -114,18 +112,17 @@ const CardBasket = ({
           </div>
         </div>
       )}
-      {showDeleteIcon && (
-        <div className="col-span-2 flex-1">
-          <Button
+      {
+        <div className="col-span-2 flex flex-1 items-center justify-center">
+          <button
             className="w-full bg-main bg-opacity-20 lg:w-fit lg:bg-transparent"
-            isPending={isPending}
             onClick={handleDelete}
           >
             <Delete_icon />
             <span className="lg:hidden">حذف</span>
-          </Button>
+          </button>
         </div>
-      )}
+      }
     </Link>
   );
 };

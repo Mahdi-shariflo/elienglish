@@ -34,13 +34,11 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
 
   const handleAddToCart = () => {
     if (!session?.accessToken) return setOpenNeedLogin(true);
-
     // افزودن محصول اصلی
     mutateAdd({
       itemId: product._id,
       type: 'PRODUCT_PHYSICAL',
     });
-
     // افزودن افزودنی‌ها
     selectedAddons.forEach((item) => {
       mutateAdd({

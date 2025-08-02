@@ -111,7 +111,7 @@ const Page = () => {
             {/* installment */}
 
             {installmentCourses && (
-              <div className="cardPayment mt-4">
+              <div className="cardPayment mt-4 w-full">
                 <RadioGroup
                   value={checkout.selectInstallment}
                   onValueChange={(value) => setCheckout({ ...checkout, selectInstallment: value })}

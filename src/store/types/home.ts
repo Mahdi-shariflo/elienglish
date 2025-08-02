@@ -34,6 +34,7 @@ export type Category = {
 export type Product = {
   basketItems: {
     count: number;
+    type: string;
   };
   suggestedDiscount?: number;
   canonicalurl?: string;
