@@ -18,7 +18,6 @@ const Page = async ({ searchParams }: Props) => {
     filterCourse.append(decodeURIComponent(key), decodeURIComponent(value as string));
   }
   const newQueryString = filterCourse.toString();
-
   const result = await request({ url: `/course/main?${newQueryString}` });
   const product: {
     course: Course[];
@@ -60,16 +59,12 @@ const Page = async ({ searchParams }: Props) => {
                       title: 'تکمیل شده',
                       url: 'completed',
                       type: 'statusCourse',
-                      isLink: true,
-                      page: `/course-category?statusCourse=completed`,
                     },
                     {
                       _id: '2',
                       title: 'در حال برگزاری',
                       url: 'inProgress',
                       type: 'statusCourse',
-                      isLink: true,
-                      page: `/course-category?statusCourse=inProgress`,
                     },
                   ],
                   displayType: 'text',

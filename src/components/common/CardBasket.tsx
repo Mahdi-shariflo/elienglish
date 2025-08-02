@@ -4,7 +4,6 @@ import Counter from './Counter';
 import { Product } from '@/store/types/home';
 import { Delete_icon, Toman_Icon } from './icon';
 import Image from 'next/image';
-import Button from './Button';
 import { BASEURL } from '@/lib/variable';
 import { useRemoveBasket } from '@/hooks/basket/useRemoveBasket';
 import useBasket from '@/hooks/basket/useBasket';

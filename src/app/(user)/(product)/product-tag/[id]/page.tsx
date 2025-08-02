@@ -6,6 +6,7 @@ import { request } from '@/lib/safeClient';
 import { Product } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
+import SelectedFilterProduct from '@/components/product/SelectedFilterProduct';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string }>;
@@ -73,31 +74,34 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="w-full">
-            <Sort />
-            {product?.products.length >= 1 ? (
-              <>
-                <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
-                  {product?.products?.map((product, idx) => (
-                    <CardProduct
-                      url={`/product/${product.url}/`}
-                      classImage="!object-contain"
-                      classNameImage="mt-2 px-2 lg:h-[220px]"
-                      className="!h-[430px] w-full"
-                      product={product}
-                      key={idx}
-                    />
-                  ))}
-                </div>
-                {product?.products?.length >= 1 && (
-                  <Pagination className="mt-10" total={product?.totalPages} />
-                )}
-              </>
-            ) : (
-              <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
-                مقاله‌ای یافت نشد
-              </p>
-            )}
+          <div className="w-full flex-1">
+            <SelectedFilterProduct />
+            <div className="mt-5 w-full">
+              {Number(product?.products?.length) <= 0 ? (
+                <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
+                  محصولی یافت نشد
+                </p>
+              ) : (
+                <>
+                  <Sort />
+                  <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
+                    {product?.products?.map((product, idx) => (
+                      <CardProduct
+                        url={`/product/${product.url}/`}
+                        classImage="!object-contain"
+                        classNameImage="mt-2 px-2 lg:h-[220px]"
+                        className="!h-[430px] w-full"
+                        product={product}
+                        key={idx}
+                      />
+                    ))}
+                  </div>
+                  {product?.products?.length >= 1 && (
+                    <Pagination className="mt-10" total={product?.totalPages} />
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

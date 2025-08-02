@@ -62,14 +62,14 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   }, 0);
 
   const finalPrice = mainPrice + addonsTotal;
-
+  console.log(product?.children, 'product?.childrenproduct?.childrenproduct?.children');
   return (
     <>
       <div
         className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 p-4 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
       >
         <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:p-2">
-          {product?.children && (
+          {Number(product?.children.length) >= 1 && (
             <AddtiveProduct
               products={product?.children}
               onToggle={handleSelectAddon}
@@ -90,7 +90,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
             </div>
           )}
 
-          <div className="mt-2 flex w-full flex-row-reverse items-center justify-between border-[#F4F6FA] px-[20px] !pt-4 dark:border-[#263248] lg:mt-5 lg:flex-col lg:border-t lg:px-0">
+          <div className="flex w-full flex-row-reverse items-center justify-between border-[#F4F6FA] px-[20px] !pt-4 dark:border-[#263248] lg:flex-col lg:px-0">
             {product?.count < 1 ? null : (
               <div className="w-full">
                 <div className="flex items-center justify-end gap-2">
