@@ -203,9 +203,7 @@ const Sidebar = () => {
                               }
                               className="flex h-[83px] w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border dark:border-[#263248]"
                             >
-                              <menu.Icon
-                                className={`!h-7 !w-7 ${menu.src === '/' ? 'stroke-main text-main' : 'text-main'}`}
-                              />
+                              <menu.Icon className={`!h-7 !w-7 stroke-main text-main`} />
                               <span className="font-light text-[#4A4A4A] dark:text-[#8E98A8]">
                                 {menu.title}
                               </span>
