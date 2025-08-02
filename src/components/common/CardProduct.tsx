@@ -39,7 +39,7 @@ const CardProduct = ({
         />
 
         <p
-          className={`line-clamp-2 px-4 pt-4 font-demibold text-[14px] text-[#0B1524] dark:text-white lg:px-6 lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[16px]'}`}
+          className={`line-clamp-2 px-4 pt-1 font-demibold text-[14px] text-[#0B1524] dark:text-white lg:px-6 lg:pt-4 lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[16px]'}`}
         >
           {product?.title?.replaceAll('&#038;', '')}
         </p>

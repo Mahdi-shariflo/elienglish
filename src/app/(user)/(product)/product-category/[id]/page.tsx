@@ -15,8 +15,10 @@ type Props = {
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
+  // @ts-expect-error error
+  const querySearchParams = buildQueryFromSearchParams(searchParamsFilter);
   const result = await request({
-    url: `/product/archive-category?slug=${id}${searchParamsFilter.productType ? `&productType=${searchParamsFilter.productType}` : ''}`,
+    url: `/product/archive-category?slug=${id}&${querySearchParams}`,
   });
   const product: {
     products: Product[];
@@ -84,13 +86,13 @@ const Page = async ({ searchParams, params }: Props) => {
               ) : (
                 <>
                   <Sort />
-                  <div className="grid w-full gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
+                  <div className="grid w-full grid-cols-2 gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
                     {product?.products?.map((product, idx) => (
                       <CardProduct
                         url={`/product/${product.url}/`}
                         classImage="!object-contain"
-                        classNameImage="mt-2 px-2 lg:h-[220px]"
-                        className="!h-[430px] w-full"
+                        classNameImage="mt-2 px-2 w-full !h-[200px] lg:!h-[220px]"
+                        className="!h-[340px] w-full lg:!h-[400px]"
                         product={product}
                         key={idx}
                       />

@@ -18,3 +18,18 @@ export const dangerousCharsPattern = /[.,،!?'"()@#-]/g;
 
 export const allPatternNum = /^[0-9\u06F0-\u06F9]+$/;
 export const AllowNumAndPer = /^[\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 0-9\-'‌]+$/;
+
+export function buildQueryFromSearchParams(searchParams: { [key: string]: string }): string {
+  const filterCourse = new URLSearchParams();
+
+  const entries =
+    searchParams instanceof URLSearchParams
+      ? Array.from(searchParams.entries())
+      : Object.entries(searchParams);
+
+  for (const [key, value] of entries) {
+    filterCourse.append(decodeURIComponent(key), decodeURIComponent(value));
+  }
+
+  return filterCourse.toString();
+}

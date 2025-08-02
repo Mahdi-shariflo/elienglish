@@ -15,8 +15,10 @@ type Props = {
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
+  // @ts-expect-error error
+  const querySearchParams = buildQueryFromSearchParams(searchParamsFilter);
   const result = await request({
-    url: `/course/archive-tag?slug=${id}${searchParamsFilter.statusCourse ? `&statusCourse=${searchParamsFilter.statusCourse}` : ''}`,
+    url: `/course/archive-tag?slug=${id}&${querySearchParams}`,
   });
   const product: {
     course: Course[];
