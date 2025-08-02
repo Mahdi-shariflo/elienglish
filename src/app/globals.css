@@ -86,6 +86,10 @@ input[type='number'] {
   font-family: 'regular';
   src: url('../../public/fonts/IRANYekanX/Farsinumerals/IRANYekanXFaNum-Regular.ttf');
 }
+@font-face {
+  font-family: 'regular_en_num';
+  src: url('../../public/fonts/IRANYekanX/IRANYekanXfamily/IRANYekanX-Regular.ttf');
+}
 
 @font-face {
   font-family: 'light';
@@ -100,6 +104,10 @@ input[type='number'] {
 @font-face {
   font-family: 'demibold';
   src: url('../../public/fonts/IRANYekanX/Farsinumerals/IRANYekanXFaNum-DemiBold.ttf');
+}
+@font-face {
+  font-family: 'demibold_en_num';
+  src: url('../../public/fonts/IRANYekanX/IRANYekanXfamily/IRANYekanX-DemiBold.ttf');
 }
 @font-face {
   font-family: 'thin';
@@ -169,32 +177,32 @@ hr {
 }
 
 .container_des_category h1 {
-  @apply py-4 font-extrabold !text-[23m] dark:text-white;
+  @apply py-4 font-demibold_en_num !text-[23m] dark:text-white;
 }
 
 /* معمولاً 32px */
 .container_des_category h2 {
-  @apply py-4 !font-extrabold text-[1.5em] dark:text-white;
+  @apply py-4 !font-demibold_en_num text-[1.5em] dark:text-white;
 }
 
 /* معمولاً 24px */
 .container_des_category h3 {
-  @apply py-4 font-bold text-[1.17em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[1.17em] dark:text-white;
 }
 
 /* معمولاً 18.72px */
 .container_des_category h4 {
-  @apply py-4 font-bold text-[1] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[1] dark:text-white;
 }
 
 /* معمولاً 16px */
 .container_des_category h5 {
-  @apply py-4 font-bold text-[0.83em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[0.83em] dark:text-white;
 }
 
 /* معمولاً 13.28px */
 .container_des_category h6 {
-  @apply py-4 font-bold text-[0.67em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[0.67em] dark:text-white;
 }
 
 .container_des_category * {

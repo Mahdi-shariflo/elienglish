@@ -32,6 +32,8 @@ export default {
       showPagination:"0px 12px 16px 0px #6E3DFF33"
       },
       fontFamily: {
+        "demibold_en_num":"demibold_en_num",
+        regular_en_num:"regular_en_num",
         "black":"black",
         extrablack:"extrablack",
         bold:"bold",

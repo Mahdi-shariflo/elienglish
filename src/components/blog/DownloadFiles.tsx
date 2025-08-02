@@ -30,7 +30,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                 />
               </svg>
             </span>
-            <p className="flex flex-wrap items-center gap-2 font-medium dark:text-white lg:gap-0">
+            <p className="hidden flex-wrap items-center gap-2 font-medium dark:text-white lg:flex lg:gap-0">
               <span className="text-[14px] lg:text-[16px]">
                 برای دانلود فایل‌های پیوست این مقاله لطفا{' '}
               </span>
@@ -42,6 +42,9 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                 ثبت نام
               </Link>
               <span className="text-[14px] lg:text-[16px]">کنید.</span>
+            </p>
+            <p className="font-medium dark:text-white lg:hidden">
+              برای دانلود فایل پیوست لطفا وارد شوید
             </p>
           </div>
         ) : (

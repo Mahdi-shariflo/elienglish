@@ -44,36 +44,9 @@ const Description = ({ blog }: { blog: Blog }) => {
             <Accordion defaultSelectedKeys={['0']}>
               <AccordionItem
                 key={'0'}
-                indicator={
-                  <svg
-                    className="rotate-90 stroke-[#6A7890] dark:stroke-white"
-                    width="24"
-                    height="25"
-                    viewBox="0 0 24 25"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clip-path="url(#clip0_1223_16012)">
-                      <path
-                        d="M6.85547 12.125H17.1412"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M17.9983 0.982422H5.99833C3.158 0.982422 0.855469 3.28496 0.855469 6.12528V18.1253C0.855469 20.9656 3.158 23.2681 5.99833 23.2681H17.9983C20.8386 23.2681 23.1412 20.9656 23.1412 18.1253V6.12528C23.1412 3.28496 20.8386 0.982422 17.9983 0.982422Z"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_1223_16012">
-                        <rect width="24" height="24" fill="white" transform="translate(0 0.125)" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                }
+                classNames={{
+                  indicator: '!w-8 !h-8',
+                }}
                 title={
                   <div className="flex items-center gap-2">
                     <span className="rotate-90">
@@ -97,7 +70,7 @@ const Description = ({ blog }: { blog: Blog }) => {
                   </div>
                 }
               >
-                <div className="text-zinc_400 mt-3 flex flex-col gap-3 font-bold text-[14px]">
+                <div className="text-zinc_400 mt-3 flex flex-col gap-3 font-demibold text-[14px]">
                   {headings.map((heading, index) => (
                     <button
                       key={index}
@@ -115,7 +88,7 @@ const Description = ({ blog }: { blog: Blog }) => {
         )}
       </div>
       <div
-        className="container_des_category font-regular text-[16px] leading-8 text-[#33435A] dark:text-[#8E98A8]"
+        className="container_des_category !font-regular_en_num text-[16px] leading-8 text-[#33435A] dark:text-[#8E98A8]"
         dangerouslySetInnerHTML={{ __html: cleanDescription }}
       ></div>
     </div>
