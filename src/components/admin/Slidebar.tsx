@@ -263,6 +263,18 @@ const menus = [
     ],
   },
   {
+    icon: Orders_icon,
+    name: 'صفحات',
+    href: ['/admin/terms'],
+    activeIcon: Orders_fill_icon,
+    children: [
+      {
+        name: 'شرایط و قوانین',
+        href: '/admin/terms',
+      },
+    ],
+  },
+  {
     icon: Discount_icon,
     name: 'تخفیف‌ها',
     href: '/admin/discounts/',

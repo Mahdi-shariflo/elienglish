@@ -9,7 +9,7 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
       className={`rounded-lg border border-[#F4F6FA] p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334] ${lpa.status === 'RESERVED' ? 'bg-gray-200/20 blur-[0.9px]' : ''}`}
     >
       <div className="flex items-center justify-between">
-        <p className="font-demibold text-[18px] text-[#0B1524]">{lpa.title}</p>
+        <p className="font-demibold text-[18px] text-[#0B1524] dark:text-white">{lpa.title}</p>
         <Image
           width={60}
           height={60}

@@ -24,6 +24,7 @@ export const pages = [
   '/courses',
   'course-category',
   '/course-tag',
+  '/terms',
 ];
 
 export const noIndexPaths = ['/admin', '/auth', '/search', '/shop', '*/page/*'];

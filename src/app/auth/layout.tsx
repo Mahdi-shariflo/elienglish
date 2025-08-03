@@ -1,12 +1,8 @@
 'use client';
 import { ReactNode, useEffect } from 'react';
-import LoginSlider from '@/../public/images/login-slider.png';
 import { useSession } from 'next-auth/react';
 import { useLoginGoogle } from '@/hooks/auth/useLoginGoogle';
 import Loading from '@/components/common/Loading';
-import LogoDark from '@/../public/images/logo-dark.png';
-import LogoLight from '@/../public/images/logo-light.png';
-import Image from 'next/image';
 import Link from 'next/link';
 import Slider from './Slider';
 import { useGetSliderLogin } from '@/hooks/auth/useGetSliderLogin';

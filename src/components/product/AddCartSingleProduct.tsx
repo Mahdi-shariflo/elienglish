@@ -9,8 +9,7 @@ import { useAddBasket } from '@/hooks/basket/useAddBasket';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
 import useBasket from '@/hooks/basket/useBasket';
-import { Checkbox } from '@heroui/react';
-import Button from '../common/Button';
+import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
 import Counter from '../common/Counter';
 
 type Props = {
@@ -63,19 +62,27 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   }, 0);
 
   const finalPrice = mainPrice + addonsTotal;
-
   useEffect(() => {
+    if (!baskets?.length) return;
+
     const initialSelected =
       product?.children?.filter((addon) => baskets.some((basket) => basket.itemId === addon._id)) ??
       [];
 
-    setSelectedAddons(initialSelected);
-  }, [baskets, product]);
+    setSelectedAddons((prev) => {
+      const isSame =
+        prev.length === initialSelected.length &&
+        prev.every((p) => initialSelected.some((s) => s._id === p._id));
+      return isSame ? prev : initialSelected;
+    });
+  }, [baskets, product?.children]);
+
+  console.log(selectedAddons, 'selectedAddons');
 
   return (
     <>
       <div
-        className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 p-4 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 ${className}`}
+        className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 lg:p-4 ${className}`}
       >
         <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:p-2">
           {Number(product?.children.length) >= 1 && (
@@ -170,121 +177,131 @@ const AddtiveProduct = ({
   selected: Product[];
 }) => {
   return (
-    <div className="rounded-lg bg-[#EDE8FC] p-4 dark:bg-[#505B74] lg:rounded-none lg:bg-transparent lg:p-0">
-      <div className="flex w-full items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16.5 9.40094L7.5 4.21094"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M21 16.0019V8.00186C20.9996 7.65113 20.9071 7.30667 20.7315 7.00302C20.556 6.69937 20.3037 6.44722 20 6.27186L13 2.27186C12.696 2.09632 12.3511 2.00391 12 2.00391C11.6489 2.00391 11.304 2.09632 11 2.27186L4 6.27186C3.69626 6.44722 3.44398 6.69937 3.26846 7.00302C3.09294 7.30667 3.00036 7.65113 3 8.00186V16.0019C3.00036 16.3526 3.09294 16.697 3.26846 17.0007C3.44398 17.3043 3.69626 17.5565 4 17.7319L11 21.7319C11.304 21.9074 11.6489 21.9998 12 21.9998C12.3511 21.9998 12.696 21.9074 13 21.7319L20 17.7319C20.3037 17.5565 20.556 17.3043 20.7315 17.0007C20.9071 16.697 20.9996 16.3526 21 16.0019Z"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M3.26953 6.96094L11.9995 12.0109L20.7295 6.96094"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 22.08V12"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </span>
-          <p className="font-demibold text-[16px] text-[#172334] dark:text-[#8E98A8]">
-            سفارشی سازی محصول
-          </p>
-        </div>
-        <span>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g clip-path="url(#clip0_9_22658)">
-              <path
-                d="M10.0013 18.3346C14.6037 18.3346 18.3346 14.6037 18.3346 10.0013C18.3346 5.39893 14.6037 1.66797 10.0013 1.66797C5.39893 1.66797 1.66797 5.39893 1.66797 10.0013C1.66797 14.6037 5.39893 18.3346 10.0013 18.3346Z"
-                stroke="#8E98A8"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M10 13.332H10.0083"
-                stroke="#8E98A8"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M10 6.66797V10.0013"
-                stroke="#8E98A8"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_9_22658">
-                <rect width="20" height="20" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
-        </span>
-      </div>
-      <div className="mt-4 flex flex-col gap-4 pt-4 dark:border-[#263248]">
-        {products?.map((item, idx) => {
-          const isChecked = selected.some((p) => p._id === item._id);
-
-          return (
-            <div
-              key={idx}
-              className="flex items-center justify-between border-dashed pb-3 dark:border-[#263248] lg:border-b"
-            >
-              <Checkbox
-                size="lg"
-                isSelected={isChecked}
-                onValueChange={() => onToggle(item)}
-                classNames={{
-                  base: '!px-2',
-                  label:
-                    'pr-3 text-[14px] w-[180px] overflow-hidden text-ellipsis  whitespace-nowrap dark:text-[#8E98A8] !font-regular text-[#0C0C0C]',
-                  wrapper: 'after:!bg-main',
-                }}
-              >
-                {item.title}
-              </Checkbox>
-              {item.discountPrice !== 0 && (
-                <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
-                  {discountCalculation(item.discountPrice, item.price)}%
-                </span>
-              )}
+    <Accordion className="bg-[#EDE8FC]">
+      <AccordionItem
+        classNames={{
+          base: '!py-0',
+        }}
+        title={
+          <div className="flex w-full items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.5 9.40094L7.5 4.21094"
+                    stroke="#6E3DFF"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M21 16.0019V8.00186C20.9996 7.65113 20.9071 7.30667 20.7315 7.00302C20.556 6.69937 20.3037 6.44722 20 6.27186L13 2.27186C12.696 2.09632 12.3511 2.00391 12 2.00391C11.6489 2.00391 11.304 2.09632 11 2.27186L4 6.27186C3.69626 6.44722 3.44398 6.69937 3.26846 7.00302C3.09294 7.30667 3.00036 7.65113 3 8.00186V16.0019C3.00036 16.3526 3.09294 16.697 3.26846 17.0007C3.44398 17.3043 3.69626 17.5565 4 17.7319L11 21.7319C11.304 21.9074 11.6489 21.9998 12 21.9998C12.3511 21.9998 12.696 21.9074 13 21.7319L20 17.7319C20.3037 17.5565 20.556 17.3043 20.7315 17.0007C20.9071 16.697 20.9996 16.3526 21 16.0019Z"
+                    stroke="#6E3DFF"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M3.26953 6.96094L11.9995 12.0109L20.7295 6.96094"
+                    stroke="#6E3DFF"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M12 22.08V12"
+                    stroke="#6E3DFF"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              <p className="font-demibold text-[16px] text-[#172334] dark:text-[#263248]">
+                سفارشی سازی محصول
+              </p>
             </div>
-          );
-        })}
-      </div>
-    </div>
+            <span className="hidden lg:block">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_9_22658)">
+                  <path
+                    d="M10.0013 18.3346C14.6037 18.3346 18.3346 14.6037 18.3346 10.0013C18.3346 5.39893 14.6037 1.66797 10.0013 1.66797C5.39893 1.66797 1.66797 5.39893 1.66797 10.0013C1.66797 14.6037 5.39893 18.3346 10.0013 18.3346Z"
+                    stroke="#8E98A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10 13.332H10.0083"
+                    stroke="#8E98A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M10 6.66797V10.0013"
+                    stroke="#8E98A8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_9_22658">
+                    <rect width="20" height="20" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+          </div>
+        }
+      >
+        <div className="mx-auto rounded-lg bg-[#EDE8FC] lg:rounded-none lg:bg-transparent lg:p-0">
+          <div className="flex flex-col gap-4 dark:border-[#263248]">
+            {products?.map((item, idx) => {
+              const isChecked = selected.some((p) => p._id === item._id);
+
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center justify-between border-dashed pb-3 dark:border-[#263248] lg:border-b"
+                >
+                  <Checkbox
+                    size="lg"
+                    isSelected={isChecked}
+                    onValueChange={() => onToggle(item)}
+                    classNames={{
+                      base: '!px-2',
+                      label:
+                        'pr-3 text-[14px] w-[180px] overflow-hidden text-ellipsis  whitespace-nowrap dark:text-[#8E98A8] dark:text-[#33435A] !font-regular text-[#0C0C0C]',
+                      wrapper: 'after:!bg-main',
+                    }}
+                  >
+                    {item.title}
+                  </Checkbox>
+                  {item.discountPrice !== 0 && (
+                    <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full bg-[#f44336] font-light text-white">
+                      {discountCalculation(item.discountPrice, item.price)}%
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </AccordionItem>
+    </Accordion>
   );
 };

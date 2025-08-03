@@ -12,7 +12,9 @@ type Props = {
 const BackPrevPage = ({ title, url, className, isLogo }: Props) => {
   const router = useRouter();
   return (
-    <div className={`sticky top-0 z-50 border-b bg-white lg:hidden ${className}`}>
+    <div
+      className={`sticky top-0 z-50 border-b bg-white dark:border-[#263248] dark:bg-[#0B1524] lg:hidden ${className}`}
+    >
       <div className="container_page flex h-[56px] items-center">
         <Button
           className="w-fit min-w-fit"
@@ -38,7 +40,7 @@ const BackPrevPage = ({ title, url, className, isLogo }: Props) => {
         {isLogo ? (
           <Logo className="mx-auto mt-2 w-20" />
         ) : (
-          <p className="line-clamp-1 flex-1 text-center font-medium text-[14px] text-[#0C0C0C]">
+          <p className="line-clamp-1 flex-1 text-center font-medium text-[14px] text-[#0C0C0C] dark:text-white">
             {title}
           </p>
         )}

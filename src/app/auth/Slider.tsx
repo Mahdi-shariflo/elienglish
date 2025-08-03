@@ -8,13 +8,21 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import { BASEURL } from '@/lib/variable';
+import Link from 'next/link';
 
 type Props = {
-  sliders: { imageUrl: string; title: string; description: string }[];
+  sliders: {
+    imageUrl: string;
+    title: string;
+    description: string;
+    btnLink: string;
+    btnText: string;
+  }[];
   className?: string;
 };
 
 export default function Slider({ sliders, className }: Props) {
+  console.log(sliders, 'djklsfhkjsfdsff');
   return (
     <div
       className={`custom_pagination relative flex h-full w-[90%] items-center justify-center ${className}`}
@@ -54,6 +62,14 @@ export default function Slider({ sliders, className }: Props) {
               <p className="pt-3 text-center font-light text-[#8E98A8] dark:text-[#8E98A8]">
                 {item.description}
               </p>
+              {item?.btnLink && (
+                <Link
+                  className="mx-auto mt-5 flex h-[40px] w-[120px] items-center justify-center rounded-lg bg-main font-demibold text-white"
+                  href={item?.btnLink}
+                >
+                  {item?.btnText}
+                </Link>
+              )}
             </SwiperSlide>
           );
         })}

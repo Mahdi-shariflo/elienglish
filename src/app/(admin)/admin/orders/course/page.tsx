@@ -89,9 +89,7 @@ const Page = () => {
           onChange={(value) => {
             if (value) {
               setDate({
-                // @ts-expect-error error
                 start: value.start,
-                // @ts-expect-error error
                 end: value.end,
               });
             }
@@ -106,7 +104,6 @@ const Page = () => {
           granularity="day"
           showMonthAndYearPickers={true}
           labelPlacement="outside"
-          // @ts-expect-error error
           maxValue={parseAbsoluteToLocal(getPrevDateTime(0))}
         />
       </div>

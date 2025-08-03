@@ -1,6 +1,7 @@
+// useBasket.ts
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useGetBasket } from './useGetBasket';
 import { useCheckoutStore } from '@/store/checkout-store';
 import { freeShippingPrice } from '@/lib/variable';
@@ -12,7 +13,9 @@ const useBasket = () => {
   const [total, setTotal] = useState(0);
   const { data, isLoading, isSuccess } = useGetBasket();
 
-  const baskets: BasketItem[] = data?.data?.data?.items ?? [];
+  const baskets: BasketItem[] = useMemo(() => {
+    return data?.data?.data?.items ?? [];
+  }, [data?.data?.data?.items]);
 
   const installmentCourses = baskets.filter(
     (item) => item.type === 'COURSE' && item.course?.isInstallment
@@ -36,7 +39,6 @@ const useBasket = () => {
     return sum + price * count;
   }, 0);
 
-  // مبلغ اولین قسط برای دوره‌های اقساطی: installmentPrice / installmentCount
   const installmentFirstPayments = installmentCourses.reduce((sum, item) => {
     const totalInstallment = Number(item.course?.installmentPrice ?? 0);
     const count = Number(item.course?.installmentCount ?? 1);
@@ -77,14 +79,11 @@ const useBasket = () => {
       let finalTotal = 0;
 
       if (checkout.selectInstallment === 'installment') {
-        // فقط اولین قسط + آیتم‌های غیر اقساطی
         finalTotal = nonInstallmentTotal + installmentFirstPayments;
       } else {
-        // حالت نقدی: همه محصولات با تخفیف
         finalTotal = totalProductPriceWithDiscount;
       }
 
-      // اعمال تخفیف
       if (checkout?.discountCode) {
         if (checkout.discountCode.discountCodeType === 'FIXED') {
           setDiscountPrice(Number(checkout.discountCode.discountCodePrice));
@@ -97,7 +96,6 @@ const useBasket = () => {
         }
       }
 
-      // هزینه ارسال اگر مبلغ بدون تخفیف کمتر از حد مجاز باشد
       if (
         Number(checkout?.transport?.shippingPrice) > 0 &&
         freeShippingPrice > totalProductPriceWithoutDiscount

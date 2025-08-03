@@ -175,34 +175,28 @@ hr {
 .container_des_category a {
   @apply !text-main;
 }
-
 .container_des_category h1 {
-  @apply py-4 font-demibold_en_num !text-[2em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[1.5em] dark:text-white md:!text-[2em];
 }
 
-/* معمولاً 32px */
 .container_des_category h2 {
-  @apply py-4 !font-demibold_en_num text-[1.5em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[1.25em] dark:text-white md:!text-[1.5em];
 }
 
-/* معمولاً 24px */
 .container_des_category h3 {
-  @apply py-4 font-demibold_en_num text-[1.17em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[1em] dark:text-white md:!text-[1.17em];
 }
 
-/* معمولاً 18.72px */
 .container_des_category h4 {
-  @apply py-4 font-demibold_en_num text-[1] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[0.9em] dark:text-white md:!text-[1em];
 }
 
-/* معمولاً 16px */
 .container_des_category h5 {
-  @apply py-4 font-demibold_en_num text-[0.83em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[0.75em] dark:text-white md:!text-[0.83em];
 }
 
-/* معمولاً 13.28px */
 .container_des_category h6 {
-  @apply py-4 font-demibold_en_num text-[0.67em] dark:text-white;
+  @apply py-4 font-demibold_en_num text-[0.6em] dark:text-white md:!text-[0.67em];
 }
 
 .container_des_category * {

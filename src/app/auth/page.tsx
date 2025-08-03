@@ -51,15 +51,13 @@ const Page = () => {
             /> */}
             <Input
               endContent={<img src={Flag.src} className="h-10 w-10 object-contain" />}
-              min={11}
-              max={11}
               placeholder="09123456789"
               formik={formik}
               classNameLabel="text-[14px]"
               name="mobile"
               type={isMobile ? 'tel' : 'number'}
               className=""
-              classNameInput={'text-center pl-3 !text-[14px]'}
+              classNameInput={'text-center pr-10 pl-3 !text-[14px]'}
               isClear={true}
             />
           </div>
@@ -76,7 +74,7 @@ const Page = () => {
 
         <span className="inline-block pt-5 font-medium text-[14px] dark:text-[#8E98A8]">
           با ورود و ثبت‌نام،
-          <Link href={'/common-questions/'} className="text-main">
+          <Link href={'/terms/'} className="text-main">
             شرایط استفاده را
           </Link>{' '}
           می‌پذیرم.
