@@ -11,7 +11,7 @@ const TopBanner = ({ className }: { className?: string }) => {
   return (
     <Link
       href={`${topBannerData?.href}/`}
-      className={`relative block h-[60px] w-full transition-all duration-300 ${className}`}
+      className={`relative block h-[32px] w-full transition-all duration-300 lg:h-[60px] ${className}`}
     >
       <picture className="h-full w-full overflow-hidden">
         {/* تصویر موبایل با وضوح مختلف */}

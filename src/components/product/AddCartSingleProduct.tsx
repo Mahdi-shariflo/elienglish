@@ -72,7 +72,6 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
     setSelectedAddons(initialSelected);
   }, [baskets, product]);
 
-  console.log(baskets, 'product?.childrenproduct?.childrenproduct?.children');
   return (
     <>
       <div
@@ -171,7 +170,7 @@ const AddtiveProduct = ({
   selected: Product[];
 }) => {
   return (
-    <div className="rounded-lg bg-[#EDE8FC] p-4 lg:rounded-none lg:bg-transparent lg:p-0">
+    <div className="rounded-lg bg-[#EDE8FC] p-4 dark:bg-[#505B74] lg:rounded-none lg:bg-transparent lg:p-0">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-2">
           <span>
@@ -212,7 +211,9 @@ const AddtiveProduct = ({
               />
             </svg>
           </span>
-          <p className="font-demibold text-[16px] text-[#172334]">سفارشی سازی محصول</p>
+          <p className="font-demibold text-[16px] text-[#172334] dark:text-[#8E98A8]">
+            سفارشی سازی محصول
+          </p>
         </div>
         <span>
           <svg
