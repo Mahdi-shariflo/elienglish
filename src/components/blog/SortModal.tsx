@@ -25,11 +25,11 @@ const SortModal = ({ searchParams, openSort, onToggleSort, onSort }: Props) => {
       className="bg-[#F5F6FA]"
       onClose={onToggleSort}
     >
-      <div className="flex flex-col items-center rounded-xl bg-white px-2">
+      <div className="flex flex-col items-center rounded-xl bg-white px-2 dark:bg-[#0B1524]">
         {sorts.map((sort, idx) => (
           <Button
             onClick={() => onSort(sort.sort)}
-            className={`w-full justify-between font-regular text-[#232429]`}
+            className={`w-full justify-between font-regular !text-[#232429] dark:!text-[#8E98A8]`}
             key={idx}
           >
             <span className="!text-[16px]">{sort.name}</span>
