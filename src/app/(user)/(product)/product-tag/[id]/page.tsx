@@ -87,13 +87,13 @@ const Page = async ({ searchParams, params }: Props) => {
               ) : (
                 <>
                   <Sort />
-                  <div className="grid w-full grid-cols-2 gap-4 rounded-lg dark:bg-[#172334] lg:grid-cols-3">
+                  <div className="grid w-full gap-4 rounded-lg lg:grid-cols-3 lg:p-5 dark:lg:bg-[#172334]">
                     {product?.products?.map((product, idx) => (
                       <CardProduct
                         url={`/product/${product.url}/`}
-                        classImage="!object-contain"
-                        classNameImage="mt-2 px-2 w-full !h-[200px] lg:!h-[220px]"
-                        className="!h-[340px] w-full lg:!h-[400px]"
+                        classImage="!object-contain "
+                        classNameImage="mt-5 px-2 w-full !h-[260px] lg:!h-[220px]"
+                        className="!h-[400px] w-full dark:bg-[#172334] lg:!h-[400px] dark:lg:bg-transparent"
                         product={product}
                         key={idx}
                       />

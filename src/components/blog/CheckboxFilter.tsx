@@ -121,7 +121,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
             key={idx}
             aria-label={`Accordion ${idx}`}
             classNames={{
-              base: 'border-b last:border-none !border-[#E4E7E9]',
+              base: 'border-b last:border-none dark:!border-[#263248] !border-[#E4E7E9]',
               title: 'text-[#172334] !text-[14px] lg:text-[16px] dark:text-[#E5EAEF] font-demibold',
             }}
             title={property.title}

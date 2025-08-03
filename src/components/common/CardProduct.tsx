@@ -33,13 +33,13 @@ const CardProduct = ({
       <div>
         <Image
           classImg={`${classImage}`}
-          className={`relative z-10 mx-auto flex h-[103px] w-[106px] items-center justify-center mix-blend-multiply lg:h-[254px] lg:w-full ${classNameImage} !border-none`}
+          className={`relative z-10 mx-auto flex h-[103px] w-[106px] items-center justify-center lg:h-[254px] lg:w-full ${classNameImage} !border-none`}
           src={pro?.thumbnailImage?.url}
           alt={pro.thumbnailImage?.altText ? pro.thumbnailImage?.altText : pro.title}
         />
 
         <p
-          className={`line-clamp-2 px-4 pt-1 font-demibold text-[14px] text-[#0B1524] dark:text-white lg:px-6 lg:pt-4 lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[16px]'}`}
+          className={`line-clamp-2 px-4 pt-4 font-demibold text-[14px] text-[#0B1524] dark:text-white lg:px-6 lg:pt-4 lg:font-medium ${showTotalProduct ? 'text-[12px] lg:text-[16px]' : 'text-[12px] lg:text-[16px]'}`}
         >
           {product?.title?.replaceAll('&#038;', '')}
         </p>
@@ -59,12 +59,12 @@ const CardProduct = ({
             </div>
             <div>
               {Boolean(product?.discountPrice) && (
-                <p className="whitespace-nowrap text-nowrap !pb-2 text-left !font-regular text-[14px] text-[#A8AFB8] line-through">
+                <p className="whitespace-nowrap text-nowrap !pb-2 text-left !font-regular text-[16px] text-[#A8AFB8] line-through">
                   {Number(product.price).toLocaleString()}
                 </p>
               )}
               <p className="flex items-center gap-1">
-                <span className="whitespace-nowrap font-demibold text-[16px] text-[#0C0C0C] dark:text-white">
+                <span className="whitespace-nowrap font-demibold text-[18px] text-[#0C0C0C] dark:text-white">
                   {product?.discountPrice
                     ? product?.discountPrice.toLocaleString()
                     : product.price.toLocaleString()}

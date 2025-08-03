@@ -36,7 +36,7 @@ const Sort = () => {
         }}
       >
         <DropdownTrigger>
-          <Button className="bg-transparent">
+          <Button className="bg-transparent dark:!border-[#263248]">
             <span className="text-[#0B1524] dark:text-white">مرتب‌ سازی:</span>
             <div className="flex items-center gap-2">
               <span className="font-regular text-[#505B74] dark:text-[#8E98A8]">

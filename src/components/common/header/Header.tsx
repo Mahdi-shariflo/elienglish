@@ -221,7 +221,7 @@ const quickLicks = [
   },
 ];
 
-const profilePages = ['/home', '/address', '/checkout', '/cart', '/profile/', '/product'];
+const profilePages = ['/home', '/address', '/checkout', '/cart', '/profile/'];
 
 type Props = {
   categories: string;
