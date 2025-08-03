@@ -308,7 +308,6 @@ const Header = ({ categories }: Props) => {
                   href={`${link.src}/`}
                   key={idx}
                 >
-                  {/* {link.icon && <span>{link.icon}</span>} */}
                   <span className="font-medium text-[14px] text-[#7D8793] dark:!text-white">
                     {link.name}
                   </span>
