@@ -82,7 +82,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
         {/* property */}
         <div ref={propertiesRef} className="mt-5">
           <Title className="!text-[16px]" title="مشخصات محصول" />
-          <ul className="space-y-5 lg:mt-10">
+          <ul className="mt-10 space-y-5">
             {product.properties?.map((attribute, idx) => (
               <li key={idx} className="flex items-start dark:border-[#263248] lg:border-b">
                 <span
@@ -90,7 +90,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word',
                   }}
-                  className="lg:min-[155px] flex !w-fit min-w-[80px] items-start gap-1 font-medium text-[16px] text-[#6A7890] lg:min-w-[252px] lg:pb-3"
+                  className="flex !w-fit min-w-[155px] items-start gap-1 font-medium text-[14px] text-[#6A7890] lg:min-w-[252px] lg:pb-3 lg:text-[16px]"
                 >
                   {attribute?.property}
                 </span>
@@ -99,7 +99,7 @@ const MoreInformationProduct = ({ product }: { product: Product }) => {
                     wordBreak: 'break-word',
                     overflowWrap: 'break-word',
                   }}
-                  className="block w-full pr-2 font-medium text-[16px] text-[#0B1524] dark:text-[#8E98A8] lg:pb-3"
+                  className="block w-full pr-2 font-medium text-[14px] text-[#0B1524] dark:text-[#8E98A8] lg:pb-3 lg:text-[16px]"
                 >
                   {attribute.attribiute}
                 </span>

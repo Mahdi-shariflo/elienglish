@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Toman_Icon } from '../common/icon';
 import { Product } from '@/store/types/home';
 import { discountCalculation } from '@/lib/utils';
@@ -21,6 +21,7 @@ type Props = {
 
 const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   const session = useSession();
+  const { baskets } = useBasket();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
   const { mutate: mutateAdd } = useAddBasket();
   const [selectedAddons, setSelectedAddons] = useState<Product[]>([]);
@@ -62,7 +63,16 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
   }, 0);
 
   const finalPrice = mainPrice + addonsTotal;
-  console.log(product?.children, 'product?.childrenproduct?.childrenproduct?.children');
+
+  useEffect(() => {
+    const initialSelected =
+      product?.children?.filter((addon) => baskets.some((basket) => basket.itemId === addon._id)) ??
+      [];
+
+    setSelectedAddons(initialSelected);
+  }, [baskets, product]);
+
+  console.log(baskets, 'product?.childrenproduct?.childrenproduct?.children');
   return (
     <>
       <div
@@ -127,7 +137,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
                 typeCounter={product.type}
                 typePayload={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
                 classNameAddBtnName="text-[12px]"
-                classAddBtn="mt-4"
+                classAddBtn="mt-4 !min-w-[150px] !h-[43px]"
                 classCount="border-r border-l"
                 container_Class="flex flex-col-reverse lg:flex-row items-center lg:justify-between w-full"
                 classNameCounter="border mt-2 rounded-lg border w-[96px] h-[32px] justify-start lg:ml-auto"
