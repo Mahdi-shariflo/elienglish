@@ -33,7 +33,7 @@ const Sidebar = () => {
     {
       title: 'دوره‌های آموزشی',
       Icon: Courses_icon,
-      src: '/course',
+      src: '/courses',
     },
     {
       title: 'محصولات',

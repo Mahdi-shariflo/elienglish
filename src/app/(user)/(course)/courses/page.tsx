@@ -6,6 +6,7 @@ import { request } from '@/lib/safeClient';
 import { Course } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
+import { buildQueryFromSearchParams } from '@/lib/regexes';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };

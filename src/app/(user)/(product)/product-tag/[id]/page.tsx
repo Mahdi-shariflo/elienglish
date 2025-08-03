@@ -7,6 +7,7 @@ import { Product } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 import SelectedFilterProduct from '@/components/product/SelectedFilterProduct';
+import { buildQueryFromSearchParams } from '@/lib/regexes';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string }>;
