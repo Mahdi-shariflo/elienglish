@@ -18,7 +18,7 @@ export const metadata = {
 const page = async () => {
   const blogs = await request({ url: '/blog/main' });
   return (
-    <div className="!mb-32 lg:py-32">
+    <div className="!mb-32 lg:pt-32">
       <div className="lg:container_page flex flex-col gap-10 lg:gap-[100px]">
         <BlogSection1 blogs={getSectionByName(blogs.data.data, 'sec1')} />
         <Categories categories={getSectionByName(blogs.data.data, 'sec2')} />
@@ -29,6 +29,7 @@ const page = async () => {
           delay={3000}
           typeCardBlog="long"
           filterActive
+          container_class=""
         />
         <SliderBlog
           title="آموزش گرامر"
@@ -45,6 +46,7 @@ const page = async () => {
           title="بهترین مقالات الی اینگلیش"
           delay={4500}
           typeCardBlog="long"
+          container_class=""
           blogs={getSectionByName(blogs.data.data, 'sec8')}
         />
       </div>

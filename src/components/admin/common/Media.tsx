@@ -45,7 +45,7 @@ const Media = ({
           <BaseDialog
             isOpen={open}
             size="full"
-            onClose={onClose}
+            onClickCancel={onClose}
             classBody="overflow-x-hidden px-3"
             className="px-3"
             title="نمایش رسانه"

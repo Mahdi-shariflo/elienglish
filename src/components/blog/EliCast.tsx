@@ -129,7 +129,7 @@ const EliCast = ({ delay, blogs }: Props) => {
               }
               key={idx}
             >
-              <CardBlog1 blog={item} />
+              <CardBlog1 classImage="lg:!h-[165px]" blog={item} />
             </SwiperSlide>
           );
         })}

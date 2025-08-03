@@ -16,10 +16,12 @@ type Props = {
   isLoading?: boolean;
   isLoadingFooterBtn?: boolean;
   nameBtnBack?: string;
+  onClickCancel?: () => void;
 };
 export default function BaseDialog({
   isLoading,
   isLoadingFooterBtn,
+  onClickCancel,
   children,
   classBody = 'w-[94%] mx-auto',
   isOpen,
@@ -34,6 +36,7 @@ export default function BaseDialog({
   return (
     <>
       <Modal
+        shouldBlockScroll={false}
         className={`relative !z-50 rounded-lg !shadow-none dark:bg-[#172334] ${className}`}
         scrollBehavior="inside"
         size={size}
@@ -54,7 +57,10 @@ export default function BaseDialog({
                         {title}
                       </p>
 
-                      <Button onClick={onClose} className="absolute left-3 top-2 w-fit !min-w-fit">
+                      <Button
+                        onClick={onClickCancel ? onClickCancel : onClose}
+                        className="absolute left-3 top-2 w-fit !min-w-fit"
+                      >
                         <svg
                           width="24"
                           height="24"
@@ -88,7 +94,10 @@ export default function BaseDialog({
                   </ModalBody>
                   {Boolean(onClickFooter) ? (
                     <ModalFooter className="bg-spring flex items-center justify-between rounded-lg pb-3">
-                      <Button onClick={onClose} className="w-[140px] border !text-black">
+                      <Button
+                        onClick={onClickCancel ? onClickCancel : onClose}
+                        className="w-[140px] border !text-black"
+                      >
                         <span className="!text-black dark:text-white">{nameBtnBack}</span>
                       </Button>
                       <Button

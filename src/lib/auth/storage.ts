@@ -1,7 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
 import { COOCIES_NAME } from '../variable';
-import { redirect } from 'next/navigation';
 
 interface Session {
   accessToken: string;

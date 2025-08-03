@@ -86,7 +86,7 @@ const ShareAndCopy = () => {
         </Button>
       </div>
 
-      <BaseDialog isOpen={show} title="اشتراک‌گذاری" size="md" onClose={() => setShow(false)}>
+      <BaseDialog isOpen={show} title="کپی آدرس" size="md" onClose={() => setShow(false)}>
         <div className="flex flex-col items-center justify-center">
           <span>
             <Logo />

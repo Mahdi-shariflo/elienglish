@@ -12,6 +12,7 @@ import { Delete_icon } from '../common/icon';
 import Video from 'next-video';
 import ReactPlayer from 'react-player';
 import { AudioPlayer } from '../common/AudioPlayer';
+import { BiInfoCircle } from 'react-icons/bi';
 
 type Props = {
   media: Media;
@@ -137,6 +138,17 @@ const CardMedia = ({
               alt={media.title}
             />
           )}
+
+          <button
+            className="absolute left-4 top-4"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setOpen(true);
+            }}
+          >
+            <BiInfoCircle size={25} />
+          </button>
         </Button>
       }
 
@@ -163,17 +175,21 @@ const CardMedia = ({
             <div className="flex flex-col gap-3 font-regular text-[14px]">
               <p>
                 تاریخ بارگذاری:{' '}
-                <span className="text-xs text-gray-600">{convertDatePer(media.createdAt)}</span>
+                <span className="text-[16px] text-gray-600">{convertDatePer(media.createdAt)}</span>
+              </p>
+              <p>
+                عنوان
+                <span className="text-[16px] text-gray-600">{media?.title}</span>
               </p>
               <p>
                 شده توسط بارگذاری:{' '}
-                <Link href={'/'} className="text-xs text-blue-500 underline">
+                <Link href={'/'} className="text-[16px] text-blue-500 underline">
                   {/* {media.author?.firstName} {media.author?.lastName} */}
                 </Link>
               </p>
               <p>
-                حجم:{' '}
-                <span className="text-xs text-blue-500 underline">
+                ابعاد:{' '}
+                <span className="text-[16px] text-blue-500 underline">
                   {imageSize?.width}px * {imageSize?.height}px
                 </span>
               </p>
@@ -182,7 +198,7 @@ const CardMedia = ({
                 <a
                   target="_blank"
                   href={`${BASEURL}/${media?.url}`}
-                  className="cursor-pointer text-xs text-blue-500"
+                  className="cursor-pointer text-[16px] text-blue-500"
                 >
                   {`${BASEURL}/${media.url}`}
                 </a>

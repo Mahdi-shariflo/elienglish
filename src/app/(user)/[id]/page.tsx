@@ -63,7 +63,7 @@ const Page = async ({ params }: Props) => {
           ]}
         />
         <div className="mt-8 flex flex-col items-start gap-7 lg:flex-row">
-          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border-[#F4F6FA] py-4 dark:!border-[#263248] lg:border lg:p-10 lg:px-3 lg:py-8">
+          <div className="drop_shadow_singleBlog w-full gap-10 overflow-hidden rounded-lg border-[#F4F6FA] px-3 py-4 dark:!border-[#263248] lg:border lg:p-8">
             <p className="font-medium text-main">{blog?.category?.title}</p>
             <MediaPreview media={blog} />
             {/* title */}
@@ -78,7 +78,7 @@ const Page = async ({ params }: Props) => {
               }}
             />
           </div>
-          <div className="sticky top-48 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
+          <div className="sticky top-48 z-30 w-full min-w-[380px] overflow-hidden lg:w-[380px]">
             <Share className="!hidden lg:!flex" />
             <RecommendSection blogSidebar={blogSidebar} />
             <div className="mt-10 hidden lg:block">

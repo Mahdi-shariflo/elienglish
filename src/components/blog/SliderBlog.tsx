@@ -20,6 +20,7 @@ type Props = {
   blogs?: Blog[];
   children?: ReactNode;
   filterActive?: boolean;
+  container_class?: string;
 };
 const filterButtons = [
   {
@@ -132,6 +133,7 @@ const SliderBlog = ({
   blogs,
   filterActive,
   typeCardBlog = 'long',
+  container_class,
   className = '!h-[350px] lg:!w-[270px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:!border-[#505B74] lg:!h-[320px]',
 }: Props) => {
   const [activeType, setActiveType] = useState<string>('text');
@@ -139,7 +141,7 @@ const SliderBlog = ({
   const filteredBlogs = filterActive ? blogs?.filter((blog) => blog.type === activeType) : blogs;
 
   return (
-    <div className="container_page lg:min-h-[500px] lg:w-full">
+    <div className={`container_page lg:w-full ${container_class}`}>
       {title && (
         <>
           <div className="flex items-center justify-between">
@@ -231,7 +233,7 @@ const SliderBlog = ({
           {filteredBlogs?.map((item, idx) => {
             return (
               <SwiperSlide className={`overflow-hidden !bg-transparent ${className}`} key={idx}>
-                {typeCardBlog === 'long' && <CardBlog1 blog={item} />}
+                {typeCardBlog === 'long' && <CardBlog1 classImage="lg:!h-[165px]" blog={item} />}
                 {typeCardBlog === 'short' && <CardBlog2 blog={item} />}
               </SwiperSlide>
             );

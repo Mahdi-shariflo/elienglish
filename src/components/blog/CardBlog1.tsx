@@ -23,7 +23,7 @@ const CardBlog1 = ({
       <Image
         src={blog?.thumbnailImage?.url}
         alt=""
-        classImg="object-fill lg:!object-cover"
+        classImg="object-fill lg:object-cover"
         className={`!w-full overflow-hidden transition-all duration-300 group-hover:scale-105 ${classImage}`}
       />
       <div className="space-y-4 px-5 pb-5">
