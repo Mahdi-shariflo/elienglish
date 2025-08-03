@@ -303,7 +303,11 @@ const Header = ({ categories }: Props) => {
           >
             <div className="flex items-center gap-[24px]">
               {quickLicks.map((link, idx) => (
-                <Link className="flex items-center gap-3" href={`${link.src}/`} key={idx}>
+                <Link
+                  className="flex cursor-pointer items-center gap-3"
+                  href={`${link.src}/`}
+                  key={idx}
+                >
                   {/* {link.icon && <span>{link.icon}</span>} */}
                   <span className="font-medium text-[14px] text-[#7D8793] dark:!text-white">
                     {link.name}
