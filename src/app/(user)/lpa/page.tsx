@@ -1,9 +1,10 @@
 import Breadcrumbs from '@/components/common/Breadcrumbs';
 import Filters from '@/components/blog/Filters';
 import React from 'react';
-import CardPlp from '@/components/plp/CardPlp';
+import CardPlp from '@/components/lpa/CardLpa';
 import { request } from '@/lib/safeClient';
 import { Lpa } from '@/store/types';
+import SelectedFilterLpa from '@/components/lpa/SelectedFilterLpa';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -41,15 +42,42 @@ const Page = async ({ searchParams }: Props) => {
                   attributes: days,
                   displayType: 'text',
                 },
+                {
+                  title: 'وضعیت تعین سطح',
+                  displayType: 'text',
+                  attributes: [
+                    {
+                      _id: '1',
+                      title: 'رزرو شده',
+                      type: 'lpaStatus',
+                      url: 'RESERVED',
+                    },
+                    {
+                      _id: '1',
+                      title: 'قابل رزرو',
+                      type: 'lpaStatus',
+                      url: 'AVAILABLE',
+                    },
+                  ],
+                },
               ],
               description: '',
               children: [],
             }}
           />
-          <div className="grid w-full gap-4 rounded-lg p-3 px-3 lg:!grid-cols-2">
-            {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
+          <div className="w-full">
+            <SelectedFilterLpa />
+            {lpa?.lpa.length >= 1 ? (
+              <div className="mt-5 grid w-full gap-4 rounded-lg p-3 px-3 lg:!grid-cols-2">
+                {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
 
-            {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
+                {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
+              </div>
+            ) : (
+              <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
+                یافت نشد
+              </p>
+            )}
           </div>
         </div>
       </div>

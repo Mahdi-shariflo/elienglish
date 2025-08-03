@@ -2,15 +2,16 @@
 import { useUpdateFavorite } from '@/hooks/favorites/useUpdateFavorite';
 import { useSession } from '@/lib/auth/useSession';
 import { BASEURL_SITE } from '@/lib/variable';
-import useGlobalStore from '@/store/global-store';
 import { Product } from '@/store/types/home';
 import { addToast } from '@heroui/react';
 import { useState } from 'react';
 import BaseDialog from '../common/BaseDialog';
 import Button from '../common/Button';
+import { useGetFavorites } from '@/hooks/favorites/services/useGetFavorites';
 
 const ActionFavShare = ({ product }: { product: Product }) => {
   const { updateFavorite } = useUpdateFavorite();
+  const { data } = useGetFavorites();
   const user = useSession();
   const [openShare, setOpenShare] = useState(false);
   const onToggleShare = () => setOpenShare(!openShare);
@@ -25,24 +26,32 @@ const ActionFavShare = ({ product }: { product: Product }) => {
       },
     });
   };
-
+  const datafavorites = data?.data.data;
+  const favorirtes = [
+    ...(Array.isArray(datafavorites?.physical) ? datafavorites?.physical : []),
+    ...(Array.isArray(datafavorites?.digital) ? datafavorites?.digital : []),
+  ];
+  const isBookmark = favorirtes?.find((item) => item?.item?._id === product._id);
+  console.log(isBookmark, 'isBookmark');
   return (
     <div>
       <div className="absolute right-0 top-0 z-30 flex flex-row gap-3 lg:mr-3 lg:flex-col lg:gap-0">
-        <Button onClick={() => updateFavorite(product._id, true)} className="w-fit !min-w-fit px-0">
+        <Button
+          onClick={() => updateFavorite(product._id, isBookmark)}
+          className="w-fit !min-w-fit px-0"
+        >
           <span>
-            {user?.likeProducts?.includes(product._id) ? (
+            {isBookmark ? (
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
+                stroke="currentColor"
+                fill="#6A7890"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="24px"
+                width="24px"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M16.44 3.09961C14.63 3.09961 13.01 3.97961 12 5.32961C10.99 3.97961 9.37 3.09961 7.56 3.09961C4.49 3.09961 2 5.59961 2 8.68961C2 9.87961 2.19 10.9796 2.52 11.9996C4.1 16.9996 8.97 19.9896 11.38 20.8096C11.72 20.9296 12.28 20.9296 12.62 20.8096C15.03 19.9896 19.9 16.9996 21.48 11.9996C21.81 10.9796 22 9.87961 22 8.68961C22 5.59961 19.51 3.09961 16.44 3.09961Z"
-                  fill="#DD338B"
-                />
+                <path d="M400 480a16 16 0 0 1-10.63-4L256 357.41 122.63 476A16 16 0 0 1 96 464V96a64.07 64.07 0 0 1 64-64h192a64.07 64.07 0 0 1 64 64v368a16 16 0 0 1-16 16z"></path>
               </svg>
             ) : (
               <svg

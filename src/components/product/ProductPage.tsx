@@ -34,11 +34,15 @@ const ProductPage = ({ children, product }: Props) => {
   }, [isMobile]);
 
   const breadcrumb = [
-    {
-      title: product.category.title,
-      id: '1',
-      url: `/product-category/${product.category.url}`,
-    },
+    ...(product?.category?.title
+      ? [
+          {
+            title: product?.category?.title,
+            id: '1',
+            url: `/product-category/${product?.category?.url}`,
+          },
+        ]
+      : []),
     { title: product.title, url: '', id: '1' },
   ];
 

@@ -1,15 +1,9 @@
+import { safeRequest } from '@/lib/safeClient';
 import { useQuery } from '@tanstack/react-query';
-import { Favorites } from '../favorites.type';
 
-export function useGetFavorites() {
-  const queryKeys = ['GET_FAVORITES'];
-
-  const { data, isPending } = useQuery<Favorites>({
-    queryKey: [...queryKeys],
-    queryFn: apis.fetchUserMe,
+export const useGetFavorites = () => {
+  return useQuery({
+    queryKey: ['favs'],
+    queryFn: async () => await safeRequest({ url: `/favoriteitem` }),
   });
-
-  return { data, isPending };
-}
-
-const apis: any = {};
+};

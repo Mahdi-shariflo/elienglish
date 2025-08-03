@@ -30,10 +30,7 @@ export const apiFavorite = {
     }),
   remove: (productId: string) =>
     safeRequest({
-      url: `${url}/remove/${productId}`,
+      url: `/favoriteitem/${productId}`,
       method: 'DELETE',
-      params: {
-        productId,
-      },
     }),
 };

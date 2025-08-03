@@ -7,17 +7,17 @@ export function useRemoveFavorite() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: apiFavorite.remove,
-    onSuccess: ({ data }) => {
+    onSuccess: async ({ data }) => {
       const { message } = data?.data || {};
       addToast({
-        title: message,
+        title: 'با موفقیت حذف شد',
         color: 'success',
       });
-      queryClient.invalidateQueries({ queryKey: ['favs'] });
+      await queryClient.invalidateQueries({ queryKey: ['favs'] });
     },
     onError: (error: any) => {
       addToast({
-        title: error?.response?.data.message[0],
+        title: 'پیدا نشد',
         color: 'danger',
       });
     },
