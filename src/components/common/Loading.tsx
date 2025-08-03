@@ -3,7 +3,7 @@ import { Spinner } from '@heroui/react';
 const Loading = ({ showShadow = true }: { showShadow?: boolean }) => {
   return (
     <>
-      <div className="shadow-loading fixed left-1/2 top-1/2 !z-[9999] flex h-fit w-[208px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[13px] bg-white py-5">
+      <div className="shadow-loading fixed left-1/2 top-1/2 !z-[9999] flex h-fit w-[208px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-[13px] bg-white py-5 dark:bg-[#0B1524]">
         <Spinner
           size="lg"
           label="در حال بارگذاری..."
