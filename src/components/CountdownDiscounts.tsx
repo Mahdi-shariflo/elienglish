@@ -31,7 +31,7 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
               </span>
               <span>:</span>
             </span>
-            <p className="ml-2 text-center text-[10px] lg:ml-4 lg:text-[12px]">ثانیه</p>
+            <p className="ml-2 mt-1 text-center text-[10px] lg:ml-4 lg:text-[12px]">ثانیه</p>
           </div>
           <div className="flex flex-col items-center justify-center pl-1 text-main lg:pl-0">
             <span className="flex items-center gap-1 lg:gap-2">
@@ -40,7 +40,7 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
               </span>
               <span>:</span>
             </span>
-            <p className="ml-3 text-center text-[12px]">دقیقه</p>
+            <p className="ml-3 mt-1 text-center text-[12px]">دقیقه</p>
           </div>
           <div className="flex flex-col items-center justify-center pl-1 text-main lg:pl-0">
             <span className="flex items-center gap-1 lg:gap-2">
@@ -49,14 +49,14 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
               </span>
               <span>:</span>
             </span>
-            <p className="ml-3 text-center text-[12px]">دقیقه</p>
+            <p className="ml-3 mt-1 text-center text-[12px]">دقیقه</p>
           </div>
 
           <div className="flex flex-col items-center justify-center text-main">
             <span className="flex h-[40px] w-[40px] items-center justify-center rounded-lg bg-[#E0D7FB] text-[14px] lg:h-[40px] lg:w-[40px]">
               {days < 10 ? `0${days}` : days}
             </span>
-            <p className="text-center text-[12px]">روز</p>
+            <p className="mt-1 text-center text-[12px]">روز</p>
           </div>
         </div>
       );
@@ -67,7 +67,9 @@ const CountdownDiscounts = ({ timer, className }: { timer: string; className?: s
     <div
       className={`mt-14 flex h-12 flex-col items-center justify-center gap-5 lg:mt-10 lg:gap-0 ${className}`}
     >
-      <p className="text-center font-bold text-[14px] text-[#505B74] lg:hidden">تا پایان تخفیف</p>
+      <p className="text-center font-demibold text-[18px] text-[#505B74] dark:text-[#8E98A8] lg:hidden lg:text-[14px]">
+        تا پایان تخفیف
+      </p>
       <ReactCountdown
         date={timer}
         renderer={renderer}

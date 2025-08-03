@@ -23,18 +23,19 @@ const Page = async ({ params }: Props) => {
   const totalRating = data?.data?.data?.ratingStats?.avgRating;
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
-      <div className="container_page pt-14 lg:pt-16">
+      <div className="mx-auto w-full pt-14 lg:max-w-[1440px] lg:pt-16">
         <Breadcrumbs
+          className="container_page lg:w-full"
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}
         />
         <div className="flex flex-col items-start gap-7 pt-10 lg:flex-row">
-          <div className="w-full gap-10 overflow-hidden rounded-lg lg:pb-8">
+          <div className="container_page gap-10 overflow-hidden rounded-lg lg:w-full lg:pb-8">
             <MediaPreview
-              className="!mt-0 border border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-3"
+              className="!mt-0 border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:border lg:p-3"
               media={course}
             />
-            <div className="mt-4 flex items-start gap-5 rounded-lg border !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:p-4 lg:drop-shadow-sm">
+            <div className="mt-4 flex items-start gap-5 rounded-lg !border-gray-100 bg-white dark:!border-[#263248] dark:bg-[#0B1524] lg:border lg:p-4 lg:drop-shadow-sm">
               {course?.thumbnailImage?.url && (
                 <Image
                   className="hidden !h-[190px] !min-w-[190px] overflow-hidden rounded-lg lg:block"
@@ -60,8 +61,8 @@ const Page = async ({ params }: Props) => {
             </div>
             <MoreInformationCourse course={course} />
           </div>
-          <div className="style_factor_product sticky top-32 w-full overflow-hidden rounded-lg bg-white lg:w-[380px] lg:min-w-[380px]">
-            <div className="border border-gray-50 bg-white drop-shadow-sm dark:!border-[#263248] dark:bg-[#0B1524] lg:p-8">
+          <div className="style_factor_product sticky bottom-0 w-full overflow-hidden rounded-lg p-4 dark:bg-[#172334] lg:top-32 lg:w-[380px] lg:min-w-[380px] lg:bg-white lg:p-0">
+            <div className="flex flex-row-reverse items-center justify-between border-gray-50 bg-white drop-shadow-sm dark:!border-[#263248] dark:!bg-[#172334] lg:flex-col lg:border lg:p-8">
               <div className="hidden lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
@@ -70,9 +71,9 @@ const Page = async ({ params }: Props) => {
                   {course?.shortTitle}
                 </p>
               </div>
-              <div className="mt-10">
+              <div className="lg:mt-10 lg:w-full">
                 {course.discountPrice ? (
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     {course.discountPrice && (
                       <>
                         <span className="flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[32px] lg:w-[54px] lg:text-[12px]">
@@ -85,12 +86,12 @@ const Page = async ({ params }: Props) => {
                     )}
                   </div>
                 ) : null}
-                <div className="mt-4 flex items-center justify-between">
-                  <p className="font-regular text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
+                <div className="mt-2 flex items-center justify-between lg:mt-4">
+                  <p className="hidden font-regular text-[14px] text-[#6A7890] dark:text-[#8E98A8] lg:block">
                     قیمت دوره
                   </p>
                   <div className="flex items-center gap-1">
-                    <p className="font-demibold text-[24px] dark:text-white">
+                    <p className="font-demibold text-[20px] dark:text-white lg:text-[24px]">
                       {course.discountPrice
                         ? Number(course.discountPrice).toLocaleString()
                         : Number(course.price).toLocaleString()}
@@ -108,13 +109,13 @@ const Page = async ({ params }: Props) => {
               <Counter
                 // @ts-expect-error error
                 product={course}
-                classAddBtn="!mt-10"
+                classAddBtn="lg:!mt-10 !min-w-[150px] !h-[42px]"
                 typePayload={'COURSE'}
                 typeCounter="course"
               />
-              <div>
+              <div className="hidden w-full lg:block">
                 {/* rate */}
-                <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4">
+                <div className="mt-6 flex items-center gap-2 border-b border-[#E5EAEF] pb-4 dark:border-[#263248]">
                   <span>
                     <svg
                       width="20"
@@ -133,7 +134,7 @@ const Page = async ({ params }: Props) => {
                       />
                     </svg>
                   </span>
-                  <div className="flex items-center gap-1 font-medium">
+                  <div className="hidden items-center gap-1 font-medium lg:flex">
                     <p className="flex items-center gap-1">
                       <span className="font-demibold text-[#33435A] dark:text-[#8E98A8]">
                         {totalRating}
