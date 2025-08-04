@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 
 const filterLabels: Record<string, string> = {
   video: 'ویدیو',
-  padcast: 'پادکست',
+  poddcast: 'پادکست',
   text: 'متنی',
 };
 
@@ -23,8 +23,8 @@ const SelectedFilterBlog = () => {
   };
 
   return (
-    <div className="-mt-1 hidden flex-wrap gap-2 lg:flex">
-      <div className="flex h-[40px] items-center justify-center gap-2 rounded-lg bg-[#E5EAEF] px-3 text-sm dark:bg-[#172334]">
+    <div className="-mt-1 flex flex-wrap gap-2">
+      <div className="flex h-[35px] items-center justify-center gap-2 rounded-lg bg-[#E5EAEF] px-3 text-sm dark:bg-[#172334] lg:h-[40px]">
         <span className="font-regular text-[14px] text-[#505B74] dark:text-[#8E98A8]">
           {filterLabels[blogType]}
         </span>

@@ -26,7 +26,7 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
         ) : media?.thumbnailImage?.url ? (
           <Image
             className="h-[230px] w-full lg:h-[480px]"
-            classImg="object-fill"
+            classImg="object-cover"
             src={media?.thumbnailImage?.url}
             alt=""
           />

@@ -98,7 +98,7 @@ export default function BaseDialog({
                         onClick={onClickCancel ? onClickCancel : onClose}
                         className="w-[140px] border !text-black"
                       >
-                        <span className="!text-black dark:text-white">{nameBtnBack}</span>
+                        <span className="!text-black dark:!text-white">{nameBtnBack}</span>
                       </Button>
                       <Button
                         isPending={isLoadingFooterBtn}

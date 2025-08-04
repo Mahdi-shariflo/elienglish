@@ -20,8 +20,10 @@ import SeoOptions from '@/components/admin/common/SeoOptions';
 import Video from 'react-player';
 import { AudioPlayer } from '@/components/common/AudioPlayer';
 import DownloadFile from '@/components/admin/blog/DownloadFile';
-import { Delete_icon } from '@/components/common/icon';
+import { Delete_icon, Edit_icon } from '@/components/common/icon';
 import SelectCategoryBlog from '@/components/admin/blog/SelectCategoryBlog';
+import { v4 as uuidv4 } from 'uuid';
+
 interface InitialValues {
   tags: string[];
   readTime: string;
@@ -54,7 +56,10 @@ interface InitialValues {
   }[];
 }
 const Page = () => {
-  const [show, setShow] = useState(false);
+  const [modalDownload, setModalDownload] = useState({
+    open: false,
+    info: null,
+  });
   const params = useParams();
   const { data: singleDataMag, isSuccess } = useGetBlogById();
   const { mutate, isPending } = useActionMag();
@@ -152,6 +157,9 @@ const Page = () => {
         description: blog?.description,
         short_des: blog.short_des,
         metaTitle: blog.metaTitle,
+        downloads: blog.downloads.map((item: any) => {
+          return { ...item, _id: uuidv4() };
+        }),
         metaDescription: blog.metaDescription,
         keyWords: blog.keyWords.map((item: string) => item).join(','),
         ...(blog.robots ? { robots: blog.robots } : null),
@@ -251,21 +259,33 @@ const Page = () => {
               فایل دانلود‌ها
             </p>
             <div className="grid grid-cols-3 gap-3">
-              <Button onClick={() => setShow(true)} className="h-[100px] min-w-fit border">
+              <Button
+                onClick={() => setModalDownload({ info: null, open: true })}
+                className="h-[100px] min-w-fit border"
+              >
                 فایل جدید
               </Button>
-              {formik.values.downloads.map((item, idx) => (
+              {formik?.values?.downloads?.map((item, idx) => (
                 <div
                   key={idx}
-                  className="relative flex h-[100px] min-w-fit items-center justify-center rounded-xl border"
+                  className="relative flex h-[100px] min-w-fit items-center justify-center overflow-hidden rounded-xl border"
                 >
                   <img src={`${item.icon}`} />
-                  <Button
-                    onClick={() => onRemoveDownloadFile(idx)}
-                    className="absolute left-0 top-0 flex h-10 w-10 min-w-fit items-center justify-center border bg-white"
-                  >
-                    <Delete_icon />
-                  </Button>
+                  <div className="absolute left-0 top-0">
+                    <Button
+                      onClick={() => onRemoveDownloadFile(idx)}
+                      className="flex h-10 w-10 min-w-fit items-center justify-center border bg-white"
+                    >
+                      <Delete_icon className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      // @ts-expect-error error
+                      onClick={() => setModalDownload({ info: item, open: true })}
+                      className="flex h-10 w-10 min-w-fit items-center justify-center border bg-white"
+                    >
+                      <Edit_icon />
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -395,13 +415,23 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <DownloadFile
-        onSubmit={(values) =>
-          formik.setFieldValue('downloads', [...formik.values.downloads, values])
-        }
-        show={show}
-        setShow={setShow}
-      />
+      {modalDownload.open && (
+        <DownloadFile
+          onSubmit={(values) => {
+            const prev = formik.values.downloads || [];
+
+            const updated = [
+              // @ts-expect-error error
+              ...prev.filter((item) => item._id !== values._id), // حذف آیتم قبلی اگه هست
+              values, // اضافه کردن آیتم جدید
+            ];
+
+            formik.setFieldValue('downloads', updated);
+          }}
+          modalDownload={modalDownload}
+          setModalDownload={setModalDownload}
+        />
+      )}
     </div>
   );
 };

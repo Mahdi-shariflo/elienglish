@@ -6,11 +6,24 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Button from '../common/Button';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
+import { SITE_NAME } from '@/lib/variable';
+import { request } from '@/lib/safeClient';
 
 const DownloadFiles = ({ blog }: { blog: Blog }) => {
   const [show, setShow] = useState(false);
   const user = useSession();
   if (Number(blog?.downloads?.length) < 1) return null;
+  const handleDirectDownload = async (url: string, filename: string) => {
+    const response = await request({ url });
+    const blob = await response.data.blob();
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <div className="mt-[24px]">
@@ -78,9 +91,8 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                     دانلود
                   </Button>
                 ) : (
-                  <a
-                    download
-                    href={item?.url}
+                  <button
+                    onClick={() => handleDirectDownload(item.url, SITE_NAME)}
                     className="flex h-[40px] w-[120px] items-center justify-center gap-2 rounded-lg bg-main font-medium text-white"
                   >
                     <span>دانلود</span>
@@ -92,6 +104,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
+                        \
                         <path
                           d="M19 13.2246C19.1326 13.2246 19.2597 13.2773 19.3535 13.3711C19.4473 13.4649 19.5 13.592 19.5 13.7246V17.7246C19.5 18.3876 19.2364 19.0233 18.7676 19.4922C18.2987 19.961 17.663 20.2246 17 20.2246H3C2.41989 20.2246 1.86086 20.0226 1.41602 19.6582L1.23242 19.4922C0.763581 19.0233 0.5 18.3876 0.5 17.7246V13.7246L0.509766 13.627C0.522549 13.5628 0.547692 13.5017 0.583984 13.4473L0.646484 13.3711C0.740253 13.2773 0.867392 13.2246 1 13.2246C1.13261 13.2246 1.25975 13.2773 1.35352 13.3711C1.44728 13.4649 1.5 13.592 1.5 13.7246V17.7246C1.5 18.1224 1.65815 18.5039 1.93945 18.7852C2.22076 19.0665 2.60218 19.2246 3 19.2246H17C17.3978 19.2246 17.7792 19.0665 18.0605 18.7852C18.3419 18.5039 18.5 18.1224 18.5 17.7246V13.7246C18.5 13.592 18.5527 13.4649 18.6465 13.3711C18.7403 13.2773 18.8674 13.2246 19 13.2246ZM10 1.22461C10.0994 1.22461 10.1958 1.25424 10.2773 1.30859L10.3535 1.37109C10.4473 1.46486 10.5 1.592 10.5 1.72461V12.5254L11.3545 11.667L13.6436 9.36816C13.7381 9.27363 13.8663 9.2207 14 9.2207C14.1337 9.2207 14.2619 9.27363 14.3564 9.36816C14.451 9.4627 14.5039 9.59092 14.5039 9.72461C14.5039 9.82486 14.4737 9.92171 14.4189 10.0039L14.3564 10.0811L10.3643 14.0732C10.3406 14.0959 10.3146 14.1162 10.2871 14.1338L10.1992 14.1787L10.1885 14.1826L10.1777 14.1875C10.1218 14.2122 10.0612 14.2246 10 14.2246C9.93881 14.2246 9.87824 14.2122 9.82227 14.1875L9.81152 14.1826L9.80078 14.1787L9.71289 14.1338L9.63574 14.0732L5.64355 10.0811C5.59683 10.0343 5.55951 9.97899 5.53418 9.91797C5.50885 9.85681 5.49609 9.79081 5.49609 9.72461C5.49609 9.65841 5.50885 9.59241 5.53418 9.53125C5.55951 9.47023 5.59683 9.41489 5.64355 9.36816C5.69027 9.32144 5.74562 9.28412 5.80664 9.25879C5.8678 9.23346 5.9338 9.2207 6 9.2207C6.0662 9.2207 6.1322 9.23346 6.19336 9.25879C6.2239 9.27147 6.25292 9.28736 6.28027 9.30566L6.35645 9.36816L8.64551 11.667L9.5 12.5254V1.72461C9.5 1.62517 9.52963 1.5288 9.58398 1.44727L9.64648 1.37109C9.71689 1.30069 9.80611 1.25355 9.90234 1.23438L10 1.22461Z"
                           fill="black"
@@ -99,7 +112,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                         />
                       </svg>
                     </span>
-                  </a>
+                  </button>
                 )}
               </div>
             ))}

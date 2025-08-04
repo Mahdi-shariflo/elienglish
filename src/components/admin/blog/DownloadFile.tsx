@@ -5,19 +5,35 @@ import React from 'react';
 import Media from '../common/Media';
 import { BASEURL } from '@/lib/variable';
 import * as Yup from 'yup';
+import { v4 as uuidv4 } from 'uuid';
+
 type Props = {
   onSubmit?: (values: any) => void;
-  show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
+  modalDownload: {
+    open: boolean;
+    info: any;
+  };
+  setModalDownload: React.Dispatch<
+    React.SetStateAction<{
+      open: boolean;
+      info: any;
+    }>
+  >;
 };
-const DownloadFile = ({ onSubmit, setShow, show }: Props) => {
-  const onClose = () => setShow(false);
+const DownloadFile = ({ onSubmit, modalDownload, setModalDownload }: Props) => {
+  const onClose = () =>
+    setModalDownload({
+      info: null,
+      open: false,
+    });
+
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
-      title: '',
-      size: '',
-      url: undefined,
-      icon: undefined,
+      title: modalDownload.info?.title || '',
+      size: modalDownload.info?.size || '',
+      url: modalDownload.info?.url || undefined,
+      icon: modalDownload.info?.icon || undefined,
     },
     validationSchema: Yup.object({
       title: Yup.string().required('فیلد اجباری است'),
@@ -26,7 +42,13 @@ const DownloadFile = ({ onSubmit, setShow, show }: Props) => {
       icon: Yup.string().required('فیلد اجباری است'),
     }),
     onSubmit: (values, { resetForm }) => {
-      if (onSubmit) onSubmit(values);
+      if (onSubmit) {
+        const finalValues = modalDownload.info
+          ? { ...modalDownload.info, ...values } // اگر بخوای آی‌دی هم بفرستی برای ویرایش
+          : { ...values, _id: uuidv4() };
+
+        onSubmit(finalValues);
+      }
       resetForm();
       onClose();
     },
@@ -36,7 +58,7 @@ const DownloadFile = ({ onSubmit, setShow, show }: Props) => {
       onClose={onClose}
       onClickFooter={() => formik.handleSubmit()}
       title="فایل دانلود"
-      isOpen={show}
+      isOpen={modalDownload.open}
     >
       <div className="grid grid-cols-2 gap-4">
         <Input formik={formik} name="title" label={'عنوان'} />

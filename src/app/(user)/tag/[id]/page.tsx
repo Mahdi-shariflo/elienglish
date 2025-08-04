@@ -57,9 +57,9 @@ const Page = async ({ searchParams, params }: Props) => {
             },
           ]}
         />
-        <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
+        <div className="flex flex-col items-start lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
-            title="برچسب بلاگ‌ها"
+            title="دسته‌بندی وبلاگ‌ها"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
@@ -94,17 +94,17 @@ const Page = async ({ searchParams, params }: Props) => {
               children: [],
             }}
           />
-          <div className="flex-1">
+          <div className="w-full flex-1">
             <SelectedFilterBlog />
-            <div className="mt-5">
-              {Number(blog.blogs.length) <= 0 ? (
-                <p className="dark:txet-white mt-10 text-center font-medium text-[14px] text-[#505B74] lg:mt-32 lg:text-[18px]">
+            <div className="mt-5 w-full">
+              {Number(blog?.blogs?.length) <= 0 ? (
+                <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
                   مقاله‌ای یافت نشد
                 </p>
               ) : (
                 <>
                   <Sort />
-                  <div className="mt-2 w-full rounded-lg px-3 dark:bg-[#263248]">
+                  <div className="w-full rounded-lg px-3 dark:bg-[#172334] lg:mt-2">
                     {blog.blogs.map((blog, idx) => (
                       <CardBlog blog={blog} key={idx} />
                     ))}
