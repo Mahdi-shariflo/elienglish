@@ -42,9 +42,8 @@ interface InitialValues {
   metaDescription: string;
   keyWords: string;
   robots: string;
-  redirecturl: string;
   redirectType: string;
-  canonicalurl: string;
+  canonicalUrl: string;
   type: string;
   shortDescription: string;
   coverVideo: { url: string; _id: string } | undefined;
@@ -90,9 +89,8 @@ const Page = () => {
       metaDescription: '',
       keyWords: '',
       robots: '',
-      redirecturl: '',
+      canonicalUrl: '',
       redirectType: '',
-      canonicalurl: '',
       readTime: '',
     },
     validationSchema: Yup.object({
@@ -123,13 +121,10 @@ const Page = () => {
           .filter((item) => Boolean(item)),
         category: values.category.map((option: string) => option).join(','),
         thumbnailImage: values.thumbnailImage?._id,
-        robots: values.robots,
-        canonicalurl: values.canonicalurl,
+        canonicalUrl: values.canonicalUrl,
         redirectType: Number(values?.redirectType),
-        redirecturl: values.redirecturl,
-        metaTitle: values.metaTitle,
-        metaDescription: values.metaDescription,
-        keyWords: values.keyWords,
+
+        keyWords: values.keyWords.split(','),
       };
 
       mutate({ data: removeEmptyFields(formdata) });
@@ -161,10 +156,9 @@ const Page = () => {
           return { ...item, _id: uuidv4() };
         }),
         metaDescription: blog.metaDescription,
-        keyWords: blog.keyWords.map((item: string) => item).join(','),
         ...(blog.robots ? { robots: blog.robots } : null),
-        ...(blog.canonicalurl ? { canonicalurl: blog.canonicalurl } : null),
-        ...(blog.redirecturl ? { redirecturl: blog.redirecturl } : null),
+        ...(blog.canonicalUrl ? { canonicalUrl: blog.canonicalUrl } : null),
+        ...(blog.redirectUrl ? { redirectUrl: blog.redirectUrl } : null),
         ...(blog.redirectType
           ? {
               redirectType: optionRedirectType.find(

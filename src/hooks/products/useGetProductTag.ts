@@ -9,13 +9,18 @@ type Props = {
   freePlan?: boolean;
   available?: boolean;
 };
-export const useGetProductTag = ({ page = '1', sort = '', search = '', filter = '' }: Props) => {
+export const useGetProductTag = ({
+  page = '1',
+  sort = 'createdAt_desc',
+  search = '',
+  filter = '',
+}: Props) => {
   // Debounce the search input
   return useQuery({
     queryKey: ['product-tags-admin', page, sort, search, filter],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/product-tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/product/admin/tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

@@ -16,7 +16,7 @@ import { useActionProductAdmin } from '@/hooks/admin/products/useActionProductAd
 import { useActionVariable } from '@/hooks/admin/products/useActionVariable';
 import { useGetProductById } from '@/hooks/admin/products/useGetProductById';
 import { converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
-import { StatusOptionsAdmin } from '@/lib/data';
+import { optionRedirectType, StatusOptionsAdmin } from '@/lib/data';
 import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
 import { BASEURL } from '@/lib/variable';
 import { Chip, Tab, Tabs } from '@heroui/react';
@@ -43,7 +43,6 @@ const initialValues = {
   discountTime: '',
   count: 1,
   published: 'false',
-  rozeBox: '',
   metaTitle: '',
   metaDescription: '',
   keyWords: '',
@@ -72,14 +71,20 @@ const mapProductToFormValues = (product: any) => ({
   discountTime: converDatePer(product.discountTime) || '',
   count: product.count || 1,
   published: product.published ? 'true' : 'false',
-  metaTitle: product.metaTitle || '',
-  metaDescription: product.metaDescription || '',
-  keyWords: product.keyWords || '',
+  metaTitle: product.metaTitle,
   variablesAttribiutes: product.variablesAttribiutes || [],
-  robots: product.robots || '',
-  redirectType: product.redirectType || '',
-  redirecturl: product.redirecturl || '',
   children: product?.children,
+  metaDescription: product.metaDescription,
+  keyWords: product.keyWords.map((item: string) => item).join(','),
+  ...(product.robots ? { robots: product.robots } : null),
+  ...(product.canonicalUrl ? { canonicalUrl: product.canonicalUrl } : null),
+  ...(product.redirectUrl ? { redirectUrl: product.redirectUrl } : null),
+  ...(product.redirectType
+    ? {
+        redirectType: optionRedirectType.find((item) => Number(item.value) === product.redirectType)
+          ?.value,
+      }
+    : ''),
 });
 
 const Page = () => {
@@ -106,17 +111,19 @@ const Page = () => {
         // @ts-expect-error error
         tags: values?.tags.map((item) => item._id),
         category: values?.category.join(','),
-        categories: values?.categories.map((item: { _id: string }) => item._id).join(','),
+        categories: values?.categories,
         price: +removeNumNumeric(values.price),
         discountPrice: +removeNumNumeric(values.discountPrice),
         count: Number(values.count),
         // @ts-expect-error error
         description: editorRef?.current?.getContent(),
         properties: values?.properties,
+        keyWords: values.keyWords.split(','),
+        redirectType: Number(values?.redirectType),
       };
       // add and update product
       mutate({ data: removeEmptyFields(data), id: id! });
-      // add and update cariable product
+      // // add and update cariable product
       if (values.children.length >= 1) {
         values?.children?.map((varible: any) =>
           mutateVariable({

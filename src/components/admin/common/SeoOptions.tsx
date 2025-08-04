@@ -46,14 +46,14 @@ const SeoOptions = ({ formik }: Props) => {
             <Input
               label="canonical"
               classNameInput="!h-[48px] "
-              name="canonicalurl"
+              name="canonicalUrl"
               formik={formik}
             />
             <Input label="robots" classNameInput="!h-[48px] " name="robots" formik={formik} />
             <Input
               label="redirecturl"
               classNameInput="!h-[48px] "
-              name="redirecturl"
+              name="redirectUrl"
               formik={formik}
             />
           </div>
