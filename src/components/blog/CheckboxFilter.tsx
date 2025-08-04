@@ -1,5 +1,5 @@
 import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
-import React, { useEffect, useMemo, useState, useTransition } from 'react';
+import React, { useEffect, useMemo, useTransition } from 'react';
 import { FilterCategory } from '@/store/types';
 import { usePathname, useRouter } from 'next/navigation';
 import useGlobalStore from '@/store/global-store';
@@ -20,6 +20,7 @@ type Props = {
 const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   const { setIsPendingCategory } = useGlobalStore();
   const [isPending, startTransition] = useTransition();
+
   const pathname = usePathname();
   const router = useRouter();
 
@@ -41,7 +42,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     'weekday',
     'lpaStatus',
   ];
-
   const onAttributes = ({
     checked,
     type,
@@ -56,7 +56,16 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     isLink?: boolean;
   }) => {
     startTransition(() => {
-      if (isLink && page) return router.push(page);
+      // اگر لینک هست و صفحه داره
+      if (isLink && page) {
+        // اگر سینگل هست و غیرفعال میشه، برگرد عقب
+        if (singleSelectTypes.includes(type) && !checked) {
+          return router.back();
+        }
+        // در غیر این صورت به صفحه جدید برو
+        return router.push(page);
+      }
+
       const currentUrl = new URL(window.location.href);
       const searchParams = new URLSearchParams(currentUrl.search);
       const isSingle = singleSelectTypes.includes(type);

@@ -92,7 +92,7 @@ const Page = async ({ searchParams, params }: Props) => {
                       <CardProduct
                         url={`/product/${product.url}/`}
                         classImage="!object-contain "
-                        classNameImage="mt-5 px-2 w-full !h-[260px] lg:!h-[220px]"
+                        classNameImage="lg:pt-5 px-2 w-full dark:bg-white !h-[260px] lg:!h-[240px]"
                         className="!h-[400px] w-full dark:bg-[#172334] lg:!h-[400px] dark:lg:bg-transparent"
                         product={product}
                         key={idx}

@@ -146,6 +146,10 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                       />
                     </svg>
                   </span>
+
+                  <p className="font-medium dark:text-[#E5EAEF]">
+                    {item?.author?.firstName} {item?.author?.lastName}
+                  </p>
                   {comment?.author.role === 'ADMIN' || comment?.author.role === 'GOD' ? (
                     <div className="flex items-center gap-2">
                       <span>
@@ -165,9 +169,6 @@ const CardComment = ({ comment, commentInfo }: { commentInfo: CommentInfo; comme
                       <span className="font-medium text-main">پشتیبانی</span>
                     </div>
                   ) : null}
-                  <p className="font-medium dark:text-[#E5EAEF]">
-                    {item?.author?.firstName} {item?.author?.lastName}
-                  </p>
                   <div className="flex items-center gap-2">
                     <svg
                       width="24"

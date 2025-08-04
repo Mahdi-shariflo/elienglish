@@ -6,7 +6,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import Button from '../common/Button';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
-import { SITE_NAME } from '@/lib/variable';
+import { BASEURL_SITE, SITE_NAME } from '@/lib/variable';
 import { request } from '@/lib/safeClient';
 
 const DownloadFiles = ({ blog }: { blog: Blog }) => {
@@ -91,8 +91,9 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                     دانلود
                   </Button>
                 ) : (
-                  <button
-                    onClick={() => handleDirectDownload(item.url, SITE_NAME)}
+                  <a
+                    href={`${item.url}`}
+                    download
                     className="flex h-[40px] w-[120px] items-center justify-center gap-2 rounded-lg bg-main font-medium text-white"
                   >
                     <span>دانلود</span>
@@ -112,7 +113,7 @@ const DownloadFiles = ({ blog }: { blog: Blog }) => {
                         />
                       </svg>
                     </span>
-                  </button>
+                  </a>
                 )}
               </div>
             ))}
