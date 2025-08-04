@@ -6,7 +6,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <Header categories="" />
-      <div className="pt-[10rem] lg:pt-52">{children}</div>
+      <div className="pb-10 pt-[10rem] lg:mb-32 lg:pt-52">{children}</div>
       <Footer />
     </div>
   );

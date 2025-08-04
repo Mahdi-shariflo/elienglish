@@ -60,6 +60,9 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
       if (isLink && page) {
         // اگر سینگل هست و غیرفعال میشه، برگرد عقب
         if (singleSelectTypes.includes(type) && !checked) {
+          if (pathname.startsWith('/category-product')) return router.push('/product');
+          if (pathname.startsWith('/course-category')) return router.push('/courses');
+          if (pathname.startsWith('/category')) return router.push('/courses');
           return router.back();
         }
         // در غیر این صورت به صفحه جدید برو

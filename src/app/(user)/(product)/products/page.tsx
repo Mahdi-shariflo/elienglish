@@ -35,7 +35,19 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <div className="container_page">
-        <Breadcrumbs breadcrumbs={[{ id: 'l', title: 'محصولات', url: '#' }]} />
+        <Breadcrumbs
+          breadcrumbs={[
+            {
+              id: '1234',
+              title: decodeURIComponent(
+                Array.isArray(product?.products) && Number(product?.products?.length) >= 1
+                  ? product.products[0].category.title
+                  : 'محصولات'
+              ),
+              url: '#',
+            },
+          ]}
+        />
         <div className="flex flex-col items-start gap-0 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی محصولات"

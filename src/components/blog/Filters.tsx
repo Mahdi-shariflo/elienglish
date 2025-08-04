@@ -66,7 +66,7 @@ const Filters = ({ searchParams, resultFilter, title }: Props) => {
   const sortName = sorts.find((item) => item?.sort === searchParams.sort);
   const searchParamsLength = Object.values(searchParams).filter((v) => v !== undefined).length;
   return (
-    <div className="mt-3 w-full lg:sticky lg:top-44 lg:mt-0 lg:w-fit">
+    <div className="mt-3 w-full lg:sticky lg:top-56 lg:mt-0 lg:w-fit">
       {/* mobile sort and filter */}
       <div className="flex w-full items-center gap-3 lg:hidden">
         <Button
