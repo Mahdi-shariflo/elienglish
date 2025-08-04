@@ -8,9 +8,42 @@ import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 import SelectedFilterProduct from '@/components/product/SelectedFilterProduct';
 import { buildQueryFromSearchParams } from '@/lib/regexes';
+import { Metadata, ResolvingMetadata } from 'next';
+import { BASEURL_SITE } from '@/lib/variable';
+import { getRobotsMeta } from '@/seo/common';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  // read route params
+  const hasQueryParams = await searchParams;
+
+  return {
+    title: 'محصولات',
+    description: 'توضیح محصولات',
+    alternates: {
+      canonical: `${BASEURL_SITE}/products`,
+    },
+    robots: getRobotsMeta(
+      hasQueryParams
+        ? {
+            index: false,
+            follow: false,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+        : {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+    ),
+  };
+}
 
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
@@ -39,18 +72,14 @@ const Page = async ({ searchParams }: Props) => {
           breadcrumbs={[
             {
               id: '1234',
-              title: decodeURIComponent(
-                Array.isArray(product?.products) && Number(product?.products?.length) >= 1
-                  ? product.products[0].category.title
-                  : 'محصولات'
-              ),
+              title: 'محصولات',
               url: '#',
             },
           ]}
         />
         <div className="flex flex-col items-start gap-0 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
-            title="دسته‌بندی محصولات"
+            title=" محصولات"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
