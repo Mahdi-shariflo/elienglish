@@ -1,6 +1,6 @@
 import { pages } from '@/lib/data';
 import { notFound } from 'next/navigation';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 const STATIC_FILE_REGEX = /\.(xml|json|txt|jpg|jpeg|png|svg|ico|webp)$/i;
 type Props = {
   params: Promise<{ [key: string]: string }>;
