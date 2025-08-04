@@ -15,6 +15,7 @@ import React from 'react';
 import { getmetadatSingleMag, jsonLdSingleMag, jsonLdSingleMagBreadcramp } from '@/seo/mag';
 import { Metadata } from 'next';
 import InfoBlog from '@/components/blog/InfoBlog';
+
 type Props = {
   params: Promise<{ [key: string]: string }>;
 };

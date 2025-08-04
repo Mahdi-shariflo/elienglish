@@ -39,3 +39,11 @@ export const gonePaths = [
 ] as string[];
 
 export const protectedRoute = ['/checkout', '/address', '/admin', '/profile'];
+export const EXCLUDED_PATHS = [
+  '/auth',
+  '/verify',
+  '/favicon.ico',
+  '/robots.txt',
+  '/manifest.json',
+  '/sitemap.xml',
+];

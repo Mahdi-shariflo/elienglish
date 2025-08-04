@@ -3,6 +3,7 @@ import { handleAuthProtection } from './middleware.auth';
 import { handleGonePaths } from './middleware.gone';
 import { handleMagRedirect } from './middleware.mag-redirect';
 import { handleNoIndex } from './middleware.noindex';
+import { EXCLUDED_PATHS } from './middleware.constants';
 
 export async function middleware(request: NextRequest) {
   // set log in middleware
@@ -14,7 +15,13 @@ export async function middleware(request: NextRequest) {
   // handleFingerprint(request, response);
 
   // Allow static file extensions
-  if (/\.(xml|json|txt|jpg|png|svg|ico)$/i.test(pathname)) {
+  if (
+    EXCLUDED_PATHS.some((p) => pathname.startsWith(p)) ||
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/static') ||
+    /\.(xml|json|txt|jpg|jpeg|png|svg|ico|webp)$/i.test(pathname)
+  ) {
     return response;
   }
 
@@ -28,10 +35,6 @@ export async function middleware(request: NextRequest) {
   // Redirect unauthorized users from protected routes
   const authRes = await handleAuthProtection(request);
   if (authRes) return authRes;
-
-  // Redirect unknown slugs to /mag/{id} if exists
-  const magRes = await handleMagRedirect(request);
-  if (magRes) return magRes;
 
   return response;
 }

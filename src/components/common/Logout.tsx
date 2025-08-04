@@ -23,7 +23,7 @@ const Logout = () => {
   return (
     <>
       <BaseDialog onClose={setLogout} size="lg" isOpen={logout} title="خروج از حساب کاربری">
-        <p className="p-6 text-center font-medium text-lg">
+        <p className="p-6 text-center font-medium text-lg dark:text-white">
           آیا مطمئن هستید که میخواهید از حساب کاربری خود خارج شوید
         </p>
         <div className="flex items-center gap-8">

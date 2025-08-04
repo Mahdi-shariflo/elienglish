@@ -2,12 +2,13 @@
 import { headers } from '@/lib/safeClient';
 import { BASEURL } from '@/lib/variable';
 import { NextRequest, NextResponse } from 'next/server';
+import { pages } from './middleware.constants';
 
 export async function handleGonePaths(request: NextRequest): Promise<NextResponse | null> {
   const pathname = new URL(request.url).pathname;
-
-  // فقط روی مسیرهای blog اعمال بشه
-  if (!pathname.startsWith('/blog')) return NextResponse.next();
+  // اگه مسیر جزو مسیرهای استاتیک بود، ادامه بده (هیچ fetch ای نزن)
+  const isAllowedPage = pages.some((page) => pathname === page || pathname.startsWith(page + '/'));
+  if (isAllowedPage) return null;
 
   const res = await fetch(`${BASEURL}/blog/detail${decodeURIComponent(pathname)}`, {
     headers,
