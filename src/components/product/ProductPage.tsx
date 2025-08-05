@@ -39,7 +39,7 @@ const ProductPage = ({ children, product }: Props) => {
           {
             title: product?.category?.title,
             id: '1',
-            url: `/product-category/${product?.category?.url}`,
+            url: `${product?.category?.url}`,
           },
         ]
       : []),
@@ -48,10 +48,7 @@ const ProductPage = ({ children, product }: Props) => {
 
   return (
     <div className="-mt-12 lg:mb-32 lg:mt-0 lg:pt-4">
-      <Breadcrumbs
-        className="container_page mt-8 lg:mt-7"
-        breadcrumbs={[...breadcrumb, { title: product.title, url: '', id: '1' }]}
-      />
+      <Breadcrumbs className="container_page mt-8 lg:mt-7" breadcrumbs={[...breadcrumb]} />
 
       <div className="lg:container_page mt-14 flex flex-col items-start gap-6 lg:mt-3 lg:flex-row">
         <div className="w-full">

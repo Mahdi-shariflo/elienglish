@@ -1,15 +1,19 @@
 'use client';
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
+import Loading from '@/components/common/Loading';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 
 const Search = ({ search }: { search: string }) => {
+  const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const [inputValue, setInputValue] = useState(search || '');
 
   const handleSearch = () => {
-    router.push(`/faq-search?search=${inputValue}`);
+    startTransition(() => {
+      router.push(`/faq-search?search=${inputValue}`);
+    });
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +28,7 @@ const Search = ({ search }: { search: string }) => {
 
   return (
     <>
+      {isPending && <Loading />}
       <Input
         value={inputValue}
         onChange={handleInputChange}

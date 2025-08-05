@@ -36,10 +36,10 @@ export async function generateMetadata({ searchParams, params }: Props): Promise
     : null;
 
   return {
-    title: 'تگ مجصولات',
-    description: 'توضیح تگ محصولات',
+    title: encodeURIComponent(id),
+    description: encodeURIComponent(id),
     alternates: {
-      canonical: `${BASEURL_SITE}/product-tag/${Array.isArray(product.categories) ? product.categories[0].url : ''}`,
+      canonical: `${BASEURL_SITE}/product-tag/${encodeURIComponent(id)}`,
     },
     robots: getRobotsMeta(
       hasQueryParams
@@ -88,6 +88,8 @@ const Page = async ({ searchParams, params }: Props) => {
       page: `/product-category/${item.url}`,
     };
   });
+  console.log(product, 'productproductproductproductproduct');
+
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <Script
@@ -107,6 +109,11 @@ const Page = async ({ searchParams, params }: Props) => {
             {
               id: '1234',
               title: selectedCategory?.title || 'محصولات',
+              url: '#',
+            },
+            {
+              id: '12346',
+              title: decodeURIComponent(id),
               url: '#',
             },
           ]}

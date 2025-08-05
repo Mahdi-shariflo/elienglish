@@ -52,7 +52,10 @@ const Page = async ({ searchParams }: Props) => {
         </p>
         <Search search={search} />
       </div>
-      <div className="lg:container_page mt-10 flex flex-col gap-10 lg:gap-[100px]">
+      <div className="lg:container_page mt-10 flex flex-col gap-5 lg:gap-[50px]">
+        <p className="container_page font-medium text-white lg:text-[16px]">
+          تعداد سوالات یافت شده: <span className="text-[#8E98A8]">{faq?.faq?.length} سوال</span>
+        </p>
         {!search && <Categories path="/faq-category" categories={faq?.categories} />}
         {faq?.faq?.length >= 1 && <FrequentlyAskedQuestions faqs={faq.faq} />}
       </div>

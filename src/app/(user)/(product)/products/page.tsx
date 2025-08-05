@@ -11,6 +11,8 @@ import { buildQueryFromSearchParams } from '@/lib/regexes';
 import { Metadata, ResolvingMetadata } from 'next';
 import { BASEURL_SITE } from '@/lib/variable';
 import { getRobotsMeta } from '@/seo/common';
+import Script from 'next/script';
+import { jsonLdProductBreadcrub } from '@/seo/product';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -69,6 +71,17 @@ const Page = async ({ searchParams }: Props) => {
   });
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdProductBreadcrub({
+              title: 'محصولات' as string,
+              url: '/products' as string,
+            })
+          ),
+        }}
+      />
       <div className="container_page">
         <Breadcrumbs
           breadcrumbs={[

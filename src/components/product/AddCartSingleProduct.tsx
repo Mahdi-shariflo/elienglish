@@ -176,7 +176,7 @@ const AddtiveProduct = ({
   selected: Product[];
 }) => {
   const isMobile = useMedia('(max-width: 480px)', false);
-  const [isExpanded, setIsExpanded] = useState(!isMobile);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const handleCheckboxToggle = (item: Product) => {
     onToggle(item);

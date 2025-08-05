@@ -36,7 +36,7 @@ const FrequentlyAskedQuestions = ({ faqs, icon, className, title }: Props) => {
               </svg>
             </div>
           )}
-          <p className="mt-5 text-center font-bold text-xl text-[#33435A] dark:text-white">
+          <p className="mt-5 text-center font-bold text-xl text-white">
             {title ?? 'پرسش‌های متدوال'}
           </p>
         </>

@@ -32,12 +32,14 @@ export async function generateMetadata({ searchParams, params }: Props): Promise
     totalPages: number;
     categories: { title: string; url: string }[];
   } = result?.data?.data;
-
+  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.products)
+    ? product.products[0].category
+    : null;
   return {
-    title: 'دسته بندی مجصولات',
-    description: 'توضیح دسته بندی محصولات',
+    title: selectedCategory?.title,
+    description: selectedCategory?.title,
     alternates: {
-      canonical: `${BASEURL_SITE}/archive-category/${Array.isArray(product.categories) ? product.categories[0].url : ''}`,
+      canonical: `${BASEURL_SITE}/archive-category/${encodeURIComponent(id)}`,
     },
     robots: getRobotsMeta(
       hasQueryParams
@@ -72,6 +74,10 @@ const Page = async ({ searchParams, params }: Props) => {
     totalPages: number;
     categories: { title: string; url: string }[];
   } = result?.data?.data;
+  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.products)
+    ? product.products[0].category
+    : null;
+
   const categories = product?.categories?.map((item, idx) => {
     return {
       _id: idx.toString(),
@@ -85,12 +91,13 @@ const Page = async ({ searchParams, params }: Props) => {
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
       <Script
+        id="user-layout-layoutwithdefaultmetadata-product-construct"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             jsonLdProductBreadcrub({
-              title: id as string,
-              url: id as string,
+              title: selectedCategory?.title as string,
+              url: selectedCategory?.url as string,
             })
           ),
         }}
@@ -100,7 +107,7 @@ const Page = async ({ searchParams, params }: Props) => {
           breadcrumbs={[
             {
               id: '1234',
-              title: id || 'محصولات',
+              title: decodeURIComponent(id) || 'محصولات',
               url: '#',
             },
           ]}

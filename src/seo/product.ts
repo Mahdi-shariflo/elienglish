@@ -123,13 +123,12 @@ export const jsonLdProduct = ({ product, comments }: Props) => {
 };
 
 export const jsonLdProductBreadcrub = ({ title, url }: { title: string; url: string }) => {
-  // Divide by the length of the array to get the average
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: title,
     itemListOrder: 'https://schema.org/ItemListOrderDescending',
-    numberOfItems: 3,
+    numberOfItems: 2,
     itemListElement: [
       {
         '@type': 'ListItem',

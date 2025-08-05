@@ -1,5 +1,6 @@
 import FrequentlyAskedQuestions from '@/components/faq/FrequentlyAskedQuestions';
 import { request } from '@/lib/safeClient';
+import Link from 'next/link';
 import React from 'react';
 type Props = {
   params: Promise<{ [key: string]: string }>;
@@ -9,6 +10,7 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const data = await request({ url: `/faq/archive-category?slug=${id}` });
   const faq = data?.data?.data;
+  console.log(faq);
   return (
     <div className="-mt-14 mb-32 lg:-mt-7">
       <div className="bg-faq flex h-[280px] w-full flex-col items-center justify-center lg:h-[341px]"></div>
@@ -156,7 +158,7 @@ const Page = async ({ params }: Props) => {
                 </svg>
               </span>
             }
-            title="دسته‌بندی پرسش‌ها"
+            title={`دسته‌بندی  ${Array.isArray(faq.faq) ? faq?.faq[0]?.category?.title : ''}`}
             faqs={faq.faq}
           />
         ) : (
@@ -165,6 +167,13 @@ const Page = async ({ params }: Props) => {
           </p>
         )}
       </div>
+
+      <Link
+        className="mx-auto mt-14 block w-fit rounded-lg border p-3 text-center font-medium !text-[#8E98A8] dark:!text-white"
+        href={'/faq'}
+      >
+        بازگشت به صفحه سوالات متداول
+      </Link>
     </div>
   );
 };
