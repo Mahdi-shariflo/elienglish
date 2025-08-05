@@ -29,6 +29,8 @@ import SelectPropertyCourseModal from '@/components/admin/courses/SelectProperty
 import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqAdmin';
 import Textarea from '@/components/common/form/Textarea';
 import Checkbox from '@/components/common/form/Checkbox';
+import SelectCourseTag from '@/components/admin/courses/SelectCourseTag';
+import VideoPlayer from '@/components/admin/common/VideoPlayer';
 const initialValues = {
   title: '',
   faqIdCat: '',
@@ -297,7 +299,7 @@ const Page = () => {
                 formik={formik}
               />
 
-              <SelectProductTag
+              <SelectCourseTag
                 title="انتخاب تگ"
                 onChange={(values) => formik.setFieldValue('tags', values)}
                 values={formik.values.tags}
@@ -496,10 +498,10 @@ const Page = () => {
                 withModal
                 onSelect={(img) => formik.setFieldValue('video', img)}
               >
-                <div className="flex h-[250px] w-full items-center justify-center overflow-hidden rounded-xl border">
+                <div className="flex w-full items-center justify-center overflow-hidden rounded-xl border">
                   {typeof formik.values.video === 'object' ? (
                     // @ts-expect-error error G
-                    <Video autoPlay src={`${BASEURL}/${formik?.values?.video?.url}`} />
+                    <VideoPlayer url={`${BASEURL}/${formik?.values?.video?.url}`} />
                   ) : (
                     <p className="text-center font-regular text-lg">
                       انتخاب ویدیو دوره <span className="text-red-500">*</span>

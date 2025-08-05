@@ -11,6 +11,7 @@ import { useGetCategoriesFaqAdmin } from '@/hooks/admin/faq/useGetCategoriesFaqA
 import Select from '@/components/common/Select';
 import { StatusOptionsAdmin } from '@/lib/data';
 import { useActionFaq } from '@/hooks/admin/faq/useActionFaq';
+import Checkbox from '@/components/common/form/Checkbox';
 
 type Props = {
   modal: {
@@ -40,12 +41,14 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       canonicalurl: '',
       metaDescription: '',
       title: '',
-      redirecturl: '',
+      redirectUrl: '',
       metaTitle: '',
       rebots: '',
       url: '',
       keyWords: '',
       redirectType: '',
+      mainPage: false,
+      category: '',
     },
     validationSchema: Yup.object({
       question: Yup.string().required('فیلد اجباری است'),
@@ -58,11 +61,13 @@ const ActionFaq = ({ modal, setModal }: Props) => {
         // @ts-expect-error error
         description: editorRef.current.getContent(),
         order: values.order,
+        mainPage: values.mainPage,
+        category: values.category,
         published: values.published === 'true' ? true : false,
         ...(values.metaTitle ? { metaTitle: values.metaTitle } : null),
         ...(values.metaDescription ? { metaDescription: values.metaDescription } : null),
         ...(values.redirectType ? { redirectType: values?.redirectType } : null),
-        ...(values.redirecturl ? { redirecturl: values.redirecturl } : null),
+        ...(values.redirectUrl ? { redirecturl: values.redirectUrl } : null),
         ...(values.rebots ? { robots: values.robots } : null),
         ...(values.keyWords ? { keyWords: values.keyWords } : null),
         ...(values.canonicalurl ? { canonicalurl: values.canonicalurl } : null),
@@ -83,6 +88,7 @@ const ActionFaq = ({ modal, setModal }: Props) => {
       formik.setValues({
         ...formik.values,
         ...modal.info,
+        category: modal?.info?.category?._id,
         published: modal.info.published ? 'true' : 'false',
       });
     } else {
@@ -131,6 +137,8 @@ const ActionFaq = ({ modal, setModal }: Props) => {
             name="published"
             formik={formik}
           />
+          {/* @ts-expect-error error */}
+          <Checkbox name="mainPage" formik={formik} label="جز سوالات اصلی است؟" />
           <Editor
             // @ts-expect-error error
             editorRef={editorRef}

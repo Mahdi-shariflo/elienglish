@@ -9,13 +9,18 @@ type Props = {
   freePlan?: boolean;
   available?: boolean;
 };
-export const useGetCourseTag = ({ page = '1', sort = '', search = '', filter = '' }: Props) => {
+export const useGetCourseTag = ({
+  page = '1',
+  sort = 'createdAt_desc',
+  search = '',
+  filter = '',
+}: Props) => {
   // Debounce the search input
   return useQuery({
     queryKey: ['course-tags-admin', page, sort, search, filter],
     queryFn: async () =>
       await safeRequest({
-        url: `/admin/course-tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
+        url: `/course/admin/tag/all?${filter ? filter : ''}&sort=${sort}&page=${page}&limit=${20}&${search ? `search=${decodeURIComponent(search!)}` : ''}`,
       }),
   });
 };

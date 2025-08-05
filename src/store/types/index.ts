@@ -185,6 +185,9 @@ export interface TagType {
   url: string;
   link: string;
   published: boolean;
+  category: {
+    _id: string;
+  };
 }
 
 export interface FormValuesCreteProduct {

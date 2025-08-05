@@ -70,8 +70,14 @@ const Categories = ({ categories, children, path }: Props) => {
             className="flex h-[108px] flex-col items-center justify-center gap-3 rounded-xl border-2 border-[#E5EAEF] bg-white dark:border-dark dark:!bg-[#172334] lg:h-[158px] lg:w-[183px] lg:gap-5"
             href={`${path}/${item.url}`}
           >
-            <Image className="h-14 w-14 object-cover" src={item?.thumbnailImage?.url} alt="" />
-            <p className="text-wrap px-3 text-center font-demibold text-main">{item.title}</p>
+            <Image
+              className="h-12 w-12 object-cover lg:h-14 lg:w-14"
+              src={item?.thumbnailImage?.url}
+              alt=""
+            />
+            <p className="text-wrap px-3 text-center font-medium text-[14px] text-main lg:font-demibold">
+              {item.title}
+            </p>
           </Link>
         ))}
       </div>
