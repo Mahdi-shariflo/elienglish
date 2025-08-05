@@ -79,7 +79,7 @@ const Page = async ({ searchParams }: Props) => {
                   url={`/course/${course.url}/`}
                   classImage="!object-fill lg:!object-cover"
                   classNameImage="!w-full !h-[286px] !w-full"
-                  className="!h-[380px] w-full lg:!h-[460px]"
+                  className="!h-[450px] w-full lg:!h-[460px]"
                   product={course}
                   key={idx}
                 >
