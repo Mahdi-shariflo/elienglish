@@ -162,7 +162,7 @@ const Page = async ({ params }: Props) => {
                     {course.properties.map((item, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center justify-between gap-2 border-b border-dashed border-[#E5EAEF] pb-3"
+                        className="flex items-center justify-between gap-2 border-b border-dashed border-[#E5EAEF] pb-3 dark:border-[#263248]"
                       >
                         <div className="flex items-center gap-2">
                           <ImageNextjs width={20} height={20} alt="" src={`${item.iconUrl}`} />
