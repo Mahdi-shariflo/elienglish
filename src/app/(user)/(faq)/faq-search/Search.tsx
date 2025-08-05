@@ -9,7 +9,7 @@ const Search = ({ search }: { search: string }) => {
   const [inputValue, setInputValue] = useState(search || '');
 
   const handleSearch = () => {
-    router.push(`/faq?search=${inputValue}`);
+    router.push(`/faq-search?search=${inputValue}`);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

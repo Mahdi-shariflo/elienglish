@@ -15,8 +15,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   const hasQueryParams = Object.keys(searchParamsFilter).length > 0;
 
   return {
-    title: 'سوالات متداول',
-    description: 'توضیح سوالات متداول',
+    title: 'سرچ سوالات متداول',
+    description: 'سرچ سوالات متداول',
     alternates: {
       canonical: `${BASEURL_SITE}/fa1`,
     },
@@ -42,7 +42,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 
 const Page = async ({ searchParams }: Props) => {
   const { search } = await searchParams;
-  const data = await request({ url: `/faq/main?search=${search}` });
+  const data = await request({ url: `/faq/search?search=${search}` });
   const faq = data?.data?.data;
   return (
     <div className="-mt-14 mb-32 lg:-mt-7">
