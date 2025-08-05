@@ -18,7 +18,13 @@ type Props = {
 const WatchVideo = ({ modal, setModal }: Props) => {
   const onClose = () => setModal({ open: false, poster: '', url: '' });
   return (
-    <BaseDialog onClose={onClose} size="5xl" title="تماشای ویدیو" isOpen={modal.open}>
+    <BaseDialog
+      shouldBlockScroll={true}
+      onClose={onClose}
+      size="5xl"
+      title="تماشای ویدیو"
+      isOpen={modal.open}
+    >
       <div>
         <VideoPlayer url={modal.url} poster="" />
       </div>

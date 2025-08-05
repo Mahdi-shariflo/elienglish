@@ -17,6 +17,7 @@ type Props = {
   isLoadingFooterBtn?: boolean;
   nameBtnBack?: string;
   onClickCancel?: () => void;
+  shouldBlockScroll?: boolean;
 };
 export default function BaseDialog({
   isLoading,
@@ -32,11 +33,12 @@ export default function BaseDialog({
   onClickFooter,
   className,
   nameBtnBack = 'بستن',
+  shouldBlockScroll = false,
 }: Props) {
   return (
     <>
       <Modal
-        shouldBlockScroll={false}
+        shouldBlockScroll={shouldBlockScroll}
         className={`relative !z-50 rounded-lg !shadow-none dark:bg-[#172334] ${className}`}
         scrollBehavior="inside"
         size={size}
