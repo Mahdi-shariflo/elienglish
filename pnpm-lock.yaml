@@ -131,6 +131,9 @@ importers:
       recharts:
         specifier: ^2.15.3
         version: 2.15.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      roz:
+        specifier: 'link:'
+        version: 'link:'
       server-only:
         specifier: ^0.0.1
         version: 0.0.1

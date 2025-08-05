@@ -12,12 +12,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import Image from '../common/Image';
-import BaseDialog from '../common/BaseDialog';
-import { BASEURL } from '@/lib/variable';
-import { BiCloset } from 'react-icons/bi';
+
 const Gallery = ({ product }: { product: Product }) => {
-  const [openVidoe, setOpenVidoe] = useState(false);
-  const handleClose = () => setOpenVidoe(false);
   const [open, setOpen] = useState(false);
   const isMobile = useMedia('(max-width: 480px)', false);
 
@@ -43,7 +39,11 @@ const Gallery = ({ product }: { product: Product }) => {
                 loop
               >
                 {newGallery.map((img, idx) => (
-                  <SwiperSlide onClick={() => setOpen(!open)} key={idx}>
+                  <SwiperSlide
+                    className="!h-[320px] !w-full bg-white"
+                    onClick={() => setOpen(!open)}
+                    key={idx}
+                  >
                     <Image
                       className="mx-auto h-[320px] w-[250px] object-contain"
                       src={`${img?.url}`}
@@ -83,7 +83,7 @@ const Gallery = ({ product }: { product: Product }) => {
                   }`}
                 >
                   <Image
-                    className="h-[65px] w-[70px] overflow-hidden !object-fill"
+                    className="h-[72px] w-[72px] overflow-hidden !object-cover"
                     src={`${img?.url}`}
                     alt=""
                   />

@@ -83,7 +83,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
       <div
         className={`style_factor_product bottom-0 left-0 z-10 flex w-full flex-col rounded-lg border border-gray-100 dark:!border-[#263248] lg:!z-0 lg:w-[288px] lg:min-w-[288px] lg:gap-3 lg:!border-gray-50 lg:p-4 ${className}`}
       >
-        <div className="bg-white dark:bg-[#172334] lg:rounded-lg lg:dark:p-2">
+        <div className="bg-white py-2 dark:bg-[#0b1524] lg:rounded-lg lg:py-0">
           {Number(product?.children.length) >= 1 && (
             <AddtiveProduct
               products={product?.children}
@@ -142,7 +142,7 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
                 typeCounter={product.type}
                 typePayload={product.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL'}
                 classNameAddBtnName="text-[12px]"
-                classAddBtn="mt-4 !min-w-[150px] !h-[43px]"
+                classAddBtn="-mt-2 lg:mt-4 !min-w-[150px] !h-[43px]"
                 classCount="border-r border-l"
                 container_Class="flex flex-col-reverse lg:flex-row items-center lg:justify-between w-full"
                 classNameCounter="border mt-2 rounded-lg border w-[96px] h-[32px] justify-start lg:ml-auto"

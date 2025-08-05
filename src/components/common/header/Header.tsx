@@ -298,7 +298,9 @@ const Header = ({ categories }: Props) => {
 
           <div
             className={`items-center justify-between transition-all duration-300 ${
-              cls === 'yes' ? 'h-0 opacity-0 lg:flex lg:h-fit lg:opacity-100' : 'h-0 opacity-0'
+              cls === 'yes'
+                ? 'hidden h-0 opacity-0 lg:flex lg:h-fit lg:opacity-100'
+                : 'h-0 opacity-0'
             }`}
           >
             <div className="flex items-center gap-[24px]">

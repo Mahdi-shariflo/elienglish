@@ -47,7 +47,7 @@ const Information = ({ product }: { product: Product }) => {
 
   return (
     <>
-      <div className="container_page lg:!w-full">
+      <div className="container_page mt-5 lg:mt-0 lg:!w-full">
         {/* title */}
         <div>
           <h1 className="line-clamp-2 pb-[16px] font-demibold text-[28px] text-lg text-[#232429] dark:text-white">
@@ -90,7 +90,10 @@ const Information = ({ product }: { product: Product }) => {
             <ul className="mt-[20px] space-y-4">
               {findainProperties.slice(0, 4).map((attribute, idx) => {
                 return (
-                  <li key={idx} className="flex items-start gap-5 border-dashed pb-3 lg:border-b-2">
+                  <li
+                    key={idx}
+                    className="flex items-start gap-5 border-dashed pb-3 dark:border-[#263248] lg:border-b-2"
+                  >
                     <span className="flex !w-fit min-w-[150px] items-center !gap-3 font-regular text-[14px] text-[#7D8793] lg:min-w-[166px] lg:gap-1">
                       <span>
                         <svg

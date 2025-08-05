@@ -96,7 +96,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
         searchParams.delete(type);
       }
 
-      searchParams.set('page', '1');
       const newQueryString = searchParams.toString();
       router.push(`${pathname}/?${newQueryString}`, { scroll: true });
     });

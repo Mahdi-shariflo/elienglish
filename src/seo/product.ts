@@ -122,12 +122,12 @@ export const jsonLdProduct = ({ product, comments }: Props) => {
   };
 };
 
-export const jsonLdProductBreadcrub = ({ product }: Props) => {
+export const jsonLdProductBreadcrub = ({ title, url }: { title: string; url: string }) => {
   // Divide by the length of the array to get the average
   return {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: product.title,
+    name: title,
     itemListOrder: 'https://schema.org/ItemListOrderDescending',
     numberOfItems: 3,
     itemListElement: [
@@ -139,7 +139,7 @@ export const jsonLdProductBreadcrub = ({ product }: Props) => {
       {
         '@type': 'ListItem',
         position: 2,
-        url: `${BASEURL_SITE}/${product.url}`,
+        url: `${BASEURL_SITE}/${url}`,
       },
     ],
   };

@@ -8,10 +8,56 @@ import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 import SelectedFilterProduct from '@/components/product/SelectedFilterProduct';
 import { buildQueryFromSearchParams } from '@/lib/regexes';
+import { BASEURL_SITE } from '@/lib/variable';
+import { getRobotsMeta } from '@/seo/common';
+import { Metadata } from 'next';
+import Script from 'next/script';
+import { jsonLdProductBreadcrub } from '@/seo/product';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string }>;
 };
+
+export async function generateMetadata({ searchParams, params }: Props): Promise<Metadata> {
+  // read route params
+  const { id } = await params;
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams = Object.keys(searchParamsFilter).length > 0;
+
+  const result = await request({
+    url: `/product/archive-category?slug=${id}`,
+  });
+  const product: {
+    products: Product[];
+    totalPages: number;
+    categories: { title: string; url: string }[];
+  } = result?.data?.data;
+
+  return {
+    title: 'دسته بندی مجصولات',
+    description: 'توضیح دسته بندی محصولات',
+    alternates: {
+      canonical: `${BASEURL_SITE}/archive-category/${Array.isArray(product.categories) ? product.categories[0].url : ''}`,
+    },
+    robots: getRobotsMeta(
+      hasQueryParams
+        ? {
+            index: false,
+            follow: false,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+        : {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+    ),
+  };
+}
 
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
@@ -38,16 +84,23 @@ const Page = async ({ searchParams, params }: Props) => {
   });
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdProductBreadcrub({
+              title: id as string,
+              url: id as string,
+            })
+          ),
+        }}
+      />
       <div className="container_page">
         <Breadcrumbs
           breadcrumbs={[
             {
               id: '1234',
-              title: decodeURIComponent(
-                Array.isArray(product?.products) && Number(product?.products?.length) >= 1
-                  ? product.products[0].category.title
-                  : 'محصولات'
-              ),
+              title: id || 'محصولات',
               url: '#',
             },
           ]}

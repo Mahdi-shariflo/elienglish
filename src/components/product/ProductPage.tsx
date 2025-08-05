@@ -47,22 +47,23 @@ const ProductPage = ({ children, product }: Props) => {
   ];
 
   return (
-    <div className="-mt-9 lg:mb-32 lg:mt-0 lg:pt-4">
-      <BackPrevPage title={product?.title} />
+    <div className="-mt-12 lg:mb-32 lg:mt-0 lg:pt-4">
+      <Breadcrumbs
+        className="container_page mt-8 lg:mt-7"
+        breadcrumbs={[...breadcrumb, { title: product.title, url: '', id: '1' }]}
+      />
 
-      <Breadcrumbs className="container_page mt-8 lg:mt-7" breadcrumbs={breadcrumb} />
-
-      <div className="lg:container_page mt-3 flex flex-col items-start gap-2 lg:flex-row 2xl:gap-8">
+      <div className="lg:container_page mt-14 flex flex-col items-start gap-6 lg:mt-3 lg:flex-row">
         <div className="w-full">
-          <div className="flex flex-col items-start gap-[11px] lg:mt-[25px] lg:min-h-[503px] lg:flex-row 2xl:gap-8">
+          <div className="flex flex-col items-start gap-4 lg:mt-[25px] lg:min-h-[503px] lg:flex-row">
             <Gallery product={product} />
             <Information product={product} />
           </div>
-          <div className="mt-10">
-            <MoreInformationProduct product={product} />
-          </div>
         </div>
         {children}
+      </div>
+      <div className="lg:container_page mt-10">
+        <MoreInformationProduct product={product} />
       </div>
     </div>
   );

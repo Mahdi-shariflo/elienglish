@@ -35,7 +35,7 @@ const ActionFavShare = ({ product }: { product: Product }) => {
   console.log(isBookmark, 'isBookmark');
   return (
     <div>
-      <div className="absolute right-0 top-0 z-30 flex flex-row gap-3 lg:mr-3 lg:flex-col lg:gap-0">
+      <div className="absolute right-3 top-0 z-30 flex flex-col gap-0 lg:mr-3 lg:gap-0">
         <Button
           onClick={() => updateFavorite(product._id, isBookmark)}
           className="w-fit !min-w-fit px-0"

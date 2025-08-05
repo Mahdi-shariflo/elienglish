@@ -17,7 +17,8 @@ type Props = {
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   // read route params
-  const hasQueryParams = await searchParams;
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams = Object.keys(searchParamsFilter).length > 0;
 
   return {
     title: 'محصولات',
@@ -55,6 +56,7 @@ const Page = async ({ searchParams }: Props) => {
     totalPages: number;
     categories: { title: string; url: string }[];
   } = result?.data?.data;
+
   const categories = product.categories.map((item, idx) => {
     return {
       _id: idx.toString(),
