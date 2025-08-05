@@ -26,8 +26,19 @@ const Page = async ({ params }: Props) => {
       <div className="mx-auto w-full pt-14 lg:max-w-[1440px] lg:pt-16">
         <Breadcrumbs
           className="container_page lg:w-full"
-          page="/course/category"
-          breadcrumbs={[{ id: '333', title: course?.title, url: '#' }]}
+          page="/course-category"
+          breadcrumbs={[
+            ...(course.category.title
+              ? [
+                  {
+                    title: course.category.title,
+                    url: course.category.url,
+                    id: '3333333',
+                  },
+                ]
+              : []),
+            { id: '333', title: course?.title, url: '#' },
+          ]}
         />
         <div className="flex flex-col items-start gap-7 pt-10 lg:flex-row">
           <div className="container_page gap-10 overflow-hidden rounded-lg lg:w-full lg:pb-8">
@@ -149,7 +160,10 @@ const Page = async ({ params }: Props) => {
                   <p className="font-regular text-[#8E98A8]">اطلاعات دوره</p>
                   <div className="mt-5 flex flex-col gap-5">
                     {course.properties.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between gap-3">
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between gap-2 border-b border-dashed border-[#E5EAEF] pb-3"
+                      >
                         <div className="flex items-center gap-2">
                           <ImageNextjs width={20} height={20} alt="" src={`${item.iconUrl}`} />
                           <p className="font-regular text-[#33435A] dark:text-[#8E98A8]">

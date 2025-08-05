@@ -15,7 +15,7 @@ import Select from '@/components/common/Select';
 import { useActionCourseAdmin } from '@/hooks/admin/courses/useActionCourseAdmin';
 import { useGetCourseById } from '@/hooks/admin/courses/useGetCourseById';
 import { converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
-import { StatusOptionsAdmin } from '@/lib/data';
+import { optionRedirectType, StatusOptionsAdmin } from '@/lib/data';
 import { createURL, generateRandomString, removeEmptyFields } from '@/lib/fun';
 import { getMediaType } from '@/lib/utils';
 import { BASEURL } from '@/lib/variable';
@@ -75,7 +75,7 @@ const initialValues = {
 const mapProductToFormValues = (product: any) => ({
   title: product.title || '',
   type: product.type || '',
-  canonicalurl: product.canonicalurl || '',
+  canonicalUrl: product.canonicalUrl || '',
   url: product.url || '',
   enTitle: product.enTitle || '',
   description: product.description || '',
@@ -93,10 +93,11 @@ const mapProductToFormValues = (product: any) => ({
   published: product.published ? 'true' : 'false',
   metaTitle: product.metaTitle || '',
   metaDescription: product.metaDescription || '',
-  keyWords: product.keyWords || '',
+  keyWords: product.keyWords.join(',') || '',
   robots: product.robots || '',
-  redirectType: product.redirectType || '',
-  redirecturl: product.redirecturl || '',
+  redirectType:
+    optionRedirectType.find((item) => Number(item.value) === product.redirectType)?.value || '',
+  redirectUrl: product.redirectUrl || '',
   faqIdCat: product.faqIdCat || '',
   shortTitle: product.shortTitle || '',
   short_des: product.short_des || '',
@@ -126,10 +127,12 @@ const Page = () => {
         published: values.published === 'false' ? false : true,
         // @ts-expect-error error
         thumbnailImage: values?.thumbnailImage?._id!,
+        redirectType: Number(values.redirectType),
         // @ts-expect-error error
         video: values?.video?._id!,
         // @ts-expect-error error
         coverVideo: values?.coverVideo?._id!,
+        keyWords: values.keyWords.split(','),
         // @ts-expect-error error
         galleryImage: values?.galleryImage?.map((item) => item._id),
         // @ts-expect-error error

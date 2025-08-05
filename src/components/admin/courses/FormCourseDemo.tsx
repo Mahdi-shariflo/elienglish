@@ -29,24 +29,83 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
     media: null,
   });
 
-  const onClose = () => setOpen(false);
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
+  const onClose = () => {
+    setOpen(false);
+    // Reset form when closing
+    setNewEpisode({ title: '', order: '', media: null });
+    setEditingIndex(null);
+  };
+
   if (idx === undefined) return null;
 
   const baseName = `demo.${idx}`;
 
   const addEpisode = () => {
     if (!newEpisode.title || !newEpisode?.media?.url) return;
+
     const newData = {
       title: newEpisode.title,
       order: newEpisode.order,
       type: getMediaType(newEpisode.media.url),
       mediaUrl: `${BASEURL}/${newEpisode?.media?.url}`,
+      media: newEpisode.media,
     };
+
     const currentEpisodes = formik.values.demo[idx]?.episodes || [];
-    const updatedEpisodes = [...currentEpisodes, newEpisode];
+    let updatedEpisodes;
+
+    if (editingIndex !== null) {
+      // Update existing episode
+      updatedEpisodes = currentEpisodes.map((ep: any, index: number) =>
+        index === editingIndex ? { ...newData } : ep
+      );
+      setEditingIndex(null);
+    } else {
+      // Add new episode
+      updatedEpisodes = [...currentEpisodes, { ...newData }];
+    }
 
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
     setNewEpisode({ title: '', order: '', media: null });
+  };
+
+  const editEpisode = (epIndex: number) => {
+    const currentEpisodes = formik.values.demo[idx]?.episodes || [];
+    const episodeToEdit = currentEpisodes[epIndex];
+
+    if (episodeToEdit) {
+      // اگر media توی episode موجود نیست، سعی کنیم از mediaUrl بسازیمش
+      let mediaToSet = episodeToEdit.media;
+      if (!mediaToSet && episodeToEdit.mediaUrl) {
+        // استخراج URL از mediaUrl و ساخت یک media object موقت
+        const url = episodeToEdit.mediaUrl.replace(`${BASEURL}/`, '');
+        const fileType =
+          episodeToEdit.type === 'video'
+            ? 'mp4'
+            : episodeToEdit.type === 'document'
+              ? 'pdf'
+              : 'mp3';
+        mediaToSet = {
+          url: url,
+          fileType: fileType,
+          title: episodeToEdit.title,
+        };
+      }
+
+      setNewEpisode({
+        title: episodeToEdit.title || '',
+        order: episodeToEdit.order || '',
+        media: mediaToSet,
+      });
+      setEditingIndex(epIndex);
+    }
+  };
+
+  const cancelEdit = () => {
+    setNewEpisode({ title: '', order: '', media: null });
+    setEditingIndex(null);
   };
 
   const removeEpisode = (epIndexToRemove: number) => {
@@ -55,6 +114,15 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
       (_: any, index: number) => index !== epIndexToRemove
     );
     formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
+
+    // If we're editing the episode that's being removed, reset the form
+    if (editingIndex === epIndexToRemove) {
+      setNewEpisode({ title: '', order: '', media: null });
+      setEditingIndex(null);
+    } else if (editingIndex !== null && editingIndex > epIndexToRemove) {
+      // Adjust editing index if needed
+      setEditingIndex(editingIndex - 1);
+    }
   };
 
   return (
@@ -150,9 +218,16 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
                 )}
               </div>
             </Media>
-            <Button className="mt-4 w-full bg-main text-white" onClick={addEpisode}>
-              ذخیره اپیزود
-            </Button>
+            <div className="mt-4 flex gap-2">
+              <Button className="!w-[120px] flex-1 bg-main !py-0 text-white" onClick={addEpisode}>
+                {editingIndex !== null ? 'بروزرسانی اپیزود' : 'ذخیره اپیزود'}
+              </Button>
+              {editingIndex !== null && (
+                <Button className="!w-[120px] bg-gray-500 !py-0 text-white" onClick={cancelEdit}>
+                  لغو
+                </Button>
+              )}
+            </div>
           </div>
 
           <div className="w-full space-y-3">
@@ -174,7 +249,12 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
         {/* لیست اپیزودهای فعلی */}
         <div className="mt-6 space-y-6">
           {(formik.values.demo[idx]?.episodes || []).map((ep: any, epIndex: number) => (
-            <div className="flex items-center justify-between" key={epIndex}>
+            <div
+              className={`flex items-center justify-between rounded-lg p-3 ${
+                editingIndex === epIndex ? 'border-2 border-blue-200 bg-blue-50' : 'bg-gray-50'
+              }`}
+              key={epIndex}
+            >
               <div className="flex items-center gap-2">
                 <span>
                   {ep.type === 'video' ? (
@@ -253,6 +333,11 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
                   )}
                 </span>
                 <span className="font-medium text-main">{ep.title}</span>
+                {editingIndex === epIndex && (
+                  <span className="rounded bg-blue-100 px-2 py-1 text-xs text-blue-600">
+                    در حال ویرایش
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-4">
                 {ep.type === 'video' ? (
@@ -264,6 +349,13 @@ const FormCourseDemo = ({ open, setOpen, formik, idx }: Props) => {
                     دانلود فایل
                   </a>
                 )}
+                <Button
+                  className="h-[36px] w-fit min-w-fit !rounded-lg bg-yellow-100 !px-2 text-yellow-600"
+                  onClick={() => editEpisode(epIndex)}
+                  disabled={editingIndex !== null}
+                >
+                  ویرایش
+                </Button>
                 <Button className="h-fit w-fit" onClick={() => removeEpisode(epIndex)}>
                   <Delete_icon />
                 </Button>
