@@ -10,6 +10,7 @@ import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import TopBanner from './TopBanner';
+import Search from './Search';
 const quickLicks = [
   {
     name: 'صفحه اصلی',
@@ -275,12 +276,12 @@ const Header = ({ categories }: Props) => {
               <Sidebar />
             </div>
             <Logo className="h-10 w-full" />
+
             <div className="flex items-center gap-2">
               <UserInformation />
             </div>
           </div>
-
-          <div className="hidden items-center justify-between lg:flex">
+          <div className="hidden items-center justify-between gap-8 lg:flex">
             <div
               className={`flex flex-[1.6] items-start gap-10 ${
                 cls === 'yes' ? 'lg:py-3' : 'lg:py-3'
@@ -289,7 +290,8 @@ const Header = ({ categories }: Props) => {
               <Logo className="hidden w-44 lg:flex" />
               {/* <Search /> */}
             </div>
-            <div className="hidden flex-1 justify-end gap-4 lg:flex">
+            <Search />
+            <div className="hidden justify-end gap-8 lg:flex">
               <ThemeSwitcher />
               <Cart />
               <UserInformation />
