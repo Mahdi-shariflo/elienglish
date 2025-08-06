@@ -32,7 +32,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   }, [searchParams]);
 
   const singleSelectTypes = [
-    'statusCourse',
+    'courseStatus',
     'sort',
     'available',
     'blogType',
@@ -97,6 +97,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
       }
 
       const newQueryString = searchParams.toString();
+
       router.push(`${pathname}/?${newQueryString}`, { scroll: true });
     });
   };

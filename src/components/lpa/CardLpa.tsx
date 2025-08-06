@@ -2,14 +2,17 @@ import React from 'react';
 import { Lpa } from '@/store/types';
 import Image from 'next/image';
 import Counter from '../common/Counter';
+import { Toman_Icon } from '../common/icon';
 const CardPlp = ({ lpa }: { lpa: Lpa }) => {
   return (
     <button
       disabled={lpa.status === 'RESERVED' ? true : false}
-      className={`rounded-lg border border-[#F4F6FA] p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334] ${lpa.status === 'RESERVED' ? 'bg-gray-200/20 blur-[0.9px]' : ''}`}
+      className={`rounded-lg border border-[#F4F6FA] p-3 drop-shadow-sm dark:border-[#263248] dark:bg-[#172334]`}
     >
       <div className="flex items-center justify-between">
-        <p className="font-demibold text-[18px] text-[#0B1524] dark:text-white">{lpa.title}</p>
+        <p className="font-demibold text-[16px] text-[#0B1524] dark:text-white lg:text-[18px]">
+          {lpa.title}
+        </p>
         <Image
           width={60}
           height={60}
@@ -18,13 +21,13 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
           alt=""
         />
       </div>
-      <div className="mt-3 space-y-3">
+      <div className="mt-4 space-y-5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1">
             <span>
               <svg
-                width="23"
-                height="23"
+                width="20"
+                height="20"
                 viewBox="0 0 16 17"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,15 +48,15 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[16px] text-[#33435A] dark:text-[#8E98A8]">
-              استاد: <span className="font-demibold">{lpa.teacherName}</span>
+            <p className="font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
+              استاد: <span className="font-demibold text-[14px]">{lpa.teacherName}</span>
             </p>
           </div>
           <div className="flex items-center gap-1">
             <span>
               <svg
-                width="20"
-                height="20"
+                width="19"
+                height="19"
                 viewBox="0 0 16 17"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,9 +67,9 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[16px] text-[#33435A] dark:text-[#8E98A8]">
+            <p className="font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
               تاریخ:{' '}
-              <span className="font-demibold">
+              <span className="font-demibold text-[14px]">
                 {new Date(lpa.date).toLocaleDateString('fa-IR', {
                   year: 'numeric',
                   month: '2-digit',
@@ -80,8 +83,8 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
           <div className="flex items-center gap-1">
             <span>
               <svg
-                width="22"
-                height="22"
+                width="20"
+                height="20"
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,33 +95,40 @@ const CardPlp = ({ lpa }: { lpa: Lpa }) => {
                 />
               </svg>
             </span>
-            <p className="font-regular text-[16px] text-[#33435A] dark:text-[#8E98A8]">
-              زمان: <span className="font-medium">{lpa.time}</span>
+            <p className="font-regular text-[14px] text-[#33435A] dark:text-[#8E98A8]">
+              زمان: <span className="font-demibold text-[14px]">{lpa.time}</span>
             </p>
           </div>
-          <p className="font-demibold text-[16px] text-[#33435A] dark:text-[#8E98A8]">
-            <span className="font-medium text-[16px]">
+          <p className="flex items-center gap-1 font-demibold text-[14px] text-[#33435A] dark:text-[#8E98A8]">
+            <span className="font-medium text-[14px] text-black dark:text-white">
               {lpa.discountPrice ? lpa.discountPrice.toLocaleString() : lpa.price.toLocaleString()}
             </span>{' '}
-            تومان
+            <Toman_Icon />
           </p>
         </div>
         <div className="flex items-center justify-between">
           <span
-            className={`flex h-[34px] items-center justify-center rounded-full border-2 border-[#FCEDE8] px-2 font-medium text-[14px] text-white ${lpa.status === 'RESERVED' ? 'bg-red-500' : 'bg-green-500'}`}
+            className={`flex h-[36px] items-center justify-center rounded-full border-2 border-[#FCEDE8] px-3 font-regular text-[12px] text-white ${lpa.status === 'RESERVED' ? 'bg-red-500' : 'bg-green-500'}`}
           >
             {lpa.status === 'RESERVED' ? 'رزرو شده' : 'در دسترس'}
           </span>
-          {lpa.status !== 'RESERVED' && (
+          {lpa.status === 'RESERVED' ? (
+            <span
+              className={`flex h-[36px] !w-[76px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#8E98A8] px-3 font-regular text-[12px] text-white`}
+            >
+              ثبت‌نام
+            </span>
+          ) : (
             <Counter
               // @ts-expect-error error
               product={lpa}
               typeCounter="lpas"
               typePayload="LEVEL"
               showBasketIcon={false}
+              nameAddBakect="ثبت‌نام"
               classNameAddBtnName="!text-[14px]"
-              classAddBtn="!h-[34px] !w-[76px] !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
-              classLinkCart="!h-[34px] !w-[76px] !rounded-lg !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
+              classAddBtn={`!h-[36px] !w-[76px] !min-w-fit !rounded-full !border-2 !text-[12px] !border-[#F4F6FA]  !text-white bg-main`}
+              classLinkCart="!h-[3۶px] !w-[76px] !rounded-lg !min-w-fit !border-2 !text-[12px] !border-[#F4F6FA] !bg-[#8E98A8] !text-white"
             />
           )}
         </div>

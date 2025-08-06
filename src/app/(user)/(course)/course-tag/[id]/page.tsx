@@ -8,10 +8,54 @@ import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 import SelectedFilterCourse from '@/components/product/SelectedFilterCourse';
 import { buildQueryFromSearchParams } from '@/lib/regexes';
+import { BASEURL_SITE } from '@/lib/variable';
+import { getRobotsMeta } from '@/seo/common';
+import { Metadata } from 'next';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string }>;
 };
+export async function generateMetadata({ searchParams, params }: Props): Promise<Metadata> {
+  // read route params
+  const { id } = await params;
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams = Object.keys(searchParamsFilter).length > 0;
+  const result = await request({
+    url: `/course/archive-tag?slug=${id}`,
+  });
+  const product: {
+    course: Course[];
+    totalPages: number;
+    categories: { title: string; url: string }[];
+  } = result?.data?.data;
+  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.course)
+    ? product.course[0].category
+    : null;
+  return {
+    title: selectedCategory?.title,
+    description: selectedCategory?.title,
+    alternates: {
+      canonical: `${BASEURL_SITE}/course-tag/${encodeURIComponent(id)}`,
+    },
+    robots: getRobotsMeta(
+      hasQueryParams
+        ? {
+            index: false,
+            follow: false,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+        : {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+    ),
+  };
+}
 
 const Page = async ({ searchParams, params }: Props) => {
   const { id } = await params;
@@ -40,7 +84,7 @@ const Page = async ({ searchParams, params }: Props) => {
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
       <div className="container_page">
-        <Breadcrumbs breadcrumbs={[{ title: 'دوره‌ها', id: '22', url: '/courses' }]} />
+        <Breadcrumbs breadcrumbs={[{ title: decodeURIComponent(id), id: '22', url: '/courses' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
             title="دسته‌بندی دوره‌ها"
@@ -62,13 +106,13 @@ const Page = async ({ searchParams, params }: Props) => {
                       _id: '1',
                       title: 'تکمیل شده',
                       url: 'completed',
-                      type: 'statusCourse',
+                      type: 'coursStatus',
                     },
                     {
                       _id: '2',
                       title: 'در حال برگزاری',
                       url: 'inProgress',
-                      type: 'statusCourse',
+                      type: 'coursStatus',
                     },
                   ],
                   displayType: 'text',
@@ -83,7 +127,7 @@ const Page = async ({ searchParams, params }: Props) => {
             <div className="mt-5 w-full">
               {Number(product?.course.length) <= 0 ? (
                 <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
-                  محصولی یافت نشد
+                  دوره یافت نشد
                 </p>
               ) : (
                 <>
@@ -94,7 +138,7 @@ const Page = async ({ searchParams, params }: Props) => {
                         url={`/course/${course.url}/`}
                         classImage="!object-cover"
                         classNameImage="!w-full !h-[286px] !w-full"
-                        className="!h-[380px] w-full lg:!h-[460px]"
+                        className="!h-[450px] w-full lg:!h-[460px]"
                         product={course}
                         key={idx}
                       >

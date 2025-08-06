@@ -19,7 +19,7 @@ const WatchVideo = ({ modal, setModal }: Props) => {
   const onClose = () => setModal({ open: false, poster: '', url: '' });
   return (
     <BaseDialog
-      shouldBlockScroll={true}
+      shouldBlockScroll={false}
       onClose={onClose}
       size="5xl"
       title="تماشای ویدیو"

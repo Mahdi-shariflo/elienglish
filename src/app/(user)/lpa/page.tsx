@@ -5,6 +5,13 @@ import CardPlp from '@/components/lpa/CardLpa';
 import { request } from '@/lib/safeClient';
 import { Lpa } from '@/store/types';
 import SelectedFilterLpa from '@/components/lpa/SelectedFilterLpa';
+import Pagination from '@/components/common/Pagination';
+import { BASEURL_SITE } from '@/lib/variable';
+import { getRobotsMeta } from '@/seo/common';
+import { Metadata } from 'next';
+import Script from 'next/script';
+import { jsonLdProductBreadcrub } from '@/seo/product';
+import { buildQueryFromSearchParams } from '@/lib/regexes';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
@@ -18,20 +25,64 @@ const days = [
   { title: 'جمعه', url: 'FRIDAY', _id: '7', type: 'weekday' },
 ];
 
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  // read route params
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams = Object.keys(searchParamsFilter).length > 0;
+
+  return {
+    title: 'تعیین سطح',
+    description: 'توضیحات سطح',
+    alternates: {
+      canonical: `${BASEURL_SITE}/lpa`,
+    },
+    robots: getRobotsMeta(
+      hasQueryParams
+        ? {
+            index: false,
+            follow: false,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+        : {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': '-1',
+          }
+    ),
+  };
+}
+
 const Page = async ({ searchParams }: Props) => {
   const searchParamsFilter = await searchParams;
+  // @ts-expect-error error
+  const querySearchParams = buildQueryFromSearchParams(searchParamsFilter);
   const data = await request({
-    url: `/lpa/archive?${searchParamsFilter.weekday ? `weekday=${searchParamsFilter?.weekday}` : ''}`,
+    url: `/lpa/archive?${querySearchParams}`,
   });
-  const lpa: { lpa: Lpa[] } = data?.data?.data;
-
+  const lpa: { lpa: Lpa[]; totalPages: number } = data?.data?.data;
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">
+      <Script
+        id="user-layout-layoutwithdefaultmetadata-product-construct"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdProductBreadcrub({
+              title: 'تعین سطح' as string,
+              url: '/lpa' as string,
+            })
+          ),
+        }}
+      />
       <div className="container_page">
-        <Breadcrumbs breadcrumbs={[{ id: '444', title: 'تعین سطح', url: '#' }]} />
-        <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
+        <Breadcrumbs page="/lpa" breadcrumbs={[{ id: '444', title: 'تعیین سطح', url: '' }]} />
+        <div className="flex flex-col items-start gap-0 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
           <Filters
-            title="تعین سطح"
+            title="تعیین سطح"
             searchParams={searchParamsFilter}
             resultFilter={{
               breadcrumb: [],
@@ -68,11 +119,17 @@ const Page = async ({ searchParams }: Props) => {
           <div className="w-full">
             <SelectedFilterLpa />
             {lpa?.lpa.length >= 1 ? (
-              <div className="mt-5 grid w-full gap-4 rounded-lg p-3 px-3 lg:!grid-cols-2">
-                {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
-
-                {/* <Pagination className="mt-10" total={blog?.totalPages} /> */}
-              </div>
+              <>
+                <div className="mt-5 grid w-full gap-4 rounded-lg lg:!grid-cols-2 lg:p-3">
+                  {lpa?.lpa.map((item, idx) => <CardPlp key={idx} lpa={item} />)}
+                </div>
+                {lpa?.lpa?.length >= 1 && (
+                  <Pagination
+                    className="mt-10 flex items-center justify-center"
+                    total={lpa?.totalPages}
+                  />
+                )}
+              </>
             ) : (
               <p className="dark:txet-white mt-32 w-full text-center font-medium text-[18px] text-[#505B74] lg:mt-32 lg:text-[18px]">
                 یافت نشد

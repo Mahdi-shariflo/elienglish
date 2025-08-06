@@ -11,6 +11,7 @@ import ModalNeedLoginUser from './ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
 
 type Props = {
+  nameAddBakect: string;
   product: Product;
   classNameCounter?: string;
   classLinkCart?: string;
@@ -39,6 +40,7 @@ const Counter = ({
   typeCounter,
   classLinkCart,
   handleAddToCart,
+  nameAddBakect = 'افزودن به سبد خرید',
 }: Props) => {
   const session = useSession();
   const [openNeedLogin, setOpenNeedLogin] = useState(false);
@@ -294,7 +296,7 @@ const Counter = ({
               size="sm"
             />
           ) : (
-            <span className={classNameAddBtnName}>افزودن به سبد</span>
+            <span className={classNameAddBtnName}>{nameAddBakect}</span>
           )}
         </button>
       )}

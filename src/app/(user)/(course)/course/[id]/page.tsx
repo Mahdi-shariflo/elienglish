@@ -10,9 +10,20 @@ import PropertiesCourse from '@/components/course/PropertiesCourse';
 import Counter from '@/components/common/Counter';
 import ImageNextjs from 'next/image';
 import Image from '@/components/common/Image';
+import { Metadata } from 'next';
+import { generate_metadata_course } from '@/seo/course';
 type Props = {
   params: Promise<{ [key: string]: string }>;
+  searchParams: Promise<{ [key: string]: string }>;
 };
+
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const searchParamsFilter = await searchParams;
+  const hasQueryParams: boolean = Object.keys(searchParamsFilter).length > 0;
+  return generate_metadata_course({ id, hasQueryParams });
+}
+
 const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
@@ -72,9 +83,9 @@ const Page = async ({ params }: Props) => {
             </div>
             <MoreInformationCourse course={course} />
           </div>
-          <div className="style_factor_product sticky bottom-0 w-full overflow-hidden rounded-lg p-4 dark:bg-[#172334] lg:top-32 lg:w-[380px] lg:min-w-[380px] lg:bg-white lg:p-0">
+          <div className="style_factor_product sticky bottom-0 w-full overflow-hidden rounded-lg p-4 dark:bg-[#172334] lg:top-52 lg:w-[380px] lg:min-w-[380px] lg:bg-white lg:p-0">
             <div className="flex flex-row-reverse items-center justify-between border-gray-50 bg-white drop-shadow-sm dark:!border-[#263248] dark:!bg-[#172334] lg:flex-col lg:border lg:p-8">
-              <div className="hidden lg:block">
+              <div className="hidden w-full lg:block">
                 <p className="border-b border-[#E5EAEF] pb-4 font-demibold text-[22px] text-[#0B1524] dark:!border-[#263248] dark:text-[#8E98A8]">
                   {course?.title}
                 </p>

@@ -90,8 +90,9 @@ const ActionLpa = ({ modal, setModal }: Props) => {
         title={`${modal.info?._id ? 'ویرایش' : 'ایجاد'} تعین سطح `}
         nameBtnFooter={modal.info?._id ? 'ویرایش' : 'ایجاد'}
         onClickFooter={() => formik.handleSubmit()}
-        size="2xl"
+        size="4xl"
         isLoadingFooterBtn={isPending}
+        classBody="!overflow-x-hidden px-10"
       >
         <div className="mb-4 grid grid-cols-2 gap-4 space-y-2">
           <Media
