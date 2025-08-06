@@ -37,7 +37,6 @@ const Carousel = ({
 }: Props) => {
   const swiperRef = useRef<SwiperRef | null>(null);
   const router = useRouter();
-  console.log(title, 'jjj');
   return (
     <>
       <div className={`container_page ${className}`}>

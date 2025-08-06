@@ -266,7 +266,7 @@ const Header = ({ categories }: Props) => {
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >
         <TopBanner className={`${cls === 'yes' ? '' : 'hidden'}`} />
-        <div className={`container_page`}>
+        <div className={`container_page py-2`}>
           <div
             className={`items-center justify-between ${
               cls === 'yes' ? 'flex lg:hidden' : 'hidden'
@@ -305,7 +305,7 @@ const Header = ({ categories }: Props) => {
                 : 'h-0 opacity-0'
             }`}
           >
-            <div className="flex items-center gap-[24px]">
+            <div className="mt-3 flex items-center gap-[24px]">
               {quickLicks.map((link, idx) => (
                 <Link
                   className="flex cursor-pointer items-center gap-3"

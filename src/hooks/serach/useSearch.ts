@@ -10,6 +10,6 @@ export const useSerach = (search: string) => {
     queryKey: ['serach', debouncedSearch],
     enabled: debouncedSearch.length >= 3, // Only query when the debounced value is at least 3 characters
     queryFn: async () =>
-      await safeRequest({ url: `/search/?query=${encodeURIComponent(debouncedSearch)}` }),
+      await safeRequest({ url: `/search/?search=${encodeURIComponent(debouncedSearch)}` }),
   });
 };

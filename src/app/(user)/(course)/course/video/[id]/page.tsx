@@ -12,7 +12,7 @@ type Props = {
   params: Promise<{ [key: string]: string }>;
   searchParams: Promise<{ [key: string]: string }>;
 };
-const Page = async ({ params, searchParams }: Props) => {
+const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({
     url: `/course/view-course-page?courseId=${decodeURIComponent(id)}`,

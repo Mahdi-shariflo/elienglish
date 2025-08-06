@@ -1,18 +1,23 @@
 'use client';
-import React, { useState, useRef, useEffect, useTransition } from 'react';
-import { Input, Spinner } from '@heroui/react';
-import { SearchIcon } from '../icon';
-import Image from 'next/image';
 import { useSerach } from '@/hooks/serach/useSearch';
-import { Product } from '@/store/types/home';
+import cn from '@/lib/classnames';
 import { BASEURL } from '@/lib/variable';
+import { Input, Spinner } from '@heroui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Loading from '../Loading';
-import Button from '../Button';
-import { useMedia } from 'react-use';
+import React, { useEffect, useRef, useState, useTransition } from 'react';
+import { AiOutlineFire } from 'react-icons/ai';
 import { CgClose } from 'react-icons/cg';
+import { IoIosArrowBack } from 'react-icons/io';
+import { useMedia } from 'react-use';
+import Button from '../Button';
+import { SearchIcon } from '../icon';
+import Loading from '../Loading';
+import { Product } from '@/store/types/home';
+import { useOutsideClick } from '@/hooks/common/useOutsideClick';
+import SearchSwiper from './SearchSwiper';
 
-type Serach = {
+type Search = {
   brands: {
     url: string;
     title: string;
@@ -30,6 +35,7 @@ type Serach = {
     };
   }[];
 };
+
 export default function Search() {
   const isMobile = useMedia('(max-width: 480px)', false);
   const [isVisible, setIsVisible] = useState(false);
@@ -37,37 +43,28 @@ export default function Search() {
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>('');
   const { data, isLoading } = useSerach(inputValue);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('pointerdown', handleClickOutside);
-    return () => document.removeEventListener('pointerdown', handleClickOutside);
-  }, []);
+  const searchRef = useOutsideClick<HTMLDivElement>(() => {
+    onClose();
+  });
 
   // const isVisible = inputValue.length >= 3;
   const onValueChange = (value: string) => {
     setInputValue(value);
     if (value.length >= 2) return setIsVisible(true);
     if (!isMobile) {
-      setIsVisible(false);
+      onClose();
     }
   };
 
   const onKeyDown = (e: any) => {
     if (e.key === 'Enter') {
       startTransition(() => {
-        setIsVisible(false);
+        onClose();
         router.push(`/result/?search=${inputValue}`);
       });
     }
   };
-  const serachResult: Serach = data?.data?.data;
+  const serachResult = data?.data?.data;
   const onClose = () => setIsVisible(false);
 
   const onRedirect = (url: string) => {
@@ -79,15 +76,26 @@ export default function Search() {
   };
 
   // useEffect(() => {
+  //   const preventScroll = (e:any) => {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //     return false;
+  //   };
+
   //   if (isVisible) {
-  //     document.body.style.overflow = 'hidden';
+  //     window.addEventListener('wheel', preventScroll, { passive: false });
+  //     window.addEventListener('touchmove', preventScroll, { passive: false });
+  //     window.addEventListener('keydown', preventScroll, { passive: false });
   //   } else {
-  //     document.body.style.overflow = '';
+  //     window.removeEventListener('wheel', preventScroll);
+  //     window.removeEventListener('touchmove', preventScroll);
+  //     window.removeEventListener('keydown', preventScroll);
   //   }
 
-  //   // اطمینان از اینکه هنگام خروج از کامپوننت، overflow به حالت عادی برمی‌گرده
   //   return () => {
-  //     document.body.style.overflow = '';
+  //     window.removeEventListener('wheel', preventScroll);
+  //     window.removeEventListener('touchmove', preventScroll);
+  //     window.removeEventListener('keydown', preventScroll);
   //   };
   // }, [isVisible]);
 
@@ -97,94 +105,83 @@ export default function Search() {
     }
   }, [isMobile]);
 
-  if (isPending) return <Loading />;
   return (
-    <div className="flex w-full justify-end">
-      {/* <Button
-        className="min-w-fit w-fit lg:!hidden"
-        onClick={() => setIsVisible(true)}
-      >
-        <span>
-          <svg
-            width="23"
-            height="22"
-            viewBox="0 0 23 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle
-              cx="8.5"
-              cy="8.50041"
-              r="7.5"
-              stroke="#A6AFB9"
-              strokeWidth="2"
-            />
-            <line
-              x1="16.0931"
-              y1="15.5377"
-              x2="20.6682"
-              y2="19.8082"
-              stroke="#A6AFB9"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-          </svg>
-        </span>
-      </Button> */}
-
+    <div className="w-full">
       <div
         ref={searchRef}
-        className={`overflow-hidden rounded-md bg-white shadow-sm transition-all duration-500 ease-in-out ${
+        onClick={() => setIsVisible(true)}
+        className={cn(
+          'relative w-full border lg:border-0',
           isVisible
-            ? 'h-[48px] w-full' // باز شده
-            : 'flex h-[48px] w-[48px] items-center justify-center rounded-xl border' // اولیه
-        } ${isVisible ? 'fixed left-0 right-0 top-0 z-[9999] lg:relative' : 'relative'} `}
-        onClick={() => {
-          if (!isVisible) setIsVisible(true);
-        }}
+            ? 'fixed left-0 right-0 top-0 z-[9999] w-full lg:relative lg:h-fit'
+            : 'relative hidden border-transparent lg:block lg:h-fit'
+        )}
       >
-        {isVisible ? (
-          <Input
-            value={inputValue}
-            onValueChange={(value: string) => onValueChange(value)}
-            startContent={<SearchIcon className="h-6 w-6 stroke-[#616A76]" />}
-            // ...
-            onKeyDown={onKeyDown}
-            placeholder="جستجو..."
-            className="w-full"
-            classNames={{
-              inputWrapper:
-                '!h-[48px] border border-[#E5EAEF] group-data-[has-value=true]:bg-white',
-              input: 'font-medium !rounded-none',
-            }}
-          />
-        ) : (
-          <span>
-            <svg
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11.666 19C16.0843 19 19.666 15.4183 19.666 11C19.666 6.58172 16.0843 3 11.666 3C7.24774 3 3.66602 6.58172 3.66602 11C3.66602 15.4183 7.24774 19 11.666 19Z"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M21.6664 20.9984L17.3164 16.6484"
-                stroke="#6E3DFF"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </span>
+        <Input
+          startContent={<SearchIcon className="h-6 w-6 stroke-[#616A76]" />}
+          value={inputValue}
+          onValueChange={(value: string) => onValueChange(value)}
+          endContent={
+            inputValue.length >= 2 || isMobile ? (
+              <div
+                onClick={() => {
+                  setInputValue('');
+                  onClose();
+                  router.push('/');
+                }}
+                className="w-fit min-w-fit"
+              >
+                <CgClose className="h-6 w-6 text-[#616A76]" />
+              </div>
+            ) : null
+          }
+          className={cn('w-full')}
+          classNames={{
+            inputWrapper: `h-[48px]   ${isVisible ? 'group-data-[has-value=true]:!bg-white group hover:!bg-white  bg-white dark:!bg-[#172334] !rounded-b-none !rounded-t-lg' : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg'}`,
+            input: 'font-medium ',
+          }}
+          placeholder="جستجو"
+          isClearable={true}
+          onClear={() => {
+            setInputValue('');
+            onClose();
+          }}
+          onKeyDown={onKeyDown}
+        />
+
+        {isVisible && (
+          <div
+            className={cn(
+              'custom_sidebar top-12 !z-[9999] max-h-[90vh] w-full overflow-auto rounded-b-sm bg-white px-2 dark:bg-[#0b1524]',
+              'lg:absolute lg:left-1/2 lg:h-fit lg:max-h-[85vh] lg:-translate-x-1/2 lg:rounded-b-lg lg:pb-0',
+              'md:left-auto md:right-auto',
+              'flex flex-col gap-y-3'
+            )}
+          >
+            {isLoading ? (
+              <Spinner className="mx-auto w-full !py-14" size="md" />
+            ) : (
+              <div
+                className={cn(serachResult ? 'flex w-full flex-col !gap-8 gap-y-2 p-5' : 'hidden')}
+              >
+                {/* result */}
+                {serachResult?.blog && (
+                  <SearchSwiper type="blog" title="بلاگ‌ها" sliders={serachResult?.blog} />
+                )}
+                {serachResult?.course && (
+                  <SearchSwiper type="course" title="دوره‌ها" sliders={serachResult?.course} />
+                )}
+                {serachResult?.product && (
+                  <SearchSwiper type="product" title="محصولات" sliders={serachResult?.product} />
+                )}
+              </div>
+            )}
+          </div>
         )}
       </div>
+      {isVisible && (
+        <div className="_backdrop-blur-[5px] fixed left-0 top-0 z-50 hidden h-full w-full bg-[#000000] bg-opacity-20 lg:block"></div>
+      )}
     </div>
   );
 }
