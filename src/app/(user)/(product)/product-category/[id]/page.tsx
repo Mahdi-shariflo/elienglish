@@ -67,7 +67,7 @@ const Page = async ({ searchParams, params }: Props) => {
   // @ts-expect-error error
   const querySearchParams = buildQueryFromSearchParams(searchParamsFilter);
   const result = await request({
-    url: `/product-category?slug=${id}&${querySearchParams}`,
+    url: `/product/archive-category?slug=${id}&${querySearchParams}`,
   });
   const product: {
     products: Product[];

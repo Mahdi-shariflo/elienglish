@@ -88,7 +88,6 @@ const Page = async ({ searchParams, params }: Props) => {
       page: `/product-category/${item.url}`,
     };
   });
-  console.log(product, 'productproductproductproductproduct');
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-dark">

@@ -36,7 +36,6 @@ client.interceptors.response.use(
   },
   (error) => {
     const status = error.response?.status || error.status;
-    console.log(error?.config?.url, 'errrrr');
     if (status === 410) {
       return notFound();
     }
