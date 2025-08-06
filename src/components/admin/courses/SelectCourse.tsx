@@ -76,11 +76,11 @@ export default function SelectCourse({ values, onChange, title, className }: Pro
               {option.count}
             </span>
             <div className="flex items-center gap-2">
-              {option.discountPrice && <p className="text-main line-through">{option.price}</p>}
+              {option?.discountPrice && <p className="text-main line-through">{option.price}</p>}
               <p>
                 {option.discountPrice > 0
-                  ? option.discountPrice.toLocaleString()
-                  : option.price.toLocaleString()}{' '}
+                  ? option?.discountPrice?.toLocaleString()
+                  : option?.price?.toLocaleString()}{' '}
                 <span className="!text-[10px]">تومان</span>
               </p>
             </div>

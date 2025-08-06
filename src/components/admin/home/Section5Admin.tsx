@@ -57,7 +57,7 @@ const Section5Admin = ({ formik, data }: Props) => {
         url={''}
         products={formik?.values?.section5?.product ?? []}
       >
-        <Button onClick={onOpen} className="bg-main px-4 text-white">
+        <Button onClick={onOpen} className="!w-fit !min-w-fit bg-main px-4 text-white">
           ویرایش سکشن
         </Button>
       </Carousel>

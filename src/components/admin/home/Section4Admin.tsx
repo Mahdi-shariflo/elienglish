@@ -54,10 +54,11 @@ const Section4Admin = ({ formik, data }: Props) => {
         classCard="!h-[380px] !w-[300px] lg:!h-[400px]"
         className="!w-full"
         title={formik?.values?.section4?.title}
+        colorTitle={formik?.values?.section4?.colorTitle}
         url={''}
         products={formik?.values?.section4?.course ?? []}
       >
-        <Button onClick={onOpen} className="bg-main px-4 text-white">
+        <Button onClick={onOpen} className="!w-fit bg-main px-4 text-white">
           ویرایش سکشن
         </Button>
       </Carousel>
@@ -72,7 +73,7 @@ const Section4Admin = ({ formik, data }: Props) => {
         <div className="grid grid-cols-2 gap-3">
           <Input
             label={'عنوان'}
-            name="tilte"
+            name="title"
             formik={form}
             classNameInput={'!h-[45px] !bg-[#f5f6f6]'}
           />

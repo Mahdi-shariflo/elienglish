@@ -22,6 +22,7 @@ type Props = {
   nameSec?: string;
   classBtnArrows?: string;
   classCard?: string;
+  colorTitle?: string;
 };
 const Carousel = ({
   url,
@@ -31,11 +32,12 @@ const Carousel = ({
   showSwiperSlide,
   products,
   children,
-  classBtnArrows,
   classCard,
+  colorTitle,
 }: Props) => {
   const swiperRef = useRef<SwiperRef | null>(null);
   const router = useRouter();
+  console.log(title, 'jjj');
   return (
     <>
       <div className={`container_page ${className}`}>
@@ -43,7 +45,12 @@ const Carousel = ({
           <div className="flex items-center gap-2">
             {Icon && <Icon />}
             {/* <Image width={32} height={32} alt='' src={icon} /> */}
-            <span className="font-bold text-[14px] lg:text-[24px]">{title}</span>
+            <p className="flex items-center gap-2">
+              <span className="font-bold text-[14px] lg:text-[24px]">{title}</span>
+              {colorTitle && (
+                <span className="font-bold text-[14px] text-main lg:text-[24px]">{colorTitle}</span>
+              )}
+            </p>
           </div>
           <div className="flex items-center gap-2">
             {url ? (
@@ -71,6 +78,7 @@ const Carousel = ({
               </Button>
             ) : null}
           </div>
+          {children}
         </div>
         {Number(products?.length) >= 1 ? (
           <Swiper
