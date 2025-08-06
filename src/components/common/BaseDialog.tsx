@@ -98,7 +98,7 @@ export default function BaseDialog({
                     <ModalFooter className="bg-spring flex items-center justify-between rounded-lg pb-3">
                       <Button
                         onClick={onClickCancel ? onClickCancel : onClose}
-                        className="w-[140px] border !text-black"
+                        className="min-w-[140px] max-w-fit border px-4 !text-black"
                       >
                         <span className="!text-black dark:!text-white">{nameBtnBack}</span>
                       </Button>

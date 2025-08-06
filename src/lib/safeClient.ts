@@ -36,6 +36,7 @@ client.interceptors.response.use(
   },
   (error) => {
     const status = error.response?.status || error.status;
+    console.log(error?.config?.url, 'errrrr');
     if (status === 410) {
       return notFound();
     }
@@ -52,6 +53,9 @@ client.interceptors.response.use(
       location.href = '/too-many-request';
     }
 
+    if (error?.config?.url && error?.config?.url.startsWith('/course')) {
+      return error;
+    }
     return Promise.reject(error);
   }
 );

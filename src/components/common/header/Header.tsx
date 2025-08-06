@@ -281,7 +281,7 @@ const Header = ({ categories }: Props) => {
               <UserInformation />
             </div>
           </div>
-          <div className="hidden items-center justify-between gap-8 lg:flex">
+          <div className="hidden items-center justify-between gap-5 lg:flex">
             <div
               className={`flex flex-[1.6] items-start gap-10 ${
                 cls === 'yes' ? 'lg:py-3' : 'lg:py-3'
@@ -291,7 +291,7 @@ const Header = ({ categories }: Props) => {
               {/* <Search /> */}
             </div>
             <Search />
-            <div className="hidden justify-end gap-8 lg:flex">
+            <div className="hidden justify-end gap-5 lg:flex">
               <ThemeSwitcher />
               <Cart />
               <UserInformation />

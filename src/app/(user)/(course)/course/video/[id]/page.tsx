@@ -7,16 +7,17 @@ import { CircularProgress } from '@heroui/react';
 import React from 'react';
 import Chapters from '../Chapters';
 import VideoPlayer from '@/components/admin/common/VideoPlayer';
+import NotAccess from '../NotAccess';
 type Props = {
   params: Promise<{ [key: string]: string }>;
   searchParams: Promise<{ [key: string]: string }>;
 };
 const Page = async ({ params, searchParams }: Props) => {
   const { id } = await params;
-  const { video } = await searchParams;
   const result = await request({
     url: `/course/view-course-page?courseId=${decodeURIComponent(id)}`,
   });
+  if (result?.status === 403) return <NotAccess />;
   const course: Course = result?.data?.data?.course;
   const watchVideoData = result.data.data?.WatchedVideo;
   const accessibleChapters = result.data.data?.accessibleChapters;
