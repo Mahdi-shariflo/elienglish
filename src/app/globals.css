@@ -318,3 +318,61 @@ audio::-webkit-media-controls-panel {
 .rmdp-wrapper * {
   @apply dark:!text-white;
 }
+
+/* اضافه کنید به globals.css یا فایل CSS مربوطه */
+
+.search-container {
+  transform-origin: right center; /* از سمت راست شروع می‌شود */
+}
+
+@keyframes expandSearch {
+  from {
+    width: 40px;
+    opacity: 0.8;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes collapseSearch {
+  from {
+    width: 100%;
+    opacity: 1;
+  }
+  to {
+    width: 40px;
+    opacity: 0.8;
+  }
+}
+
+.search-expand {
+  animation: expandSearch 0.3s ease-in-out forwards;
+}
+
+.search-collapse {
+  animation: collapseSearch 0.3s ease-in-out forwards;
+}
+
+/* انیمیشن برای نتایج */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-results {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* بهبود انیمیشن hover */
+.search-icon-container:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
