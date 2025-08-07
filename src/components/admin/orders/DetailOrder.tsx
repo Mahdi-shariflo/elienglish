@@ -81,6 +81,8 @@ const DetailOrder = ({ order }: { order: Order }) => {
 
   const onClose = () => setOpen(!open);
   if (!order) return null;
+  // @ts-expect-error error
+  const addressUser = order?.productPhysicalItems?.orderAddress || order;
   return (
     <div className="mt-3 rounded-xl border border-[#E4E7E9] p-4">
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
@@ -129,21 +131,21 @@ const DetailOrder = ({ order }: { order: Order }) => {
             <p className="font-regular text-[14px] text-[#7D8793]">
               نام‌ونام‌خانوادگی:
               <span className="text-[#0C0C0C]">
-                {address?.firstName} {address?.lastName}
+                {addressUser?.firstName} {addressUser?.lastName}
               </span>
             </p>
             <p className="font-regular text-[14px] text-[#7D8793]">
               آدرس:{' '}
               <span className="text-[#0C0C0C]">
-                {address?.provinceLabel}-{address?.address}
+                {addressUser?.provinceLabel}-{addressUser?.address}
               </span>
             </p>
             <p className="font-regular text-[14px] text-[#7D8793]">
-              کد پستی: <span className="text-[#0C0C0C]">{address?.postalCode}</span>
+              کد پستی: <span className="text-[#0C0C0C]">{addressUser?.postalCode}</span>
             </p>
             <p className="font-regular text-[14px] text-[#7D8793]">
               تلفن همراه برای آدرس ثبت شده :{' '}
-              <span className="text-[#0C0C0C]">{address?.mobileNumber}</span>
+              <span className="text-[#0C0C0C]">{addressUser?.mobileNumber}</span>
             </p>
           </div>
         </div>
