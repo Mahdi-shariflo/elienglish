@@ -39,6 +39,7 @@ const Page = () => {
     () =>
       initialDataOrder({
         onEdit: (row) => router.push(`/admin/orders/physical/${row._id}`),
+        name: 'productPhysicalItems',
       }),
     []
   );
@@ -129,35 +130,35 @@ const Page = () => {
               search: '',
               sort: 'createdAt_desc',
               // @ts-expect-error error
-              orderStatus: value.currentKey!,
+              orderStatus: value.value!,
             })
           }
           value={filter.orderStatus}
           label="فیلتر وضعیت"
           options={[
             {
-              label: 'AWAITING',
-              value: 'در انتظار',
+              value: 'AWAITING',
+              label: 'در انتظار',
             },
             {
-              label: 'DOING',
-              value: 'درحال انجام',
+              value: 'DOING',
+              label: 'درحال انجام',
             },
             {
-              label: 'REVIEW',
-              value: 'در حال بررسی',
+              value: 'REVIEW',
+              label: 'در حال بررسی',
             },
             {
-              label: 'DELIVERY',
-              value: 'تحویل به پست',
+              value: 'DELIVERY',
+              label: 'تحویل به پست',
             },
             {
-              label: 'POSTED',
-              value: 'پست شده',
+              value: 'POSTED',
+              label: 'پست شده',
             },
             {
-              label: 'CANCELED',
-              value: 'کنسل شده',
+              value: 'CANCELED',
+              label: 'کنسل شده',
             },
           ]}
         />

@@ -7,10 +7,7 @@ import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetLpaOrdersAdmin } from '@/hooks/admin/orders/lpa/useGetLpaOrdersAdmin';
 import { converDateGre } from '@/lib/convert';
-import { getPrevDateTime } from '@/lib/DateTime';
-import { initialDataOrder, ordersStatus } from '@/lib/table-column';
-import { DateRangePicker } from '@heroui/react';
-import { parseAbsoluteToLocal } from '@internationalized/date';
+import { initialDataOrder } from '@/lib/table-column';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
@@ -40,6 +37,7 @@ const Page = () => {
     () =>
       initialDataOrder({
         onEdit: (row) => router.push(`/admin/orders/lpa/${row._id}`),
+        name: 'levelItems',
       }),
     []
   );
@@ -130,7 +128,7 @@ const Page = () => {
               search: '',
               sort: 'createdAt_desc',
               // @ts-expect-error error
-              orderStatus: value.currentKey!,
+              orderStatus: value.value!,
             })
           }
           value={filter.orderStatus}
@@ -138,19 +136,19 @@ const Page = () => {
           options={[
             {
               label: 'در انتظار ',
-              vaalue: 'PENDING',
+              value: 'PENDING',
             },
             {
-              label: 'تاپید شده',
-              vaalue: 'SUBMITTED',
+              label: 'تائید شده',
+              value: 'SUBMITTED',
             },
             {
               label: 'تکمیل شده',
-              vaalue: 'COMPLETED',
+              value: 'COMPLETED',
             },
             {
               label: 'کنسل شده',
-              vaalue: 'CANCELED',
+              value: 'CANCELED',
             },
           ]}
         />

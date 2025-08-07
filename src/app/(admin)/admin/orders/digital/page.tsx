@@ -39,6 +39,7 @@ const Page = () => {
     () =>
       initialDataOrder({
         onEdit: (row) => router.push(`/admin/orders/digital/${row._id}`),
+        name: 'productDigitalItems',
       }),
     []
   );
@@ -129,12 +130,25 @@ const Page = () => {
               search: '',
               sort: 'createdAt_desc',
               // @ts-expect-error error
-              orderStatus: value.currentKey!,
+              orderStatus: value.value!,
             })
           }
           value={filter.orderStatus}
           label="فیلتر وضعیت"
-          options={ordersStatus}
+          options={[
+            {
+              value: 'PENDING',
+              label: 'در حال انتظار',
+            },
+            {
+              label: 'در دسترس',
+              value: 'AVAILABLE',
+            },
+            {
+              label: 'منقضی شده',
+              value: 'EXPIRED',
+            },
+          ]}
         />
       </ReactTable>
     </div>

@@ -223,6 +223,7 @@ export const EnumName = (label: string) => {
     { label: 'REVIEW', value: 'در حال بررسی' },
     { label: 'DELIVERY', value: 'تحویل به پست' },
     { label: 'POSTED', value: 'پست شده' },
+    { label: 'DOING', value: 'درحال انجام' },
   ];
 
   const found = options.find((item) => item.label === label);

@@ -51,7 +51,7 @@ const Select = ({
   const mappedOptions: OptionType[] = options.map((item) => ({
     ...item,
     label: item[nameLabel],
-    value: item[nameValue].toString(),
+    value: item[nameValue]?.toString(),
   }));
 
   const findValue =
