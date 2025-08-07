@@ -117,18 +117,20 @@ export default function Search() {
       <div
         ref={searchRef}
         className={cn(
-          'relative transition-all duration-300 ease-out',
+          'relative z-[10000] transition-all duration-300 ease-out',
           // حالت موبایل
-          isMobile && isVisible ? 'fixed left-0 right-0 top-0 z-[9999] w-full' : '',
+          isMobile && isVisible ? 'fixed left-0 right-0 top-0 w-full' : '',
           // حالت دسکتاپ
-          !isMobile && !isExpanded ? 'h-[40px] w-[40px] cursor-pointer' : 'w-full max-w-md'
+          !isMobile && !isExpanded
+            ? 'flex h-[40px] w-[52px] cursor-pointer items-center justify-center'
+            : 'w-full'
         )}
       >
         {/* آیکون حالت بسته */}
         {!isExpanded && !isMobile && (
           <div
             onClick={onExpandSearch}
-            className="flex h-10 w-10 transform items-center justify-center rounded-full bg-[#E4E7E9] transition-colors duration-200 hover:scale-105 hover:bg-[#d1d5db] dark:bg-[#172334] dark:hover:bg-[#1f2937]"
+            className="flex h-[45px] w-[52px] transform items-center justify-center rounded-xl border transition-colors duration-200 hover:scale-105 dark:bg-[#172334] dark:hover:bg-[#1f2937]"
           >
             <SearchIcon className="h-5 w-5 stroke-[#616A76]" />
           </div>
@@ -170,12 +172,12 @@ export default function Search() {
                   </div>
                 ) : null
               }
-              className="w-full"
+              className="relative z-[10001] w-full"
               classNames={{
                 inputWrapper: cn(
                   'h-[48px] transition-all duration-200',
                   isVisible && inputValue.length >= 2
-                    ? 'dark:!bg-[#172334] !bg-white hover:!bg-white dark:hover:!bg-[#172334] !rounded-b-none !rounded-t-lg border-b-0'
+                    ? 'dark:!bg-[#172334] !bg-white hover:!bg-white border-t border-r border-l dark:hover:!bg-[#172334] !rounded-b-none !rounded-t-lg border-b-none dark:border-[#263248]'
                     : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg hover:!bg-[#d1d5db] dark:hover:!bg-[#1f2937]'
                 ),
                 input: 'font-medium text-right',
@@ -190,7 +192,7 @@ export default function Search() {
         {isVisible && inputValue.length >= 2 && (
           <div
             className={cn(
-              'absolute top-12 z-[9999] max-h-[90vh] w-full overflow-auto rounded-b-lg border border-gray-200 bg-white px-2 shadow-2xl dark:border-gray-700 dark:bg-[#0b1524]',
+              'absolute top-12 z-[10000] max-h-[90vh] w-full overflow-auto rounded-b-lg border border-gray-200 bg-white px-2 shadow-2xl dark:border-gray-700 dark:bg-[#0b1524]',
               'lg:left-1/2 lg:h-fit lg:max-h-[85vh] lg:-translate-x-1/2',
               'animate-in slide-in-from-top-2 fade-in duration-200',
               'flex flex-col gap-y-3'
@@ -229,7 +231,7 @@ export default function Search() {
       {/* Backdrop */}
       {isVisible && !isMobile && (
         <div
-          className="animate-in fade-in fixed left-0 top-0 z-[9998] h-full w-full bg-black bg-opacity-20 backdrop-blur-sm duration-200"
+          className="animate-in fade-in fixed left-0 top-40 z-[9999] h-full w-full bg-black bg-opacity-20 backdrop-blur-sm duration-200"
           onClick={onClose}
         />
       )}
