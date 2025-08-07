@@ -23,7 +23,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const { id } = await params;
   const searchParamsFilter = await searchParams;
   const hasQueryParams: boolean = Object.keys(searchParamsFilter).length > 0;
-  return generate_metadata_course({ id, hasQueryParams });
+  return generate_metadata_course({ id });
 }
 
 const Page = async ({ params }: Props) => {

@@ -19,10 +19,10 @@ export const useGetDigitalOrdersAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['digital-orders-admin', page, search, endDate, startDate, orderStatus],
+    queryKey: ['digital-orders-admin', page, search, endDate, startDate, orderStatus, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/order/admin/product-digital?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
+        url: `/order/admin/product-digital?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `downloadOrderStatus=${orderStatus}` : null}`,
       }),
   });
 };

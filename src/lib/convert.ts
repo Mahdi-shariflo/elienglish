@@ -22,7 +22,7 @@ export const converDateGre = (date: string, format?: string) => {
   if (date && date !== 'undefined') {
     const date1 = new DateObject({ calendar: persian, locale: persian_fa, date })
       .convert(gregorian, gregorian_en)
-      .format(format ? format : '');
+      .format(format ? format : 'YYYY-MM-DD');
     return date1;
   }
   return '';
@@ -31,6 +31,11 @@ export const converTime = (date: string) => {
   const date1 = new DateObject(date);
   const birth_date = date1.convert(persian, persian_fa).format('HH:mm');
   return birth_date;
+};
+
+export const toISOStringUTC = (dateStr: string) => {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toISOString();
 };
 
 export const converDatePer = (date: string, format?: string) => {

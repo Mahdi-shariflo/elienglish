@@ -19,10 +19,10 @@ export const useGetPhysicalOrderAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['physical-orders-admin', page, search, endDate, startDate, orderStatus],
+    queryKey: ['physical-orders-admin', page, search, endDate, startDate, orderStatus, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/order/product-physical?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
+        url: `/order/product-physical?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `physicalOrderStatus=${orderStatus}` : null}`,
       }),
   });
 };

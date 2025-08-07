@@ -1,21 +1,28 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
+import MutiRangeDatePicker from '@/components/admin/MutiRangeDatePicker';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetCoursesOrdersAdmin } from '@/hooks/admin/orders/course/useGetCoursesOrdersAdmin';
-import { getPrevDateTime } from '@/lib/DateTime';
+import { converDateGre } from '@/lib/convert';
 import { initialDataOrder, ordersStatus } from '@/lib/table-column';
-import { DateRangePicker } from '@heroui/react';
-import { parseAbsoluteToLocal } from '@internationalized/date';
+import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 
 const Page = () => {
   const router = useRouter();
   const [date, setDate] = useState({
-    start: parseAbsoluteToLocal(getPrevDateTime(30)), // 7 days ago
-    end: parseAbsoluteToLocal(getPrevDateTime(0)), // current date
+    start: '', // 7 days ago
+    end: '', // current date
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      date: '',
+    },
+    onSubmit: () => {},
   });
 
   const [filter, setFilter] = useState({
@@ -31,12 +38,14 @@ const Page = () => {
     orderStatus: filter.orderStatus,
     startDate: date.start.toString(),
     endDate: date.end.toString(),
+    nameStatus: 'courseOrderStatus',
   });
 
   const columns = useMemo(
     () =>
       initialDataOrder({
         onEdit: (row) => router.push(`/admin/orders/course/${row._id}`),
+        name: 'courseItems',
       }),
     []
   );
@@ -83,29 +92,18 @@ const Page = () => {
           classNameInput="bg-[#f5f6f6] !h-[48px]"
           onClear={() => setFilter({ ...filter, page: '1', search: '' })}
         />
-        <DateRangePicker
-          label="بازه زمانی"
-          // @ts-expect-error error
-          value={date}
-          onChange={(value) => {
-            if (value) {
+        <MutiRangeDatePicker
+          onChange={(date) => {
+            const startDate = date.split('-')[0];
+            const endtDate = date.split('-')[1];
+            console.log(startDate, endtDate);
+            if (startDate && endtDate) {
               setDate({
-                start: value.start,
-                end: value.end,
+                start: new Date(`${converDateGre(startDate)}`).toISOString(),
+                end: new Date(`${converDateGre(endtDate)}`).toISOString(),
               });
             }
           }}
-          variant="flat"
-          className="mt-2 !w-1/3 !min-w-[220px]"
-          classNames={{
-            input: '!h-[48px]',
-            label: 'text-[#616A76] text-[14px]',
-            inputWrapper: '!h-[48px] border border-[#E4E7E9] rounded-lg',
-          }}
-          granularity="day"
-          showMonthAndYearPickers={true}
-          labelPlacement="outside"
-          maxValue={parseAbsoluteToLocal(getPrevDateTime(0))}
         />
       </div>
       <ReactTable
@@ -139,7 +137,7 @@ const Page = () => {
               search: '',
               sort: 'createdAt_desc',
               // @ts-expect-error error
-              orderStatus: value.currentKey!,
+              orderStatus: value.value!,
             })
           }
           value={filter.orderStatus}

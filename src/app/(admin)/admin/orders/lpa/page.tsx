@@ -1,9 +1,12 @@
 'use client';
 import ReactTable from '@/components/admin/common/ReactTable';
+import MutiRangeDatePicker from '@/components/admin/MutiRangeDatePicker';
+import Datepicker from '@/components/common/Datepicker';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetLpaOrdersAdmin } from '@/hooks/admin/orders/lpa/useGetLpaOrdersAdmin';
+import { converDateGre } from '@/lib/convert';
 import { getPrevDateTime } from '@/lib/DateTime';
 import { initialDataOrder, ordersStatus } from '@/lib/table-column';
 import { DateRangePicker } from '@heroui/react';
@@ -14,8 +17,8 @@ import { useMemo, useState } from 'react';
 const Page = () => {
   const router = useRouter();
   const [date, setDate] = useState({
-    start: parseAbsoluteToLocal(getPrevDateTime(30)), // 7 days ago
-    end: parseAbsoluteToLocal(getPrevDateTime(0)), // current date
+    start: '', // 7 days ago
+    end: '', // current date
   });
 
   const [filter, setFilter] = useState({
@@ -82,32 +85,18 @@ const Page = () => {
           classNameInput="bg-[#f5f6f6] !h-[48px]"
           onClear={() => setFilter({ ...filter, page: '1', search: '' })}
         />
-        <DateRangePicker
-          label="بازه زمانی"
-          // @ts-expect-error error
-          value={date}
-          onChange={(value) => {
-            if (value) {
+        <MutiRangeDatePicker
+          onChange={(date) => {
+            const startDate = date.split('-')[0];
+            const endtDate = date.split('-')[1];
+            console.log(startDate, endtDate);
+            if (startDate && endtDate) {
               setDate({
-                // @ts-expect-error error
-                start: value.start,
-                // @ts-expect-error error
-                end: value.end,
+                start: new Date(`${converDateGre(startDate)} 00:00:00`).toISOString(),
+                end: new Date(`${converDateGre(endtDate)} 00:00:00`).toISOString(),
               });
             }
           }}
-          variant="flat"
-          className="mt-2 !w-1/3 !min-w-[220px]"
-          classNames={{
-            input: '!h-[48px]',
-            label: 'text-[#616A76] text-[14px]',
-            inputWrapper: '!h-[48px] border border-[#E4E7E9] rounded-lg',
-          }}
-          granularity="day"
-          showMonthAndYearPickers={true}
-          labelPlacement="outside"
-          // @ts-expect-error error
-          maxValue={parseAbsoluteToLocal(getPrevDateTime(0))}
         />
       </div>
       <ReactTable
@@ -146,7 +135,24 @@ const Page = () => {
           }
           value={filter.orderStatus}
           label="فیلتر وضعیت"
-          options={ordersStatus}
+          options={[
+            {
+              label: 'در انتظار ',
+              vaalue: 'PENDING',
+            },
+            {
+              label: 'تاپید شده',
+              vaalue: 'SUBMITTED',
+            },
+            {
+              label: 'تکمیل شده',
+              vaalue: 'COMPLETED',
+            },
+            {
+              label: 'کنسل شده',
+              vaalue: 'CANCELED',
+            },
+          ]}
         />
       </ReactTable>
     </div>

@@ -1,9 +1,6 @@
-import { MdOutlineSwitchAccessShortcut, MdProductionQuantityLimits } from 'react-icons/md';
+import { MdOutlineSwitchAccessShortcut } from 'react-icons/md';
 import { TbEdit } from 'react-icons/tb';
 import { FaEye } from 'react-icons/fa';
-import { FcPrint } from 'react-icons/fc';
-import { CgCloseR, CgEye } from 'react-icons/cg';
-import Link from 'next/link';
 import HeaderCell from '@/components/common/HeaderCell';
 import { convertDatePer } from './convert';
 import { Checkbox, Tooltip } from '@heroui/react';
@@ -11,6 +8,9 @@ import { BASEURL, BASEURL_SITE } from './variable';
 import { statusIcon } from './data';
 import { Delete_icon, Edit_icon } from '@/components/common/icon';
 import Button from '@/components/common/Button';
+import { EnumName } from './fun';
+import Link from 'next/link';
+import { CgCloseR, CgEye } from 'react-icons/cg';
 type Props = {
   onDelete?: (row: any) => void;
   onEye?: (row: any) => void;
@@ -19,6 +19,7 @@ type Props = {
   onSelect?: (row: any) => void;
   onAccess?: (row: any) => void;
   selected?: string[];
+  name?: string;
 };
 
 export const initialDataWritten = () => [
@@ -893,7 +894,7 @@ export const initialDataSliders = ({ onDelete, onEdit }: Props) => [
     ),
   },
 ];
-export const initialDataCategorySliders = ({ onDelete, onEdit }: Props) => [
+export const initialDataCategorySliders = ({ onDelete, onEdit, name }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
     dataIndex: '_id',
@@ -935,7 +936,7 @@ export const initialDataCategorySliders = ({ onDelete, onEdit }: Props) => [
     ),
   },
 ];
-export const initialDataOrder = ({ onEdit }: Props) => [
+export const initialDataOrder = ({ onEdit, name }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
     dataIndex: '_id',
@@ -994,8 +995,8 @@ export const initialDataOrder = ({ onEdit }: Props) => [
     title: <HeaderCell align="center" title="وضعیت" />,
     dataIndex: 'verify',
     key: 'verify',
-    render: (value: string) => (
-      <p className="text-center text-xs text-gray-800">{value ? 'موفق' : 'ناموفق'}</p>
+    render: (value: string, row: any) => (
+      <p className="text-center text-xs text-gray-800">{name && EnumName(row[name].status)}</p>
     ),
   },
   {
@@ -2049,7 +2050,7 @@ export const ordersStatus = [
     value: 'PAID',
   },
   {
-    label: 'دسترسی',
+    label: 'قطع دسترسی',
     value: 'ACCESS_REVOKED',
   },
   {

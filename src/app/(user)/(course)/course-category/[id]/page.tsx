@@ -69,7 +69,7 @@ const Page = async ({ searchParams, params }: Props) => {
       _id: idx.toString(),
       title: item.title,
       url: item.url,
-      type: 'coursType',
+      type: 'courseType',
       isLink: true,
       page: `${item.url}`,
     };

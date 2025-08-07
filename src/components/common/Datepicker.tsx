@@ -56,7 +56,6 @@ const Datepicker = ({
               ? formik.touched[name!] && formik.errors[name!] && '1px solid #ef4444'
               : null,
           }}
-          format="YYYY-MM-DD HH:mm:ss"
           plugins={[<TimePicker position="right" />]}
           value={formik ? formik.values[name] : null}
           onChange={handleChange}

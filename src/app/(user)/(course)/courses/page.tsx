@@ -68,9 +68,6 @@ const Page = async ({ searchParams }: Props) => {
     };
   });
 
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.course)
-    ? product.course[0].category
-    : null;
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
       <Script
@@ -107,13 +104,13 @@ const Page = async ({ searchParams }: Props) => {
                       _id: '1',
                       title: 'تکمیل شده',
                       url: 'completed',
-                      type: 'coursStatus',
+                      type: 'courseStatus',
                     },
                     {
                       _id: '2',
                       title: 'در حال برگزاری',
                       url: 'inProgress',
-                      type: 'coursStatus',
+                      type: 'courseStatus',
                     },
                   ],
                   displayType: 'text',

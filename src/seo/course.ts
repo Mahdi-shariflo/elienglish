@@ -35,13 +35,7 @@ export const getCourse = async (id: string) => {
   }
 };
 
-export const generate_metadata_course = async ({
-  id,
-  hasQueryParams,
-}: {
-  id: string;
-  hasQueryParams: boolean;
-}) => {
+export const generate_metadata_course = async ({ id }: { id: string }) => {
   const courseData = await getCourse(id);
   const course = courseData?.course || {};
 

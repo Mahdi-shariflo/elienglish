@@ -19,10 +19,10 @@ export const useGetLpaOrdersAdmin = ({
 }: Props) => {
   // Debounce the search input
   return useQuery({
-    queryKey: ['lpa-orders-admin', page, search, endDate, startDate, orderStatus],
+    queryKey: ['lpa-orders-admin', page, search, endDate, startDate, orderStatus, sort],
     queryFn: async () =>
       await safeRequest({
-        url: `/order/admin/lpa?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `orderStatus=${orderStatus}` : null}`,
+        url: `/order/admin/lpa?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `levelOrderStatus=${orderStatus}` : null}`,
       }),
   });
 };

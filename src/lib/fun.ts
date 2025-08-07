@@ -207,3 +207,24 @@ export function mergePropertiesAndAttributes(properties: Property[]): FinalItem[
     };
   });
 }
+
+export const EnumName = (label: string) => {
+  const options = [
+    { label: 'PENDING', value: 'در انتظار' },
+    { label: 'AVAILABLE', value: 'در دسترسی' },
+    { label: 'CANCELED', value: 'لغو شده' },
+    { label: 'EXPIRED', value: 'منقضی شده' },
+    { label: 'SUBMITTED', value: 'ثبت شده' },
+    { label: 'COMPLETED', value: 'تکمیل شده' },
+    { label: 'PAID', value: 'پرداخت شده' },
+    { label: 'ACCESS_REVOKED', value: 'قطع دسترسی' },
+    { label: 'PAID', value: 'پرداخت شده' },
+    { label: 'AWAITING', value: 'در انتظار' },
+    { label: 'REVIEW', value: 'در حال بررسی' },
+    { label: 'DELIVERY', value: 'تحویل به پست' },
+    { label: 'POSTED', value: 'پست شده' },
+  ];
+
+  const found = options.find((item) => item.label === label);
+  return found ? found.value : label; // اگر پیدا نشد، خودش رو برمی‌گردونه
+};
