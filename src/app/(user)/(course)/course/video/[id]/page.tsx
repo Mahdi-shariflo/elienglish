@@ -12,31 +12,23 @@ type Props = {
   params: Promise<{ [key: string]: string }>;
   searchParams: Promise<{ [key: string]: string }>;
 };
-const Page = async ({ params }: Props) => {
+const Page = async ({ params, searchParams }: Props) => {
+  const { episodeId, video } = await searchParams;
   const { id } = await params;
   const result = await request({
     url: `/course/view-course-page?courseId=${decodeURIComponent(id)}`,
   });
+
   if (result?.status === 403) return <NotAccess />;
   const course: Course = result?.data?.data?.course;
-  const watchVideoData = result.data.data?.WatchedVideo;
-  const accessibleChapters = result.data.data?.accessibleChapters;
-
-  const cleanDescription =
-    typeof course?.description === 'string'
-      ? course?.description
-          ?.replace(/\[caption.*?](.*?)\[\/caption\]/g, '$1') // حذف فقط تگ‌های [caption] و نگه داشتن محتوای داخل آن
-          ?.replace(/id="attachment_\d+"/g, '') // حذف idهای attachment
-          ?.replace(/align=".*?"/g, '') // حذف ویژگی align
-          ?.replace(/width=".*?"/g, '') // حذف ویژگی width
-          ?.replace(/height=".*?"/g, '')
-      : ''; // حذف ویژگی height
+  const watchVideoData = result?.data?.data?.WatchedVideo;
+  const accessibleChapters = result?.data?.data?.accessibleChapters;
 
   const findIstComplated = watchVideoData?.videoProgresses?.find(
     (item: { isCompleted: boolean }) => item.isCompleted === false
   );
   const allEpisodes = accessibleChapters?.flatMap((ch: { episodes: [] }) => ch.episodes); // همه اپیزودهای دوره
-  const totalEpisodes = allEpisodes.length;
+  const totalEpisodes = allEpisodes?.length;
 
   const completedEpisodes = watchVideoData?.videoProgresses?.filter(
     (p: { isCompleted: boolean; episodeId: string }) => {
@@ -48,7 +40,6 @@ const Page = async ({ params }: Props) => {
 
   const progressPercent =
     totalEpisodes > 0 ? Math.round((completedEpisodes / totalEpisodes) * 100) : 0;
-
   return (
     <div className="bg-white pb-10 dark:bg-dark lg:bg-[#f7f7f7]">
       <div className="container_page">
@@ -56,7 +47,7 @@ const Page = async ({ params }: Props) => {
           page="/course/category"
           breadcrumbs={[{ id: '333', title: course.title, url: '#' }]}
         />
-        <div className="mt-10 flex items-start">
+        <div className="mt-10 flex flex-col items-start lg:flex-row">
           <div>
             <div className="!mt-0 border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334]">
               <div className="flex items-center justify-between py-2">
@@ -93,7 +84,10 @@ const Page = async ({ params }: Props) => {
                     </span>
                   </div>
                   <p className="font-medium text-[#8E98A8]">
-                    پیشرفت شما: <span className="text-left text-main">%{progressPercent}</span>
+                    پیشرفت شما:{' '}
+                    <span className="text-left text-main">
+                      %{Number(progressPercent) ? progressPercent : 0}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -106,11 +100,17 @@ const Page = async ({ params }: Props) => {
                   poster=""
                   watchedTime={findIstComplated?.watchedTime}
                   url={
-                    watchVideoData?.episodeUrl
-                      ? watchVideoData?.episodeUrl
-                      : course.chapters[0].episodes[0].video
+                    video
+                      ? video
+                      : watchVideoData?.episodeUrl
+                        ? watchVideoData?.episodeUrl
+                        : course.chapters[0].episodes[0].video
                   }
                 />
+              </div>
+              <div className="flex w-full flex-col border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334] lg:hidden 3xl:min-w-[450px]">
+                <p className="font-medium text-[14px] lg:text-[18px]">محتوای دوره</p>
+                <Chapters isLink course={{ ...course, chapters: accessibleChapters }} />
               </div>
             </div>
             <div className="mt-4 rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
@@ -150,32 +150,18 @@ const Page = async ({ params }: Props) => {
               </div>
             ) : null}
 
-            <div className="mt-4 flex w-full items-center justify-between rounded-lg border-b border-gray-200 bg-white p-4 dark:!border-[#263248] dark:bg-[#172334] lg:border lg:border-gray-50 lg:drop-shadow-sm">
-              {cleanDescription && (
-                <div>
-                  <Title className="!text-[16px]" title="معرفی محصول" />
-                  <div className="mt-1">
-                    <p
-                      dangerouslySetInnerHTML={{ __html: cleanDescription }}
-                      className="container_des_category text-justify font-regular text-[12px] leading-9 text-[#616A76] dark:text-[#8E98A8] lg:text-[16px]"
-                    ></p>
-                  </div>
-                </div>
-              )}
-
-              <Comments
-                commentInfo={{
-                  _id: course._id,
-                  thumbnailImage: course.thumbnailImage,
-                  title: course.title,
-                  targetType: 'product',
-                }}
-              />
-            </div>
+            <Comments
+              commentInfo={{
+                _id: episodeId ? episodeId : course._id,
+                thumbnailImage: course.thumbnailImage,
+                title: course.title,
+                targetType: 'videoCourse',
+              }}
+            />
           </div>
-          <div className="min-w-[342px] border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334] 3xl:min-w-[450px]">
+          <div className="hidden min-w-[342px] border border-gray-100 bg-white p-3 dark:!border-[#263248] dark:bg-[#172334] lg:block 3xl:min-w-[450px]">
             <p className="font-medium text-[18px]">محتوای دوره</p>
-            <Chapters isLink course={course} />
+            <Chapters isLink course={{ ...course, chapters: accessibleChapters }} />
           </div>
         </div>
       </div>

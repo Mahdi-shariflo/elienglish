@@ -24,7 +24,7 @@ const VideoPlayer = ({ url, poster, course, watchedTime = 0 }: Props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { mutate } = useUpdateWatchVideo();
   const { id } = useParams();
-  const isHls = url.endsWith('.m3u8');
+  const isHls = url.trim().endsWith('.m3u8');
   const videoSrc = isHls ? url : `${BASEURL_SITE}/api/video/${encodeURIComponent(url)}`;
   const handlePlay = () => {
     if (videoRef.current) {

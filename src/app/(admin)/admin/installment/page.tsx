@@ -26,9 +26,9 @@ const Page = () => {
     orderStatus: filter.orderStatus,
     nameStatus: 'courseOrderStatus',
     // @ts-expect-error error
-    userId: filter.userId[0]?._id,
+    userId: Array.isArray(filter.userId) ? filter.userId[0]?._id : '',
     // @ts-expect-error error
-    courseId: filter.courseId[0]?._id,
+    courseId: Array.isArray(filter.courseId) ? filter.courseId[0]?._id : '',
   });
 
   const columns = useMemo(
@@ -74,6 +74,7 @@ const Page = () => {
           values={filter.courseId}
         />
         <UsersSelect
+          isMulti={false}
           className="w-full"
           onChange={(values: any) => setFilter({ ...filter, userId: values })}
           values={filter.userId}

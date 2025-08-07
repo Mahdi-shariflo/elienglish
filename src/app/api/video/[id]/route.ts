@@ -4,7 +4,6 @@ export async function GET(req: Request, { params }: { params: Promise<{ id: stri
   const { id } = await params;
   const range = req.headers.get('range') || '';
   const videoUrl = `${id}`;
-
   const response = await fetch(videoUrl, {
     headers: {
       Range: range,

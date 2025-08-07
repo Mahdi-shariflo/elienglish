@@ -61,7 +61,7 @@ const Page = () => {
                 key={idx}
                 className="flex flex-col items-center gap-4 border-b border-gray-200 pb-4 dark:border-[#263248] lg:flex-row"
               >
-                <div className="flex flex-1 gap-4">
+                <div className="flex w-full flex-1 gap-4">
                   <div>
                     <Image
                       className="h-[80px] w-[80px] overflow-hidden rounded-lg lg:h-[130px] lg:w-[130px]"

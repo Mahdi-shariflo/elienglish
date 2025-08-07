@@ -22,7 +22,6 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { id } = await params;
   const searchParamsFilter = await searchParams;
-  const hasQueryParams: boolean = Object.keys(searchParamsFilter).length > 0;
   return generate_metadata_course({ id });
 }
 
@@ -33,6 +32,7 @@ const Page = async ({ params }: Props) => {
   const data = await safeRequest({
     url: `/comment/comment-page?pageLocation=${course?._id}`,
   });
+
   const totalRating = data?.data?.data?.ratingStats?.avgRating;
   const comments: Comment[] = data?.data?.data;
 

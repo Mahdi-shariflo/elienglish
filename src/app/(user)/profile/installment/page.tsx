@@ -1,12 +1,15 @@
 'use client';
 import BackPrevPage from '@/components/common/BackPrevPage';
 import { Toman_Icon } from '@/components/common/icon';
+import Loading from '@/components/common/Loading';
 import { useGetInstallment } from '@/hooks/admin/installment/useGetInstallment';
+import { usePayInstallment } from '@/hooks/checkout/usePayInstallment';
 import { Installment } from '@/store/types';
 import { Spinner } from '@heroui/react';
 import React from 'react';
 
 const Page = () => {
+  const { mutate, isPending } = usePayInstallment();
   const { data, isLoading } = useGetInstallment();
   const installment: Installment[] = data?.data?.data?.installment;
   return (
@@ -106,15 +109,25 @@ const Page = () => {
                     <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden">
                       وضعیت
                     </p>
-                    <p
-                      className={`mx-auto mt-2 flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] lg:mt-0 ${item.status === 'AWAITING' ? 'bg-[#FF9800] bg-opacity-10 text-[#FF9800]' : item.status === 'PAID' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
-                    >
-                      {item.status === 'AWAITING'
-                        ? 'در انتظار پرداخت'
-                        : item.status === 'PAID'
-                          ? 'پرداخت شده'
-                          : 'بسته شده'}
-                    </p>
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <p
+                        className={`mx-auto mt-2 flex h-[28px] w-[97px] items-center justify-center rounded-lg text-center font-medium text-[12px] lg:mt-0 ${item.status === 'AWAITING' ? 'bg-[#2196F3] bg-opacity-10 text-[#2196F3]' : item.status === 'PAID' ? 'bg-[#4CAF50] bg-opacity-10 !text-[#4CAF50]' : 'bg-[#F4F6FA] text-[#6A7890]'}`}
+                      >
+                        {item.status === 'AWAITING'
+                          ? 'در انتظار پرداخت'
+                          : item.status === 'PAID'
+                            ? 'پرداخت شده'
+                            : 'بسته شده'}
+                      </p>
+                      {item.canPay && (
+                        <button
+                          onClick={() => mutate({ data: { installmentId: item._id } })}
+                          className="flex h-[32px] w-[79px] items-center justify-center rounded-lg bg-main font-medium text-[14px] text-white"
+                        >
+                          پرداخت
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -122,6 +135,8 @@ const Page = () => {
           </div>
         )}
       </div>
+
+      {isPending && <Loading title="در حال استعلام از درگاه بانکی..." />}
     </div>
   );
 };

@@ -279,7 +279,7 @@ export type CommentInfo = {
   _id: string;
   thumbnailImage: ThumbnailImage;
   title: string;
-  targetType: 'blog' | 'product';
+  targetType: 'blog' | 'product' | 'course' | 'videoCourse';
 };
 
 export type Lpa = {
@@ -402,6 +402,8 @@ export type Notification = {
 };
 
 export type Installment = {
+  _id: string;
+  canPay?: boolean;
   amount: number;
   courseId: string;
   createdAt: string;
