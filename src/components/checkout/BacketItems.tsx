@@ -63,7 +63,7 @@ const BacketItems = () => {
   return (
     <div className="rounded-lg border-[#E5EAEF] dark:border-[#263248] lg:border lg:p-[25px]">
       <Title title="سبد خرید" />
-      <div className="mt-5 flex flex-col gap-10 lg:mt-10 lg:gap-5">
+      <div className="mt-5 flex flex-col gap-5 lg:mt-10 lg:gap-5">
         {groupedItems?.map((product, idx) => (
           <div className="drop_shadow_cart_backet rounded-lg border border-gray-100 bg-white dark:border-[#263248] dark:bg-[#172334]">
             <CardBasket

@@ -56,23 +56,53 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
       // href={`/product/${product?.urlVar ? product?.urlVar : product.url}/`}
       className={`grid h-fit w-full grid-cols-2 items-center justify-between gap-4 rounded-xl p-3 lg:flex lg:p-4 ${className}`}
     >
-      <div className="col-span-2 flex w-full flex-[4] items-center gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
-        <div
-          className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] overflow-hidden rounded-lg ${classImage}`}
-        >
-          {product?.thumbnailImage?.url || product?.teacherProfile ? (
-            <Image
-              fill
-              src={`${product?.thumbnailImage?.url ? `${BASEURL}/${product.thumbnailImage.url}` : product?.teacherProfile}`}
-              alt=""
-            />
-          ) : null}
+      <div className="col-span-2 flex w-full flex-[4] items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
+        <div className="flex items-center gap-2">
+          <div
+            className={`relative !h-[80px] min-h-[80px] !w-[80px] min-w-[80px] overflow-hidden rounded-lg ${classImage}`}
+          >
+            {product?.thumbnailImage?.url || product?.teacherProfile ? (
+              <Image
+                fill
+                src={`${product?.thumbnailImage?.url ? `${BASEURL}/${product.thumbnailImage.url}` : product?.teacherProfile}`}
+                alt=""
+              />
+            ) : null}
+          </div>
+          <div>
+            <p className="line-clamp-2 font-medium text-[14px] dark:text-white lg:text-[16px]">
+              {product?.title}
+            </p>
+            {showTotal && (
+              <div className="flex flex-1 items-center gap-3 pt-2 dark:border-[#263248] lg:hidden lg:border-none lg:pb-0">
+                <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
+                <div className="flex items-center gap-1">
+                  <p className="font-demibold dark:text-white">
+                    {Number(
+                      Number(product?.discountPrice ? product?.discountPrice : product?.price) *
+                        (product?.count ? product.count : 1)
+                    ).toLocaleString()}
+                  </p>
+                  <Toman_Icon />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <p className="line-clamp-2 font-medium text-[14px] dark:text-white lg:text-[16px]">
-          {product?.title}
-        </p>
+        <div className="lg:hidden">
+          {product?.type === 'physical' ? (
+            <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
+          ) : (
+            <button
+              className="flex h-[40px] w-full items-center justify-center gap-2 rounded-xl bg-main bg-opacity-20 px-3 lg:w-fit lg:bg-transparent"
+              onClick={handleDelete}
+            >
+              <Delete_icon className="!h-6 !w-6 text-white" />
+            </button>
+          )}
+        </div>
       </div>
-      <div className="flex flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
+      <div className="hidden flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:flex lg:border-none lg:pb-0">
         <p className="font-medium text-[14px] text-[#8E98A8]">قیمت</p>
         <div className="flex items-center gap-1">
           <p className="font-demibold dark:text-white">
@@ -84,7 +114,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col items-center justify-center gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
+      <div className="hidden flex-1 flex-col items-center justify-center gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:flex lg:border-none lg:pb-0">
         <p className="font-medium text-[14px] text-[#8E98A8]">تعداد</p>
         {product?.type === 'physical' ? (
           <Counter product={product} typeCounter="product" typePayload="PRODUCT_PHYSICAL" />
@@ -95,7 +125,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
         )}
       </div>
       {showTotal && (
-        <div className="flex flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:border-none lg:pb-0">
+        <div className="hidden flex-1 flex-col items-center justify-between gap-3 border-b border-gray-200 pb-2 dark:border-[#263248] lg:flex lg:border-none lg:pb-0">
           <p className="font-medium text-[14px] text-[#8E98A8]">مجموع</p>
           <div className="flex items-center gap-1">
             <p className="font-demibold dark:text-white">
@@ -108,17 +138,17 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
           </div>
         </div>
       )}
-      {
-        <div className="col-span-2 flex flex-1 items-center justify-center">
+      {product?.type === 'physical' ? null : (
+        <div className="col-span-2 hidden flex-1 items-center justify-center lg:flex">
           <button
-            className="w-full bg-main bg-opacity-20 lg:w-fit lg:bg-transparent"
+            className="flex h-[40px] w-full items-center justify-center gap-2 rounded-xl bg-main bg-opacity-20 lg:w-fit lg:bg-transparent"
             onClick={handleDelete}
           >
             <Delete_icon className="!h-6 !w-6 text-white" />
-            <span className="lg:hidden">حذف</span>
+            <span className="text-main lg:hidden">حذف</span>
           </button>
         </div>
-      }
+      )}
     </Link>
   );
 };
