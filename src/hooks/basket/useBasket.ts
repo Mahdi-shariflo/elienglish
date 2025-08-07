@@ -75,11 +75,6 @@ const useBasket = () => {
     return sum + price * count;
   }, 0);
 
-  console.log(
-    totalProductPriceWithDiscount,
-    'totalProductPriceWithDiscounttotalProductPriceWithDiscounttotalProductPriceWithDiscount'
-  );
-
   useEffect(() => {
     if (checkout) {
       let finalTotal = 0;

@@ -42,7 +42,7 @@ export default function Search() {
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>('');
-  const { data, isLoading } = useSerach(inputValue);
+  const { data, isLoading, isSuccess } = useSerach(inputValue);
   const searchRef = useOutsideClick<HTMLDivElement>(() => {
     onClose();
   });
@@ -137,7 +137,7 @@ export default function Search() {
           }
           className={cn('w-full')}
           classNames={{
-            inputWrapper: `h-[48px]   ${isVisible ? 'group-data-[has-value=true]:!bg-white group hover:!bg-white  bg-white dark:!bg-[#172334] !rounded-b-none !rounded-t-lg' : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg'}`,
+            inputWrapper: `h-[48px]   ${isVisible ? 'dark:group-data-[has-value=true]:!bg-[#172334] group-data-[has-value=true]:!bg-white group !bg-white dark:!bg-[#172334] hover:!bg-transparent   !rounded-b-none !rounded-t-lg' : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg'}`,
             input: 'font-medium ',
           }}
           placeholder="جستجو"
@@ -164,6 +164,14 @@ export default function Search() {
               <div
                 className={cn(serachResult ? 'flex w-full flex-col !gap-8 gap-y-2 p-5' : 'hidden')}
               >
+                {isSuccess
+                  ? [...serachResult?.blog, ...serachResult?.course, ...serachResult?.product]
+                      .length < 1 && (
+                      <p className="line-clamp-2 p-1 text-center font-medium text-[13px] text-[#505B74]">
+                        موردی یافت نشد
+                      </p>
+                    )
+                  : null}
                 {/* result */}
                 {serachResult?.blog && (
                   <SearchSwiper type="blog" title="بلاگ‌ها" sliders={serachResult?.blog} />

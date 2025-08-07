@@ -32,6 +32,7 @@ export type Category = {
 };
 
 export type Product = {
+  itemType: string;
   itemId: string;
   basketItems: {
     count: number;

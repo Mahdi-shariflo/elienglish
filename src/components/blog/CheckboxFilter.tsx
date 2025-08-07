@@ -41,6 +41,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     'productTypeCategory',
     'weekday',
     'lpaStatus',
+    'searchItemType',
   ];
   const onAttributes = ({
     checked,

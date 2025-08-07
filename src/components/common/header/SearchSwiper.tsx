@@ -10,6 +10,7 @@ import Image from '../Image';
 import { ThumbnailImage } from '@/store/types';
 import Title from '../Title';
 import Button from '../Button';
+import Link from 'next/link';
 
 type Props = {
   sliders: {
@@ -90,20 +91,22 @@ export default function SearchSwiper({ sliders, className, title, type }: Props)
         {sliders?.map((item, idx) => {
           return (
             <SwiperSlide
-              className="!flex !h-[83px] !w-[280px] gap-1 overflow-hidden rounded-lg border border-[#9fa8b14d] !p-1 dark:bg-[#172334]"
+              className="!flex !h-[83px] !w-[280px] overflow-hidden rounded-lg border border-[#9fa8b14d] dark:bg-[#172334]"
               key={idx}
             >
-              <div>
-                <Image
-                  className={`${type === 'blog' ? '!h-full !min-w-[130px] overflow-hidden !rounded-lg' : type === 'course' ? 'h-full w-[73px] min-w-[73px]' : 'h-full w-[7۲px] min-w-[7۲px]'}`}
-                  classImg={`${type === 'blog' ? '!object-contain overflow-hidden !rounded-lg' : type === 'course' ? 'overflow-hidden !rounded-lg' : 'overflow-hidden !rounded-lg'}`}
-                  alt=""
-                  src={item?.thumbnailImage?.url}
-                />
-              </div>
-              <p className="line-clamp-2 p-1 font-medium text-[13px] text-[#505B74]">
-                {item.title}
-              </p>
+              <Link className="!flex gap-1 !p-1" href={'$'}>
+                <div>
+                  <Image
+                    className={`${type === 'blog' ? '!h-full !min-w-[130px] overflow-hidden !rounded-lg' : type === 'course' ? 'h-full w-[73px] min-w-[73px]' : 'h-full w-[7۲px] min-w-[7۲px]'}`}
+                    classImg={`${type === 'blog' ? '!object-contain overflow-hidden !rounded-lg' : type === 'course' ? 'overflow-hidden !rounded-lg' : 'overflow-hidden !rounded-lg'}`}
+                    alt=""
+                    src={item?.thumbnailImage?.url}
+                  />
+                </div>
+                <p className="line-clamp-2 p-1 font-medium text-[13px] text-[#505B74]">
+                  {item.title}
+                </p>
+              </Link>
             </SwiperSlide>
           );
         })}
