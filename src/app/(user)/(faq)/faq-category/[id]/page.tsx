@@ -10,7 +10,6 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const data = await request({ url: `/faq/archive-category?slug=${id}` });
   const faq = data?.data?.data;
-  console.log(faq);
   return (
     <div className="-mt-14 mb-32 lg:-mt-7">
       <div className="bg-faq flex h-[280px] w-full flex-col items-center justify-center lg:h-[341px]"></div>

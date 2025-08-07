@@ -29,9 +29,6 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
     // @ts-expect-error error
     const isParent = product?.isParent === true;
 
-    console.log('isChild:', isChild);
-    console.log('isParent:', isParent);
-
     if (isChild) {
       const parentId = product.parent;
       const siblings = baskets.filter((item) => item.product?.parent === parentId);

@@ -3,7 +3,21 @@ import { BASEURL, BASEURL_SITE, SITE_NAME } from '@/lib/variable';
 import { htmlToText } from 'html-to-text';
 import { permanentRedirect, redirect } from 'next/navigation';
 import { getRobotsMeta } from './common';
+import { Course } from '@/store/types/home';
+import { Comment } from '@/store/types';
 
+type Props = {
+  product: Course;
+  comments?: {
+    ratingStats: {
+      avgRating: number;
+      totalRating: number;
+      count: number;
+    };
+
+    comments: Comment[];
+  };
+};
 export const getCourse = async (id: string) => {
   try {
     const data = await safeRequest({
@@ -90,15 +104,15 @@ export const generate_metadata_course = async ({
       },
       keywords: course.keyWords?.join(','),
       robots: getRobotsMeta(
-        hasQueryParams
-          ? {
-              index: false,
-              follow: false,
+        course.robots
+          ? course.robots
+          : {
+              index: true,
+              follow: true,
               'max-image-preview': 'large',
               'max-snippet': -1,
               'max-video-preview': '-1',
             }
-          : course?.robots
       ),
     };
   } else {
@@ -106,4 +120,66 @@ export const generate_metadata_course = async ({
       title: 'محصول',
     };
   }
+};
+
+export const jsonLdCourse = ({ product, comments }: Props) => {
+  // Divide by the length of the array to get the average
+  // تقسیم متن به جملات و انتخاب چند جمله اول
+  const fullHtml = product?.description;
+
+  const textContent = htmlToText(fullHtml, {
+    wordwrap: 130,
+  });
+
+  // تقسیم متن به جملات و انتخاب چند جمله اول
+  const sentences = textContent.slice(0, 168); // برای نمایش ۲ جمله اول
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'Course',
+    name: product.metaTitle ? product.metaTitle : product.title,
+    description: product.metaDescription ? product.metaDescription : sentences,
+    // @ts-expect-error error
+    robots: getRobotsMeta(product?.robots),
+    alternates: {
+      canonical: product?.canonicalUrl ? product.canonicalUrl : `${BASEURL_SITE}/${product.url}/`,
+    },
+    image: [`${BASEURL}/${product.thumbnailImage.url}`],
+    ...(product.discountPrice
+      ? {
+          offers: {
+            '@type': 'Offer',
+            url: `${BASEURL_SITE}/product/${product.url}`,
+            priceCurrency: 'IRR',
+            price: product.price,
+            priceValidUntil: product.createdAt,
+            itemCondition: 'https://schema.org/NewCondition',
+            availability: 'https://schema.org/InStock',
+            seller: {
+              '@type': 'Organization',
+              name: SITE_NAME,
+            },
+          },
+        }
+      : null),
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: comments?.ratingStats?.totalRating,
+      reviewCount: comments?.ratingStats?.count,
+    },
+    review: comments?.comments?.map((item) => {
+      return {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: item?.rating,
+          bestRating: '5',
+        },
+        author: {
+          '@type': 'Person',
+          name: `${item?.author?.firstName} ${item.author?.lastName}`,
+        },
+        reviewBody: item?.content,
+      };
+    }),
+  };
 };

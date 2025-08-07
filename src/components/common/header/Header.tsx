@@ -6,7 +6,6 @@ import { memo, useEffect, useState } from 'react';
 import Logo from '../Logo';
 import Sidebar from '../Sidebar';
 import Cart from './Cart';
-import CategoryMenu from './CategoryMenu';
 import UserInformation from './UserInformation';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import TopBanner from './TopBanner';
@@ -266,7 +265,7 @@ const Header = ({ categories }: Props) => {
         } ${isProfilePage ? '!hidden lg:!block' : ''}`}
       >
         <TopBanner className={`${cls === 'yes' ? '' : 'hidden'}`} />
-        <div className={`container_page py-2`}>
+        <div className={`container_page`}>
           <div
             className={`items-center justify-between ${
               cls === 'yes' ? 'flex lg:hidden' : 'hidden'

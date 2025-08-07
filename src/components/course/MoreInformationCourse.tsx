@@ -7,7 +7,7 @@ import Comments from '../common/Comments';
 import Button from '../common/Button';
 import Link from 'next/link';
 import WatchVideo from '../common/WatchVideo';
-import { BASEURL, BASEURL_SITE } from '@/lib/variable';
+import { BASEURL_SITE } from '@/lib/variable';
 
 const MoreInformationCourse = ({ course }: { course: Course }) => {
   const [modal, setModal] = useState({
@@ -59,7 +59,6 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
     {
       name: 'سوالات متداول',
       ref: faqRef,
-      // @ts-expect-error errro
       show: Array.isArray(course?.faqs) && course.faqs.length > 0, // اگر دارید
     },
     {
@@ -292,7 +291,113 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
             </div>
           </>
         )}
+        {/* question */}
 
+        {Array.isArray(course?.faqs) && course.faqs.length > 0 && (
+          <>
+            <div ref={faqRef}>
+              <Title className="!text-[16px]" title="سوالات متداول" />
+              <Accordion
+                defaultExpandedKeys={['0']}
+                className="mt-5 !rounded-lg dark:bg-[#172334] dark:!p-6 lg:!mt-10"
+              >
+                {course.faqs.map((faq, idx) => (
+                  <AccordionItem
+                    classNames={{
+                      base: ' border demo_style !mt-4 border-gray-100 !p-3 dark:border-[#263248] !rounded-lg',
+                      trigger: '',
+                    }}
+                    key={idx}
+                    indicator={(open) =>
+                      !open ? (
+                        <span>
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_1498_19773)">
+                              <path
+                                d="M6.85547 12H17.1412"
+                                stroke="#6E3DFF"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                              <path
+                                d="M17.9983 0.855469H5.99833C3.158 0.855469 0.855469 3.158 0.855469 5.99833V17.9983C0.855469 20.8386 3.158 23.1412 5.99833 23.1412H17.9983C20.8386 23.1412 23.1412 20.8386 23.1412 17.9983V5.99833C23.1412 3.158 20.8386 0.855469 17.9983 0.855469Z"
+                                stroke="#6E3DFF"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1498_19773">
+                                <rect width="24" height="24" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </span>
+                      ) : (
+                        <span>
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_1498_9393)">
+                              <path
+                                d="M12 6.85547V17.1412"
+                                stroke="#6E3DFF"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                              <path
+                                d="M6.85547 12H17.1412"
+                                stroke="#6E3DFF"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                              <path
+                                d="M17.9983 0.855469H5.99833C3.158 0.855469 0.855469 3.158 0.855469 5.99833V17.9983C0.855469 20.8386 3.158 23.1412 5.99833 23.1412H17.9983C20.8386 23.1412 23.1412 20.8386 23.1412 17.9983V5.99833C23.1412 3.158 20.8386 0.855469 17.9983 0.855469Z"
+                                stroke="#6E3DFF"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              />
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1498_9393">
+                                <rect width="24" height="24" fill="white" />
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </span>
+                      )
+                    }
+                    title={
+                      <p className="font-medium text-[14px] dark:text-[#8E98A8] lg:text-[16px]">
+                        <span className="text-[14px] text-main lg:text-[16px]">{faq?.order}. </span>
+                        {faq?.question}
+                      </p>
+                    }
+                  >
+                    <p className="font-regular text-[14px] leading-8 text-[#6A7890]">
+                      {faq.answer}
+                    </p>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </>
+        )}
         {Array.isArray(course?.chapters) && course.chapters.length > 0 && (
           <>
             {/* problem */}
@@ -334,7 +439,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                       )}
                       classNames={{
                         trigger: 'demo_style',
-                        content: '!px-3',
+                        content: '!px-5',
                         heading:
                           'drop_shadow_faq border dark:border-[#263248] border-gray-100 !rounded-lg !px-4',
                       }}

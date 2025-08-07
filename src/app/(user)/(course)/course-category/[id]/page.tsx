@@ -3,7 +3,7 @@ import Filters from '@/components/blog/Filters';
 import React from 'react';
 import Pagination from '@/components/common/Pagination';
 import { request } from '@/lib/safeClient';
-import { Course, Product } from '@/store/types/home';
+import { Course } from '@/store/types/home';
 import CardProduct from '@/components/common/CardProduct';
 import Sort from '@/components/common/Sort';
 import SelectedFilterCourse from '@/components/product/SelectedFilterCourse';
@@ -26,17 +26,11 @@ export async function generateMetadata({ searchParams, params }: Props): Promise
   const result = await request({
     url: `/course/archive-category?slug=${id}`,
   });
-  const product: {
-    course: Course[];
-    totalPages: number;
-    categories: { title: string; url: string }[];
-  } = result?.data?.data;
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.course)
-    ? product.course[0].category
-    : null;
+  const product: any = result?.data?.data;
+
   return {
-    title: selectedCategory?.title,
-    description: selectedCategory?.title,
+    title: product?.category?.title,
+    description: product?.category?.title,
     alternates: {
       canonical: `${BASEURL_SITE}/course-category/${encodeURIComponent(id)}`,
     },
@@ -68,22 +62,16 @@ const Page = async ({ searchParams, params }: Props) => {
   const result = await request({
     url: `/course/archive-category?slug=${id}&${querySearchParams}`,
   });
-  const product: {
-    course: Course[];
-    totalPages: number;
-    categories: { title: string; url: string }[];
-  } = result?.data?.data;
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.course)
-    ? product.course[0].category
-    : null;
-  const categories = product.categories.map((item, idx) => {
+  const product: any = result?.data?.data;
+
+  const categories = product.categories.map((item: any, idx: number) => {
     return {
       _id: idx.toString(),
       title: item.title,
       url: item.url,
       type: 'coursType',
       isLink: true,
-      page: `/course-category/${item.url}`,
+      page: `${item.url}`,
     };
   });
 
@@ -95,8 +83,8 @@ const Page = async ({ searchParams, params }: Props) => {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             jsonLdProductBreadcrub({
-              title: selectedCategory?.title as string,
-              url: selectedCategory?.url as string,
+              title: product?.category?.title as string,
+              url: `/course-category/${product?.category?.url}` as string,
             })
           ),
         }}
@@ -124,13 +112,13 @@ const Page = async ({ searchParams, params }: Props) => {
                       _id: '1',
                       title: 'تکمیل شده',
                       url: 'completed',
-                      type: 'coursStatus',
+                      type: 'courseStatus',
                     },
                     {
                       _id: '2',
                       title: 'در حال برگزاری',
                       url: 'inProgress',
-                      type: 'coursStatus',
+                      type: 'courseStatus',
                     },
                   ],
                   displayType: 'text',
@@ -151,7 +139,7 @@ const Page = async ({ searchParams, params }: Props) => {
                 <>
                   <Sort />
                   <div className="grid w-full gap-4 rounded-lg p-2 dark:bg-[#172334] lg:grid-cols-3 lg:p-10">
-                    {product?.course.map((course, idx) => (
+                    {product?.course.map((course: Course, idx: number) => (
                       <CardProduct
                         url={`/course/${course.url}/`}
                         classImage="!object-cover"

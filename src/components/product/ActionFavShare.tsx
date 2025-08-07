@@ -32,7 +32,6 @@ const ActionFavShare = ({ product }: { product: Product }) => {
     ...(Array.isArray(datafavorites?.digital) ? datafavorites?.digital : []),
   ];
   const isBookmark = favorirtes?.find((item) => item?.item?._id === product._id);
-  console.log(isBookmark, 'isBookmark');
   return (
     <div>
       <div className="absolute right-3 top-0 z-30 flex flex-col gap-0 lg:mr-3 lg:gap-0">

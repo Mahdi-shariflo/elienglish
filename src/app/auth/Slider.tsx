@@ -22,7 +22,6 @@ type Props = {
 };
 
 export default function Slider({ sliders, className }: Props) {
-  console.log(sliders, 'djklsfhkjsfdsff');
   return (
     <div
       className={`custom_pagination relative flex h-full w-[90%] items-center justify-center ${className}`}

@@ -11,6 +11,8 @@ import { buildQueryFromSearchParams } from '@/lib/regexes';
 import { BASEURL_SITE } from '@/lib/variable';
 import { getRobotsMeta } from '@/seo/common';
 import { Metadata } from 'next';
+import Script from 'next/script';
+import { jsonLdProductBreadcrub } from '@/seo/product';
 type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
   params: Promise<{ [key: string]: string }>;
@@ -23,17 +25,11 @@ export async function generateMetadata({ searchParams, params }: Props): Promise
   const result = await request({
     url: `/course/archive-tag?slug=${id}`,
   });
-  const product: {
-    course: Course[];
-    totalPages: number;
-    categories: { title: string; url: string }[];
-  } = result?.data?.data;
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.course)
-    ? product.course[0].category
-    : null;
+  const product: any = result?.data?.data;
+
   return {
-    title: selectedCategory?.title,
-    description: selectedCategory?.title,
+    title: product?.category?.title,
+    description: product?.category?.title,
     alternates: {
       canonical: `${BASEURL_SITE}/course-tag/${encodeURIComponent(id)}`,
     },
@@ -65,12 +61,8 @@ const Page = async ({ searchParams, params }: Props) => {
   const result = await request({
     url: `/course/archive-tag?slug=${id}&${querySearchParams}`,
   });
-  const product: {
-    course: Course[];
-    totalPages: number;
-    categories: { title: string; url: string }[];
-  } = result?.data?.data;
-  const categories = product.categories.map((item, idx) => {
+  const product: any = result?.data?.data;
+  const categories = product.categories.map((item: any, idx: number) => {
     return {
       _id: idx.toString(),
       title: item.title,
@@ -83,6 +75,18 @@ const Page = async ({ searchParams, params }: Props) => {
 
   return (
     <div className="min-h-screen w-full bg-white pb-32 dark:bg-dark">
+      <Script
+        id="user-layout-layoutwithdefaultmetadata-product-construct"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdProductBreadcrub({
+              title: product?.category?.title as string,
+              url: `/course-tag/${product?.category?.url}` as string,
+            })
+          ),
+        }}
+      />
       <div className="container_page">
         <Breadcrumbs breadcrumbs={[{ title: decodeURIComponent(id), id: '22', url: '/courses' }]} />
         <div className="flex flex-col items-start gap-10 pt-3 lg:flex-row lg:gap-10 lg:pt-10">
@@ -133,7 +137,7 @@ const Page = async ({ searchParams, params }: Props) => {
                 <>
                   <Sort />
                   <div className="grid w-full gap-4 rounded-lg p-2 dark:bg-[#172334] lg:grid-cols-3 lg:p-10">
-                    {product?.course.map((course, idx) => (
+                    {product?.course.map((course: Course, idx: number) => (
                       <CardProduct
                         url={`/course/${course.url}/`}
                         classImage="!object-cover"

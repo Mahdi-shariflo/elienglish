@@ -50,7 +50,8 @@ const Counter = ({
   const { mutate: mutateRemoveBasket, isPending: isPendingRemoveBasket } = useRemoveBasket();
   const productIsBasket = baskets?.find(
     (basket: any) =>
-      basket[typeCounter === 'digital' ? 'product' : typeCounter]?._id === product._id
+      basket[typeCounter === 'digital' || typeCounter === 'physical' ? 'product' : typeCounter]
+        ?._id === product._id
   );
 
   useEffect(() => {
@@ -84,11 +85,14 @@ const Counter = ({
     if (Number(productIsBasket?.count) < 0) return null;
     mutateRemoveBasket({ id: product._id });
   };
-  // if (isPeningBasket) return <Spinner size='sm' classNames={{ circle1: "!border-b-main", circle2: "!border-b-main" }} className='ml-auto mt-2' />
+  // if (isPeningBasket) return <Spinner size='sm' classNames={{ circle1: "!border-b-white", circle2: "!border-b-white" }} className='ml-auto mt-2' />
   return (
     <>
       {productIsBasket ? (
-        typeCounter === 'course' || typeCounter === 'digital' || typeCounter === 'lpas' ? (
+        typeCounter === 'course' ||
+        typeCounter === 'digital' ||
+        typeCounter === 'physical' ||
+        typeCounter === 'lpas' ? (
           <Link
             className={`mt-3 flex h-[44px] w-full items-center justify-center whitespace-nowrap rounded bg-main px-2 font-medium text-[12px] text-white ${classLinkCart}`}
             href={'/checkout/'}
@@ -105,7 +109,7 @@ const Counter = ({
                 >
                   {isPending ? (
                     <Spinner
-                      classNames={{ circle1: '!border-b-main', circle2: '!border-b-main' }}
+                      classNames={{ circle1: '!border-b-white', circle2: '!border-b-white' }}
                       size="sm"
                     />
                   ) : (
@@ -147,7 +151,7 @@ const Counter = ({
                     <span>
                       {isPendingRemoveBasket ? (
                         <Spinner
-                          classNames={{ circle1: '!border-b-main', circle2: '!border-b-main' }}
+                          classNames={{ circle1: '!border-b-white', circle2: '!border-b-white' }}
                           size="sm"
                         />
                       ) : (
@@ -198,7 +202,7 @@ const Counter = ({
                     </span>
                   ) : isPendingRemoveBasket ? (
                     <Spinner
-                      classNames={{ circle1: '!border-b-main', circle2: '!border-b-main' }}
+                      classNames={{ circle1: '!border-b-white', circle2: '!border-b-white' }}
                       size="sm"
                     />
                   ) : (

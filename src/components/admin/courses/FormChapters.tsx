@@ -51,7 +51,6 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
       formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
       setEditingIndex(null); // خروج از حالت ویرایش
     } else {
-      console.log(newEpisode, 'newEpisodenewEpisodenewEpisodenewEpisodenewEpisodenewEpisode');
       // حالت اضافه کردن - اپیزود جدید
       const updatedEpisodes = [...currentEpisodes, { ...newEpisode }];
       formik.setFieldValue(`${baseName}.episodes`, updatedEpisodes);
@@ -95,8 +94,6 @@ const FormChapters = ({ open, setOpen, formik, idx }: Props) => {
     setEditingIndex(null);
     setNewEpisode({ title: '', order: '', duration: '', video: '', type: '' });
   };
-
-  console.log(formik.values.chapters[idx]?.episodes || []);
 
   return (
     <BaseDialog

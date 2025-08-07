@@ -129,6 +129,8 @@ export type Product = {
   }[];
 };
 export type Course = {
+  canonicalUrl: string;
+  faqs: { question: string; answer: string; order: number }[];
   btnCourse: {
     title: string;
     href: string;

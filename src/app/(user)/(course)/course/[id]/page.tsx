@@ -11,7 +11,9 @@ import Counter from '@/components/common/Counter';
 import ImageNextjs from 'next/image';
 import Image from '@/components/common/Image';
 import { Metadata } from 'next';
-import { generate_metadata_course } from '@/seo/course';
+import { generate_metadata_course, jsonLdCourse } from '@/seo/course';
+import Script from 'next/script';
+import { jsonLdProduct } from '@/seo/product';
 type Props = {
   params: Promise<{ [key: string]: string }>;
   searchParams: Promise<{ [key: string]: string }>;
@@ -27,14 +29,27 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 const Page = async ({ params }: Props) => {
   const { id } = await params;
   const result = await request({ url: `/course/detail/${decodeURIComponent(id)}` });
-  const course: Course = result?.data?.data?.course;
+  const course: Course = { ...result?.data?.data?.course, faqs: result?.data?.data?.faq };
   const data = await safeRequest({
     url: `/comment/comment-page?pageLocation=${course?._id}`,
   });
   const totalRating = data?.data?.data?.ratingStats?.avgRating;
-  console.log(result.data.data, 'fhdgfsjfgsjfgsjfs');
+  const comments: Comment[] = data?.data?.data;
+
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
+      <Script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            jsonLdCourse({
+              product: course,
+              // @ts-expect-error error
+              comments: comments,
+            })
+          ),
+        }}
+      />
       <div className="mx-auto w-full pt-14 lg:max-w-[1440px] lg:pt-16">
         <Breadcrumbs
           className="container_page lg:w-full"
@@ -44,12 +59,12 @@ const Page = async ({ params }: Props) => {
               ? [
                   {
                     title: course.category.title,
-                    url: course.category.url,
+                    url: `/course-category/${course.category.url}`,
                     id: '3333333',
                   },
                 ]
               : []),
-            { id: '333', title: course?.title, url: '#' },
+            { id: '333', title: course?.title, url: '' },
           ]}
         />
         <div className="flex flex-col items-start gap-7 pt-10 lg:flex-row">

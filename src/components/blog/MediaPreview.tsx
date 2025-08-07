@@ -12,7 +12,6 @@ const MediaPreview = ({ media, className }: { media: Blog | Course; className?: 
   if (!media) return null;
 
   // تشخیص دسکتاپ سمت کلاینت
-  console.log(media?.audio?.url);
   return (
     <>
       <div
