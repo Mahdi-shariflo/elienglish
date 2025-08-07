@@ -39,13 +39,15 @@ const Page = () => {
     <div className="pb-32 pt-4 lg:mb-10 lg:pb-0 lg:pt-0">
       <BackPrevPage title="لیست آدرس‌ها" />
 
-      <div className="container_page mt-10 space-y-4 rounded-2xl border border-[#E4E7E9] bg-white p-4 lg:mt-5 lg:min-h-[70vh] lg:!w-full lg:p-[16px]">
+      <div className="container_page mt-10 space-y-4 rounded-2xl border border-[#E4E7E9] bg-white p-4 dark:border-[#263248] dark:bg-[#172334] lg:mt-5 lg:min-h-[70vh] lg:!w-full lg:p-[16px]">
         <div className="flex items-center justify-between border-b border-[#E4E7E9] pb-3 lg:border-0">
-          <p className="hidden font-medium text-[18px] text-[#0C0C0C] lg:block">لیست آدرس‌ها</p>
+          <p className="hidden font-medium text-[18px] text-[#0C0C0C] dark:text-white lg:block">
+            لیست آدرس‌ها
+          </p>
           {address?.length >= 1 && (
             <Button
               onClick={onNewAddress}
-              className="h-[42px] border border-[#E4E7E9] px-2 font-regular text-main lg:w-fit"
+              className="h-[42px] border border-[#E4E7E9] px-2 font-regular text-main dark:border-[#263248] lg:w-fit"
             >
               <span>
                 <svg

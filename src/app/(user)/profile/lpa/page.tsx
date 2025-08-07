@@ -17,11 +17,11 @@ const Page = () => {
   const orders: { order: Order[]; totalPages: number; totalItems: number } = data?.data?.data;
 
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
-      <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+      <BackPrevPage url="/profile" title="تعین سطح" />
 
       <div>
-        <div className="hidden items-center gap-3 border-b lg:flex">
+        <div className="hidden items-center gap-3 border-b dark:border-[#263248] lg:flex">
           <span>
             <svg
               width="32"
@@ -52,24 +52,24 @@ const Page = () => {
             {orders.order.map((order, idx) => {
               return (
                 <div
-                  className="grid grid-cols-3 flex-wrap justify-between gap-5 rounded-[16px] border border-[#E5EAEF] p-4 lg:flex"
+                  className="grid grid-cols-2 flex-wrap justify-between gap-5 rounded-[16px] border border-[#E5EAEF] p-4 dark:border-[#263248] lg:flex lg:grid-cols-3"
                   key={idx}
                 >
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">نوع جلسه</p>
-                    <p className="font-medium text-[12px] text-[#0B1524]">
+                    <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
                       {order.levelItems.title}
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">قیمت</p>
-                    <p className="font-medium text-[12px] text-[#0B1524]">
+                    <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
                       {Number(order.levelItems.price).toLocaleString()} تومان
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">تاریخ</p>
-                    <p className="font-medium text-[12px] text-[#0B1524]">
+                    <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
                       {new Date(order.levelItems.date).toLocaleDateString('fa-IR', {
                         year: 'numeric',
                         month: 'long',
@@ -77,22 +77,22 @@ const Page = () => {
                       })}
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">زمان</p>
-                    <p className="font-medium text-[12px] text-[#0B1524]">
+                    <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
                       {order.levelItems.time}
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">استاد</p>
-                    <p className="font-medium text-[12px] text-[#0B1524]">
+                    <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
                       {order.levelItems.teacherName}
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">وضعیت</p>
                     <p
-                      className={`flex h-[28px] w-[78px] items-center justify-center rounded-md p-1 text-center font-medium text-[12px] text-[#0B1524] ${order.levelItems.status === 'PENDING' ? 'bg-[#2196F3] bg-opacity-10 text-[#2196F3]' : order.levelItems.status === 'SUBMITTED' ? 'bg-[#4CAF50] bg-opacity-10 text-[#4CAF50]' : ''}`}
+                      className={`flex h-[28px] w-[78px] items-center justify-center rounded-md p-1 text-center font-medium text-[12px] text-[#0B1524] dark:text-white ${order.levelItems.status === 'PENDING' ? 'bg-[#2196F3] bg-opacity-10 text-[#2196F3]' : order.levelItems.status === 'SUBMITTED' ? 'bg-[#4CAF50] bg-opacity-10 text-[#4CAF50]' : ''}`}
                     >
                       {order.levelItems.status === 'PENDING'
                         ? 'در حال انتظار'
@@ -101,7 +101,7 @@ const Page = () => {
                           : 'لغو شد'}
                     </p>
                   </div>
-                  <div className="space-y-4 border-b pb-2 lg:border-none">
+                  <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">گزارش تعیین سطح</p>
                     <Button className="h-[32px] w-[89px] rounded-lg bg-main text-white">
                       <span>

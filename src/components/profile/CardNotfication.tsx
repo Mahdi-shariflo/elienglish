@@ -3,7 +3,7 @@ import React from 'react';
 
 const CardNotfication = ({ notification }: { notification: Notification }) => {
   return (
-    <div className="flex items-center gap-3 rounded-lg border p-2 lg:gap-0 lg:border-none">
+    <div className="flex items-center gap-3 rounded-lg border p-2 dark:border-[#263248] lg:gap-0 lg:border-none">
       <div className="flex flex-1 items-start gap-3">
         <span>
           <svg

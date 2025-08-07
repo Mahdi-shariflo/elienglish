@@ -1004,7 +1004,7 @@ export const initialDataOrder = ({ onEdit }: Props) => [
     key: 'totalAmount',
     render: (value: string) => (
       <p className="text-center text-xs text-gray-800">
-        {Number(Number(value) / 10).toLocaleString()} تومان
+        {Number(Number(value)).toLocaleString()} تومان
       </p>
     ),
   },
@@ -2042,27 +2042,19 @@ export const initialDataPlans = ({ onDelete, onEdit }: Props) => [
 export const ordersStatus = [
   {
     label: 'در انتظار پرداخت',
-    value: 'Awaiting',
+    value: 'AWAITING',
   },
   {
-    label: 'در حال انجام',
-    value: 'Doing',
+    label: 'پرداخت شده',
+    value: 'PAID',
   },
   {
-    label: 'در انتظار بررسی',
-    value: 'Review',
-  },
-  {
-    label: 'تحویل به پست',
-    value: 'Delivery',
-  },
-  {
-    label: 'ارسال شده',
-    value: 'Posted',
+    label: 'دسترسی',
+    value: 'ACCESS_REVOKED',
   },
   {
     label: 'لغو شده',
-    value: 'Canceled',
+    value: 'CANCELED',
   },
   {
     label: 'برداشتن فیلتر',

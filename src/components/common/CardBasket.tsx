@@ -117,7 +117,7 @@ const CardBasket = ({ product, className, classImage, showTotal = true }: Props)
             className="w-full bg-main bg-opacity-20 lg:w-fit lg:bg-transparent"
             onClick={handleDelete}
           >
-            <Delete_icon />
+            <Delete_icon className="!h-6 !w-6 text-white" />
             <span className="lg:hidden">حذف</span>
           </button>
         </div>

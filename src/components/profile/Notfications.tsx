@@ -9,7 +9,7 @@ const Notfications = () => {
   const notfications: Notification[] = data?.data?.data?.notification;
   if (Number(notfications?.length) < 1 || !data?.data) return null;
   return (
-    <div className="mt-5 rounded-2xl border-[#E4E7E9] px-4 dark:border-[#505B74] dark:bg-[#263248] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
+    <div className="mt-5 rounded-2xl border-[#E4E7E9] p-4 dark:border-[#263248] dark:bg-[#172334] lg:mr-0 lg:!w-full lg:border lg:bg-white lg:p-[16px]">
       <div className="flex items-center gap-4">
         <span>
           <svg

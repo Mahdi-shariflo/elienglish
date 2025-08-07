@@ -1,7 +1,6 @@
 import useBasket from '@/hooks/basket/useBasket';
 import { useCreateCheckout } from '@/hooks/checkout/useCreateCheckout';
 import { useDiscount } from '@/hooks/discount/useDiscount';
-import { freeShippingPrice } from '@/lib/variable';
 import { useCheckoutStore } from '@/store/checkout-store';
 import { useFormik } from 'formik';
 import { usePathname, useRouter } from 'next/navigation';
@@ -12,6 +11,7 @@ import Loading from '../common/Loading';
 import DiscountResult from './DiscountResult';
 
 const Factor = () => {
+  const { baskets } = useBasket();
   const { checkout: checkoutData, setCheckout } = useCheckoutStore();
   const { mutate: mutateCheckout, isPending: isPendingCheckout } = useCreateCheckout();
   const {
@@ -68,6 +68,7 @@ const Factor = () => {
     mutateCheckout({ data: checkoutFields });
   };
 
+  const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
   return (
     <>
       <div className="w-full rounded-lg border border-[#E4E7E9] p-[25px] dark:border-[#263248]">
@@ -103,18 +104,14 @@ const Factor = () => {
                 </p>
               </div>
             ) : null}
-            {pathname !== '/cart/' ? (
+            {isCartPhycial ? (
               <>
                 <div className="flex items-center justify-between">
                   <p className="font-regular text-[16px] text-[#616A76] dark:text-[#A8AFB8]">
                     هزینه ارسال
                   </p>
                   <p className="font-medium text-[16px] text-[#0C0C0C] dark:text-white">
-                    {total >= freeShippingPrice && checkoutData?.transport?.isShippingFree
-                      ? 'رایگان'
-                      : checkoutData?.transport
-                        ? `${checkoutData?.transport?.shippingPrice.toLocaleString()} تومان`
-                        : 'تعین نشده'}
+                    {Number(65000).toLocaleString()} تومان
                   </p>
                 </div>
               </>
@@ -161,7 +158,7 @@ const Factor = () => {
                     </svg>
                     <p className="font-regular text-[12px] text-red-500">
                       {/* @ts-expect-error  error*/}
-                      {error?.response?.data?.errors?.message}
+                      {error?.response?.data?.message[0]}
                     </p>
                   </div>
                 ) : undefined

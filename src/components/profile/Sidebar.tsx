@@ -526,7 +526,7 @@ const Sidebar = () => {
   const { setLogout } = useGlobalStore();
   const pathname = usePathname();
   return (
-    <div className="mt-10 overflow-hidden !rounded-2xl border border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mt-0">
+    <div className="sticky top-32 mt-10 overflow-hidden !rounded-2xl border border-[#E4E7E9] dark:border-[#263248] dark:bg-[#172334] lg:mt-0">
       {/* user profile */}
       <div className="flex flex-col items-center justify-center bg-[linear-gradient(180deg,_#EDE8FC_-8.74%,_#FFFFFF_100%)] dark:bg-none lg:!w-full lg:p-[16px]">
         <div className="relative mx-auto flex !h-[70px] !w-[70px] flex-col items-center justify-center rounded-full pt-5 lg:!h-[100px] lg:!w-[100px] lg:gap-3 lg:pt-0">
@@ -566,7 +566,7 @@ const Sidebar = () => {
             </span>
           </span>
         </div>
-        <div className="mt-8 flex w-full flex-col items-center justify-center border-b border-[#E4E7E9] pb-3 dark:border-[#505B74]">
+        <div className="mt-8 flex w-full flex-col items-center justify-center border-b border-[#E4E7E9] pb-3 dark:border-[#263248]">
           <p className="font-medium text-[16px] dark:text-white">
             {session?.firstName} {session?.lastName}
           </p>
@@ -578,7 +578,7 @@ const Sidebar = () => {
       {/* levels */}
       {/* sidebar */}
       <div className="space-y-4 px-[16px] pb-[16px] lg:!w-full">
-        <div className="border-b border-[#E4E7E9] dark:border-[#505B74]">
+        <div className="border-b border-[#E4E7E9] dark:border-[#263248]">
           <div className="flex items-center justify-between font-medium">
             <p className="text-[14px] text-[#505B74] dark:text-[#8E98A8]">سطح شما</p>
             <p className="text-[#0B1524] dark:text-white">B2 – Upper-Intermediate</p>
@@ -613,7 +613,7 @@ const Sidebar = () => {
         </div>
         {menus.map((menu, idx) => (
           <Link
-            className={`relative flex h-[45px] items-center gap-3 border-b border-[#E4E7E9] pb-3 after:absolute after:-right-4 after:h-[80%] after:w-px dark:border-[#505B74] ${pathname === menu.href ? 'after:bg-main' : ''}`}
+            className={`relative flex h-[45px] items-center gap-3 border-b border-[#E4E7E9] pb-3 after:absolute after:-right-4 after:h-[80%] after:w-px dark:border-[#263248] ${pathname === menu.href ? 'after:bg-main' : ''}`}
             key={idx}
             href={`${menu.href}/`}
           >

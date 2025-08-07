@@ -12,8 +12,8 @@ type Props = {
 const CardDownload = ({ order, src }: Props) => {
   const { refetch, isLoading } = useGetDownloadFile({ src });
   return (
-    <div className="overflow-hidden rounded-xl border border-[#E4E7E9] lg:!w-full">
-      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-4 lg:py-8">
+    <div className="overflow-hidden rounded-xl border border-[#E4E7E9] dark:border-[#263248] lg:!w-full">
+      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-4 dark:border-[#263248] dark:bg-[#0b1524] lg:py-8">
         <div className="flex gap-3 lg:flex-1 lg:flex-row lg:items-center lg:gap-10">
           <p className="font-medium text-[14px] text-[#7D8793] lg:px-[16px]">
             {new Date(order.createdAt).toLocaleDateString('fa-IR', {
@@ -24,18 +24,18 @@ const CardDownload = ({ order, src }: Props) => {
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">کد سفارش:</span>
-            <span className="font-medium text-[#232429]">{order.orderNumber}</span>
+            <span className="font-medium text-[#232429] dark:text-white">{order.orderNumber}</span>
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">قیمت کل:</span>
-            <span className="font-medium text-[#232429]">
+            <span className="font-medium text-[#232429] dark:text-white">
               {Number(order.totalAmount).toLocaleString()} تومان
             </span>
           </p>
         </div>
       </div>
 
-      <div className="custom_scroll_gallery flex items-center gap-4 overflow-x-auto px-3 lg:py-4">
+      <div className="custom_scroll_gallery flex items-center gap-4 overflow-x-auto p-3 lg:py-4">
         <div className="relative h-[131pxpx] w-[131pxpx]">
           <Image
             className="h-[115px] w-[115px] object-contain"

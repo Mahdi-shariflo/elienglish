@@ -79,7 +79,7 @@ const RingkasanOrder = ({ className }: { className?: string }) => {
 
   return (
     <div
-      className={`] relative mr-auto w-[95%] space-y-4 rounded-2xl border-[#E4E7E9] dark:border-[#505B74] dark:bg-[#263248] lg:mr-0 lg:w-full lg:max-w-full lg:border lg:bg-white lg:p-[16px] ${className}`}
+      className={`relative mx-auto mt-3 w-[95%] space-y-4 rounded-2xl border-[#E4E7E9] p-3 dark:border-[#263248] dark:bg-[#172334] lg:mr-0 lg:w-full lg:max-w-full lg:border lg:bg-white lg:p-[16px] ${className}`}
     >
       <div className="flex items-center gap-3">
         <span>
@@ -101,7 +101,7 @@ const RingkasanOrder = ({ className }: { className?: string }) => {
       </div>
 
       {/* waiting */}
-      <div className="custom_scroll_gallery flex items-center gap-3 overflow-auto rounded-lg border border-[#E4E7E9] dark:border-[#505B74]">
+      <div className="custom_scroll_gallery flex items-center gap-3 overflow-auto rounded-lg border border-[#E4E7E9] dark:border-[#263248]">
         {newArray.map((item, idx) => (
           <button
             key={idx}

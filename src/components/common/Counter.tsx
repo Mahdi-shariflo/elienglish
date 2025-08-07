@@ -11,7 +11,7 @@ import ModalNeedLoginUser from './ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
 
 type Props = {
-  nameAddBakect: string;
+  nameAddBakect?: string;
   product: Product;
   classNameCounter?: string;
   classLinkCart?: string;

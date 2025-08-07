@@ -58,7 +58,7 @@ const EliMag = ({
             classTitle="text-[18px]"
             blog={blogs[0]}
             classImage="!object-fill !h-[450px]  !rounded-lg"
-            className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] !p-0 dark:border-[#505B74]"
+            className="w-1/2 overflow-hidden rounded-lg border border-[#E5EAEF] !p-0 dark:border-[#263248]"
           />
         )}
 
@@ -72,7 +72,7 @@ const EliMag = ({
                 blog={item}
                 showTag
                 classImage="!w-[180x] !min-w-[180px] !h-[110px]"
-                className="!h-[128px] border border-[#E5EAEF] !px-3 !py-0 dark:border-[#505B74]"
+                className="!h-[128px] border border-[#E5EAEF] !px-3 !py-0 dark:border-[#263248]"
               />
             ))}
         </div>

@@ -108,7 +108,7 @@ const Filters = ({ searchParams, resultFilter, title }: Props) => {
       <div className="mt-5 lg:mt-0">
         <Title className="hidden lg:block" title={title} />
         <div className="mt-5 hidden !max-h-[90vh] w-[288px] min-w-[288px] overflow-hidden overflow-x-hidden rounded-xl bg-[#F4F6FA] !px-6 dark:bg-[#172334] lg:block lg:pl-3">
-          <div className="flex !h-[54px] items-center justify-between border-b dark:border-[#505B74]">
+          <div className="flex !h-[54px] items-center justify-between border-b dark:border-[#263248]">
             <div className="flex items-center gap-2">
               <span>
                 <svg

@@ -24,8 +24,8 @@ const Page = () => {
   const downloadLink = data?.data?.data?.downloadLinks;
 
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
-      <BackPrevPage url="/profile" title="تاریخچه سفارش‌ها" />
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pb-10 dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pb-0 lg:pt-0">
+      <BackPrevPage url="/profile" title="فایل های دانلودی" />
       {/* <div className='container_page lg:!w-full lg:flex-row  flex  flex-col items-center gap-6 lg:justify-between'>
                 <p className='text-[#0C0C0C] hidden lg:block font-medium text-[14px] lg:text-[18px]'>تاریخچه سفارش‌های من</p>
                 <Input className='lg:!w-[284px]' placeholder='جستجو ' classNameInput='!h-[48px] bg-[#F5F6F6]' startContent={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

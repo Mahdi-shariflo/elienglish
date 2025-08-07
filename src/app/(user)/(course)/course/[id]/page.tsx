@@ -32,6 +32,7 @@ const Page = async ({ params }: Props) => {
     url: `/comment/comment-page?pageLocation=${course?._id}`,
   });
   const totalRating = data?.data?.data?.ratingStats?.avgRating;
+  console.log(result.data.data, 'fhdgfsjfgsjfgsjfs');
   return (
     <div className="bg-white pb-10 dark:bg-[#0B1524] lg:bg-[#f7f7f7]">
       <div className="mx-auto w-full pt-14 lg:max-w-[1440px] lg:pt-16">
@@ -123,7 +124,7 @@ const Page = async ({ params }: Props) => {
                 </div>
                 {course.discountTime && (
                   <CountdownDiscounts
-                    className="hidden lg:mt-8 lg:block"
+                    className="!mb-10 hidden lg:my-8 lg:block"
                     timer={course?.discountTime}
                   />
                 )}

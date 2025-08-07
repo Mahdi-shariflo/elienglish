@@ -21,7 +21,6 @@ import EditInfo from '@/components/checkout/EditInfo';
 import BacketItems from '@/components/checkout/BacketItems';
 
 const Page = () => {
-  const { data: payment } = useGetPayment();
   const { data } = useGetAddress();
   const { setCheckout, checkout } = useCheckoutStore();
   const { baskets } = useBasket();

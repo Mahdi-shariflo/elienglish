@@ -2,13 +2,12 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/form/Input';
 import React, { useEffect } from 'react';
-import ReactSelect from '../common/form/ReactSelect';
 import { useUpdateUser } from '@/hooks/profile/useUpdateUser';
 import { useFormik } from 'formik';
 import { namePattern } from '@/lib/regexes';
 import * as Yup from 'yup';
 import { removeEmptyFields } from '@/lib/fun';
-import { addCommaCartBank, removeNumNumeric } from '@/lib/convert';
+import { addCommaCartBank, converDateGre, converDatePer, removeNumNumeric } from '@/lib/convert';
 import { User } from '@/store/types';
 import { useSession } from '@/lib/auth/useSession';
 import Datepicker from '../common/Datepicker';
@@ -65,6 +64,11 @@ const ActionUser = ({ disable = false }: Props) => {
                 ...(data.nationalCode ? { nationalCode: data.nationalCode.toString() } : null),
               }
             : null),
+          ...(data.dateOfBirth
+            ? {
+                dateOfBirth: converDateGre(data.dateOfBirth),
+              }
+            : null),
         },
       });
     },
@@ -79,13 +83,17 @@ const ActionUser = ({ disable = false }: Props) => {
         ...(user.shabaNumber
           ? { shabaNumber: addCommaCartBank(removeNumNumeric(user.shabaNumber)) }
           : null),
+        ...(user?.dateOfBirth ? { dateOfBirth: converDatePer(user.dateOfBirth) } : null),
       });
     }
   }, [user]);
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit} className="grid grid-cols-2 gap-x-4 gap-y-3 lg:gap-x-7">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="lg:rid-cols-2 grid gap-x-4 gap-y-3 lg:gap-x-7"
+      >
         <Input
           classNameLabel="text-[#616A76]"
           label={'نام'}
@@ -316,8 +324,8 @@ const ActionUser = ({ disable = false }: Props) => {
           formik={formik}
           label="شبا کاربر"
           placeholder=" "
-          name="shabanumber"
-          classNameInput={'!h-[45px] bg-[#f5f6f6]'}
+          name="shabaNumber"
+          classNameInput={'!h-[52px] bg-[#f5f6f6]'}
           classNameLabel="!text-[12px]"
           type="tel"
         />
@@ -325,7 +333,7 @@ const ActionUser = ({ disable = false }: Props) => {
           formik={formik}
           label="تاریخ تولد کاربر"
           name="dateOfBirth"
-          inputClass="!h-[45px]"
+          inputClass="!h-[52px]"
         />
         <div className="col-span-2 flex justify-end py-4">
           <Button

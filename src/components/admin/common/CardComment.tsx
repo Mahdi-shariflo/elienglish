@@ -15,7 +15,7 @@ type Props = {
 const CardComment = ({ onDelete, comment, className }: Props) => {
   return (
     <div
-      className={`relative rounded-lg border border-gray-100 p-3 shadow-md dark:border-[#505B74] ${className}`}
+      className={`relative rounded-lg border border-gray-100 p-3 shadow-md dark:border-[#263248] ${className}`}
     >
       <div className="flex items-center gap-2">
         <Image

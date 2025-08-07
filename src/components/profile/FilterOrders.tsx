@@ -190,7 +190,7 @@ const FilterOrders = ({ orderStatusCounts }: Props) => {
           ))}
         </Tabs>
       ) : (
-        <div className="hidden items-center gap-5 border-b border-[#EDEDED] pb-4 dark:border-[#505B74] lg:flex">
+        <div className="hidden items-center gap-5 border-b border-[#EDEDED] pb-4 dark:border-[#263248] lg:flex">
           {filters.map((filter, idx) => (
             <Button
               onPress={() => onSort(filter.status)}

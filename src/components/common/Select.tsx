@@ -62,7 +62,9 @@ const Select = ({
   return (
     <div className={className}>
       {label && (
-        <p className={`mb-[6px] pr-1 font-medium text-[14px] text-black ${labelClass}`}>
+        <p
+          className={`mb-[6px] pr-1 font-medium text-[14px] text-black dark:!text-[#8E98A8] ${labelClass}`}
+        >
           {label} {isRequired && <span className="text-red-500">*</span>}
         </p>
       )}
@@ -114,7 +116,7 @@ const Select = ({
         }}
         classNames={{
           control: () =>
-            ` !outline-none !border !border-[#E5EAEF] h-full !rounded-lg ${isError ? '!bg-[#FEE7EF]' : '!bg-[#F4F6FA]'}`,
+            ` !outline-none !border !border-[#E5EAEF] h-full !rounded-lg dark:!border-[#263248] ${isError ? '!bg-[#FEE7EF] ' : '!bg-[#F4F6FA] dark:!bg-[#0B1524]'}`,
           indicatorSeparator: () => 'hidden',
           placeholder: () => 'font-regular !whitespace-nowrap !text-[14px]',
           container: () => '!outline-none h-full',

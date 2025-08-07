@@ -19,7 +19,7 @@ const CardBlog2 = ({
   return (
     <Link
       href={`/${blog.url}`}
-      className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 dark:bg-[#263248] ${className}`}
+      className={`group flex h-full items-center justify-start gap-3 rounded-lg bg-white p-3 dark:bg-[#172334] ${className}`}
     >
       <Image
         classImg="!object-cover !h-full rounded-lg overflow-hidden"

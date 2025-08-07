@@ -13,8 +13,8 @@ const CardOrder = ({ order, name }: Props) => {
   const router = useRouter();
 
   return (
-    <div className="overflow-hidden rounded-xl border border-[#E4E7E9] lg:!w-full">
-      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-3 lg:py-8">
+    <div className="overflow-hidden rounded-xl border border-[#E4E7E9] dark:border-[#263248] lg:!w-full">
+      <div className="border-b border-[#E4E7E9] bg-[#EDE8FC] px-3 py-3 dark:border-[#263248] dark:bg-[#0b1524] lg:py-8">
         {/* <div className="flex items-center justify-between ">
         <div className="flex items-center gap-2 lg:p-[16px]">
           <span>{findItem?.icon}</span>
@@ -37,18 +37,18 @@ const CardOrder = ({ order, name }: Props) => {
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">کد سفارش:</span>
-            <span className="font-medium text-[#232429]">{order.orderNumber}</span>
+            <span className="font-medium text-[#232429] dark:text-white">{order.orderNumber}</span>
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">قیمت کل:</span>
-            <span className="font-medium text-[#232429]">
+            <span className="font-medium text-[#232429] dark:text-white">
               {Number(order.totalAmount).toLocaleString()} تومان
             </span>
           </p>
         </div>
       </div>
 
-      <div className="custom_scroll_gallery flex items-center gap-4 overflow-x-auto px-3 lg:py-4">
+      <div className="custom_scroll_gallery flex items-center gap-4 overflow-x-auto p-3 lg:py-4">
         {order[name].products?.map((image, idx) => (
           <div key={idx} className="relative h-[131pxpx] w-[131pxpx]">
             <Image

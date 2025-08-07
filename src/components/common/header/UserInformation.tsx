@@ -323,7 +323,7 @@ export default function UserInformation() {
           </Link>
           <span className="hidden lg:block">
             <Dropdown
-              className="dark:bg-[#263248]"
+              className="dark:bg-[#172334]"
               placement="bottom-start"
               shouldBlockScroll={false}
             >

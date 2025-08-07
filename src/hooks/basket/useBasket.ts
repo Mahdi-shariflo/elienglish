@@ -61,18 +61,24 @@ const useBasket = () => {
   }, 0);
 
   const totalProductPriceWithDiscount = baskets.reduce((sum, item) => {
-    const price = item?.course?.discountPrice
-      ? Number(item?.course.discountPrice)
-      : item?.product?.discountPrice
-        ? Number(item?.product.discountPrice)
-        : item?.course?.price
-          ? Number(item?.course.price)
-          : item?.product?.price
-            ? Number(item?.product.price)
-            : 0;
+    const price =
+      item?.course?.discountPrice ??
+      item?.product?.discountPrice ??
+      item?.course?.price ??
+      item?.product?.price ??
+      item?.lpas?.discountPrice ??
+      item?.lpas?.price ??
+      0;
+
     const count = Number(item?.count ?? 0);
+
     return sum + price * count;
   }, 0);
+
+  console.log(
+    totalProductPriceWithDiscount,
+    'totalProductPriceWithDiscounttotalProductPriceWithDiscounttotalProductPriceWithDiscount'
+  );
 
   useEffect(() => {
     if (checkout) {

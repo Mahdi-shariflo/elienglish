@@ -23,7 +23,7 @@ const Page = () => {
     (item) => item.courseItems.status === (searchParams.get('sort') || 'AWAITING')
   );
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="تاریخچه سفارش‌ دوره" />
       <div className="">
         <div className="hidden items-center gap-3 lg:flex">
@@ -59,7 +59,7 @@ const Page = () => {
             {sortOrders.map((order, idx) => (
               <div
                 key={idx}
-                className="flex flex-col items-center gap-4 border-b border-gray-200 pb-4 lg:flex-row"
+                className="flex flex-col items-center gap-4 border-b border-gray-200 pb-4 dark:border-[#263248] lg:flex-row"
               >
                 <div className="flex flex-1 gap-4">
                   <div>
@@ -69,8 +69,8 @@ const Page = () => {
                       src={order.courseItems.thumbnailImage.url}
                     />
                   </div>
-                  <div className="flex-1 space-y-2 border-[#EDEDED] lg:space-y-6 lg:border-l">
-                    <p className="line-clamp-1 font-medium text-[14px] text-[#0B1524] lg:text-[16px]">
+                  <div className="flex-1 space-y-2 border-[#EDEDED] dark:border-[#263248] lg:space-y-6 lg:border-l">
+                    <p className="line-clamp-1 font-medium text-[14px] text-[#0B1524] dark:text-[#8E98A8] lg:text-[16px]">
                       {order.courseItems.title}
                     </p>{' '}
                     <div className="flex items-center gap-1">
@@ -114,7 +114,7 @@ const Page = () => {
                     شروع یادگیری
                   </Link>
                   <Link
-                    className="flex h-[40px] w-[186px] items-center justify-center rounded-lg border font-medium text-main"
+                    className="flex h-[40px] w-[186px] items-center justify-center rounded-lg border font-medium text-main dark:border-[#263248]"
                     href={`/couse/${order.courseItems.url}`}
                   >
                     ثبت نظر

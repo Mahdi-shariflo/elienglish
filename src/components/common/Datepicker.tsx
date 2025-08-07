@@ -44,7 +44,7 @@ const Datepicker = ({
   return (
     <div className={`container_datepicker ${className}`}>
       {label && (
-        <label className="text-block block pb-[6px] font-medium text-[13px]">
+        <label className="text-block block pb-[6px] font-medium text-[13px] dark:!text-[#8E98A8]">
           {label}:{isRequired && <span className="text-sm text-[#DF2040]">*</span>}
         </label>
       )}
@@ -65,8 +65,8 @@ const Datepicker = ({
           disabled={disabled}
           placeholder="روز/ماه/سال"
           shadow={false}
-          className="!w-full !bg-[#f5f6f6] !font-regular"
-          inputClass={`!w-full !border !border-gray-200 !outline-0  !font-regular px-3 rounded-lg h-[48px] lg:h-[50px] !bg-[#f5f6f6] ${inputClass}`}
+          className="!w-full !bg-[#f5f6f6] !font-regular dark:!bg-[#0B1524]"
+          inputClass={`!w-full dark:!text-white !border !border-gray-200 !outline-0  !font-regular px-3 rounded-lg h-[48px] lg:h-[50px] dark:!border-none dark:!bg-[#0B1524] !bg-[#f5f6f6] ${inputClass}`}
           containerClassName="!w-full overflow-hidden"
           arrowClassName="!hidden"
           maxDate={maxDate ? maxDate : undefined}

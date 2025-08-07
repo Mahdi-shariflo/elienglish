@@ -81,7 +81,7 @@ const BacketItems = () => {
               }
             />
             {product?.children && product?.children?.length >= 1 ? (
-              <div className="border-t border-[#eef0f1] px-3 dark:border-[#505B74]">
+              <div className="border-t border-[#eef0f1] px-3 dark:border-[#263248]">
                 {product?.children?.map((item: any, idx: number) => {
                   if (!item.product.title) return null;
                   return (

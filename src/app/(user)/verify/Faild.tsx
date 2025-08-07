@@ -1,21 +1,12 @@
 'use client';
 import Button from '@/components/common/Button';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
-type Props = {
-  result?: {
-    order: {
-      orderNumber: number;
-    };
-    statusResult: {
-      response: {
-        transactionId: string;
-      };
-    };
-  };
-};
-const Faild = ({ result }: Props) => {
+
+const Faild = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   return (
     <div className="container_page">
       <div className="mx-auto my-20 mt-40 lg:mt-60 lg:w-[600px]">
@@ -39,7 +30,7 @@ const Faild = ({ result }: Props) => {
           </span>
           <div className="flex items-center justify-center gap-1 pt-4 font-regular text-[14px] text-[#393B40]">
             <p>کد رهگیری سفارش شما:</p>
-            <p>{result?.statusResult?.response?.transactionId || result?.order?.orderNumber}</p>
+            <p>{searchParams.get('orderNumber')}</p>
           </div>
         </div>
         <div className="mt-12 flex flex-col items-center gap-3 lg:mt-10 lg:flex-row">

@@ -60,6 +60,7 @@ export type shippingMethod = {
 };
 
 export type User = {
+  dateOfBirth?: string;
   theme?: string;
   viewport?: string;
   shabaNumber?: string;

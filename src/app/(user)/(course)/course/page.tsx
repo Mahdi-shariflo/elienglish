@@ -27,7 +27,7 @@ const page = async () => {
         <SliderBlog
           title="آموزش گرامر"
           delay={4000}
-          className="!h-[118px] !w-[380px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:border-[#505B74]"
+          className="!h-[118px] !w-[380px] overflow-hidden rounded-lg border border-[#E5EAEF] dark:border-[#263248]"
           typeCardBlog="short"
           blogs={getSectionByName(blogs.data.data, 'sec4')}
         />

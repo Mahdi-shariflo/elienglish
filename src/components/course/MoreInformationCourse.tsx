@@ -373,7 +373,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                                 درس {item.episodes.length}
                               </span>
                             </div>
-                            <div className="h-7 w-px bg-gray-300 dark:bg-[#263248]" />
+                            <div className="h-7 w-px bg-gray-300 dark:bg-[#172334]" />
                             <div className="flex items-center gap-2">
                               <span>
                                 <svg
@@ -490,7 +490,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                                 >
                                   مشاهده
                                 </Link>
-                                <div className="h-7 w-px bg-gray-300 dark:bg-[#263248]" />
+                                <div className="h-7 w-px bg-gray-300 dark:bg-[#172334]" />
 
                                 <div className="flex items-center gap-2">
                                   <span>
@@ -513,7 +513,7 @@ const MoreInformationCourse = ({ course }: { course: Course }) => {
                                     درس {idx + 1}
                                   </span>
                                 </div>
-                                <div className="hidden h-7 w-px bg-gray-300 dark:bg-[#263248] lg:block" />
+                                <div className="hidden h-7 w-px bg-gray-300 dark:bg-[#172334] lg:block" />
                                 <div className="hidden items-center gap-2 lg:flex">
                                   <span>
                                     <svg

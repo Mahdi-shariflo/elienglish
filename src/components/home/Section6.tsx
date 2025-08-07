@@ -51,7 +51,7 @@ const Section6 = ({ className, section }: Props) => {
             {section.comments.map((item, idx) => (
               <SwiperSlide className="!w-[300px]" key={idx}>
                 <CardComment
-                  className="h-full w-full bg-white !p-8 dark:bg-[#263248]"
+                  className="h-full w-full bg-white !p-8 dark:bg-[#172334]"
                   comment={item}
                 />
               </SwiperSlide>

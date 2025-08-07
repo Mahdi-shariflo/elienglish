@@ -73,10 +73,10 @@ const Verify = () => {
 
   return (
     <Suspense>
-      <div className="mx-auto flex h-fit w-fit flex-col justify-between rounded-xl p-2 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:p-5">
+      <div className="mx-auto flex h-fit w-fit flex-col justify-between rounded-xl p-2 dark:bg-[#172334] lg:mt-14 lg:h-fit lg:p-5">
         <form
           onSubmit={formik.handleSubmit}
-          className="mx-auto flex w-full flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#263248] lg:mt-14 lg:h-fit lg:w-[472px]"
+          className="mx-auto flex w-full flex-col justify-between rounded-xl bg-white p-5 dark:bg-[#172334] lg:mt-14 lg:h-fit lg:w-[472px]"
         >
           <div className="w-full">
             <h1 className="font-demibold text-[20px] text-primary dark:text-[#E5EAEF] lg:text-[28px]">

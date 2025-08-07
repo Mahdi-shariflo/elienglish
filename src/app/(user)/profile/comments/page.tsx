@@ -11,7 +11,7 @@ const Page = () => {
   const comments: [] = data?.data?.data?.comments;
 
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] lg:mb-10 lg:mt-5 lg:!w-full lg:border lg:bg-white lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:mt-5 lg:!w-full lg:border lg:bg-white lg:p-[16px] lg:pt-0">
       <BackPrevPage title="دیدگاه‌های من" />
       <div className="hidden items-center gap-3 lg:flex">
         <span>
@@ -28,7 +28,7 @@ const Page = () => {
             />
           </svg>
         </span>
-        <p className="hidden font-medium text-[24px] text-[#33435A] lg:block lg:text-[18px]">
+        <p className="hidden font-medium text-[24px] text-[#33435A] dark:text-white lg:block lg:text-[18px]">
           دیدگاه‌های من
         </p>
       </div>

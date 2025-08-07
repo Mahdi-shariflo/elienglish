@@ -46,11 +46,11 @@ const Page = () => {
     }
   }, [isSuccess]);
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="درخواست پشتیبانی جدید" />
 
       <div>
-        <div className="hidden items-center gap-3 border-b border-gray-100 lg:flex">
+        <div className="hidden items-center gap-3 border-b border-gray-100 dark:border-[#263248] lg:flex">
           <span>
             <svg
               width="32"
@@ -94,7 +94,7 @@ const Page = () => {
             >
               {'ارسال فایل'} {<span className="text-red-500">*</span>}
             </p>
-            <div className="relative h-[200px] w-full rounded-lg border-2 border-dashed">
+            <div className="relative h-[200px] w-full rounded-lg border-2 border-dashed dark:border-[#263248]">
               <label className="block h-full w-full cursor-pointer" htmlFor="upload">
                 {formik.values.files instanceof File ? (
                   <img

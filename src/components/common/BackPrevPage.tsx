@@ -13,7 +13,7 @@ const BackPrevPage = ({ title, url, className, isLogo }: Props) => {
   const router = useRouter();
   return (
     <div
-      className={`sticky top-0 z-50 border-b bg-white dark:border-[#263248] dark:bg-[#0B1524] lg:hidden ${className}`}
+      className={`sticky top-0 z-50 border-b bg-white dark:border-[#263248] dark:bg-[#172334] lg:hidden ${className}`}
     >
       <div className="container_page flex h-[56px] items-center">
         <Button
@@ -26,10 +26,10 @@ const BackPrevPage = ({ title, url, className, isLogo }: Props) => {
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="stroke-[#545A66] dark:stroke-white"
           >
             <path
               d="M8.91 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.91 4.08008"
-              stroke="#545A66"
               strokeWidth="1.5"
               strokeMiterlimit="10"
               strokeLinecap="round"

@@ -40,7 +40,7 @@ const Description = ({ blog }: { blog: Blog }) => {
     <div>
       <div className="my-10">
         {headings.length === 0 ? null : (
-          <div className="md:w-[50%]mt-14 mx-auto rounded-lg bg-[#F5F6FA] p-4 dark:bg-[#263248]">
+          <div className="md:w-[50%]mt-14 mx-auto rounded-lg bg-[#F5F6FA] p-4 dark:bg-[#172334]">
             <Accordion defaultSelectedKeys={['0']}>
               <AccordionItem
                 key={'0'}

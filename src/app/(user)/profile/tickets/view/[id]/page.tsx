@@ -52,7 +52,7 @@ const Page = () => {
     }
   }, [isSuccess]);
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="مشاهده تیکت" />
 
       <div className="px-5 lg:px-0">
@@ -64,25 +64,25 @@ const Page = () => {
           />
         ) : (
           <>
-            <div className="flex flex-col items-center justify-between border-b pb-5 lg:flex-row">
+            <div className="flex flex-col items-center justify-between border-b pb-5 dark:border-[#263248] lg:flex-row">
               <div className="w-full">
-                <p className="font-medium text-[16px] text-[#33435A] lg:text-[24px]">
+                <p className="font-medium text-[16px] text-[#33435A] dark:text-white lg:text-[24px]">
                   {ticket.title}
                 </p>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
+                  <p className="font-medium text-[14px] text-[#33435A] dark:text-[#8E98A8] lg:text-[16px]">
                     شماره تیکت:{' '}
                     <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
                       {ticket.ticketNumber}
                     </span>
                   </p>
-                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
+                  <p className="font-medium text-[14px] text-[#33435A] dark:text-[#8E98A8] lg:text-[16px]">
                     بخش:{' '}
                     <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
                       {ticket.section}
                     </span>
                   </p>
-                  <p className="font-medium text-[14px] text-[#33435A] lg:text-[16px]">
+                  <p className="font-medium text-[14px] text-[#33435A] dark:text-[#8E98A8] lg:text-[16px]">
                     تاریخ ایجاد:{' '}
                     <span className="text-[14px] text-[#6A7890] lg:text-[16px]">
                       {new Date(ticket.createdAt).toLocaleDateString('fa-IR', {
@@ -97,7 +97,7 @@ const Page = () => {
               <div className="mt-5 flex w-full flex-col justify-end space-y-3 lg:w-fit">
                 <Button
                   onClick={() => setShow(!show)}
-                  className="flex !h-[42px] w-full items-center gap-1 rounded-lg border border-[#E4E7E9] px-2 font-regular text-[14px] text-main lg:!w-[159px]"
+                  className="flex !h-[42px] w-full items-center gap-1 rounded-lg border border-[#E4E7E9] px-2 font-regular text-[14px] text-main dark:border-[#263248] lg:!w-[159px]"
                 >
                   <span>
                     <svg
@@ -138,7 +138,7 @@ const Page = () => {
             </div>
             <div className="mt-5 space-y-6">
               {ticket.messages.map((item, idx) => (
-                <div className="border-b pb-3" key={idx}>
+                <div className="border-b pb-3 dark:border-[#263248]" key={idx}>
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-[16px] text-main">{item.fullName}</p>
                     <p className="font-medium text-[14px] text-[#6A7890]">
@@ -150,11 +150,13 @@ const Page = () => {
                     </p>
                   </div>
                   <p className="mt-8 font-regular text-[18px] text-[#6A7890]">متن پیام</p>
-                  <p className="pt-6 font-regular text-[16px] text-[#0B1524]">{item.content}</p>
+                  <p className="pt-6 font-regular text-[16px] text-[#0B1524] dark:text-white">
+                    {item.content}
+                  </p>
                   {item.attachmentUrl ? (
                     <div className="mt-5">
                       <p className="font-regular text-[18px] text-[#6A7890]">فایل پیوست</p>
-                      <div className="mt-4 flex h-[67px] items-center justify-between rounded-lg bg-[#F4F6FA] px-3">
+                      <div className="mt-4 flex h-[67px] items-center justify-between rounded-lg border bg-[#F4F6FA] px-3 dark:border-[#263248] dark:bg-[#172334]">
                         <div className="flex items-center gap-3">
                           <span>
                             <svg
@@ -170,7 +172,7 @@ const Page = () => {
                               />
                             </svg>
                           </span>
-                          <span className="font-regular text-[16px] text-[#0B1524]">
+                          <span className="font-regular text-[16px] text-[#0B1524] dark:text-white">
                             فایل پیوسته شده
                           </span>
                         </div>

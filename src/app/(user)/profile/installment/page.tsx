@@ -10,7 +10,7 @@ const Page = () => {
   const { data, isLoading } = useGetInstallment();
   const installment: Installment[] = data?.data?.data?.installment;
   return (
-    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#505B74] dark:bg-[#263248] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
+    <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile" title="اقساط" />
       <div>
         <div className="hidden items-center gap-3 lg:flex">
@@ -40,57 +40,61 @@ const Page = () => {
           />
         ) : (
           <div className="px-4 lg:px-0">
-            <div className="hidden items-center justify-between border-b border-[#EDEDED] pb-3 lg:flex">
-              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">
+            <div className="hidden items-center justify-between border-b border-[#EDEDED] pb-3 dark:border-[#263248] lg:flex">
+              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74] dark:text-white">
                 شماره سفارش
               </p>
-              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">
+              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74] dark:text-white">
                 شماره قسط
               </p>
 
-              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">مبلغ قسط</p>
+              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74] dark:text-white">
+                مبلغ قسط
+              </p>
 
-              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">
+              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74] dark:text-white">
                 سررسید قسط
               </p>
 
-              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74]">وضعیت </p>
+              <p className="flex-1 text-center font-regular text-[16px] text-[#505B74] dark:text-white">
+                وضعیت{' '}
+              </p>
             </div>
             <div className="mt-5 space-y-5">
               {installment?.map((item, idx) => (
                 <div
                   key={idx}
-                  className="grid h-fit grid-cols-2 gap-4 rounded-[12px] border border-[#E5EAEF] bg-[#F4F6FA] p-2 lg:flex lg:h-[84px] lg:items-center lg:justify-between lg:p-0"
+                  className="grid h-fit grid-cols-2 gap-4 rounded-[12px] border border-[#E5EAEF] bg-[#F4F6FA] p-2 dark:border-[#263248] dark:bg-transparent lg:flex lg:h-[84px] lg:items-center lg:justify-between lg:p-0"
                 >
-                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
-                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                  <div className="flex-1 border-b border-gray-300 pb-3 dark:border-[#263248] lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden">
                       شماره سفارش
                     </p>
-                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] dark:text-white lg:pt-0">
                       {item?.orderId}
                     </p>
                   </div>
-                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
-                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                  <div className="flex-1 border-b border-gray-300 pb-3 dark:border-[#263248] lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden">
                       شماره قسط
                     </p>
-                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] dark:text-white lg:pt-0">
                       قسط شماره {item.installmentNumber}
                     </p>
                   </div>
-                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
-                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden lg:pt-0">
+                  <div className="flex-1 border-b border-gray-300 pb-3 dark:border-[#263248] lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden lg:pt-0">
                       شماره سفارش
                     </p>
-                    <p className="flex flex-1 items-center justify-center gap-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                    <p className="flex flex-1 items-center justify-center gap-1 pt-2 text-center font-regular text-[#0B1524] dark:text-white lg:pt-0">
                       {Number(item.amount).toLocaleString()} <Toman_Icon />
                     </p>
                   </div>
-                  <div className="flex-1 border-b border-gray-300 pb-3 lg:border-none">
-                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                  <div className="flex-1 border-b border-gray-300 pb-3 dark:border-[#263248] lg:border-none">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden">
                       سررسید قسط
                     </p>
-                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] lg:pt-0">
+                    <p className="flex-1 pt-2 text-center font-regular text-[#0B1524] dark:text-white lg:pt-0">
                       {new Date(item.createdAt).toLocaleDateString('fa-IR', {
                         year: 'numeric',
                         month: 'long',
@@ -99,7 +103,7 @@ const Page = () => {
                     </p>
                   </div>
                   <div className="flex-1">
-                    <p className="text-center font-regular text-[14px] text-[#505B74] lg:hidden">
+                    <p className="text-center font-regular text-[14px] text-[#505B74] dark:text-white lg:hidden">
                       وضعیت
                     </p>
                     <p
