@@ -17,8 +17,15 @@ type Props = {
   onChange: (value: Product) => void;
   title?: string;
   className?: string;
+  isMulti?: boolean;
 };
-export default function SelectCourse({ values, onChange, title, className }: Props) {
+export default function SelectCourse({
+  values,
+  onChange,
+  title,
+  className,
+  isMulti = true,
+}: Props) {
   const [search, setSearch] = useState('');
   const [selectedProducts, setSelectedProducts] = useState<Product[]>(values);
   const [open, setOpen] = useState(false);
@@ -159,7 +166,7 @@ export default function SelectCourse({ values, onChange, title, className }: Pro
             ),
           ValueContainer: CustomValueContainer,
         }}
-        placeholder="انتخاب محصولات"
+        placeholder="انتخاب دوره"
         options={options}
         value={selectedProducts}
         onChange={(value) => {
@@ -171,7 +178,7 @@ export default function SelectCourse({ values, onChange, title, className }: Pro
         // @ts-expect-error
         getOptionLabel={getOptionLabel}
         getOptionValue={(option) => option.title}
-        isMulti
+        isMulti={isMulti}
         onMenuScrollToBottom={onMenuScrollToBottom}
         // isSearchable
         hideSelectedOptions

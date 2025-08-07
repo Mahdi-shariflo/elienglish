@@ -1062,6 +1062,112 @@ export const initialDataOrder = ({ onEdit, name }: Props) => [
     ),
   },
 ];
+export const initialDataInstallment = ({ onEdit, name }: Props) => [
+  {
+    title: <HeaderCell align="center" title="ردیف" />,
+    dataIndex: '_id',
+    key: '_id',
+    render: (_: string, __: any, idx: number) => (
+      <p className="text-center text-xs text-gray-800">{idx + 1}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="کاربر" />,
+    dataIndex: 'userId',
+    key: 'userId',
+    render: (_: string, row: any) => (
+      <div className="flex flex-col items-center justify-center">
+        <p className="block text-center text-xs text-blue-500">
+          {row?.userId?.firstName ? row?.userId?.firstName : 'کاربر'}{' '}
+          {row?.userId?.lastName ? row?.userId?.lastName : 'رز'}
+        </p>
+        <p className="text-[12px]">{row?.userId?.mobile}</p>
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="قیمت" />,
+    dataIndex: 'amount',
+    key: 'amount',
+    render: (value: string) => (
+      <p className="text-center text-xs text-gray-800">{Number(value).toLocaleString()} تومان</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="تاریخ ایجاد" />,
+    dataIndex: 'createdAt',
+    key: 'createdAt',
+    render: (_: string, row: any) => (
+      <div>
+        <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt)}</p>
+        <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt, true)}</p>
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="مهلت پرداخت" />,
+    dataIndex: 'dueDate',
+    key: 'dueDate',
+    render: (_: string, row: any) => (
+      <div>
+        <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt)}</p>
+        <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt, true)}</p>
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="عملیات" />,
+    dataIndex: 'action',
+    key: 'action',
+    render: (_: string, row: any) => (
+      <div className="flex items-center justify-center gap-2 text-gray-600">
+        {/* {
+                    onDelete ?
+ <Button className="!px-0 w-fit" onClick={() => onDelete(row)}>
+                            <Delete_icon  />
+                        </Button>                        : null
+                }
+                {
+                    onEdit ?
+                        <TbEdit onClick={() => onEdit(row)} className="text-green-600/80 cursor-pointer" size={23} />
+                        : null
+                } 
+                 */}
+        {onEdit ? (
+          <Button className="w-fit !px-0" onClick={() => onEdit(row)}>
+            <Edit_icon />
+          </Button>
+        ) : null}
+        {/* <Tooltip className="bg-white" content={<span className="text-[10px]">در حال آماده سازی</span>}>
+                    <button className="!px-0 w-fit" className="w-7 flex justify-center items-center rounded-lg h-7 border">
+                        <CiMenuKebab />
+                    </button>
+                </Tooltip>
+                <Tooltip className="bg-white" content={<span className="text-[10px]">تکمیل</span>}>
+                    <button className="!px-0 w-fit" className="w-7 flex justify-center items-center rounded-lg h-7 border">
+                        <GiCheckMark />
+                    </button>
+                </Tooltip> */}
+        <Tooltip className="bg-white" content={<span className="text-[10px]">چاپ آدرس</span>}>
+          {/* <Link
+            href={`/print/${row._id}?type=address`}
+            className="w-7 flex justify-center items-center rounded-lg h-7 border"
+          >
+            <FcPrint />
+          </Link> */}
+        </Tooltip>
+        <Tooltip className="bg-white" content={<span className="text-[10px]">چاپ اقلام</span>}>
+          {/* <Link
+            href={`/print/${row._id}?type=product`}
+            className="w-7 flex justify-center items-center rounded-lg h-7 border"
+          >
+            <MdProductionQuantityLimits />
+          </Link> */}
+        </Tooltip>
+      </div>
+    ),
+  },
+];
 export const initialDataDetailOrder = ({ onEdit, onDelete }: Props) => [
   {
     title: <HeaderCell align="left" title="آیدی محصول" />,

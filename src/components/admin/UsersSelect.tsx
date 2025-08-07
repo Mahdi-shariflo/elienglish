@@ -9,8 +9,9 @@ type Props = {
   title?: string;
   className?: string;
   isMulti?: boolean;
+  label?: boolean;
 };
-const UsersSelect = ({ values, onChange, className, isMulti = true }: Props) => {
+const UsersSelect = ({ values, onChange, className, isMulti = true, label = true }: Props) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
   const { data, isPending, isLoading, isFetching, isSuccess } = useGetUsersAdmin({
@@ -38,10 +39,12 @@ const UsersSelect = ({ values, onChange, className, isMulti = true }: Props) => 
 
   return (
     <div className={className}>
-      <p className={`mb-[6px] pr-1 font-medium text-[14px] lg:text-[14px]`}>
-        {'کاربران'}
-        {/* <span className="text-red-500">*</span> */}
-      </p>
+      {label && (
+        <p className={`mb-[6px] pr-1 font-medium text-[14px] lg:text-[14px]`}>
+          {'کاربران'}
+          {/* <span className="text-red-500">*</span> */}
+        </p>
+      )}
       <Select
         components={{
           IndicatorsContainer: () => (
@@ -98,7 +101,7 @@ const UsersSelect = ({ values, onChange, className, isMulti = true }: Props) => 
           menu: () => '!z-[9999] rounded-xl !font-regular overflow-hidden',
         }}
         menuPosition="fixed"
-        menuPlacement="top"
+        menuPlacement="bottom"
       />
     </div>
   );

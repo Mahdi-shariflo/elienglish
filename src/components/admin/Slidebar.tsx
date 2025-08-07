@@ -227,12 +227,12 @@ const menus = [
   //   href: '/admin/menus/',
   //   activeIcon: Menu_fill_icon,
   // },
-  // {
-  //   icon: Sms_icon,
-  //   name: 'پیامک‌ها',
-  //   href: '/admin/sms/',
-  //   activeIcon: Sms_fill_icon,
-  // },
+  {
+    icon: Sms_icon,
+    name: 'اقساط',
+    href: '/admin/installment/',
+    activeIcon: Sms_fill_icon,
+  },
   {
     icon: Orders_icon,
     name: 'سفارش‌ها',
