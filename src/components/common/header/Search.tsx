@@ -39,21 +39,21 @@ type Search = {
 export default function Search() {
   const isMobile = useMedia('(max-width: 480px)', false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
   const [inputValue, setInputValue] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
   const { data, isLoading, isSuccess } = useSerach(inputValue);
-  const searchRef = useOutsideClick<HTMLDivElement>(() => {
-    onClose();
-  });
 
-  // const isVisible = inputValue.length >= 3;
-  const onValueChange = (value: string) => {
-    setInputValue(value);
-    if (value.length >= 2) return setIsVisible(true);
-    if (!isMobile) {
+  const searchRef = useOutsideClick<HTMLDivElement>(() => {
+    if (!isMobile && isExpanded) {
       onClose();
     }
+  });
+
+  const onValueChange = (value: string) => {
+    setInputValue(value);
   };
 
   const onKeyDown = (e: any) => {
@@ -64,8 +64,26 @@ export default function Search() {
       });
     }
   };
+
   const serachResult = data?.data?.data;
-  const onClose = () => setIsVisible(false);
+
+  const onClose = () => {
+    setIsVisible(false);
+    setIsExpanded(false);
+    setInputValue('');
+  };
+
+  const onExpandSearch = () => {
+    if (!isMobile) {
+      setIsExpanded(true);
+      // تاخیر برای focus بعد از انیمیشن
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 150);
+    } else {
+      setIsVisible(true);
+    }
+  };
 
   const onRedirect = (url: string) => {
     startTransition(() => {
@@ -75,120 +93,145 @@ export default function Search() {
     });
   };
 
-  // useEffect(() => {
-  //   const preventScroll = (e:any) => {
-  //     e.preventDefault();
-  //     e.stopPropagation();
-  //     return false;
-  //   };
-
-  //   if (isVisible) {
-  //     window.addEventListener('wheel', preventScroll, { passive: false });
-  //     window.addEventListener('touchmove', preventScroll, { passive: false });
-  //     window.addEventListener('keydown', preventScroll, { passive: false });
-  //   } else {
-  //     window.removeEventListener('wheel', preventScroll);
-  //     window.removeEventListener('touchmove', preventScroll);
-  //     window.removeEventListener('keydown', preventScroll);
-  //   }
-
-  //   return () => {
-  //     window.removeEventListener('wheel', preventScroll);
-  //     window.removeEventListener('touchmove', preventScroll);
-  //     window.removeEventListener('keydown', preventScroll);
-  //   };
-  // }, [isVisible]);
+  // نمایش نتایج با تاخیر بعد از تایپ
+  useEffect(() => {
+    if (inputValue.length >= 2 && isExpanded) {
+      const timeout = setTimeout(() => {
+        setIsVisible(true);
+      }, 300);
+      return () => clearTimeout(timeout);
+    } else if (inputValue.length < 2) {
+      setIsVisible(false);
+    }
+  }, [inputValue, isExpanded]);
 
   useEffect(() => {
     if (isMobile) {
+      setIsExpanded(true);
       setIsVisible(true);
     }
   }, [isMobile]);
 
   return (
-    <div className="w-full">
+    <div className="flex w-full justify-end">
       <div
         ref={searchRef}
-        onClick={() => setIsVisible(true)}
         className={cn(
-          'relative w-full border lg:border-0',
-          isVisible
-            ? 'fixed left-0 right-0 top-0 z-[9999] w-full lg:relative lg:h-fit'
-            : 'relative hidden border-transparent lg:block lg:h-fit'
+          'relative transition-all duration-300 ease-out',
+          // حالت موبایل
+          isMobile && isVisible ? 'fixed left-0 right-0 top-0 z-[9999] w-full' : '',
+          // حالت دسکتاپ
+          !isMobile && !isExpanded ? 'h-[40px] w-[40px] cursor-pointer' : 'w-full max-w-md'
         )}
       >
-        <Input
-          startContent={<SearchIcon className="h-6 w-6 stroke-[#616A76]" />}
-          value={inputValue}
-          onValueChange={(value: string) => onValueChange(value)}
-          endContent={
-            inputValue.length >= 2 || isMobile ? (
-              <div
-                onClick={() => {
-                  setInputValue('');
-                  onClose();
-                  router.push('/');
-                }}
-                className="w-fit min-w-fit"
-              >
-                <CgClose className="h-6 w-6 text-[#616A76]" />
-              </div>
-            ) : null
-          }
-          className={cn('w-full')}
-          classNames={{
-            inputWrapper: `h-[48px]   ${isVisible ? 'dark:group-data-[has-value=true]:!bg-[#172334] group-data-[has-value=true]:!bg-white group !bg-white dark:!bg-[#172334] hover:!bg-transparent   !rounded-b-none !rounded-t-lg' : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg'}`,
-            input: 'font-medium ',
-          }}
-          placeholder="جستجو"
-          isClearable={true}
-          onClear={() => {
-            setInputValue('');
-            onClose();
-          }}
-          onKeyDown={onKeyDown}
-        />
+        {/* آیکون حالت بسته */}
+        {!isExpanded && !isMobile && (
+          <div
+            onClick={onExpandSearch}
+            className="flex h-10 w-10 transform items-center justify-center rounded-full bg-[#E4E7E9] transition-colors duration-200 hover:scale-105 hover:bg-[#d1d5db] dark:bg-[#172334] dark:hover:bg-[#1f2937]"
+          >
+            <SearchIcon className="h-5 w-5 stroke-[#616A76]" />
+          </div>
+        )}
 
-        {isVisible && (
+        {/* Input حالت باز */}
+        <div
+          className={cn(
+            'transition-all duration-300 ease-out',
+            !isExpanded && !isMobile
+              ? 'pointer-events-none scale-95 opacity-0'
+              : 'scale-100 opacity-100'
+          )}
+        >
+          {(isExpanded || isMobile) && (
+            <Input
+              ref={inputRef}
+              startContent={<SearchIcon className="h-6 w-6 stroke-[#616A76]" />}
+              value={inputValue}
+              onValueChange={onValueChange}
+              endContent={
+                inputValue.length >= 1 || isExpanded ? (
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (inputValue.length > 0) {
+                        setInputValue('');
+                        setIsVisible(false);
+                      } else {
+                        onClose();
+                        if (!isMobile) {
+                          router.push('/');
+                        }
+                      }
+                    }}
+                    className="w-fit min-w-fit cursor-pointer rounded-full p-1 transition-colors hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    <CgClose className="h-4 w-4 text-[#616A76]" />
+                  </div>
+                ) : null
+              }
+              className="w-full"
+              classNames={{
+                inputWrapper: cn(
+                  'h-[48px] transition-all duration-200',
+                  isVisible && inputValue.length >= 2
+                    ? 'dark:!bg-[#172334] !bg-white hover:!bg-white dark:hover:!bg-[#172334] !rounded-b-none !rounded-t-lg border-b-0'
+                    : '!bg-[#E4E7E9] dark:!bg-[#172334] !rounded-lg hover:!bg-[#d1d5db] dark:hover:!bg-[#1f2937]'
+                ),
+                input: 'font-medium text-right',
+              }}
+              placeholder="جستجو..."
+              onKeyDown={onKeyDown}
+            />
+          )}
+        </div>
+
+        {/* نتایج */}
+        {isVisible && inputValue.length >= 2 && (
           <div
             className={cn(
-              'custom_sidebar top-12 !z-[9999] max-h-[90vh] w-full overflow-auto rounded-b-sm bg-white px-2 dark:bg-[#0b1524]',
-              'lg:absolute lg:left-1/2 lg:h-fit lg:max-h-[85vh] lg:-translate-x-1/2 lg:rounded-b-lg lg:pb-0',
-              'md:left-auto md:right-auto',
+              'absolute top-12 z-[9999] max-h-[90vh] w-full overflow-auto rounded-b-lg border border-gray-200 bg-white px-2 shadow-2xl dark:border-gray-700 dark:bg-[#0b1524]',
+              'lg:left-1/2 lg:h-fit lg:max-h-[85vh] lg:-translate-x-1/2',
+              'animate-in slide-in-from-top-2 fade-in duration-200',
               'flex flex-col gap-y-3'
             )}
           >
             {isLoading ? (
-              <Spinner className="mx-auto w-full !py-14" size="md" />
+              <Spinner className="mx-auto w-full py-8" size="md" />
             ) : (
-              <div
-                className={cn(serachResult ? 'flex w-full flex-col !gap-8 gap-y-2 p-5' : 'hidden')}
-              >
-                {isSuccess
-                  ? [...serachResult?.blog, ...serachResult?.course, ...serachResult?.product]
-                      .length < 1 && (
-                      <p className="line-clamp-2 p-1 text-center font-medium text-[13px] text-[#505B74]">
-                        موردی یافت نشد
-                      </p>
-                    )
-                  : null}
-                {/* result */}
-                {serachResult?.blog && (
-                  <SearchSwiper type="blog" title="بلاگ‌ها" sliders={serachResult?.blog} />
+              <div className={cn(serachResult ? 'flex w-full flex-col gap-8 p-5' : 'hidden')}>
+                {isSuccess &&
+                  [
+                    ...(serachResult?.blog || []),
+                    ...(serachResult?.course || []),
+                    ...(serachResult?.product || []),
+                  ].length < 1 && (
+                    <p className="py-4 text-center font-medium text-sm text-[#505B74]">
+                      موردی یافت نشد
+                    </p>
+                  )}
+
+                {serachResult?.blog && serachResult.blog.length > 0 && (
+                  <SearchSwiper type="blog" title="بلاگ‌ها" sliders={serachResult.blog} />
                 )}
-                {serachResult?.course && (
-                  <SearchSwiper type="course" title="دوره‌ها" sliders={serachResult?.course} />
+                {serachResult?.course && serachResult.course.length > 0 && (
+                  <SearchSwiper type="course" title="دوره‌ها" sliders={serachResult.course} />
                 )}
-                {serachResult?.product && (
-                  <SearchSwiper type="product" title="محصولات" sliders={serachResult?.product} />
+                {serachResult?.product && serachResult.product.length > 0 && (
+                  <SearchSwiper type="product" title="محصولات" sliders={serachResult.product} />
                 )}
               </div>
             )}
           </div>
         )}
       </div>
-      {isVisible && (
-        <div className="_backdrop-blur-[5px] fixed left-0 top-0 z-50 hidden h-full w-full bg-[#000000] bg-opacity-20 lg:block"></div>
+
+      {/* Backdrop */}
+      {isVisible && !isMobile && (
+        <div
+          className="animate-in fade-in fixed left-0 top-0 z-[9998] h-full w-full bg-black bg-opacity-20 backdrop-blur-sm duration-200"
+          onClick={onClose}
+        />
       )}
     </div>
   );
