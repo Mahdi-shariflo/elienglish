@@ -38,7 +38,7 @@ export const useGetInstallmentAdmin = ({
     ],
     queryFn: async () =>
       await safeRequest({
-        url: `/installment/admin?page=${page}&limit=${20}&sort=${sort}&endDate=${endDate}&startDate=${startDate}&search=${decodeURIComponent(search!)}&${orderStatus ? `installmentStatus=${orderStatus}` : ''}${userId ? `&userId=${userId}` : ''}${courseId ? `courseId=${courseId}` : ''}`,
+        url: `/installment/admin?page=${page}&limit=${20}&sort=${sort}&search=${decodeURIComponent(search!)}&${orderStatus ? `installmentStatus=${orderStatus}` : ''}${userId ? `&userId=${userId}` : ''}${courseId ? `courseId=${courseId}` : ''}`,
       }),
   });
 };

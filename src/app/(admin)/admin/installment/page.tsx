@@ -2,11 +2,15 @@
 import ReactTable from '@/components/admin/common/ReactTable';
 import SelectCourse from '@/components/admin/courses/SelectCourse';
 import UsersSelect from '@/components/admin/UsersSelect';
+import Button from '@/components/common/Button';
+import Input from '@/components/common/form/Input';
+import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetInstallmentAdmin } from '@/hooks/admin/installment/useGetInstallmentAdmin';
 import { initialDataInstallment, ordersStatus } from '@/lib/table-column';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
+import { BiFilter } from 'react-icons/bi';
 
 const Page = () => {
   const router = useRouter();
@@ -26,9 +30,9 @@ const Page = () => {
     orderStatus: filter.orderStatus,
     nameStatus: 'courseOrderStatus',
     // @ts-expect-error error
-    userId: Array.isArray(filter.userId) ? filter.userId[0]?._id : '',
+    userId: filter.userId?._id,
     // @ts-expect-error error
-    courseId: Array.isArray(filter.courseId) ? filter.courseId[0]?._id : '',
+    courseId: filter.courseId?._id,
   });
 
   const columns = useMemo(
@@ -59,12 +63,39 @@ const Page = () => {
     });
   };
 
+  const onChangeInput = (search: string) => {
+    setFilter({
+      ...filter,
+      page: '1',
+      search: search,
+    });
+  };
+
+  console.log(filter);
+
   return (
     <div>
-      <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        اقساط
-      </p>
-       
+      <div className="flex items-center justify-between border-b border-[#E4E7E9] pb-3">
+        <p className="hidden font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
+          اقساط
+        </p>
+        <Button
+          onClick={() => {
+            setFilter({
+              courseId: [],
+              userId: [],
+              orderStatus: '',
+              page: '1',
+              search: '',
+              sort: '',
+            });
+          }}
+          className="w-fit"
+        >
+          <span>حذف فیلتر</span>
+          <BiFilter />
+        </Button>
+      </div>
       <div className="flex w-full items-center justify-start gap-x-4">
         <SelectCourse
           isMulti={false}
@@ -78,6 +109,15 @@ const Page = () => {
           className="w-full"
           onChange={(values: any) => setFilter({ ...filter, userId: values })}
           values={filter.userId}
+        />
+        <Input
+          value={filter.search}
+          onChange={(e) => onChangeInput(e.target.value)}
+          startContent={<SearchIcon className="stroke-[#616A76]" />}
+          className="!mb-5 !mt-7"
+          label="جستجو"
+          classNameLabel="text-[#616A76] text-[14px]"
+          classNameInput="bg-[#f5f6f6] !h-[48px]"
         />
       </div>
       <ReactTable

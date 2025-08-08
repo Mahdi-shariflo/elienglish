@@ -4,7 +4,7 @@ import ActionLpa from '@/components/admin/lpa/ActionLpa';
 import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import { useGetLpaAdmin } from '@/hooks/admin/lpa/useGetLpaAdmin';
-import { initialDataFaq, initialDataLpa } from '@/lib/table-column';
+import { initialDataLpa } from '@/lib/table-column';
 import useGlobalStore from '@/store/global-store';
 import { TagType } from '@/store/types';
 import React, { useMemo, useState } from 'react';
