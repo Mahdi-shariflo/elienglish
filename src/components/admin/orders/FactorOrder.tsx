@@ -7,9 +7,18 @@ interface FactorOrderProps {
   price?: number;
   total?: number;
   discountPrice: number;
+  installmentPrice?: number;
+  installmentCount?: number;
 }
 
-const FactorOrder: React.FC<FactorOrderProps> = ({ order, price, discountPrice, total }) => {
+const FactorOrder: React.FC<FactorOrderProps> = ({
+  order,
+  price,
+  installmentCount,
+  discountPrice,
+  total,
+  installmentPrice,
+}) => {
   if (!order) return null;
 
   return (
@@ -19,13 +28,33 @@ const FactorOrder: React.FC<FactorOrderProps> = ({ order, price, discountPrice, 
       </p>
       <div className="mt-3 space-y-3">
         <div className="flex items-center justify-between">
-          <p className="font-regular text-[16px] text-[#616A76]">
-            قیمت محصولات بدون تخفیف ({price?.toLocaleString()})
-          </p>
+          <p className="font-regular text-[16px] text-[#616A76]">قیمت محصولات بدون تخفیف</p>
           <p className="whitespace-nowrap font-medium text-[14px] text-[#0C0C0C]">
             {price?.toLocaleString()} تومان
           </p>
         </div>
+        <div className="flex items-center justify-between">
+          <p className="font-regular text-[16px] text-[#616A76]">قیمت محصولات با تخفیف</p>
+          <p className="whitespace-nowrap font-medium text-[14px] text-[#0C0C0C]">
+            {discountPrice?.toLocaleString()} تومان
+          </p>
+        </div>
+        {installmentPrice && (
+          <div className="flex items-center justify-between">
+            <p className="font-regular text-[16px] text-[#616A76]">قیمت اقساطی دوره</p>
+            <p className="whitespace-nowrap font-medium text-[14px] text-[#0C0C0C]">
+              {installmentPrice?.toLocaleString()} تومان
+            </p>
+          </div>
+        )}
+        {installmentCount && (
+          <div className="flex items-center justify-between">
+            <p className="font-regular text-[16px] text-[#616A76]">تعداد اقساط</p>
+            <p className="whitespace-nowrap font-medium text-[14px] text-[#0C0C0C]">
+              {installmentCount}
+            </p>
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#616A76]">جمع سبد خرید</p>
           <p className="whitespace-nowrap font-medium text-[16px] text-[#0C0C0C]">
@@ -40,12 +69,12 @@ const FactorOrder: React.FC<FactorOrderProps> = ({ order, price, discountPrice, 
             </p>
           </div>
         )}
-        <div className="flex items-center justify-between">
+        {/* <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#616A76]">هزینه حمل و نقل</p>
           <p className="font-medium text-[16px] text-[#0C0C0C]">
             {(order.postPrice ?? 0).toLocaleString()} تومان
           </p>
-        </div>
+        </div> */}
         <div className="flex items-center justify-between">
           <p className="font-regular text-[16px] text-[#0C0C0C]">مجموع پرداختی</p>
           <p className="font-medium text-[16px] text-[#0C0C0C]">

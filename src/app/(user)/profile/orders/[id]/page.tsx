@@ -18,6 +18,41 @@ const Page = async ({ params }: Props) => {
   const { id } = await params;
   const data = await safeRequest({ url: `/order/product-physical/${id}` });
   const order: Order = data?.data?.data;
+  const paymentDetails = [
+    { label: 'مبلغ سفارش', value: Number(order?.totalAmount).toLocaleString() + ' تومان' },
+    { label: 'کد تخفیف', value: order?.productPhysicalItems?.productPhysicalDiscountCode },
+    {
+      label: 'نوع کد تخفیف',
+      value:
+        order?.productPhysicalItems?.productPhysicalDiscountType === 'PERCENT' ? 'درصدی' : 'ثابت',
+    },
+    {
+      label: 'مقدار کد تخفیف',
+      value:
+        Number(order?.productPhysicalItems?.productPhysicalDiscountPrice).toLocaleString() +
+        ' تومان',
+    },
+    { label: 'نوع ارسال', value: order?.productPhysicalItems?.orderTrackingCodeType },
+    { label: 'کد رهگیری', value: order?.productPhysicalItems?.orderTrackingCode },
+    {
+      label: 'هزینه ارسال',
+      value: Number(order?.productPhysicalItems?.orderTrackingPrice).toLocaleString() + ' تومان',
+    },
+    {
+      label: 'وضعیت',
+      value: (
+        <div className="flex items-center gap-2">
+          <span>
+            {statusIcon.find((item) => item.status === order?.productPhysicalItems?.status)?.icon}
+          </span>
+          <span>
+            {statusIcon.find((item) => item.status === order?.productPhysicalItems?.status)?.name}
+          </span>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pt-4 dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:mt-5 lg:!w-full lg:border lg:p-[16px] lg:pt-0">
       <BackPrevPage url="/profile/orders" title="همه سفارشات" />
@@ -37,7 +72,7 @@ const Page = async ({ params }: Props) => {
                         مشاهده فاکتور
                     </Button>
                 </div> */}
-        <div className="flex h-[56px] items-center bg-[#F5F6F6] px-4 dark:bg-gray-800">
+        <div className="flex h-[56px] items-center bg-[#f5f6f6] px-4 dark:bg-gray-800">
           <p className="w-[240px] font-regular text-[14px] text-[#7D8793]">کد پیگیری سفارش</p>
           <p className="whitespace-nowrap font-regular text-[14px] text-[#0C0C0C] dark:text-white">
             {order.orderNumber}
@@ -53,7 +88,7 @@ const Page = async ({ params }: Props) => {
             })}
           </p>
         </div>
-        <div className="flex h-[56px] items-center bg-[#F5F6F6] px-4 dark:bg-gray-800">
+        <div className="flex h-[56px] items-center bg-[#f5f6f6] px-4 dark:bg-gray-800">
           <p className="w-[240px] font-regular text-[14px] text-[#7D8793]">تحویل گیرنده</p>
           <p className="whitespace-nowrap font-regular text-[14px] text-[#0C0C0C] dark:text-white">
             {order?.productPhysicalItems?.orderAddress?.firstName}{' '}
@@ -76,39 +111,22 @@ const Page = async ({ params }: Props) => {
 
       <div className="h-px w-full bg-[#E4E7E9] dark:bg-[#263248]" />
 
-      <div className="!mt-10 px-5">
-        {/* title */}
+      <div>
         <p className="mb-3 font-regular text-[#393B40] dark:text-white">جزئیات پرداخت و مرسوله </p>
-        <div className="flex h-[56px] items-center bg-[#F5F6F6] px-4 dark:bg-gray-800">
-          <p className="w-[240px] font-regular text-[14px] text-[#7D8793]">مبلغ سفارش</p>
-          <p className="whitespace-nowrap font-regular text-[14px] text-[#0C0C0C] dark:text-white">
-            {Number(order?.totalAmount).toLocaleString()} تومان
-          </p>
-        </div>
 
-        <div className="flex h-[56px] items-center bg-[#F5F6F6] px-4 dark:bg-gray-800">
-          <p className="w-[240px] font-regular text-[14px] text-[#7D8793] dark:text-white">
-            وضعیت{' '}
-          </p>
-          <div className="flex items-center gap-2 lg:p-[16px]">
-            <span>
-              {statusIcon.find((item) => item.status === order.productPhysicalItems.status)?.icon}
-            </span>
-            <span className="font-regular text-[14px] text-[#393B40] dark:text-white">
-              {statusIcon.find((item) => item.status === order.productPhysicalItems.status)?.name}
-            </span>
-          </div>
-        </div>
-        {/* <div className='bg-white h-[56px] flex items-center px-4'>
-                    <p className='text-[#7D8793] w-[240px] font-regular text-[14px]'>امتیاز رز کلاب</p>
-                    <div className='flex items-center gap-1'>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path fillRule="evenodd" clipRule="evenodd" d="M7.81542 10.5716C7.69542 10.6807 7.54459 10.7349 7.39459 10.7349C7.22459 10.7349 7.05542 10.6657 6.93209 10.5307L5.41292 8.86408C5.18042 8.60908 5.19876 8.21323 5.45376 7.98156C5.70792 7.7474 6.10376 7.76656 6.33709 8.02155L7.85626 9.68825C8.08876 9.94408 8.07042 10.3391 7.81542 10.5716ZM17.5596 7.35073L15.1087 3.75156C14.7279 3.18823 14.0946 2.85156 13.4137 2.85156H6.59126C5.91126 2.85156 5.27792 3.18822 4.89792 3.74989L2.43876 7.35073C1.90459 8.13406 1.97709 9.17825 2.61626 9.89075L8.70458 16.5741C9.03542 16.9382 9.50708 17.1474 9.99875 17.1474C10.4904 17.1474 10.9621 16.9382 11.2921 16.5732L17.3812 9.88241C18.0229 9.17908 18.0962 8.13823 17.5596 7.35073Z" fill="#FFA216" />
-                        </svg>
-
-                        <p className='text-[#0C0C0C] dark:text-white font-regular text-[14px] whitespace-nowrap'>۵۴</p>
-                    </div>
-                </div> */}
+        {paymentDetails
+          .filter((item) => item.value && item.value !== 'NaN تومان') // فقط وقتی مقدار وجود داره
+          .map((item, i) => (
+            <div
+              key={i}
+              className="flex h-[56px] items-center px-4 odd:bg-white even:bg-[#f5f6f6] dark:odd:bg-gray-800 dark:even:bg-gray-800"
+            >
+              <p className="w-[240px] font-regular text-[14px] text-[#7D8793]">{item.label}</p>
+              <p className="whitespace-nowrap font-regular text-[14px] text-[#0C0C0C] dark:text-white">
+                {item.value}
+              </p>
+            </div>
+          ))}
       </div>
 
       <div className="h-px w-full bg-[#E4E7E9] dark:bg-[#263248]" />

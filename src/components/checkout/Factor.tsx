@@ -3,7 +3,6 @@ import { useCreateCheckout } from '@/hooks/checkout/useCreateCheckout';
 import { useDiscount } from '@/hooks/discount/useDiscount';
 import { useCheckoutStore } from '@/store/checkout-store';
 import { useFormik } from 'formik';
-import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Button from '../common/Button';
 import Input from '../common/form/Input';
@@ -20,8 +19,8 @@ const Factor = () => {
     total,
     discountPrice,
     totalProductPriceWithDiscount,
+    totalDiscount,
   } = useBasket();
-  const pathname = usePathname();
   const formik = useFormik({
     initialValues: {
       code: checkoutData?.discountCode ? checkoutData?.discountCode?.code : '',
@@ -90,10 +89,7 @@ const Factor = () => {
             <div className="flex items-center justify-between">
               <p className="font-regular text-[16px] text-[#ED2E2E]">مجموع تخفیف روی کالا ها</p>
               <p className="font-medium text-[16px] text-[#ED2E2E]">
-                {Number(
-                  totalProductPriceWithoutDiscount - totalProductPriceWithDiscount
-                ).toLocaleString()}{' '}
-                تومان
+                {Number(totalDiscount).toLocaleString()} تومان
               </p>
             </div>
             {checkoutData?.discountCode ? (

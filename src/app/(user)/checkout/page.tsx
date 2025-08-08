@@ -51,12 +51,11 @@ const Page = () => {
     setCheckout({ ...checkout, address });
   };
 
-  const installmentCourses = baskets?.filter(
+  const installmentCourses = baskets?.find(
     (item) => item.type === 'COURSE' && item.course?.isInstallment
   );
 
   const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
-
   if (!baskets || baskets?.length < 1) return <EmptyCartPage />;
   return (
     <>

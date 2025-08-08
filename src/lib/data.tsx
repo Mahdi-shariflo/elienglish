@@ -296,33 +296,6 @@ export const optionRedirectType = [
   { label: 'خالی', value: '0' },
 ];
 
-export const ordersStatus = [
-  {
-    label: 'در انتظار پرداخت',
-    value: 'Awaiting',
-  },
-  {
-    label: 'در حال انجام',
-    value: 'Doing',
-  },
-  {
-    label: 'در انتظار بررسی',
-    value: 'Review',
-  },
-  {
-    label: 'تحویل به پست',
-    value: 'Delivery',
-  },
-  {
-    label: 'ارسال شده',
-    value: 'Posted',
-  },
-  {
-    label: 'لغو شده',
-    value: 'Canceled',
-  },
-];
-
 export const StatusOptionsAdmin = [
   { label: 'پیش نمایش', value: 'false' },
   { label: 'انتشار', value: 'true' },

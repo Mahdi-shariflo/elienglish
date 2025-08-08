@@ -1,11 +1,8 @@
 'use client';
 import BaseDialog from '@/components/common/BaseDialog';
 import Button from '@/components/common/Button';
-import Input from '@/components/common/form/Input';
 import Select from '@/components/common/Select';
-import { useUpdateDigitalOrderById } from '@/hooks/admin/orders/digital/useUpdateDigitalOrderById';
-import { useGetStatusCheckout } from '@/hooks/checkout/useGetStatusCheckout';
-import { toEnglishDigits } from '@/lib/fun';
+import { useUpdateCourseById } from '@/hooks/admin/orders/course/useUpdateCourseById';
 import { ordersStatus } from '@/lib/table-column';
 import useOrderStore from '@/store/order-store';
 import { Order } from '@/store/types/home';
@@ -14,63 +11,42 @@ import { useFormik } from 'formik';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-const StatusOrder = ({ order }: { order: Order }) => {
-  const [modalStatusSnap, setModalStatusSnap] = useState(false);
-  const { address, orderItems } = useOrderStore();
+const CourseStatusOrder = ({ order }: { order: Order }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const { mutate, isPending: isLoading } = useUpdateDigitalOrderById();
+  const { mutate, isPending: isLoading, isSuccess } = useUpdateCourseById();
   const formik = useFormik({
     initialValues: {
-      orderStatus: '',
+      status: '',
       orderTrackingCodeType: '',
       orderTrackingCode: '',
     },
     onSubmit: (values) => {
-      if (
-        (values.orderStatus === 'Posted' && !values.orderTrackingCode) ||
-        (values.orderStatus === 'Posted' && !values.orderTrackingCodeType)
-      )
-        return addToast({
-          title: 'نحوه ارسال و یا کد پیگیری را وارد کنید',
-          color: 'danger',
-        });
-      setOpen(false);
-
       const data = {
-        orderStatus: values.orderStatus,
-        ...(values.orderTrackingCode
-          ? { orderTrackingCode: Number(toEnglishDigits(values.orderTrackingCode)) }
-          : null),
-        ...(values.orderStatus === 'Review' ? { orderAddress: address } : null),
-        ...(values.orderStatus === 'Review'
-          ? {
-              basket: orderItems.map((item) => {
-                return { id: item.productId, count: item.productCount };
-              }),
-            }
-          : null),
-        ...(order.orderAddress === address && order.orderItems === orderItems
-          ? { justStatus: true }
-          : { justStatus: false }),
+        status: values.status,
       };
       mutate({ data, id: order._id });
       // TODO: handle form submission
     },
   });
-  const onChangeStatus = (e: { currentKey: string }) => {
-    router.push(`${pathname}/?status=${e.currentKey}`);
-    formik.setFieldValue('orderStatus', e.currentKey);
+  const onChangeStatus = (e: { value: string }) => {
+    router.push(`${pathname}/?status=${e.value}`);
+    formik.setFieldValue('status', e.value);
   };
 
   useEffect(() => {
-    if (order && !formik.values.orderStatus) {
-      router.push(`${pathname}/?status=${order.orderStatus}`);
+    if (order && !formik.values.status) {
+      router.push(`${pathname}/?status=${order.courseItems?.status}`);
 
-      formik.setFieldValue('orderStatus', order.orderStatus);
+      formik.setFieldValue('status', order.courseItems?.status);
     }
   }, [order]);
+  useEffect(() => {
+    if (isSuccess) {
+      setOpen(false);
+    }
+  }, [isSuccess]);
 
   return (
     <div className="mt-3 rounded-xl border border-[#E4E7E9] p-4">
@@ -81,7 +57,7 @@ const StatusOrder = ({ order }: { order: Order }) => {
         <Select
           options={ordersStatus}
           label="وضعیت"
-          name="orderStatus"
+          name="status"
           nameLabel="label"
           nameValue="value"
           formik={formik}
@@ -97,7 +73,7 @@ const StatusOrder = ({ order }: { order: Order }) => {
           nameValue="_id"
           formik={formik}
           disabled={
-            formik.values.orderStatus === 'Review' || formik.values.orderStatus === 'Posted'
+            formik.values.status === 'Review' || formik.values.status === 'Posted'
               ? false
               : true
           }
@@ -107,22 +83,22 @@ const StatusOrder = ({ order }: { order: Order }) => {
             </span>
           }
         /> */}
-        <Input
-          label={'کد رهگیری'}
-          classNameInput="!h-[48px] bg-[#f5f6f6]"
-          name="orderTrackingCode"
-          disabled={
-            formik.values.orderStatus === 'Review' || formik.values.orderStatus === 'Posted'
-              ? false
-              : true
-          }
-          formik={formik}
-          description={
-            <span className="font-regular">
-              برای تغیر وضعیت باید روی در حال بررسی یا ارسال به پست باشد.
-            </span>
-          }
-        />
+        {/* <Input
+                    label={'کد رهگیری'}
+                    classNameInput="!h-[48px] bg-[#f5f6f6]"
+                    name="orderTrackingCode"
+                    disabled={
+                        formik.values.status === 'Review' || formik.values.status === 'Posted'
+                            ? false
+                            : true
+                    }
+                    formik={formik}
+                    description={
+                        <span className="font-regular">
+                            برای تغیر وضعیت باید روی در حال بررسی یا ارسال به پست باشد.
+                        </span>
+                    }
+                /> */}
         <Button
           isPending={isLoading}
           onClick={() => setOpen(true)}
@@ -135,18 +111,11 @@ const StatusOrder = ({ order }: { order: Order }) => {
         پیگیری سفارش سمت اسنپ
       </Button> */}
       <DialogCantUpdate formik={formik} open={open} setOpen={setOpen} />
-      {modalStatusSnap && (
-        <ModalShowStatusSnap
-          id={order.snappOrderId!}
-          open={modalStatusSnap}
-          setOpen={setModalStatusSnap}
-        />
-      )}
     </div>
   );
 };
 
-export default StatusOrder;
+export default CourseStatusOrder;
 
 type Props = {
   id?: string;
@@ -189,46 +158,6 @@ export const DialogCantUpdate = ({ open, setOpen, formik }: Props) => {
         {/* @ts-expect-error */}
         <Button onClick={() => formik.handleSubmit()} className="mt-6 bg-main text-white">
           اعمال تغیرات
-        </Button>
-      </div>
-    </BaseDialog>
-  );
-};
-
-export const ModalShowStatusSnap = ({ id, open, setOpen }: Props) => {
-  const { data, isPending } = useGetStatusCheckout({
-    url: id ? `/snapppayment/status?code=${id}` : '',
-  });
-  const onClose = () => setOpen(false);
-  const snap = data?.data?.data;
-  return (
-    <BaseDialog
-      isOpen={open}
-      title="پیگیری سفارش سمت اسنپ"
-      isLoading={isPending}
-      onClose={onClose}
-      size="md"
-    >
-      <div className="space-y-3">
-        <p className="font-regular text-[14px] text-[#7D8793]">
-          {' '}
-          مبلغ:{' '}
-          <span className="text-[#0C0C0C]">
-            {Number(snap?.statusResult?.response?.amount! / 10).toLocaleString()} تومان
-          </span>
-        </p>
-        <p className="font-regular text-[14px] text-[#7D8793]">
-          {' '}
-          وضعیت: <span className="text-[#0C0C0C]">{snap?.statusResult?.response?.status}</span>
-        </p>
-        <p className="font-regular text-[14px] text-[#7D8793]">
-          {' '}
-          شماره سفارش:{' '}
-          <span className="text-[#0C0C0C]">{snap?.statusResult?.response?.transactionId}</span>
-        </p>
-
-        <Button onClick={onClose} className="!mt-6 bg-main text-white">
-          متوجه شدم
         </Button>
       </div>
     </BaseDialog>

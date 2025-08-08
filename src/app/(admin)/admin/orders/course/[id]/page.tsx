@@ -1,4 +1,5 @@
 'use client';
+import CourseStatusOrder from '@/components/admin/orders/CourseStatusOrder';
 import DetailOrder from '@/components/admin/orders/DetailOrder';
 import DiscountOrder from '@/components/admin/orders/DiscountOrder';
 import FactorOrder from '@/components/admin/orders/FactorOrder';
@@ -41,12 +42,14 @@ const Page = () => {
           </div>
           <div className="min-w-[400px]">
             <FactorOrder
-              discountPrice={order?.courseItems?.price}
+              discountPrice={order?.courseItems?.discountPrice}
+              installmentCount={order?.courseItems?.installmentCount}
+              installmentPrice={order?.courseItems?.installmentPrice}
               price={order?.courseItems?.price}
               total={order?.courseItems?.courseTotalAmount}
               order={order}
             />
-            <StatusOrder order={order} />
+            <CourseStatusOrder order={order} />
             {/* 
             <PrintOrder order={order} />
             <Note order={order} /> */}

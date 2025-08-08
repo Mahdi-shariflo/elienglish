@@ -9,7 +9,7 @@ import { useAddBasket } from '@/hooks/basket/useAddBasket';
 import ModalNeedLoginUser from '../common/ModalNeedLoginUser';
 import { useSession } from '@/lib/auth/useSession';
 import useBasket from '@/hooks/basket/useBasket';
-import { Accordion, AccordionItem, Checkbox } from '@heroui/react';
+import { Accordion, AccordionItem, addToast, Checkbox } from '@heroui/react';
 import Counter from '../common/Counter';
 import { useMedia } from 'react-use';
 
@@ -35,19 +35,43 @@ const AddCartSingleProduct = ({ className, product, showDetail }: Props) => {
 
   const handleAddToCart = () => {
     if (!session?.accessToken) return setOpenNeedLogin(true);
-    // افزودن محصول اصلی
+
+    // تعداد محصولات دیجیتال در سبد خرید
+    const isDigitalInBasket = baskets.some((item) => item.type === 'PRODUCT_DIGITAL');
+
+    // بررسی محصول اصلی دیجیتال بودن
+    const isProductDigital = product.type === 'digital';
+
+    // شمارش تعداد افزودنی‌های دیجیتال
+    const digitalAddonsCount = selectedAddons.filter((item) => item.type === 'digital').length;
+
+    // اگر محصول دیجیتال در سبد قبلاً هست و یا خود محصول دیجیتال است،
+    // یا بیش از یک افزودنی دیجیتال انتخاب شده، اجازه اضافه کردن نده
+    if (
+      (isDigitalInBasket && (isProductDigital || digitalAddonsCount > 0)) ||
+      digitalAddonsCount > 1
+    ) {
+      return addToast({
+        title: 'تنها یک محصول دانلودی مجاز به خرید می باشد',
+        color: 'danger',
+      });
+    }
+
+    // افزودن محصول اصلی به سبد
     mutateAdd({
       itemId: product._id,
-      type: 'PRODUCT_PHYSICAL',
+      type: isProductDigital ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL',
     });
-    // افزودن افزودنی‌ها
+
+    // افزودن افزودنی‌ها به سبد
     selectedAddons.forEach((item) => {
       mutateAdd({
         itemId: item._id,
-        type: 'PRODUCT_PHYSICAL',
+        type: item.type === 'digital' ? 'PRODUCT_DIGITAL' : 'PRODUCT_PHYSICAL',
       });
     });
   };
+
   const mainPrice = product?.discountPrice ?? product?.price ?? 0;
 
   const addonsTotal = selectedAddons.reduce((sum, item) => {

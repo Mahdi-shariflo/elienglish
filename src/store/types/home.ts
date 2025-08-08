@@ -278,6 +278,13 @@ export interface Order {
     courseDiscountCode: string;
     courseDiscountPrice: string;
     courseDiscountType: 'FIXED' | 'PERCENT';
+    status: string;
+  };
+  productDigitalItems: {
+    status: string;
+  };
+  productPhysicalItems: {
+    status: string;
   };
   zibalTrackId?: string;
   orderTrackingCodeType: string;

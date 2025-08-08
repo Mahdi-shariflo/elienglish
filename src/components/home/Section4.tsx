@@ -13,7 +13,11 @@ type Props = {
   };
 };
 const Section4 = ({ section }: Props) => {
-  if (!section?.course || !section?.product) return;
+  if (
+    (!section?.course || section.course.length === 0) &&
+    (!section?.product || section.product.length === 0)
+  )
+    return null;
   // if (Number(blogs?.length) < 1) return null;
   return (
     <div className="container_page">
@@ -22,7 +26,7 @@ const Section4 = ({ section }: Props) => {
         className="!w-full"
         title={section?.colorTitle}
         url={section?.href}
-        products={section?.course || section?.product}
+        products={section?.course ?? section?.product}
       ></Carousel>
     </div>
   );

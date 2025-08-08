@@ -1065,10 +1065,10 @@ export const initialDataOrder = ({ onEdit, name }: Props) => [
 export const initialDataInstallment = ({ onEdit, name }: Props) => [
   {
     title: <HeaderCell align="center" title="ردیف" />,
-    dataIndex: '_id',
-    key: '_id',
-    render: (_: string, __: any, idx: number) => (
-      <p className="text-center text-xs text-gray-800">{idx + 1}</p>
+    dataIndex: 'installmentNumber',
+    key: 'installmentNumber',
+    render: (value: string, __: any, idx: number) => (
+      <p className="text-center text-xs text-gray-800">{value}</p>
     ),
   },
   {
@@ -1113,6 +1113,47 @@ export const initialDataInstallment = ({ onEdit, name }: Props) => [
         <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt)}</p>
         <p className="text-center text-xs text-gray-800">{convertDatePer(row.createdAt, true)}</p>
       </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="پرداخت شده در" />,
+    dataIndex: 'paidAt',
+    key: 'paidAt',
+    render: (_: string, row: any) => (
+      <div>
+        {row.paidAt ? (
+          <>
+            <p className="text-center text-xs text-gray-800">{convertDatePer(row.paidAt)}</p>
+            <p className="text-center text-xs text-gray-800">{convertDatePer(row.paidAt, true)}</p>
+          </>
+        ) : (
+          <p className="text-center text-xs text-gray-800">-</p>
+        )}
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="میتواند پرداخت کند" />,
+    dataIndex: 'canPay',
+    key: 'canPay',
+    render: (value: string, row: any) => (
+      <p className="text-center text-xs text-gray-800">{value ? 'بله' : 'خیر'}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="وضعیت پرداخت" />,
+    dataIndex: 'isPaid',
+    key: 'isPaid',
+    render: (value: string, row: any) => (
+      <p className="text-center text-xs text-gray-800">{value ? 'پرداخت شده' : 'پرداخت نشده'}</p>
+    ),
+  },
+  {
+    title: <HeaderCell align="center" title="وضعیت " />,
+    dataIndex: 'status',
+    key: 'status',
+    render: (value: string, row: any) => (
+      <p className="text-center text-xs text-gray-800">{EnumName(value)}</p>
     ),
   },
   {
@@ -1182,7 +1223,10 @@ export const initialDataDetailOrder = ({ onEdit, onDelete }: Props) => [
     key: 'createdAt',
     render: (_: string, row: any) => (
       <div className="flex items-center gap-3">
-        <img className="h-10 w-10 rounded-lg border" src={`${BASEURL}/${row.thumbnailImage.url}`} />
+        <img
+          className="h-10 w-10 rounded-lg border"
+          src={`${BASEURL}/${row?.thumbnailImage?.url}`}
+        />
         <div className="space-y-2">
           <p className="text-[12px] text-black">{row.title}</p>
           <p className="text-[12px] text-gray-600">{Number(row.price).toLocaleString()} تومان</p>

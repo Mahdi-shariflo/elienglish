@@ -7,7 +7,7 @@ import Input from '@/components/common/form/Input';
 import { SearchIcon } from '@/components/common/icon';
 import Select from '@/components/common/Select';
 import { useGetInstallmentAdmin } from '@/hooks/admin/installment/useGetInstallmentAdmin';
-import { initialDataInstallment, ordersStatus } from '@/lib/table-column';
+import { initialDataInstallment } from '@/lib/table-column';
 import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { BiFilter } from 'react-icons/bi';
@@ -71,8 +71,6 @@ const Page = () => {
     });
   };
 
-  console.log(filter);
-
   return (
     <div>
       <div className="flex items-center justify-between border-b border-[#E4E7E9] pb-3">
@@ -126,7 +124,18 @@ const Page = () => {
         total={order?.totalPages}
         mainData={order?.installment}
         showData={columns}
-        columns={['title', 'amount', 'createdAt', 'userId', 'dueDate']}
+        columns={[
+          'installmentNumber',
+          'title',
+          'amount',
+          'createdAt',
+          'status',
+          'paidAt',
+          'userId',
+          'dueDate',
+          'canPay',
+          'isPaid',
+        ]}
         page={Number(filter.page)}
         sort={filter.sort}
         onChangeSort={onChangeSort}

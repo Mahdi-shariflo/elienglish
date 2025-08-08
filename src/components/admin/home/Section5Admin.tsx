@@ -90,7 +90,7 @@ const Section5Admin = ({ formik, data }: Props) => {
           />
           <ProductsSelect
             className="col-span-2 w-full"
-            title="انتخاب دوره"
+            title="انتخاب محصول"
             values={form?.values?.product}
             onChange={(values) => form.setFieldValue('product', values)}
           />

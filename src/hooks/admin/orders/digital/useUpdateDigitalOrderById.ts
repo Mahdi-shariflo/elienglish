@@ -7,7 +7,7 @@ export const useUpdateDigitalOrderById = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ data, id }: { data: unknown; id: string }) =>
-      await safeRequest({ url: `/admin/order/update/${id}`, method: 'PATCH', data }),
+      await safeRequest({ url: `/order/admin/product-digital/${id}`, method: 'PATCH', data }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: ['single-digital-order-admin', 'digital-orders-admin'],

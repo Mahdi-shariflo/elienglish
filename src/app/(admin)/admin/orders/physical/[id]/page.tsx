@@ -2,6 +2,7 @@
 import DetailOrder from '@/components/admin/orders/DetailOrder';
 import DiscountOrder from '@/components/admin/orders/DiscountOrder';
 import FactorOrder from '@/components/admin/orders/FactorOrder';
+import PhsicalStatusOrder from '@/components/admin/orders/PhsicalStatusOrder';
 import ProductsOrder from '@/components/admin/orders/ProductsOrder';
 import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
@@ -52,7 +53,7 @@ const Page = () => {
               discountPrice={order?.productPhysicalItems?.discountPrice}
               order={order}
             />
-            <StatusOrder order={order} />
+            <PhsicalStatusOrder order={order} />
             {/* 
             <PrintOrder order={order} />
             <Note order={order} /> */}

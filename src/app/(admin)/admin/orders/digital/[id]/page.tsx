@@ -1,9 +1,9 @@
 'use client';
 import DetailOrder from '@/components/admin/orders/DetailOrder';
+import DigitalOrderStatus from '@/components/admin/orders/DigitalOrderStatus';
 import DiscountOrder from '@/components/admin/orders/DiscountOrder';
 import FactorOrder from '@/components/admin/orders/FactorOrder';
 import ProductsOrder from '@/components/admin/orders/ProductsOrder';
-import StatusOrder from '@/components/admin/orders/StatusOrder';
 import TransportOrder from '@/components/admin/orders/TransportOrder';
 import TypeTransaction from '@/components/admin/orders/TypeTransaction';
 import { useGetDigitalOrdersByIdAdmin } from '@/hooks/admin/orders/digital/useGetDigitalOrdersByIdAdmin';
@@ -41,7 +41,7 @@ const Page = () => {
               discountPrice={order?.productDigitalItems?.discountPrice}
               order={order}
             />
-            <StatusOrder order={order} />
+            <DigitalOrderStatus order={order} />
             {/* 
             <PrintOrder order={order} />
             <Note order={order} /> */}

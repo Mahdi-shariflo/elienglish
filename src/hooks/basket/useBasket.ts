@@ -20,6 +20,7 @@ const useBasket = () => {
   const installmentCourses = baskets.filter(
     (item) => item.type === 'COURSE' && item.course?.isInstallment
   );
+  const isCartPhycial = baskets?.find((item) => item.type === 'PRODUCT_PHYSICAL');
 
   const nonInstallmentItems = baskets.filter(
     (item) => !(item.type === 'COURSE' && item.course?.isInstallment)
@@ -59,21 +60,21 @@ const useBasket = () => {
     const count = Number(item?.count ?? 0);
     return sum + price * count;
   }, 0);
+  const totalDiscount = baskets.reduce((sum, item) => {
+    const price = Number(item?.product?.price ?? item?.course?.price ?? 0);
+    const discountPrice = Number(
+      item?.product?.discountPrice ?? item?.course?.discountPrice ?? price
+    );
+    const suggestedDiscount = Number(item?.product?.suggestedDiscount ?? 0);
 
-  const totalProductPriceWithDiscount = baskets.reduce((sum, item) => {
-    const price =
-      item?.course?.discountPrice ??
-      item?.product?.discountPrice ??
-      item?.course?.price ??
-      item?.product?.price ??
-      item?.lpas?.discountPrice ??
-      item?.lpas?.price ??
-      0;
+    // مقدار تخفیف برای یک آیتم
+    const discountAmount = price - discountPrice + suggestedDiscount;
 
-    const count = Number(item?.count ?? 0);
-
-    return sum + price * count;
+    // ضرب در تعداد
+    return sum + discountAmount * Number(item?.count ?? 1);
   }, 0);
+
+  const totalProductPriceWithDiscount = data?.data?.data?.totalPrice + (isCartPhycial ? 65000 : 0);
 
   useEffect(() => {
     if (checkout) {
@@ -115,6 +116,7 @@ const useBasket = () => {
     totalProductPriceWithoutDiscount,
     nonInstallmentTotal,
     installmentFirstPayments,
+    totalDiscount,
   ]);
 
   return {
@@ -127,6 +129,7 @@ const useBasket = () => {
     discountPrice,
     installmentCourses,
     nonInstallmentItems,
+    totalDiscount,
   };
 };
 

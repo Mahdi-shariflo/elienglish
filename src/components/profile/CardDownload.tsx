@@ -46,13 +46,13 @@ const CardDownload = ({ order, src }: Props) => {
       </div>
       {src && (
         <div className="flex justify-end px-3 py-2">
-          <Button
-            isPending={isLoading}
-            // @ts-expect-error error
-            onClick={() => refetch()}
-            className="!w-fit !min-w-fit bg-main px-4 font-medium text-white"
+          <a
+            target="_blank"
+            download={true}
+            href={src}
+            className="flex !h-[40px] !w-[40px] items-center justify-center gap-2 rounded-lg bg-main px-4 font-medium text-white lg:!w-fit lg:!min-w-fit"
           >
-            <span className="text-[13px]">دانلودی فایل</span>
+            <span className="hidden text-[13px] lg:block">دانلودی فایل</span>
             <span>
               <svg
                 width="18"
@@ -67,7 +67,7 @@ const CardDownload = ({ order, src }: Props) => {
                 />
               </svg>
             </span>
-          </Button>
+          </a>
         </div>
       )}
     </div>

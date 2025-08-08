@@ -5,6 +5,12 @@ export type Order = {
   orderNumber: number;
   totalAmount: number;
   productPhysicalItems: {
+    productPhysicalDiscountType: 'PERCENT' | 'FIXED';
+    productPhysicalDiscountCode: string;
+    productPhysicalDiscountPrice: number;
+    orderTrackingCodeType: string;
+    orderTrackingCode: string;
+    orderTrackingPrice: string;
     thumbnailImage: Media;
     status:
       | 'AWAITING'

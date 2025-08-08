@@ -11,8 +11,7 @@ const levels = [
 ];
 
 const Progress = () => {
-  const session = useSession();
-  const active = '';
+  const active = 'B2';
   const activeIndex = levels.findIndex((level) => level.name === active);
 
   return (

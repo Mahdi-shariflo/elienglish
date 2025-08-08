@@ -22,6 +22,7 @@ const Page = () => {
     (item) => item.productDigitalItems.status === (searchParams.get('sort') || 'PENDING')
   );
   const downloadLink = data?.data?.data?.downloadLinks;
+  console.log(downloadLink);
 
   return (
     <div className="space-y-4 rounded-2xl border-[#E4E7E9] bg-white pb-10 dark:border-[#263248] dark:bg-[#172334] lg:mb-10 lg:min-h-[90vh] lg:!w-full lg:border lg:p-[16px] lg:pb-0 lg:pt-0">
