@@ -71,7 +71,7 @@ const Page = async ({ searchParams, params }: Props) => {
       url: item.url,
       type: 'courseType',
       isLink: true,
-      page: `${item.url}`,
+      page: `/course-category/${item.url}`,
     };
   });
 

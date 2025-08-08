@@ -31,13 +31,12 @@ export async function generateMetadata({ searchParams, params }: Props): Promise
     products: Product[];
     totalPages: number;
     categories: { title: string; url: string }[];
+    category: { url: string; title: string };
   } = result?.data?.data;
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.products)
-    ? product.products[0].category
-    : null;
+
   return {
-    title: selectedCategory?.title,
-    description: selectedCategory?.title,
+    title: product?.category?.title,
+    description: product?.category?.title,
     alternates: {
       canonical: `${BASEURL_SITE}/archive-category/${encodeURIComponent(id)}`,
     },
@@ -73,10 +72,8 @@ const Page = async ({ searchParams, params }: Props) => {
     products: Product[];
     totalPages: number;
     categories: { title: string; url: string }[];
+    category: { url: string; title: string };
   } = result?.data?.data;
-  const selectedCategory: { title: string; url: string } | null = Array.isArray(product.products)
-    ? product.products[0].category
-    : null;
 
   const categories = product?.categories?.map((item, idx) => {
     return {
@@ -96,8 +93,8 @@ const Page = async ({ searchParams, params }: Props) => {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             jsonLdProductBreadcrub({
-              title: selectedCategory?.title as string,
-              url: selectedCategory?.url as string,
+              title: product?.category?.title as string,
+              url: product?.category?.url as string,
             })
           ),
         }}
