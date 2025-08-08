@@ -93,7 +93,7 @@ const Page = async ({ searchParams, params }: Props) => {
           <Filters
             title="دسته‌بندی دوره‌ها"
             // @ts-expect-error error
-            searchParams={{ ...searchParamsFilter, coursType: decodeURIComponent(id) }}
+            searchParams={{ ...searchParamsFilter, courseType: decodeURIComponent(id) }}
             resultFilter={{
               breadcrumb: [],
               title: '',

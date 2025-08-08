@@ -36,7 +36,7 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
     'sort',
     'available',
     'blogType',
-    'coursType',
+    'courseType',
     'productType',
     'productTypeCategory',
     'weekday',
@@ -106,7 +106,6 @@ const CheckboxFilter = ({ resultFilter, searchParams }: Props) => {
   useEffect(() => {
     setIsPendingCategory(isPending);
   }, [isPending]);
-
   return (
     // @ts-expect-error error
     <Accordion defaultSelectedKeys={['0', '1']} className="px-0">
