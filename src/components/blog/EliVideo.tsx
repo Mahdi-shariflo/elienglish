@@ -1,7 +1,6 @@
 'use client';
 import { Blog } from '@/store/types';
 import React from 'react';
-import Title from '../common/Title';
 import Link from 'next/link';
 import Image from '../common/Image';
 // Import Swiper React components

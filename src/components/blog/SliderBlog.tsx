@@ -77,7 +77,7 @@ const filterButtons = [
     ),
   },
   {
-    type: 'podcast',
+    type: 'poddcast',
     label: 'پادکست',
     icon: (
       <svg
@@ -139,7 +139,7 @@ const SliderBlog = ({
   const [activeType, setActiveType] = useState<string>('text');
 
   const filteredBlogs = filterActive ? blogs?.filter((blog) => blog.type === activeType) : blogs;
-  console.log(blogs);
+  console.log(filterActive && blogs);
   return (
     <div className={`container_page lg:w-full ${container_class}`}>
       {title && (

@@ -29,7 +29,6 @@ const page = async () => {
           delay={3000}
           typeCardBlog="long"
           filterActive
-          container_class=""
         />
         <SliderBlog
           title="آموزش گرامر"

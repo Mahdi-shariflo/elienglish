@@ -117,7 +117,7 @@ const page = () => {
 
   return (
     <div
-      className={`relative mb-32 ${topBannerData ? '-mt-[1.6rem] lg:-mt-[7.2rem]' : '-mt-24 lg:-mt-[10.9rem]'}`}
+      className={`relative mb-32 ${topBannerData ? '-mt-[3.7rem] lg:-mt-[6.2rem]' : '-mt-24 lg:-mt-[10rem]'}`}
     >
       <div className="pt-[25rem]">
         <div className="bg-contact-us absolute top-0 z-50 h-[672px] w-full lg:top-20"></div>
