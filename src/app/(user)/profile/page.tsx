@@ -9,11 +9,9 @@ const Page = () => {
     <div className="max-w-full !overflow-hidden lg:pb-10 lg:pt-5">
       <BackPrevPage url="/" title="صفحه اصلی" />
       <div className="mt-4 max-w-full lg:mt-0 lg:hidden">
-        {/* <ProfileInformation /> */}
-        <RingkasanOrder className="lg:hidden" />
         <Sidebar />
       </div>
-      <RingkasanOrder className="hidden lg:block" />
+      <RingkasanOrder className="block" />
       <Notfications />
       {/* <LastViewProducts/> */}
     </div>

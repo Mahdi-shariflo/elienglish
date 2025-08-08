@@ -45,7 +45,7 @@ const CardDownload = ({ order, src }: Props) => {
         </div>
       </div>
       {src && (
-        <div className="hidden justify-end px-3 py-2 lg:flex">
+        <div className="flex justify-end px-3 py-2">
           <Button
             isPending={isLoading}
             // @ts-expect-error error

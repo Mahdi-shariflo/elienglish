@@ -7,6 +7,7 @@ import useGlobalStore from '@/store/global-store';
 import Profile from '@/../public/images/profile.jpg';
 import Image from 'next/image';
 import { useSession } from '@/lib/auth/useSession';
+import Progress from './Progress';
 
 const menus = [
   {
@@ -529,24 +530,25 @@ const Sidebar = () => {
     <div className="sticky top-32 mt-10 overflow-hidden !rounded-2xl border border-[#E4E7E9] dark:border-[#263248] dark:bg-[#172334] lg:mt-0">
       {/* user profile */}
       <div className="flex flex-col items-center justify-center bg-[linear-gradient(180deg,_#EDE8FC_-8.74%,_#FFFFFF_100%)] dark:bg-none lg:!w-full lg:p-[16px]">
-        <div className="flex w-full flex-col items-center justify-center border-b border-[#E4E7E9] pb-3 dark:border-[#263248]">
+        <div className="flex w-full flex-col items-center justify-center border-b border-[#E4E7E9] pb-3 pt-5 dark:border-[#263248]">
           <p className="font-medium text-[16px] dark:text-white">
             {session?.firstName} {session?.lastName}
           </p>
           <p className="pt-2 font-medium text-[14px] text-[#6A7890] dark:text-[#8E98A8]">
             {session?.mobile}
           </p>
+          <Progress />
         </div>
       </div>
       {/* levels */}
       {/* sidebar */}
       <div className="space-y-4 px-[16px] pb-[16px] lg:!w-full">
-        <div className="border-b border-[#E4E7E9] dark:border-[#263248]">
+        <div className="border-b border-[#E4E7E9] pb-2 pt-3 dark:border-[#263248] lg:pt-0">
           <div className="flex items-center justify-between font-medium">
             <p className="text-[14px] text-[#505B74] dark:text-[#8E98A8]">سطح شما</p>
             <p className="text-[#0B1524] dark:text-white">B2 – Upper-Intermediate</p>
           </div>
-          <Button className="flex items-center justify-between">
+          <Link href={'/lpa'} className="mt-2 flex items-center justify-between font-medium">
             <span className="text-main">تعین سطح</span>
             <span>
               <svg
@@ -572,7 +574,7 @@ const Sidebar = () => {
                 />
               </svg>
             </span>
-          </Button>
+          </Link>
         </div>
         {menus.map((menu, idx) => (
           <Link
