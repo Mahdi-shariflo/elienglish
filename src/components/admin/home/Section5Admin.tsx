@@ -44,7 +44,7 @@ const Section5Admin = ({ formik, data }: Props) => {
 
   const onOpen = () => {
     form.setValues({
-      ...formik.values?.section4,
+      ...formik.values?.section5,
     });
     setOpen(true);
   };
@@ -72,7 +72,7 @@ const Section5Admin = ({ formik, data }: Props) => {
         <div className="grid grid-cols-2 gap-3">
           <Input
             label={'عنوان'}
-            name="tilte"
+            name="title"
             formik={form}
             classNameInput={'!h-[45px] !bg-[#f5f6f6]'}
           />

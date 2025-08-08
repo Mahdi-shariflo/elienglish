@@ -51,7 +51,7 @@ const CardProduct = ({
             <div className="">
               <div className={`space-y-1 pb-3`}>
                 {Boolean(product.discountPrice) && (
-                  <span className="absolute top-5 z-30 flex h-[20px] w-[39px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[10px] text-white lg:static lg:h-[32px] lg:w-[54px] lg:text-[14px]">
+                  <span className="absolute top-5 z-30 flex h-[30px] w-[59px] items-center justify-center rounded-full border-2 border-[#FCEDE8] bg-[#F44336] pt-px font-medium text-[14px] text-white lg:static lg:h-[32px] lg:w-[54px] lg:text-[14px]">
                     {discountCalculation(product.discountPrice, product.price)}%
                   </span>
                 )}

@@ -64,7 +64,7 @@ const Page = () => {
                   <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">
                     <p className="font-regular text-[14px] text-[#6A7890]">قیمت</p>
                     <p className="font-medium text-[12px] text-[#0B1524] dark:text-white">
-                      {Number(order.levelItems.price).toLocaleString()} تومان
+                      {Number(order.levelItems.lpaTotalAmount).toLocaleString()} تومان
                     </p>
                   </div>
                   <div className="space-y-4 border-b pb-2 dark:border-[#263248] lg:border-none">

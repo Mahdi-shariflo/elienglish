@@ -2,6 +2,7 @@
 import DetailOrder from '@/components/admin/orders/DetailOrder';
 import DiscountOrder from '@/components/admin/orders/DiscountOrder';
 import FactorOrder from '@/components/admin/orders/FactorOrder';
+import LpaStatusOrder from '@/components/admin/orders/LpaStatusOrder';
 import ProductsOrder from '@/components/admin/orders/ProductsOrder';
 import ProductsOrderLpa from '@/components/admin/orders/ProductsOrderLpa';
 import StatusOrder from '@/components/admin/orders/StatusOrder';
@@ -18,7 +19,7 @@ const Page = () => {
   return (
     <div>
       <p className="hidden border-b border-[#E4E7E9] pb-3 font-medium text-[14px] text-[#0C0C0C] lg:block lg:text-[18px]">
-        جزئیات سفارش
+        سفارشات تعین سطح
       </p>
 
       {isLoading ? (
@@ -43,7 +44,7 @@ const Page = () => {
               discountPrice={order?.levelItems?.discountPrice}
               order={order}
             />
-            <StatusOrder order={order} />
+            <LpaStatusOrder order={order} />
             {/* 
             <PrintOrder order={order} />
             <Note order={order} /> */}

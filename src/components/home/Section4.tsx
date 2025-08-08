@@ -7,6 +7,7 @@ import { Product } from '@/store/types/home';
 type Props = {
   section: {
     colorTitle: string;
+    title: string;
     href: string;
     course: Product[];
     product: Product[];
@@ -22,9 +23,16 @@ const Section4 = ({ section }: Props) => {
   return (
     <div className="container_page">
       <Carousel
-        classCard="!h-[380px] !w-[300px] lg:!h-[400px]"
+        classImage={section.product ? '!object-contain ' : '!object-fill lg:!object-cover'}
+        classNameImage={
+          section.product
+            ? 'lg:pt-5 px-2 w-full dark:bg-white !h-[260px] lg:!h-[240px]'
+            : '!w-full !h-[286px] !w-full'
+        }
+        classCard="!h-[380px] !w-[300px] lg:!h-[430px]"
         className="!w-full"
-        title={section?.colorTitle}
+        title={section?.title}
+        colorTitle={section.colorTitle}
         url={section?.href}
         products={section?.course ?? section?.product}
       ></Carousel>

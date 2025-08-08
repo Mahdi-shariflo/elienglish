@@ -75,7 +75,7 @@ const mapProductToFormValues = (product: any) => ({
   variablesAttribiutes: product.variablesAttribiutes || [],
   children: product?.children,
   metaDescription: product.metaDescription,
-  keyWords: product.keyWords.map((item: string) => item).join(','),
+  keyWords: product.keyWords.join(','),
   ...(product.robots ? { robots: product.robots } : null),
   ...(product.canonicalUrl ? { canonicalUrl: product.canonicalUrl } : null),
   ...(product.redirectUrl ? { redirectUrl: product.redirectUrl } : null),

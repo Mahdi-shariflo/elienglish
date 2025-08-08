@@ -286,6 +286,10 @@ export interface Order {
   productPhysicalItems: {
     status: string;
   };
+  levelItems: {
+    lpaId: string;
+    status: string;
+  };
   zibalTrackId?: string;
   orderTrackingCodeType: string;
   orderTrackingCode: string;

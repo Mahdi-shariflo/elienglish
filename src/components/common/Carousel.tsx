@@ -23,6 +23,8 @@ type Props = {
   classBtnArrows?: string;
   classCard?: string;
   colorTitle?: string;
+  classImage?: string;
+  classNameImage?: string;
 };
 const Carousel = ({
   url,
@@ -34,6 +36,8 @@ const Carousel = ({
   children,
   classCard,
   colorTitle,
+  classImage,
+  classNameImage,
 }: Props) => {
   const swiperRef = useRef<SwiperRef | null>(null);
   const router = useRouter();
@@ -102,7 +106,13 @@ const Carousel = ({
                   key={idx}
                   className={classCard}
                 >
-                  <CardProduct url="" className="h-full w-full" product={item} />
+                  <CardProduct
+                    classImage={classImage}
+                    classNameImage={classNameImage}
+                    url=""
+                    className="h-full w-full"
+                    product={item}
+                  />
                 </SwiperSlide>
               );
             })}

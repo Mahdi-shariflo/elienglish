@@ -100,6 +100,7 @@ const Page = () => {
       // thumbnailImage: Yup.object(),
     }),
     onSubmit: (values) => {
+      console.log(values.keyWords);
       const formdata = {
         title: values.title,
         Published: values.Published === 'true' ? true : false,
@@ -124,7 +125,7 @@ const Page = () => {
         canonicalUrl: values.canonicalUrl,
         redirectType: Number(values?.redirectType),
 
-        keyWords: values.keyWords.split(','),
+        keyWords: values?.keyWords ? values?.keyWords?.split(',') : [],
       };
 
       mutate({ data: removeEmptyFields(formdata) });
@@ -155,6 +156,7 @@ const Page = () => {
         downloads: blog.downloads.map((item: any) => {
           return { ...item, _id: uuidv4() };
         }),
+        keyWords: blog.keyWords.join(','),
         metaDescription: blog.metaDescription,
         ...(blog.robots ? { robots: blog.robots } : null),
         ...(blog.canonicalUrl ? { canonicalUrl: blog.canonicalUrl } : null),

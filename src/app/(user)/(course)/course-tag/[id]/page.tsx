@@ -140,9 +140,9 @@ const Page = async ({ searchParams, params }: Props) => {
                     {product?.course.map((course: Course, idx: number) => (
                       <CardProduct
                         url={`/course/${course.url}/`}
-                        classImage="!object-cover"
-                        classNameImage="!w-full !h-[286px] !w-full"
-                        className="!h-[450px] w-full lg:!h-[460px]"
+                        classImage="!object-cover lg:!object-cover"
+                        classNameImage="!w-full !h-[350px] lg:!h-[310px] !w-full"
+                        className="!h-[550px] w-full !rounded-xl lg:!h-[490px]"
                         product={course}
                         key={idx}
                       >

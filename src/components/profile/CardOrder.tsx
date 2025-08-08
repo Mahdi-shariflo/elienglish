@@ -37,7 +37,7 @@ const CardOrder = ({ order, name }: Props) => {
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">کد سفارش:</span>
-            <span className="font-medium text-[#232429] dark:text-white">{order.orderNumber}</span>
+            <span className="font-medium text-[#232429] dark:text-white">{order?.orderNumber}</span>
           </p>
           <p className="flex gap-1 text-[14px]">
             <span className="font-medium text-[#7D8793]">قیمت کل:</span>
@@ -53,7 +53,7 @@ const CardOrder = ({ order, name }: Props) => {
           <div key={idx} className="relative h-[131pxpx] w-[131pxpx]">
             <Image
               className="h-[80px] w-[80px] object-contain lg:h-[115px] lg:w-[115px]"
-              src={`${image?.thumbnailImage.url}`}
+              src={`${image?.thumbnailImage?.url}`}
               alt=""
             />
           </div>
